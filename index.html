@@ -574,10 +574,35 @@ html[lang="ar"] .phead h1{line-height:1.2}
   .container{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
 }
 
-</style>
-</head>
-<body>
+/* ---------- complete systems ---------- */
+.systems{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+@media (max-width:980px){.systems{grid-template-columns:1fr}}
+.scard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s,transform .2s}
+.scard:hover{border-color:var(--line-2);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.scard .shot{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.scard .shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+[dir="rtl"] .scard .shot img{object-position:top right}
+.scard .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.scard .meta{display:flex;gap:6px;flex-wrap:wrap}
+.scard h3{font-family:var(--f-display);font-size:22px;font-weight:700;letter-spacing:-.02em}
+.scard p{color:var(--muted);font-size:15px}
+.scard .feat{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+.scard .feat span{display:inline-flex;gap:6px;align-items:center}.scard .feat svg{width:14px;height:14px;color:var(--mint)}
+.stats{display:flex;gap:8px;flex-wrap:wrap}.stats span{font-family:var(--f-mono);font-size:12px;color:var(--muted);background:var(--surface-2);border-radius:6px;padding:2px 8px}
+.scard .foot{display:flex;gap:10px;align-items:center;margin-top:auto;padding-top:8px;flex-wrap:wrap}
+.sys-frame{border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;background:var(--surface);box-shadow:var(--shadow-lg)}
+.sys-bar{display:flex;align-items:center;gap:12px;padding:8px 14px;border-bottom:1px solid var(--line);background:var(--surface-2);font-size:12px;color:var(--muted)}
+.sys-bar .dots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--line-2);margin-inline-end:4px}
+.sys-bar .url{flex:1;font-family:var(--f-mono);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 10px;text-align:start}
+.sys-bar a{color:var(--primary-ink);text-decoration:none;display:inline-flex;gap:4px;align-items:center;font-weight:600}.sys-bar a svg{width:14px;height:14px}
+.sys-frame iframe{display:block;width:100%;height:min(78vh,820px);border:0;background:var(--bg)}
+.sys-note{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--mint-soft);color:var(--mint);border-radius:12px;padding:10px 14px;margin:0 0 16px;font-weight:600;font-size:14px}
+.sys-note svg{width:18px;height:18px}.sys-note span{flex:1;min-width:200px}
+.tryit{margin:0;padding-inline-start:18px;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--text)}
+.users{display:flex;flex-direction:column;gap:6px}.users div{display:flex;justify-content:space-between;gap:10px;font-size:13px;border-bottom:1px dashed var(--line);padding-bottom:4px}.users b{font-family:var(--f-mono);font-weight:500}
+.users span{color:var(--muted)}
 
+</style>
 <a class="sr" href="#work">Skip to products</a>
 <header class="nav">
   <div class="container">
@@ -586,7 +611,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
       <b>hudera</b><span>AI</span>
     </a>
     <nav class="nav-links" aria-label="Main">
-      <a href="#services">Services</a><a href="#work">Products</a><a href="#process">How we work</a><a class="keep" href="#contact">Contact</a>
+      <a href="#systems">Systems</a><a href="#services">Services</a><a href="#work">Products</a><a href="#process">How we work</a><a class="keep" href="#contact">Contact</a>
     </nav>
     <button class="lang-btn no-l10n" id="lang" type="button"></button>
     <button class="theme-btn" id="theme" type="button" aria-label="Switch theme"></button>
@@ -600,7 +625,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
       <span class="eyebrow">AI automation · SaaS · WhatsApp</span>
       <h1>We build the software and <span class="hl">AI automations</span> that run your business.</h1>
       <p class="lead">HUDERA AI designs and delivers WhatsApp assistants, business dashboards, workflow automations and custom SaaS products for companies in Saudi Arabia and the Gulf. Every project starts from your real process, and you click through a working demo before anything goes live.</p>
-      <div class="ctas"><a class="btn primary" href="#work">Explore the products</a><a class="btn" href="#contact">Book a discovery call</a></div>
+      <div class="ctas"><a class="btn primary" href="#systems">Try a complete system</a><a class="btn" href="#contact">Book a discovery call</a></div>
       <div class="proof"><span id="p1"></span><span id="p2"></span><span id="p3"></span></div>
     </div>
     <div class="hero-stage" aria-label="Live example: a WhatsApp conversation updating the team inbox">
@@ -612,6 +637,11 @@ html[lang="ar"] .phead h1{line-height:1.2}
   <div class="band"><div class="container industries"><b>Built for teams in</b>
     <span data-i="hard">Construction &amp; contracting</span><span data-i="building">Real estate &amp; interiors</span><span data-i="store">Retail &amp; distribution</span><span data-i="briefcase">Professional services</span><span data-i="heart">Healthcare &amp; clinics</span><span data-i="wallet">Finance teams</span>
   </div></div>
+
+  <section class="container sec" id="systems">
+    <div class="sec-head"><div><span class="eyebrow">Complete systems — try them yourself</span><h2>Three working products you can use right now</h2><p>Not mock-ups: each one is a real application with a database, roles, workflows and reports. It runs in your browser here, and the same code runs as a server. Sample companies are fictional; the code is open on GitHub.</p></div></div>
+    <div class="systems" id="systems-grid"></div>
+  </section>
 
   <section class="container sec" id="services">
     <div class="sec-head"><div><span class="eyebrow">What we build</span><h2>Nine ways we take manual work off your team</h2><p>From a single WhatsApp assistant to a full multi-user platform. Each service links to a product you can try on this page.</p></div></div>
@@ -1190,7 +1220,7 @@ const AR_DICT = {
 "Grace set to # min · # late arrivals this period": "السماح {0} دقيقة · {1} حالة تأخير في هذه الفترة",
 "Grid D: waiting for power from main contractor.": "المحور D: بانتظار الكهرباء من المقاول الرئيسي.",
 "Gulf Horizon Contracting": "أفق الخليج للمقاولات",
-"HR": "الموارد البشرية",
+"HR": "موارد بشرية",
 "HR & payroll": "الموارد البشرية والرواتب",
 "HR manager": "مدير الموارد البشرية",
 "HR · Late: #": "الموارد البشرية · متأخرون: #",
@@ -1465,7 +1495,7 @@ const AR_DICT = {
 "Safety keywords": "كلمات السلامة",
 "Safety officer": "مسؤول السلامة",
 "Safety · power": "السلامة · الكهرباء",
-"Sales": "المبيعات",
+"Sales": "مبيعات",
 "Same DN, item and qty": "نفس السند والصنف والكمية",
 "Sami Haddad": "سامي حداد",
 "Sample data": "بيانات تجريبية",
@@ -1832,12 +1862,12 @@ const AR_DICT = {
 "See PermitPack →": "شاهد PermitPack ←",
 "Need something like HUDERA Connect?": "تحتاج حلاً مثل HUDERA Connect؟",
 "Need something like Hesabo?": "تحتاج حلاً مثل Hesabo؟",
-"Need something like SiteLog?": "تحتاج حلاً مثل SiteLog؟",
+"Need something like SiteLog?": "تحتاج شيئًا مثل SiteLog؟",
 "Need something like Threadline?": "تحتاج حلاً مثل Threadline؟",
-"Need something like QuoteFlow?": "تحتاج حلاً مثل QuoteFlow؟",
+"Need something like QuoteFlow?": "تحتاج شيئًا مثل QuoteFlow؟",
 "Need something like CostPulse?": "تحتاج حلاً مثل CostPulse؟",
 "Need something like PayRoster?": "تحتاج حلاً مثل PayRoster؟",
-"Need something like Attendify?": "تحتاج حلاً مثل Attendify؟",
+"Need something like Attendify?": "تحتاج شيئًا مثل Attendify؟",
 "Need something like MatchDesk?": "تحتاج حلاً مثل MatchDesk؟",
 "Need something like PermitPack?": "تحتاج حلاً مثل PermitPack؟",
 "Breadcrumb": "مسار التنقل",
@@ -1997,9 +2027,9 @@ const AR_DICT = {
 "Inquiries arrive from several sales reps and countries. Managers can't see who holds each one, how long it has waited, or why it is late.": "الاستفسارات تصل من عدة مندوبين ودول، والمدير لا يعرف من يمسك كل استفسار ولا كم انتظر ولا سبب تأخره.",
 "QuoteFlow gives each inquiry a number and a path through clear stages. The SLA clock starts when an engineer accepts it and counts working hours. Roles, permissions, an activity log with undo, and bilingual reports are built in.": "يعطي QuoteFlow كل استفسار رقماً ومساراً بمراحل واضحة. عدّاد SLA يبدأ عند قبول المهندس ويحسب ساعات العمل فقط. الأدوار والصلاحيات وسجل النشاط مع التراجع والتقارير بلغتين مدمجة فيه.",
 "Managers see the whole pipeline and every delay in one place. Engineers know what is theirs and what is due next.": "المدير يرى كل المراحل وكل تأخير في مكان واحد، والمهندس يعرف ما المطلوب منه وما المستحق بعده.",
-"Pipeline board": "لوحة المراحل",
+"Pipeline board": "لوحة خط المبيعات",
 "Move inquiries between stages": "انقل الاستفسارات بين المراحل",
-"SLA timers": "مؤقتات SLA",
+"SLA timers": "مؤقتات الرد (SLA)",
 "Working hours, from acceptance": "ساعات عمل، من لحظة القبول",
 "Roles & permissions": "الأدوار والصلاحيات",
 "Per role and per person": "لكل دور ولكل شخص",
@@ -2092,7 +2122,7 @@ const AR_DICT = {
 "Python": "Python",
 "Excel automation": "أتمتة Excel",
 "Web review screen": "شاشة مراجعة على الويب",
-"Attendance & overtime system": "نظام الحضور والإضافي",
+"Attendance & overtime system": "نظام الحضور والأوفر تايم",
 "Attendify · Attendance & overtime system": "Attendify · نظام الحضور والإضافي",
 "Daily attendance with grace periods, night shifts, lateness and overtime reports that update themselves, and a dashboard for HR.": "حضور يومي بفترات سماح وورديات ليلية وتقارير تأخير وإضافي تتحدث تلقائياً، ولوحة مؤشرات للموارد البشرية.",
 "Lateness, absence and overtime reports are prepared by hand every month, and rules like grace periods are applied inconsistently.": "تقارير التأخير والغياب والإضافي تُجهَّز يدوياً كل شهر، وقواعد مثل فترة السماح تُطبَّق بشكل غير متسق.",
@@ -2227,7 +2257,134 @@ const AR_DICT = {
 "# · Generate": "# · الإنشاء",
 "View on GitHub": "شاهد الكود على GitHub",
 "GitHub: hudera-ai": "GitHub: hudera-ai",
-"Facebook: huderaai": "فيسبوك:‏ huderaai"
+"Facebook: huderaai": "فيسبوك:‏ huderaai",
+"Systems": "الأنظمة",
+"Try a complete system": "جرّب نظامًا كاملًا",
+"Complete systems — try them yourself": "أنظمة كاملة — جرّبها بنفسك",
+"Three working products you can use right now": "ثلاثة منتجات شغّالة تقدر تستخدمها الآن",
+"Not mock-ups: each one is a real application with a database, roles, workflows and reports. It runs in your browser here, and the same code runs as a server. Sample companies are fictional; the code is open on GitHub.": "ليست مجرد واجهات: كل نظام تطبيق حقيقي بقاعدة بيانات وصلاحيات ودورات عمل وتقارير. يعمل هنا داخل متصفحك، ونفس الكود يعمل كخادم. الشركات في البيانات افتراضية، والكود مفتوح على GitHub.",
+"Complete system": "نظام كامل",
+"Open source": "مفتوح المصدر",
+"Try it yourself": "جرّبه بنفسك",
+"Code on GitHub": "الكود على GitHub",
+"All systems": "كل الأنظمة",
+"Open the live demo": "افتح النسخة الحية",
+"Open in a new tab": "افتح في تبويب جديد",
+"Try this": "جرّب هذا",
+"Sign in as": "سجّل الدخول كـ",
+"Built with": "مبني بـ",
+"What's inside": "ماذا يوجد بالداخل",
+"Full system": "النظام الكامل",
+"Try the full system": "جرّب النظام الكامل",
+"Daily site reporting system": "نظام التقارير اليومية للمواقع",
+"Inquiry → quotation → follow-up system": "نظام الاستفسارات ← عروض الأسعار ← المتابعة",
+"Field messages become structured daily reports with approvals and BOQ progress — a complete system, not a mock-up.": "رسائل الموقع تتحول إلى تقارير يومية منظمة مع اعتماد ونسبة إنجاز من جدول الكميات — نظام كامل وليس مجرد واجهة.",
+"Every inquiry tracked from arrival to quotation and follow-up, with SLA timers, a pipeline board, an assisted quotation builder and win/loss reports.": "متابعة كل استفسار من وصوله حتى عرض السعر والمتابعة، مع مؤقت رد، لوحة خط مبيعات، مُنشئ عروض أسعار بمساعدة ذكية، وتقارير الفوز والخسارة.",
+"Device punches turned into lateness, overtime, leaves and the monthly payroll-ready report — with shifts, grace periods and night shifts handled by a tested rules engine.": "بصمات الجهاز تتحول إلى تأخير وأوفر تايم وإجازات وتقرير شهري جاهز للرواتب — مع ورديات ودقائق سماح وورديات ليلية يعالجها محرك قواعد مختبر.",
+"Ufuq Al-Bina Contracting Co. (fictional)": "شركة أفق البناء للمقاولات (افتراضية)",
+"Marasim Technical Services Co. (fictional)": "شركة مراسم للخدمات الفنية (افتراضية)",
+"Golden Palms Trading Co. (fictional)": "شركة النخيل الذهبي للتجارة (افتراضية)",
+"Project manager": "مدير مشروع",
+"Foreman": "فورمان",
+"Admin": "مدير النظام",
+"Manager": "مدير",
+"Estimator": "مهندس تسعير",
+"Department manager": "مدير قسم",
+"Apply the message to today's report, then submit it and approve it as the project manager.": "أضف الرسالة لتقرير اليوم، ثم أرسله واعتمده كمدير المشروع.",
+"Open a project to see BOQ progress and earned value move with every approved report.": "افتح مشروعًا لترى نسبة الإنجاز والقيمة المنجزة تتحرك مع كل تقرير معتمد.",
+"Switch to Arabic and dark mode from Settings; print a report to A4.": "بدّل للعربية والمظهر الداكن من الإعدادات، واطبع تقريرًا على A4.",
+"Message parser (AR/EN)": "محلل الرسائل (عربي/إنجليزي)",
+"Manpower, equipment, activities, materials and issues extracted from free text; activities matched to BOQ items.": "استخراج العمالة والمعدات والأعمال والمواد والملاحظات من نص حر، وربط الأعمال ببنود جدول الكميات.",
+"Approval workflow": "دورة الاعتماد",
+"Foreman drafts → PM approves or returns with a comment → locked, with an audit log.": "الفورمان يُعد ← مدير المشروع يعتمد أو يعيد بتعليق ← يُقفل، مع سجل عمليات.",
+"BOQ progress & earned value": "إنجاز جدول الكميات والقيمة المنجزة",
+"Executed vs. quantity per item; value-weighted overall progress and trends.": "المنفذ مقابل الكمية لكل بند، وإنجاز كلي مرجّح بالقيمة مع منحنيات.",
+"Printable A4 report": "تقرير A4 قابل للطباعة",
+"Company header, all tables and signature blocks.": "ترويسة الشركة وكل الجداول وخانات التوقيع.",
+"Roles & scoping": "الصلاحيات والنطاق",
+"Admin, PM, engineer, foreman, client viewer — users only see their projects.": "مدير نظام، مدير مشروع، مهندس، فورمان، مشاهد للعميل — كل مستخدم يرى مشاريعه فقط.",
+"RTL layout, light and dark themes, phone-ready.": "اتجاه RTL، مظهر فاتح وداكن، ويعمل على الموبايل.",
+"Message received": "وصول الرسالة",
+"Webhook or paste: foreman text in Arabic/English.": "عبر Webhook أو لصق: نص الفورمان بالعربي/الإنجليزي.",
+"Lines extracted": "استخراج السطور",
+"Rule-based parser (optional LLM) produces structured lines.": "محلل قواعد (مع نموذج لغوي اختياري) ينتج سطورًا منظمة.",
+"Applied to the day": "إضافة لتقرير اليوم",
+"Counts merged into today's draft; activities linked to BOQ.": "دمج الأعداد في مسودة اليوم وربط الأعمال بجدول الكميات.",
+"PM reviews": "مراجعة مدير المشروع",
+"Approve, or return with a comment; locked afterwards.": "اعتماد أو إعادة بتعليق، ثم يُقفل.",
+"Dashboards update": "تحديث اللوحات",
+"Earned value, manpower trend, open issues.": "القيمة المنجزة، اتجاه العمالة، الملاحظات المفتوحة.",
+"Submit the quotation for approval, sign in as the manager, approve & send, then print it to A4.": "أرسل العرض للاعتماد، سجّل الدخول كمدير، اعتمد وأرسل، ثم اطبعه على A4.",
+"Watch the pipeline board move the inquiry from quoting to quoted to won.": "شاهد لوحة خط المبيعات تنقل الاستفسار من التسعير إلى تم التسعير إلى مكتسب.",
+"Open Reports for win rate, SLA compliance and lost reasons.": "افتح التقارير لنسبة الفوز والالتزام بوقت الرد وأسباب الخسارة.",
+"First-response targets per priority; overdue and at-risk inquiries surface on the dashboard.": "وقت رد مستهدف لكل أولوية، والمتأخر والمعرض للتأخر يظهر على اللوحة.",
+"New → assigned → site visit → quoting → quoted → negotiation, with value per stage.": "جديد ← مُسند ← زيارة ← تسعير ← تم التسعير ← تفاوض، بقيمة كل مرحلة.",
+"Assisted quotation drafting": "صياغة عرض السعر بمساعدة ذكية",
+"Reads the inquiry text (AR/EN) and proposes catalogue lines with quantities; discount and VAT computed.": "يقرأ نص الاستفسار (عربي/إنجليزي) ويقترح بنودًا من قائمة الخدمات بالكميات، مع حساب الخصم والضريبة.",
+"Approval & revisions": "الاعتماد والمراجعات",
+"Estimator drafts → manager approves & sends; revisions supersede older quotes.": "مهندس التسعير يُعد ← المدير يعتمد ويرسل، والمراجعات تحل محل العروض الأقدم.",
+"Printable quotation": "عرض سعر قابل للطباعة",
+"Company header, client block, items, totals, terms, signatures.": "ترويسة الشركة وبيانات العميل والبنود والإجماليات والشروط والتوقيعات.",
+"Funnel, win rate, SLA met, by sales rep, by client type, top services, lost reasons.": "القمع، نسبة الفوز، الالتزام بوقت الرد، حسب المندوب ونوع العميل، أكثر الخدمات، أسباب الخسارة.",
+"Inquiry arrives": "وصول الاستفسار",
+"WhatsApp, e-mail, phone, website form (intake endpoint).": "واتساب، بريد، هاتف، نموذج الموقع (نقطة استقبال).",
+"Clock starts": "بدء المؤقت",
+"Assign & respond before the target; follow-ups scheduled.": "إسناد ورد قبل الموعد المستهدف، وجدولة المتابعات.",
+"Draft in seconds": "مسودة في ثوانٍ",
+"Lines proposed from the text; edit, discount, VAT.": "بنود مقترحة من النص؛ تعديل وخصم وضريبة.",
+"Manager sends": "المدير يرسل",
+"Locked quotation, PDF, revisions when negotiating.": "عرض مقفل، PDF، ومراجعات عند التفاوض.",
+"Won or lost": "فوز أو خسارة",
+"Reason captured; reports update.": "تسجيل السبب وتحديث التقارير.",
+"Open Import punches, click “Try a sample”, see the preview (duplicates, unknown IDs) and import.": "افتح استيراد البصمات، اضغط «جرّب مثال»، شاهد المعاينة (المكرر، الأرقام غير المعروفة) ثم استورد.",
+"Open an employee to see the month calendar with late minutes and overtime badges; add a manual punch.": "افتح موظفًا لترى تقويم الشهر بدقائق التأخير وشارات الأوفر تايم، وأضف بصمة يدوية.",
+"Approve a pending leave and watch the days recompute.": "اعتمد إجازة معلقة وشاهد الأيام تُعاد حسابها.",
+"Open the Monthly report, export CSV, and lock the month.": "افتح التقرير الشهري، صدّر CSV، واقفل الشهر.",
+"Rules engine": "محرك القواعد",
+"Shifts with breaks, night shifts across midnight, grace per shift, overtime rounding and minimums, weekend/holiday rates.": "ورديات باستراحات، ورديات ليلية تعبر منتصف الليل، سماح لكل وردية، تقريب وحد أدنى للأوفر تايم، معاملات العطل.",
+"Device import": "استيراد من الجهاز",
+"Any fingerprint/face export (CSV/TSV); dry-run preview; live push endpoint.": "أي تصدير بصمة/وجه (CSV/TSV)، معاينة قبل الإدخال، ونقطة استقبال مباشرة.",
+"Daily sheet & calendars": "الكشف اليومي والتقويمات",
+"Per-date sheet by department; per-employee month view.": "كشف بالتاريخ والقسم، وعرض شهري لكل موظف.",
+"Leaves & holidays": "الإجازات والعطل",
+"Requests, approval, public holidays — days recompute automatically.": "طلبات واعتماد وعطل رسمية — الأيام تُحسب تلقائيًا.",
+"Monthly report": "التقرير الشهري",
+"OT pay, late and absence deductions, CSV export, print, month locking.": "مبلغ الأوفر تايم، خصومات التأخير والغياب، تصدير CSV، طباعة، وقفل الشهر.",
+"Roles": "الصلاحيات",
+"Admin, HR, department manager (own department only), viewer; audit log.": "مدير نظام، موارد بشرية، مدير قسم (قسمه فقط)، مشاهد؛ سجل عمليات.",
+"Punches": "البصمات",
+"Fingerprint device export or push.": "تصدير أو دفع من جهاز البصمة.",
+"Day records": "سجلات الأيام",
+"Status, late, early, worked, overtime per employee per day.": "الحالة والتأخير والانصراف المبكر وساعات العمل والأوفر تايم لكل موظف يوميًا.",
+"Missing punches, leaves, manual fixes.": "بصمات ناقصة، إجازات، تصحيحات يدوية.",
+"Monthly figures": "أرقام الشهر",
+"Additions and deductions per employee.": "إضافات وخصومات لكل موظف.",
+"Locked month": "شهر مقفل",
+"Figures frozen and exported.": "تجميد الأرقام وتصديرها.",
+"# tables": "# جدول",
+"~# sample reports": "~# تقرير تجريبي",
+"# tests": "# اختبار",
+"# clients": "# عميل",
+"~# sample inquiries": "~# استفسار تجريبي",
+"# employees": "# موظف",
+"# months of punches": "# شهور بصمات",
+"This is the real application running in your browser with a SQLite database (WebAssembly). Everything you change is saved on your device only. Sample company: Ufuq Al-Bina Contracting Co. (fictional). Demo users use the password": "هذا هو التطبيق الحقيقي يعمل داخل متصفحك بقاعدة بيانات SQLite (WebAssembly). كل ما تغيّره يُحفظ على جهازك فقط. الشركة التجريبية: شركة أفق البناء للمقاولات (افتراضية). كلمة مرور المستخدمين التجريبيين",
+"This is the real application running in your browser with a SQLite database (WebAssembly). Everything you change is saved on your device only. Sample company: Marasim Technical Services Co. (fictional). Demo users use the password": "هذا هو التطبيق الحقيقي يعمل داخل متصفحك بقاعدة بيانات SQLite (WebAssembly). كل ما تغيّره يُحفظ على جهازك فقط. الشركة التجريبية: شركة مراسم للخدمات الفنية (افتراضية). كلمة مرور المستخدمين التجريبيين",
+"This is the real application running in your browser with a SQLite database (WebAssembly). Everything you change is saved on your device only. Sample company: Golden Palms Trading Co. (fictional). Demo users use the password": "هذا هو التطبيق الحقيقي يعمل داخل متصفحك بقاعدة بيانات SQLite (WebAssembly). كل ما تغيّره يُحفظ على جهازك فقط. الشركة التجريبية: شركة النخيل الذهبي للتجارة (افتراضية). كلمة مرور المستخدمين التجريبيين",
+"Same code runs as a real server:": "نفس الكود يعمل كخادم حقيقي:",
+"→ REST API, sessions, integrations.": "← REST API وجلسات وتكاملات.",
+"A complete, working version of SiteLog is available — database, roles, approvals and reports.": "تتوفر نسخة كاملة وشغّالة من SiteLog — قاعدة بيانات وصلاحيات واعتماد وتقارير.",
+"A complete, working version of QuoteFlow is available — database, roles, approvals and reports.": "تتوفر نسخة كاملة وشغّالة من QuoteFlow — قاعدة بيانات وصلاحيات واعتماد وتقارير.",
+"A complete, working version of Attendify is available — database, roles, approvals and reports.": "تتوفر نسخة كاملة وشغّالة من Attendify — قاعدة بيانات وصلاحيات واعتماد وتقارير.",
+"We adapt the system to your workflow, connect it to your WhatsApp, devices or ERP, and run it for you monthly.": "نكيّف النظام على طريقة عملك، ونربطه بواتسابك أو أجهزتك أو نظام ERP، ونشغّله لك شهريًا.",
+"SiteLog live demo": "النسخة الحية من SiteLog",
+"QuoteFlow live demo": "النسخة الحية من QuoteFlow",
+"Attendify live demo": "النسخة الحية من Attendify",
+"SiteLog dashboard": "لوحة SiteLog",
+"QuoteFlow dashboard": "لوحة QuoteFlow",
+"Attendify dashboard": "لوحة Attendify",
+"Open Inbox, paste a WhatsApp message like “carpenters 12, steel fixers 8, slab pour 35 m3 level 2, loader 1 breakdown” (Arabic works too) and watch it become report lines.": "افتح الرسائل الواردة، الصق رسالة واتساب مثل «12 نجار، 8 حداد، تم صب 35 م3 سقف الدور الثاني، لودر 1 عطلان» وشاهدها تتحول إلى سطور تقرير.",
+"Create a new inquiry with details like “coring 30 holes Ø150 and wall cutting 18 m” (or the same in Arabic) — then click New quotation and see the priced lines drafted for you.": "أنشئ استفسارًا جديدًا بتفاصيل مثل «كور 30 نقطة قطر 150 وقص جدار 18 م.ط» ثم اضغط عرض سعر جديد وشاهد البنود المسعّرة تُقترح لك."
 };
 
 /* ================= i18n: Arabic / English =================
@@ -3173,6 +3330,73 @@ function mountPermitPack(el, opt = {}) {
   if (opt.view) shell.go(opt.view);
 }
 
+/* ---------- Full systems: complete, working products (code on GitHub, live demo on GitHub Pages) ---------- */
+const PAGES = "https://hudera-ai.github.io";
+const SYSTEMS = [
+  { id: "sitelog", name: "SiteLog", repo: "sitelog", kind: "Daily site reporting system", cat: "auto", port: 8787,
+    tagline: "Field messages become structured daily reports with approvals and BOQ progress — a complete system, not a mock-up.",
+    company: "Ufuq Al-Bina Contracting Co. (fictional)",
+    users: [["sara@ufuq.example", "Project manager"], ["ahmed@ufuq.example", "Foreman"], ["khalid@ufuq.example", "Admin"]],
+    tryit: ["Open Inbox, paste a WhatsApp message like “carpenters 12, steel fixers 8, slab pour 35 m3 level 2, loader 1 breakdown” (Arabic works too) and watch it become report lines.", "Apply the message to today's report, then submit it and approve it as the project manager.", "Open a project to see BOQ progress and earned value move with every approved report.", "Switch to Arabic and dark mode from Settings; print a report to A4."],
+    features: [["chat", "Message parser (AR/EN)", "Manpower, equipment, activities, materials and issues extracted from free text; activities matched to BOQ items."], ["check", "Approval workflow", "Foreman drafts → PM approves or returns with a comment → locked, with an audit log."], ["chart", "BOQ progress & earned value", "Executed vs. quantity per item; value-weighted overall progress and trends."], ["file", "Printable A4 report", "Company header, all tables and signature blocks."], ["users", "Roles & scoping", "Admin, PM, engineer, foreman, client viewer — users only see their projects."], ["globe", "Arabic / English", "RTL layout, light and dark themes, phone-ready."]],
+    flow: [["WhatsApp", "Message received", "Webhook or paste: foreman text in Arabic/English."], ["Parser", "Lines extracted", "Rule-based parser (optional LLM) produces structured lines."], ["Report", "Applied to the day", "Counts merged into today's draft; activities linked to BOQ."], ["Approval", "PM reviews", "Approve, or return with a comment; locked afterwards."], ["Progress", "Dashboards update", "Earned value, manpower trend, open issues."]],
+    stack: ["Node.js", "Express", "SQLite (sql.js)", "Vanilla JS", "WhatsApp Cloud API webhook", "17 tests"],
+    stats: ["14 tables", "~370 sample reports", "17 tests"] },
+  { id: "quoteflow", name: "QuoteFlow", repo: "quoteflow", kind: "Inquiry → quotation → follow-up system", cat: "saas", port: 8788,
+    tagline: "Every inquiry tracked from arrival to quotation and follow-up, with SLA timers, a pipeline board, an assisted quotation builder and win/loss reports.",
+    company: "Marasim Technical Services Co. (fictional)",
+    users: [["tariq@marasim.example", "Manager"], ["lina@marasim.example", "Sales"], ["hani@marasim.example", "Estimator"]],
+    tryit: ["Create a new inquiry with details like “coring 30 holes Ø150 and wall cutting 18 m” (or the same in Arabic) — then click New quotation and see the priced lines drafted for you.", "Submit the quotation for approval, sign in as the manager, approve & send, then print it to A4.", "Watch the pipeline board move the inquiry from quoting to quoted to won.", "Open Reports for win rate, SLA compliance and lost reasons."],
+    features: [["clock", "SLA timers", "First-response targets per priority; overdue and at-risk inquiries surface on the dashboard."], ["grid", "Pipeline board", "New → assigned → site visit → quoting → quoted → negotiation, with value per stage."], ["sparkle", "Assisted quotation drafting", "Reads the inquiry text (AR/EN) and proposes catalogue lines with quantities; discount and VAT computed."], ["check", "Approval & revisions", "Estimator drafts → manager approves & sends; revisions supersede older quotes."], ["file", "Printable quotation", "Company header, client block, items, totals, terms, signatures."], ["chart", "Reports", "Funnel, win rate, SLA met, by sales rep, by client type, top services, lost reasons."]],
+    flow: [["Intake", "Inquiry arrives", "WhatsApp, e-mail, phone, website form (intake endpoint)."], ["SLA", "Clock starts", "Assign & respond before the target; follow-ups scheduled."], ["Quote", "Draft in seconds", "Lines proposed from the text; edit, discount, VAT."], ["Approve", "Manager sends", "Locked quotation, PDF, revisions when negotiating."], ["Close", "Won or lost", "Reason captured; reports update."]],
+    stack: ["Node.js", "Express", "SQLite (sql.js)", "Vanilla JS", "Intake API", "9 tests"],
+    stats: ["14 clients", "~110 sample inquiries", "9 tests"] },
+  { id: "attendify", name: "Attendify", repo: "attendify", kind: "Attendance & overtime system", cat: "biz", port: 8789,
+    tagline: "Device punches turned into lateness, overtime, leaves and the monthly payroll-ready report — with shifts, grace periods and night shifts handled by a tested rules engine.",
+    company: "Golden Palms Trading Co. (fictional)",
+    users: [["hr@goldenpalms.example", "HR"], ["salem@goldenpalms.example", "Department manager"], ["huda@goldenpalms.example", "Admin"]],
+    tryit: ["Open Import punches, click “Try a sample”, see the preview (duplicates, unknown IDs) and import.", "Open an employee to see the month calendar with late minutes and overtime badges; add a manual punch.", "Approve a pending leave and watch the days recompute.", "Open the Monthly report, export CSV, and lock the month."],
+    features: [["clock", "Rules engine", "Shifts with breaks, night shifts across midnight, grace per shift, overtime rounding and minimums, weekend/holiday rates."], ["inbox", "Device import", "Any fingerprint/face export (CSV/TSV); dry-run preview; live push endpoint."], ["calendar", "Daily sheet & calendars", "Per-date sheet by department; per-employee month view."], ["check", "Leaves & holidays", "Requests, approval, public holidays — days recompute automatically."], ["file", "Monthly report", "OT pay, late and absence deductions, CSV export, print, month locking."], ["users", "Roles", "Admin, HR, department manager (own department only), viewer; audit log."]],
+    flow: [["Device", "Punches", "Fingerprint device export or push."], ["Engine", "Day records", "Status, late, early, worked, overtime per employee per day."], ["HR", "Exceptions", "Missing punches, leaves, manual fixes."], ["Report", "Monthly figures", "Additions and deductions per employee."], ["Payroll", "Locked month", "Figures frozen and exported."]],
+    stack: ["Node.js", "Express", "SQLite (sql.js)", "Vanilla JS", "Device push API", "14 tests"],
+    stats: ["40 employees", "3 months of punches", "14 tests"] },
+];
+const S = id => SYSTEMS.find(s => s.id === id);
+const sysDemo = s => `${PAGES}/${s.repo}/?mode=local`;
+const sysShot = (s, n) => `${PAGES}/${s.repo}/docs/${n}.png`;
+
+function renderSystems() {
+  const host = $("#systems-grid"); if (!host) return;
+  host.innerHTML = SYSTEMS.map(s => `<article class="scard">
+      <a class="shot" href="#s-${s.id}" aria-label="${s.name}"><img src="${sysShot(s, "dashboard")}" alt="${s.name} dashboard" loading="lazy"></a>
+      <div class="body"><div class="meta">${chip(CATS.find(c => c[0] === s.cat)[1], CAT_C[s.cat], false)}${chip("Complete system", "green", false)}${chip("Open source", "grey", false)}</div>
+      <h3>${s.name}</h3><p>${s.tagline}</p>
+      <div class="feat">${s.features.slice(0, 3).map(f => `<span>${ic("check")}${f[1]}</span>`).join("")}</div>
+      <div class="stats">${s.stats.map(x => `<span>${x}</span>`).join("")}</div>
+      <div class="foot"><a class="btn primary sm" href="#s-${s.id}">${ic("play")}Try it yourself</a><a class="btn sm" href="${CONTACT.github}/${s.repo}" target="_blank" rel="noopener">${ic("grid")}Code on GitHub</a></div></div></article>`).join("");
+}
+
+function renderSystem(s) {
+  const i = SYSTEMS.indexOf(s), prev = SYSTEMS[(i - 1 + SYSTEMS.length) % SYSTEMS.length], next = SYSTEMS[(i + 1) % SYSTEMS.length];
+  const v = $("#pview");
+  v.innerHTML = `<div class="container pview">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#systems">${ic("back")}All systems</a><span>/</span><span>Complete system</span></nav>
+    <div class="phead"><div><div class="row">${chip(CATS.find(c => c[0] === s.cat)[1], CAT_C[s.cat], false)}${chip(s.kind, "grey", false)}${chip("Complete system", "green", false)}</div><h1>${s.name}</h1><p class="tag">${s.tagline}</p></div>
+      <div class="acts"><a class="btn primary" href="${sysDemo(s)}" target="_blank" rel="noopener">${ic("play")}Open the live demo</a><a class="btn" href="${CONTACT.github}/${s.repo}" target="_blank" rel="noopener">${ic("grid")}Code on GitHub</a><a class="btn" href="#contact" data-interest="${s.id}">Discuss a similar solution</a></div></div>
+    <div class="sys-frame"><div class="sys-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url" dir="ltr">${PAGES}/${s.repo}/</span><a href="${sysDemo(s)}" target="_blank" rel="noopener">Open in a new tab ${ic("arrow")}</a></div>
+      <iframe src="${sysDemo(s)}" title="${s.name} live demo" loading="lazy" allow="clipboard-write"></iframe></div>
+    <p style="font-size:13px;color:var(--faint);margin-top:12px">This is the real application running in your browser with a SQLite database (WebAssembly). Everything you change is saved on your device only. Sample company: ${s.company}. Demo users use the password <code class="no-l10n">demo1234</code>.</p>
+    <div class="pgrid">
+      <div class="pbox"><h3>Try this</h3><ol class="tryit">${s.tryit.map(x => `<li>${x}</li>`).join("")}</ol></div>
+      <div class="pbox"><h3>Sign in as</h3><div class="users">${s.users.map(([e, r]) => `<div><b class="no-l10n" dir="ltr">${e}</b><span>${r}</span></div>`).join("")}</div><p class="small" style="margin-top:10px">Same code runs as a real server: <code class="no-l10n">npm install && npm start</code> → REST API, sessions, integrations.</p></div>
+      <div class="pbox"><h3>Built with</h3><div class="stack" style="margin:0">${s.stack.map(x => chip(x, "grey", false)).join("")}</div><div class="stats" style="margin-top:12px">${s.stats.map(x => `<span>${x}</span>`).join("")}</div></div></div>
+    <h2 class="h-sub">What's inside</h2><div class="features">${s.features.map(([icn, t, d]) => `<div class="feature"><span class="ico">${ic(icn)}</span><div><b>${t}</b><span>${d}</span></div></div>`).join("")}</div>
+    <h2 class="h-sub">How the workflow runs</h2><div class="flowline">${s.flow.map(([k, t, d], j) => `<div class="flowstep"><small>${String(j + 1).padStart(2, "0")} · ${k}</small><b>${t}</b><span>${d}</span></div>${j < s.flow.length - 1 ? `<span class="flowarrow">${ic("arrow")}</span>` : ""}`).join("")}</div>
+    <div class="cta-band"><div><h3>Need something like ${s.name}?</h3><p>We adapt the system to your workflow, connect it to your WhatsApp, devices or ERP, and run it for you monthly.</p></div><div class="row"><a class="btn" href="#contact" data-interest="${s.id}">Book a discovery call</a><a class="btn primary" ${waAttr(`Hi HUDERA AI, I'd like to discuss a system like ${s.name}.`, `مرحباً HUDERA AI، أرغب في مناقشة نظام مثل ${s.name}.`)}>${ic("chat")}Chat on WhatsApp</a></div></div>
+    <div class="pnav"><a href="#s-${prev.id}"><small>← Previous</small><b>${prev.name}</b></a><a href="#s-${next.id}"><small>Next →</small><b>${next.name}</b></a></div>
+  </div>`;
+}
+
 /* ================= Site: products, home, product pages, router ================= */
 const CONTACT = { email: "hudera.ai@gmail.com", whatsapp: "+20 155 515 9139", wa: "201555159139", linkedin: "https://www.linkedin.com/company/hudera", facebook: "https://www.facebook.com/huderaai", github: "https://github.com/hudera-ai" };
 const REPO = { connect: "hudera-connect" };
@@ -3300,7 +3524,7 @@ function renderHome() {
       <div class="body"><div class="meta">${chip(CATS.find(c => c[0] === p.cat)[1], CAT_C[p.cat], false)}${chip("Interactive demo", "grey", false)}</div>
       <h3>${p.name}</h3><p>${p.tagline}</p>
       <div class="feat">${p.features.slice(0, 3).map(f => `<span>${ic("check")}${f[1]}</span>`).join("")}</div>
-      <div class="foot"><a class="btn primary sm" href="#p-${p.id}">${ic("play")}Explore demo</a><a class="btn sm" href="#contact" data-interest="${p.id}">Discuss a similar solution</a></div></div></article>`).join("");
+      <div class="foot"><a class="btn primary sm" href="#p-${p.id}">${ic("play")}Explore demo</a>${S(p.id) ? `<a class="btn sm" href="#s-${p.id}">${ic("bolt")}Full system</a>` : `<a class="btn sm" href="#contact" data-interest="${p.id}">Discuss a similar solution</a>`}</div></div></article>`).join("");
   // live previews (each is the real demo's first screen, scaled)
   PRODUCTS.forEach(p => { const c = $(`[data-preview="${p.id}"]`); p.mount(c, { controls: false, preview: true, autoplay: true, speed: 40 }); });
   $$(".preview-canvas .demo-bar").forEach(b => b.remove());
@@ -3341,6 +3565,7 @@ function renderProduct(p) {
     <nav class="crumbs" aria-label="Breadcrumb"><a href="#work">${ic("back")}All products</a><span>/</span><span>${CATS.find(c => c[0] === p.cat)[1]}</span></nav>
     <div class="phead"><div><div class="row">${chip(CATS.find(c => c[0] === p.cat)[1], CAT_C[p.cat], false)}${chip(p.kind, "grey", false)}</div><h1>${p.name}</h1><p class="tag">${p.tagline}</p></div>
       <div class="acts"><a class="btn primary" href="#contact" data-interest="${p.id}">Discuss a similar solution</a><a class="btn" href="${repoUrl(p.id)}" target="_blank" rel="noopener">${ic("grid")}View on GitHub</a><a class="btn" href="#p-${next.id}">Next product ${ic("arrow")}</a></div></div>
+    ${S(p.id) ? `<div class="sys-note">${ic("bolt")}<span>A complete, working version of ${p.name} is available — database, roles, approvals and reports.</span><a class="btn primary sm" href="#s-${p.id}">Try the full system</a></div>` : ""}
     <div class="demo-wrap" id="demo-host"></div>
     <p style="font-size:13px;color:var(--faint);margin-top:12px">This demo runs in your browser on sample data. Company names, people and figures are fictional.</p>
     <div class="pgrid"><div class="pbox"><h3>The problem</h3><p>${p.problem}</p></div><div class="pbox"><h3>What we build</h3><p>${p.solution}</p></div><div class="pbox"><h3>Business value</h3><p>${p.value}</p></div></div>
@@ -3358,7 +3583,11 @@ function renderProduct(p) {
 function route() {
   const h = location.hash.replace("#", "");
   const home = $("#home"), pv = $("#pview");
-  if (h.startsWith("p-") && P(h.slice(2))) {
+  if (h.startsWith("s-") && S(h.slice(2))) {
+    if (current && current.stop) current.stop(); current = null;
+    home.hidden = true; pv.hidden = false; renderSystem(S(h.slice(2)));
+    window.scrollTo({ top: 0, behavior: "instant" }); document.title = `${S(h.slice(2)).name} · HUDERA AI`; pageKey = h;
+  } else if (h.startsWith("p-") && P(h.slice(2))) {
     home.hidden = true; pv.hidden = false; renderProduct(P(h.slice(2)));
     window.scrollTo({ top: 0, behavior: "instant" }); document.title = `${P(h.slice(2)).name} · HUDERA AI`; pageKey = h;
   } else {
@@ -3405,7 +3634,7 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#lang").addEventListener("click", () => setLang(LANG === "ar" ? "en" : "ar"));
   $$("[data-i]").forEach(x => x.insertAdjacentHTML("afterbegin", ic(x.dataset.i)));
   [["p1", "Arabic & English"], ["p2", "Works with WhatsApp, Excel & your systems"], ["p3", "Human approval built in"]].forEach(([id, t]) => { $("#" + id).innerHTML = ic("check") + esc(t); });
-  initTheme(); renderHome(); renderHero(); initContact();
+  initTheme(); renderHome(); renderSystems(); renderHero(); initContact();
   $("#products").addEventListener("click", e => { const o = e.target.closest("[data-open]"); if (o && e.isTrusted) location.hash = "p-" + o.dataset.open; });
   $("#tabs").addEventListener("click", e => { const b = e.target.closest("[data-cat]"); if (!b) return; $$("#tabs .tab").forEach(t => t.setAttribute("aria-pressed", t === b)); const k = b.dataset.cat; $$(".pcard").forEach(c => { c.hidden = !(k === "all" || c.dataset.pcat === k); }); fitPreviews(); });
   window.addEventListener("hashchange", route); window.addEventListener("resize", fitPreviews);
