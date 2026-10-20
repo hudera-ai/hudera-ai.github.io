@@ -1,0 +1,14 @@
+{
+  "name": "hudera-platform-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "db:reset": "bash local/reset.sh",
+    "test": "bash local/reset.sh && node --test --test-concurrency=1 tests/*.test.mjs",
+    "dev": "node local/dev-stack.mjs"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "2.45.4",
+    "pg": "8.13.1"
+  }
+}

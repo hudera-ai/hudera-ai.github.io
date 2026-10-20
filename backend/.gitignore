@@ -1,0 +1,4 @@
+node_modules/
+local/postgrest
+.env
+supabase/.temp/
