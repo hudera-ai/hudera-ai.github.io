@@ -1,0 +1,46 @@
+# Browser end-to-end checks (Playwright). Needs: npm run db:reset, local stack (npm run dev), and the local build served on :3301
+# (python3 portfolio2/build.py --local localsite && python3 -m http.server 3301 -d localsite).
+import time, subprocess
+from playwright.sync_api import sync_playwright
+UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
+def q(sql): return subprocess.run(["psql","-d","hudera_test","-At","-c",sql],capture_output=True,text=True).stdout.strip()
+with sync_playwright() as p:
+    b=p.chromium.launch(); ctx=b.new_context(viewport={"width":1440,"height":900},user_agent=UA); pg=ctx.new_page(); errs=[]
+    pg.on("pageerror", lambda e: errs.append(str(e))); pg.on("console", lambda m: m.type=="error" and errs.append(m.text))
+    pg.goto("http://localhost:3301/admin/"); time.sleep(2); pg.screenshot(path="a00_gate.png")
+    pg.click("#g-in"); pg.wait_for_url("**/auth/v1/authorize**"); pg.click("#pick-owner"); time.sleep(3)
+    pg.screenshot(path="a01_noaccess.png"); print("gate text:", pg.inner_text(".gate")[:120].replace("\n"," "))
+    print(q("select app.bootstrap_owner('owner@hudera.test')") or q("select role from app.staff_roles"))
+    pg.reload(); time.sleep(3); pg.screenshot(path="a02_overview.png", full_page=True)
+    print("h1", pg.inner_text("#page-h"), "| kpis", [x.inner_text().replace("\n"," / ") for x in pg.query_selector_all(".kpi")][:4])
+    pg.click("[data-preset='7']"); time.sleep(2); print("7d visitors kpi", pg.query_selector_all(".kpi")[1].inner_text().replace("\n"," / "))
+    pg.goto("http://localhost:3301/admin/#/users"); time.sleep(2); pg.screenshot(path="a03_users.png")
+    pg.select_option("#u-ph","no"); time.sleep(1.5); print("no-phone rows", len(pg.query_selector_all("#u-list tr.click")))
+    pg.select_option("#u-ph",""); time.sleep(1)
+    with pg.expect_download() as dl: pg.click("#exp")
+    path=dl.value.path(); print("csv head:", open(path,encoding='utf-8-sig').read().splitlines()[:2])
+    pg.fill("#u-q","sara"); time.sleep(1.5); pg.click("#u-list tr.click"); time.sleep(2.5); pg.screenshot(path="a04_user.png", full_page=True)
+    print("timeline items", len(pg.query_selector_all("#tl li")))
+    pg.goto("http://localhost:3301/admin/#/leads"); time.sleep(2); pg.screenshot(path="a05_leads.png")
+    pg.click("#l-list tr.click"); time.sleep(2)
+    pg.select_option("#c-st","in_progress"); pg.click("#c-save"); time.sleep(1.5)
+    pg.fill("#c-note","Called, will send a proposal Sunday."); pg.click("#c-addnote"); time.sleep(1.5)
+    pg.select_option("#a-ch","whatsapp"); pg.select_option("#a-out","reached"); pg.click("#a-log"); time.sleep(1.5)
+    pg.click("#c-mail"); time.sleep(1); pg.fill("#m-sub","Your AI HR officer proposal"); pg.fill("#m-body","Hi Sara,\nThanks for your request. Attached is our next step.\n\nHUDERA AI"); pg.screenshot(path="a06_compose.png")
+    pg.click("#m-send"); time.sleep(3); pg.screenshot(path="a07_lead.png", full_page=True)
+    print("lead status", q("select status from app.contact_requests order by created_at limit 1"), "| emails", q("select string_agg(template||':'||status, ', ') from app.email_messages"))
+    pg.goto("http://localhost:3301/admin/#/features"); time.sleep(2); pg.screenshot(path="a08_features.png")
+    pg.click("tr.click"); time.sleep(2); pg.screenshot(path="a09_feature.png", full_page=True)
+    pg.goto("http://localhost:3301/admin/#/emails"); time.sleep(2); pg.screenshot(path="a10_emails.png")
+    pg.goto("http://localhost:3301/admin/#/settings"); time.sleep(2.5); pg.screenshot(path="a11_settings.png", full_page=True)
+    pg.fill("#r-email","support@hudera.test"); pg.click("#r-add"); time.sleep(1.5); print("toast/after add:", q("select string_agg(role::text, ',') from app.staff_roles"))
+    pg.goto("http://localhost:3301/admin/#/audit"); time.sleep(2); pg.screenshot(path="a12_audit.png")
+    print("audit rows", len(pg.query_selector_all("tbody tr")))
+    pg.click("#lang-btn"); pg.goto("http://localhost:3301/admin/#/overview"); time.sleep(2.5); pg.screenshot(path="a13_overview_ar.png")
+    m=b.new_context(viewport={"width":390,"height":844},device_scale_factor=2,user_agent=UA); mp=m.new_page()
+    mp.goto("http://localhost:3301/admin/"); time.sleep(1.5); mp.click("#g-in"); mp.wait_for_url("**/auth/v1/authorize**"); mp.click("#pick-owner"); time.sleep(3)
+    mp.screenshot(path="a14_mobile.png"); print("mobile overflow", mp.evaluate("document.documentElement.scrollWidth"))
+    # a regular user cannot see the dashboard
+    r=b.new_context(user_agent=UA).new_page(); r.goto("http://localhost:3301/admin/"); time.sleep(1.5); r.click("#g-in"); r.wait_for_url("**/auth/v1/authorize**"); r.click("#pick-omarclient"); time.sleep(3)
+    print("omar gate:", r.inner_text(".gate")[:80].replace("\n"," "))
+    print("errors", errs)
