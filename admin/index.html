@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>HUDERA AI Admin</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F6F7FB;--surface:#FFFFFF;--surface-2:#F0F2F8;--surface-3:#E9ECF5;
+  --ink:#0B1220;--text:#1F2637;--muted:#5B6478;--faint:#8A93A6;--line:#E3E7F0;--line-2:#D5DAE6;
+  --primary:#3D5AFE;--primary-ink:#2C46E6;--primary-soft:#E9EDFF;--on-primary:#FFFFFF;
+  --mint:#0FA97A;--mint-soft:#DDF6EC;--amber:#B26A00;--amber-soft:#FFF0D6;--red:#D9363E;--red-soft:#FDE6E7;--violet:#6E56CF;--violet-soft:#EEEAFB;--sky:#0B83C5;--sky-soft:#E0F1FB;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--grid:#E9ECF2;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);--shadow-lg:0 24px 48px -18px rgba(16,24,40,.28);
+  --f:"Instrument Sans","IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;--f-d:"Bricolage Grotesque","IBM Plex Sans Arabic",system-ui,sans-serif;--f-m:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){
+  --bg:#0A0F1A;--surface:#111827;--surface-2:#161F31;--surface-3:#1C2740;--ink:#F3F6FC;--text:#DCE2EE;--muted:#9AA4BA;--faint:#6F7A91;--line:#232D42;--line-2:#2E3A54;
+  --primary:#7088FF;--primary-ink:#8EA0FF;--primary-soft:#1B2450;--on-primary:#0A0F1A;--mint:#34D3A4;--mint-soft:#0F3328;--amber:#FFC34D;--amber-soft:#3A2C0B;--red:#FF7A80;--red-soft:#3D1A1D;--violet:#A996FF;--violet-soft:#29214A;--sky:#5CC2F2;--sky-soft:#0F2D40;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--grid:#1E283B;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A0F1A;--surface:#111827;--surface-2:#161F31;--surface-3:#1C2740;--ink:#F3F6FC;--text:#DCE2EE;--muted:#9AA4BA;--faint:#6F7A91;--line:#232D42;--line-2:#2E3A54;
+  --primary:#7088FF;--primary-ink:#8EA0FF;--primary-soft:#1B2450;--on-primary:#0A0F1A;--mint:#34D3A4;--mint-soft:#0F3328;--amber:#FFC34D;--amber-soft:#3A2C0B;--red:#FF7A80;--red-soft:#3D1A1D;--violet:#A996FF;--violet-soft:#29214A;--sky:#5CC2F2;--sky-soft:#0F2D40;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--grid:#1E283B;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:14.5px/1.5 var(--f);min-height:100vh}
+[hidden]{display:none!important}
+a{color:var(--primary-ink)}
+button,input,select,textarea{font:inherit;color:inherit}
+svg.i{width:16px;height:16px;flex:none}
+.mono{font-family:var(--f-m)}.muted{color:var(--muted)}.faint{color:var(--faint)}.small{font-size:12.5px}
+/* shell */
+.shell{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+.side{background:var(--surface);border-inline-end:1px solid var(--line);padding:18px 12px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;align-items:center;gap:10px;font:700 18px var(--f-d);color:var(--ink);padding:4px 8px 16px;text-decoration:none}
+.brand i{width:30px;height:30px;border-radius:9px;background:var(--primary);color:#fff;display:grid;place-items:center;font-style:normal}
+.brand small{font:500 11px var(--f-m);color:var(--faint);letter-spacing:.06em;text-transform:uppercase;display:block}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;color:var(--muted);text-decoration:none;font-weight:600}
+.nav a:hover{background:var(--surface-2);color:var(--ink)}
+.nav a[aria-current="page"]{background:var(--primary-soft);color:var(--primary-ink)}
+.nav .badge{margin-inline-start:auto;background:var(--red);color:#fff;border-radius:99px;font-size:11px;padding:1px 7px}
+.side .me{margin-top:auto;border-top:1px solid var(--line);padding:12px 8px 0;display:flex;flex-direction:column;gap:8px}
+.side .me b{color:var(--ink);font-size:13.5px;overflow-wrap:anywhere}
+.side .me .row{display:flex;gap:6px;flex-wrap:wrap}
+.main{min-width:0;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 24px;border-bottom:1px solid var(--line);background:var(--surface);position:sticky;top:0;z-index:5}
+.top h1{font:700 22px var(--f-d);color:var(--ink);margin:0;letter-spacing:-.01em}
+.top .sp{flex:1}
+.menu-btn{display:none}
+.content{padding:22px 24px 48px;display:flex;flex-direction:column;gap:18px}
+/* controls */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:36px;padding:0 14px;border-radius:9px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font-weight:600;font-size:13.5px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--faint)}.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:var(--on-primary)}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) .btn.primary{color:var(--on-primary)}}
+.btn.sm{height:30px;padding:0 10px;font-size:12.5px}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn.danger{color:var(--red);border-color:color-mix(in srgb,var(--red) 40%,transparent)}
+.input{height:36px;border:1px solid var(--line-2);border-radius:9px;background:var(--surface);padding:0 10px;min-width:0}
+textarea.input{height:auto;min-height:120px;padding:9px 10px;resize:vertical;width:100%}
+.input:focus,.btn:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:9px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:0 11px;height:34px;font-weight:600;font-size:13px;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--primary-soft);color:var(--primary-ink)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filters label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+/* cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.card h2{font:700 16px var(--f-d);color:var(--ink);margin:0 0 4px}
+.card .sub{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-width:0}
+.kpi small{display:block;color:var(--muted);font-size:12.5px;font-weight:600}
+.kpi b{display:block;font:700 28px var(--f-d);color:var(--ink);letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi span{display:block;font-size:12px;color:var(--faint);margin-top:2px}
+.kpi.alert b{color:var(--red)}
+/* tables */
+.tbl-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:start;font-size:12px;color:var(--muted);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface-2);white-space:nowrap;position:sticky;top:0}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tbody tr.click{cursor:pointer}tbody tr.click:hover{background:var(--surface-2)}
+td .t{color:var(--ink);font-weight:600}td .s{display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.num{text-align:end;font-variant-numeric:tabular-nums}
+.pager{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap;background:var(--surface-2);color:var(--muted)}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.chip.nodot::before{display:none}
+.c-blue{background:var(--primary-soft);color:var(--primary-ink)}.c-mint{background:var(--mint-soft);color:var(--mint)}.c-amber{background:var(--amber-soft);color:var(--amber)}
+.c-red{background:var(--red-soft);color:var(--red)}.c-violet{background:var(--violet-soft);color:var(--violet)}.c-sky{background:var(--sky-soft);color:var(--sky)}
+/* charts */
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .ax{font:11px var(--f);fill:var(--faint)}
+.chart .gl{stroke:var(--grid);stroke-width:1}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:3px;border-radius:2px;display:inline-block}
+.legend i.sq{height:10px;width:10px;border-radius:3px}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--surface);border-radius:8px;padding:7px 10px;font-size:12px;line-height:1.45;white-space:nowrap;box-shadow:var(--shadow-lg);z-index:3;transform:translate(-50%,-110%)}
+.tip b{display:block}
+.hbars{display:flex;flex-direction:column;gap:8px}
+.hbar{display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:4px 10px;align-items:center;font-size:13px}
+.hbar .lbl{color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbar .val{text-align:end;font-variant-numeric:tabular-nums;color:var(--muted)}
+.hbar .track{grid-column:1/-1;height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.hbar .fill{height:100%;background:var(--s1);border-radius:4px}
+details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;color:var(--muted)}
+/* detail pages */
+.prof{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.av{width:56px;height:56px;border-radius:50%;object-fit:cover;background:var(--primary);color:#fff;display:grid;place-items:center;font:700 22px var(--f-d);flex:none}
+.prof h2{font:700 22px var(--f-d);color:var(--ink);margin:0}
+.kv{display:grid;grid-template-columns:150px minmax(0,1fr);gap:7px 12px;font-size:13.5px}
+.kv dt{color:var(--muted)}.kv dd{margin:0;color:var(--ink);overflow-wrap:anywhere}
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.tl .dot{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--surface-2);color:var(--muted)}
+.tl .dot svg{width:13px;height:13px}
+.tl .k-contact .dot{background:var(--primary-soft);color:var(--primary-ink)}.tl .k-email .dot{background:var(--violet-soft);color:var(--violet)}
+.tl .k-status .dot{background:var(--amber-soft);color:var(--amber)}.tl .srv .dot{background:var(--mint-soft);color:var(--mint)}
+.tl time{color:var(--faint);font-size:12px;white-space:nowrap}
+.tl .day{display:block;grid-column:1/-1;font-weight:700;color:var(--muted);font-size:12px;padding:12px 0 2px;border:0}
+.feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.feat div{border:1px solid var(--line);border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;gap:3px;font-size:13px}
+.feat b{color:var(--ink)}
+.notes{display:flex;flex-direction:column;gap:8px}
+.note{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:13.5px;white-space:pre-wrap;overflow-wrap:anywhere}
+.note small{display:block;color:var(--faint);margin-top:4px}
+.msg{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--surface-2);border-radius:10px;padding:12px 14px;color:var(--ink)}
+.form-row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.form-row label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);font-weight:600}
+.stack{display:flex;flex-direction:column;gap:10px}
+.err{background:var(--red-soft);color:var(--red);border-radius:10px;padding:10px 12px}
+.ok{background:var(--mint-soft);color:var(--mint);border-radius:10px;padding:10px 12px}
+/* modal */
+.scrim{position:fixed;inset:0;background:rgba(8,12,24,.5);z-index:50;display:grid;place-items:center;padding:16px}
+.modal{background:var(--surface);border-radius:16px;box-shadow:var(--shadow-lg);width:min(620px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.modal h2{font:700 19px var(--f-d);color:var(--ink);margin:0}
+/* gate */
+.gate{min-height:100vh;display:grid;place-items:center;padding:24px}
+.gate .card{max-width:440px;width:100%;padding:28px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.gate h1{font:700 24px var(--f-d);color:var(--ink);margin:0}
+.toast{position:fixed;bottom:18px;inset-inline-start:50%;transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:10px;z-index:60;font-size:13.5px;box-shadow:var(--shadow-lg)}
+[dir="rtl"] .toast{transform:translateX(50%)}
+.skel{height:90px;border-radius:14px;background:linear-gradient(90deg,var(--surface-2),var(--surface-3),var(--surface-2));background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+@media (max-width:1100px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .side{position:fixed;inset-block:0;inset-inline-start:0;width:250px;z-index:40;transform:translateX(-105%);transition:transform .2s;box-shadow:var(--shadow-lg)}
+  [dir="rtl"] .side{transform:translateX(105%)}
+  .side.open{transform:none!important}
+  .menu-btn{display:inline-flex}
+  .g2{grid-template-columns:1fr}
+  .top{padding:12px 16px}.content{padding:16px 16px 40px}
+  .kv{grid-template-columns:1fr}.kv dt{margin-top:6px}
+}
+@media (max-width:520px){.g4,.g3{grid-template-columns:1fr 1fr}.kpi b{font-size:22px}}
+.tl .s{display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.tl b{margin-inline-end:6px}
+#view:focus{outline:none}
+.side{align-self:start}
+
+</style>
+</head>
+<body>
+<div id="app"><div class="gate"><div class="card"><p class="muted">Loading…</p></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const HUDERA_CONFIG = {"supabaseUrl": "", "supabaseAnonKey": ""};
+/* HUDERA AI · admin dashboard. Every number comes from the admin_* database functions,
+   which check the signed-in person's staff role on the server. */
+"use strict";
+const cfg = typeof HUDERA_CONFIG !== "undefined" ? HUDERA_CONFIG : {};
+const TZ = "Asia/Riyadh";
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
+let LANG = store.get("hudera-admin-lang") || "en";
+const AR = {
+  "Overview": "نظرة عامة", "Users": "المستخدمون", "Leads": "طلبات التواصل", "Features": "الميزات", "E-mails": "الرسائل", "Settings": "الإعدادات", "Audit log": "سجل التدقيق",
+  "Sign out": "تسجيل الخروج", "Website": "الموقع", "Last 7 days": "آخر 7 أيام", "Last 30 days": "آخر 30 يوماً", "Last 90 days": "آخر 90 يوماً", "From": "من", "To": "إلى",
+  "Registered users": "المستخدمون المسجلون", "Total visitors": "إجمالي الزوار", "Visitors": "الزوار", "Sessions": "الجلسات", "Page views": "مشاهدات الصفحات",
+  "Active users today": "النشطون اليوم", "New users today": "مستخدمون جدد اليوم", "New in 7 days": "جدد خلال 7 أيام", "New this month": "جدد هذا الشهر",
+  "Contact requests": "طلبات التواصل", "Waiting for a reply": "بانتظار الرد", "Overdue follow-ups": "متابعات متأخرة", "Registration rate": "نسبة التسجيل",
+  "Returning visitors": "زوار عائدون", "Signed-in sessions": "جلسات بحساب", "Anonymous sessions": "جلسات بدون حساب",
+  "Visitors over time": "الزوار عبر الوقت", "Registrations over time": "التسجيلات عبر الوقت", "Daily active users": "المستخدمون النشطون يومياً",
+  "Monthly active": "النشطون شهرياً", "Feature usage": "استخدام الميزات", "Engagement": "التفاعل", "Contact requests over time": "طلبات التواصل عبر الوقت",
+  "Top pages": "أكثر الصفحات زيارة", "Traffic sources": "مصادر الزيارات", "Referrers": "المواقع المُحيلة", "Devices": "الأجهزة", "Browsers": "المتصفحات",
+  "Retention by sign-up week": "الاحتفاظ حسب أسبوع التسجيل", "Requests by status": "الطلبات حسب الحالة", "Show as table": "عرض كجدول",
+  "Search name, e-mail or phone": "ابحث بالاسم أو البريد أو الجوال", "All": "الكل", "Active": "نشط", "Inactive": "غير نشط", "Suspended": "موقوف", "Deleted": "محذوف",
+  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
+  "Registered": "تاريخ التسجيل", "Last login": "آخر دخول", "Last activity": "آخر نشاط", "Status": "الحالة", "Recent features": "آخر الميزات", "Important actions": "إجراءات مهمة",
+  "Contact": "التواصل", "Previous": "السابق", "Next": "التالي", "No results": "لا توجد نتائج", "Account": "الحساب", "Timeline": "الخط الزمني", "Load more": "تحميل المزيد",
+  "Send e-mail": "إرسال بريد", "Used": "استُخدمت", "Not used": "لم تُستخدم", "Unknown": "غير معروف", "Recent sessions": "آخر الجلسات", "Pages visited": "الصفحات المزارة",
+  "New": "جديد", "Pending": "قيد الانتظار", "Contacted": "تم التواصل", "In progress": "قيد التنفيذ", "Resolved": "تم الحل", "Closed": "مغلق", "Open": "مفتوحة",
+  "Assigned to": "مسند إلى", "Follow-up": "موعد المتابعة", "Save": "حفظ", "Add note": "إضافة ملاحظة", "Internal notes": "ملاحظات داخلية", "Contact attempts": "محاولات التواصل",
+  "Log attempt": "تسجيل محاولة", "Status history": "سجل الحالة", "Subject": "الموضوع", "Message": "الرسالة", "Send": "إرسال", "Cancel": "إلغاء", "Retry": "إعادة المحاولة",
+  "Team": "الفريق", "Tracking": "التتبع", "E-mail service": "خدمة البريد", "Privacy": "الخصوصية", "General": "عام",
+};
+const t = s => (LANG === "ar" && AR[s]) || s;
+const nf = n => (n == null || n === "" ? "—" : Number(n).toLocaleString("en-US"));
+const pct = n => (n == null ? "—" : `${Number(n).toLocaleString("en-US", { maximumFractionDigits: 1 })}%`);
+const loc = () => (LANG === "ar" ? "ar-EG-u-ca-gregory-nu-latn" : "en-GB");
+const fdt = (v, withTime = true) => v ? new Date(v).toLocaleString(loc(), { timeZone: TZ, day: "numeric", month: "short", year: "numeric", ...(withTime ? { hour: "2-digit", minute: "2-digit" } : {}) }) : "—";
+const fday = v => v ? new Date(v + (String(v).length === 10 ? "T12:00:00Z" : "")).toLocaleDateString(loc(), { timeZone: TZ, day: "numeric", month: "short" }) : "—";
+function ago(v) {
+  if (!v) return "—"; const s = (Date.now() - new Date(v)) / 1000;
+  const f = new Intl.RelativeTimeFormat(LANG === "ar" ? "ar" : "en", { numeric: "auto" });
+  if (s < 60) return f.format(0, "second"); if (s < 3600) return f.format(-Math.round(s / 60), "minute");
+  if (s < 86400) return f.format(-Math.round(s / 3600), "hour"); if (s < 86400 * 45) return f.format(-Math.round(s / 86400), "day");
+  return fdt(v, false);
+}
+const today = () => new Date().toLocaleDateString("en-CA", { timeZone: TZ });
+const addDays = (d, n) => { const x = new Date(d + "T12:00:00Z"); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); };
+const ICON = {
+  home: "M3 10.5 12 3l9 7.5V21H3z", users: "M16 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1M9.5 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM21 19v-1a4 4 0 0 0-3-3.9M15 3.1a3.5 3.5 0 0 1 0 6.8",
+  inbox: "M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z", grid: "M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z",
+  mail: "M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm-1 1 9 7 9-7", gear: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z",
+  list: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01", menu: "M3 6h18M3 12h18M3 18h18", eye: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+  user: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", flag: "M4 22V4m0 0h13l-2 4 2 4H4", phone: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z",
+  check: "M20 6 9 17l-5-5", dl: "M12 3v12m0 0-4-4m4 4 4-4M4 21h16", sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4", moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
+  back: "M15 18l-6-6 6-6", dot: "M12 12h.01",
+};
+const ic = n => `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON[n] || ICON.dot}"/></svg>`;
+const STATUS = { new: ["New", "c-blue"], pending: ["Pending", "c-amber"], contacted: ["Contacted", "c-sky"], in_progress: ["In progress", "c-violet"], resolved: ["Resolved", "c-mint"], closed: ["Closed", ""] };
+const EMAIL_ST = { queued: ["Queued", "c-amber"], sending: ["Sending", "c-amber"], sent: ["Sent (accepted by provider)", "c-sky"], delivered: ["Delivered", "c-mint"], delivery_delayed: ["Delayed", "c-amber"], bounced: ["Bounced", "c-red"], complained: ["Marked as spam", "c-red"], failed: ["Failed", "c-red"], cancelled: ["Cancelled", ""] };
+const ACT = { active: ["Active", "c-mint"], inactive: ["Inactive", "c-amber"], suspended: ["Suspended", "c-red"], deleted: ["Deleted", ""] };
+const chip = (pair, fallback) => pair ? `<span class="chip ${pair[1]}">${esc(t(pair[0]))}</span>` : `<span class="chip">${esc(fallback || "—")}</span>`;
+
+let sb = null, who = null;
+const state = { from: addDays(today(), -29), to: today(), preset: 30 };
+try { const r = JSON.parse(sessionStorage.getItem("hudera-admin-range") || "null"); if (r) Object.assign(state, r); } catch (e) {}
+
+function toast(m) { const d = document.createElement("div"); d.className = "toast"; d.setAttribute("role", "status"); d.textContent = m; document.body.appendChild(d); setTimeout(() => d.remove(), 3200); }
+const ERRS = { forbidden: "You don't have permission for this.", not_authenticated: "Your session ended. Sign in again.", rate_limited: "Too many actions — try again later.",
+  last_owner: "There must always be at least one owner.", user_not_found: "No account with that e-mail. They must sign in with Google on the site once first.",
+  no_marketing_consent: "This person has not agreed to announcements. Send a follow-up instead.", recipient_unavailable: "This recipient's e-mail was removed.",
+  invalid_setting_value: "That value is not allowed.", cannot_change_self: "You can't change your own account here.", invalid_assignee: "Only active team members can be assigned." };
+async function api(fn, args = {}) {
+  const { data, error } = await sb.rpc(fn, args);
+  if (error) { const code = String(error.message || "error").split(/\s/)[0]; const e = new Error(ERRS[code] || error.message || code); e.code = code; throw e; }
+  return data;
+}
+
+/* ---------------- charts (SVG, one y-axis, hover tooltip, table fallback) ---------------- */
+function niceMax(v) { if (v <= 0) return 4; const p = 10 ** Math.floor(Math.log10(v)); const n = v / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p; }
+function chart(el, { labels, series, type = "line", fmt = nf, height = 220 }) {
+  const W = 640, H = height, L = 40, R = 10, T = 10, B = 26;
+  const max = niceMax(Math.max(1, ...series.flatMap(s => s.values)));
+  const n = labels.length, iw = W - L - R, ih = H - T - B;
+  const x = i => L + (type === "bar" ? (i + 0.5) * iw / n : (n === 1 ? iw / 2 : i * iw / (n - 1)));
+  const y = v => T + ih - (v / max) * ih;
+  const ticks = [0, .25, .5, .75, 1].map(f => f * max);
+  const every = Math.max(1, Math.ceil(n / 8));
+  let svg = ticks.map(v => `<line class="gl" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${fmt(Math.round(v * 100) / 100)}</text>`).join("");
+  svg += labels.map((l, i) => i % every === 0 ? `<text class="ax" x="${x(i)}" y="${H - 8}" text-anchor="middle">${esc(l)}</text>` : "").join("");
+  if (type === "bar") {
+    const bw = Math.max(2, Math.min(28, iw / n - 2)) / series.length;
+    series.forEach((s, k) => s.values.forEach((v, i) => { if (v > 0) { const h = Math.max(1, ih - (y(v) - T)); const bx = x(i) - bw * series.length / 2 + k * bw;
+      svg += `<path d="M${bx + 1},${T + ih} V${y(v) + Math.min(4, h)} q0,-4 4,-4 h${bw - 10 > 0 ? bw - 10 : 0} q4,0 4,4 V${T + ih} Z" fill="${s.color}"/>`; } }));
+  } else {
+    series.forEach(s => { svg += `<polyline fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="${s.values.map((v, i) => `${x(i)},${y(v)}`).join(" ")}"/>`;
+      if (n <= 31) svg += s.values.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="2.5" fill="${s.color}"/>`).join(""); });
+  }
+  svg += `<line class="xh" x1="0" x2="0" y1="${T}" y2="${T + ih}" stroke="var(--faint)" stroke-dasharray="3 3" visibility="hidden"/><rect x="${L}" y="${T}" width="${iw}" height="${ih}" fill="transparent" class="hit"/>`;
+  el.innerHTML = `${series.length > 1 ? `<div class="legend">${series.map(s => `<span><i class="${type === "bar" ? "sq" : ""}" style="background:${s.color}"></i>${esc(t(s.name))}</span>`).join("")}</div>` : ""}
+    <div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(series.map(s => t(s.name)).join(", "))}">${svg}</svg><div class="tip" hidden></div></div>
+    <details class="tv"><summary>${t("Show as table")}</summary><div class="tbl-wrap" style="margin-top:6px;max-height:240px"><table><thead><tr><th></th>${series.map(s => `<th class="num">${esc(t(s.name))}</th>`).join("")}</tr></thead>
+    <tbody>${labels.map((l, i) => `<tr><td>${esc(l)}</td>${series.map(s => `<td class="num">${fmt(s.values[i])}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`;
+  const svgEl = $("svg", el), tip = $(".tip", el), xh = $(".xh", el), wrap = $(".chart", el);
+  $(".hit", el).addEventListener("pointermove", e => {
+    const r = svgEl.getBoundingClientRect(), px = (e.clientX - r.left) * W / r.width;
+    let i = type === "bar" ? Math.floor((px - L) / (iw / n)) : Math.round((px - L) / (n === 1 ? 1 : iw / (n - 1)));
+    i = Math.max(0, Math.min(n - 1, i));
+    xh.setAttribute("x1", x(i)); xh.setAttribute("x2", x(i)); xh.setAttribute("visibility", "visible");
+    tip.hidden = false; tip.innerHTML = `<b>${esc(labels[i])}</b>${series.map(s => `${esc(t(s.name))}: ${fmt(s.values[i])}`).join("<br>")}`;
+    tip.style.left = `${(x(i) / W) * r.width}px`; tip.style.top = `${(y(Math.max(...series.map(s => s.values[i]))) / H) * r.height}px`;
+  });
+  $(".hit", el).addEventListener("pointerleave", () => { tip.hidden = true; xh.setAttribute("visibility", "hidden"); });
+  void wrap;
+}
+function hbars(el, rows, { label, value, fmt = nf, color = "var(--s1)", onClick } = {}) {
+  if (!rows.length) { el.innerHTML = `<p class="empty">${t("No data yet")}</p>`; return; }
+  const max = Math.max(1, ...rows.map(value));
+  el.innerHTML = `<div class="hbars">${rows.map((r, i) => `<div class="hbar" ${onClick ? `role="button" tabindex="0" data-i="${i}" style="cursor:pointer"` : ""}><span class="lbl" dir="auto">${esc(label(r))}</span><span class="val">${fmt(value(r))}</span>
+    <div class="track"><div class="fill" style="width:${(100 * value(r) / max).toFixed(1)}%;background:${color}"></div></div></div>`).join("")}</div>`;
+  if (onClick) $$(".hbar", el).forEach(b => b.addEventListener("click", () => onClick(rows[+b.dataset.i])));
+}
+
+/* ---------------- layout ---------------- */
+const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["leads", "Leads", "inbox", "leads.view"],
+  ["features", "Features", "grid", "features.view"], ["emails", "E-mails", "mail", "email.send"], ["settings", "Settings", "gear", "analytics.view"], ["audit", "Audit log", "list", "audit.view"]];
+const can = p => !!who?.perms?.includes(p);
+function shell() {
+  document.documentElement.lang = LANG; document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
+  $("#app").innerHTML = `<div class="shell"><aside class="side" id="side">
+      <a class="brand" href="#/overview"><i>h</i><span>HUDERA AI<small>Admin</small></span></a>
+      <nav class="nav" aria-label="Admin">${NAV.filter(n => can(n[3])).map(([k, l, i]) => `<a href="#/${k}" data-k="${k}">${ic(i)}<span>${t(l)}</span>${k === "leads" ? `<span class="badge" id="lead-badge" hidden></span>` : ""}</a>`).join("")}</nav>
+      <div class="me"><b dir="auto">${esc(who.name || who.email)}</b><span class="small muted">${esc(who.role)} · <span dir="ltr">${esc(who.email)}</span></span>
+        <div class="row"><button class="btn sm" id="lang-btn" type="button">${LANG === "ar" ? "English" : "عربي"}</button><button class="btn sm" id="theme-btn" type="button" aria-label="Theme">${ic("moon")}</button>
+        <a class="btn sm" href="../">${t("Website")}</a><button class="btn sm" id="out-btn" type="button">${t("Sign out")}</button></div></div></aside>
+    <div class="main"><header class="top"><button class="btn sm menu-btn" id="menu-btn" type="button" aria-label="Menu">${ic("menu")}</button><h1 id="page-h"></h1><span class="sp"></span><div id="top-tools" class="filters"></div></header>
+      <main class="content" id="view" tabindex="-1"></main></div></div>`;
+  $("#out-btn").addEventListener("click", async () => { await sb.auth.signOut(); location.reload(); });
+  $("#lang-btn").addEventListener("click", () => { LANG = LANG === "ar" ? "en" : "ar"; store.set("hudera-admin-lang", LANG); shell(); route(); });
+  $("#theme-btn").addEventListener("click", () => { const cur = document.documentElement.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); const nx = cur === "dark" ? "light" : "dark"; document.documentElement.setAttribute("data-theme", nx); store.set("hudera-admin-theme", nx); });
+  $("#menu-btn").addEventListener("click", () => $("#side").classList.toggle("open"));
+  refreshBadge();
+}
+async function refreshBadge() {
+  if (!can("leads.view")) return;
+  try { const r = await api("admin_list_contacts", { p_status: "open", p_limit: 1 }); const n = (r.counts.new || 0) + (r.counts.pending || 0); const b = $("#lead-badge"); if (b) { b.hidden = !n; b.textContent = n; } } catch (e) {}
+}
+function page(title, tools = "") {
+  $("#page-h").textContent = title; $("#top-tools").innerHTML = tools; $("#side").classList.remove("open");
+  $$(".nav a").forEach(a => a.toggleAttribute("aria-current", false)); const k = location.hash.split("/")[1] || "overview";
+  const a = $(`.nav a[data-k="${k}"]`); if (a) a.setAttribute("aria-current", "page");
+  document.title = `${title} · HUDERA AI Admin`;
+  return $("#view");
+}
+function rangeTools() {
+  return `<div class="seg" role="group" aria-label="Date range">${[7, 30, 90].map(d => `<button type="button" data-preset="${d}" aria-pressed="${state.preset === d}">${t(`Last ${d} days`)}</button>`).join("")}</div>
+    <label>${t("From")} <input class="input" type="date" id="rf" value="${state.from}" max="${today()}"></label><label>${t("To")} <input class="input" type="date" id="rt" value="${state.to}" max="${today()}"></label>
+    <span class="small faint">${TZ}</span>`;
+}
+function bindRange(reload) {
+  const save = () => { try { sessionStorage.setItem("hudera-admin-range", JSON.stringify(state)); } catch (e) {} reload(); };
+  $$("[data-preset]").forEach(b => b.addEventListener("click", () => { state.preset = +b.dataset.preset; state.to = today(); state.from = addDays(state.to, -(state.preset - 1)); save(); }));
+  $("#rf").addEventListener("change", e => { if (e.target.value && e.target.value <= state.to) { state.from = e.target.value; state.preset = 0; save(); } });
+  $("#rt").addEventListener("change", e => { if (e.target.value && e.target.value >= state.from) { state.to = e.target.value; state.preset = 0; save(); } });
+}
+const skel = n => `<div class="grid g4">${'<div class="skel"></div>'.repeat(n)}</div>`;
+const failBox = e => `<div class="err" role="alert">${esc(e.message)}</div>`;
+
+/* ---------------- overview ---------------- */
+async function viewOverview() {
+  const v = page(t("Overview"), rangeTools()); bindRange(viewOverview);
+  v.innerHTML = skel(8);
+  let d; try { d = await api("admin_overview", { p_from: state.from, p_to: state.to, p_tz: TZ }); } catch (e) { v.innerHTML = failBox(e); return; }
+  const c = d.cards, days = d.daily, lbl = days.map(x => fday(x.day));
+  const kpi = (label, val, note = "", cls = "") => `<div class="kpi ${cls}"><small>${t(label)}</small><b>${val}</b>${note ? `<span>${note}</span>` : ""}</div>`;
+  v.innerHTML = `
+    <div class="grid g4">
+      ${kpi("Registered users", nf(c.registered_users), `${nf(c.new_users_in_range)} ${LANG === "ar" ? "جديد في الفترة" : "new in this range"}`)}
+      ${kpi("Visitors", nf(c.visitors_in_range), `${nf(c.total_visitors)} ${LANG === "ar" ? "منذ البداية · متصفحات فريدة" : "all time · unique browsers"}`)}
+      ${kpi("Active users today", nf(c.active_users_today), `${nf(c.active_users_7d)} ${LANG === "ar" ? "في 7 أيام" : "in 7 days"} · ${nf(c.active_users_30d)} ${LANG === "ar" ? "في 30 يوماً" : "in 30 days"}`)}
+      ${kpi("Contact requests", nf(c.contacts_total), `${nf(c.contacts_in_range)} ${LANG === "ar" ? "في الفترة" : "in this range"}`)}
+      ${kpi("New users today", nf(c.new_users_today))}
+      ${kpi("New in 7 days", nf(c.new_users_7d))}
+      ${kpi("New this month", nf(c.new_users_month))}
+      ${kpi("Waiting for a reply", nf(c.contacts_pending), `${nf(c.contacts_open)} ${LANG === "ar" ? "مفتوحة" : "open"}`, c.contacts_pending ? "alert" : "")}
+      ${kpi("Sessions", nf(c.sessions_in_range), `${nf(c.page_views_in_range)} ${LANG === "ar" ? "مشاهدة صفحة" : "page views"}`)}
+      ${kpi("Returning visitors", nf(c.returning_visitors_in_range))}
+      ${kpi("Signed-in sessions", nf(c.logged_in_sessions), `${nf(c.anonymous_sessions)} ${LANG === "ar" ? "بدون حساب" : "anonymous"}`)}
+      ${kpi("Registration rate", pct(c.registration_conversion), LANG === "ar" ? "تسجيلات جديدة ÷ زوار الفترة" : "new sign-ups ÷ visitors in range")}
+    </div>
+    <p class="small faint" style="margin:-6px 0 0">${LANG === "ar" ? "الزائر = متصفح واحد وافق على الإحصاءات (وليس شخصاً). الجلسة تنتهي بعد 30 دقيقة دون نشاط. المستخدم = حساب مسجل بجوجل." : "Visitor = one browser that allowed analytics (not a person). A session ends after 30 minutes without activity. User = a registered Google account."}</p>
+    <div class="grid g2">
+      <section class="card"><h2>${t("Visitors over time")}</h2><p class="sub">${LANG === "ar" ? "زوار فريدون وجلسات يومياً" : "Unique visitors and sessions per day"}</p><div id="ch-vis"></div></section>
+      <section class="card"><h2>${t("Registrations over time")}</h2><p class="sub">${LANG === "ar" ? "حسابات جديدة يومياً" : "New Google accounts per day"}</p><div id="ch-reg"></div></section>
+      <section class="card"><h2>${t("Daily active users")}</h2><p class="sub">${LANG === "ar" ? "مستخدمون مسجلون لهم نشاط في اليوم" : "Registered users with any activity that day"}</p><div id="ch-dau"></div></section>
+      <section class="card"><h2>${t("Monthly active")}</h2><p class="sub">${LANG === "ar" ? "آخر 6 أشهر · مستخدمون مسجلون" : "Last 6 months · registered users"}</p><div id="ch-mau"></div></section>
+      <section class="card"><h2>${t("Feature usage")}</h2><p class="sub">${LANG === "ar" ? "مرات الاستخدام في الفترة · اضغط لفتح الميزة" : "Uses in this range · click to open"}</p><div id="ch-feat"></div></section>
+      <section class="card"><h2>${t("Engagement")}</h2><p class="sub">${LANG === "ar" ? "متوسط مدة الجلسة يومياً (ثوانٍ)" : "Average session length per day (seconds)"}</p>
+        <div class="grid g3" style="margin-bottom:10px">${kpi(LANG === "ar" ? "صفحات/جلسة" : "Pages / session", d.engagement.pages_per_session ?? "—")}${kpi(LANG === "ar" ? "أحداث/جلسة" : "Events / session", d.engagement.events_per_session ?? "—")}${kpi(LANG === "ar" ? "ارتداد" : "Bounce rate", pct(d.engagement.bounce_rate))}</div><div id="ch-eng"></div></section>
+      <section class="card"><h2>${t("Contact requests over time")}</h2><div id="ch-con"></div></section>
+      <section class="card"><h2>${t("Requests by status")}</h2><div id="ch-cst"></div></section>
+    </div>
+    <div class="grid g3">
+      <section class="card"><h2>${t("Top pages")}</h2><div id="t-pages"></div></section>
+      <section class="card"><h2>${t("Traffic sources")}</h2><div id="t-src"></div><h2 style="margin-top:14px">${t("Referrers")}</h2><div id="t-ref"></div></section>
+      <section class="card"><h2>${t("Devices")}</h2><div id="t-dev"></div><h2 style="margin-top:14px">${t("Browsers")}</h2><div id="t-br"></div></section>
+    </div>
+    <section class="card"><h2>${t("Retention by sign-up week")}</h2><p class="sub">${LANG === "ar" ? "نسبة من سجلوا في الأسبوع وعادوا بعد 1 و2 و4 أسابيع. «—» = لم يمر الوقت الكافي بعد." : "Share of people who signed up that week and came back 1, 2 and 4 weeks later. “—” = not enough time has passed."}</p><div id="t-ret"></div></section>`;
+  chart($("#ch-vis"), { labels: lbl, series: [{ name: "Visitors", color: "var(--s1)", values: days.map(x => x.visitors) }, { name: "Sessions", color: "var(--s2)", values: days.map(x => x.sessions) }] });
+  chart($("#ch-reg"), { type: "bar", labels: lbl, series: [{ name: "Registrations", color: "var(--s1)", values: days.map(x => x.registrations) }] });
+  chart($("#ch-dau"), { labels: lbl, series: [{ name: "Daily active users", color: "var(--s3)", values: days.map(x => x.active_users) }] });
+  chart($("#ch-mau"), { type: "bar", labels: d.monthly_active.map(m => m.month), series: [{ name: "Users", color: "var(--s1)", values: d.monthly_active.map(m => m.users) }, { name: "Visitors", color: "var(--s2)", values: d.monthly_active.map(m => m.visitors) }] });
+  chart($("#ch-eng"), { labels: lbl, height: 180, series: [{ name: "Avg. session (s)", color: "var(--s1)", values: days.map(x => x.avg_session_sec || 0) }] });
+  chart($("#ch-con"), { type: "bar", labels: lbl, series: [{ name: "Contact requests", color: "var(--s1)", values: days.map(x => x.contacts) }] });
+  hbars($("#ch-feat"), d.features.filter(f => f.uses > 0), { label: f => f.name, value: f => f.uses, onClick: f => (location.hash = `#/features/${f.key}`) });
+  hbars($("#ch-cst"), Object.entries(STATUS).map(([k, v]) => ({ k, n: d.contacts_by_status[k] || 0, l: t(v[0]) })), { label: r => r.l, value: r => r.n });
+  hbars($("#t-pages"), d.top_pages, { label: r => r.path, value: r => r.views });
+  hbars($("#t-src"), d.sources, { label: r => r.source, value: r => r.sessions });
+  hbars($("#t-ref"), d.referrers, { label: r => r.domain, value: r => r.sessions });
+  hbars($("#t-dev"), d.devices, { label: r => r.device, value: r => r.sessions });
+  hbars($("#t-br"), d.browsers, { label: r => r.browser, value: r => r.sessions });
+  $("#t-ret").innerHTML = d.retention.length ? `<div class="tbl-wrap"><table><thead><tr><th>${LANG === "ar" ? "الأسبوع" : "Week"}</th><th class="num">${t("Users")}</th><th class="num">+1w</th><th class="num">+2w</th><th class="num">+4w</th></tr></thead><tbody>
+    ${d.retention.map(r => `<tr><td>${esc(r.week)}</td><td class="num">${nf(r.users)}</td><td class="num">${r.complete_weeks >= 2 ? pct(r.w1) : "—"}</td><td class="num">${r.complete_weeks >= 3 ? pct(r.w2) : "—"}</td><td class="num">${r.complete_weeks >= 5 ? pct(r.w4) : "—"}</td></tr>`).join("")}</tbody></table></div>` : `<p class="empty">${t("No data yet")}</p>`;
+}
+
+/* ---------------- users ---------------- */
+const uq = { search: "", activity: "all", status: "all", phone: "", from: "", to: "", sort: "created_desc", offset: 0 };
+function userArgs() { return { p_search: uq.search || null, p_activity: uq.activity, p_status: uq.status, p_has_phone: uq.phone === "" ? null : uq.phone === "yes", p_from: uq.from || null, p_to: uq.to || null, p_tz: TZ }; }
+async function viewUsers() {
+  const v = page(t("Users"), can("users.export") ? `<button class="btn" id="exp" type="button">${ic("dl")}${t("Export CSV")}</button>` : "");
+  v.innerHTML = `<div class="filters">
+      <input class="input" id="u-q" type="search" placeholder="${t("Search name, e-mail or phone")}" value="${esc(uq.search)}" style="flex:1;min-width:200px">
+      <select class="input" id="u-act">${[["all", "All"], ["active", "Active"], ["inactive", "Inactive"]].map(([k, l]) => `<option value="${k}" ${uq.activity === k ? "selected" : ""}>${t(l)}</option>`).join("")}</select>
+      <select class="input" id="u-st">${[["all", LANG === "ar" ? "كل الحالات" : "Any status"], ["active", "Active"], ["suspended", "Suspended"], ["deleted", "Deleted"]].map(([k, l]) => `<option value="${k}" ${uq.status === k ? "selected" : ""}>${t(l)}</option>`).join("")}</select>
+      <select class="input" id="u-ph">${[["", "Any phone"], ["yes", "Has phone"], ["no", "No phone"]].map(([k, l]) => `<option value="${k}" ${uq.phone === k ? "selected" : ""}>${t(l)}</option>`).join("")}</select>
+      <label>${t("Registered")} <input class="input" type="date" id="u-from" value="${uq.from}"> – <input class="input" type="date" id="u-to" value="${uq.to}"></label>
+      <select class="input" id="u-sort">${[["created_desc", LANG === "ar" ? "الأحدث تسجيلاً" : "Newest first"], ["created_asc", LANG === "ar" ? "الأقدم" : "Oldest first"], ["last_seen", LANG === "ar" ? "آخر نشاط" : "Last activity"], ["name", t("Name")]].map(([k, l]) => `<option value="${k}" ${uq.sort === k ? "selected" : ""}>${l}</option>`).join("")}</select>
+    </div><div id="u-list"><div class="skel"></div></div>`;
+  let timer;
+  $("#u-q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => { uq.search = e.target.value.trim(); uq.offset = 0; loadUsers(); }, 300); });
+  [["#u-act", "activity"], ["#u-st", "status"], ["#u-ph", "phone"], ["#u-from", "from"], ["#u-to", "to"], ["#u-sort", "sort"]].forEach(([s, k]) => $(s).addEventListener("change", e => { uq[k] = e.target.value; uq.offset = 0; loadUsers(); }));
+  $("#exp")?.addEventListener("click", exportUsers);
+  loadUsers();
+}
+async function loadUsers() {
+  const box = $("#u-list"); if (!box) return;
+  let r; try { r = await api("admin_list_users", { ...userArgs(), p_sort: uq.sort, p_limit: 25, p_offset: uq.offset }); } catch (e) { box.innerHTML = failBox(e); return; }
+  box.innerHTML = `<div class="tbl-wrap"><table><thead><tr><th>${t("Name")}</th><th>${t("Phone")}</th><th>${t("Registered")}</th><th>${t("Last login")}</th><th>${t("Last activity")}</th><th>${t("Status")}</th><th class="num">${t("Sessions")}</th><th>${t("Recent features")}</th><th class="num">${t("Important actions")}</th><th>${t("Contact")}</th></tr></thead><tbody>
+    ${r.rows.map(u => `<tr class="click" data-id="${u.id}" tabindex="0"><td><span class="t" dir="auto">${esc(u.full_name || "—")}</span><span class="s" dir="ltr">${esc(u.email)}${u.email_verified ? " ✓" : ""}</span>${u.staff_role ? `<span class="chip nodot c-violet">${esc(u.staff_role)}</span>` : ""}</td>
+      <td dir="ltr">${u.phone ? esc(u.phone) : `<span class="faint">${LANG === "ar" ? "لا يوجد · البريد" : "none · use e-mail"}</span>`}</td><td>${fdt(u.created_at, false)}</td><td>${ago(u.last_login_at)}</td><td>${ago(u.last_seen_at)}</td>
+      <td>${chip(ACT[u.activity])}</td><td class="num">${nf(u.sessions)}</td><td class="small">${esc((u.recent_features || []).join(", ")) || "—"}</td><td class="num">${nf(u.important_actions)}</td>
+      <td>${u.contact_status ? chip(STATUS[u.contact_status]) : `<span class="faint">—</span>`}</td></tr>`).join("") || `<tr><td colspan="10" class="empty">${t("No results")}</td></tr>`}</tbody></table></div>
+    ${pager(r, o => { uq.offset = o; loadUsers(); })}<p class="small faint">${LANG === "ar" ? `«غير نشط» = لا نشاط منذ ${r.inactivity_days} يوماً (يمكن تغييره من الإعدادات). يختلف عن الحساب الموقوف أو المحذوف.` : `“Inactive” = no activity for ${r.inactivity_days} days (change it in Settings). It is not the same as a suspended or deleted account.`}</p>`;
+  $$("tr.click", box).forEach(tr => { const go = () => (location.hash = `#/users/${tr.dataset.id}`); tr.addEventListener("click", go); tr.addEventListener("keydown", e => e.key === "Enter" && go()); });
+  bindPager(box);
+}
+let pagerCb = null;
+function pager(r, cb) {
+  pagerCb = cb; const from = r.total ? r.offset + 1 : 0, to = Math.min(r.offset + r.limit, r.total);
+  return `<div class="pager"><span>${from}–${to} ${LANG === "ar" ? "من" : "of"} ${nf(r.total)}</span><span class="filters"><button class="btn sm" data-off="${r.offset - r.limit}" ${r.offset <= 0 ? "disabled" : ""}>${t("Previous")}</button><button class="btn sm" data-off="${r.offset + r.limit}" ${to >= r.total ? "disabled" : ""}>${t("Next")}</button></span></div>`;
+}
+function bindPager(box) { const cb = pagerCb; $$("[data-off]", box).forEach(b => b.addEventListener("click", () => cb(Math.max(0, +b.dataset.off)))); }
+async function exportUsers() {
+  try {
+    const rows = await api("admin_export_users", userArgs());
+    const cols = [["full_name", "Name"], ["email", "Email"], ["email_verified", "Email verified"], ["phone", "Phone"], ["created_at", "Registered"], ["last_login_at", "Last login"], ["last_seen_at", "Last activity"],
+                  ["status", "Account status"], ["activity", "Activity"], ["sessions", "Sessions"], ["important_actions", "Important actions"], ["contact_status", "Latest request status"], ["marketing_consent", "News consent"]];
+    const cell = v => { let s = Array.isArray(v) ? v.join("; ") : v == null ? "" : String(v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return `"${s.replace(/"/g, '""')}"`; };
+    const csv = "﻿" + [cols.map(c => c[1]).join(","), ...rows.map(r => cols.map(([k]) => cell(r[k])).join(","))].join("\r\n");
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" })); a.download = `hudera-users-${today()}.csv`; a.click();
+    toast(`${rows.length} ${LANG === "ar" ? "صف تم تصديره (مسجل في سجل التدقيق)" : "rows exported (recorded in the audit log)"}`);
+  } catch (e) { toast(e.message); }
+}
+
+/* ---------------- one user ---------------- */
+async function viewUser(id) {
+  const v = page(t("Users"), `<a class="btn" href="#/users">${ic("back")}${t("Users")}</a>`);
+  v.innerHTML = `<div class="skel"></div>`;
+  let d; try { d = await api("admin_get_user", { p_id: id }); } catch (e) { v.innerHTML = failBox(e); return; }
+  const u = d.user;
+  $("#page-h").textContent = u.full_name || u.email;
+  const featState = { used: ["Used", "c-mint"], not_used: ["Not used", "c-amber"], unknown: ["Unknown", ""] };
+  v.innerHTML = `
+    <section class="card"><div class="prof">${u.avatar_url ? `<img class="av" src="${esc(u.avatar_url)}" alt="" referrerpolicy="no-referrer" data-ini="${esc((u.full_name || u.email)[0].toUpperCase())}">` : `<span class="av">${esc((u.full_name || u.email)[0].toUpperCase())}</span>`}
+      <div><h2 dir="auto">${esc(u.full_name || "—")}</h2><div class="filters">${chip(ACT[u.activity])}${u.staff_role ? `<span class="chip nodot c-violet">${esc(u.staff_role)}</span>` : ""}${u.google_linked ? `<span class="chip nodot">Google</span>` : ""}</div></div><span style="flex:1"></span>
+      ${can("email.send") && u.status !== "deleted" ? `<button class="btn primary" id="mail-u">${ic("mail")}${t("Send e-mail")}</button>` : ""}
+      ${can("users.manage") && u.status !== "deleted" && u.id !== who.user_id ? `<button class="btn ${u.status === "active" ? "danger" : ""}" id="susp">${u.status === "active" ? (LANG === "ar" ? "إيقاف الحساب" : "Suspend") : (LANG === "ar" ? "إعادة التفعيل" : "Reactivate")}</button>` : ""}</div></section>
+    <div class="grid g2">
+      <section class="card"><h2>${t("Account")}</h2><dl class="kv">
+        <dt>${t("E-mail")}</dt><dd dir="ltr">${esc(u.email)} ${u.email_verified ? `<span class="chip c-mint">${LANG === "ar" ? "موثّق من جوجل" : "verified by Google"}</span>` : `<span class="chip c-amber">${LANG === "ar" ? "غير موثّق" : "not verified"}</span>`}</dd>
+        <dt>${t("Phone")}</dt><dd dir="ltr">${u.phone ? `<a href="tel:${esc(u.phone)}">${esc(u.phone)}</a> · <a href="https://wa.me/${esc(u.phone.replace("+", ""))}" target="_blank" rel="noopener">WhatsApp</a>` : `<span class="muted">${LANG === "ar" ? "لم يضف رقماً — تواصل عبر البريد" : "Not provided — contact by e-mail"}</span>`}</dd>
+        <dt>${t("Registered")}</dt><dd>${fdt(u.created_at)}</dd><dt>${t("Last login")}</dt><dd>${fdt(u.last_login_at)} · ${nf(u.login_count)} ${LANG === "ar" ? "مرة" : "sign-ins"}</dd>
+        <dt>${t("Last activity")}</dt><dd>${fdt(u.last_seen_at)}</dd><dt>${LANG === "ar" ? "الأخبار بالبريد" : "News e-mails"}</dt><dd>${u.marketing_consent ? (LANG === "ar" ? "موافق" : "Opted in") : (LANG === "ar" ? "غير موافق" : "Not opted in")}</dd>
+        <dt>${LANG === "ar" ? "النشاط المسجل" : "Recorded activity"}</dt><dd>${nf(d.stats.events)} ${LANG === "ar" ? "حدث" : "events"} · ${nf(d.stats.page_views)} ${t("Page views").toLowerCase()} · ${nf(u.sessions)} ${t("Sessions").toLowerCase()}</dd>
+      </dl></section>
+      <section class="card"><h2>${t("Contact requests")}</h2>${d.requests.length ? `<div class="tbl-wrap"><table><tbody>${d.requests.map(r => `<tr class="click" data-href="#/leads/${r.id}"><td><span class="t mono">${esc(r.ref)}</span><span class="s" dir="auto">${esc(r.subject)}</span></td><td>${chip(STATUS[r.status])}</td><td class="small">${fdt(r.created_at, false)}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted">${LANG === "ar" ? "لم يرسل أي طلب." : "No requests."}</p>`}
+        <h2 style="margin-top:14px">${t("E-mails")}</h2>${d.emails.length ? `<div class="tbl-wrap"><table><tbody>${d.emails.map(m => `<tr><td><span class="t" dir="auto">${esc(m.subject)}</span><span class="s">${esc(m.template)}${m.last_error ? ` · ${esc(m.last_error)}` : ""}</span></td><td>${chip(EMAIL_ST[m.status])}</td><td class="small">${fdt(m.created_at)}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted">—</p>`}</section>
+    </div>
+    <section class="card"><h2>${t("Features")}</h2><p class="sub">${LANG === "ar" ? "«لم تُستخدم» تظهر فقط إذا كان التتبع يعمل أثناء نشاط المستخدم. «غير معروف» = لا توجد بيانات كافية (مثلاً لم يوافق على الإحصاءات أو لم يزر الموقع بعد بدء التتبع)." : "“Not used” only appears when tracking was live while this user was active. “Unknown” = not enough data (e.g. analytics declined, or no visit since tracking started)."}</p>
+      <div class="feat">${d.features.map(f => `<div><b>${esc(f.name)}</b>${chip(featState[f.state])}<span class="small muted">${f.uses ? `${nf(f.uses)}× · ${ago(f.last_used)}` : (f.state === "unknown" ? (LANG === "ar" ? "لا بيانات كافية" : "not enough data") : (LANG === "ar" ? "متتبعة منذ " : "tracked since ") + fdt(f.tracking_since, false))}</span></div>`).join("")}</div></section>
+    <div class="grid g2">
+      <section class="card"><h2>${t("Recent sessions")}</h2>${d.sessions.length ? `<div class="tbl-wrap"><table><thead><tr><th>${LANG === "ar" ? "البداية" : "Started"}</th><th>${LANG === "ar" ? "المصدر" : "Source"}</th><th>${t("Devices")}</th><th class="num">${t("Page views")}</th></tr></thead><tbody>${d.sessions.map(s => `<tr><td>${fdt(s.started_at)}<span class="s">${Math.max(0, Math.round((new Date(s.last_seen_at) - new Date(s.started_at)) / 60000))} min · ${esc(s.landing_path || "/")}</span></td><td>${esc(s.source)}<span class="s">${esc(s.referrer_domain || "")}</span></td><td>${esc(s.device)} · ${esc(s.browser)}</td><td class="num">${nf(s.page_views)}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted">${LANG === "ar" ? "لا توجد جلسات مسجلة (ربما لم يوافق على الإحصاءات)." : "No recorded sessions (analytics may have been declined)."}</p>`}
+        <h2 style="margin-top:14px">${t("Pages visited")}</h2><div id="u-pages"></div></section>
+      <section class="card"><h2>${t("Timeline")}</h2><ol class="tl" id="tl"></ol><button class="btn sm" id="tl-more" hidden>${t("Load more")}</button></section>
+    </div>`;
+  hbars($("#u-pages"), d.pages, { label: r => r.path, value: r => r.views });
+  $$("tr[data-href]", v).forEach(tr => tr.addEventListener("click", () => (location.hash = tr.dataset.href)));
+  $("#mail-u")?.addEventListener("click", () => composeEmail({ user: u.id }));
+  $("#susp")?.addEventListener("click", async () => { try { await api("admin_set_user_status", { p_id: u.id, p_status: u.status === "active" ? "suspended" : "active" }); toast(t("Save")); viewUser(id); } catch (e) { toast(e.message); } });
+  let before = null, lastDay = "";
+  const EVL = { page_view: "Viewed", login: "Signed in", user_registered: "Created account", contact_submitted: "Sent a contact request", phone_added: "Added phone", platform_opened: "Opened platform demo", demo_opened: "Opened product demo",
+    system_opened: "Opened system", roi_calculated: "Used value calculator", whatsapp_clicked: "Clicked WhatsApp", faq_opened: "Opened FAQ", section_view: "Saw section", logout: "Signed out", github_clicked: "Opened GitHub",
+    language_changed: "Switched language", theme_changed: "Switched theme", contact_started: "Started contact form", contact_failed: "Contact form error", sign_in_started: "Clicked sign in", profile_opened: "Opened account panel", client_error: "Saw an error", marketing_consent_changed: "Changed news consent" };
+  async function more() {
+    let r; try { r = await api("admin_user_timeline", { p_id: id, p_before: before, p_limit: 60 }); } catch (e) { $("#tl").insertAdjacentHTML("beforeend", `<li>${failBox(e)}</li>`); return; }
+    const html = r.items.map(it => {
+      const day = new Date(it.at).toLocaleDateString(loc(), { timeZone: TZ, weekday: "short", day: "numeric", month: "short", year: "numeric" });
+      const head = day !== lastDay ? `<li class="day">${esc(day)}</li>` : ""; lastDay = day;
+      let ico = "eye", text = "";
+      if (it.kind === "event") { ico = it.source === "server" ? "check" : "eye"; const pr = it.props && Object.keys(it.props).length ? ` · ${Object.entries(it.props).map(([k, x]) => `${k}: ${x}`).join(", ")}` : "";
+        text = `<b>${esc(EVL[it.name] || it.name)}</b>${it.feature ? ` <span class="chip nodot">${esc(it.feature)}</span>` : ""}<span class="s">${esc(it.path || "")}${esc(pr)}</span>`; }
+      else if (it.kind === "contact") { ico = "inbox"; text = `<b>${LANG === "ar" ? "طلب تواصل" : "Contact request"} <a class="mono" href="#/leads/${it.id}">${esc(it.ref)}</a></b><span class="s" dir="auto">${esc(it.subject)}</span>`; }
+      else if (it.kind === "email") { ico = "mail"; text = `<b>${LANG === "ar" ? "بريد" : "E-mail"}: <span dir="auto">${esc(it.subject)}</span></b><span class="s">${esc(t((EMAIL_ST[it.status] || [it.status])[0]))}</span>`; }
+      else if (it.kind === "status") { ico = "flag"; text = `<b class="mono">${esc(it.ref)}</b> ${esc(t(STATUS[it.from]?.[0] || it.from))} → ${esc(t(STATUS[it.to]?.[0] || it.to))}`; }
+      return `${head}<li class="k-${it.kind} ${it.source === "server" ? "srv" : ""}"><span class="dot">${ic(ico)}</span><div>${text}</div><time datetime="${esc(it.at)}">${new Date(it.at).toLocaleTimeString(loc(), { timeZone: TZ, hour: "2-digit", minute: "2-digit" })}</time></li>`;
+    }).join("");
+    $("#tl").insertAdjacentHTML("beforeend", html || (before ? "" : `<li class="day">${LANG === "ar" ? "لا يوجد نشاط مسجل." : "No recorded activity."}</li>`));
+    before = r.next_before; $("#tl-more").hidden = !r.has_more;
+  }
+  $("#tl-more").addEventListener("click", more); more();
+}
+
+/* ---------------- leads ---------------- */
+const lq = { search: "", status: "open", assigned: "", overdue: false, offset: 0 };
+async function viewLeads() {
+  const v = page(t("Leads"));
+  let staff = []; try { staff = await api("admin_staff_options"); } catch (e) {}
+  v.innerHTML = `<div class="filters"><input class="input" id="l-q" type="search" placeholder="${LANG === "ar" ? "ابحث بالاسم أو البريد أو رقم الطلب" : "Search name, e-mail, phone or reference"}" value="${esc(lq.search)}" style="flex:1;min-width:200px">
+    <select class="input" id="l-st"><option value="open">${t("Open")}</option><option value="all">${t("All")}</option>${Object.entries(STATUS).map(([k, x]) => `<option value="${k}">${t(x[0])}</option>`).join("")}</select>
+    <select class="input" id="l-as"><option value="">${LANG === "ar" ? "أي مسؤول" : "Anyone"}</option>${staff.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("")}</select>
+    <label><input type="checkbox" id="l-od" ${lq.overdue ? "checked" : ""}> ${LANG === "ar" ? "متابعة متأخرة" : "Overdue follow-up"}</label></div><div id="l-list"><div class="skel"></div></div>`;
+  $("#l-st").value = lq.status; $("#l-as").value = lq.assigned;
+  let timer; $("#l-q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => { lq.search = e.target.value.trim(); lq.offset = 0; loadLeads(); }, 300); });
+  $("#l-st").addEventListener("change", e => { lq.status = e.target.value; lq.offset = 0; loadLeads(); });
+  $("#l-as").addEventListener("change", e => { lq.assigned = e.target.value; lq.offset = 0; loadLeads(); });
+  $("#l-od").addEventListener("change", e => { lq.overdue = e.target.checked; lq.offset = 0; loadLeads(); });
+  loadLeads();
+}
+async function loadLeads() {
+  const box = $("#l-list"); if (!box) return;
+  let r; try { r = await api("admin_list_contacts", { p_search: lq.search || null, p_status: lq.status, p_assigned: lq.assigned || null, p_overdue: lq.overdue, p_limit: 25, p_offset: lq.offset, p_tz: TZ }); } catch (e) { box.innerHTML = failBox(e); return; }
+  box.innerHTML = `<div class="filters" style="margin-bottom:10px">${Object.entries(STATUS).map(([k, x]) => `<span class="chip ${x[1]}">${t(x[0])}: ${nf(r.counts[k] || 0)}</span>`).join("")}</div>
+    <div class="tbl-wrap"><table><thead><tr><th>${LANG === "ar" ? "الطلب" : "Request"}</th><th>${t("Name")}</th><th>${LANG === "ar" ? "التواصل المفضل" : "Prefers"}</th><th>${t("Status")}</th><th>${t("Assigned to")}</th><th>${t("Follow-up")}</th><th>${LANG === "ar" ? "وصل" : "Received"}</th></tr></thead><tbody>
+    ${r.rows.map(c => `<tr class="click" data-id="${c.id}" tabindex="0"><td><span class="t mono">${esc(c.ref)}</span><span class="s" dir="auto">${esc(c.subject)}</span></td><td><span class="t" dir="auto">${esc(c.full_name)}</span><span class="s" dir="ltr">${esc(c.email)}${c.phone ? ` · ${esc(c.phone)}` : ""}</span></td>
+      <td>${esc(c.preferred_method)}</td><td>${chip(STATUS[c.status])}</td><td>${esc(c.assignee_name || "—")}</td><td class="${c.follow_up_at && new Date(c.follow_up_at) < new Date() && !["resolved", "closed"].includes(c.status) ? "" : ""}">${c.follow_up_at ? `${new Date(c.follow_up_at) < new Date() && !["resolved", "closed"].includes(c.status) ? `<span class="chip c-red">${fdt(c.follow_up_at, false)}</span>` : fdt(c.follow_up_at, false)}` : "—"}</td><td>${ago(c.created_at)}</td></tr>`).join("") || `<tr><td colspan="7" class="empty">${t("No results")}</td></tr>`}</tbody></table></div>${pager(r, o => { lq.offset = o; loadLeads(); })}`;
+  $$("tr.click", box).forEach(tr => { const go = () => (location.hash = `#/leads/${tr.dataset.id}`); tr.addEventListener("click", go); tr.addEventListener("keydown", e => e.key === "Enter" && go()); });
+  bindPager(box);
+}
+async function viewLead(id) {
+  const v = page(t("Leads"), `<a class="btn" href="#/leads">${ic("back")}${t("Leads")}</a>`);
+  v.innerHTML = `<div class="skel"></div>`;
+  let d, staff = [];
+  try { [d, staff] = await Promise.all([api("admin_get_contact", { p_id: id }), api("admin_staff_options").catch(() => [])]); } catch (e) { v.innerHTML = failBox(e); return; }
+  render(d);
+  function render(d) {
+    const c = d.request, u = d.user, manage = can("leads.manage");
+    $("#page-h").textContent = c.ref;
+    const fu = c.follow_up_at ? new Date(c.follow_up_at).toLocaleString("sv-SE", { timeZone: TZ }).slice(0, 16).replace(" ", "T") : "";
+    v.innerHTML = `
+    <div class="grid g2">
+      <section class="card"><div class="filters" style="justify-content:space-between"><h2 dir="auto">${esc(c.subject)}</h2>${chip(STATUS[c.status])}</div>
+        <p class="sub"><span class="mono">${esc(c.ref)}</span> · ${fdt(c.created_at)} · ${esc(c.reason)}</p><div class="msg" dir="auto">${esc(c.message)}</div>
+        <dl class="kv" style="margin-top:12px"><dt>${t("Name")}</dt><dd dir="auto">${esc(c.full_name)}${c.company ? ` · ${esc(c.company)}` : ""}</dd>
+          <dt>${t("E-mail")}</dt><dd dir="ltr"><a href="mailto:${esc(c.email)}">${esc(c.email)}</a> ${u?.email_verified ? `<span class="chip c-mint">${LANG === "ar" ? "موثّق" : "verified"}</span>` : ""}</dd>
+          <dt>${t("Phone")}</dt><dd dir="ltr">${c.phone ? `<a href="tel:${esc(c.phone)}">${esc(c.phone)}</a> · <a href="https://wa.me/${esc(c.phone.replace("+", ""))}" target="_blank" rel="noopener">WhatsApp</a>` : `<span class="muted">${LANG === "ar" ? "لا يوجد — استخدم البريد" : "none — use e-mail"}</span>`}</dd>
+          <dt>${LANG === "ar" ? "يفضّل" : "Prefers"}</dt><dd>${esc(c.preferred_method)}${c.preferred_time ? ` · <span dir="auto">${esc(c.preferred_time)}</span>` : ""}</dd>
+          <dt>${t("Account")}</dt><dd>${u ? `<a href="#/users/${u.id}">${LANG === "ar" ? "فتح ملف المستخدم" : "Open user profile"}</a> · ${chip(ACT[u.status === "active" ? "active" : u.status])}` : "—"}</dd>
+          <dt>${LANG === "ar" ? "الموافقة" : "Consent"}</dt><dd>${fdt(c.consent_at)}</dd></dl></section>
+      <section class="card stack"><h2>${LANG === "ar" ? "إدارة الطلب" : "Manage"}</h2>
+        ${manage ? `<div class="form-row"><label>${t("Status")}<select class="input" id="c-st">${Object.entries(STATUS).map(([k, x]) => `<option value="${k}" ${k === c.status ? "selected" : ""}>${t(x[0])}</option>`).join("")}</select></label>
+          <label>${t("Assigned to")}<select class="input" id="c-as"><option value="">—</option>${staff.map(s => `<option value="${s.id}" ${s.id === c.assigned_to ? "selected" : ""}>${esc(s.name)}</option>`).join("")}</select></label>
+          <label>${t("Follow-up")}<input class="input" type="datetime-local" id="c-fu" value="${fu}"></label><button class="btn primary" id="c-save">${t("Save")}</button></div>
+          <div class="filters">${can("email.send") ? `<button class="btn" id="c-mail">${ic("mail")}${t("Send e-mail")}</button>` : ""}<span class="small faint">${LANG === "ar" ? "مواعيد بتوقيت الرياض" : "Times in Riyadh time"}</span></div>` : `<p class="muted">${LANG === "ar" ? "صلاحية العرض فقط." : "View only."}</p>`}
+        <h2 style="margin-top:6px">${t("Internal notes")}</h2><p class="sub">${LANG === "ar" ? "لا يراها العميل أبداً." : "Never shown to the client."}</p>
+        <div class="notes">${d.notes.map(n => `<div class="note" dir="auto">${esc(n.body)}<small>${esc(n.author || "—")} · ${fdt(n.created_at)}</small></div>`).join("") || `<p class="muted small">—</p>`}</div>
+        ${manage ? `<textarea class="input" id="c-note" rows="3" style="min-height:70px" placeholder="${LANG === "ar" ? "اكتب ملاحظة داخلية…" : "Write an internal note…"}"></textarea><button class="btn sm" id="c-addnote">${t("Add note")}</button>` : ""}
+      </section>
+    </div>
+    <div class="grid g2">
+      <section class="card stack"><h2>${t("Contact attempts")}</h2>
+        ${d.attempts.length ? `<div class="tbl-wrap"><table><tbody>${d.attempts.map(a => `<tr><td>${esc(a.channel)} · <b>${esc(a.outcome.replace(/_/g, " "))}</b><span class="s" dir="auto">${esc(a.notes || "")}</span></td><td class="small">${esc(a.by || "")}<span class="s">${fdt(a.attempted_at)}</span></td></tr>`).join("")}</tbody></table></div>` : `<p class="muted small">${LANG === "ar" ? "لا محاولات بعد." : "No attempts yet."}</p>`}
+        ${manage ? `<div class="form-row"><label>${LANG === "ar" ? "القناة" : "Channel"}<select class="input" id="a-ch">${["phone", "whatsapp", "email", "meeting", "other"].map(x => `<option>${x}</option>`).join("")}</select></label>
+          <label>${LANG === "ar" ? "النتيجة" : "Outcome"}<select class="input" id="a-out">${["reached", "no_answer", "left_message", "scheduled", "wrong_number", "other"].map(x => `<option value="${x}">${x.replace(/_/g, " ")}</option>`).join("")}</select></label>
+          <label style="flex:1;min-width:160px">${LANG === "ar" ? "ملاحظة" : "Note"}<input class="input" id="a-notes" maxlength="2000"></label><button class="btn" id="a-log">${t("Log attempt")}</button></div>` : ""}
+        <h2>${t("E-mails")}</h2>${d.emails.length ? `<div class="tbl-wrap"><table><tbody>${d.emails.map(m => `<tr><td><span class="t" dir="auto">${esc(m.subject)}</span><span class="s" dir="ltr">${esc(m.to_email)}${m.last_error ? ` · ${esc(m.last_error)}` : ""}</span></td><td>${chip(EMAIL_ST[m.status])}</td><td class="small">${fdt(m.created_at)}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted small">—</p>`}
+      </section>
+      <section class="card"><h2>${t("Status history")}</h2><ol class="tl">${d.history.map(h => `<li class="k-status"><span class="dot">${ic("flag")}</span><div>${h.from ? `${esc(t(STATUS[h.from]?.[0] || h.from))} → ` : ""}<b>${esc(t(STATUS[h.to]?.[0] || h.to))}</b><span class="s">${esc(h.by || "")}</span></div><time>${fdt(h.at)}</time></li>`).join("")}</ol>
+        ${d.other_requests.length ? `<h2 style="margin-top:14px">${LANG === "ar" ? "طلبات أخرى من نفس الشخص" : "Other requests from this person"}</h2>${d.other_requests.map(o => `<p><a class="mono" href="#/leads/${o.id}">${esc(o.ref)}</a> <span dir="auto">${esc(o.subject)}</span> ${chip(STATUS[o.status])}</p>`).join("")}` : ""}</section>
+    </div>`;
+    const act = async (fn, args, msg) => { try { render(await api(fn, args)); toast(msg); refreshBadge(); } catch (e) { toast(e.message); } };
+    $("#c-save")?.addEventListener("click", () => {
+      const as = $("#c-as").value, fuv = $("#c-fu").value;
+      act("admin_update_contact", { p_id: id, p_status: $("#c-st").value, p_assigned_to: as || null, p_clear_assignee: !as, p_follow_up_at: fuv ? new Date(fuv + ":00+03:00").toISOString() : null, p_clear_follow_up: !fuv }, t("Save"));
+    });
+    $("#c-addnote")?.addEventListener("click", () => { const b = $("#c-note").value.trim(); if (b) act("admin_add_contact_note", { p_id: id, p_body: b }, t("Add note")); });
+    $("#a-log")?.addEventListener("click", () => act("admin_log_contact_attempt", { p_id: id, p_channel: $("#a-ch").value, p_outcome: $("#a-out").value, p_notes: $("#a-notes").value || null }, t("Log attempt")));
+    $("#c-mail")?.addEventListener("click", () => composeEmail({ request: id, onSent: async () => render(await api("admin_get_contact", { p_id: id })) }));
+  }
+}
+
+/* ---------------- e-mail composer ---------------- */
+async function composeEmail({ user = null, request = null, onSent } = {}) {
+  let rec; try { rec = await api("admin_email_recipient", { p_user: user, p_request: request }); } catch (e) { toast(e.message); return; }
+  const token = crypto.randomUUID();
+  document.body.insertAdjacentHTML("beforeend", `<div class="scrim" id="mail-scrim"><form class="modal" id="mail-form" role="dialog" aria-modal="true" aria-labelledby="mail-h">
+    <h2 id="mail-h">${t("Send e-mail")}</h2>
+    <div class="card" style="padding:12px 14px"><b dir="auto">${esc(rec.name || "—")}</b> <span dir="ltr">&lt;${esc(rec.email)}&gt;</span> ${rec.email_verified ? `<span class="chip c-mint">${LANG === "ar" ? "موثّق" : "verified"}</span>` : ""}
+      <div class="small muted">${t("Phone")}: <span dir="ltr">${esc(rec.phone || "—")}</span> · ${LANG === "ar" ? "الأخبار" : "News"}: ${rec.marketing_consent ? "✓" : "✗"}${rec.request_ref ? ` · <span class="mono">${esc(rec.request_ref)}</span>` : ""}</div></div>
+    <label class="stack small muted">${LANG === "ar" ? "النوع" : "Type"}<select class="input" id="m-cat"><option value="follow_up">${LANG === "ar" ? "متابعة (رد على طلب أو استفسار)" : "Follow-up (about their request or account)"}</option><option value="announcement" ${rec.marketing_consent ? "" : "disabled"}>${LANG === "ar" ? "إعلان (يتطلب موافقة على الأخبار)" : "Announcement (needs news consent)"}</option></select></label>
+    <label class="stack small muted">${t("Subject")}<input class="input" id="m-sub" maxlength="150" required></label>
+    <label class="stack small muted">${t("Message")}<textarea class="input" id="m-body" maxlength="8000" required dir="auto"></textarea></label>
+    <p class="small faint">${LANG === "ar" ? "يُرسل من خلال مزود البريد. الحالة تتغير إلى «تم التسليم» فقط عندما يؤكد المزود ذلك." : "Sent through the e-mail provider. It shows “Delivered” only when the provider confirms delivery."}</p>
+    <div id="m-err" class="err" hidden></div>
+    <div class="filters" style="justify-content:flex-end"><button class="btn" type="button" id="m-cancel">${t("Cancel")}</button><button class="btn primary" type="submit" id="m-send">${t("Send")}</button></div></form></div>`);
+  const close = () => $("#mail-scrim")?.remove();
+  $("#m-cancel").addEventListener("click", close);
+  $("#mail-scrim").addEventListener("click", e => { if (e.target.id === "mail-scrim") close(); });
+  $("#mail-form").addEventListener("keydown", e => e.key === "Escape" && close());
+  $("#m-sub").focus();
+  $("#mail-form").addEventListener("submit", async e => {
+    e.preventDefault(); const btn = $("#m-send"); btn.disabled = true; $("#m-err").hidden = true;
+    try {
+      const r = await api("admin_send_email", { p_subject: $("#m-sub").value, p_body: $("#m-body").value, p_user: user, p_request: request, p_category: $("#m-cat").value, p_client_token: token });
+      close(); toast(LANG === "ar" ? `أُضيف للإرسال إلى ${r.to}` : `Queued for ${r.to}`);
+      await runWorker(); onSent && onSent();
+    } catch (x) { $("#m-err").textContent = x.message; $("#m-err").hidden = false; btn.disabled = false; }
+  });
+}
+async function runWorker(body = {}) {
+  try { const { data: s } = await sb.auth.getSession();
+    const r = await fetch(`${cfg.supabaseUrl}/functions/v1/email-worker`, { method: "POST", headers: { apikey: cfg.supabaseAnonKey, authorization: `Bearer ${s.session.access_token}`, "content-type": "application/json" }, body: JSON.stringify(body) });
+    return r.ok ? r.json() : { error: r.status };
+  } catch (e) { return { error: "unreachable" }; }
+}
+
+/* ---------------- features ---------------- */
+async function viewFeatures() {
+  const v = page(t("Features"), rangeTools()); bindRange(viewFeatures);
+  v.innerHTML = `<div class="skel"></div>`;
+  let rows; try { rows = await api("admin_features", { p_from: state.from, p_to: state.to, p_tz: TZ }); } catch (e) { v.innerHTML = failBox(e); return; }
+  const spark = arr => { const m = Math.max(1, ...arr), w = 90, h = 22; return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true"><polyline fill="none" stroke="var(--s1)" stroke-width="1.6" points="${arr.map((x, i) => `${(i * w / Math.max(1, arr.length - 1)).toFixed(1)},${(h - 2 - (x / m) * (h - 4)).toFixed(1)}`).join(" ")}"/></svg>`; };
+  v.innerHTML = `<p class="small muted" style="margin:0">${LANG === "ar" ? "تقرير الاعتماد: كم شخصاً استخدم كل ميزة، ومن المؤهلين لم يستخدمها بعد. المؤهل = مستخدم نشط زار الموقع بعد بدء تتبع الميزة." : "Adoption report: how many people used each feature, and who among eligible users hasn't yet. Eligible = an active user who visited after tracking for that feature started."}</p>
+    <div class="tbl-wrap"><table><thead><tr><th>${LANG === "ar" ? "الميزة" : "Feature"}</th><th class="num">${LANG === "ar" ? "مرات الاستخدام" : "Uses"}</th><th class="num">${LANG === "ar" ? "مستخدمون" : "Users"}</th><th class="num">${t("Visitors")}</th><th class="num">${LANG === "ar" ? "الاعتماد" : "Adoption"}</th><th>${LANG === "ar" ? "آخر استخدام" : "Last used"}</th><th>${LANG === "ar" ? "الاتجاه" : "Trend"}</th></tr></thead><tbody>
+    ${rows.map(f => { const adopt = f.eligible_users ? Math.round(100 * f.all_time_users / f.eligible_users) : null;
+      return `<tr class="click" data-k="${f.key}" tabindex="0"><td><span class="t">${esc(f.name)}</span><span class="s">${esc(f.category)} · ${esc(f.match_event)}${f.match_prop ? ` (${esc(f.match_prop)} = ${esc(f.match_value)})` : ""}${f.active ? "" : " · off"}</span></td>
+      <td class="num">${nf(f.uses)}</td><td class="num">${nf(f.users)}</td><td class="num">${nf(f.visitors)}</td><td class="num">${adopt == null ? "—" : pct(adopt)}<span class="s">${nf(f.all_time_users)}/${nf(f.eligible_users)}</span></td><td>${ago(f.last_used)}</td><td>${spark(f.trend)}</td></tr>`; }).join("")}</tbody></table></div>`;
+  $$("tr.click", v).forEach(tr => { const go = () => (location.hash = `#/features/${tr.dataset.k}`); tr.addEventListener("click", go); tr.addEventListener("keydown", e => e.key === "Enter" && go()); });
+}
+async function viewFeature(key) {
+  const v = page(t("Features"), rangeTools() + `<a class="btn" href="#/features">${ic("back")}${t("Features")}</a>`); bindRange(() => viewFeature(key));
+  v.innerHTML = `<div class="skel"></div>`;
+  let d; try { d = await api("admin_feature_detail", { p_key: key, p_from: state.from, p_to: state.to, p_tz: TZ }); } catch (e) { v.innerHTML = failBox(e); return; }
+  $("#page-h").textContent = d.feature.name;
+  const list = (rows, cols) => rows?.length ? `<div class="tbl-wrap" style="max-height:340px"><table><tbody>${rows.map(r => `<tr class="click" data-u="${r.id}"><td><span class="t" dir="auto">${esc(r.full_name || "—")}</span><span class="s" dir="ltr">${esc(r.email)}</span></td><td class="small">${cols(r)}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted small">—</p>`;
+  v.innerHTML = `<div class="grid g4"><div class="kpi"><small>${LANG === "ar" ? "مرات الاستخدام" : "Uses"}</small><b>${nf(d.uses)}</b></div><div class="kpi"><small>${LANG === "ar" ? "مستخدمون مسجلون" : "Registered users"}</small><b>${nf(d.users)}</b></div>
+      <div class="kpi"><small>${t("Visitors")}</small><b>${nf(d.visitors)}</b></div><div class="kpi"><small>${LANG === "ar" ? "آخر استخدام" : "Last used"}</small><b style="font-size:18px">${ago(d.last_used)}</b><span>${LANG === "ar" ? "متتبعة منذ" : "tracked since"} ${fdt(d.feature.tracking_since, false)}</span></div></div>
+    <div class="grid g2"><section class="card"><h2>${LANG === "ar" ? "الاستخدام يومياً" : "Daily use"}</h2><div id="f-ch"></div></section><section class="card"><h2>${LANG === "ar" ? "التفاصيل" : "Breakdown"}</h2><div id="f-pr"></div></section></div>
+    ${d.users_who_used ? `<div class="grid g2"><section class="card"><h2>${LANG === "ar" ? "من استخدمها" : "Who used it"}</h2>${list(d.users_who_used, r => `${nf(r.uses)}× · ${ago(r.last_used)}`)}</section>
+      <section class="card"><h2>${LANG === "ar" ? "مؤهلون لم يستخدموها" : "Eligible, not used yet"} (${nf(d.eligible_not_used_count)})</h2><p class="sub">${LANG === "ar" ? `${nf(d.unknown_count)} مستخدم حالتهم غير معروفة (لا بيانات بعد بدء التتبع).` : `${nf(d.unknown_count)} users are unknown (no activity since tracking started).`}</p>${list(d.eligible_not_used, r => `${LANG === "ar" ? "آخر نشاط" : "last seen"} ${ago(r.last_seen_at)}`)}</section></div>` : ""}`;
+  chart($("#f-ch"), { labels: d.daily.map(x => fday(x.day)), series: [{ name: LANG === "ar" ? "استخدام" : "Uses", color: "var(--s1)", values: d.daily.map(x => x.uses) }, { name: LANG === "ar" ? "مستخدمون" : "Users", color: "var(--s2)", values: d.daily.map(x => x.users) }] });
+  hbars($("#f-pr"), d.props, { label: r => r.value, value: r => r.uses });
+  $$("tr[data-u]", v).forEach(tr => tr.addEventListener("click", () => (location.hash = `#/users/${tr.dataset.u}`)));
+}
+
+/* ---------------- e-mails ---------------- */
+const eq = { status: "all", search: "", offset: 0 };
+async function viewEmails() {
+  const v = page(t("E-mails"), `<button class="btn" id="run-w">${ic("mail")}${LANG === "ar" ? "إرسال المعلّق الآن" : "Send queued now"}</button>`);
+  v.innerHTML = `<div class="filters"><input class="input" id="e-q" type="search" placeholder="${LANG === "ar" ? "ابحث بالبريد أو الموضوع" : "Search address or subject"}" value="${esc(eq.search)}" style="flex:1;min-width:200px">
+    <select class="input" id="e-st"><option value="all">${t("All")}</option>${Object.entries(EMAIL_ST).map(([k, x]) => `<option value="${k}">${esc(t(x[0]))}</option>`).join("")}</select></div><div id="e-list"><div class="skel"></div></div>`;
+  $("#e-st").value = eq.status;
+  let timer; $("#e-q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => { eq.search = e.target.value.trim(); eq.offset = 0; loadEmails(); }, 300); });
+  $("#e-st").addEventListener("change", e => { eq.status = e.target.value; eq.offset = 0; loadEmails(); });
+  $("#run-w").addEventListener("click", async () => { const r = await runWorker(); toast(r.error ? (LANG === "ar" ? "تعذّر تشغيل خدمة البريد" : "Could not reach the e-mail worker") : r.configured === false ? (LANG === "ar" ? "مزود البريد غير مُعد بعد" : "E-mail provider is not configured yet") : `${r.processed} ${LANG === "ar" ? "رسالة تمت معالجتها" : "processed"}`); loadEmails(); });
+  loadEmails();
+}
+async function loadEmails() {
+  const box = $("#e-list"); if (!box) return;
+  let r; try { r = await api("admin_list_emails", { p_status: eq.status, p_search: eq.search || null, p_limit: 25, p_offset: eq.offset }); } catch (e) { box.innerHTML = failBox(e); return; }
+  box.innerHTML = `<div class="filters" style="margin-bottom:10px">${Object.entries(r.counts).map(([k, n]) => `<span class="chip ${EMAIL_ST[k]?.[1] || ""}">${esc(t(EMAIL_ST[k]?.[0] || k))}: ${nf(n)}</span>`).join("")}</div>
+    <div class="tbl-wrap"><table><thead><tr><th>${LANG === "ar" ? "المستلم" : "To"}</th><th>${t("Subject")}</th><th>${t("Status")}</th><th>${LANG === "ar" ? "المحاولات" : "Attempts"}</th><th>${LANG === "ar" ? "أُنشئ" : "Created"}</th><th></th></tr></thead><tbody>
+    ${r.rows.map(m => `<tr><td dir="ltr">${m.user_id ? `<a href="#/users/${m.user_id}">${esc(m.to_email)}</a>` : esc(m.to_email)}${m.request_ref ? `<span class="s mono">${esc(m.request_ref)}</span>` : ""}</td>
+      <td><span class="t" dir="auto">${esc(m.subject)}</span><span class="s">${esc(m.template)} · ${esc(m.category)}${m.last_error ? ` · <span style="color:var(--red)">${esc(m.last_error)}</span>` : ""}</span></td>
+      <td>${chip(EMAIL_ST[m.status])}${m.next_attempt_at ? `<span class="s">${LANG === "ar" ? "المحاولة التالية" : "next try"} ${fdt(m.next_attempt_at)}</span>` : ""}${m.delivered_at ? `<span class="s">${fdt(m.delivered_at)}</span>` : ""}</td>
+      <td class="num">${nf(m.attempts)}</td><td>${fdt(m.created_at)}</td>
+      <td>${m.status === "failed" ? `<button class="btn sm" data-retry="${m.id}">${t("Retry")}</button>` : m.status === "queued" ? `<button class="btn sm" data-cancel="${m.id}">${t("Cancel")}</button>` : ""}</td></tr>`).join("") || `<tr><td colspan="6" class="empty">${t("No results")}</td></tr>`}</tbody></table></div>${pager(r.total != null ? { total: r.total, offset: eq.offset, limit: 25 } : r, o => { eq.offset = o; loadEmails(); })}`;
+  $$("[data-retry]", box).forEach(b => b.addEventListener("click", async () => { try { await api("admin_retry_email", { p_id: b.dataset.retry }); await runWorker(); loadEmails(); } catch (e) { toast(e.message); } }));
+  $$("[data-cancel]", box).forEach(b => b.addEventListener("click", async () => { try { await api("admin_cancel_email", { p_id: b.dataset.cancel }); loadEmails(); } catch (e) { toast(e.message); } }));
+  bindPager(box);
+}
+
+/* ---------------- settings ---------------- */
+async function viewSettings() {
+  const v = page(t("Settings"));
+  v.innerHTML = `<div class="skel"></div>`;
+  let s, staff = [], events = [], features = [], svc = null;
+  try {
+    s = await api("admin_get_settings");
+    [staff, events, features, svc] = await Promise.all([can("settings.manage") ? api("admin_list_staff") : [], api("admin_event_catalog").catch(() => []),
+      api("admin_features", { p_from: addDays(today(), -29), p_to: today(), p_tz: TZ }).catch(() => []), runWorker({ action: "status" })]);
+  } catch (e) { v.innerHTML = failBox(e); return; }
+  const st = s.settings, m = s.can_manage, dis = m ? "" : "disabled";
+  const w = s.email_worker || {};
+  v.innerHTML = `
+  ${m ? "" : `<p class="muted">${LANG === "ar" ? "عرض فقط — يحتاج تعديل الإعدادات دور مالك أو مدير." : "View only — changing settings needs the owner or admin role."}</p>`}
+  <div class="grid g2">
+    <section class="card stack"><h2>${t("General")}</h2>
+      <div class="form-row"><label style="flex:1">${LANG === "ar" ? "اسم الموقع" : "Website name"}<input class="input" id="s-name" value="${esc(st.site_name)}" ${dis}></label><button class="btn" data-save="site_name" ${dis}>${t("Save")}</button></div>
+      <div class="form-row"><label style="flex:1">${LANG === "ar" ? "بريد إشعارات الطلبات الجديدة" : "New-request notification e-mail"}<input class="input" id="s-notify" dir="ltr" value="${esc(st.notify_email)}" ${dis}></label><button class="btn" data-save="notify_email" ${dis}>${t("Save")}</button></div>
+      <div class="form-row"><label>${LANG === "ar" ? "يُعتبر المستخدم غير نشط بعد (أيام)" : "User counts as inactive after (days)"}<input class="input" type="number" min="1" max="365" id="s-inact" value="${esc(st.inactivity_days)}" ${dis}></label><button class="btn" data-save="inactivity_days" ${dis}>${t("Save")}</button></div>
+      <div class="form-row"><label>${LANG === "ar" ? "مدة الاحتفاظ بالإحصاءات (أيام)" : "Keep analytics for (days)"}<input class="input" type="number" min="30" max="1095" id="s-ret" value="${esc(st.analytics_retention_days)}" ${dis}></label><button class="btn" data-save="analytics_retention_days" ${dis}>${t("Save")}</button></div>
+      <p class="small faint">${LANG === "ar" ? `${nf(s.counts.events)} حدث محفوظ · الأقدم ${fdt(s.counts.oldest_event, false)} · يُحذف القديم يومياً.` : `${nf(s.counts.events)} events stored · oldest ${fdt(s.counts.oldest_event, false)} · older events are purged daily.`}</p>
+    </section>
+    <section class="card stack"><h2>${t("Privacy")}</h2>
+      <label class="filters"><input type="checkbox" id="p-track" ${st.privacy?.tracking_enabled !== false ? "checked" : ""} ${dis}> ${LANG === "ar" ? "تفعيل الإحصاءات" : "Analytics on"}</label>
+      <label class="filters"><input type="checkbox" id="p-consent" ${st.privacy?.require_analytics_consent !== false ? "checked" : ""} ${dis}> ${LANG === "ar" ? "اطلب موافقة الزائر قبل الإحصاءات (موصى به)" : "Ask visitors for consent before analytics (recommended)"}</label>
+      <div class="form-row"><label style="flex:1">${LANG === "ar" ? "رابط إشعار الخصوصية" : "Privacy notice URL"}<input class="input" id="p-url" dir="ltr" value="${esc(st.privacy?.policy_url || "")}" ${dis}></label><label>${LANG === "ar" ? "الإصدار" : "Version"}<input class="input" id="p-ver" value="${esc(st.privacy?.policy_version || "")}" style="width:110px" ${dis}></label></div>
+      <label class="filters"><input type="checkbox" id="w-on" ${st.welcome_email?.enabled !== false ? "checked" : ""} ${dis}> ${LANG === "ar" ? "إرسال بريد ترحيب عند التسجيل" : "Send a welcome e-mail on sign-up"}</label>
+      <button class="btn" id="p-save" ${dis}>${t("Save")}</button></section>
+    <section class="card stack"><h2>${t("E-mail service")}</h2>
+      <dl class="kv"><dt>${LANG === "ar" ? "المزود" : "Provider"}</dt><dd>Resend</dd>
+        <dt>${LANG === "ar" ? "مُعد" : "Configured"}</dt><dd>${svc?.error ? `<span class="chip c-red">${LANG === "ar" ? "الخدمة غير منشورة أو غير متاحة" : "worker not deployed / unreachable"}</span>` : svc.configured ? `<span class="chip c-mint">${LANG === "ar" ? "نعم" : "yes"}</span>` : `<span class="chip c-amber">${LANG === "ar" ? "لا — أضف RESEND_API_KEY و EMAIL_FROM" : "no — set RESEND_API_KEY and EMAIL_FROM"}</span>`}</dd>
+        <dt>${LANG === "ar" ? "المرسل" : "From"}</dt><dd dir="ltr">${esc(svc?.from || "—")}</dd><dt>${LANG === "ar" ? "إشعارات التسليم" : "Delivery webhooks"}</dt><dd>${svc?.webhook_configured ? "✓" : "✗"}</dd>
+        <dt>${LANG === "ar" ? "التشغيل التلقائي" : "Scheduled runs"}</dt><dd>${svc?.cron_secret_configured ? "✓" : "✗"}</dd>
+        <dt>${LANG === "ar" ? "آخر تشغيل" : "Last run"}</dt><dd>${w.at ? `${fdt(w.at)} · ${esc(JSON.stringify(w.last_run || w.note || ""))}` : "—"}</dd>
+        <dt>${LANG === "ar" ? "في الطابور" : "Queued"}</dt><dd>${nf(s.counts.queued_emails)} · ${LANG === "ar" ? "فشل" : "failed"} ${nf(s.counts.failed_emails)}</dd></dl>
+      <p class="small faint">${LANG === "ar" ? "مفاتيح المزود محفوظة كأسرار في Supabase ولا تظهر هنا أبداً." : "Provider keys are stored as Supabase secrets and are never shown here."}</p></section>
+    <section class="card stack"><h2>${LANG === "ar" ? "أسباب التواصل وأسماء الحالات" : "Contact reasons & status labels"}</h2>
+      <p class="sub">${LANG === "ar" ? "سطر لكل سبب: المفتاح | English | عربي" : "One reason per line: key | English | Arabic"}</p>
+      <textarea class="input" id="s-reasons" rows="7" dir="auto" ${dis}>${esc((st.contact_reasons || []).map(r => `${r.key} | ${r.en} | ${r.ar}`).join("\n"))}</textarea>
+      <button class="btn" id="s-reasons-save" ${dis}>${t("Save")}</button>
+      <div class="form-row">${Object.keys(STATUS).map(k => `<label>${k}<input class="input" data-lbl="${k}" value="${esc(st.contact_status_labels?.[k] || STATUS[k][0])}" style="width:120px" ${dis}></label>`).join("")}</div>
+      <button class="btn" id="s-labels-save" ${dis}>${t("Save")}</button></section>
+  </div>
+  ${m ? `<section class="card stack"><h2>${t("Team")}</h2><p class="sub">${LANG === "ar" ? "owner: كل شيء · admin: كل شيء عدا الأدوار · support: المستخدمون والطلبات والبريد · analyst: الإحصاءات فقط. يجب أن يسجّل الشخص دخوله بجوجل مرة أولاً." : "owner: everything · admin: everything except roles · support: users, leads and e-mail · analyst: analytics only. The person must sign in with Google once first."}</p>
+    <div class="tbl-wrap"><table><tbody>${staff.map(p => `<tr><td><span class="t" dir="auto">${esc(p.full_name || "—")}</span><span class="s" dir="ltr">${esc(p.email)}</span></td><td><span class="chip nodot c-violet">${esc(p.role)}</span></td><td class="small">${fdt(p.granted_at, false)}${p.granted_by ? ` · ${esc(p.granted_by)}` : ""}</td><td>${can("roles.manage") ? `<button class="btn sm danger" data-rm="${esc(p.email)}">${LANG === "ar" ? "إزالة" : "Remove"}</button>` : ""}</td></tr>`).join("")}</tbody></table></div>
+    ${can("roles.manage") ? `<div class="form-row"><label style="flex:1">${t("E-mail")}<input class="input" id="r-email" dir="ltr" placeholder="name@company.com"></label><label>${LANG === "ar" ? "الدور" : "Role"}<select class="input" id="r-role">${["support", "analyst", "admin", "owner"].map(r => `<option>${r}</option>`).join("")}</select></label><button class="btn primary" id="r-add">${LANG === "ar" ? "إضافة / تغيير" : "Add / change"}</button></div>` : ""}</section>` : ""}
+  <section class="card stack"><h2>${t("Tracking")}</h2><p class="sub">${LANG === "ar" ? "الأحداث المسموح بها من الموقع وخصائصها. لإضافة ميزة جديدة: اختر الحدث (وقيمة خاصية اختيارياً) واحفظ — تُحسب الأحداث القديمة المطابقة تلقائياً." : "Events the site may send and their allowed properties. To track a new feature, pick its event (and optionally one property value) and save — matching past events are counted automatically."}</p>
+    <div class="tbl-wrap" style="max-height:300px"><table><thead><tr><th>${LANG === "ar" ? "الحدث" : "Event"}</th><th>${LANG === "ar" ? "الخصائص" : "Properties"}</th><th class="num">30d</th></tr></thead><tbody>${events.map(e => `<tr><td><span class="t mono">${esc(e.name)}</span><span class="s">${esc(e.description)}${e.is_important ? " · ★" : ""}${e.client_allowed ? "" : " · server"}</span></td><td class="mono small">${esc(e.allowed_props.join(", ") || "—")}</td><td class="num">${nf(e.last_30d)}</td></tr>`).join("")}</tbody></table></div>
+    ${m ? `<h2 style="margin-top:6px">${LANG === "ar" ? "إضافة أو تعديل ميزة" : "Add or edit a feature"}</h2><div class="form-row">
+      <label>${LANG === "ar" ? "المفتاح" : "Key"}<input class="input mono" id="f-key" placeholder="pricing_page" list="f-keys"><datalist id="f-keys">${features.map(f => `<option value="${esc(f.key)}">`).join("")}</datalist></label>
+      <label style="flex:1">${t("Name")}<input class="input" id="f-name"></label><label>${LANG === "ar" ? "الفئة" : "Category"}<input class="input" id="f-cat" value="General" style="width:120px"></label>
+      <label>${LANG === "ar" ? "الحدث" : "Event"}<select class="input" id="f-ev">${events.map(e => `<option>${esc(e.name)}</option>`).join("")}</select></label>
+      <label>${LANG === "ar" ? "خاصية" : "Property"}<input class="input mono" id="f-prop" style="width:110px"></label><label>${LANG === "ar" ? "القيمة" : "Value"}<input class="input mono" id="f-val" style="width:120px"></label>
+      <label>${LANG === "ar" ? "لمن" : "Eligible"}<select class="input" id="f-elig"><option value="everyone">everyone</option><option value="registered">registered</option></select></label>
+      <label class="filters"><input type="checkbox" id="f-act" checked> ${LANG === "ar" ? "مفعلة" : "Active"}</label><button class="btn primary" id="f-save">${t("Save")}</button></div>` : ""}
+  </section>`;
+  const save = async (key, value) => { try { await api("admin_update_setting", { p_key: key, p_value: value }); toast(t("Save") + " ✓"); } catch (e) { toast(e.message); } };
+  $$("[data-save]", v).forEach(b => b.addEventListener("click", () => {
+    const k = b.dataset.save;
+    const val = { site_name: () => $("#s-name").value.trim(), notify_email: () => $("#s-notify").value.trim(), inactivity_days: () => +$("#s-inact").value, analytics_retention_days: () => +$("#s-ret").value }[k]();
+    save(k, val);
+  }));
+  $("#p-save")?.addEventListener("click", async () => {
+    await save("privacy", { tracking_enabled: $("#p-track").checked, require_analytics_consent: $("#p-consent").checked, policy_url: $("#p-url").value.trim(), policy_version: $("#p-ver").value.trim() });
+    await save("welcome_email", { enabled: $("#w-on").checked });
+  });
+  $("#s-reasons-save")?.addEventListener("click", () => {
+    const rows = $("#s-reasons").value.split("\n").map(l => l.split("|").map(x => x.trim())).filter(r => r[0]).map(([key, en, ar]) => ({ key, en, ar }));
+    save("contact_reasons", rows);
+  });
+  $("#s-labels-save")?.addEventListener("click", () => save("contact_status_labels", Object.fromEntries($$("[data-lbl]").map(i => [i.dataset.lbl, i.value.trim()]))));
+  $("#r-add")?.addEventListener("click", async () => { try { await api("admin_set_staff_role", { p_email: $("#r-email").value, p_role: $("#r-role").value }); toast(t("Save") + " ✓"); viewSettings(); } catch (e) { toast(e.message); } });
+  $$("[data-rm]", v).forEach(b => b.addEventListener("click", async () => { if (!confirm(`${LANG === "ar" ? "إزالة صلاحيات" : "Remove access for"} ${b.dataset.rm}?`)) return; try { await api("admin_set_staff_role", { p_email: b.dataset.rm, p_role: null }); viewSettings(); } catch (e) { toast(e.message); } }));
+  $("#f-key")?.addEventListener("change", e => { const f = features.find(x => x.key === e.target.value); if (!f) return; $("#f-name").value = f.name; $("#f-cat").value = f.category; $("#f-ev").value = f.match_event; $("#f-prop").value = f.match_prop || ""; $("#f-val").value = f.match_value || ""; $("#f-elig").value = f.eligibility; $("#f-act").checked = f.active; });
+  $("#f-save")?.addEventListener("click", async () => {
+    try { const r = await api("admin_upsert_feature", { p_key: $("#f-key").value.trim(), p_name: $("#f-name").value.trim(), p_description: null, p_category: $("#f-cat").value.trim(), p_eligibility: $("#f-elig").value,
+      p_match_event: $("#f-ev").value, p_match_prop: $("#f-prop").value.trim() || null, p_match_value: $("#f-val").value.trim() || null, p_active: $("#f-act").checked, p_sort: 100, p_backfill: true });
+      toast(`${LANG === "ar" ? "تم الحفظ · أحداث سابقة" : "Saved · past events matched"}: ${r.backfilled}`); } catch (e) { toast(e.message); }
+  });
+}
+
+/* ---------------- audit ---------------- */
+let aoff = 0;
+async function viewAudit() {
+  const v = page(t("Audit log"));
+  let r; try { r = await api("admin_audit_log", { p_limit: 50, p_offset: aoff }); } catch (e) { v.innerHTML = failBox(e); return; }
+  v.innerHTML = `<div class="tbl-wrap"><table><thead><tr><th>${LANG === "ar" ? "الوقت" : "When"}</th><th>${LANG === "ar" ? "من" : "Who"}</th><th>${LANG === "ar" ? "الإجراء" : "Action"}</th><th>${LANG === "ar" ? "الهدف" : "Target"}</th><th>${LANG === "ar" ? "التفاصيل" : "Details"}</th></tr></thead><tbody>
+    ${r.rows.map(a => `<tr><td class="small">${fdt(a.at)}</td><td dir="auto">${esc(a.actor)}</td><td class="mono small">${esc(a.action)}</td><td class="small">${esc(a.target_type || "")} <span class="mono">${esc(a.target_id || "")}</span></td><td class="mono small" style="max-width:420px;overflow-wrap:anywhere">${esc(JSON.stringify(a.details))}</td></tr>`).join("") || `<tr><td colspan="5" class="empty">${t("No results")}</td></tr>`}</tbody></table></div>
+    ${pager({ total: r.total, offset: aoff, limit: 50 }, o => { aoff = o; viewAudit(); })}`;
+  bindPager(v);
+}
+
+/* ---------------- router + boot ---------------- */
+function route() {
+  if (!who) return;
+  const [, sec, id] = location.hash.split("/");
+  const first = NAV.find(n => can(n[3]))?.[0] || "overview";
+  const go = { overview: viewOverview, users: id ? () => viewUser(id) : viewUsers, leads: id ? () => viewLead(id) : viewLeads, features: id ? () => viewFeature(decodeURIComponent(id)) : viewFeatures,
+    emails: viewEmails, settings: viewSettings, audit: viewAudit }[sec];
+  const need = NAV.find(n => n[0] === sec)?.[3];
+  if (!go || (need && !can(need))) { location.hash = `#/${first}`; return; }
+  go(); $("#view")?.focus({ preventScroll: true });
+}
+function gate(html) { $("#app").innerHTML = `<div class="gate"><div class="card">${html}</div></div>`; }
+async function boot() {
+  const th = store.get("hudera-admin-theme"); if (th) document.documentElement.setAttribute("data-theme", th);
+  document.documentElement.lang = LANG; document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
+  if (!cfg.supabaseUrl || !cfg.supabaseAnonKey) { gate(`<h1>HUDERA AI · Admin</h1><p class="muted">The backend is not connected yet. Add the Supabase project URL and anon key to <code>src/config.json</code> and rebuild (see backend/README.md).</p>`); return; }
+  sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
+  const hadCode = new URLSearchParams(location.search).has("code");
+  const { data } = await sb.auth.getSession();
+  if (hadCode) history.replaceState(null, "", location.pathname + (sessionStorage.getItem("hudera-admin-return") || "#/overview"));
+  if (!data.session) {
+    gate(`<h1>HUDERA AI · Admin</h1><p class="muted">${LANG === "ar" ? "سجّل الدخول بحساب جوجل المضاف لفريق HUDERA." : "Sign in with the Google account that was added to the HUDERA team."}</p><button class="btn primary" id="g-in">${LANG === "ar" ? "تسجيل الدخول بجوجل" : "Sign in with Google"}</button><a class="small" href="../">← ${t("Website")}</a>`);
+    $("#g-in").addEventListener("click", () => { try { sessionStorage.setItem("hudera-admin-return", location.hash || "#/overview"); } catch (e) {}
+      sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: "select_account" } } }); });
+    return;
+  }
+  try { who = await api("admin_whoami"); } catch (e) { gate(failBox(e)); return; }
+  if (!who.role) {
+    gate(`<h1>${LANG === "ar" ? "لا توجد صلاحية" : "No admin access"}</h1><p class="muted">${LANG === "ar" ? "حسابك" : "Your account"} <b dir="ltr">${esc(data.session.user.email)}</b> ${LANG === "ar" ? "ليس ضمن فريق الإدارة. اطلب من المالك إضافتك من الإعدادات ← الفريق." : "is not on the admin team. Ask the owner to add you in Settings → Team."}</p><button class="btn" id="g-out">${t("Sign out")}</button><a class="small" href="../">← ${t("Website")}</a>`);
+    $("#g-out").addEventListener("click", async () => { await sb.auth.signOut(); location.reload(); });
+    return;
+  }
+  sb.auth.onAuthStateChange((evt) => { if (evt === "SIGNED_OUT") location.reload(); });
+  shell(); window.addEventListener("hashchange", route); route();
+}
+// broken avatar → initial letter (no inline handlers)
+document.addEventListener("error", e => { const im = e.target; if (im.tagName === "IMG" && im.dataset.ini != null) { const s = document.createElement("span"); s.className = im.className; s.textContent = im.dataset.ini; im.replaceWith(s); } }, true);
+boot();
+
+</script>
+</body>
+</html>
