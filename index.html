@@ -702,6 +702,11 @@ html[lang="ar"] .phead h1{line-height:1.2}
   .hero .ctas .btn.lg{flex:1 1 auto}
 }
 
+.foot-l{display:flex;flex-direction:column;gap:10px}
+.social{display:flex;gap:16px;flex-wrap:wrap}
+.social a{color:var(--primary-ink);font-weight:600;text-decoration:none}
+.social a:hover{text-decoration:underline}
+
 </style>
 <a class="sr" href="#work">Skip to products</a>
 <header class="nav">
@@ -836,7 +841,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
   </section>
 
   <footer class="container site">
-    <span>© 2026 HUDERA AI · AI automation &amp; SaaS products</span>
+    <div class="foot-l"><span>© 2026 HUDERA AI · AI employees &amp; SaaS platforms</span><nav class="social" aria-label="HUDERA AI on the web"><a href="https://www.linkedin.com/company/hudera/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/hudera-ai" target="_blank" rel="noopener">GitHub</a><a href="https://www.facebook.com/huderaai" target="_blank" rel="noopener">Facebook</a><a href="mailto:hudera.ai@gmail.com">hudera.ai@gmail.com</a></nav></div>
     <p>Product demos on this page run in your browser on sample data; company names, people and figures inside them are fictional. WhatsApp is a trademark of Meta Platforms, Inc. Chat screens are HUDERA demo interfaces for solutions built on the WhatsApp Business Platform.</p>
   </footer>
 </main>
@@ -2474,6 +2479,10 @@ const AR_DICT = {
 "A monthly plan by number of AI employees and tasks done, plus a one-time setup quoted after the discovery call.": "باقة شهرية حسب عدد موظفي الذكاء الاصطناعي والمهام المنجزة، بالإضافة لرسوم إعداد لمرة واحدة تُحدد بعد مكالمة التعارف.",
 "WhatsApp": "واتساب",
 "Show all # demos": "اعرض كل الـ # ديمو",
+"© 2026 HUDERA AI · AI employees & SaaS platforms": "© 2026 HUDERA AI · موظفون بالذكاء الاصطناعي ومنصّات SaaS",
+"HUDERA AI on the web": "HUDERA AI على الإنترنت",
+"LinkedIn": "لينكدإن",
+"Facebook": "فيسبوك",
 "Systems": "الأنظمة",
 "Try a complete system": "جرّب نظامًا كاملًا",
 "Complete systems — try them yourself": "أنظمة كاملة — جرّبها بنفسك",
@@ -3716,7 +3725,7 @@ function renderSystem(s) {
 }
 
 /* ================= Site: products, home, product pages, router ================= */
-const CONTACT = { email: "hudera.ai@gmail.com", whatsapp: "+20 155 515 9139", wa: "201555159139", linkedin: "https://www.linkedin.com/company/hudera", facebook: "https://www.facebook.com/huderaai", github: "https://github.com/hudera-ai" };
+const CONTACT = { email: "hudera.ai@gmail.com", whatsapp: "+20 155 515 9139", wa: "201555159139", linkedin: "https://www.linkedin.com/company/hudera/", facebook: "https://www.facebook.com/huderaai", github: "https://github.com/hudera-ai" };
 const REPO = { connect: "hudera-connect" };
 const repoUrl = id => `${CONTACT.github}/${REPO[id] || id}`;
 const waLink = text => `https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(text)}`;
