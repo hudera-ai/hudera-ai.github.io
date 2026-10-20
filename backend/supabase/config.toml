@@ -1,0 +1,28 @@
+# Supabase CLI project config (only the parts this project changes).
+project_id = "hudera-ai"
+
+[auth]
+site_url = "https://hudera-ai.github.io"
+additional_redirect_urls = ["https://hudera-ai.github.io/", "https://hudera-ai.github.io/admin/", "http://localhost:3301/", "http://localhost:3301/admin/"]
+
+# Google is the only way in: e-mail/password and magic-link sign-ups are switched off
+# (staff roles are matched to verified Google e-mails only).
+[auth.email]
+enable_signup = false
+
+[auth.external.google]
+enabled = true
+client_id = "env(GOOGLE_CLIENT_ID)"
+secret = "env(GOOGLE_CLIENT_SECRET)"
+skip_nonce_check = false
+
+# These functions check the caller themselves (worker secret, staff JWT, Svix signature, user JWT),
+# so the gateway JWT check is turned off — it would otherwise also block CORS preflight and Resend webhooks.
+[functions.email-worker]
+verify_jwt = false
+
+[functions.email-webhook]
+verify_jwt = false
+
+[functions.account-delete]
+verify_jwt = false
