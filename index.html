@@ -707,6 +707,70 @@ html[lang="ar"] .phead h1{line-height:1.2}
 .social a{color:var(--primary-ink);font-weight:600;text-decoration:none}
 .social a:hover{text-decoration:underline}
 
+/* ---------- v4: account, consent, contact requests ---------- */
+.acct{display:flex;align-items:center}
+.acct-btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font:600 14px var(--f-body);cursor:pointer}
+.acct-btn:hover{border-color:var(--faint)}
+.acct-btn.signed{padding:0;width:40px;height:40px;border-radius:50%;justify-content:center;overflow:hidden}
+.acct-av{width:32px;height:32px;border-radius:50%;object-fit:cover;display:inline-grid;place-items:center;background:var(--primary);color:#fff;font-weight:700;flex:none}
+.acct-av.lg{width:52px;height:52px;font-size:22px}
+.acct-scrim{position:fixed;inset:0;background:rgba(8,12,24,.45);z-index:80;animation:stepIn .2s}
+.acct-panel{position:fixed;z-index:81;inset-block:0;inset-inline-end:0;width:min(420px,100%);background:var(--surface);border-inline-start:1px solid var(--line);box-shadow:var(--shadow-lg);overflow:auto;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
+.acct-head{display:flex;gap:12px;align-items:center}
+.acct-head h2{font-family:var(--f-display);font-size:20px;color:var(--ink)}
+.acct-head p{font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center;overflow-wrap:anywhere}
+.icon-x{margin-inline-start:auto;width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;flex:none}
+.icon-x svg{width:16px;height:16px}
+.acct-sec{border:1px solid var(--line);border-radius:var(--r-lg);padding:14px;display:flex;flex-direction:column;gap:10px}
+.acct-sec>label,.acct-sec>b{color:var(--ink)}
+.acct-sec small{display:block;color:var(--muted);font-size:12.5px;font-weight:400;margin-top:2px}
+.acct-sec .row{display:flex;gap:8px}
+.acct-sec .row .input{flex:1;min-width:0}
+.chk{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:14px;color:var(--text)}
+.chk input{width:18px;height:18px;margin-top:2px;accent-color:var(--primary);flex:none}
+.acct-reqs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.acct-reqs li{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;font-size:13.5px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.acct-reqs .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.acct-reqs small{grid-column:1/-1;color:var(--faint)}
+.acct-foot{flex-direction:row;flex-wrap:wrap}
+.acct-delbox{border-color:color-mix(in srgb,var(--red) 45%,transparent);background:var(--red-soft)}
+.btn.danger{color:var(--red);border-color:color-mix(in srgb,var(--red) 40%,transparent)}
+.btn.danger:hover{background:var(--red-soft)}
+.muted{color:var(--muted)}.small{font-size:12.5px}.mono{font-family:var(--f-mono)}
+.consent{position:fixed;z-index:70;inset-inline-start:16px;bottom:max(16px,env(safe-area-inset-bottom,0px));max-width:560px;width:calc(100% - 32px);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);padding:14px 16px;display:flex;flex-direction:column;gap:10px;animation:stepIn .3s}
+.consent p{font-size:14px;color:var(--text);margin:0}
+.consent .row{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.phone-prompt{position:fixed;z-index:69;inset-inline-end:16px;top:84px;max-width:380px;width:calc(100% - 32px);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);padding:14px 16px;display:flex;flex-direction:column;gap:10px;animation:stepIn .3s}
+.phone-prompt p{font-size:14px;margin:0}
+.phone-prompt .row{display:flex;gap:8px;justify-content:flex-end}
+.req-host{background:var(--surface);color:var(--text);border-radius:var(--r-xl);padding:24px;min-width:0}
+.req-host .form{padding:0;background:none;box-shadow:none}
+.req-signin,.req-done{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.req-signin h3,.req-done h3{font-family:var(--f-display);font-size:22px;color:var(--ink)}
+.req-signin p,.req-done p{color:var(--muted);margin:0}
+.req-done>svg{width:36px;height:36px;color:var(--mint);background:var(--mint-soft);border-radius:50%;padding:7px}
+.req-done .row{display:flex;gap:8px;flex-wrap:wrap}
+.g-btn{background:#fff!important;color:#1F2637!important;border-color:var(--line-2)!important}
+.g-btn:hover{background:#F3F5FA!important}
+.methods{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.methods legend{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:6px;padding:0}
+.methods label{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line-2);border-radius:10px;padding:8px 12px;cursor:pointer;font-size:14px}
+.methods input{accent-color:var(--primary)}
+.methods label:has(input:checked){border-color:var(--primary);background:var(--primary-soft);color:var(--primary-ink)}
+.opt{font-weight:400;color:var(--faint);font-size:12px}
+.hint{font-size:12px;color:var(--mint);margin-top:4px;display:block}
+.form-err{background:var(--red-soft);color:var(--red);border-radius:10px;padding:10px 12px;font-size:14px;margin:0}
+.input[readonly]{background:var(--surface-2);color:var(--muted)}
+@media (max-width:820px){.acct-btn span{display:none}.acct-btn{width:40px;padding:0;justify-content:center}}
+@media (max-width:640px){.consent{bottom:max(80px,env(safe-area-inset-bottom,0px))}.req-host{padding:18px}.phone-prompt{top:auto;bottom:84px}}
+
+[hidden]{display:none!important}
+.acct-sec.chk{flex-direction:row}
+.acct-reqs .chip{justify-self:end}
+.field.methods{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px}
+.field.methods legend{width:100%}
+.req-done p,.req-signin p{overflow-wrap:anywhere}
+
 </style>
 <a class="sr" href="#work">Skip to products</a>
 <header class="nav">
@@ -720,6 +784,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
     </nav>
     <button class="lang-btn no-l10n" id="lang" type="button"></button>
     <button class="theme-btn" id="theme" type="button" aria-label="Switch theme"></button>
+    <div class="acct" id="acct" hidden></div>
     <a class="btn primary sm" href="#contact">Book a call</a>
   </div>
 </header>
@@ -826,7 +891,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
   <section class="container" id="contact" style="padding-bottom:24px">
     <div class="contact">
       <div><span class="eyebrow" style="color:#9FB0FF">Start a project</span><h2 style="margin-top:12px">Tell us what takes your team the most time.</h2>
-        <p style="margin-top:14px;font-size:17px">Fill in the short form and we'll prepare your project brief. We usually start with one process and a working demo built on it.</p>
+        <p style="margin-top:14px;font-size:17px" id="contact-lead">Fill in the short form and we'll prepare your project brief. We usually start with one process and a working demo built on it.</p>
         <div class="list" id="contact-lines"></div></div>
       <form class="form" id="brief-form" novalidate>
         <div class="field"><label for="f-name">Your name</label><input class="input" id="f-name" name="name" autocomplete="name" placeholder="e.g. Abdulrahman Al-Otaibi"></div>
@@ -837,11 +902,12 @@ html[lang="ar"] .phead h1{line-height:1.2}
         <div class="full row between"><span style="font-size:12.5px;color:var(--faint)">Nothing is sent automatically. You'll get a brief to send on WhatsApp or copy.</span><button class="btn primary" type="submit">Prepare my brief</button></div>
         <div class="full" id="brief-out" hidden><div class="brief" id="brief-text"></div><div class="row" style="margin-top:10px"><a class="btn sm primary" id="brief-wa" href="#" target="_blank" rel="noopener">Send on WhatsApp</a><button class="btn sm" type="button" id="brief-copy">Copy brief</button></div></div>
       </form>
+      <div class="req-host" id="req-host" hidden></div>
     </div>
   </section>
 
   <footer class="container site">
-    <div class="foot-l"><span>© 2026 HUDERA AI · AI employees &amp; SaaS platforms</span><nav class="social" aria-label="HUDERA AI on the web"><a href="https://www.linkedin.com/company/hudera/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/hudera-ai" target="_blank" rel="noopener">GitHub</a><a href="https://www.facebook.com/huderaai" target="_blank" rel="noopener">Facebook</a><a href="mailto:hudera.ai@gmail.com">hudera.ai@gmail.com</a></nav></div>
+    <div class="foot-l"><span>© 2026 HUDERA AI · AI employees &amp; SaaS platforms</span><nav class="social" aria-label="HUDERA AI on the web"><a href="https://www.linkedin.com/company/hudera/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/hudera-ai" target="_blank" rel="noopener">GitHub</a><a href="https://www.facebook.com/huderaai" target="_blank" rel="noopener">Facebook</a><a href="mailto:hudera.ai@gmail.com">hudera.ai@gmail.com</a><a href="privacy.html">Privacy</a><a href="#" id="consent-open">Analytics choices</a></nav></div>
     <p>Product demos on this page run in your browser on sample data; company names, people and figures inside them are fictional. WhatsApp is a trademark of Meta Platforms, Inc. Chat screens are HUDERA demo interfaces for solutions built on the WhatsApp Business Platform.</p>
   </footer>
 </main>
@@ -850,6 +916,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
 <div id="pview" hidden></div>
 
 <script>
+const HUDERA_CONFIG = {"supabaseUrl": "", "supabaseAnonKey": ""};
 /* ---------- core helpers ---------- */
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -1622,7 +1689,7 @@ const AR_DICT = {
 "Request": "الطلب",
 "Request REQ-# generated": "أُنشئ الطلب REQ-#",
 "Requests answered by assistant": "طلبات رد عليها المساعد",
-"Resolved": "محلول",
+"Resolved": "تم الحل",
 "Restart": "إعادة التشغيل",
 "Result": "النتيجة",
 "Results": "النتائج",
@@ -1795,7 +1862,7 @@ const AR_DICT = {
 "Tue · Handled by team: #": "الثلاثاء · الفريق: #",
 "Turki Al-Anazi": "تركي العنزي",
 "Turn a permission off and restart the chat: the request goes to an accountant instead.": "أوقف صلاحية وأعد تشغيل المحادثة، وسيذهب الطلب لمحاسب بدلاً من المساعد.",
-"Type": "النوع",
+"Type": "اكتب",
 "Unassigned": "غير مسند",
 "Unit": "الوحدة",
 "Unplanned": "غير مخطط",
@@ -1909,6 +1976,76 @@ const AR_DICT = {
 "W# · Lost: #": "الأسبوع {0} · خسرناه: {1}",
 "W# · Open: #": "الأسبوع {0} · مفتوح: {1}",
 "W# · Won: #": "الأسبوع {0} · تم الفوز: {1}",
+"Privacy choices": "خيارات الخصوصية",
+"Can we count your visit?": "هل تسمح لنا بإحصاء زيارتك؟",
+"We use our own analytics to see which demos are useful. No advertising cookies, nothing sold.": "نستخدم إحصاءات خاصة بنا لمعرفة العروض المفيدة. لا ملفات إعلانية ولا نبيع أي بيانات.",
+"Privacy notice": "إشعار الخصوصية",
+"Only essential": "الضروري فقط",
+"Allow analytics": "السماح بالإحصاءات",
+"Sign in": "تسجيل الدخول",
+"Your account": "حسابك",
+"Verified by Google": "موثّق من جوجل",
+"Admin dashboard": "لوحة التحكم",
+"Phone / WhatsApp": "الجوال / واتساب",
+"Optional. Only used to reply to your requests. Without it we reply by e-mail.": "اختياري. نستخدمه فقط للرد على طلباتك، وبدونه نرد عليك بالبريد الإلكتروني.",
+"Save": "حفظ",
+"News by e-mail": "أخبار عبر البريد",
+"Occasional updates about new HUDERA products. You can turn this off at any time.": "تحديثات متباعدة عن منتجات HUDERA الجديدة، ويمكنك إيقافها في أي وقت.",
+"Your requests": "طلباتك",
+"No requests yet.": "لا توجد طلبات بعد.",
+"New request": "طلب جديد",
+"Download my data": "تنزيل بياناتي",
+"Delete my account": "حذف حسابي",
+"Sign out": "تسجيل الخروج",
+"We store your Google name, e-mail and photo, your phone if you add it, and the pages and demos you use.": "نحفظ اسمك وبريدك وصورتك من جوجل، ورقمك إن أضفته، والصفحات والعروض التي تستخدمها.",
+"Delete your account?": "حذف حسابك؟",
+"Your profile is removed and your name, e-mail and phone are erased from your requests. This cannot be undone.": "سيُحذف ملفك وتُمسح بياناتك (الاسم والبريد والجوال) من طلباتك. لا يمكن التراجع عن ذلك.",
+"to confirm": "للتأكيد",
+"Delete permanently": "حذف نهائي",
+"Pending": "قيد الانتظار",
+"Contacted": "تم التواصل",
+"In progress": "قيد التنفيذ",
+"Closed": "مغلق",
+"Welcome": "أهلاً بك",
+"Add a phone number if you'd like replies on WhatsApp. It's optional — we can always reply by e-mail.": "أضف رقم جوالك إذا رغبت أن نرد عليك عبر واتساب. الأمر اختياري، ويمكننا دائماً الرد بالبريد.",
+"Not now": "ليس الآن",
+"Add phone": "إضافة رقم",
+"Request received": "تم استلام طلبك",
+"Reference": "رقم الطلب",
+". We sent a confirmation to": ". أرسلنا تأكيداً إلى",
+"and you can follow the status from your account.": "ويمكنك متابعة الحالة من حسابك.",
+"Send another request": "إرسال طلب آخر",
+"WhatsApp us": "راسلنا على واتساب",
+"Send us a request": "أرسل لنا طلباً",
+"Sign in with Google to send a request and follow its status. We only receive your name, e-mail and photo from Google.": "سجّل الدخول بجوجل لإرسال طلب ومتابعة حالته. نستلم من جوجل اسمك وبريدك وصورتك فقط.",
+"Continue with Google": "المتابعة باستخدام جوجل",
+"Prefer not to sign in?": "تفضّل عدم تسجيل الدخول؟",
+"Message us on WhatsApp": "راسلنا على واتساب",
+"or": "أو",
+"e-mail us": "راسلنا بالبريد",
+"Full name": "الاسم الكامل",
+"E-mail": "البريد الإلكتروني",
+"From your account": "من حسابك",
+"optional": "اختياري",
+"Company": "الشركة",
+"What is it about?": "ما موضوع الطلب؟",
+"Choose…": "اختر…",
+"Subject": "الموضوع",
+"e.g. AI HR officer for 300 employees": "مثال: موظف موارد بشرية ذكي لـ 300 موظف",
+"What takes your team the most time today?": "ما الذي يستهلك أكثر وقت فريقك اليوم؟",
+"How should we contact you?": "كيف نتواصل معك؟",
+"WhatsApp": "واتساب",
+"Phone call": "مكالمة هاتفية",
+"Best time to reach you": "أنسب وقت للتواصل",
+"e.g. Sun–Thu, 9–12 Riyadh time": "مثال: الأحد–الخميس، 9–12 بتوقيت الرياض",
+"I agree that HUDERA AI stores this request and contacts me about it, as described in the": "أوافق على أن تحفظ HUDERA AI هذا الطلب وتتواصل معي بشأنه كما هو موضح في",
+"privacy notice": "إشعار الخصوصية",
+"Signed in as": "مسجّل الدخول باسم",
+"Send request": "إرسال الطلب",
+"Loading…": "جارٍ التحميل…",
+"Privacy": "الخصوصية",
+"Analytics choices": "خيارات الإحصاءات",
+"Send us a request and follow its status from your account. We usually start with one process and a working demo built on it.": "أرسل لنا طلبك وتابع حالته من حسابك. عادةً نبدأ بعملية واحدة ونموذج يعمل مبني عليها.",
 "Skip to products": "انتقل إلى المنتجات",
 "HUDERA AI home": "الصفحة الرئيسية لـ HUDERA AI",
 "Main": "الرئيسية",
@@ -1970,7 +2107,6 @@ const AR_DICT = {
 "Tell us what takes your team the most time.": "أخبرنا بما يستهلك أكثر وقت فريقك.",
 "Fill in the short form and we'll prepare your project brief. We usually start with one process and a working demo built on it.": "املأ النموذج القصير وسنجهّز ملخص مشروعك. نبدأ عادةً بعملية واحدة ونموذج يعمل مبني عليها.",
 "Your name": "الاسم",
-"Company": "الشركة",
 "Company name": "اسم الشركة",
 "Email or WhatsApp": "البريد الإلكتروني أو واتساب",
 "Interested in": "مهتم بـ",
@@ -2477,7 +2613,6 @@ const AR_DICT = {
 "A clickable prototype on your workflow in 1–2 weeks, then a pilot with one team in 2–6 weeks.": "نموذج تفاعلي على سير عملكم خلال 1–2 أسبوع، ثم تجربة مع فريق واحد خلال 2–6 أسابيع.",
 "How is it priced?": "كيف التسعير؟",
 "A monthly plan by number of AI employees and tasks done, plus a one-time setup quoted after the discovery call.": "باقة شهرية حسب عدد موظفي الذكاء الاصطناعي والمهام المنجزة، بالإضافة لرسوم إعداد لمرة واحدة تُحدد بعد مكالمة التعارف.",
-"WhatsApp": "واتساب",
 "Show all # demos": "اعرض كل الـ # ديمو",
 "© 2026 HUDERA AI · AI employees & SaaS platforms": "© 2026 HUDERA AI · موظفون بالذكاء الاصطناعي ومنصّات SaaS",
 "HUDERA AI on the web": "HUDERA AI على الإنترنت",
@@ -4014,7 +4149,7 @@ function initContact() {
 /* ---------- boot ---------- */
 function onLangChange() {
   document.title = pageKey ? `${P(pageKey.slice(2)).name} · HUDERA AI` : tt("HUDERA AI Portfolio", "HUDERA AI | أعمالنا ومنتجاتنا");
-  briefBuild(); fitPreviews(); paintHeroH1(); roiCalc(); if (heroReplay) { heroReplay(); }
+  briefBuild(); fitPreviews(); paintHeroH1(); roiCalc(); if (heroReplay) { heroReplay(); } if (typeof HP !== "undefined") HP.onLang();
 }
 document.addEventListener("DOMContentLoaded", () => {
   startL10n();
@@ -4028,6 +4163,343 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("hashchange", route); window.addEventListener("resize", fitPreviews);
   if ("ResizeObserver" in window) new ResizeObserver(fitPreviews).observe($("#products"));
   route();
+  $("#consent-open")?.addEventListener("click", e => { e.preventDefault(); HP.showConsent(); });
+  HP.init();
 });
 
+/* ---------- HUDERA platform client: Google sign-in, consented analytics, contact requests ----------
+   Talks to Supabase (Auth + RPC functions). Nothing here is trusted by the server: the database checks
+   who is calling on every request. If HUDERA_CONFIG has no Supabase project, the site keeps its old
+   behaviour (WhatsApp brief) and sends no analytics. */
+const HP = (() => {
+  const cfg = typeof HUDERA_CONFIG !== "undefined" ? HUDERA_CONFIG : {};
+  const enabled = !!(cfg.supabaseUrl && cfg.supabaseAnonKey);
+  const SB_JS = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js";
+  const CONSENT_KEY = "hudera.consent", VID_KEY = "hudera.vid", SID_KEY = "hudera.sid", PHONE_DISMISS = "hudera.phone_prompt";
+  const SESSION_GAP = 30 * 60 * 1000;
+  const store = {
+    get: (k, s = localStorage) => { try { return s.getItem(k); } catch (e) { return null; } },
+    set: (k, v, s = localStorage) => { try { s.setItem(k, v); } catch (e) {} },
+    del: (k, s = localStorage) => { try { s.removeItem(k); } catch (e) {} },
+  };
+  const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
+  let sb = null, session = null, me = null, site = { require_consent: true, tracking_enabled: true, contact_reasons: [] };
+  let queue = [], preConsent = [], flushTimer = null, ready = false;
+
+  /* ---------------- consent ---------------- */
+  const consent = () => { try { return JSON.parse(store.get(CONSENT_KEY) || "null"); } catch (e) { return null; } };
+  const canTrack = () => enabled && site.tracking_enabled !== false && (site.require_consent === false || consent()?.analytics === true);
+  function setConsent(analytics) {
+    store.set(CONSENT_KEY, JSON.stringify({ v: site.privacy_version || "2026-10", analytics, at: new Date().toISOString() }));
+    $("#consent")?.remove();
+    if (analytics) { queue.push(...preConsent); preConsent = []; flushSoon(100); }
+    else { preConsent = []; queue = []; store.del(VID_KEY); store.del(SID_KEY); }
+  }
+  function showConsent() {
+    if (!enabled || site.require_consent === false || consent() || $("#consent")) return;
+    document.body.insertAdjacentHTML("beforeend", `<div class="consent" id="consent" role="dialog" aria-live="polite" aria-label="Privacy choices">
+      <p><b>Can we count your visit?</b> We use our own analytics to see which demos are useful. No advertising cookies, nothing sold. <a href="privacy.html">Privacy notice</a></p>
+      <div class="row"><button class="btn sm" type="button" data-consent="0">Only essential</button><button class="btn sm primary" type="button" data-consent="1">Allow analytics</button></div></div>`);
+    $("#consent").addEventListener("click", e => { const b = e.target.closest("[data-consent]"); if (b) setConsent(b.dataset.consent === "1"); });
+  }
+
+  /* ---------------- analytics ---------------- */
+  function ids() {
+    let vid = store.get(VID_KEY); if (!vid) { vid = uuid(); store.set(VID_KEY, vid); }
+    let s = null; try { s = JSON.parse(store.get(SID_KEY) || "null"); } catch (e) {}
+    const now = Date.now();
+    if (!s || now - s.last > SESSION_GAP) {
+      const q = new URLSearchParams(location.search);
+      let ref = ""; try { const r = document.referrer && new URL(document.referrer); ref = r && r.host !== location.host ? r.hostname : ""; } catch (e) {}
+      s = { id: uuid(), last: now, ctx: { referrer: ref, utm_source: q.get("utm_source"), utm_medium: q.get("utm_medium"), utm_campaign: q.get("utm_campaign"), path: curPath() } };
+    }
+    s.last = now; store.set(SID_KEY, JSON.stringify(s));
+    return { vid, sid: s.id, ctx: s.ctx };
+  }
+  function curPath() { const h = location.hash; return location.pathname + (/^#(p|s)-/.test(h) ? h : ""); }
+  function track(name, props = {}, extra = {}) {
+    if (!enabled || site.tracking_enabled === false) return;
+    const ev = { id: uuid(), name, at: new Date().toISOString(), path: curPath(), props, ...extra };
+    if (canTrack()) { queue.push(ev); flushSoon(); }
+    else if (!consent() && preConsent.length < 30) preConsent.push(ev);   // kept in memory only, sent only if the visitor agrees
+  }
+  function flushSoon(ms = 2500) { clearTimeout(flushTimer); flushTimer = setTimeout(flush, ms); }
+  async function flush(useBeacon = false) {
+    if (!canTrack() || !queue.length || !ready) return;
+    const batch = queue.splice(0, 50), { vid, sid, ctx } = ids();
+    const send = token => fetch(`${cfg.supabaseUrl}/rest/v1/rpc/track`, {
+      method: "POST", keepalive: useBeacon,
+      headers: { apikey: cfg.supabaseAnonKey, ...(String(token).split(".").length === 3 ? { authorization: `Bearer ${token}` } : {}), "content-type": "application/json" },
+      body: JSON.stringify({ p_visitor: vid, p_session: sid, p_context: ctx, p_events: batch }) });
+    try {
+      let r = await send(session?.access_token || cfg.supabaseAnonKey);
+      if (r.status === 401) r = await send(cfg.supabaseAnonKey);           // expired token: still count the visit
+      if (!r.ok && r.status >= 500) throw new Error(String(r.status));
+    } catch (e) {                                                          // analytics must never break the page
+      batch.forEach(ev => { ev.retry = (ev.retry || 0) + 1; }); queue.unshift(...batch.filter(ev => ev.retry <= 2));
+    }
+    if (queue.length) flushSoon(4000);
+  }
+
+  /* ---------------- auth ---------------- */
+  function loadSdk() {
+    return new Promise((res, rej) => {
+      if (window.supabase?.createClient) return res();
+      const s = document.createElement("script"); s.src = cfg.sdkUrl || SB_JS; s.async = true; s.crossOrigin = "anonymous";
+      s.onload = () => res(); s.onerror = () => rej(new Error("sdk")); document.head.appendChild(s);
+    });
+  }
+  async function signIn(placement) {
+    if (!sb) return toast(tt("Sign-in is not available right now.", "تسجيل الدخول غير متاح حالياً."));
+    track("sign_in_started", { placement }); await flush(true);
+    store.set("hudera.return", location.hash || "", sessionStorage);
+    const { error } = await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: "select_account" } } });
+    if (error) toast(tt("Could not start Google sign-in.", "تعذّر بدء تسجيل الدخول بجوجل."));
+  }
+  async function signOut() {
+    track("logout"); await flush(true);
+    await sb.auth.signOut(); me = null; closePanel(); renderAcct(); renderContact();
+    toast(tt("Signed out", "تم تسجيل الخروج"));
+  }
+  async function rpc(fn, args) {
+    const { data, error } = await sb.rpc(fn, args);
+    if (error) { const code = (error.message || "error").split(/\s/)[0]; throw Object.assign(new Error(code), { code }); }
+    return data;
+  }
+  async function loadMe() {
+    try { me = await rpc("me"); } catch (e) { me = null; if (e.code === "account_suspended") toast(tt("This account is suspended. Contact us on WhatsApp.", "هذا الحساب موقوف. تواصل معنا عبر واتساب.")); }
+    renderAcct(); renderContact();
+    if (me && !me.phone && !store.get(PHONE_DISMISS) && store.get("hudera.just_signed_in", sessionStorage)) phonePrompt();
+    store.del("hudera.just_signed_in", sessionStorage);
+  }
+
+  /* ---------------- account button + panel ---------------- */
+  const gIcon = `<svg viewBox="0 0 48 48" width="16" height="16" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.3-.4-3.5z"/></svg>`;
+  const initial = u => esc((u.full_name || u.email || "?").trim()[0].toUpperCase());
+  const avatarHtml = (u, cls = "") => u.avatar_url
+    ? `<img class="acct-av ${cls}" src="${esc(u.avatar_url)}" alt="" referrerpolicy="no-referrer" data-ini="${initial(u)}">`
+    : `<span class="acct-av ${cls}">${initial(u)}</span>`;
+  const STATUS = { new: ["New", "c-blue"], pending: ["Pending", "c-amber"], contacted: ["Contacted", "c-violet"], in_progress: ["In progress", "c-violet"], resolved: ["Resolved", "c-mint"], closed: ["Closed", "c-grey"] };
+  function renderAcct() {
+    const host = $("#acct"); if (!host) return;
+    if (!enabled) { host.hidden = true; return; }
+    host.hidden = false;
+    host.innerHTML = me
+      ? `<button class="acct-btn signed" id="acct-btn" type="button" aria-haspopup="dialog" aria-label="Your account">${avatarHtml(me)}</button>`
+      : `<button class="acct-btn" id="acct-btn" type="button">${gIcon}<span>Sign in</span></button>`;
+    $("#acct-btn").addEventListener("click", () => me ? openPanel() : signIn("nav"));
+  }
+  function openPanel() {
+    closePanel(); track("profile_opened");
+    const reqs = (me.requests || []).map(r => `<li><span class="mono no-l10n">${esc(r.ref)}</span><span class="t">${esc(r.subject)}</span>${chip(STATUS[r.status]?.[0] || r.status, (STATUS[r.status]?.[1] || "c-grey").slice(2))}<small>${new Date(r.created_at).toLocaleDateString(LANG === "ar" ? "ar-EG-u-ca-gregory-nu-latn" : "en-GB", { day: "numeric", month: "short", year: "numeric" })}</small></li>`).join("");
+    document.body.insertAdjacentHTML("beforeend", `<div class="acct-scrim" id="acct-scrim"></div>
+    <aside class="acct-panel" id="acct-panel" role="dialog" aria-modal="true" aria-labelledby="acct-h">
+      <div class="acct-head">${avatarHtml(me, "lg")}<div><h2 id="acct-h" class="no-l10n">${esc(me.full_name || me.email)}</h2>
+        <p><span class="no-l10n">${esc(me.email)}</span> ${me.email_verified ? `<span class="chip c-mint">Verified by Google</span>` : ""}</p></div>
+        <button class="icon-x" type="button" id="acct-close" aria-label="Close">${ic("x")}</button></div>
+      ${me.staff_role ? `<a class="btn primary" href="admin/">${ic("chart")}Admin dashboard</a>` : ""}
+      <form class="acct-sec" id="acct-phone"><label for="acct-ph"><b>Phone / WhatsApp</b><small>Optional. Only used to reply to your requests. Without it we reply by e-mail.</small></label>
+        <div class="row"><input class="input" id="acct-ph" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+966 5x xxx xxxx" value="${esc(me.phone || "")}"><button class="btn" type="submit">Save</button></div></form>
+      <label class="acct-sec chk"><input type="checkbox" id="acct-mk" ${me.marketing_consent ? "checked" : ""}><span><b>News by e-mail</b><small>Occasional updates about new HUDERA products. You can turn this off at any time.</small></span></label>
+      <div class="acct-sec"><b>Your requests</b>${reqs ? `<ul class="acct-reqs">${reqs}</ul>` : `<p class="muted">No requests yet.</p>`}<a class="btn sm" href="#contact" id="acct-new">New request</a></div>
+      <div class="acct-sec acct-foot"><button class="btn sm" type="button" id="acct-export">${ic("download")}Download my data</button><button class="btn sm danger" type="button" id="acct-del">Delete my account</button><button class="btn sm" type="button" id="acct-out">Sign out</button></div>
+      <p class="muted small">We store your Google name, e-mail and photo, your phone if you add it, and the pages and demos you use. <a href="privacy.html">Privacy notice</a></p>
+    </aside>`);
+    const panel = $("#acct-panel");
+    $("#acct-scrim").addEventListener("click", closePanel); $("#acct-close").addEventListener("click", closePanel);
+    panel.addEventListener("keydown", e => { if (e.key === "Escape") closePanel(); });
+    $("#acct-new").addEventListener("click", closePanel);
+    $("#acct-out").addEventListener("click", signOut);
+    $("#acct-phone").addEventListener("submit", async e => {
+      e.preventDefault(); const v = $("#acct-ph").value.trim();
+      try { me = await rpc("update_my_profile", v ? { p_phone: v } : { p_clear_phone: true }); $("#acct-ph").value = me.phone || ""; toast(tt("Saved", "تم الحفظ")); renderContact(); }
+      catch (err) { toast(errText(err.code)); }
+    });
+    $("#acct-mk").addEventListener("change", async e => {
+      try { me = await rpc("update_my_profile", { p_marketing_consent: e.target.checked }); toast(tt("Saved", "تم الحفظ")); } catch (err) { e.target.checked = !e.target.checked; toast(errText(err.code)); }
+    });
+    $("#acct-export").addEventListener("click", async () => {
+      try { const data = await rpc("my_data_export"); const a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" })); a.download = "hudera-my-data.json"; a.click(); }
+      catch (err) { toast(errText(err.code)); }
+    });
+    $("#acct-del").addEventListener("click", deleteAccount);
+    $("#acct-close").focus();
+  }
+  function closePanel() { $("#acct-panel")?.remove(); $("#acct-scrim")?.remove(); }
+  function deleteAccount() {
+    if ($("#acct-delbox")) return;
+    $("#acct-del").closest(".acct-sec").insertAdjacentHTML("afterend", `<form class="acct-sec acct-delbox" id="acct-delbox"><b>Delete your account?</b>
+      <small>Your profile is removed and your name, e-mail and phone are erased from your requests. This cannot be undone.</small>
+      <label for="acct-delin" class="small">Type <b class="mono no-l10n">DELETE</b> to confirm</label>
+      <div class="row"><input class="input no-l10n" id="acct-delin" autocomplete="off" dir="ltr"><button class="btn danger" type="submit">Delete permanently</button></div></form>`);
+    $("#acct-delin").focus();
+    $("#acct-delbox").addEventListener("submit", e => { e.preventDefault(); if ($("#acct-delin").value.trim() === "DELETE") doDelete(); else $("#acct-delin").focus(); });
+  }
+  async function doDelete() {
+    try {
+      const r = await fetch(`${cfg.supabaseUrl}/functions/v1/account-delete`, { method: "POST",
+        headers: { apikey: cfg.supabaseAnonKey, authorization: `Bearer ${session.access_token}`, "content-type": "application/json" }, body: JSON.stringify({ confirm: "DELETE" }) });
+      if (!r.ok) throw new Error("delete_failed");
+      await sb.auth.signOut(); me = null; closePanel(); renderAcct(); renderContact();
+      toast(tt("Your account was deleted.", "تم حذف حسابك."));
+    } catch (e) { toast(tt("Could not delete the account. Please contact us.", "تعذّر حذف الحساب. تواصل معنا من فضلك.")); }
+  }
+  function phonePrompt() {
+    if ($("#phone-prompt")) return;
+    document.body.insertAdjacentHTML("beforeend", `<div class="phone-prompt" id="phone-prompt" role="status"><p><b class="no-l10n">${esc(tt("Welcome", "أهلاً بك") + (me.full_name ? ` ${me.full_name.split(" ")[0]}` : "") + "!")}</b> Add a phone number if you'd like replies on WhatsApp. It's optional — we can always reply by e-mail.</p>
+      <div class="row"><button class="btn sm" type="button" id="pp-later">Not now</button><button class="btn sm primary" type="button" id="pp-add">Add phone</button></div></div>`);
+    $("#pp-later").addEventListener("click", () => { store.set(PHONE_DISMISS, "1"); $("#phone-prompt").remove(); });
+    $("#pp-add").addEventListener("click", () => { $("#phone-prompt").remove(); openPanel(); setTimeout(() => $("#acct-ph")?.focus(), 50); });
+  }
+
+  /* ---------------- contact requests ---------------- */
+  const ERR = {
+    phone_required: ["Add a phone number to be contacted by phone or WhatsApp — or choose e-mail.", "أضف رقم جوال للتواصل بالهاتف أو واتساب، أو اختر البريد الإلكتروني."],
+    invalid_phone: ["That phone number doesn't look right. Use the international format, e.g. +966 55 123 4567.", "رقم الجوال غير صحيح. استخدم الصيغة الدولية مثل ‎+966 55 123 4567."],
+    invalid_message: ["Write at least 10 characters about what you need.", "اكتب 10 أحرف على الأقل عن احتياجك."],
+    invalid_subject: ["Add a short subject (3–150 characters).", "أضف عنواناً قصيراً (3–150 حرفاً)."],
+    invalid_name: ["Add your name.", "أضف اسمك."],
+    invalid_reason: ["Choose what the request is about.", "اختر موضوع الطلب."],
+    consent_required: ["Please tick the consent box so we can contact you.", "من فضلك وافق على شروط الخصوصية حتى نتمكن من التواصل معك."],
+    rate_limited: ["Too many requests for now. Please try again in an hour or message us on WhatsApp.", "طلبات كثيرة حالياً. جرّب بعد ساعة أو راسلنا على واتساب."],
+    not_authenticated: ["Your session ended. Please sign in again.", "انتهت الجلسة. سجّل الدخول مرة أخرى."],
+  };
+  const errText = code => (ERR[code] ? tt(ERR[code][0], ERR[code][1]) : tt("Something went wrong. Please try again.", "حدث خطأ. حاول مرة أخرى."));
+  let formToken = uuid(), pendingSubject = "", pendingReason = "", lastRef = null;
+  function renderContact() {
+    const host = $("#req-host"); if (!host || !enabled) return;
+    $("#brief-form").hidden = true; host.hidden = false;
+    if (lastRef) {
+      host.innerHTML = `<div class="req-done" role="status">${ic("check")}<h3>Request received</h3><p>Reference <b class="mono no-l10n">${esc(lastRef)}</b>. We sent a confirmation to <span class="no-l10n">${esc(me?.email || "")}</span> and you can follow the status from your account.</p>
+        <div class="row"><button class="btn sm" type="button" id="req-again">Send another request</button><a class="btn sm" ${waAttr(`Hi HUDERA AI, about my request ${lastRef}`, `مرحباً HUDERA AI، بخصوص طلبي ${lastRef}`)}>WhatsApp us</a></div></div>`;
+      $("#req-again").addEventListener("click", () => { lastRef = null; formToken = uuid(); renderContact(); });
+      return;
+    }
+    if (!me) {
+      host.innerHTML = `<div class="req-signin"><h3>Send us a request</h3><p>Sign in with Google to send a request and follow its status. We only receive your name, e-mail and photo from Google.</p>
+        <button class="btn primary g-btn" type="button" id="req-signin">${gIcon}<span>Continue with Google</span></button>
+        <p class="muted small">Prefer not to sign in? <a ${waAttr("Hi HUDERA AI, I'd like to talk about a project.", "مرحباً HUDERA AI، أرغب في الحديث عن مشروع.")} data-wa-place="contact">Message us on WhatsApp</a> or <a href="mailto:hudera.ai@gmail.com">e-mail us</a>.</p></div>`;
+      $("#req-signin").addEventListener("click", () => signIn("contact"));
+      return;
+    }
+    const reasons = (site.contact_reasons || []).map(r => `<option value="${esc(r.key)}" ${r.key === pendingReason ? "selected" : ""}>${esc(LANG === "ar" ? r.ar : r.en)}</option>`).join("");
+    host.innerHTML = `<form class="form" id="req-form" novalidate>
+      <div class="field"><label for="r-name">Full name</label><input class="input" id="r-name" autocomplete="name" maxlength="120" required value="${esc(me.full_name || "")}"></div>
+      <div class="field"><label for="r-email">E-mail</label><input class="input no-l10n" id="r-email" value="${esc(me.email)}" readonly dir="ltr" aria-describedby="r-email-n"><small id="r-email-n" class="hint">${me.email_verified ? "Verified by Google" : "From your account"}</small></div>
+      <div class="field"><label for="r-phone">Phone / WhatsApp <span class="opt">optional</span></label><input class="input" id="r-phone" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+966 5x xxx xxxx" value="${esc(me.phone || "")}"></div>
+      <div class="field"><label for="r-company">Company <span class="opt">optional</span></label><input class="input" id="r-company" autocomplete="organization" maxlength="120"></div>
+      <div class="field"><label for="r-reason">What is it about?</label><select class="input select" id="r-reason" required><option value="">Choose…</option>${reasons}</select></div>
+      <div class="field"><label for="r-subject">Subject</label><input class="input" id="r-subject" maxlength="150" required value="${esc(pendingSubject)}" placeholder="e.g. AI HR officer for 300 employees"></div>
+      <div class="field full"><label for="r-msg">Message</label><textarea class="input" id="r-msg" maxlength="4000" required placeholder="What takes your team the most time today?"></textarea></div>
+      <fieldset class="field full methods"><legend>How should we contact you?</legend>
+        <label><input type="radio" name="r-method" value="email" checked><span>E-mail</span></label><label><input type="radio" name="r-method" value="whatsapp"><span>WhatsApp</span></label><label><input type="radio" name="r-method" value="phone"><span>Phone call</span></label></fieldset>
+      <div class="field full"><label for="r-time">Best time to reach you <span class="opt">optional</span></label><input class="input" id="r-time" maxlength="80" placeholder="e.g. Sun–Thu, 9–12 Riyadh time"></div>
+      <label class="full chk"><input type="checkbox" id="r-consent" required><span>I agree that HUDERA AI stores this request and contacts me about it, as described in the <a href="privacy.html" target="_blank" rel="noopener">privacy notice</a>.</span></label>
+      <p class="full form-err" id="r-err" role="alert" hidden></p>
+      <div class="full row between"><span class="muted small">Signed in as <span class="no-l10n">${esc(me.email)}</span></span><button class="btn primary" type="submit" id="r-send">Send request</button></div>
+    </form>`;
+    const f = $("#req-form");
+    f.addEventListener("focusin", () => { if (!f.dataset.started) { f.dataset.started = 1; track("contact_started"); } });
+    f.addEventListener("submit", async e => {
+      e.preventDefault();
+      const err = $("#r-err"), btn = $("#r-send"); err.hidden = true;
+      const method = f.querySelector("[name=r-method]:checked").value;
+      const fail = code => { err.textContent = errText(code); err.hidden = false; track("contact_failed", { code }); };
+      if ($("#r-name").value.trim().length < 2) return fail("invalid_name");
+      if (!$("#r-reason").value) return fail("invalid_reason");
+      if ($("#r-subject").value.trim().length < 3) return fail("invalid_subject");
+      if ($("#r-msg").value.trim().length < 10) return fail("invalid_message");
+      if (method !== "email" && !$("#r-phone").value.trim()) return fail("phone_required");
+      if (!$("#r-consent").checked) return fail("consent_required");
+      btn.disabled = true; btn.textContent = tt("Sending…", "جارٍ الإرسال…");
+      try {
+        const r = await rpc("submit_contact", { p_full_name: $("#r-name").value, p_phone: $("#r-phone").value || null, p_company: $("#r-company").value || null,
+          p_reason: $("#r-reason").value, p_subject: $("#r-subject").value, p_message: $("#r-msg").value, p_preferred_method: method,
+          p_preferred_time: $("#r-time").value || null, p_consent: true, p_client_token: formToken, p_path: curPath() });
+        lastRef = r.ref; pendingSubject = ""; pendingReason = "";
+        loadMe(); renderContact();
+        $("#req-host").scrollIntoView({ behavior: "smooth", block: "center" });
+      } catch (x) { fail(x.code); btn.disabled = false; btn.textContent = tt("Send request", "إرسال الطلب"); }
+    });
+  }
+  // "Discuss a similar solution" buttons pre-fill the request
+  const REASON_FOR = { workforce: "ai_employee", "contractor-os": "contractor_os", connect: "whatsapp", hesabo: "whatsapp" };
+  document.addEventListener("click", e => {
+    const a = e.target.closest("[data-interest]"); if (!a) return;
+    const id = a.dataset.interest, p = typeof P === "function" && P(id), s = typeof S === "function" && S(id);
+    const name = (p && p.name) || (s && s.name) || "";
+    pendingReason = REASON_FOR[id] || (name ? "custom_system" : "");
+    pendingSubject = name ? tt(`About ${name}`, `بخصوص ${name}`) : "";
+    setTimeout(() => { const subj = $("#r-subject"), rs = $("#r-reason"); if (subj && !subj.value) subj.value = pendingSubject; if (rs && pendingReason) rs.value = pendingReason; }, 80);
+  });
+
+  /* ---------------- automatic tracking of the site's own features ---------------- */
+  function wireTracking() {
+    let lastPath = null;
+    const pv = () => { const p = curPath(); if (p !== lastPath) { lastPath = p; track("page_view", { title: document.title.slice(0, 120), lang: LANG }); } };
+    const routeEvent = () => {
+      const h = location.hash.replace("#", "");
+      if (h.startsWith("s-") && typeof S === "function" && S(h.slice(2))) {
+        const s = S(h.slice(2));
+        s.platform ? track("platform_opened", { platform: s.id, mode: "page" }) : track("system_opened", { system: s.id });
+      } else if (h.startsWith("p-") && typeof P === "function" && P(h.slice(2))) track("demo_opened", { product: h.slice(2) });
+    };
+    pv(); routeEvent();
+    window.addEventListener("hashchange", () => { setTimeout(() => { pv(); routeEvent(); }, 30); });
+    document.addEventListener("click", e => {
+      const a = e.target.closest("a[href]"); if (!a) return;
+      const href = a.getAttribute("href") || "";
+      const m = href.match(/github\.com\/hudera-ai\/?([\w.-]*)/); if (m) track("github_clicked", { repo: m[1] || "org" });
+      if (/^https:\/\/wa\.me\//.test(href)) track("whatsapp_clicked", { placement: a.dataset.waPlace || (a.classList.contains("wa-float") ? "float" : a.closest("section[id]")?.id || "page") });
+      const live = href.match(/hudera-ai\.github\.io\/(workforce|contractor-os)/); if (live) track("platform_opened", { platform: live[1], mode: "newtab" });
+    }, true);
+    document.addEventListener("toggle", e => { const d = e.target; if (d.tagName === "DETAILS" && d.open && d.closest("#faq")) track("faq_opened", { question: String([...d.parentElement.children].indexOf(d) + 1) }); }, true);
+    let roiTimer = null, roiSent = 0;
+    document.addEventListener("input", e => {
+      if (!e.target.closest(".roi") || roiSent >= 3) return;
+      clearTimeout(roiTimer);
+      roiTimer = setTimeout(() => { roiSent++; track("roi_calculated", { requests: +$("#r-req").value, minutes: +$("#r-min").value, share: +$("#r-share").value, cost: +$("#r-cost").value }); }, 1500);
+    });
+    $("#lang")?.addEventListener("click", () => setTimeout(() => track("language_changed", { lang: LANG }), 0));
+    $("#theme")?.addEventListener("click", () => setTimeout(() => track("theme_changed", { theme: document.documentElement.getAttribute("data-theme") || "auto" }), 0));
+    if ("IntersectionObserver" in window) {
+      const seen = new Set();
+      const io = new IntersectionObserver(es => es.forEach(en => { const id = en.target.id; if (en.isIntersecting && !seen.has(id)) { seen.add(id); track("section_view", { section: id }); } }), { threshold: 0.35 });
+      ["systems", "value", "services", "work", "process", "faq", "contact"].forEach(id => { const el = document.getElementById(id); el && io.observe(el); });
+    }
+    let errs = 0;
+    window.addEventListener("error", e => { if (errs++ < 3) track("client_error", { code: "js_error", where: String(e.filename || "").split("/").pop().slice(0, 60) || "inline" }); });
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flush(true); });
+    window.addEventListener("pagehide", () => flush(true));
+  }
+
+  document.addEventListener("error", e => { const im = e.target; if (im.tagName === "IMG" && im.dataset.ini != null) { const s = document.createElement("span"); s.className = im.className; s.textContent = im.dataset.ini; im.replaceWith(s); } }, true);
+
+  /* ---------------- boot ---------------- */
+  async function init() {
+    renderAcct();
+    if (!enabled) { const c = $("#consent-open"); if (c) c.hidden = true; return; }
+    const lead = $("#contact-lead"); if (lead) lead.textContent = "Send us a request and follow its status from your account. We usually start with one process and a working demo built on it.";
+    const host = $("#req-host"); if (host) { $("#brief-form").hidden = true; host.hidden = false; host.innerHTML = `<div class="req-signin"><p class="muted">Loading…</p></div>`; }
+    try { await loadSdk(); } catch (e) { $("#brief-form").hidden = false; if (host) host.hidden = true; return; }
+    sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
+    const hadCode = new URLSearchParams(location.search).has("code");
+    try { site = { ...site, ...(await rpc("site_config")) }; } catch (e) {}
+    const { data } = await sb.auth.getSession(); session = data.session;
+    if (hadCode) {                                       // back from Google: clean the URL and return to where the visitor was
+      const back = store.get("hudera.return", sessionStorage) || ""; store.del("hudera.return", sessionStorage);
+      if (session) store.set("hudera.just_signed_in", "1", sessionStorage);
+      history.replaceState(null, "", location.pathname + back);
+      if (back) { if (typeof route === "function") route(); }
+    }
+    sb.auth.onAuthStateChange((evt, s) => { const changed = (s?.user?.id || null) !== (session?.user?.id || null); session = s; if (changed) { if (s) loadMe(); else { me = null; renderAcct(); renderContact(); } } });
+    ready = true;
+    if (session) await loadMe(); else { renderAcct(); renderContact(); }
+    showConsent(); wireTracking(); flushSoon(800);
+  }
+  return { init, track, onLang: () => { renderContact(); }, signIn, openPanel: () => me && openPanel(), get me() { return me; }, enabled, setConsent, showConsent: () => { store.del(CONSENT_KEY); showConsent(); } };
+})();
+
 </script>
+</body></html>
