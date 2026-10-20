@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>HUDERA AI | أتمتة الأعمال بالذكاء الاصطناعي</title>
-<meta name="description" content="HUDERA AI builds WhatsApp AI assistants, dashboards, workflow automations and SaaS products for businesses in Saudi Arabia and the Gulf.">
+<title>HUDERA AI | موظفين بالذكاء الاصطناعي للشركات</title>
+<meta name="description" content="HUDERA AI builds AI employees for HR, collections, sales and site operations: they work on WhatsApp in Arabic and English, on your own data, with a person approving anything sensitive. Saudi Arabia and the Gulf.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="HUDERA AI | AI automation & SaaS for KSA & the Gulf">
-<meta property="og:description" content="مساعدات واتساب ذكية، تقارير ومتابعة آلية، لوحات مؤشرات وأنظمة SaaS للشركات في السعودية والخليج.">
+<meta property="og:title" content="HUDERA AI | AI employees for companies in KSA & the Gulf">
+<meta property="og:description" content="موظفين بالذكاء الاصطناعي للموارد البشرية والتحصيل والمبيعات وتشغيل المواقع، على واتساب وبالعربي، وكل قرار حساس يعتمده شخص.">
 <meta property="og:image" content="https://hudera-ai.github.io/og.png">
 <meta property="og:url" content="https://hudera-ai.github.io/">
 <meta name="twitter:card" content="summary_large_image">
@@ -603,6 +603,105 @@ html[lang="ar"] .phead h1{line-height:1.2}
 .users{display:flex;flex-direction:column;gap:6px}.users div{display:flex;justify-content:space-between;gap:10px;font-size:13px;border-bottom:1px dashed var(--line);padding-bottom:4px}.users b{font-family:var(--f-mono);font-weight:500}
 .users span{color:var(--muted)}
 
+/* ---------- v3: AI-employee hero ---------- */
+.btn.lg{height:50px;padding:0 22px;font-size:16px;border-radius:12px}
+.hero-ai{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);padding-block:64px 56px}
+.hero-ai h1 .hl{background:linear-gradient(100deg,var(--primary),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.agent-stage{display:flex;gap:20px;align-items:flex-start;position:relative}
+.agent-stage::before{content:"";position:absolute;inset:8% -4% 0 10%;background:radial-gradient(60% 60% at 40% 40%,var(--primary-soft),transparent 70%);z-index:-1;filter:blur(8px)}
+.agent-stage #hero-phone .phone{width:268px}
+.agent-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.agent-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);padding:14px 14px 10px}
+.agent-id{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.agent-id b{display:block;font-size:14.5px;color:var(--ink)}
+.agent-id small{display:block;font-size:12px;color:var(--muted)}
+.agent-av{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#7C5CFF,var(--primary));color:#fff;display:grid;place-items:center;font-family:var(--f-ar);font-weight:700;font-size:18px;flex:none}
+.live{margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--mint);background:var(--mint-soft);padding:3px 9px;border-radius:99px}
+.live i{width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--mint) 60%,transparent)}100%{box-shadow:0 0 0 8px transparent}}
+.trace-h{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:12px 0 6px}
+.htrace{list-style:none;margin:0;padding:0;min-height:236px;display:flex;flex-direction:column;gap:2px}
+.htrace li{display:flex;gap:10px;align-items:flex-start;padding:7px 6px;border-radius:9px;animation:stepIn .35s ease both}
+.htrace li:last-child{background:var(--surface-2)}
+.htrace .ti{width:26px;height:26px;border-radius:8px;background:var(--primary-soft);color:var(--primary-ink);display:grid;place-items:center;flex:none}
+.htrace .ti svg{width:14px;height:14px}
+.htrace li.ok .ti{background:var(--mint-soft);color:var(--mint)}
+.htrace li.rule .ti{background:var(--violet-soft);color:var(--violet)}
+.htrace li.wait .ti{background:var(--amber-soft);color:var(--amber)}
+.htrace b{display:block;font-size:13px;color:var(--ink);font-weight:600}
+.htrace small{display:block;font-size:12px;color:var(--muted);font-family:var(--f-mono);overflow-wrap:anywhere}
+@keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.appr-card{display:flex;align-items:center;gap:10px;background:var(--amber-soft);border:1px solid color-mix(in srgb,var(--amber) 35%,transparent);border-radius:var(--r-lg);padding:11px 12px;animation:stepIn .35s ease both}
+.appr-card .ti{width:30px;height:30px;border-radius:9px;background:var(--surface);color:var(--amber);display:grid;place-items:center;flex:none}
+.appr-card .ti svg{width:16px;height:16px}
+.appr-card b{display:block;font-size:13px;color:var(--ink)}
+.appr-card small{display:block;font-size:12px;color:var(--muted)}
+.appr-card .btns{margin-inline-start:auto;display:flex;gap:6px}
+.appr-card .btns i{font-style:normal;font-size:12px;font-weight:600;padding:5px 10px;border-radius:7px;background:var(--surface);border:1px solid var(--line-2);color:var(--text)}
+.appr-card .btns i:first-child{background:var(--mint);border-color:var(--mint);color:#fff}
+.appr-card.done{background:var(--mint-soft);border-color:color-mix(in srgb,var(--mint) 35%,transparent)}
+.appr-card.done .ti{color:var(--mint)}
+.agent-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.agent-kpis>div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.agent-kpis b{display:block;font-family:var(--f-display);font-size:22px;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.agent-kpis small{display:block;font-size:11.5px;color:var(--muted);line-height:1.3}
+
+/* ---------- v3: ROI calculator ---------- */
+.roi{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:stretch}
+.roi-in{display:flex;flex-direction:column;gap:20px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-xl);padding:24px}
+.rng{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:baseline}
+.rng span{font-size:14.5px;color:var(--text)}
+.rng b{font-family:var(--f-mono);font-size:14px;color:var(--primary-ink);font-variant-numeric:tabular-nums}
+.rng input{grid-column:1/-1;width:100%;accent-color:var(--primary);height:22px;margin:0}
+.roi-out{background:linear-gradient(160deg,#0E1630,#1B2A6B);color:#E7ECFF;border-radius:var(--r-xl);padding:26px;display:flex;flex-direction:column;gap:18px}
+.roi-out small{display:block;font-size:12.5px;color:#AEB9E6}
+.roi-out .big b{display:block;font-family:var(--f-display);font-size:clamp(36px,4.6vw,54px);letter-spacing:-.03em;line-height:1.05;color:#fff;margin-top:4px}
+.roi-out .big span{color:#C8D1F5;font-size:15px}
+.roi-out .row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.roi-out .row3>div{background:rgba(255,255,255,.07);border-radius:12px;padding:12px}
+.roi-out .row3 b{display:block;font-size:17px;color:#fff;margin-top:3px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.roi-out .row3 b.pos{color:#5BE3B5}.roi-out .row3 b.neg{color:#FF9AA0}
+.roi-bar{display:flex;height:10px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.roi-bar i{display:block;height:100%;transition:width .3s}
+#r-bar-plan{background:#8EA0FF}#r-bar-net{background:#5BE3B5}
+.roi-out .note{font-size:12.5px;color:#9FAAD6;margin:0}
+.roi-out .btn.primary{align-self:flex-start;background:#fff;border-color:#fff;color:#16205A}
+.roi-out .btn.primary:hover{background:#E7ECFF}
+.vs{margin-top:22px;border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;background:var(--surface)}
+.vs>div{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1.2fr);gap:0;border-top:1px solid var(--line)}
+.vs>div:first-child{border-top:0;background:var(--surface-2)}
+.vs>div>*{padding:13px 16px;margin:0;font-size:14.5px}
+.vs>div>span{color:var(--muted);font-weight:600}
+.vs>div>p{color:var(--muted)}
+.vs>div>.ai{color:var(--ink);background:color-mix(in srgb,var(--primary-soft) 55%,transparent);font-weight:500}
+.vs-h b{font-size:14px;color:var(--ink)}
+.vs-h b.ai{color:var(--primary-ink)}
+
+/* ---------- v3: FAQ, gallery, floating WhatsApp ---------- */
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:0 18px}
+.faq summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:600;color:var(--ink);font-size:16px;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-mono);color:var(--primary);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 16px;color:var(--muted);font-size:15px}
+.products.collapsed .pcard.more{display:none}
+.more-wrap{display:flex;justify-content:center;margin-top:24px}
+.wa-float{position:fixed;z-index:60;inset-inline-end:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 18px 0 14px;border-radius:99px;background:#25D366;color:#073B22;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(7,59,34,.5)}
+.wa-float svg{width:22px;height:22px}
+.wa-float:hover{background:#1FBE5A}
+@media (max-width:1100px){.hero-ai{grid-template-columns:1fr}.agent-stage{max-width:760px}.roi{grid-template-columns:1fr}}
+@media (max-width:820px){.faq{grid-template-columns:1fr}.vs>div{grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1fr)}.vs>div>*{padding:11px 10px;font-size:13.5px}}
+@media (max-width:640px){
+  .agent-stage{flex-direction:column;align-items:center}
+  .agent-side{margin-top:0;width:100%}
+  .htrace{min-height:0}
+  .roi-out .row3{grid-template-columns:1fr}
+  .roi-in,.roi-out{padding:18px}
+  .wa-float span{display:none}.wa-float{width:54px;padding:0;justify-content:center}
+  .hero .ctas .btn.lg{flex:1 1 auto}
+}
+
 </style>
 <a class="sr" href="#work">Skip to products</a>
 <header class="nav">
@@ -612,7 +711,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
       <b>hudera</b><span>AI</span>
     </a>
     <nav class="nav-links" aria-label="Main">
-      <a href="#systems">Platforms</a><a href="#services">Services</a><a href="#work">Products</a><a href="#process">How we work</a><a class="keep" href="#contact">Contact</a>
+      <a href="#systems">Platforms</a><a href="#value">Value</a><a href="#work">Products</a><a href="#process">How we work</a><a href="#faq">FAQ</a><a class="keep" href="#contact">Contact</a>
     </nav>
     <button class="lang-btn no-l10n" id="lang" type="button"></button>
     <button class="theme-btn" id="theme" type="button" aria-label="Switch theme"></button>
@@ -621,17 +720,22 @@ html[lang="ar"] .phead h1{line-height:1.2}
 </header>
 
 <main id="home">
-  <section class="container hero" id="top">
+  <section class="container hero hero-ai" id="top">
     <div>
       <span class="eyebrow">AI employees · SaaS platforms · WhatsApp</span>
-      <h1>We build the software and <span class="hl">AI automations</span> that run your business.</h1>
-      <p class="lead">HUDERA AI designs and delivers WhatsApp assistants, business dashboards, workflow automations and custom SaaS products for companies in Saudi Arabia and the Gulf. Every project starts from your real process, and you click through a working demo before anything goes live.</p>
-      <div class="ctas"><a class="btn primary" href="#s-workforce">Meet the AI employees</a><a class="btn" href="#s-contractor-os">Contractor OS</a><a class="btn" href="#contact">Book a discovery call</a></div>
+      <h1 class="no-l10n" id="hero-h1"></h1>
+      <p class="lead">HUDERA AI builds AI employees for HR, collections, sales and site operations. They answer on WhatsApp in Arabic and English, work on your company's own data, follow your rules and ask a person before anything sensitive. Every decision is traced.</p>
+      <div class="ctas"><a class="btn primary lg" href="#s-workforce">Try the AI HR officer</a><a class="btn lg" href="#s-contractor-os">See Contractor OS</a></div>
       <div class="proof"><span id="p1"></span><span id="p2"></span><span id="p3"></span></div>
     </div>
-    <div class="hero-stage" aria-label="Live example: a WhatsApp conversation updating the team inbox">
-      <div class="browser"><div class="browser-bar"><div class="dots"><i></i><i></i><i></i></div><div class="url">inbox.lumen-interiors.demo</div><div class="sp"></div></div><div id="hero-panel"></div></div>
+    <div class="agent-stage" aria-label="Live example: an AI HR officer handling a leave request on WhatsApp">
       <div id="hero-phone"></div>
+      <div class="agent-side">
+        <div class="agent-card"><div class="agent-id"><span class="agent-av">ن</span><div><b>Noura · AI HR officer</b><small>Rawabi Facilities (sample company)</small></div><span class="live"><i></i>Live</span></div>
+          <div class="trace-h">How Noura decided</div><ol class="htrace" id="hero-trace"></ol></div>
+        <div class="appr-card" id="hero-appr" hidden></div>
+        <div class="agent-kpis"><div><b id="hk-tasks">1,093</b><small>tasks this month</small></div><div><b id="hk-auto">94%</b><small>without a person</small></div><div><b id="hk-hours">130</b><small>hours saved</small></div></div>
+      </div>
     </div>
   </section>
 
@@ -645,6 +749,34 @@ html[lang="ar"] .phead h1{line-height:1.2}
     <div class="sec-head" style="margin-top:44px"><div><span class="eyebrow">Apps on the same stack</span><h2>Focused systems for one workflow</h2><p>Smaller complete products built the same way: database, roles, workflows and reports — each one usable on its own or as a module next to the platforms.</p></div></div>
     <div class="systems" id="systems-grid"></div>
   </section>
+
+  <section class="band" id="value"><div class="container sec">
+    <div class="sec-head"><div><span class="eyebrow">The business case</span><h2>What an AI employee is worth to you</h2><p>Move the sliders to match your team. The estimate uses your own numbers; plan prices are the sample prices shown in the platform demo.</p></div></div>
+    <div class="roi">
+      <div class="roi-in">
+        <label class="rng"><span>Requests per working day</span><b id="r-req-v"></b><input type="range" id="r-req" min="10" max="400" step="10" value="80"></label>
+        <label class="rng"><span>Minutes a person spends on each</span><b id="r-min-v"></b><input type="range" id="r-min" min="2" max="30" step="1" value="7"></label>
+        <label class="rng"><span>Share the AI finishes without a person</span><b id="r-share-v"></b><input type="range" id="r-share" min="40" max="95" step="5" value="80"></label>
+        <label class="rng"><span>Monthly cost of one employee (salary, housing, GOSI, iqama)</span><b id="r-cost-v"></b><input type="range" id="r-cost" min="4000" max="30000" step="500" value="12000"></label>
+      </div>
+      <div class="roi-out">
+        <div class="big"><small>Work taken off your team every month</small><b id="r-hours"></b><span id="r-fte"></span></div>
+        <div class="row3"><div><small>Value of that time</small><b id="r-value"></b></div><div><small>Suggested plan</small><b id="r-plan"></b></div><div><small>Net per month</small><b id="r-net"></b></div></div>
+        <div class="roi-bar"><i id="r-bar-plan"></i><i id="r-bar-net"></i></div>
+        <p class="note">Estimate only. Working days: 22 a month; one full-time employee: 160 hours a month.</p>
+        <a class="btn primary" href="#contact" data-interest="workforce">Get this estimate for your company</a>
+      </div>
+    </div>
+    <div class="vs">
+      <div class="vs-h"><span></span><b>Traditional hire</b><b class="ai">AI employee on HUDERA</b></div>
+      <div><span>Availability</span><p>Office hours, 5–6 days</p><p class="ai">24/7, including weekends and holidays</p></div>
+      <div><span>Response time</span><p>Minutes to hours</p><p class="ai">Seconds</p></div>
+      <div><span>Ready to work</span><p>1–3 months to hire and train</p><p class="ai">Days: upload your policies, set the rules</p></div>
+      <div><span>Busy season</span><p>Overtime or another hire</p><p class="ai">Same plan, billed by tasks done</p></div>
+      <div><span>Sensitive decisions</span><p>Made by the employee</p><p class="ai">Still made by a person, through an approval queue</p></div>
+      <div><span>Audit trail</span><p>Whatever was written down</p><p class="ai">Every message, rule and action logged</p></div>
+    </div>
+  </div></section>
 
   <section class="container sec" id="services">
     <div class="sec-head"><div><span class="eyebrow">What we build</span><h2>Nine ways we take manual work off your team</h2><p>From a single WhatsApp assistant to a full multi-user platform. Each service links to a product you can try on this page.</p></div></div>
@@ -673,6 +805,19 @@ html[lang="ar"] .phead h1{line-height:1.2}
     </div>
   </section>
 
+  <section class="container sec" id="faq">
+    <div class="sec-head"><div><span class="eyebrow">Questions</span><h2>Before you hire an AI employee</h2></div></div>
+    <div class="faq">
+      <details open><summary>Does it replace my team?</summary><p>It takes the repetitive requests (leave balances, letters, payment reminders, first replies to leads, site updates) and prepares the rest for a person. Some companies use it to avoid a new hire; others free their existing staff for harder work. You decide.</p></details>
+      <details><summary>What if it doesn't know the answer?</summary><p>It hands the conversation to a person. Policy answers quote the paragraph and document they come from, and the AI never invents a rule, a number or a date.</p></details>
+      <details><summary>Which WhatsApp number does it use?</summary><p>Your company number on the official WhatsApp Business Platform (Cloud API). Proactive messages such as reminders use templates approved by Meta.</p></details>
+      <details><summary>Where is our data kept?</summary><p>In a database for your company only, with role-based access and an audit log. It can run in a Saudi cloud region if your policy requires it.</p></details>
+      <details><summary>Does it understand our Arabic?</summary><p>Saudi and Gulf, Egyptian and Modern Standard Arabic, plus English, including dates like «بكرة» or «الأحد الجاي» and amounts written in words or numbers.</p></details>
+      <details><summary>How long until it is live?</summary><p>A clickable prototype on your workflow in 1–2 weeks, then a pilot with one team in 2–6 weeks.</p></details>
+      <details><summary>How is it priced?</summary><p>A monthly plan by number of AI employees and tasks done, plus a one-time setup quoted after the discovery call.</p></details>
+    </div>
+  </section>
+
   <section class="container" id="contact" style="padding-bottom:24px">
     <div class="contact">
       <div><span class="eyebrow" style="color:#9FB0FF">Start a project</span><h2 style="margin-top:12px">Tell us what takes your team the most time.</h2>
@@ -695,6 +840,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
     <p>Product demos on this page run in your browser on sample data; company names, people and figures inside them are fictional. WhatsApp is a trademark of Meta Platforms, Inc. Chat screens are HUDERA demo interfaces for solutions built on the WhatsApp Business Platform.</p>
   </footer>
 </main>
+<a class="wa-float" id="wa-float" aria-label="Chat on WhatsApp"></a>
 
 <div id="pview" hidden></div>
 
@@ -1655,7 +1801,7 @@ const AR_DICT = {
 "Updated openings drawing rev C": "مخطط الفتحات المحدّث مراجعة C",
 "Use the pipeline board to move inquiries between stages, or filter the list by country and stage.": "استخدم لوحة المراحل لنقل الاستفسارات بين المراحل، أو صفِّ القائمة حسب الدولة والمرحلة.",
 "Valid": "ساري",
-"Value": "القيمة",
+"Value": "العائد",
 "Variance": "الانحراف",
 "Verified": "موثّق",
 "Visit booked": "تم حجز الزيارة",
@@ -1775,7 +1921,7 @@ const AR_DICT = {
 "that run your business.": "التي تدير أعمالك.",
 "HUDERA AI designs and delivers WhatsApp assistants, business dashboards, workflow automations and custom SaaS products for companies in Saudi Arabia and the Gulf. Every project starts from your real process, and you click through a working demo before anything goes live.": "تصمم HUDERA AI وتنفّذ مساعدات واتساب ذكية ولوحات مؤشرات للأعمال وأتمتة لسير العمل ومنتجات SaaS مخصصة للشركات في السعودية والخليج. كل مشروع يبدأ من طريقة عملك الفعلية، وتجرّب نموذجاً تفاعلياً يعمل قبل أي إطلاق.",
 "Explore the products": "استعرض المنتجات",
-"Book a discovery call": "احجز مكالمة تعريفية",
+"Book a discovery call": "احجز مكالمة تعارف",
 "Arabic & English": "عربي وإنجليزي",
 "Works with WhatsApp, Excel & your systems": "يعمل مع واتساب وExcel وأنظمتك",
 "Human approval built in": "اعتماد بشري مدمج",
@@ -2261,6 +2407,73 @@ const AR_DICT = {
 "View on GitHub": "شاهد الكود على GitHub",
 "GitHub: hudera-ai": "GitHub: hudera-ai",
 "Facebook: huderaai": "فيسبوك:‏ huderaai",
+"Platforms": "المنصات",
+"FAQ": "أسئلة شائعة",
+"AI employees · SaaS platforms · WhatsApp": "موظفون رقميون · منصات SaaS · واتساب",
+"HUDERA AI builds AI employees for HR, collections, sales and site operations. They answer on WhatsApp in Arabic and English, work on your company's own data, follow your rules and ask a person before anything sensitive. Every decision is traced.": "HUDERA AI تبني موظفين بالذكاء الاصطناعي للموارد البشرية والتحصيل والمبيعات وتشغيل المواقع. يردّون على واتساب بالعربي والإنجليزي، ويشتغلون على بيانات شركتك، ويلتزمون بقواعدك، ويرجعون لشخص قبل أي قرار حساس. وكل قرار له سجل واضح.",
+"Try the AI HR officer": "جرّب موظف الموارد البشرية الذكي",
+"See Contractor OS": "شوف Contractor OS",
+"Live example: an AI HR officer handling a leave request on WhatsApp": "مثال حي: موظفة موارد بشرية ذكية تتعامل مع طلب إجازة على واتساب",
+"Noura · AI HR officer": "نورة · موظفة موارد بشرية ذكية",
+"Rawabi Facilities (sample company)": "روابي للمرافق (شركة تجريبية)",
+"Live": "مباشر",
+"How Noura decided": "كيف قررت نورة",
+"tasks this month": "مهمة هذا الشهر",
+"without a person": "بدون تدخل بشري",
+"hours saved": "ساعة تم توفيرها",
+"A person approves anything sensitive": "أي قرار حساس يعتمده شخص",
+"Every decision traced": "كل قرار له سجل",
+"The business case": "الجدوى المالية",
+"What an AI employee is worth to you": "كم يساوي لك موظف الذكاء الاصطناعي",
+"Move the sliders to match your team. The estimate uses your own numbers; plan prices are the sample prices shown in the platform demo.": "حرّك المؤشرات حسب فريقك. التقدير مبني على أرقامك، وأسعار الباقات هي الأسعار التجريبية الظاهرة في ديمو المنصّة.",
+"Requests per working day": "عدد الطلبات في يوم العمل",
+"Minutes a person spends on each": "الدقائق التي يقضيها الموظف على كل طلب",
+"Share the AI finishes without a person": "نسبة ما ينهيه الذكاء الاصطناعي بدون موظف",
+"Monthly cost of one employee (salary, housing, GOSI, iqama)": "التكلفة الشهرية لموظف واحد (راتب، سكن، تأمينات، إقامة)",
+"Work taken off your team every month": "الشغل اللي يتشال عن فريقك كل شهر",
+"Value of that time": "قيمة هذا الوقت",
+"Suggested plan": "الباقة المقترحة",
+"Net per month": "الصافي شهرياً",
+"Estimate only. Working days: 22 a month; one full-time employee: 160 hours a month.": "تقدير فقط. أيام العمل: 22 يوماً في الشهر، والموظف بدوام كامل: 160 ساعة في الشهر.",
+"Get this estimate for your company": "احصل على هذا التقدير لشركتك",
+"Traditional hire": "توظيف تقليدي",
+"AI employee on HUDERA": "موظف ذكاء اصطناعي على HUDERA",
+"Availability": "التوفر",
+"Office hours, 5–6 days": "ساعات الدوام، 5–6 أيام",
+"24/7, including weekends and holidays": "24/7 حتى في الإجازات والعطل",
+"Response time": "سرعة الرد",
+"Minutes to hours": "من دقائق إلى ساعات",
+"Seconds": "ثوانٍ",
+"Ready to work": "جاهز للعمل خلال",
+"1–3 months to hire and train": "1–3 شهور توظيف وتدريب",
+"Days: upload your policies, set the rules": "أيام: ارفع سياساتك وحدد القواعد",
+"Busy season": "موسم الضغط",
+"Overtime or another hire": "ساعات إضافية أو توظيف جديد",
+"Same plan, billed by tasks done": "نفس الباقة، والفوترة حسب المهام المنجزة",
+"Sensitive decisions": "القرارات الحساسة",
+"Made by the employee": "يتخذها الموظف",
+"Still made by a person, through an approval queue": "يتخذها شخص دائماً عبر قائمة موافقات",
+"Audit trail": "سجل التدقيق",
+"Whatever was written down": "اللي اتكتب بس",
+"Every message, rule and action logged": "كل رسالة وقاعدة وإجراء مسجّل",
+"Questions": "أسئلة",
+"Before you hire an AI employee": "قبل ما توظّف موظف ذكاء اصطناعي",
+"Does it replace my team?": "هل يستبدل فريقي؟",
+"It takes the repetitive requests (leave balances, letters, payment reminders, first replies to leads, site updates) and prepares the rest for a person. Some companies use it to avoid a new hire; others free their existing staff for harder work. You decide.": "يتولى الطلبات المتكررة (أرصدة الإجازات، الخطابات، تذكيرات السداد، أول رد على العملاء المحتملين، تحديثات المواقع) ويجهّز الباقي لشخص. بعض الشركات تستخدمه بدل توظيف جديد، وغيرها تفرّغ موظفيها لشغل أهم. القرار لك.",
+"What if it doesn't know the answer?": "لو ما يعرف الإجابة؟",
+"It hands the conversation to a person. Policy answers quote the paragraph and document they come from, and the AI never invents a rule, a number or a date.": "يحوّل المحادثة لشخص. إجابات السياسات تذكر الفقرة والمستند اللي جاية منه، والذكاء الاصطناعي لا يخترع قاعدة أو رقماً أو تاريخاً.",
+"Which WhatsApp number does it use?": "على أي رقم واتساب يشتغل؟",
+"Your company number on the official WhatsApp Business Platform (Cloud API). Proactive messages such as reminders use templates approved by Meta.": "رقم شركتك على منصة واتساب للأعمال الرسمية (Cloud API). الرسائل المبادِرة مثل التذكيرات تستخدم قوالب معتمدة من Meta.",
+"Where is our data kept?": "وين تُحفظ بياناتنا؟",
+"In a database for your company only, with role-based access and an audit log. It can run in a Saudi cloud region if your policy requires it.": "في قاعدة بيانات خاصة بشركتك، مع صلاحيات حسب الدور وسجل تدقيق. ويمكن تشغيله في منطقة سحابية داخل السعودية إذا تطلبت سياستكم ذلك.",
+"Does it understand our Arabic?": "هل يفهم لهجتنا؟",
+"Saudi and Gulf, Egyptian and Modern Standard Arabic, plus English, including dates like «بكرة» or «الأحد الجاي» and amounts written in words or numbers.": "السعودية والخليجية والمصرية والفصحى، والإنجليزية، بما في ذلك تواريخ مثل «بكرة» أو «الأحد الجاي» والمبالغ المكتوبة بالحروف أو الأرقام.",
+"How long until it is live?": "متى يصير جاهزاً؟",
+"A clickable prototype on your workflow in 1–2 weeks, then a pilot with one team in 2–6 weeks.": "نموذج تفاعلي على سير عملكم خلال 1–2 أسبوع، ثم تجربة مع فريق واحد خلال 2–6 أسابيع.",
+"How is it priced?": "كيف التسعير؟",
+"A monthly plan by number of AI employees and tasks done, plus a one-time setup quoted after the discovery call.": "باقة شهرية حسب عدد موظفي الذكاء الاصطناعي والمهام المنجزة، بالإضافة لرسوم إعداد لمرة واحدة تُحدد بعد مكالمة التعارف.",
+"WhatsApp": "واتساب",
+"Show all # demos": "اعرض كل الـ # ديمو",
 "Systems": "الأنظمة",
 "Try a complete system": "جرّب نظامًا كاملًا",
 "Complete systems — try them yourself": "أنظمة كاملة — جرّبها بنفسك",
@@ -2388,8 +2601,6 @@ const AR_DICT = {
 "Attendify dashboard": "لوحة Attendify",
 "Open Inbox, paste a WhatsApp message like “carpenters 12, steel fixers 8, slab pour 35 m3 level 2, loader 1 breakdown” (Arabic works too) and watch it become report lines.": "افتح الرسائل الواردة، الصق رسالة واتساب مثل «12 نجار، 8 حداد، تم صب 35 م3 سقف الدور الثاني، لودر 1 عطلان» وشاهدها تتحول إلى سطور تقرير.",
 "Create a new inquiry with details like “coring 30 holes Ø150 and wall cutting 18 m” (or the same in Arabic) — then click New quotation and see the priced lines drafted for you.": "أنشئ استفسارًا جديدًا بتفاصيل مثل «كور 30 نقطة قطر 150 وقص جدار 18 م.ط» ثم اضغط عرض سعر جديد وشاهد البنود المسعّرة تُقترح لك.",
-"Platforms": "المنصات",
-"AI employees · SaaS platforms · WhatsApp": "موظفون رقميون · منصات SaaS · واتساب",
 "Meet the AI employees": "تعرّف على الموظفين الرقميين",
 "Contractor OS": "Contractor OS",
 "Our platforms — try them yourself": "منصاتنا — جرّبها بنفسك",
@@ -3643,24 +3854,84 @@ function renderHome() {
   if (CONTACT.wa) cl.insertAdjacentHTML("beforeend", `<a class="btn primary" style="align-self:flex-start;margin-top:8px" ${waAttr("Hi HUDERA AI, I'd like to book a discovery call.", "مرحباً HUDERA AI، أرغب في حجز مكالمة تعريفية.")}>${ic("chat")}Chat with us on WhatsApp</a>`);
 }
 
-/* hero: live phone + live lead panel fed by the same demo state */
-let heroDemo;
+/* hero: an AI employee at work — WhatsApp on one side, its decision trace and the human approval on the other */
+const HERO_H1 = () => tt('Hire <span class="hl">AI employees</span> that work around the clock.', 'وظّف <span class="hl">موظفين بالذكاء الاصطناعي</span> يشتغلوا على مدار الساعة.');
+function paintHeroH1() { const h = $("#hero-h1"); if (h) h.innerHTML = HERO_H1(); }
+const HERO_SCRIPT = [
+  { msg: "السلام عليكم، كم رصيد إجازتي؟", reply: "وعليكم السلام أحمد 👋\nرصيد إجازتك السنوية: *14 يوم*.\nتبغى تقدم طلب إجازة؟",
+    steps: [["user", "Identified the sender", "عرفت المرسل", "Ahmed Al-Otaibi · RA-014 · registered mobile", "أحمد العتيبي · RA-014 · من رقمه المسجّل"], ["search", "Understood the request", "فهمت الطلب", "leave balance · 96%", "رصيد إجازات · ثقة 96%"], ["file", "Read the HR record", "قرأت ملف الموظف", "hr.leave_balance → 14 days", "hr.leave_balance ← 14 يوم"]] },
+  { msg: "ابغى اجازة من 3 الى 5 نوفمبر", reply: "تمام، هذا ملخص الطلب:\n• إجازة سنوية من الثلاثاء 3 إلى الخميس 5 نوفمبر\n• 3 أيام عمل · رصيدك بعدها 11\nأرفعه؟",
+    steps: [["layers", "Extracted the dates", "استخرجت التواريخ", "3–5 Nov · 3 working days (Fri/Sat excluded)", "3–5 نوفمبر · 3 أيام عمل (بدون الجمعة والسبت)"], ["shield", "Applied the leave rule", "طبّقت قاعدة الإجازات", "more than 1 day → manager approval", "أكثر من يوم → موافقة المدير"]] },
+  { msg: "نعم", reply: "رفعت طلبك لمديرتك هيا العتيبي للموافقة ✅\nبأبلغك هنا أول ما يتم الرد.",
+    steps: [["file", "Created the leave request", "أنشأت طلب الإجازة", "hr.create_leave_request → #2417", "hr.create_leave_request ← رقم 2417"], ["hand", "Waiting for a person", "بانتظار قرار بشري", "HR manager · approval queue", "مديرة الموارد البشرية · قائمة الموافقات"]], approval: true },
+];
 function renderHero() {
-  heroDemo = mountConnect($("#hero-phone"), { phoneOnly: true, compact: true, controls: false, autoplay: true, lang: "ar", speed: 1 });
-  const panel = $("#hero-panel");
-  let doneAt = 0;
-  const paint = () => {
-    const S = heroDemo.state, c = S.convs[0], lead = S.leads.find(l => l.id === "LM-2417");
-    panel.innerHTML = `<div class="app" style="height:auto;grid-template-columns:minmax(0,1fr)"><div class="app-main"><div class="app-top"><h4>Inbox · Lumen Interiors</h4><span class="sp"></span>${chip(c.status, STATUS_C[c.status] || "grey")}</div>
-      <div class="app-body" style="gap:12px;padding:14px">
-        <div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="kpi"><small>Conversations today</small><b>${38 + (c.msgs.length ? 1 : 0)}</b></div><div class="kpi"><small>Leads captured</small><b>${9 + (lead ? 1 : 0)}</b></div><div class="kpi"><small>Visits booked</small><b>${4 + (c.status === "Booked" ? 1 : 0)}</b></div></div>
-        <div style="display:grid;gap:12px">
-          <div class="card"><h5>Live lead ${lead ? `<span class="mono sub">LM-2417</span>` : ""}</h5><dl class="kv" style="margin-top:10px;font-size:12.5px"><dt>Customer</dt><dd>Faisal Al-Harbi</dd><dt>Service</dt><dd>Kitchen</dd><dt>Area</dt><dd>${esc(S.lead?.area || "—")}</dd><dt>City</dt><dd>${esc(S.lead?.city || "—")}</dd><dt>Estimate</dt><dd>${lead ? "from SAR 18,000" : "—"}</dd><dt>Stage</dt><dd>${lead ? chip(lead.stage, STAGE_C[lead.stage]) : "—"}</dd></dl></div>
-          <div class="card"><h5>Automation activity</h5><div class="log" style="margin-top:6px">${S.log.slice(0, 4).map(l => `<div class="it"><span style="color:${l.color}">${ic(l.icon)}</span><span>${l.html}</span><time>${l.t}</time></div>`).join("") || `<div class="empty" style="padding:12px 0">Waiting for a message…</div>`}</div></div>
-        </div></div></div></div>`;
-    if (c.status === "Booked") { if (!doneAt) doneAt = Date.now(); else if (Date.now() - doneAt > 7000) { doneAt = 0; heroDemo.restart(); } }
+  paintHeroH1();
+  const host = $("#hero-phone"); if (!host) return;
+  host.innerHTML = phone({ rtl: true, color: "#7C5CFF", mono: "ن", name: "نورة", sub: "الموارد البشرية", day: "اليوم", placeholder: "مراسلة" });
+  const chatEl = $("[data-chat]", host), traceEl = $("#hero-trace"), appr = $("#hero-appr");
+  const head = chatEl.innerHTML; let eng = null, run = 0;
+  const addStep = ([icon, en, ar, den, dar], cls = "") => { const li = document.createElement("li"); li.className = cls; li.innerHTML = `<span class="ti">${ic(icon)}</span><div><b>${esc(tt(en, ar))}</b><small>${esc(tt(den, dar))}</small></div>`; traceEl.appendChild(li); while (traceEl.children.length > 5) traceEl.firstElementChild.remove(); };
+  const bump = (id, by, suffix = "") => { const el = $("#" + id); if (!el) return; const n = +el.textContent.replace(/[^\d]/g, "") + by; el.textContent = n.toLocaleString("en-US") + suffix; };
+  async function play() {
+    const my = ++run; eng && eng.stop(); chatEl.innerHTML = head; traceEl.innerHTML = ""; appr.hidden = true; appr.className = "appr-card";
+    eng = chatEngine(chatEl, { speed: 1 });
+    const alive = () => my === run && eng.alive;
+    for (const s of HERO_SCRIPT) {
+      await eng.wait(900); if (!alive()) return;
+      eng.bubble({ side: "out", text: s.msg });
+      addStep(["inbox", "Message received", "وصلت رسالة", "WhatsApp · Arabic", "واتساب · عربي"]);
+      for (const st of s.steps) { await eng.wait(650); if (!alive()) return; addStep(st, st[0] === "hand" ? "wait" : st[0] === "shield" ? "rule" : ""); }
+      await eng.say({ side: "in", text: s.reply, delay: 700 }); if (!alive()) return;
+      addStep(["send", "Replied", "ردّت", "in 2 seconds", "خلال ثانيتين"], "ok"); bump("hk-tasks", 1);
+      if (s.approval) {
+        appr.hidden = false; appr.innerHTML = `<span class="ti">${ic("hand")}</span><div><b>${esc(tt("Annual leave · Ahmed Al-Otaibi · 3 days", "إجازة سنوية · أحمد العتيبي · 3 أيام"))}</b><small>${esc(tt("Waiting for the HR manager", "بانتظار مديرة الموارد البشرية"))}</small></div><span class="btns"><i>${esc(tt("Approve", "اعتماد"))}</i><i>${esc(tt("Reject", "رفض"))}</i></span>`;
+        await eng.wait(2600); if (!alive()) return;
+        appr.classList.add("done"); appr.innerHTML = `<span class="ti">${ic("check")}</span><div><b>${esc(tt("Approved by Haya Al-Otaibi, HR manager", "اعتمدته هيا العتيبي، مديرة الموارد البشرية"))}</b><small>${esc(tt("balance updated · employee notified", "تم تحديث الرصيد · وتم إبلاغ الموظف"))}</small></div>`;
+        await eng.say({ side: "in", text: "أبشرك ✅ تم اعتماد إجازتك من 3 إلى 5 نوفمبر. إجازة سعيدة!", delay: 600 }); if (!alive()) return;
+        addStep(["check", "Closed the loop", "أغلقت الطلب", "employee notified · 12 min saved", "تم إبلاغ الموظف · وفّرت 12 دقيقة"], "ok");
+      }
+    }
+    await eng.wait(6000); if (my === run) play();
+  }
+  const io = "IntersectionObserver" in window ? new IntersectionObserver(es => { if (es[0].isIntersecting && !run) play(); }) : null;
+  io ? io.observe(host) : play();
+  heroReplay = play;
+}
+let heroReplay = null;
+
+/* ROI calculator */
+function initRoi() {
+  const g = id => $("#" + id); if (!g("r-req")) return;
+  const PLANS = [["Starter", 1490, 1000, 1.2], ["Growth", 3900, 4000, 0.9], ["Scale", 9500, 15000, 0.6]];
+  const calc = () => {
+    const req = +g("r-req").value, min = +g("r-min").value, share = +g("r-share").value / 100, cost = +g("r-cost").value;
+    g("r-req-v").textContent = fmt(req); g("r-min-v").textContent = tt(`${min} min`, `${min} دقيقة`); g("r-share-v").textContent = `${Math.round(share * 100)}%`; g("r-cost-v").textContent = sar(cost);
+    const tasks = req * 22, hours = tasks * min * share / 60, fte = hours / 160, value = fte * cost;
+    const price = p => p[1] + Math.max(0, tasks - p[2]) * p[3];
+    const plan = PLANS.reduce((best, p) => (price(p) < price(best) ? p : best), PLANS[0]); const pc = price(plan), net = value - pc;
+    g("r-hours").textContent = tt(`${fmt(Math.round(hours))} hours`, `${fmt(Math.round(hours))} ساعة`);
+    g("r-fte").textContent = tt(`≈ ${fte.toFixed(1)} full-time employees`, `≈ ${fte.toFixed(1)} موظف بدوام كامل`);
+    g("r-value").textContent = sar(value); g("r-plan").textContent = `${plan[0]} · ${sar(pc)}`;
+    g("r-net").textContent = (net < 0 ? "−" : "+") + sar(Math.abs(net)).replace("SAR ", tt("SAR ", "ر.س ")); g("r-net").className = net < 0 ? "neg" : "pos";
+    const tot = Math.max(value, pc) || 1; g("r-bar-plan").style.width = `${(100 * Math.min(pc, value) / tot).toFixed(1)}%`; g("r-bar-net").style.width = `${(100 * Math.max(0, net) / tot).toFixed(1)}%`;
+    g("r-value").textContent = g("r-value").textContent.replace("SAR ", tt("SAR ", "ر.س "));
+    g("r-cost-v").textContent = g("r-cost-v").textContent.replace("SAR ", tt("SAR ", "ر.س "));
+    g("r-plan").textContent = g("r-plan").textContent.replace("SAR ", tt("SAR ", "ر.س "));
   };
-  paint(); setInterval(() => { if (!document.hidden && !$("#home").hidden) paint(); }, 700);
+  ["r-req", "r-min", "r-share", "r-cost"].forEach(id => g(id).addEventListener("input", calc));
+  calc(); roiCalc = calc;
+}
+let roiCalc = () => {};
+
+/* show the strongest demos first; the rest behind one button */
+function initMoreDemos() {
+  const cards = $$("#products .pcard"); const SHOW = 6; if (cards.length <= SHOW) return;
+  cards.slice(SHOW).forEach(c => c.classList.add("more"));
+  $("#products").classList.add("collapsed");
+  $("#products").insertAdjacentHTML("afterend", `<div class="more-wrap"><button class="btn" type="button" id="more-demos">${ic("grid")}<span>Show all ${cards.length} demos</span></button></div>`);
+  $("#more-demos").addEventListener("click", e => { $("#products").classList.remove("collapsed"); e.currentTarget.parentElement.remove(); fitPreviews(); });
+  $("#tabs").addEventListener("click", () => { $("#products").classList.remove("collapsed"); $(".more-wrap")?.remove(); });
 }
 
 /* ---------- product page ---------- */
@@ -3734,14 +4005,15 @@ function initContact() {
 /* ---------- boot ---------- */
 function onLangChange() {
   document.title = pageKey ? `${P(pageKey.slice(2)).name} · HUDERA AI` : tt("HUDERA AI Portfolio", "HUDERA AI | أعمالنا ومنتجاتنا");
-  briefBuild(); fitPreviews();
+  briefBuild(); fitPreviews(); paintHeroH1(); roiCalc(); if (heroReplay) { heroReplay(); }
 }
 document.addEventListener("DOMContentLoaded", () => {
   startL10n();
   $("#lang").addEventListener("click", () => setLang(LANG === "ar" ? "en" : "ar"));
   $$("[data-i]").forEach(x => x.insertAdjacentHTML("afterbegin", ic(x.dataset.i)));
-  [["p1", "Arabic & English"], ["p2", "Works with WhatsApp, Excel & your systems"], ["p3", "Human approval built in"]].forEach(([id, t]) => { $("#" + id).innerHTML = ic("check") + esc(t); });
-  initTheme(); renderHome(); renderSystems(); renderHero(); initContact();
+  [["p1", "Arabic & English"], ["p2", "A person approves anything sensitive"], ["p3", "Every decision traced"]].forEach(([id, t]) => { $("#" + id).innerHTML = ic("check") + esc(t); });
+  initTheme(); renderHome(); renderSystems(); renderHero(); initContact(); initRoi(); initMoreDemos();
+  const wf = $("#wa-float"); if (wf && CONTACT.wa) { wf.outerHTML = `<a class="wa-float" ${waAttr("Hi HUDERA AI, I'd like to talk about an AI employee for my company.", "مرحباً HUDERA AI، أرغب في التحدث عن موظف ذكاء اصطناعي لشركتي.")} aria-label="Chat on WhatsApp">${ic("chat")}<span>WhatsApp</span></a>`; }
   $("#products").addEventListener("click", e => { const o = e.target.closest("[data-open]"); if (o && e.isTrusted) location.hash = "p-" + o.dataset.open; });
   $("#tabs").addEventListener("click", e => { const b = e.target.closest("[data-cat]"); if (!b) return; $$("#tabs .tab").forEach(t => t.setAttribute("aria-pressed", t === b)); const k = b.dataset.cat; $$(".pcard").forEach(c => { c.hidden = !(k === "all" || c.dataset.pcat === k); }); fitPreviews(); });
   window.addEventListener("hashchange", route); window.addEventListener("resize", fitPreviews);
@@ -3750,5 +4022,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
-
-</body></html>
