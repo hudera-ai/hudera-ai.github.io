@@ -178,7 +178,7 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 <div id="app"><div class="gate"><div class="card"><p class="muted">Loading…</p></div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
-const HUDERA_CONFIG = {"supabaseUrl": "", "supabaseAnonKey": ""};
+const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co", "supabaseAnonKey": "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW"};
 /* HUDERA AI · admin dashboard. Every number comes from the admin_* database functions,
    which check the signed-in person's staff role on the server. */
 "use strict";
@@ -786,7 +786,7 @@ async function boot() {
   const th = store.get("hudera-admin-theme"); if (th) document.documentElement.setAttribute("data-theme", th);
   document.documentElement.lang = LANG; document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
   if (!cfg.supabaseUrl || !cfg.supabaseAnonKey) { gate(`<h1>HUDERA AI · Admin</h1><p class="muted">The backend is not connected yet. Add the Supabase project URL and anon key to <code>src/config.json</code> and rebuild (see backend/README.md).</p>`); return; }
-  sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
+  sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { global: { fetch: (u, o = {}) => { const h = new Headers(o.headers || {}); const k = cfg.supabaseAnonKey; if (k && !k.includes('.') && h.get('Authorization') === 'Bearer ' + k) h.delete('Authorization'); return fetch(u, { ...o, headers: h }); } }, auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
   const hadCode = new URLSearchParams(location.search).has("code");
   const { data } = await sb.auth.getSession();
   if (hadCode) history.replaceState(null, "", location.pathname + (sessionStorage.getItem("hudera-admin-return") || "#/overview"));
