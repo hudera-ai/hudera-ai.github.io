@@ -916,7 +916,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
 <div id="pview" hidden></div>
 
 <script>
-const HUDERA_CONFIG = {"supabaseUrl": "", "supabaseAnonKey": ""};
+const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co", "supabaseAnonKey": "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW"};
 /* ---------- core helpers ---------- */
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -4483,7 +4483,7 @@ const HP = (() => {
     const lead = $("#contact-lead"); if (lead) lead.textContent = "Send us a request and follow its status from your account. We usually start with one process and a working demo built on it.";
     const host = $("#req-host"); if (host) { $("#brief-form").hidden = true; host.hidden = false; host.innerHTML = `<div class="req-signin"><p class="muted">Loading…</p></div>`; }
     try { await loadSdk(); } catch (e) { $("#brief-form").hidden = false; if (host) host.hidden = true; return; }
-    sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
+    sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { global: { fetch: (u, o = {}) => { const h = new Headers(o.headers || {}); const k = cfg.supabaseAnonKey; if (k && !k.includes('.') && h.get('Authorization') === 'Bearer ' + k) h.delete('Authorization'); return fetch(u, { ...o, headers: h }); } }, auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
     const hadCode = new URLSearchParams(location.search).has("code");
     try { site = { ...site, ...(await rpc("site_config")) }; } catch (e) {}
     const { data } = await sb.auth.getSession(); session = data.session;
