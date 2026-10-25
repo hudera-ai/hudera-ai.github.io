@@ -837,6 +837,23 @@ body.chat-on .chat-fab{display:none}
 @media (max-width:640px){.chat-h small{display:none}}
 .chat-h b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-h small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chat-h{gap:8px}.chat-h .chat-ib{width:30px;height:30px}.chat-h .chat-lang button{padding:6px 8px;min-width:30px}
+/* video assistant */
+.chat-h .chat-ib.vid{color:#fff;background:linear-gradient(135deg,#3D5AFE,#22D3EE);border-color:transparent}
+.chat-video{position:absolute;inset:58px 0 0 0;z-index:5;display:flex;flex-direction:column;background:var(--bg,#0b1020);border-radius:0 0 18px 18px;overflow:hidden}
+.cv-stage{position:relative;flex:1;min-height:0;background:#000;display:grid;place-items:center}
+.cv-stage video{width:100%;height:100%;object-fit:cover;background:#000}
+.cv-status{position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;color:#fff;font-size:14px;background:radial-gradient(circle at 50% 40%,#1b2450,#05070f)}
+.cv-spin{width:34px;height:34px;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#22D3EE;animation:cvs 1s linear infinite}@keyframes cvs{to{transform:rotate(360deg)}}
+.cv-badge{position:absolute;top:10px;inset-inline-start:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11.5px;padding:3px 9px;border-radius:99px}
+.cv-timer{position:absolute;top:10px;inset-inline-end:10px;background:rgba(0,0,0,.55);color:#fff;font:600 12px ui-monospace,monospace;padding:3px 9px;border-radius:99px}
+.cv-timer:empty{display:none}
+.cv-cap{padding:10px 14px;font-size:13.5px;line-height:1.6;min-height:46px;max-height:84px;overflow:auto;border-top:1px solid var(--line,rgba(255,255,255,.08))}
+.cv-cap .muted{opacity:.7}
+.cv-ctl{display:flex;gap:8px;justify-content:center;padding:10px 12px 14px}
+.cv-b{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line,rgba(127,127,127,.3));background:var(--surface,transparent);color:inherit;border-radius:99px;padding:8px 14px;font:inherit;font-size:13px;cursor:pointer}
+.cv-b svg{width:16px;height:16px}.cv-b[aria-pressed=true]{background:#DC2626;color:#fff;border-color:#DC2626}
+.cv-b.end{background:#DC2626;color:#fff;border-color:#DC2626}
+@media (prefers-reduced-motion:reduce){.cv-spin{animation:none}}
 
 </style>
 <a class="sr" href="#work">Skip to products</a>
@@ -4593,6 +4610,7 @@ const HP = (() => {
   const SVG = {
     mic: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>`,
     spk: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>`,
+    vid: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3z"/></svg>`,
     cal: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>`,
   };
   let rec = null, recOn = false;
@@ -4676,6 +4694,79 @@ const HP = (() => {
     });
   }
 
+
+  /* ---- video assistant: a realistic AI avatar (LiveAvatar) with our own assistant as its brain ---- */
+  const AV_SDK = "https://cdn.jsdelivr.net/npm/@heygen/liveavatar-web-sdk@0.0.19/+esm";
+  const AV_ERR = { sign_in_required: ["Sign in with Google to talk to our video assistant.", "سجّل دخولك بجوجل عشان تكلّم مساعدنا بالفيديو."],
+    rate_limited: ["You've used today's video calls. Keep chatting here or book a call with the team.", "استخدمت مكالمات الفيديو المتاحة النهارده. كمّل كتابة هنا أو احجز مكالمة مع الفريق."],
+    daily_limit: ["Video calls are fully booked today. Keep chatting here or book a call with the team.", "مكالمات الفيديو خلصت النهارده. كمّل كتابة هنا أو احجز مكالمة مع الفريق."],
+    already_active: ["You already have a video call open.", "عندك مكالمة فيديو مفتوحة بالفعل."],
+    ai_budget_reached: ["The video assistant is paused right now. Book a call with our team instead.", "مساعد الفيديو متوقف دلوقتي. احجز مكالمة مع فريقنا بدلها."],
+    disabled: ["The video assistant isn't available right now.", "مساعد الفيديو مش متاح دلوقتي."] };
+  let av = null, avAvail = null;
+  const mmss = n => `${Math.floor(n / 60)}:${String(Math.max(0, n % 60)).padStart(2, "0")}`;
+  async function avatarCheck() {
+    if (avAvail === null) { try { avAvail = await rpc("avatar_available", {}); } catch (e) { avAvail = { enabled: false }; } }
+    const b = $("#chat-vid"); if (b) b.hidden = !avAvail?.enabled;
+  }
+  async function avatarFn(body) {
+    const r = await fetch(`${cfg.supabaseUrl}/functions/v1/avatar`, { method: "POST",
+      headers: { apikey: cfg.supabaseAnonKey, "content-type": "application/json", ...(session?.access_token ? { authorization: `Bearer ${session.access_token}` } : {}) }, body: JSON.stringify(body) });
+    const j = await r.json().catch(() => ({})); if (!r.ok) throw Object.assign(new Error(j.error || "failed"), { code: j.error }); return j;
+  }
+  function videoUI() {
+    $("#chat-video")?.remove();
+    $("#chat-panel").insertAdjacentHTML("beforeend", `<div class="chat-video" id="chat-video" role="region" aria-label="${ct("Video call with the AI assistant", "مكالمة فيديو مع المساعد الذكي")}">
+      <div class="cv-stage"><video id="cv-v" autoplay playsinline></video><div class="cv-status" id="cv-status"><i class="cv-spin"></i><span>${ct("Connecting…", "جاري الاتصال…")}</span></div>
+        <span class="cv-badge">${ct("AI assistant", "مساعد ذكي")}</span><span class="cv-timer" id="cv-timer"></span></div>
+      <div class="cv-cap" id="cv-cap" aria-live="polite" dir="auto"><span class="muted">${ct("Talk naturally — the assistant hears you and answers out loud.", "اتكلم براحتك، المساعد سامعك وبيرد عليك بصوت.")}</span></div>
+      <div class="cv-ctl"><button type="button" class="cv-b" id="cv-mute" aria-pressed="false">${SVG.mic}<span>${ct("Mute", "كتم")}</span></button>
+        <button type="button" class="cv-b" id="cv-book">${SVG.cal}<span>${ct("Book a call", "احجز مكالمة")}</span></button>
+        <button type="button" class="cv-b end" id="cv-end"><span>${ct("End", "إنهاء")}</span></button></div></div>`);
+    $("#cv-end").addEventListener("click", () => videoEnd("USER_CLOSED"));
+    $("#cv-book").addEventListener("click", () => { videoEnd("book"); chatBooking(); });
+    $("#cv-mute").addEventListener("click", async () => { const vc = av?.s?.voiceChat; if (!vc) return; try { if (vc.isMuted) await vc.unmute(); else await vc.mute(); } catch (e) {}
+      const m = !!vc.isMuted; $("#cv-mute").setAttribute("aria-pressed", String(m)); $("#cv-mute span").textContent = m ? ct("Unmute", "تشغيل المايك") : ct("Mute", "كتم"); });
+  }
+  function videoCap(role, text) { const c = $("#cv-cap"); if (c && text) c.innerHTML = `<b>${role === "user" ? ct("You", "أنت") : ct("Assistant", "المساعد")}:</b> ${esc(text)}`; }
+  async function videoStart() {
+    if (av) return;
+    if (!session) { chatBubble("sys", ct(AV_ERR.sign_in_required[0], AV_ERR.sign_in_required[1])); chatSignupCard(); return; }
+    try { speechSynthesis.cancel(); } catch (e) {} if (recOn) try { rec.stop(); } catch (e) {}
+    $("#chat-chips")?.remove(); videoUI(); av = { starting: true };
+    let j;
+    try { j = await avatarFn({ action: "start", token: chatToken(), lang: chatLang() }); }
+    catch (e) { av = null; $("#chat-video")?.remove(); const m = AV_ERR[e.code] || ["Couldn't start the video call. Please try again.", "تعذّر بدء مكالمة الفيديو. حاول مرة أخرى."]; chatBubble("sys", ct(m[0], m[1])); return; }
+    av = { id: j.id, max: j.max_seconds || 300, t0: 0, timer: null, s: null };
+    track("avatar_call_started");
+    try {
+      const { LiveAvatarSession } = await import(AV_SDK);
+      const s = new LiveAvatarSession(j.session_token, { voiceChat: {}, autoKeepAlive: true }); av.s = s;
+      s.on("session.stream_ready", () => {
+        try { s.attach($("#cv-v")); } catch (e) {}
+        $("#cv-status")?.remove(); av.t0 = Date.now();
+        const tick = () => { if (!av) return; const left = av.max - Math.floor((Date.now() - av.t0) / 1000); const t = $("#cv-timer"); if (t) t.textContent = mmss(left); if (left <= 0) videoEnd("MAX_DURATION_REACHED"); };
+        tick(); av.timer = setInterval(tick, 1000);
+      });
+      s.on("user.transcription", e => { if (e?.text) { videoCap("user", e.text); chatBubble("user", e.text); } });
+      s.on("avatar.transcription", e => { if (e?.text) { videoCap("assistant", e.text); chatBubble("assistant", e.text); } });
+      s.on("session.stopped", e => videoEnd(e?.stop_reason || e?.end_reason || "stopped"));
+      s.on("session.disconnected", r => videoEnd(typeof r === "string" ? r : "disconnected"));
+      await s.start();
+    } catch (e) { console.warn("video", e); videoEnd("start_failed", ct("Couldn't connect the video call (check the microphone permission).", "تعذّر توصيل مكالمة الفيديو (اتأكد إنك سامح بالمايك).")); }
+  }
+  async function videoEnd(reason, msg) {
+    const a = av; if (!a || a.ending) return; a.ending = true;
+    clearInterval(a.timer);
+    const secs = a.t0 ? Math.round((Date.now() - a.t0) / 1000) : 0;
+    try { await a.s?.stop(); } catch (e) {}
+    $("#chat-video")?.remove(); av = null;
+    if (a.id) avatarFn({ action: "end", id: a.id, seconds: secs, reason }).catch(() => {});
+    chatBubble("sys", msg || (secs ? ct(`Video call ended (${mmss(secs)}). You can keep chatting here.`, `انتهت مكالمة الفيديو (${mmss(secs)}). تقدر تكمّل كتابة هنا.`) : ct("Video call ended.", "انتهت مكالمة الفيديو.")));
+    track("avatar_call_ended");
+  }
+  window.addEventListener("pagehide", () => { if (av?.s) try { av.s.stop(); } catch (e) {} });
+
   function chatChrome() {
     const fab = $("#chat-fab"), pn = $("#chat-panel");
     if (fab) { fab.querySelector("span").textContent = tt("Ask HUDERA's assistant", "اسأل مساعد HUDERA"); fab.setAttribute("aria-label", tt("Open the AI assistant", "افتح المساعد الذكي")); }
@@ -4686,6 +4777,7 @@ const HP = (() => {
     $("#chat-in").placeholder = ct("Write your message…", "اكتب رسالتك…");
     $("#chat-note").innerHTML = `${ct("This chat is saved so our team can follow up with you.", "تُحفظ المحادثة ليتابع معك فريقنا.")} <a href="privacy.html" target="_blank" rel="noopener">${ct("Privacy", "الخصوصية")}</a>`;
     $$("#chat-lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === cl)));
+    const vb = $("#chat-vid"); if (vb) { vb.setAttribute("aria-label", ct("Video call with the assistant", "مكالمة فيديو مع المساعد")); vb.title = vb.getAttribute("aria-label"); }
     $("#chat-cal")?.setAttribute("aria-label", ct("Book a call", "احجز مكالمة")); $("#chat-cal")?.setAttribute("title", ct("Book a call", "احجز مكالمة"));
     const spk = $("#chat-spk"); if (spk) { spk.setAttribute("aria-pressed", String(voiceOn())); spk.setAttribute("aria-label", ct("Read replies aloud", "قراءة الردود بصوت")); spk.title = ct("Read replies aloud", "قراءة الردود بصوت"); }
     const mic = $("#chat-mic"); if (mic && !recOn) { mic.setAttribute("aria-label", ct("Speak your message", "تحدّث برسالتك")); mic.title = ct("Speak your message", "تحدّث برسالتك"); }
@@ -4757,7 +4849,7 @@ const HP = (() => {
     if (!$("#chat-panel")) {
       document.body.insertAdjacentHTML("beforeend", `<section class="chat-panel no-l10n" id="chat-panel" role="dialog" aria-modal="false" aria-labelledby="chat-title">
         <header class="chat-h"><span class="chat-av">${ic("bot")}</span><div><b id="chat-title"></b><small id="chat-sub"></small></div>
-          <button class="chat-ib" type="button" id="chat-cal">${SVG.cal}</button><button class="chat-ib" type="button" id="chat-spk" aria-pressed="false">${SVG.spk}</button>
+          <button class="chat-ib vid" type="button" id="chat-vid" hidden>${SVG.vid}</button><button class="chat-ib" type="button" id="chat-cal">${SVG.cal}</button><button class="chat-ib" type="button" id="chat-spk" aria-pressed="false">${SVG.spk}</button>
           <div class="chat-lang" id="chat-lang" role="group"><button type="button" data-l="ar">ع</button><button type="button" data-l="en">EN</button></div>
           <button class="icon-x" type="button" id="chat-x" aria-label="Close">${ic("x")}</button></header>
         <div class="chat-auth" id="chat-auth" hidden></div>
@@ -4766,6 +4858,7 @@ const HP = (() => {
         <p class="chat-note" id="chat-note"></p></section>`);
       $("#chat-x").addEventListener("click", chatClose);
       $("#chat-cal").addEventListener("click", chatBooking);
+      $("#chat-vid").addEventListener("click", videoStart);
       $("#chat-spk").addEventListener("click", () => { store.set("hudera.chat_voice", voiceOn() ? "0" : "1"); if (!voiceOn()) try { speechSynthesis.cancel(); } catch (e) {} chatChrome(); });
       $("#chat-mic")?.addEventListener("click", micToggle);
       $$("#chat-lang button").forEach(b => b.addEventListener("click", () => {
@@ -4781,9 +4874,9 @@ const HP = (() => {
       chatChrome();
     }
     $("#chat-panel").hidden = false; $("#chat-fab").setAttribute("aria-expanded", "true"); document.body.classList.add("chat-on");
-    track("chat_opened"); chatLoad().then(() => $("#chat-in")?.focus());
+    track("chat_opened"); avatarCheck(); chatLoad().then(() => $("#chat-in")?.focus());
   }
-  function chatClose() { const p = $("#chat-panel"); if (p) p.hidden = true; $("#chat-fab")?.setAttribute("aria-expanded", "false"); document.body.classList.remove("chat-on"); $("#chat-fab")?.focus(); }
+  function chatClose() { if (av) videoEnd("USER_CLOSED"); const p = $("#chat-panel"); if (p) p.hidden = true; $("#chat-fab")?.setAttribute("aria-expanded", "false"); document.body.classList.remove("chat-on"); $("#chat-fab")?.focus(); }
   function chatInit() {
     if (!enabled || site.chat_enabled === false || $("#chat-fab")) return;
     document.body.insertAdjacentHTML("beforeend", `<button class="chat-fab no-l10n" id="chat-fab" type="button" aria-expanded="false" aria-controls="chat-panel">${ic("bot")}<span></span></button>`);
