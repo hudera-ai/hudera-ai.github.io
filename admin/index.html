@@ -229,6 +229,9 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 .dlg{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--text);padding:20px;width:min(560px,calc(100vw - 32px))}.dlg::backdrop{background:rgba(5,9,18,.55)}.dlg h2{font:700 18px var(--f-d);color:var(--ink);margin:0 0 12px}
 @media (max-width:700px){.note-f{grid-template-columns:1fr}.dtl li{grid-template-columns:1fr}.stepper li.end:first-of-type{margin-inline-start:0}}
 
+.call{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 0;border-top:1px solid var(--line)}.call:first-of-type{border-top:0}.call b{color:var(--ink)}
+.calls{border-color:color-mix(in srgb,var(--mint) 45%,transparent)}
+
 </style>
 </head>
 <body>
@@ -362,7 +365,7 @@ const AR = {
   "Top pages": "أكثر الصفحات زيارة", "Traffic sources": "مصادر الزيارات", "Referrers": "المواقع المُحيلة", "Devices": "الأجهزة", "Browsers": "المتصفحات",
   "Retention by sign-up week": "الاحتفاظ حسب أسبوع التسجيل", "Requests by status": "الطلبات حسب الحالة", "Show as table": "عرض كجدول",
   "Search name, e-mail or phone": "ابحث بالاسم أو البريد أو الجوال", "All": "الكل", "Active": "نشط", "Inactive": "غير نشط", "Suspended": "موقوف", "Deleted": "محذوف",
-  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "Interest insights": "اهتمامات العملاء", "Pipeline": "متابعة العملاء", "Assistant chats": "محادثات المساعد", "Export": "تصدير", "PDF report": "تقرير PDF", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
+  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "No data yet": "لا توجد بيانات بعد", "Interest insights": "اهتمامات العملاء", "Pipeline": "متابعة العملاء", "Assistant chats": "محادثات المساعد", "Export": "تصدير", "PDF report": "تقرير PDF", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
   "Registered": "تاريخ التسجيل", "Last login": "آخر دخول", "Last activity": "آخر نشاط", "Status": "الحالة", "Recent features": "آخر الميزات", "Important actions": "إجراءات مهمة",
   "Contact": "التواصل", "Previous": "السابق", "Next": "التالي", "No results": "لا توجد نتائج", "Account": "الحساب", "Timeline": "الخط الزمني", "Load more": "تحميل المزيد",
   "Send e-mail": "إرسال بريد", "Used": "استُخدمت", "Not used": "لم تُستخدم", "Unknown": "غير معروف", "Recent sessions": "آخر الجلسات", "Pages visited": "الصفحات المزارة",
@@ -1163,8 +1166,9 @@ async function viewPipeline() {
   v.innerHTML = `<div id="p-kpis" class="grid g4" style="margin-bottom:12px"></div><div id="p-due"></div>
     <div class="filters" style="margin:12px 0"><input class="input" id="p-q" type="search" placeholder="${ar ? "ابحث بالاسم أو الشركة أو الجوال" : "Search name, company or phone"}" value="${esc(pq.search)}" style="flex:1;min-width:200px">
       <div class="seg" role="group"><button type="button" aria-pressed="${pq.view === "board"}" data-v="board">${ar ? "لوحة المراحل" : "Board"}</button><button type="button" aria-pressed="${pq.view === "list"}" data-v="list">${ar ? "قائمة" : "List"}</button></div></div>
-    <div id="p-body"><div class="skel"></div></div><div class="grid g2" style="margin-top:12px"><section class="card"><h2>${ar ? "أسباب الرفض" : "Why clients said no"}</h2><div id="p-loss"></div></section>
-      <section class="card"><h2>${ar ? "تقييمات العملاء" : "Client feedback"}</h2><div id="p-fb"></div></section></div>`;
+    <div id="p-calls"></div><div id="p-body"><div class="skel"></div></div><div class="grid g2" style="margin-top:12px"><section class="card"><h2>${ar ? "أسباب الرفض" : "Why clients said no"}</h2><div id="p-loss"></div></section>
+      <section class="card"><h2>${ar ? "تقييمات العملاء" : "Client feedback"}</h2><div id="p-fb"></div></section></div>
+    <section class="card" style="margin-top:12px"><h2>${ar ? "التنبيهات على الإيميل" : "E-mail alerts"}</h2><div id="p-alerts"></div></section>`;
   let timer; $("#p-q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => { pq.search = e.target.value.trim(); loadPipeline(); }, 300); });
   $$(".seg [data-v]").forEach(b => b.addEventListener("click", () => { pq.view = b.dataset.v; $$(".seg [data-v]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); loadPipeline(); }));
   $("#d-new")?.addEventListener("click", () => dealForm());
@@ -1201,7 +1205,32 @@ async function loadPipeline() {
     $$("tr.click", body).forEach(tr => { const go = () => (location.hash = `#/pipeline/${tr.dataset.id}`); tr.addEventListener("click", go); tr.addEventListener("keydown", e => e.key === "Enter" && go()); });
   }
   hbars($("#p-loss"), (r.loss_reasons || []).map(x => ({ ...x })), { label: x => lossName(x.reason), value: x => x.n, color: "var(--red)" });
+  loadCallsAndAlerts();
   $("#p-fb").innerHTML = r.feedback?.count ? `<div class="kpi" style="border:0;padding:0"><b>★ ${r.feedback.avg}</b><span>${ar ? `متوسط ${r.feedback.count} تقييم` : `average of ${r.feedback.count} ratings`}</span></div>` : `<p class="empty">${ar ? "لا توجد تقييمات بعد. اطلب تقييماً من صفحة أي عميل." : "No feedback yet. Request it from any client's page."}</p>`;
+}
+const gcalLink = b => `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent((AR_() ? "مكالمة: " : "Call: ") + b.name)}&dates=${new Date(b.starts_at).toISOString().replace(/[-:]|\.\d{3}/g, "")}/${new Date(b.ends_at).toISOString().replace(/[-:]|\.\d{3}/g, "")}&details=${encodeURIComponent([b.phone, b.email, b.note].filter(Boolean).join("\n"))}`;
+const BST = { booked: ["Booked", "محجوزة", "c-blue"], done: ["Done", "تمت", "c-mint"], cancelled: ["Cancelled", "ملغاة", ""], no_show: ["No-show", "لم يحضر", "c-red"] };
+function callRow(b, withDeal) {
+  const ar = AR_();
+  return `<div class="call"><div><b dir="auto">${esc(withDeal && b.deal_name ? b.deal_name : b.name)}</b> <span class="chip ${BST[b.status]?.[2] || ""}">${esc(ar ? BST[b.status]?.[1] : BST[b.status]?.[0])}</span>
+      <div class="small muted">${fdt(b.starts_at)}${b.phone ? ` · <span dir="ltr">${esc(b.phone)}</span>` : ""}${b.note ? ` · <span dir="auto">${esc(b.note)}</span>` : ""}</div></div>
+    <div class="filters">${withDeal && b.deal_id ? `<a class="btn sm" href="#/pipeline/${b.deal_id}">${ar ? "العميل" : "Client"}</a>` : ""}<a class="btn sm" href="${gcalLink(b)}" target="_blank" rel="noopener">${ar ? "تقويم جوجل" : "Google Calendar"}</a>
+      ${can("leads.manage") && b.status === "booked" ? `<button class="btn sm" data-bk="${b.id}" data-st="done">${ar ? "تمت" : "Done"}</button><button class="btn sm" data-bk="${b.id}" data-st="no_show">${ar ? "لم يحضر" : "No-show"}</button><button class="btn sm danger" data-bk="${b.id}" data-st="cancelled">${ar ? "إلغاء" : "Cancel"}</button>` : ""}</div></div>`;
+}
+function bindCalls(box, after) { $$("[data-bk]", box).forEach(x => x.addEventListener("click", async () => { try { await api("admin_booking_set", { p_id: x.dataset.bk, p_status: x.dataset.st }); toast(AR_() ? "تم الحفظ" : "Saved"); after(); } catch (e) { toast(e.message); } })); }
+async function loadCallsAndAlerts() {
+  const ar = AR_();
+  try {
+    const calls = await api("admin_bookings", { p_upcoming: true });
+    const box = $("#p-calls"); if (box) { box.innerHTML = calls.length ? `<section class="card calls" style="margin-bottom:12px"><h2>📞 ${ar ? "المكالمات القادمة" : "Upcoming calls"} <span class="muted small">(${calls.length})</span></h2>${calls.map(b => callRow(b, true)).join("")}</section>` : ""; bindCalls(box, loadPipeline); }
+  } catch (e) {}
+  try {
+    const n = await api("admin_notify_status"); const box = $("#p-alerts"); if (!box) return;
+    box.innerHTML = `<p class="sub">${ar ? `تصلك تنبيهات فورية على <b dir="ltr">${esc(n.to)}</b> عند: عميل جديد، طلب تواصل من المساعد، حجز مكالمة، أو تقييم جديد. وملخص يومي الساعة ${n.alerts?.digest_hour ?? 8} صباحاً بتوقيت الرياض.` : `Instant alerts go to <b>${esc(n.to)}</b> for new clients, assistant hand-offs, booked calls and feedback, plus a daily digest at ${n.alerts?.digest_hour ?? 8}:00 Riyadh time.`}</p>
+      <div class="filters"><span class="small">${ar ? "آخر إرسال:" : "Last sent:"} ${n.last_sent ? fdt(n.last_sent) : "—"}</span>${n.pending ? `<span class="chip c-amber">${n.pending} ${ar ? "في الانتظار" : "pending"}</span>` : ""}${n.failed ? `<span class="chip c-red">${n.failed} ${ar ? "فشل" : "failed"}</span>` : ""}
+        ${n.last_error ? `<span class="small" style="color:var(--red)" dir="ltr">${esc(n.last_error.slice(0, 140))}</span>` : ""}<span class="sp" style="flex:1"></span>${can("settings.manage") ? `<button class="btn sm" id="al-test" type="button">${ar ? "إرسال تنبيه تجريبي" : "Send a test alert"}</button>` : ""}</div>`;
+    $("#al-test")?.addEventListener("click", async () => { try { const r = await api("admin_notify_test"); toast(ar ? `تم الإرسال إلى ${r.to}، تأكد من بريدك خلال دقيقة` : `Sent to ${r.to}; check your inbox in a minute`); setTimeout(loadCallsAndAlerts, 8000); } catch (e) { toast(e.message); } });
+  } catch (e) {}
 }
 function dealForm(pre = {}) {
   const ar = AR_();
@@ -1283,6 +1312,7 @@ async function viewDeal(id) {
       ${r.request ? `<section class="card"><h2>${t("Contact requests")}</h2><p><a class="mono" href="#/leads/${r.request.id}">${esc(r.request.ref)}</a> <b dir="auto">${esc(r.request.subject)}</b> ${chip(STATUS[r.request.status])}</p><p dir="auto" class="small" style="white-space:pre-wrap">${esc(r.request.message)}</p></section>` : ""}
       ${r.insight?.summary ? `<section class="card"><h2>${ar ? "تحليل الذكاء الاصطناعي" : "AI analysis"}</h2><p class="ai-sum" dir="auto">${esc(r.insight.summary)}</p>${r.insight.next_action ? `<div class="ai-next"><p dir="auto">${esc(r.insight.next_action)}</p></div>` : ""}</section>` : ""}
     </div>`;
+  api("admin_bookings", { p_deal: id, p_upcoming: false }).then(bs => { if (!bs.length) return; const sec = document.createElement("section"); sec.className = "card"; sec.innerHTML = `<h2>📞 ${ar ? "المكالمات المحجوزة" : "Booked calls"}</h2>${bs.map(b => callRow(b, false)).join("")}`; $(".stepper").closest(".card").after(sec); bindCalls(sec, () => viewDeal(id)); }).catch(() => {});
   const save = async args => { try { await api("admin_deal_update", { p_id: id, ...args }); toast(ar ? "تم الحفظ" : "Saved"); viewDeal(id); } catch (e) { toast(e.code === "loss_reason_required" ? (ar ? "اختر سبب الرفض أولاً" : "Choose a reason first") : e.message); } };
   $$(".stepper [data-st]").forEach(b => b.addEventListener("click", () => { const st = b.dataset.st; if (st === "lost") { $("#lost-box").hidden = false; $("#lost-box input")?.focus(); return; } if (st !== d.stage) save({ p_stage: st }); }));
   $("#lr-save")?.addEventListener("click", () => { const lr = $("input[name=lr]:checked")?.value; if (!lr) { toast(ar ? "اختر سبب الرفض" : "Choose a reason"); return; } save({ p_stage: "lost", p_loss_reason: lr, p_loss_details: $("#lr-d").value || null }); });
