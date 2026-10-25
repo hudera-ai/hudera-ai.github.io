@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Your feedback · HUDERA AI</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#F6F7FB;--surface:#fff;--ink:#0B1220;--text:#1F2637;--muted:#5B6478;--line:#E3E7F0;--line2:#D5DAE6;--primary:#3D5AFE;--star:#F5A524;--ok:#16A34A;--err:#DC2626}
+@media (prefers-color-scheme:dark){:root{--bg:#0A0F1A;--surface:#111827;--ink:#F3F6FC;--text:#DCE2EE;--muted:#9AA4BA;--line:#232D42;--line2:#2E3A54;--primary:#8EA0FF}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 "IBM Plex Sans Arabic","Instrument Sans",system-ui,sans-serif}
+html[lang=en] body{font-family:"Instrument Sans",system-ui,sans-serif}
+main{max-width:620px;margin:0 auto;padding:28px 16px 64px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--ink);text-decoration:none;font-size:19px;direction:ltr}
+.brand i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#3D5AFE,#22D3EE);color:#fff;display:grid;place-items:center;font-style:normal;font-size:16px}
+.lang{border:1px solid var(--line2);background:var(--surface);color:var(--text);border-radius:8px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px 22px}
+h1{color:var(--ink);font-size:26px;line-height:1.3;margin:0 0 6px}
+p.lead{color:var(--muted);margin:0 0 18px}
+fieldset{border:0;padding:0;margin:0 0 18px}
+legend,label.l{display:block;font-weight:700;color:var(--ink);margin-bottom:8px;font-size:15px}
+.stars{display:flex;gap:6px;direction:ltr;justify-content:flex-start}
+html[dir=rtl] .stars{justify-content:flex-end;flex-direction:row-reverse}
+.stars input{position:absolute;opacity:0;pointer-events:none}
+.stars label{font-size:34px;line-height:1;color:var(--line2);cursor:pointer;transition:transform .1s}
+.stars label:hover,.stars label.on{color:var(--star)}
+.stars input:focus-visible+label{outline:2px solid var(--primary);border-radius:6px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.opts label{display:flex;gap:8px;align-items:center;border:1px solid var(--line2);border-radius:12px;padding:9px 12px;cursor:pointer;font-size:14.5px}
+.opts input{accent-color:var(--primary)}
+.opts label:has(input:checked){border-color:var(--primary);background:color-mix(in srgb,var(--primary) 8%,transparent)}
+textarea{width:100%;min-height:96px;border:1px solid var(--line2);border-radius:12px;padding:10px 12px;font:inherit;font-size:15px;background:var(--surface);color:var(--ink);resize:vertical}
+textarea:focus{outline:2px solid color-mix(in srgb,var(--primary) 40%,transparent);border-color:var(--primary)}
+button.go{width:100%;height:48px;border:0;border-radius:12px;background:var(--primary);color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+button.go:disabled{opacity:.6;cursor:progress}
+.msg{padding:12px 14px;border-radius:12px;margin-top:12px;font-size:14.5px}
+.msg.err{background:color-mix(in srgb,var(--err) 10%,transparent);color:var(--err)}
+.done{text-align:center;padding:20px 6px}.done b{display:block;font-size:22px;color:var(--ink);margin:8px 0}
+.done .ic{width:56px;height:56px;border-radius:50%;margin:0 auto;background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok);display:grid;place-items:center;font-size:28px}
+.foot{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}
+.foot a{color:inherit}
+</style>
+</head>
+<body>
+<main>
+  <header><a class="brand" href="./"><i>h</i><span>HUDERA AI</span></a><button class="lang" id="lang" type="button">English</button></header>
+  <div class="card" id="box"><p class="lead" id="loading">…</p></div>
+  <p class="foot"><span id="f-priv"></span> <a href="privacy.html" id="f-link"></a></p>
+</main>
+<script>
+(() => {
+  const URL_ = "https://aetdmyxpbxlkywkvltae.supabase.co", KEY = "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW";
+  const token = new URLSearchParams(location.search).get("t") || "";
+  let lang = (new URLSearchParams(location.search).get("lang") || (navigator.language || "ar")).startsWith("en") ? "en" : "ar";
+  let info = null, done = false;
+  const T = {
+    ar: { title: n => `${n ? n + "، " : ""}رأيك يهمّنا`, lead: "شكراً لوقتك مع فريق HUDERA AI. دقيقة واحدة تساعدنا نخدمك بشكل أفضل.", rate: "كيف تقيّم تجربتك معنا حتى الآن؟",
+      dec: "أين وصلت في قرارك؟", liked: "ما الذي أعجبك؟", improve: "ما الذي نحسّنه أو ما الذي منعك من المتابعة؟", send: "إرسال", sending: "جارٍ الإرسال…",
+      thanks: "شكراً لك!", thanksSub: "وصل رأيك لفريقنا، وسنأخذه بعين الاعتبار.", already: "سبق أن أرسلت رأيك، شكراً لك! يمكنك إرسال تحديث إذا أردت.",
+      invalid: "هذا الرابط غير صالح أو انتهت صلاحيته.", need: "اختر عدد النجوم أولاً.", err: "تعذّر الإرسال. حاول مرة أخرى.", priv: "نستخدم إجابتك لتحسين خدمتنا فقط.", privLink: "إشعار الخصوصية",
+      opts: { interested: "مهتم ونكمل", need_time: "أحتاج وقتاً للتفكير", price: "السعر أعلى من المتوقع", design: "الشكل أو التصميم لم يناسبني", offer_issues: "العرض لا يغطي ما أحتاجه", chose_other: "اخترنا جهة أخرى", not_needed: "لم نعد نحتاج الخدمة", other: "سبب آخر" } },
+    en: { title: n => `${n ? n + ", " : ""}we'd value your feedback`, lead: "Thank you for your time with the HUDERA AI team. One minute helps us serve you better.", rate: "How would you rate your experience with us so far?",
+      dec: "Where are you in your decision?", liked: "What did you like?", improve: "What should we improve, or what stopped you from moving forward?", send: "Send", sending: "Sending…",
+      thanks: "Thank you!", thanksSub: "Your feedback reached our team and we'll take it into account.", already: "You already sent feedback, thank you! You can send an update if you like.",
+      invalid: "This link is not valid or has expired.", need: "Choose a star rating first.", err: "Couldn't send. Please try again.", priv: "We use your answer only to improve our service.", privLink: "Privacy notice",
+      opts: { interested: "Interested, let's continue", need_time: "I need time to think", price: "The price is higher than expected", design: "The look or design didn't suit me", offer_issues: "The offer doesn't cover what I need", chose_other: "We chose another provider", not_needed: "We no longer need it", other: "Another reason" } },
+  };
+  const $ = s => document.querySelector(s), esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const rpc = async (fn, args) => {
+    const r = await fetch(`${URL_}/rest/v1/rpc/${fn}`, { method: "POST", headers: { apikey: KEY, "content-type": "application/json" }, body: JSON.stringify(args) });
+    const j = await r.json().catch(() => null); if (!r.ok) throw new Error(j?.message || "error"); return j;
+  };
+  function render() {
+    const t = T[lang]; document.documentElement.lang = lang; document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    $("#lang").textContent = lang === "ar" ? "English" : "عربي"; $("#f-priv").textContent = t.priv; $("#f-link").textContent = t.privLink;
+    document.title = lang === "ar" ? "رأيك · HUDERA AI" : "Your feedback · HUDERA AI";
+    const box = $("#box");
+    if (!info) { box.innerHTML = `<p class="lead">${esc(t.invalid)}</p>`; return; }
+    if (done) { box.innerHTML = `<div class="done"><div class="ic">✓</div><b>${esc(t.thanks)}</b><p class="lead">${esc(t.thanksSub)}</p></div>`; return; }
+    box.innerHTML = `<h1>${esc(t.title(info.first_name))}</h1><p class="lead">${esc(info.done ? t.already : t.lead)}</p>
+      <form id="fb" novalidate>
+        <fieldset><legend>${esc(t.rate)}</legend><div class="stars" id="stars">${[1, 2, 3, 4, 5].map(n => `<input type="radio" name="r" id="r${n}" value="${n}"><label for="r${n}" data-n="${n}" aria-label="${n}/5">★</label>`).join("")}</div></fieldset>
+        <fieldset><legend>${esc(t.dec)}</legend><div class="opts">${Object.entries(t.opts).map(([k, v]) => `<label><input type="radio" name="d" value="${k}"> ${esc(v)}</label>`).join("")}</div></fieldset>
+        <label class="l" for="liked">${esc(t.liked)}</label><textarea id="liked" maxlength="2000"></textarea>
+        <label class="l" for="improve" style="margin-top:14px">${esc(t.improve)}</label><textarea id="improve" maxlength="2000"></textarea>
+        <div id="err"></div>
+        <button class="go" type="submit" style="margin-top:16px">${esc(t.send)}</button></form>`;
+    const paint = v => document.querySelectorAll("#stars label").forEach(l => l.classList.toggle("on", +l.dataset.n <= v));
+    document.querySelectorAll("#stars input").forEach(i => i.addEventListener("change", () => paint(+i.value)));
+    document.querySelectorAll("#stars label").forEach(l => { l.addEventListener("mouseenter", () => paint(+l.dataset.n)); l.addEventListener("mouseleave", () => paint(+(document.querySelector("#stars input:checked")?.value || 0))); });
+    $("#fb").addEventListener("submit", async e => {
+      e.preventDefault(); const rating = +(document.querySelector("#stars input:checked")?.value || 0);
+      const err = $("#err"); err.innerHTML = "";
+      if (!rating) { err.innerHTML = `<div class="msg err">${esc(t.need)}</div>`; return; }
+      const b = e.target.querySelector("button.go"); b.disabled = true; b.textContent = t.sending;
+      try {
+        await rpc("submit_feedback", { p_token: token, p_rating: rating, p_decision: document.querySelector("input[name=d]:checked")?.value || null, p_liked: $("#liked").value, p_improve: $("#improve").value });
+        done = true; render();
+      } catch (x) { err.innerHTML = `<div class="msg err">${esc(t.err)}</div>`; b.disabled = false; b.textContent = t.send; }
+    });
+  }
+  $("#lang").addEventListener("click", () => { lang = lang === "ar" ? "en" : "ar"; render(); });
+  (async () => {
+    if (/^[0-9a-f-]{36}$/i.test(token)) { try { info = await rpc("feedback_info", { p_token: token }); } catch (e) { info = null; } }
+    render();
+  })();
+})();
+</script>
+</body>
+</html>
