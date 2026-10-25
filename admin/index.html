@@ -251,6 +251,13 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 .ai-strip{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;margin-bottom:12px;text-decoration:none;color:inherit}
 .ai-strip .meter{grid-column:1/-1;margin:4px 0}.ai-strip:hover{border-color:var(--primary)}
 @media (max-width:640px){.ai-form{grid-template-columns:1fr}.ai-big{font-size:30px}}
+/* price offers */
+.offer{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}.offer.old{opacity:.7}
+.otot{font:700 15px var(--f-d);color:var(--ink)}
+.dlg-wide{width:min(760px,94vw)}
+.of-row{display:grid;grid-template-columns:2fr 1fr 1fr 2fr auto;gap:8px;margin-bottom:8px;align-items:center}
+@media (max-width:640px){.of-row{grid-template-columns:1fr 1fr;}.of-row [name=product],.of-row [name=note]{grid-column:1/-1}}
+.of-share{display:flex;gap:8px;align-items:center;margin:8px 0;font-size:13.5px}
 
 </style>
 </head>
@@ -1177,7 +1184,7 @@ const DECISION = { interested: ["Interested", "مهتم ويكمل"], need_time:
   offer_issues: ["Offer doesn't cover needs", "العرض لا يغطي احتياجه"], chose_other: ["Chose another provider", "اختار جهة أخرى"], not_needed: ["No longer needed", "لم يعد يحتاجها"], other: ["Other", "سبب آخر"] };
 const SRC = { chat: ["AI assistant", "المساعد الذكي"], contact_form: ["Contact form", "نموذج التواصل"], insight: ["Interest insights", "اهتمامات العملاء"], manual: ["Added manually", "إضافة يدوية"] };
 const KIND = { created: ["Added", "أُضيف"], stage: ["Stage changed", "تغيّرت المرحلة"], note: ["Note", "ملاحظة"], call: ["Call", "مكالمة"], whatsapp: ["WhatsApp", "واتساب"], email: ["E-mail", "إيميل"],
-  meeting: ["Meeting", "اجتماع"], follow_up: ["Follow-up set", "موعد متابعة"], feedback: ["Feedback received", "وصل تقييم"], feedback_requested: ["Feedback requested", "طُلب تقييم"] };
+  meeting: ["Meeting", "اجتماع"], follow_up: ["Follow-up set", "موعد متابعة"], feedback: ["Feedback received", "وصل تقييم"], feedback_requested: ["Feedback requested", "طُلب تقييم"], offer: ["Price offer", "عرض سعر"] };
 const L2 = (m, k) => (m[k] ? m[k][AR_() ? 1 : 0] : k);
 const sar = v => (v == null ? "" : `${nf(Math.round(v))} ${AR_() ? "ر.س" : "SAR"}`);
 const toLocalInput = v => { if (!v) return ""; const d = new Date(v); const p = n => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`; };
@@ -1280,7 +1287,7 @@ async function addToPipeline(userId, source = "insight") {
 }
 
 const evBody = b => (!b || !AR_()) ? b : String(b).replace(/^From the website assistant/, "من المساعد الذكي").replace("The assistant handed this conversation to the team.", "حوّل المساعد الذكي المحادثة للفريق.")
-  .replace(/^Added to the pipeline$/, "أُضيف لمتابعة العملاء").replace(/^From contact request /, "من طلب التواصل ").replace(/^New contact request /, "طلب تواصل جديد ").replace(/^Rating /, "التقييم ");
+  .replace(/^Added to the pipeline$/, "أُضيف لمتابعة العملاء").replace(/^From contact request /, "من طلب التواصل ").replace(/^New contact request /, "طلب تواصل جديد ").replace(/^Rating /, "التقييم ").replace(/^Offer sent: /, "تم إرسال عرض سعر: ").replace(/^Offer accepted: /, "العميل وافق على العرض: ").replace(/^Offer rejected: /, "العميل رفض العرض: ").replace(/ SAR one-time/g, " ر.س مرة واحدة").replace(/ SAR \/ month/g, " ر.س شهرياً").replace(/ SAR \/ year/g, " ر.س سنوياً");
 async function viewDeal(id) {
   const ar = AR_(), m = can("leads.manage");
   const v = page(ar ? "متابعة العملاء" : "Pipeline", `<a class="btn" href="#/pipeline">${ic("back")}${ar ? "كل العملاء" : "All clients"}</a>`);
@@ -1335,6 +1342,7 @@ async function viewDeal(id) {
       ${r.request ? `<section class="card"><h2>${t("Contact requests")}</h2><p><a class="mono" href="#/leads/${r.request.id}">${esc(r.request.ref)}</a> <b dir="auto">${esc(r.request.subject)}</b> ${chip(STATUS[r.request.status])}</p><p dir="auto" class="small" style="white-space:pre-wrap">${esc(r.request.message)}</p></section>` : ""}
       ${r.insight?.summary ? `<section class="card"><h2>${ar ? "تحليل الذكاء الاصطناعي" : "AI analysis"}</h2><p class="ai-sum" dir="auto">${esc(r.insight.summary)}</p>${r.insight.next_action ? `<div class="ai-next"><p dir="auto">${esc(r.insight.next_action)}</p></div>` : ""}</section>` : ""}
     </div>`;
+  loadOffers(id, d);
   api("admin_bookings", { p_deal: id, p_upcoming: false }).then(bs => { if (!bs.length) return; const sec = document.createElement("section"); sec.className = "card"; sec.innerHTML = `<h2>📞 ${ar ? "المكالمات المحجوزة" : "Booked calls"}</h2>${bs.map(b => callRow(b, false)).join("")}`; $(".stepper").closest(".card").after(sec); bindCalls(sec, () => viewDeal(id)); }).catch(() => {});
   const save = async args => { try { await api("admin_deal_update", { p_id: id, ...args }); toast(ar ? "تم الحفظ" : "Saved"); viewDeal(id); } catch (e) { toast(e.code === "loss_reason_required" ? (ar ? "اختر سبب الرفض أولاً" : "Choose a reason first") : e.message); } };
   $$(".stepper [data-st]").forEach(b => b.addEventListener("click", () => { const st = b.dataset.st; if (st === "lost") { $("#lost-box").hidden = false; $("#lost-box input")?.focus(); return; } if (st !== d.stage) save({ p_stage: st }); }));
@@ -1391,6 +1399,76 @@ async function viewChat(id) {
   $("#c-add")?.addEventListener("click", () => {
     if (u) addToPipeline(u.id, "chat");
     else dealForm({ name: c.facts?.name || "" });
+  });
+}
+
+/* ---------------- per-client price offers ---------------- */
+const PRODUCT_NAMES = ["HUDERA Workforce", "Contractor OS", "HUDERA Connect", "Hesabo", "SiteLog", "Threadline", "QuoteFlow", "CostPulse", "PayRoster", "Attendify", "MatchDesk", "PermitPack"];
+const BILL = { one_time: ["One-time", "مرة واحدة"], monthly: ["Monthly", "شهرياً"], yearly: ["Yearly", "سنوياً"] };
+const OST = { draft: ["Draft", "مسودة", ""], sent: ["Sent to client", "مُرسل للعميل", "c-sky"], accepted: ["Accepted", "مقبول", "c-mint"], rejected: ["Rejected", "مرفوض", "c-red"] };
+const L1 = (m, k) => (m[k] || [k, k])[AR_() ? 1 : 0];
+const offerTotals = t => [["one_time", ""], ["monthly", AR_() ? " / شهر" : " / month"], ["yearly", AR_() ? " / سنة" : " / year"]].filter(([k]) => Number(t?.[k]) > 0).map(([k, s]) => `${sar(t[k])}${s}`).join(" + ") || "—";
+function offerText(o, d) {
+  const ar = AR_();
+  const lines = o.items.map(i => `• ${i.product}: ${nf(i.price_sar)} ${ar ? "ر.س" : "SAR"} ${L1(BILL, i.billing)}${i.note ? ` (${i.note})` : ""}`).join("\n");
+  return ar ? `مرحباً ${d.name.split(" ")[0]}،\nيسعدنا نرسل لك عرض HUDERA AI المخصص لك:\n${lines}\n${o.client_note ? o.client_note + "\n" : ""}${o.valid_until ? `العرض ساري حتى ${fdt(o.valid_until, false)}.\n` : ""}\nأي سؤال احنا موجودين.\nفريق HUDERA AI`
+    : `Hi ${d.name.split(" ")[0]},\nHere is your personal HUDERA AI offer:\n${lines}\n${o.client_note ? o.client_note + "\n" : ""}${o.valid_until ? `Valid until ${fdt(o.valid_until, false)}.\n` : ""}\nHappy to answer any question.\nThe HUDERA AI team`;
+}
+async function loadOffers(id, d) {
+  const ar = AR_(), m = can("leads.manage");
+  let list; try { list = await api("admin_offers", { p_deal: id }); } catch (e) { return; }
+  let sec = $("#d-offers"); if (!sec) { sec = document.createElement("section"); sec.className = "card"; sec.id = "d-offers"; $(".stepper").closest(".card").after(sec); }
+  sec.innerHTML = `<div class="filters" style="justify-content:space-between"><h2 style="margin:0">💰 ${ar ? "عرض السعر" : "Price offer"}</h2>${m ? `<button class="btn sm primary" type="button" id="of-new">${ar ? "+ عرض جديد" : "+ New offer"}</button>` : ""}</div>
+    <p class="small muted" style="margin:6px 0 10px">${ar ? "مفيش أسعار عامة. المساعد الذكي بيقول الأسعار <b>للعميل ده بس</b>، ولما العرض يكون «مُرسل» أو «مقبول» وساري ومسموح للمساعد. الملاحظة الداخلية عمرها ما بتظهر للعميل." : "No public prices. The assistant quotes prices <b>to this client only</b>, when the offer is Sent or Accepted, still valid, and shared with the assistant. Internal notes are never shown to the client."}</p>
+    ${list.length ? list.map((o, n) => `<div class="offer ${n ? "old" : ""}"><div class="filters" style="justify-content:space-between"><div class="filters"><span class="chip ${OST[o.status]?.[2] || ""}">${L1(OST, o.status)}</span>${o.expired ? `<span class="chip c-amber">${ar ? "منتهي" : "Expired"}</span>` : ""}${o.share_with_assistant && ["sent", "accepted"].includes(o.status) && !o.expired ? `<span class="chip c-violet">🤖 ${ar ? "المساعد يعرفه" : "Assistant can quote"}</span>` : ""}<b class="otot">${offerTotals(o.totals)}</b></div>
+        <span class="small faint">${o.valid_until ? `${ar ? "ساري حتى" : "valid until"} ${fdt(o.valid_until, false)} · ` : ""}${ago(o.updated_at)}${o.by ? ` · ${esc(o.by)}` : ""}</span></div>
+      <table class="tbl" style="margin-top:8px"><tbody>${o.items.map(i => `<tr><td dir="auto">${esc(i.product)}${i.note ? `<div class="small muted" dir="auto">${esc(i.note)}</div>` : ""}</td><td>${L1(BILL, i.billing)}</td><td style="text-align:end"><b>${sar(i.price_sar)}</b></td></tr>`).join("")}</tbody></table>
+      ${o.client_note ? `<p class="small" dir="auto" style="margin:8px 0 0">📝 ${esc(o.client_note)}</p>` : ""}${o.internal_note ? `<p class="small muted" dir="auto" style="margin:4px 0 0">🔒 ${esc(o.internal_note)}</p>` : ""}
+      <div class="filters" style="margin-top:8px">${m ? `<button class="btn sm" type="button" data-of-edit="${o.id}">${ar ? "تعديل" : "Edit"}</button>` : ""}<button class="btn sm" type="button" data-of-copy="${o.id}">${ar ? "نسخ نص العرض" : "Copy offer text"}</button>
+        ${d.phone ? `<a class="btn sm" target="_blank" rel="noopener" data-of-wa="${o.id}" href="#">WhatsApp</a>` : ""}${m && o.status === "draft" ? `<button class="btn sm danger" type="button" data-of-del="${o.id}">${ar ? "حذف المسودة" : "Delete draft"}</button>` : ""}</div></div>`).join("")
+      : `<p class="empty">${ar ? "لسه مفيش عرض للعميل ده." : "No offer for this client yet."}</p>`}`;
+  const byId = k => list.find(o => o.id === k);
+  $("#of-new", sec)?.addEventListener("click", () => offerForm(id, d, list[0] ? { ...list[0], id: null, status: "draft" } : null));
+  $$("[data-of-edit]", sec).forEach(b => b.addEventListener("click", () => offerForm(id, d, byId(b.dataset.ofEdit))));
+  $$("[data-of-copy]", sec).forEach(b => b.addEventListener("click", async () => { try { await navigator.clipboard.writeText(offerText(byId(b.dataset.ofCopy), d)); toast(ar ? "تم النسخ" : "Copied"); } catch (e) { toast(e.message); } }));
+  $$("[data-of-wa]", sec).forEach(a => { a.href = `https://wa.me/${String(d.phone).replace(/\D/g, "")}?text=${encodeURIComponent(offerText(byId(a.dataset.ofWa), d))}`; });
+  $$("[data-of-del]", sec).forEach(b => b.addEventListener("click", async () => { try { await api("admin_offer_delete", { p_id: b.dataset.ofDel }); loadOffers(id, d); } catch (e) { toast(e.message); } }));
+}
+function offerForm(dealId, d, pre) {
+  const ar = AR_();
+  const items = pre?.items?.length ? pre.items : [{ product: d.product_interest && PRODUCT_NAMES.find(p => d.product_interest.includes(p)) || "", price_sar: "", billing: "one_time", note: "" }];
+  const vu = pre?.valid_until && !pre.expired ? pre.valid_until : addDays(today(), 14);
+  const dlg = document.createElement("dialog"); dlg.className = "dlg dlg-wide";
+  const row = (i = {}) => `<div class="of-row"><input class="input" name="product" list="of-products" dir="auto" placeholder="${ar ? "المنتج أو الخدمة" : "Product or service"}" value="${esc(i.product || "")}">
+      <input class="input" name="price" type="number" min="0" step="1" dir="ltr" placeholder="${ar ? "السعر ر.س" : "Price SAR"}" value="${esc(i.price_sar ?? "")}">
+      <select class="input" name="billing">${Object.keys(BILL).map(k => `<option value="${k}" ${i.billing === k ? "selected" : ""}>${L1(BILL, k)}</option>`).join("")}</select>
+      <input class="input" name="note" dir="auto" placeholder="${ar ? "تفاصيل (اختياري)" : "Details (optional)"}" value="${esc(i.note || "")}"><button class="btn sm" type="button" data-rm aria-label="${ar ? "حذف" : "Remove"}">✕</button></div>`;
+  dlg.innerHTML = `<form method="dialog" id="of-f"><h2>${ar ? `عرض سعر لـ ${esc(d.name)}` : `Offer for ${esc(d.name)}`}</h2>
+    <datalist id="of-products">${PRODUCT_NAMES.map(p => `<option value="${p}">`).join("")}<option value="${ar ? "حل مخصص" : "Custom solution"}"><option value="${ar ? "رسوم التجهيز والتدريب" : "Setup & training"}"></datalist>
+    <div id="of-rows">${items.map(row).join("")}</div><button class="btn sm" type="button" id="of-add">${ar ? "+ إضافة بند" : "+ Add item"}</button>
+    <p class="otot" id="of-tot" style="margin:10px 0"></p>
+    <div class="grid g2"><label class="fld"><span>${ar ? "ساري حتى" : "Valid until"}</span><input class="input" type="date" name="valid" value="${esc(vu)}"></label>
+      <label class="fld"><span>${t("Status")}</span><select class="input" name="status">${Object.keys(OST).map(k => `<option value="${k}" ${(pre?.status || "draft") === k ? "selected" : ""}>${L1(OST, k)}</option>`).join("")}</select></label></div>
+    <label class="fld"><span>${ar ? "ملاحظة للعميل (المساعد ممكن يقولها)" : "Note for the client (the assistant may say it)"}</span><input class="input" name="cnote" dir="auto" value="${esc(pre?.client_note || "")}" placeholder="${ar ? "مثلاً: شامل التدريب وشهر دعم" : "e.g. includes training and one month of support"}"></label>
+    <label class="fld"><span>🔒 ${ar ? "ملاحظة داخلية (للفريق بس)" : "Internal note (team only)"}</span><input class="input" name="inote" dir="auto" value="${esc(pre?.internal_note || "")}" placeholder="${ar ? "مثلاً: أقل سعر ممكن، الهامش…" : "e.g. floor price, margin…"}"></label>
+    <label class="of-share"><input type="checkbox" name="share" ${pre?.share_with_assistant === false ? "" : "checked"}> ${ar ? "المساعد الذكي يقدر يقول الأسعار دي للعميل ده لما يسأل" : "The assistant may quote these prices to this client"}</label>
+    <div class="filters" style="justify-content:flex-end"><button class="btn" value="cancel" type="submit" formnovalidate>${ar ? "إلغاء" : "Cancel"}</button><button class="btn primary" value="ok" type="submit">${t("Save")}</button></div></form>`;
+  document.body.appendChild(dlg); dlg.showModal();
+  const f = $("#of-f", dlg), rows = $("#of-rows", dlg);
+  const read = () => $$(".of-row", rows).map(r => ({ product: r.querySelector("[name=product]").value.trim(), price_sar: r.querySelector("[name=price]").value, billing: r.querySelector("[name=billing]").value, note: r.querySelector("[name=note]").value.trim() })).filter(i => i.product);
+  const tot = () => { const t2 = { one_time: 0, monthly: 0, yearly: 0 }; read().forEach(i => { t2[i.billing] += Number(i.price_sar) || 0; }); $("#of-tot", dlg).innerHTML = `${ar ? "الإجمالي:" : "Total:"} <b>${offerTotals(t2)}</b>`; };
+  const bindRm = () => $$("[data-rm]", rows).forEach(b => b.onclick = () => { if ($$(".of-row", rows).length > 1) b.closest(".of-row").remove(); tot(); });
+  $("#of-add", dlg).addEventListener("click", () => { rows.insertAdjacentHTML("beforeend", row({ billing: "one_time" })); bindRm(); });
+  rows.addEventListener("input", tot); rows.addEventListener("change", tot); bindRm(); tot();
+  dlg.addEventListener("close", async () => {
+    if (dlg.returnValue === "ok") {
+      const its = read();
+      if (its.some(i => i.price_sar === "" || Number(i.price_sar) < 0)) { toast(ar ? "اكتب سعر لكل بند" : "Enter a price for every item"); dlg.remove(); offerForm(dealId, d, { ...pre, items: its }); return; }
+      try { await api("admin_offer_save", { p_deal: dealId, p_id: pre?.id || null, p_items: its, p_valid_until: f.valid.value || null, p_status: f.status.value,
+          p_client_note: f.cnote.value || null, p_internal_note: f.inote.value || null, p_share: f.share.checked });
+        toast(ar ? "تم حفظ العرض" : "Offer saved"); viewDeal(dealId); } catch (e) { toast(e.message === "invalid_input" ? (ar ? "راجع البنود والأسعار" : "Check the items and prices") : e.message); }
+    }
+    dlg.remove();
   });
 }
 
