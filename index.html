@@ -771,6 +771,13 @@ html[lang="ar"] .phead h1{line-height:1.2}
 .field.methods legend{width:100%}
 .req-done p,.req-signin p{overflow-wrap:anywhere}
 
+.acct-expbox .exp-opts{display:grid;gap:8px}
+.exp-opt{display:flex;align-items:center;gap:10px;text-align:start;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font:inherit}
+.exp-opt:hover{border-color:var(--muted)}.exp-opt:disabled{opacity:.6;cursor:progress}
+.exp-opt svg{width:18px;height:18px;flex:none}
+.exp-opt span{display:flex;flex-direction:column}.exp-opt b{font-size:14px}.exp-opt small{margin:0}
+.exp-opt.primary{border-color:color-mix(in srgb,var(--primary,#3D5AFE) 55%,transparent);background:color-mix(in srgb,var(--primary,#3D5AFE) 10%,transparent)}
+
 </style>
 <a class="sr" href="#work">Skip to products</a>
 <header class="nav">
@@ -4167,6 +4174,110 @@ document.addEventListener("DOMContentLoaded", () => {
   HP.init();
 });
 
+/* ---------- HX: file exports shared by the site and the admin dashboard ----------
+   PDF  → a styled report rendered in the browser (html2pdf: html2canvas + jsPDF), so Arabic is shaped by the browser.
+   XLSX → real Excel workbook, one sheet per section (SheetJS).  CSV / JSON → plain files.
+   Libraries load from cdnjs only when the person picks that format. Nothing leaves the browser. */
+const HX = (() => {
+  const LIBS = {
+    pdf: "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js",
+    xlsx: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
+  };
+  const cache = {};
+  const load = k => (cache[k] = cache[k] || new Promise((ok, no) => {
+    const s = document.createElement("script"); s.src = LIBS[k]; s.async = true;
+    s.onload = () => ok(); s.onerror = () => { delete cache[k]; s.remove(); no(new Error("lib_failed")); };
+    document.head.appendChild(s);
+  }));
+  const e = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const save = (blob, name) => {
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  };
+  const cellText = v => (v == null || v === "" ? "" : Array.isArray(v) ? v.join(", ") : String(v));
+
+  /* sheets: [{ name, head: [..], rows: [[..], ..] }] */
+  async function xlsx(sheets, file, rtl) {
+    await load("xlsx");
+    const X = window.XLSX, wb = X.utils.book_new();
+    sheets.forEach(s => {
+      const aoa = [s.head, ...s.rows.map(r => r.map(v => (typeof v === "number" || typeof v === "boolean" ? v : cellText(v))))];
+      const ws = X.utils.aoa_to_sheet(aoa);
+      ws["!cols"] = s.head.map((_, i) => ({ wch: Math.min(60, Math.max(10, ...aoa.slice(0, 400).map(r => cellText(r[i]).length + 2))) }));
+      if (aoa.length > 1) ws["!autofilter"] = { ref: X.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: aoa.length - 1, c: s.head.length - 1 } }) };
+      X.utils.book_append_sheet(wb, ws, s.name.replace(/[\\/?*[\]:]/g, " ").slice(0, 31));
+    });
+    if (rtl) wb.Workbook = { Views: [{ RTL: true }] };
+    X.writeFile(wb, file, { compression: true });
+  }
+
+  function csv(head, rows, file) {
+    const c = v => { let s = cellText(v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return `"${s.replace(/"/g, '""')}"`; };
+    save(new Blob(["﻿" + [head.map(c).join(","), ...rows.map(r => r.map(c).join(","))].join("\r\n")], { type: "text/csv;charset=utf-8" }), file);
+  }
+  const json = (data, file) => save(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }), file);
+
+  /* report: { title, subtitle, meta: [[label, value]], sections: [{ title, kv: [[label, value]] } | { title, head, rows, note }], footer } */
+  const CSS = `.hx{background:#fff;color:#0B1220;font:12px/1.6 "IBM Plex Sans Arabic","Instrument Sans",system-ui,sans-serif;padding:6px 2px}
+.hx *{box-sizing:border-box}
+.hx-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid #3D5AFE;padding-bottom:12px;margin-bottom:6px}
+.hx-brand{display:flex;align-items:center;gap:8px;font:800 19px/1 "Bricolage Grotesque","Instrument Sans",sans-serif;color:#0B1220;direction:ltr}
+.hx-mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#3D5AFE,#22D3EE);color:#fff;display:grid;place-items:center;font-size:15px}
+.hx-brand b{color:#3D5AFE;font-weight:800}
+.hx h1{font-size:17px;line-height:1.35;margin:0 0 2px;font-weight:700}
+.hx .mut{color:#5B6478;font-size:11px}
+.hx-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 4px;color:#3A4459;font-size:11px}
+.hx-meta span b{color:#0B1220;font-weight:600}
+.hx h2{font-size:13.5px;margin:18px 0 8px;color:#1F2A44;font-weight:700;display:flex;align-items:center;gap:8px}
+.hx h2 i{display:inline-block;width:4px;height:14px;border-radius:2px;background:#3D5AFE}
+.hx h2 small{color:#5B6478;font-weight:500;font-size:11px}
+.hx table{width:100%;border-collapse:collapse;font-size:10.5px;table-layout:auto}
+.hx th{background:#EEF1FF;color:#1F2A44;text-align:start;padding:6px 7px;border:1px solid #D9DEEA;font-weight:600;white-space:nowrap}
+.hx td{padding:5px 7px;border:1px solid #E3E7F0;vertical-align:top;overflow-wrap:anywhere}
+.hx tbody tr:nth-child(even) td{background:#FAFBFE}
+.hx .kv td:first-child{width:30%;color:#5B6478;background:#F7F8FC;font-weight:500}
+.hx .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.hx .empty{color:#8A93A6;font-style:italic;padding:6px 0}
+.hx .note{color:#8A93A6;font-size:10px;margin-top:4px}
+.hx-foot{margin-top:20px;color:#8A93A6;font-size:9.5px;border-top:1px solid #E3E7F0;padding-top:8px;display:flex;justify-content:space-between;gap:12px}`;
+  const w = v => e(v).split(/(\s+)/).map(p => (!p || /^\s+$/.test(p) ? p : `<span>${p}</span>`)).join("");
+  const isLtr = v => /^[\x00-\x7F]*$/.test(v) && /[@+.:/\d]/.test(v);
+  const td = v => { const s = cellText(v); return s === "" ? "<td>—</td>" : `<td>${isLtr(s) ? `<span class="ltr">${e(s)}</span>` : w(s)}</td>`; };
+  function reportHtml(r, rtl, width) {
+    const secs = r.sections.map(s => {
+      const h = `<h2><i></i><span>${w(s.title)}</span>${s.count != null ? ` <small>(${s.count})</small>` : ""}</h2>`;
+      if (s.kv) return h + `<table class="kv"><tbody>${s.kv.map(([k, v]) => `<tr><td>${w(k)}</td>${td(v)}</tr>`).join("")}</tbody></table>`;
+      if (!s.rows.length) return h + `<p class="empty">${w(s.empty || "—")}</p>`;
+      return h + `<table><thead><tr>${s.head.map(x => `<th>${w(x)}</th>`).join("")}</tr></thead><tbody>${s.rows.map(row => `<tr>${row.map(td).join("")}</tr>`).join("")}</tbody></table>${s.note ? `<p class="note">${w(s.note)}</p>` : ""}`;
+    }).join("");
+    return `<div class="hx" dir="${rtl ? "rtl" : "ltr"}" lang="${rtl ? "ar" : "en"}" style="width:${width}px"><style>${CSS}</style>
+      <div class="hx-head"><div><h1>${w(r.title)}</h1>${r.subtitle ? `<div class="mut">${w(r.subtitle)}</div>` : ""}</div>
+        <div class="hx-brand"><span class="hx-mark">h</span><span>HUDERA <b>AI</b></span></div></div>
+      ${r.meta?.length ? `<div class="hx-meta">${r.meta.map(([k, v]) => `<span>${w(k)}: <b>${isLtr(cellText(v)) ? `<span class="ltr">${e(v)}</span>` : w(v)}</b></span>`).join("")}</div>` : ""}
+      ${secs}
+      <div class="hx-foot"><span>${w(r.footer || "")}</span><span class="ltr">hudera-ai.github.io</span></div></div>`;
+  }
+  async function pdf(r, file, { rtl = false, landscape = false } = {}) {
+    await load("pdf");
+    const width = landscape ? 1040 : 715;
+    const host = document.createElement("div");
+    host.style.cssText = "position:fixed;left:0;top:0;width:0;height:0;overflow:hidden;opacity:0;z-index:-1;pointer-events:none";
+    host.innerHTML = reportHtml(r, rtl, width);
+    document.body.appendChild(host);
+    try {
+      if (document.fonts?.ready) await document.fonts.ready;
+      await window.html2pdf().set({
+        margin: [10, 9, 12, 9], filename: file,
+        image: { type: "jpeg", quality: 0.95 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false, scrollX: 0, scrollY: 0 },
+        jsPDF: { unit: "mm", format: "a4", orientation: landscape ? "landscape" : "portrait", compress: true },
+        pagebreak: { mode: ["css", "legacy"], avoid: ["tr", "h2", ".hx-head", ".hx-meta"] },
+      }).from(host.firstElementChild).save();
+    } finally { host.remove(); }
+  }
+  return { pdf, xlsx, csv, json, load };
+})();
+
 /* ---------- HUDERA platform client: Google sign-in, consented analytics, contact requests ----------
    Talks to Supabase (Auth + RPC functions). Nothing here is trusted by the server: the database checks
    who is calling on every request. If HUDERA_CONFIG has no Supabase project, the site keeps its old
@@ -4318,13 +4429,62 @@ const HP = (() => {
     $("#acct-mk").addEventListener("change", async e => {
       try { me = await rpc("update_my_profile", { p_marketing_consent: e.target.checked }); toast(tt("Saved", "تم الحفظ")); } catch (err) { e.target.checked = !e.target.checked; toast(errText(err.code)); }
     });
-    $("#acct-export").addEventListener("click", async () => {
-      try { const data = await rpc("my_data_export"); const a = document.createElement("a");
-        a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" })); a.download = "hudera-my-data.json"; a.click(); }
-      catch (err) { toast(errText(err.code)); }
+    let expData = null;
+    $("#acct-export").addEventListener("click", () => {
+      const open = $("#acct-expbox"); $("#acct-export").setAttribute("aria-expanded", open ? "false" : "true");
+      if (open) { open.remove(); return; }
+      const opts = [["pdf", tt("PDF report", "تقرير PDF"), tt("Easy to read and print", "سهل القراءة والطباعة"), "primary"],
+                    ["xlsx", "Excel", tt("A sheet for each section", "ورقة لكل قسم"), ""],
+                    ["json", "JSON", tt("For developers and other apps", "للمطورين والتطبيقات الأخرى"), ""]];
+      $("#acct-export").closest(".acct-sec").insertAdjacentHTML("afterend", `<div class="acct-sec acct-expbox no-l10n" id="acct-expbox"><b>${tt("Download my data", "تنزيل بياناتي")}</b>
+        <small>${tt("Choose the file format. Up to 5 downloads a day.", "اختر صيغة الملف. حتى 5 تنزيلات في اليوم.")}</small>
+        <div class="exp-opts">${opts.map(([f, l, d, c]) => `<button class="exp-opt ${c}" type="button" data-fmt="${f}">${ic("download")}<span><b>${l}</b><small>${d}</small></span></button>`).join("")}</div></div>`);
+      $$("#acct-expbox [data-fmt]").forEach(b => b.addEventListener("click", async () => {
+        const all = $$("#acct-expbox [data-fmt]"), lbl = b.querySelector("small"), was = lbl.textContent;
+        all.forEach(x => (x.disabled = true)); lbl.textContent = tt("Preparing the file…", "جارٍ تجهيز الملف…");
+        try { expData = expData || await rpc("my_data_export"); await exportMine(b.dataset.fmt, expData); toast(tt("Your file is downloading.", "جارٍ تنزيل الملف.")); }
+        catch (err) { toast(err.message === "lib_failed" ? tt("Couldn't prepare the file. Check your connection and try again.", "تعذّر تجهيز الملف. تأكد من الاتصال وحاول مرة أخرى.") : err.code === "rate_limited" ? tt("You reached today's download limit (5 a day). Try again tomorrow.", "وصلت لحد التنزيل اليوم (5 مرات). جرّب بكرة.") : errText(err.code)); }
+        finally { lbl.textContent = was; all.forEach(x => (x.disabled = false)); }
+      }));
     });
     $("#acct-del").addEventListener("click", deleteAccount);
     $("#acct-close").focus();
+  }
+  /* "Download my data" in PDF / Excel / JSON (the data itself comes from my_data_export) */
+  async function exportMine(fmt, d) {
+    const ar = LANG === "ar", day = new Date().toLocaleDateString("en-CA");
+    const dt = v => (v ? new Date(v).toLocaleString(ar ? "ar-EG-u-ca-gregory-nu-latn" : "en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "");
+    const yes = v => (v ? tt("Yes", "نعم") : tt("No", "لا"));
+    const STAT = { new: tt("New", "جديد"), pending: tt("Pending", "قيد الانتظار"), contacted: tt("Contacted", "تم التواصل"), in_progress: tt("In progress", "قيد التنفيذ"), resolved: tt("Resolved", "تم الحل"), closed: tt("Closed", "مغلق"),
+                   queued: tt("Queued", "في الانتظار"), sent: tt("Sent", "أُرسل"), delivered: tt("Delivered", "وصل"), failed: tt("Failed", "فشل"), bounced: tt("Bounced", "مرتد"), active: tt("Active", "نشط"), suspended: tt("Suspended", "موقوف") };
+    const METHOD = { email: tt("E-mail", "البريد"), phone: tt("Phone call", "مكالمة"), whatsapp: "WhatsApp" };
+    const st = v => STAT[v] || v || "";
+    if (fmt === "json") return HX.json(d, `hudera-my-data-${day}.json`);
+    const p = d.profile || {}, reqs = d.contact_requests || [], mails = d.emails || [], acts = d.activity || [];
+    const profile = [[tt("Name", "الاسم"), p.full_name], [tt("E-mail", "البريد الإلكتروني"), p.email], [tt("E-mail verified by Google", "البريد موثّق من جوجل"), yes(p.email_verified)],
+      [tt("Phone / WhatsApp", "الجوال / واتساب"), p.phone], [tt("Sign-in method", "طريقة الدخول"), "Google"], [tt("Account status", "حالة الحساب"), st(p.status)],
+      [tt("News by e-mail", "أخبار عبر البريد"), yes(p.marketing_consent)], [tt("Registered", "تاريخ التسجيل"), dt(p.created_at)], [tt("Last sign-in", "آخر تسجيل دخول"), dt(p.last_login_at)],
+      [tt("Last activity", "آخر نشاط"), dt(p.last_seen_at)], [tt("Sign-ins", "عدد مرات الدخول"), p.login_count], [tt("Privacy notice accepted", "الموافقة على إشعار الخصوصية"), dt(p.privacy_accepted_at)], [tt("Account ID", "رقم الحساب"), p.id]];
+    const H = { req: [tt("Ref.", "الرقم"), tt("Subject", "الموضوع"), tt("Status", "الحالة"), tt("Reply by", "طريقة الرد"), tt("Date", "التاريخ"), tt("Message", "الرسالة")],
+                mail: [tt("E-mail", "الرسالة"), tt("Subject", "العنوان"), tt("Status", "الحالة"), tt("Date", "التاريخ")],
+                act: [tt("Activity", "النشاط"), tt("Page", "الصفحة"), tt("Time", "الوقت")] };
+    const R = { req: reqs.map(r => [r.ref, r.subject, st(r.status), METHOD[r.preferred_method] || r.preferred_method, dt(r.created_at), r.message]),
+                mail: mails.map(m => [m.template, m.subject, st(m.status), dt(m.created_at)]),
+                act: acts.map(a => [a.event, a.path, dt(a.at)]) };
+    if (fmt === "xlsx") return HX.xlsx([
+      { name: tt("Profile", "الملف الشخصي"), head: [tt("Field", "البيان"), tt("Value", "القيمة")], rows: profile.map(([k, v]) => [k, v ?? ""]) },
+      { name: tt("Requests", "الطلبات"), head: H.req, rows: R.req }, { name: tt("E-mails", "الرسائل"), head: H.mail, rows: R.mail },
+      { name: tt("Activity", "النشاط"), head: H.act, rows: R.act }], `hudera-my-data-${day}.xlsx`, ar);
+    const MAX = 300;
+    return HX.pdf({ title: tt("Your data at HUDERA AI", "بياناتك في HUDERA AI"), subtitle: tt("A copy of everything we store about your account.", "نسخة من كل البيانات المحفوظة عن حسابك."),
+      meta: [[tt("Account", "الحساب"), p.email], [tt("Exported", "تاريخ التصدير"), dt(d.exported_at || new Date())]],
+      sections: [{ title: tt("Profile", "الملف الشخصي"), kv: profile.filter(([, v]) => v != null && v !== "") },
+        { title: tt("Your requests", "طلباتك"), count: reqs.length, head: H.req, rows: R.req, empty: tt("No requests yet.", "لا توجد طلبات بعد.") },
+        { title: tt("E-mails we sent you", "الرسائل المرسلة إليك"), count: mails.length, head: H.mail, rows: R.mail, empty: tt("No e-mails yet.", "لا توجد رسائل بعد.") },
+        { title: tt("Activity on the site", "نشاطك على الموقع"), count: acts.length, head: H.act, rows: R.act.slice(0, MAX), empty: tt("No activity recorded.", "لا يوجد نشاط مسجل."),
+          note: acts.length > MAX ? tt(`Showing the latest ${MAX}. The Excel and JSON files include all ${acts.length}.`, `يظهر آخر ${MAX} فقط. ملف Excel وملف JSON فيهم الـ ${acts.length} كاملين.`) : "" }],
+      footer: tt("You can delete your account at any time from the account panel.", "يمكنك حذف حسابك في أي وقت من لوحة الحساب.") },
+      `hudera-my-data-${day}.pdf`, { rtl: ar });
   }
   function closePanel() { $("#acct-panel")?.remove(); $("#acct-scrim")?.remove(); }
   function deleteAccount() {
