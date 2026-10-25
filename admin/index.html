@@ -179,6 +179,27 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 .xmenu-list button:hover,.xmenu-list button:focus-visible{background:var(--surface-2,rgba(127,127,127,.12))}
 .xmenu-list b{font-size:13.5px;font-weight:600}.xmenu-list small{font-size:12px;color:var(--muted)}
 
+/* interest insights */
+.ins-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.ins{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:border-color .15s}
+.ins:hover{border-color:var(--faint)}
+.ins-h{display:flex;align-items:center;gap:10px}.ins-h .who{flex:1;min-width:0;display:flex;flex-direction:column}
+.ins-h .who b{color:var(--ink);font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ins-h .who .s{font-size:12px;color:var(--muted);text-align:start;overflow:hidden;text-overflow:ellipsis}
+.ins .lv{display:flex;align-items:center;gap:6px;flex:none}
+.av.sm{width:34px;height:34px;font-size:14px}
+.sbar{display:inline-block;width:54px;height:6px;border-radius:4px;background:var(--surface-3);overflow:hidden;vertical-align:middle}.sbar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--red));border-radius:4px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:12px;padding:3px 9px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--text)}
+.ins .sum{margin:0;font-size:13px;color:var(--text);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ins .foot{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ins .foot .sp{flex:1}
+.kpi.lv-hot b{color:var(--red)}.kpi.lv-warm b{color:var(--amber)}.kpi.lv-cold b{color:var(--sky)}
+.ai-sum{font-size:14px;line-height:1.7;color:var(--ink);margin:6px 0 10px}
+.ai-int{margin:0 0 10px;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}.ai-int li{display:flex;flex-direction:column;font-size:13px;border-inline-start:3px solid var(--primary);padding-inline-start:9px}.ai-int b{color:var(--ink)}
+.ai-next{background:var(--primary-soft);border-radius:10px;padding:9px 12px;margin-bottom:12px}.ai-next small{color:var(--primary-ink);font-weight:600}.ai-next p{margin:2px 0 0;color:var(--ink);font-size:13.5px}
+.fld{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:12.5px;color:var(--muted)}.fld .input{width:100%}.fld textarea{min-height:220px;line-height:1.7;resize:vertical;font:inherit;font-size:14px;padding:10px 12px;height:auto}
+.warn{background:var(--amber-soft);color:var(--amber);border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:10px}
+.req{border-top:1px solid var(--line);padding:8px 0}.req:first-of-type{border-top:0}.req p{margin:4px 0;white-space:pre-wrap}
+@media (max-width:560px){.ins-list{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -312,7 +333,7 @@ const AR = {
   "Top pages": "أكثر الصفحات زيارة", "Traffic sources": "مصادر الزيارات", "Referrers": "المواقع المُحيلة", "Devices": "الأجهزة", "Browsers": "المتصفحات",
   "Retention by sign-up week": "الاحتفاظ حسب أسبوع التسجيل", "Requests by status": "الطلبات حسب الحالة", "Show as table": "عرض كجدول",
   "Search name, e-mail or phone": "ابحث بالاسم أو البريد أو الجوال", "All": "الكل", "Active": "نشط", "Inactive": "غير نشط", "Suspended": "موقوف", "Deleted": "محذوف",
-  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "Export": "تصدير", "PDF report": "تقرير PDF", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
+  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "Interest insights": "اهتمامات العملاء", "Export": "تصدير", "PDF report": "تقرير PDF", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
   "Registered": "تاريخ التسجيل", "Last login": "آخر دخول", "Last activity": "آخر نشاط", "Status": "الحالة", "Recent features": "آخر الميزات", "Important actions": "إجراءات مهمة",
   "Contact": "التواصل", "Previous": "السابق", "Next": "التالي", "No results": "لا توجد نتائج", "Account": "الحساب", "Timeline": "الخط الزمني", "Load more": "تحميل المزيد",
   "Send e-mail": "إرسال بريد", "Used": "استُخدمت", "Not used": "لم تُستخدم", "Unknown": "غير معروف", "Recent sessions": "آخر الجلسات", "Pages visited": "الصفحات المزارة",
@@ -342,7 +363,7 @@ const ICON = {
   mail: "M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm-1 1 9 7 9-7", gear: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z",
   list: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01", menu: "M3 6h18M3 12h18M3 18h18", eye: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
   user: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", flag: "M4 22V4m0 0h13l-2 4 2 4H4", phone: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z",
-  check: "M20 6 9 17l-5-5", dl: "M12 3v12m0 0-4-4m4 4 4-4M4 21h16", sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4", moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
+  spark: "M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z", check: "M20 6 9 17l-5-5", dl: "M12 3v12m0 0-4-4m4 4 4-4M4 21h16", sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4", moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
   back: "M15 18l-6-6 6-6", dot: "M12 12h.01",
 };
 const ic = n => `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON[n] || ICON.dot}"/></svg>`;
@@ -412,7 +433,7 @@ function hbars(el, rows, { label, value, fmt = nf, color = "var(--s1)", onClick 
 }
 
 /* ---------------- layout ---------------- */
-const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["leads", "Leads", "inbox", "leads.view"],
+const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["insights", "Interest insights", "spark", "leads.view"], ["leads", "Leads", "inbox", "leads.view"],
   ["features", "Features", "grid", "features.view"], ["emails", "E-mails", "mail", "email.send"], ["settings", "Settings", "gear", "analytics.view"], ["audit", "Audit log", "list", "audit.view"]];
 const can = p => !!who?.perms?.includes(p);
 function shell() {
@@ -595,7 +616,7 @@ async function exportUsers(fmt = "xlsx") {
 
 /* ---------------- one user ---------------- */
 async function viewUser(id) {
-  const v = page(t("Users"), `<a class="btn" href="#/users">${ic("back")}${t("Users")}</a>`);
+  const v = page(t("Users"), `<a class="btn" href="#/users">${ic("back")}${t("Users")}</a>${can("leads.view") ? ` <a class="btn" href="#/insights/${esc(id)}">${ic("spark")}${LANG === "ar" ? "الاهتمامات والإيميل المقترح" : "Interests & suggested e-mail"}</a>` : ""}`);
   v.innerHTML = `<div class="skel"></div>`;
   let d; try { d = await api("admin_get_user", { p_id: id }); } catch (e) { v.innerHTML = failBox(e); return; }
   const u = d.user;
@@ -912,12 +933,188 @@ async function viewAudit() {
   bindPager(v);
 }
 
+/* ---------------- interest insights (who looked at what, how interested, AI summary + e-mail draft) ---------------- */
+const AR_ = () => LANG === "ar";
+const LEVEL = { hot: ["Hot", "c-red", "ساخن"], warm: ["Warm", "c-amber", "دافئ"], cold: ["Cold", "c-sky", "بارد"] };
+const levelChip = l => LEVEL[l] ? `<span class="chip ${LEVEL[l][1]}">${AR_() ? LEVEL[l][2] : LEVEL[l][0]}</span>` : "";
+const ISTAT = { new: ["New", "جديد", "c-blue"], reviewed: ["Reviewed", "تمت المراجعة", "c-violet"], contacted: ["Contacted", "تم التواصل", "c-mint"], dismissed: ["Dismissed", "مستبعد", ""] };
+const istatChip = s => `<span class="chip ${ISTAT[s]?.[2] || ""}">${(AR_() ? ISTAT[s]?.[1] : ISTAT[s]?.[0]) || esc(s)}</span>`;
+const PNAME = { workforce: "HUDERA Workforce", "contractor-os": "Contractor OS", contractor_os: "Contractor OS", connect: "HUDERA Connect", hesabo: "Hesabo", sitelog: "SiteLog",
+  threadline: "Threadline", quoteflow: "QuoteFlow", costpulse: "CostPulse", payroster: "PayRoster", attendify: "Attendify", matchdesk: "MatchDesk", permitpack: "PermitPack" };
+const EVT = {
+  platform_opened: ["Opened a live platform demo", "فتح ديمو منصة"], demo_opened: ["Opened a product page", "فتح صفحة منتج"], system_opened: ["Opened a system", "فتح نظام"],
+  roi_calculated: ["Used the value calculator", "استخدم حاسبة القيمة"], whatsapp_clicked: ["Clicked WhatsApp", "ضغط على واتساب"], faq_opened: ["Opened a FAQ answer", "فتح سؤالاً شائعاً"],
+  github_clicked: ["Opened GitHub", "فتح GitHub"], page_view: ["Viewed a page", "زار صفحة"], section_view: ["Saw a homepage section", "شاهد قسماً في الصفحة الرئيسية"],
+  contact_started: ["Started the contact form", "بدأ تعبئة نموذج التواصل"], contact_submitted: ["Sent a contact request", "أرسل طلب تواصل"], contact_failed: ["Contact form failed", "تعذّر إرسال النموذج"],
+  sign_in_started: ["Started Google sign-in", "بدأ تسجيل الدخول"], login: ["Signed in", "سجّل الدخول"], user_registered: ["Created an account", "أنشأ حساباً"],
+  phone_added: ["Added a phone number", "أضاف رقم جوال"], language_changed: ["Switched language", "غيّر اللغة"], marketing_consent_changed: ["Changed news consent", "غيّر موافقة الأخبار"] };
+const evtName = n => (EVT[n] ? (AR_() ? EVT[n][1] : EVT[n][0]) : n);
+const topicLabel = i => (AR_() ? i.label_ar : i.label_en) || i.topic || i.key;
+const firstName = n => String(n || "").trim().split(/\s+/)[0] || "";
+const scoreBar = s => `<span class="sbar" title="${s}/100"><i style="width:${Math.max(3, Math.min(100, s || 0))}%"></i></span><b class="num">${s ?? 0}</b>`;
+
+function fallbackEmail(d) {
+  const p = d.person || {}, top = (d.rules?.interests || []).find(i => i.category === "platform" || i.category === "product");
+  const fn = firstName(p.full_name), ar = AR_();
+  const what = top ? (ar ? top.label_ar : top.label_en) : (ar ? "حلول HUDERA AI" : "HUDERA AI's solutions");
+  return ar ? {
+    subject: top ? `${what.split(" (")[0]}: اقتراح يناسب عملك` : "اقتراح يناسب عملك من HUDERA AI",
+    body: `مرحباً ${fn || ""}،\n\nشكراً لتسجيلك في موقع HUDERA AI. يسعدنا أن نعرّفك أكثر على ${what}، وكيف يمكن أن يوفّر وقت فريقك ويقلّل العمل اليدوي في شركتك.\n\nإذا كان مناسباً لك، نرتّب مكالمة قصيرة (15 دقيقة) نعرض فيها ديمو مخصصاً على طريقة عملكم ونجيب عن أسئلتك.\n\nما الوقت المناسب لك هذا الأسبوع؟\n\nمع التحية،\nفريق HUDERA AI`.replace("مرحباً ،", "مرحباً،"),
+  } : {
+    subject: top ? `${what.split(" (")[0]}: an idea for your team` : "An idea for your team from HUDERA AI",
+    body: `Hi ${fn || "there"},\n\nThank you for signing up on the HUDERA AI website. We'd be glad to show you more about ${what} and how it can save your team time and cut manual work.\n\nIf it suits you, we can set up a short 15-minute call with a demo tailored to how your company works, and answer any questions.\n\nWhat time works for you this week?\n\nBest regards,\nThe HUDERA AI team`,
+  };
+}
+
+async function runLeadAI(id) {
+  const { data: s } = await sb.auth.getSession();
+  let r;
+  try {
+    r = await fetch(`${cfg.supabaseUrl}/functions/v1/lead-ai`, { method: "POST",
+      headers: { apikey: cfg.supabaseAnonKey, authorization: `Bearer ${s.session.access_token}`, "content-type": "application/json" },
+      body: JSON.stringify({ user_id: id, lang: LANG }) });
+  } catch (e) { const er = new Error("network"); er.code = "network"; throw er; }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { const er = new Error(j.error || (r.status === 404 ? "ai_not_deployed" : "ai_failed")); er.code = r.status === 404 && !j.error ? "ai_not_deployed" : j.error || "ai_failed"; throw er; }
+  return j.insight;
+}
+const aiErr = code => ({
+  ai_not_configured: ["The AI key isn't added yet (GEMINI_API_KEY in Supabase → Edge Functions → Secrets).", "لم تتم إضافة مفتاح الذكاء الاصطناعي بعد (GEMINI_API_KEY في Supabase ← Edge Functions ← Secrets)."],
+  ai_not_deployed: ["The AI function isn't deployed yet.", "دالة الذكاء الاصطناعي غير منشورة بعد."],
+  rate_limited: ["Daily AI limit reached. Try again tomorrow.", "وصلت للحد اليومي للتحليل. جرّب غداً."],
+  forbidden: ["You don't have permission for this.", "ليست لديك صلاحية لهذا."],
+  network: ["Couldn't reach the AI function. Check your connection, or the function may not be deployed yet.", "تعذّر الوصول لدالة الذكاء الاصطناعي. تأكد من الاتصال، أو ربما لم تُنشر الدالة بعد."],
+}[code] || ["The AI couldn't analyse this person right now. Try again.", "تعذّر التحليل الآن. حاول مرة أخرى."])[AR_() ? 1 : 0];
+
+const iq = { level: "all", status: "all", search: "", page: 0 };
+async function viewInsights() {
+  const ar = AR_();
+  const v = page(ar ? "اهتمامات العملاء" : "Interest insights", can("leads.manage") ? `<button class="btn primary" id="ai-all" type="button">${ic("spark")}${ar ? "حلّل الجدد بالذكاء الاصطناعي" : "Analyse new with AI"}</button>` : "");
+  v.innerHTML = `<p class="sub" style="margin:0 0 12px">${ar ? "لكل مستخدم مسجل: ما الذي اطّلع عليه في الموقع، ودرجة اهتمامه، وملخص وإيميل متابعة جاهز. التقييم الأولي يعمل تلقائياً، والذكاء الاصطناعي يكتب الملخص والإيميل." : "For every registered user: what they explored, how interested they seem, plus a summary and a ready follow-up e-mail. Rule-based scoring is automatic; AI writes the summary and the e-mail."}</p>
+    <div id="i-kpis" class="grid g4" style="margin-bottom:12px"></div>
+    <div class="filters" style="margin-bottom:12px">
+      <input class="input" id="i-q" type="search" placeholder="${t("Search name, e-mail or phone")}" value="${esc(iq.search)}" style="flex:1;min-width:200px">
+      <select class="input" id="i-lv">${[["all", ar ? "كل المستويات" : "All levels"], ["hot", ar ? "ساخن" : "Hot"], ["warm", ar ? "دافئ" : "Warm"], ["cold", ar ? "بارد" : "Cold"]].map(([k, l]) => `<option value="${k}" ${iq.level === k ? "selected" : ""}>${l}</option>`).join("")}</select>
+      <select class="input" id="i-st">${[["all", ar ? "كل الحالات" : "Any status"], ...Object.entries(ISTAT).map(([k, x]) => [k, ar ? x[1] : x[0]])].map(([k, l]) => `<option value="${k}" ${iq.status === k ? "selected" : ""}>${l}</option>`).join("")}</select>
+    </div><div id="i-list"><div class="skel"></div></div>`;
+  let timer;
+  $("#i-q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => { iq.search = e.target.value.trim(); loadInsights(); }, 300); });
+  $("#i-lv").addEventListener("change", e => { iq.level = e.target.value; loadInsights(); });
+  $("#i-st").addEventListener("change", e => { iq.status = e.target.value; loadInsights(); });
+  $("#ai-all")?.addEventListener("click", analyseNew);
+  loadInsights();
+}
+let insightRows = [];
+async function loadInsights() {
+  const box = $("#i-list"); if (!box) return; const ar = AR_();
+  let r; try { r = await api("admin_insights_list", { p_level: "all", p_status: iq.status, p_search: iq.search || null, p_limit: 100, p_offset: 0 }); } catch (e) { box.innerHTML = failBox(e); return; }
+  insightRows = r.rows.filter(x => !x.staff_role);
+  const cnt = l => insightRows.filter(x => x.level === l).length;
+  $("#i-kpis").innerHTML = [["hot", ar ? "ساخن" : "Hot"], ["warm", ar ? "دافئ" : "Warm"], ["cold", ar ? "بارد" : "Cold"]].map(([k, l]) => `<div class="kpi lv-${k}"><small>${l}</small><b>${cnt(k)}</b></div>`).join("")
+    + `<div class="kpi"><small>${ar ? "حلّلها الذكاء الاصطناعي" : "Analysed by AI"}</small><b>${insightRows.filter(x => x.ai && !x.stale).length}</b><span>${ar ? `من ${insightRows.length}` : `of ${insightRows.length}`}</span></div>`;
+  const rows = insightRows.filter(x => iq.level === "all" || x.level === iq.level);
+  box.innerHTML = rows.length ? `<div class="ins-list">${rows.map(x => `<a class="ins card" href="#/insights/${x.id}">
+      <div class="ins-h">${x.avatar_url ? `<img class="av sm" src="${esc(x.avatar_url)}" alt="" referrerpolicy="no-referrer" data-ini="${esc((x.full_name || x.email)[0].toUpperCase())}">` : `<span class="av sm">${esc((x.full_name || x.email)[0].toUpperCase())}</span>`}
+        <div class="who"><b dir="auto">${esc(x.full_name || x.email)}</b><span class="s" dir="ltr">${esc(x.email)}</span></div>
+        <div class="lv">${levelChip(x.level)}${scoreBar(x.score)}</div></div>
+      <div class="tags">${x.interests.length ? x.interests.map(i => `<span class="tag">${esc(topicLabel(i).split(" (")[0])}${i.count > 1 ? ` ×${i.count}` : ""}</span>`).join("") : `<span class="faint small">${ar ? "لا نشاط مهم بعد" : "No meaningful activity yet"}</span>`}</div>
+      <p class="sum" dir="auto">${x.ai_summary ? esc(x.ai_summary) : `<span class="faint">${ar ? "لم يُحلَّل بالذكاء الاصطناعي بعد." : "Not analysed by AI yet."}</span>`}${x.stale ? ` <span class="chip c-amber">${ar ? "نشاط جديد بعد التحليل" : "new activity since"}</span>` : ""}</p>
+      <div class="foot">${istatChip(x.status)}${x.requests ? `<span class="chip c-blue">${ar ? "أرسل طلب تواصل" : "sent a request"}</span>` : ""}${x.marketing_consent ? `<span class="chip c-mint">${ar ? "موافق على الأخبار" : "news consent"}</span>` : ""}<span class="sp"></span><span class="small muted">${ar ? "آخر نشاط" : "Last activity"} ${ago(x.last_seen_at)}</span></div>
+    </a>`).join("")}</div>` : `<p class="empty">${t("No results")}</p>`;
+}
+async function analyseNew() {
+  const ar = AR_(), btn = $("#ai-all");
+  const todo = insightRows.filter(x => (x.level === "hot" || x.level === "warm") && (!x.ai || x.stale)).slice(0, 15);
+  if (!todo.length) { toast(ar ? "لا يوجد عملاء ساخنون أو دافئون يحتاجون تحليلاً الآن." : "No hot or warm people need analysis right now."); return; }
+  btn.disabled = true; let ok = 0;
+  for (const [i, x] of todo.entries()) {
+    btn.lastChild.textContent = ar ? ` جارٍ التحليل ${i + 1}/${todo.length}…` : ` Analysing ${i + 1}/${todo.length}…`;
+    try { await runLeadAI(x.id); ok++; } catch (e) { toast(aiErr(e.code)); if (["ai_not_configured", "ai_not_deployed", "forbidden", "rate_limited"].includes(e.code)) break; }
+  }
+  btn.disabled = false; btn.lastChild.textContent = ar ? "حلّل الجدد بالذكاء الاصطناعي" : "Analyse new with AI";
+  if (ok) toast(ar ? `تم تحليل ${ok}` : `${ok} analysed`);
+  loadInsights();
+}
+
+async function viewInsight(id) {
+  const ar = AR_();
+  const v = page(ar ? "اهتمامات العملاء" : "Interest insights", `<a class="btn" href="#/insights">${ic("back")}${ar ? "كل العملاء" : "All people"}</a> <a class="btn" href="#/users/${esc(id)}">${ic("user")}${ar ? "ملف المستخدم" : "User profile"}</a>`);
+  v.innerHTML = `<div class="skel"></div>`;
+  let d; try { d = await api("admin_insight_get", { p_user: id }); } catch (e) { v.innerHTML = failBox(e); return; }
+  const g = d.digest, p = g.person, rules = g.rules || {}, ins = d.insight || {};
+  const hasAI = !!ins.generated_at, level = (hasAI && ins.level) || rules.level, score = hasAI ? ins.score : rules.score;
+  const stale = hasAI && ins.events_until && g.newest_event_at && new Date(g.newest_event_at) > new Date(ins.events_until);
+  const fn = firstName(p.full_name);
+  const draft = ins.email_body ? { subject: ins.email_subject || "", body: ins.email_body.replaceAll("{{first_name}}", fn || (ar ? "" : "there")).replace("مرحباً ،", "مرحباً،") } : fallbackEmail(g);
+  const consentOk = p.agreed_to_marketing_emails || (g.requests || []).length > 0;
+  $("#page-h").textContent = p.full_name || p.email;
+  const acts = (g.activity || []).map(a => {
+    const det = a.detail ? (PNAME[a.detail] || (a.event === "faq_opened" ? `#${+a.detail + 1}` : a.detail)) : "";
+    return `<tr><td>${esc(evtName(a.event))}${det ? ` · <b dir="auto">${esc(det)}</b>` : ""}</td><td class="num">${nf(a.count)}</td><td class="small">${ago(a.last_at)}</td></tr>`;
+  }).join("");
+  const calc = g.calculator;
+  v.innerHTML = `
+    <section class="card"><div class="prof">${p.avatar_url ? `<img class="av" src="${esc(p.avatar_url)}" alt="" referrerpolicy="no-referrer" data-ini="${esc((p.full_name || p.email)[0].toUpperCase())}">` : `<span class="av">${esc((p.full_name || p.email)[0].toUpperCase())}</span>`}
+      <div style="flex:1;min-width:220px"><h2 dir="auto">${esc(p.full_name || "—")}</h2><div class="small muted" dir="ltr" style="text-align:start">${esc(p.email)}${p.phone ? ` · ${esc(p.phone)}` : ""}</div>
+        <div class="filters" style="margin-top:6px">${levelChip(level)}${scoreBar(score)}${istatChip(ins.status || "new")}${p.agreed_to_marketing_emails ? `<span class="chip c-mint">${ar ? "موافق على الأخبار" : "news consent"}</span>` : `<span class="chip">${ar ? "غير موافق على الأخبار" : "no news consent"}</span>`}</div></div>
+      ${can("leads.manage") ? `<label class="small">${ar ? "الحالة" : "Status"} <select class="input" id="ins-st">${Object.entries(ISTAT).map(([k, x]) => `<option value="${k}" ${(ins.status || "new") === k ? "selected" : ""}>${ar ? x[1] : x[0]}</option>`).join("")}</select></label>` : ""}</div></section>
+    <div class="grid g2">
+      <section class="card"><h2>${ar ? "تحليل الذكاء الاصطناعي" : "AI analysis"}</h2>
+        ${hasAI ? `<p class="sub">${esc(ins.model || "")} · ${fdt(ins.generated_at)}${stale ? ` · <span class="chip c-amber">${ar ? "يوجد نشاط أحدث" : "newer activity exists"}</span>` : ""}</p>
+          <p dir="auto" class="ai-sum">${esc(ins.summary || "")}</p>
+          ${(ins.interests || []).length ? `<ul class="ai-int">${ins.interests.map(i => `<li><b dir="auto">${esc(i.topic || "")}</b><span dir="auto">${esc(i.reason || "")}</span></li>`).join("")}</ul>` : ""}
+          ${ins.next_action ? `<div class="ai-next"><small>${ar ? "الخطوة المقترحة" : "Suggested next step"}${ins.channel ? ` · ${ins.channel === "whatsapp" ? "WhatsApp" : ins.channel === "phone" ? (ar ? "اتصال" : "Phone") : (ar ? "إيميل" : "E-mail")}` : ""}</small><p dir="auto">${esc(ins.next_action)}</p></div>` : ""}`
+        : `<p class="muted">${ar ? "لم يُحلَّل بعد. التقييم الحالي من القواعد التلقائية. اضغط الزر ليكتب الذكاء الاصطناعي ملخصاً وإيميلاً مخصصاً." : "Not analysed yet; the score below comes from automatic rules. Press the button to get an AI summary and a tailored e-mail."}</p>`}
+        ${can("leads.manage") ? `<button class="btn ${hasAI ? "" : "primary"}" id="ins-ai" type="button">${ic("spark")}<span>${hasAI ? (ar ? "إعادة التحليل" : "Analyse again") : (ar ? "حلّل بالذكاء الاصطناعي" : "Analyse with AI")}</span></button>` : ""}
+      </section>
+      <section class="card"><h2>${ar ? "الاهتمامات (تقييم تلقائي)" : "Interests (automatic score)"}</h2><p class="sub">${ar ? "محسوبة من نشاطه: المنصات والمنتجات التي فتحها، والحاسبة، وواتساب، وطلبات التواصل. النشاط الأحدث له وزن أكبر." : "From their activity: platforms and products opened, calculator, WhatsApp, contact requests. Recent activity weighs more."}</p>
+        <div id="ins-bars"></div>
+        ${calc ? `<p class="small" style="margin-top:10px"><b>${ar ? "مدخلات الحاسبة:" : "Calculator inputs:"}</b> ${ar ? `${nf(calc.requests)} طلب شهرياً · ${nf(calc.minutes)} دقيقة للطلب · ${nf(calc.share)}% آلي · تكلفة ${nf(calc.cost)}` : `${nf(calc.requests)} requests/month · ${nf(calc.minutes)} min each · ${nf(calc.share)}% automated · cost ${nf(calc.cost)}`}</p>` : ""}
+      </section>
+    </div>
+    <section class="card"><h2>${ar ? "إيميل المتابعة" : "Follow-up e-mail"}</h2>
+      <p class="sub">${hasAI && ins.email_body ? (ar ? "كتبه الذكاء الاصطناعي. راجعه وعدّل قبل الإرسال." : "Written by AI. Review and edit before sending.") : (ar ? "مسودة جاهزة من القالب. حلّل بالذكاء الاصطناعي للحصول على إيميل مخصص." : "A template draft. Analyse with AI for a tailored e-mail.")}</p>
+      ${consentOk ? "" : `<div class="warn">${ar ? "هذا الشخص لم يوافق على رسائل الأخبار ولم يرسل طلب تواصل. اجعل الرسالة متابعة خدمية بسيطة وليست ترويجية، ولا ترسل له رسائل تسويقية متكررة." : "This person hasn't agreed to news e-mails and hasn't sent a request. Keep it a light service follow-up, not promotional, and don't send repeated marketing."}</div>`}
+      <label class="fld"><span>${ar ? "العنوان" : "Subject"}</span><input class="input" id="em-sub" dir="auto" value="${esc(draft.subject)}"></label>
+      <label class="fld"><span>${ar ? "النص" : "Body"}</span><textarea class="input" id="em-body" dir="auto" rows="12">${esc(draft.body)}</textarea></label>
+      <div class="filters">
+        <a class="btn primary" id="em-gmail" target="_blank" rel="noopener">${ic("mail")}${ar ? "فتح في Gmail" : "Open in Gmail"}</a>
+        ${p.phone ? `<a class="btn" id="em-wa" target="_blank" rel="noopener">WhatsApp</a>` : ""}
+        <button class="btn" id="em-copy" type="button">${ar ? "نسخ النص" : "Copy text"}</button>
+        ${can("leads.manage") ? `<button class="btn" id="em-save" type="button">${ar ? "حفظ التعديلات" : "Save edits"}</button><button class="btn" id="em-done" type="button">${ic("check")}${ar ? "تم التواصل" : "Mark contacted"}</button>` : ""}
+      </div></section>
+    <div class="grid g2">
+      <section class="card"><h2>${ar ? "ماذا فعل على الموقع" : "What they did on the site"}</h2>
+        ${acts ? `<div class="tbl-wrap"><table><thead><tr><th>${ar ? "النشاط" : "Activity"}</th><th class="num">${ar ? "مرات" : "Times"}</th><th>${ar ? "آخر مرة" : "Last"}</th></tr></thead><tbody>${acts}</tbody></table></div>` : `<p class="empty">${ar ? "لا يوجد نشاط مسجل (ربما لم يوافق على الإحصاءات)." : "No recorded activity (they may not have allowed analytics)."}</p>`}
+        <p class="small faint" style="margin-top:8px">${ar ? `${nf(g.sessions?.count)} جلسة · المصادر: ${esc((g.sessions?.sources || []).join("، ") || "—")}${(g.sessions?.referrers || []).length ? ` · ${esc(g.sessions.referrers.join("، "))}` : ""}` : `${nf(g.sessions?.count)} sessions · sources: ${esc((g.sessions?.sources || []).join(", ") || "—")}${(g.sessions?.referrers || []).length ? ` · ${esc(g.sessions.referrers.join(", "))}` : ""}`}</p></section>
+      <section class="card"><h2>${t("Contact requests")}</h2>${(g.requests || []).length ? g.requests.map(r => `<div class="req"><b dir="auto">${esc(r.subject)}</b> ${chip(STATUS[r.status])}<p dir="auto" class="small">${esc(r.message)}</p><span class="small muted">${r.company ? `${esc(r.company)} · ` : ""}${ar ? `قبل ${r.days_ago} يوم` : `${r.days_ago} days ago`} · ${esc(r.preferred_method)}</span></div>`).join("") : `<p class="muted">${ar ? "لم يرسل أي طلب." : "No requests."}</p>`}</section>
+    </div>`;
+  hbars($("#ins-bars"), rules.interests || [], { label: i => `${topicLabel(i)}${i.count > 1 ? ` (×${i.count})` : ""}`, value: i => i.points });
+  const upd = () => {
+    const su = $("#em-sub").value, bo = $("#em-body").value;
+    $("#em-gmail").href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(p.email)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(bo)}`;
+    if ($("#em-wa")) $("#em-wa").href = `https://wa.me/${String(p.phone).replace(/\D/g, "")}?text=${encodeURIComponent(bo)}`;
+  };
+  upd(); $("#em-sub").addEventListener("input", upd); $("#em-body").addEventListener("input", upd);
+  $("#em-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(`${$("#em-sub").value}\n\n${$("#em-body").value}`); toast(ar ? "تم النسخ" : "Copied"); } catch (e) { toast(ar ? "تعذّر النسخ" : "Couldn't copy"); } });
+  $("#em-save")?.addEventListener("click", async () => {
+    try { await api("admin_insight_update", { p_user: id, p_email_subject: $("#em-sub").value, p_email_body: $("#em-body").value }); toast(ar ? "تم الحفظ" : "Saved"); } catch (e) { toast(e.message); }
+  });
+  $("#em-done")?.addEventListener("click", async () => { try { await api("admin_insight_update", { p_user: id, p_status: "contacted" }); toast(ar ? "تم تسجيل التواصل" : "Marked as contacted"); viewInsight(id); } catch (e) { toast(e.message); } });
+  $("#ins-st")?.addEventListener("change", async e => { try { await api("admin_insight_update", { p_user: id, p_status: e.target.value }); toast(ar ? "تم الحفظ" : "Saved"); } catch (er) { toast(er.message); } });
+  $("#ins-ai")?.addEventListener("click", async () => {
+    const b = $("#ins-ai"); b.disabled = true; b.querySelector("span").textContent = ar ? "جارٍ التحليل…" : "Analysing…";
+    try { await runLeadAI(id); toast(ar ? "تم التحليل" : "Analysis ready"); viewInsight(id); }
+    catch (e) { toast(aiErr(e.code)); b.disabled = false; b.querySelector("span").textContent = hasAI ? (ar ? "إعادة التحليل" : "Analyse again") : (ar ? "حلّل بالذكاء الاصطناعي" : "Analyse with AI"); }
+  });
+}
+
 /* ---------------- router + boot ---------------- */
 function route() {
   if (!who) return;
   const [, sec, id] = location.hash.split("/");
   const first = NAV.find(n => can(n[3]))?.[0] || "overview";
-  const go = { overview: viewOverview, users: id ? () => viewUser(id) : viewUsers, leads: id ? () => viewLead(id) : viewLeads, features: id ? () => viewFeature(decodeURIComponent(id)) : viewFeatures,
+  const go = { overview: viewOverview, users: id ? () => viewUser(id) : viewUsers, leads: id ? () => viewLead(id) : viewLeads, insights: id ? () => viewInsight(id) : viewInsights, features: id ? () => viewFeature(decodeURIComponent(id)) : viewFeatures,
     emails: viewEmails, settings: viewSettings, audit: viewAudit }[sec];
   const need = NAV.find(n => n[0] === sec)?.[3];
   if (!go || (need && !can(need))) { location.hash = `#/${first}`; return; }
