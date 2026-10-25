@@ -808,6 +808,15 @@ body.chat-on .chat-fab{display:none}
   .chat-panel{inset:auto 0 0 0;width:100%;height:min(88dvh,640px);border-radius:var(--r-xl) var(--r-xl) 0 0}}
 @media (max-width:640px){.consent{bottom:max(136px,env(safe-area-inset-bottom,0px))}}
 
+.chat-lang{display:inline-flex;border:1px solid var(--line-2);border-radius:9px;overflow:hidden;flex:none}
+.chat-lang button{border:0;background:transparent;color:var(--muted);font:600 12px/1 inherit;padding:7px 9px;cursor:pointer;min-width:34px}
+.chat-lang button[aria-pressed="true"]{background:var(--primary);color:#fff}
+.chat-auth{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--primary) 6%,transparent);font-size:12.5px;color:var(--text)}
+.chat-auth[hidden]{display:none}.chat-auth span{flex:1;line-height:1.5}
+.chat-gbtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:10px;padding:7px 11px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap;flex:none}
+.chat-gbtn:hover{border-color:var(--primary)}.chat-gbtn svg{width:16px;height:16px}
+.chat-h .chat-lang{flex:none;display:inline-flex;flex-direction:row;min-width:0}
+
 </style>
 <a class="sr" href="#work">Skip to products</a>
 <header class="nav">
@@ -4546,24 +4555,37 @@ const HP = (() => {
   /* ---------------- AI sales assistant (chat widget) ---------------- */
   const CHAT_KEY = "hudera.chat", CHAT_OPEN = "hudera.chat_open";
   let chatBusy = false, chatLoaded = false;
+  const CHAT_LANG = "hudera.chat_lang";
+  const chatLang = () => { const v = store.get(CHAT_LANG); return v === "ar" || v === "en" ? v : LANG; };
+  const ct = (en, ar) => (chatLang() === "ar" ? ar : en);
   const chatToken = () => {
     let t = store.get(CHAT_KEY);
     if (!t || t.length < 30) { t = (uuid() + uuid()).replace(/-/g, ""); store.set(CHAT_KEY, t); }
     return t;
   };
   const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
-  const CHIPS = () => LANG === "ar"
+  const CHIPS = () => chatLang() === "ar"
     ? ["أريد مساعد واتساب لخدمة العملاء", "عندنا شغل يدوي كثير في الموارد البشرية", "كم تكلفة مشروع مثل هذا؟", "أريد أشوف ديمو"]
     : ["I want a WhatsApp assistant for customers", "Our HR work is very manual", "How much does a project like this cost?", "I'd like to see a demo"];
   function chatChrome() {
     const fab = $("#chat-fab"), pn = $("#chat-panel");
     if (fab) { fab.querySelector("span").textContent = tt("Ask HUDERA's assistant", "اسأل مساعد HUDERA"); fab.setAttribute("aria-label", tt("Open the AI assistant", "افتح المساعد الذكي")); }
     if (!pn) return;
-    $("#chat-title").textContent = tt("HUDERA Assistant", "مساعد HUDERA");
-    $("#chat-sub").textContent = tt("AI assistant · replies instantly", "مساعد بالذكاء الاصطناعي · يرد فوراً");
-    $("#chat-in").placeholder = tt("Write your message…", "اكتب رسالتك…");
-    $("#chat-note").innerHTML = `${tt("This chat is saved so our team can follow up with you.", "تُحفظ المحادثة ليتابع معك فريقنا.")} <a href="privacy.html" target="_blank" rel="noopener">${tt("Privacy", "الخصوصية")}</a>`;
-    pn.dir = LANG === "ar" ? "rtl" : "ltr";
+    const cl = chatLang();
+    $("#chat-title").textContent = ct("HUDERA Assistant", "مساعد HUDERA");
+    $("#chat-sub").textContent = ct("AI assistant · replies instantly", "مساعد بالذكاء الاصطناعي · يرد فوراً");
+    $("#chat-in").placeholder = ct("Write your message…", "اكتب رسالتك…");
+    $("#chat-note").innerHTML = `${ct("This chat is saved so our team can follow up with you.", "تُحفظ المحادثة ليتابع معك فريقنا.")} <a href="privacy.html" target="_blank" rel="noopener">${ct("Privacy", "الخصوصية")}</a>`;
+    $$("#chat-lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === cl)));
+    $("#chat-lang").setAttribute("aria-label", ct("Chat language", "لغة المحادثة"));
+    const sb_ = $("#chat-auth");
+    if (sb_) {
+      sb_.hidden = !!session;
+      sb_.innerHTML = session ? "" : `<span>${ct("Sign in to save this chat and get a tailored follow-up.", "سجّل دخولك لنحفظ محادثتك ونتابع معك بعرض مناسب.")}</span>
+        <button class="chat-gbtn" type="button" id="chat-gin2">${gIcon}<b>${ct("Sign in with Google", "سجّل بإيميلك")}</b></button>`;
+      $("#chat-gin2")?.addEventListener("click", () => { store.set(CHAT_OPEN, "1", sessionStorage); signIn("chat"); });
+    }
+    pn.dir = cl === "ar" ? "rtl" : "ltr"; pn.lang = cl;
   }
   function chatBubble(role, text, extra = "") {
     const box = $("#chat-msgs"); if (!box) return;
@@ -4572,8 +4594,8 @@ const HP = (() => {
   }
   function chatSignupCard() {
     if (session || $("#chat-signup")) return;
-    $("#chat-msgs").insertAdjacentHTML("beforeend", `<div class="chat-card" id="chat-signup"><p>${tt("Sign in with Google so we save your details and our team follows up with a tailored proposal.", "سجّل الدخول بجوجل لنحفظ تفاصيلك ويتابع معك فريقنا بعرض مناسب لك.")}</p>
-      <button class="btn sm primary" type="button" id="chat-gin">${gIcon}<span>${tt("Sign in with Google", "تسجيل الدخول بجوجل")}</span></button></div>`);
+    $("#chat-msgs").insertAdjacentHTML("beforeend", `<div class="chat-card" id="chat-signup"><p>${ct("Sign in with Google so we save your details and our team follows up with a tailored proposal.", "سجّل الدخول بجوجل لنحفظ تفاصيلك ويتابع معك فريقنا بعرض مناسب لك.")}</p>
+      <button class="btn sm primary" type="button" id="chat-gin">${gIcon}<span>${ct("Sign in with Google", "تسجيل الدخول بجوجل")}</span></button></div>`);
     $("#chat-gin").addEventListener("click", () => { store.set(CHAT_OPEN, "1", sessionStorage); signIn("chat"); });
     $("#chat-msgs").scrollTop = $("#chat-msgs").scrollHeight;
   }
@@ -4582,14 +4604,14 @@ const HP = (() => {
     const box = $("#chat-msgs"); let hist = [];
     if (store.get(CHAT_KEY)) { try { hist = await rpc("chat_history", { p_token: store.get(CHAT_KEY) }); } catch (e) {} }
     box.innerHTML = "";
-    chatBubble("assistant", tt("Hello! I'm HUDERA's AI assistant. Tell me what your company does and which work takes most of your team's time, and I'll suggest what fits you.",
+    chatBubble("assistant", ct("Hello! I'm HUDERA's AI assistant. Tell me what your company does and which work takes most of your team's time, and I'll suggest what fits you.",
       "أهلاً بك! أنا مساعد HUDERA الذكي. أخبرني عن نشاط شركتك وما الذي يأخذ معظم وقت فريقك، وسأقترح عليك ما يناسبك."));
     (hist || []).forEach(m => chatBubble(m.role, m.content));
     if (!(hist || []).length) {
       box.insertAdjacentHTML("beforeend", `<div class="chat-chips" id="chat-chips">${CHIPS().map(c => `<button type="button" class="chip-btn">${esc(c)}</button>`).join("")}</div>`);
       $$("#chat-chips .chip-btn").forEach(b => b.addEventListener("click", () => chatSend(b.textContent)));
     } else if (session && store.get("hudera.just_signed_in_chat", sessionStorage)) {
-      chatBubble("assistant", tt("Thanks for signing in! Your details are saved. Shall we continue?", "شكراً لتسجيلك! تم حفظ تفاصيلك. نكمل؟"));
+      chatBubble("assistant", ct("Thanks for signing in! Your details are saved. Shall we continue?", "شكراً لتسجيلك! تم حفظ تفاصيلك. نكمل؟"));
     }
     store.del("hudera.just_signed_in_chat", sessionStorage);
   }
@@ -4602,16 +4624,16 @@ const HP = (() => {
     try {
       const r = await fetch(`${cfg.supabaseUrl}/functions/v1/chat`, { method: "POST",
         headers: { apikey: cfg.supabaseAnonKey, "content-type": "application/json", ...(session?.access_token ? { authorization: `Bearer ${session.access_token}` } : {}) },
-        body: JSON.stringify({ token: chatToken(), message: text, lang: LANG, path: curPath() }) });
+        body: JSON.stringify({ token: chatToken(), message: text, lang: chatLang(), path: curPath() }) });
       const j = await r.json().catch(() => ({}));
       $("#chat-typing")?.remove();
-      chatBubble("assistant", j.reply || tt("Sorry, something went wrong. Please try again or message us on WhatsApp.", "عذراً، حدث خطأ. حاول مرة أخرى أو راسلنا على واتساب."), r.ok ? "" : "err");
-      if (j.handoff) chatBubble("sys", tt("✓ Sent to our team. We'll contact you soon.", "✓ وصل طلبك لفريقنا وسنتواصل معك قريباً."));
+      chatBubble("assistant", j.reply || ct("Sorry, something went wrong. Please try again or message us on WhatsApp.", "عذراً، حدث خطأ. حاول مرة أخرى أو راسلنا على واتساب."), r.ok ? "" : "err");
+      if (j.handoff) chatBubble("sys", ct("✓ Sent to our team. We'll contact you soon.", "✓ وصل طلبك لفريقنا وسنتواصل معك قريباً."));
       if (j.ask_signup) chatSignupCard();
       track("chat_message");
     } catch (e) {
       $("#chat-typing")?.remove();
-      chatBubble("assistant", tt("Connection problem. Please try again.", "مشكلة في الاتصال. حاول مرة أخرى."), "err");
+      chatBubble("assistant", ct("Connection problem. Please try again.", "مشكلة في الاتصال. حاول مرة أخرى."), "err");
     } finally { chatBusy = false; $("#chat-send").disabled = false; $("#chat-in").focus(); }
   }
   function chatGrow() { const i = $("#chat-in"); if (!i) return; i.style.height = "auto"; i.style.height = Math.min(120, i.scrollHeight) + "px"; }
@@ -4619,11 +4641,19 @@ const HP = (() => {
     if (!$("#chat-panel")) {
       document.body.insertAdjacentHTML("beforeend", `<section class="chat-panel no-l10n" id="chat-panel" role="dialog" aria-modal="false" aria-labelledby="chat-title">
         <header class="chat-h"><span class="chat-av">${ic("bot")}</span><div><b id="chat-title"></b><small id="chat-sub"></small></div>
+          <div class="chat-lang" id="chat-lang" role="group"><button type="button" data-l="ar">ع</button><button type="button" data-l="en">EN</button></div>
           <button class="icon-x" type="button" id="chat-x" aria-label="Close">${ic("x")}</button></header>
+        <div class="chat-auth" id="chat-auth" hidden></div>
         <div class="chat-msgs" id="chat-msgs" aria-live="polite"><div class="cm assistant typing"><i></i><i></i><i></i></div></div>
         <form class="chat-f" id="chat-f"><textarea id="chat-in" rows="1" maxlength="1500" dir="auto"></textarea><button class="chat-send" id="chat-send" type="submit" aria-label="Send">${ic("send")}</button></form>
         <p class="chat-note" id="chat-note"></p></section>`);
       $("#chat-x").addEventListener("click", chatClose);
+      $$("#chat-lang button").forEach(b => b.addEventListener("click", () => {
+        if (b.dataset.l === chatLang()) return;
+        store.set(CHAT_LANG, b.dataset.l); chatChrome();
+        if ($("#chat-chips")) { chatLoaded = false; chatLoad(); return; }     // nothing said yet: redraw the greeting in the new language
+        chatBubble("sys", ct("The assistant will reply in English.", "سيرد المساعد بالعربية."));
+      }));
       $("#chat-f").addEventListener("submit", e => { e.preventDefault(); chatSend($("#chat-in").value); });
       $("#chat-in").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); chatSend($("#chat-in").value); } });
       $("#chat-in").addEventListener("input", chatGrow);
@@ -4782,7 +4812,7 @@ const HP = (() => {
       history.replaceState(null, "", location.pathname + back);
       if (back) { if (typeof route === "function") route(); }
     }
-    sb.auth.onAuthStateChange((evt, s) => { const changed = (s?.user?.id || null) !== (session?.user?.id || null); session = s; if (changed) { if (s) loadMe(); else { me = null; renderAcct(); renderContact(); } } });
+    sb.auth.onAuthStateChange((evt, s) => { const changed = (s?.user?.id || null) !== (session?.user?.id || null); session = s; chatChrome(); if (changed) { if (s) loadMe(); else { me = null; renderAcct(); renderContact(); } } });
     ready = true;
     if (session) await loadMe(); else { renderAcct(); renderContact(); }
     showConsent(); wireTracking(); flushSoon(800); chatInit();
