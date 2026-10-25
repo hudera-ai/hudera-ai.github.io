@@ -200,6 +200,35 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 .req{border-top:1px solid var(--line);padding:8px 0}.req:first-of-type{border-top:0}.req p{margin:4px 0;white-space:pre-wrap}
 @media (max-width:560px){.ins-list{grid-template-columns:1fr}}
 
+/* pipeline */
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);gap:10px;overflow-x:auto;padding-bottom:6px}
+.col{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:8px;min-height:120px}
+.col-h{display:flex;align-items:center;justify-content:space-between;padding:2px 4px}
+.deal{display:flex;flex-direction:column;gap:3px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:9px 10px;text-decoration:none;color:inherit}
+.deal:hover{border-color:var(--faint)}.deal-h{display:flex;align-items:center;justify-content:space-between;gap:6px}.deal-h b{color:var(--ink);font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.deal .s{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.deal-f{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}.deal-f svg,.due svg{width:13px;height:13px;vertical-align:-2px;margin-inline-end:3px}
+.late{color:var(--red)!important;font-weight:600}.today{color:var(--amber)!important;font-weight:600}
+.due{border-color:color-mix(in srgb,var(--amber) 45%,transparent)}.due h2{display:flex;align-items:center;gap:6px}
+.due-list{display:flex;flex-direction:column}.due-list a{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 2px;border-top:1px solid var(--line);text-decoration:none;color:inherit}.due-list a:first-child{border-top:0}.due-list b{color:var(--ink)}
+.stepper{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.stepper button{border:1px solid var(--line-2);background:var(--surface);color:var(--muted);border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.stepper button:disabled{cursor:default}.stepper li.done button{background:var(--primary-soft);color:var(--primary-ink);border-color:transparent}
+.stepper li.cur button{background:var(--primary);color:#fff;border-color:var(--primary)}.stepper li.cur.won button{background:var(--mint);border-color:var(--mint)}.stepper li.cur.lost button{background:var(--red);border-color:var(--red)}
+.stepper li.end:first-of-type{margin-inline-start:auto}
+.lost-box{margin-top:12px;border:1px solid color-mix(in srgb,var(--red) 35%,transparent);background:var(--red-soft);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.lost-box[hidden]{display:none}.lost-box b{color:var(--ink)}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px}.opts label{display:flex;gap:7px;align-items:center;background:var(--surface);border:1px solid var(--line-2);border-radius:10px;padding:7px 10px;font-size:13px;cursor:pointer}
+.note-f{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:8px;align-items:start;margin-bottom:12px}.note-f textarea{height:auto;min-height:40px;font:inherit;font-size:13.5px;padding:8px 10px;resize:vertical}
+.dtl{list-style:none;margin:0;padding:0}.dtl li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13.5px}.dtl li:first-child{border-top:0}
+.dtl .tl-k{font-weight:600;color:var(--ink)}.dtl small{display:block;margin-top:2px}
+.tx{display:flex;flex-direction:column;gap:8px;max-height:520px;overflow-y:auto;margin-top:10px;padding:4px}
+.tx .cm{max-width:88%;padding:8px 11px;border-radius:12px;font-size:13.5px;line-height:1.6}.tx .cm small{display:block;font-size:11px;opacity:.7;margin-top:2px}
+.tx .cm.assistant{align-self:flex-start;background:var(--surface-2);color:var(--text)}.tx .cm.user{align-self:flex-end;background:var(--primary);color:#fff}
+.fb{border-top:1px solid var(--line);padding:8px 0}.fb:first-of-type{border-top:0}.fb p{margin:4px 0;font-size:13.5px}.stars-s{color:#F5A524;letter-spacing:1px}
+.dlg{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--text);padding:20px;width:min(560px,calc(100vw - 32px))}.dlg::backdrop{background:rgba(5,9,18,.55)}.dlg h2{font:700 18px var(--f-d);color:var(--ink);margin:0 0 12px}
+@media (max-width:700px){.note-f{grid-template-columns:1fr}.dtl li{grid-template-columns:1fr}.stepper li.end:first-of-type{margin-inline-start:0}}
+
 </style>
 </head>
 <body>
@@ -333,7 +362,7 @@ const AR = {
   "Top pages": "أكثر الصفحات زيارة", "Traffic sources": "مصادر الزيارات", "Referrers": "المواقع المُحيلة", "Devices": "الأجهزة", "Browsers": "المتصفحات",
   "Retention by sign-up week": "الاحتفاظ حسب أسبوع التسجيل", "Requests by status": "الطلبات حسب الحالة", "Show as table": "عرض كجدول",
   "Search name, e-mail or phone": "ابحث بالاسم أو البريد أو الجوال", "All": "الكل", "Active": "نشط", "Inactive": "غير نشط", "Suspended": "موقوف", "Deleted": "محذوف",
-  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "Interest insights": "اهتمامات العملاء", "Export": "تصدير", "PDF report": "تقرير PDF", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
+  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "Interest insights": "اهتمامات العملاء", "Pipeline": "متابعة العملاء", "Assistant chats": "محادثات المساعد", "Export": "تصدير", "PDF report": "تقرير PDF", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
   "Registered": "تاريخ التسجيل", "Last login": "آخر دخول", "Last activity": "آخر نشاط", "Status": "الحالة", "Recent features": "آخر الميزات", "Important actions": "إجراءات مهمة",
   "Contact": "التواصل", "Previous": "السابق", "Next": "التالي", "No results": "لا توجد نتائج", "Account": "الحساب", "Timeline": "الخط الزمني", "Load more": "تحميل المزيد",
   "Send e-mail": "إرسال بريد", "Used": "استُخدمت", "Not used": "لم تُستخدم", "Unknown": "غير معروف", "Recent sessions": "آخر الجلسات", "Pages visited": "الصفحات المزارة",
@@ -363,7 +392,7 @@ const ICON = {
   mail: "M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm-1 1 9 7 9-7", gear: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z",
   list: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01", menu: "M3 6h18M3 12h18M3 18h18", eye: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
   user: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", flag: "M4 22V4m0 0h13l-2 4 2 4H4", phone: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z",
-  spark: "M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z", check: "M20 6 9 17l-5-5", dl: "M12 3v12m0 0-4-4m4 4 4-4M4 21h16", sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4", moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
+  chat: "M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z", spark: "M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z", check: "M20 6 9 17l-5-5", dl: "M12 3v12m0 0-4-4m4 4 4-4M4 21h16", sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4", moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
   back: "M15 18l-6-6 6-6", dot: "M12 12h.01",
 };
 const ic = n => `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON[n] || ICON.dot}"/></svg>`;
@@ -433,7 +462,7 @@ function hbars(el, rows, { label, value, fmt = nf, color = "var(--s1)", onClick 
 }
 
 /* ---------------- layout ---------------- */
-const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["insights", "Interest insights", "spark", "leads.view"], ["leads", "Leads", "inbox", "leads.view"],
+const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["pipeline", "Pipeline", "flag", "leads.view"], ["insights", "Interest insights", "spark", "leads.view"], ["chats", "Assistant chats", "chat", "leads.view"], ["leads", "Leads", "inbox", "leads.view"],
   ["features", "Features", "grid", "features.view"], ["emails", "E-mails", "mail", "email.send"], ["settings", "Settings", "gear", "analytics.view"], ["audit", "Audit log", "list", "audit.view"]];
 const can = p => !!who?.perms?.includes(p);
 function shell() {
@@ -1038,9 +1067,10 @@ async function analyseNew() {
 
 async function viewInsight(id) {
   const ar = AR_();
-  const v = page(ar ? "اهتمامات العملاء" : "Interest insights", `<a class="btn" href="#/insights">${ic("back")}${ar ? "كل العملاء" : "All people"}</a> <a class="btn" href="#/users/${esc(id)}">${ic("user")}${ar ? "ملف المستخدم" : "User profile"}</a>`);
+  const v = page(ar ? "اهتمامات العملاء" : "Interest insights", `<a class="btn" href="#/insights">${ic("back")}${ar ? "كل العملاء" : "All people"}</a> <a class="btn" href="#/users/${esc(id)}">${ic("user")}${ar ? "ملف المستخدم" : "User profile"}</a>${can("leads.manage") ? ` <button class="btn primary" id="to-pipe" type="button">${ic("flag")}${ar ? "إضافة لمتابعة العملاء" : "Add to pipeline"}</button>` : ""}`);
   v.innerHTML = `<div class="skel"></div>`;
   let d; try { d = await api("admin_insight_get", { p_user: id }); } catch (e) { v.innerHTML = failBox(e); return; }
+  $("#to-pipe")?.addEventListener("click", () => addToPipeline(id, "insight"));
   const g = d.digest, p = g.person, rules = g.rules || {}, ins = d.insight || {};
   const hasAI = !!ins.generated_at, level = (hasAI && ins.level) || rules.level, score = hasAI ? ins.score : rules.score;
   const stale = hasAI && ins.events_until && g.newest_event_at && new Date(g.newest_event_at) > new Date(ins.events_until);
@@ -1109,12 +1139,214 @@ async function viewInsight(id) {
   });
 }
 
+/* ---------------- pipeline (client follow-up stage by stage) ---------------- */
+const STAGES = [["new", "New", "جديد", "c-blue"], ["contacted", "Contacted", "تم التواصل", "c-sky"], ["discovery", "Needs understood", "فهم الاحتياج", "c-violet"],
+  ["proposal", "Proposal sent", "تم إرسال العرض", "c-amber"], ["negotiation", "Negotiation", "تفاوض", "c-amber"], ["won", "Won", "تم الاتفاق", "c-mint"], ["lost", "Lost", "مرفوض", "c-red"]];
+const stageName = k => { const s = STAGES.find(x => x[0] === k); return s ? (AR_() ? s[2] : s[1]) : k; };
+const stageChip = k => { const s = STAGES.find(x => x[0] === k); return `<span class="chip ${s?.[3] || ""}">${esc(stageName(k))}</span>`; };
+const LOSS = { price: ["Price", "السعر"], design: ["Look / design", "الشكل أو التصميم"], offer_issues: ["Issues in the offer", "مشاكل في العرض"], timing: ["Timing", "التوقيت"],
+  competitor: ["Chose a competitor", "اختار منافساً"], no_response: ["No response", "لم يرد"], not_fit: ["Not a fit", "غير مناسب"], other: ["Other", "سبب آخر"] };
+const lossName = k => (LOSS[k] ? LOSS[k][AR_() ? 1 : 0] : k || "");
+const DECISION = { interested: ["Interested", "مهتم ويكمل"], need_time: ["Needs time", "يحتاج وقتاً"], price: ["Price too high", "السعر أعلى من المتوقع"], design: ["Design didn't suit", "الشكل لم يناسبه"],
+  offer_issues: ["Offer doesn't cover needs", "العرض لا يغطي احتياجه"], chose_other: ["Chose another provider", "اختار جهة أخرى"], not_needed: ["No longer needed", "لم يعد يحتاجها"], other: ["Other", "سبب آخر"] };
+const SRC = { chat: ["AI assistant", "المساعد الذكي"], contact_form: ["Contact form", "نموذج التواصل"], insight: ["Interest insights", "اهتمامات العملاء"], manual: ["Added manually", "إضافة يدوية"] };
+const KIND = { created: ["Added", "أُضيف"], stage: ["Stage changed", "تغيّرت المرحلة"], note: ["Note", "ملاحظة"], call: ["Call", "مكالمة"], whatsapp: ["WhatsApp", "واتساب"], email: ["E-mail", "إيميل"],
+  meeting: ["Meeting", "اجتماع"], follow_up: ["Follow-up set", "موعد متابعة"], feedback: ["Feedback received", "وصل تقييم"], feedback_requested: ["Feedback requested", "طُلب تقييم"] };
+const L2 = (m, k) => (m[k] ? m[k][AR_() ? 1 : 0] : k);
+const sar = v => (v == null ? "" : `${nf(Math.round(v))} ${AR_() ? "ر.س" : "SAR"}`);
+const toLocalInput = v => { if (!v) return ""; const d = new Date(v); const p = n => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`; };
+
+const pq = { search: "", view: "board" };
+async function viewPipeline() {
+  const ar = AR_();
+  const v = page(ar ? "متابعة العملاء" : "Pipeline", can("leads.manage") ? `<button class="btn primary" id="d-new" type="button">${ic("user")}${ar ? "إضافة عميل" : "Add client"}</button>` : "");
+  v.innerHTML = `<div id="p-kpis" class="grid g4" style="margin-bottom:12px"></div><div id="p-due"></div>
+    <div class="filters" style="margin:12px 0"><input class="input" id="p-q" type="search" placeholder="${ar ? "ابحث بالاسم أو الشركة أو الجوال" : "Search name, company or phone"}" value="${esc(pq.search)}" style="flex:1;min-width:200px">
+      <div class="seg" role="group"><button type="button" aria-pressed="${pq.view === "board"}" data-v="board">${ar ? "لوحة المراحل" : "Board"}</button><button type="button" aria-pressed="${pq.view === "list"}" data-v="list">${ar ? "قائمة" : "List"}</button></div></div>
+    <div id="p-body"><div class="skel"></div></div><div class="grid g2" style="margin-top:12px"><section class="card"><h2>${ar ? "أسباب الرفض" : "Why clients said no"}</h2><div id="p-loss"></div></section>
+      <section class="card"><h2>${ar ? "تقييمات العملاء" : "Client feedback"}</h2><div id="p-fb"></div></section></div>`;
+  let timer; $("#p-q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => { pq.search = e.target.value.trim(); loadPipeline(); }, 300); });
+  $$(".seg [data-v]").forEach(b => b.addEventListener("click", () => { pq.view = b.dataset.v; $$(".seg [data-v]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); loadPipeline(); }));
+  $("#d-new")?.addEventListener("click", () => dealForm());
+  loadPipeline();
+}
+function dealCard(d) {
+  const ar = AR_();
+  return `<a class="deal" href="#/pipeline/${d.id}"><div class="deal-h"><b dir="auto">${esc(d.name)}</b>${d.level ? levelChip(d.level) : ""}</div>
+    ${d.company ? `<span class="s" dir="auto">${esc(d.company)}</span>` : ""}${d.product_interest ? `<span class="s" dir="auto">${esc(d.product_interest)}</span>` : ""}
+    <div class="deal-f">${d.value_sar != null ? `<span class="small">${sar(d.value_sar)}</span>` : ""}${d.stage === "lost" && d.loss_reason ? `<span class="chip c-red">${esc(lossName(d.loss_reason))}</span>` : ""}
+      ${d.feedback ? `<span class="chip c-amber">★ ${d.feedback.rating}/5</span>` : ""}
+      ${d.next_follow_up_at && !["won", "lost"].includes(d.stage) ? `<span class="small ${d.overdue ? "late" : d.due_today ? "today" : "muted"}">${ic("flag")}${fdt(d.next_follow_up_at)}</span>` : ""}
+      <span class="small faint">${esc(L2(SRC, d.source))}</span></div></a>`;
+}
+async function loadPipeline() {
+  const body = $("#p-body"); if (!body) return; const ar = AR_();
+  let r; try { r = await api("admin_deals_list", { p_search: pq.search || null }); } catch (e) { body.innerHTML = failBox(e); return; }
+  const c = r.counts || {}, open = ["new", "contacted", "discovery", "proposal", "negotiation"].reduce((a, k) => a + (c[k] || 0), 0);
+  const closed = (c.won || 0) + (c.lost || 0);
+  $("#p-kpis").innerHTML = [[ar ? "عملاء قيد المتابعة" : "Open clients", nf(open), sar(r.open_value)], [ar ? "متابعات اليوم أو متأخرة" : "Due today / overdue", nf(r.due), "", r.due ? "lv-hot" : ""],
+    [ar ? "تم الاتفاق" : "Won", nf(c.won || 0), sar(r.won_value)], [ar ? "نسبة النجاح" : "Win rate", closed ? `${Math.round(100 * (c.won || 0) / closed)}%` : "—", ar ? `من ${closed} مغلق` : `of ${closed} closed`]]
+    .map(([l, val, note, cls]) => `<div class="kpi ${cls || ""}"><small>${l}</small><b>${val}</b>${note ? `<span>${note}</span>` : ""}</div>`).join("");
+  const due = r.rows.filter(d => d.due_today || d.overdue);
+  $("#p-due").innerHTML = due.length ? `<section class="card due"><h2>${ic("flag")}${ar ? "تابع اليوم" : "Follow up today"} <span class="muted small">(${due.length})</span></h2><div class="due-list">${due.map(d =>
+    `<a href="#/pipeline/${d.id}"><b dir="auto">${esc(d.name)}</b><span>${stageChip(d.stage)}</span><span class="small ${d.overdue ? "late" : "today"}">${fdt(d.next_follow_up_at)}</span></a>`).join("")}</div></section>` : "";
+  if (pq.view === "board") {
+    body.innerHTML = `<div class="board">${STAGES.map(([k]) => { const rows = r.rows.filter(d => d.stage === k);
+      return `<div class="col"><div class="col-h">${stageChip(k)}<span class="muted small">${rows.length}</span></div>${rows.map(dealCard).join("") || `<p class="faint small" style="padding:8px">—</p>`}</div>`; }).join("")}</div>`;
+  } else {
+    body.innerHTML = r.rows.length ? `<div class="tbl-wrap"><table><thead><tr><th>${t("Name")}</th><th>${ar ? "المرحلة" : "Stage"}</th><th>${ar ? "الاهتمام" : "Interest"}</th><th class="num">${ar ? "القيمة" : "Value"}</th><th>${ar ? "المتابعة القادمة" : "Next follow-up"}</th><th>${ar ? "المصدر" : "Source"}</th><th>${ar ? "آخر نشاط" : "Last activity"}</th></tr></thead><tbody>
+      ${r.rows.map(d => `<tr class="click" data-id="${d.id}" tabindex="0"><td><span class="t" dir="auto">${esc(d.name)}</span><span class="s" dir="auto">${esc(d.company || d.email || d.phone || "")}</span></td><td>${stageChip(d.stage)}${d.stage === "lost" && d.loss_reason ? ` <span class="small">${esc(lossName(d.loss_reason))}</span>` : ""}</td>
+        <td class="small" dir="auto">${esc(d.product_interest || "—")}</td><td class="num">${d.value_sar != null ? sar(d.value_sar) : "—"}</td><td class="small ${d.overdue ? "late" : d.due_today ? "today" : ""}">${d.next_follow_up_at ? fdt(d.next_follow_up_at) : "—"}</td>
+        <td class="small">${esc(L2(SRC, d.source))}</td><td class="small">${d.last_event ? `${esc(L2(KIND, d.last_event.kind))} · ${ago(d.last_event.at)}` : "—"}</td></tr>`).join("")}</tbody></table></div>` : `<p class="empty">${t("No results")}</p>`;
+    $$("tr.click", body).forEach(tr => { const go = () => (location.hash = `#/pipeline/${tr.dataset.id}`); tr.addEventListener("click", go); tr.addEventListener("keydown", e => e.key === "Enter" && go()); });
+  }
+  hbars($("#p-loss"), (r.loss_reasons || []).map(x => ({ ...x })), { label: x => lossName(x.reason), value: x => x.n, color: "var(--red)" });
+  $("#p-fb").innerHTML = r.feedback?.count ? `<div class="kpi" style="border:0;padding:0"><b>★ ${r.feedback.avg}</b><span>${ar ? `متوسط ${r.feedback.count} تقييم` : `average of ${r.feedback.count} ratings`}</span></div>` : `<p class="empty">${ar ? "لا توجد تقييمات بعد. اطلب تقييماً من صفحة أي عميل." : "No feedback yet. Request it from any client's page."}</p>`;
+}
+function dealForm(pre = {}) {
+  const ar = AR_();
+  const dlg = document.createElement("dialog"); dlg.className = "dlg";
+  dlg.innerHTML = `<form method="dialog" id="df"><h2>${ar ? "إضافة عميل للمتابعة" : "Add a client to the pipeline"}</h2>
+    <label class="fld"><span>${t("Name")} *</span><input class="input" name="name" required dir="auto" value="${esc(pre.name || "")}"></label>
+    <div class="grid g2"><label class="fld"><span>${ar ? "الشركة" : "Company"}</span><input class="input" name="company" dir="auto"></label><label class="fld"><span>${t("Phone")}</span><input class="input" name="phone" dir="ltr" placeholder="+966…"></label></div>
+    <div class="grid g2"><label class="fld"><span>${t("E-mail")}</span><input class="input" name="email" type="email" dir="ltr"></label><label class="fld"><span>${ar ? "القيمة المتوقعة (ر.س)" : "Expected value (SAR)"}</span><input class="input" name="value" type="number" min="0" step="100" dir="ltr"></label></div>
+    <label class="fld"><span>${ar ? "مهتم بـ" : "Interested in"}</span><input class="input" name="interest" dir="auto"></label>
+    <div class="filters" style="justify-content:flex-end"><button class="btn" value="cancel" type="submit" formnovalidate>${ar ? "إلغاء" : "Cancel"}</button><button class="btn primary" value="ok" type="submit">${ar ? "إضافة" : "Add"}</button></div></form>`;
+  document.body.appendChild(dlg); dlg.showModal();
+  dlg.addEventListener("close", async () => {
+    if (dlg.returnValue === "ok") {
+      const f = new FormData($("#df", dlg));
+      try { const r = await api("admin_deal_create", { p_name: f.get("name"), p_company: f.get("company") || null, p_phone: f.get("phone") || null, p_email: f.get("email") || null,
+        p_interest: f.get("interest") || null, p_value: f.get("value") ? +f.get("value") : null, p_source: "manual" }); location.hash = `#/pipeline/${r.id}`; } catch (e) { toast(e.message); }
+    }
+    dlg.remove();
+  });
+}
+async function addToPipeline(userId, source = "insight") {
+  try { const r = await api("admin_deal_create", { p_user: userId, p_source: source }); toast(r.existing ? (AR_() ? "العميل موجود في المتابعة بالفعل" : "Already in the pipeline") : (AR_() ? "تمت الإضافة للمتابعة" : "Added to the pipeline")); location.hash = `#/pipeline/${r.id}`; }
+  catch (e) { toast(e.message); }
+}
+
+const evBody = b => (!b || !AR_()) ? b : String(b).replace(/^From the website assistant/, "من المساعد الذكي").replace("The assistant handed this conversation to the team.", "حوّل المساعد الذكي المحادثة للفريق.")
+  .replace(/^Added to the pipeline$/, "أُضيف لمتابعة العملاء").replace(/^From contact request /, "من طلب التواصل ").replace(/^New contact request /, "طلب تواصل جديد ").replace(/^Rating /, "التقييم ");
+async function viewDeal(id) {
+  const ar = AR_(), m = can("leads.manage");
+  const v = page(ar ? "متابعة العملاء" : "Pipeline", `<a class="btn" href="#/pipeline">${ic("back")}${ar ? "كل العملاء" : "All clients"}</a>`);
+  v.innerHTML = `<div class="skel"></div>`;
+  let r; try { r = await api("admin_deal_get", { p_id: id }); } catch (e) { v.innerHTML = failBox(e); return; }
+  const d = r.deal; $("#page-h").textContent = d.name;
+  const idx = STAGES.findIndex(s => s[0] === d.stage);
+  const fbUrl = d.feedback_token ? `${location.origin}${location.pathname.replace(/admin\/?$/, "")}feedback.html?t=${d.feedback_token}&lang=${LANG}` : "";
+  const fbMsg = ar ? `مرحباً ${d.name.split(" ")[0]}،\nشكراً لوقتك مع فريق HUDERA AI. يهمنا رأيك في تجربتك معنا، ولن يأخذ أكثر من دقيقة:\n${fbUrl}\n\nمع التحية،\nفريق HUDERA AI`
+    : `Hi ${d.name.split(" ")[0]},\nThank you for your time with the HUDERA AI team. We'd value your feedback on your experience; it takes about a minute:\n${fbUrl}\n\nBest regards,\nThe HUDERA AI team`;
+  v.innerHTML = `
+    <section class="card"><div class="prof">${d.avatar_url ? `<img class="av" src="${esc(d.avatar_url)}" alt="" referrerpolicy="no-referrer" data-ini="${esc(d.name[0].toUpperCase())}">` : `<span class="av">${esc(d.name[0].toUpperCase())}</span>`}
+      <div style="flex:1;min-width:220px"><h2 dir="auto">${esc(d.name)}</h2><div class="small muted">${[d.company, d.product_interest].filter(Boolean).map(x => `<span dir="auto">${esc(x)}</span>`).join(" · ")}</div>
+        <div class="filters" style="margin-top:6px">${stageChip(d.stage)}${d.level ? levelChip(d.level) : ""}<span class="chip">${esc(L2(SRC, d.source))}</span>${d.value_sar != null ? `<span class="chip c-mint">${sar(d.value_sar)}</span>` : ""}</div></div>
+      <div class="filters">${d.phone ? `<a class="btn" href="https://wa.me/${esc(String(d.phone).replace(/\D/g, ""))}" target="_blank" rel="noopener">WhatsApp</a><a class="btn" href="tel:${esc(d.phone)}">${ic("phone")}${esc(d.phone)}</a>` : ""}
+        ${d.email ? `<a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(d.email)}" target="_blank" rel="noopener">${ic("mail")}${ar ? "إيميل" : "E-mail"}</a>` : ""}
+        ${d.user_id ? `<a class="btn" href="#/insights/${d.user_id}">${ic("spark")}${ar ? "الاهتمامات" : "Insights"}</a>` : ""}</div></div>
+      <ol class="stepper">${STAGES.slice(0, 5).map(([k], i) => `<li class="${d.stage === "lost" ? "" : i < idx ? "done" : i === idx ? "cur" : ""}"><button type="button" data-st="${k}" ${m ? "" : "disabled"}>${esc(stageName(k))}</button></li>`).join("")}
+        <li class="end ${d.stage === "won" ? "cur won" : ""}"><button type="button" data-st="won" ${m ? "" : "disabled"}>${esc(stageName("won"))}</button></li><li class="end ${d.stage === "lost" ? "cur lost" : ""}"><button type="button" data-st="lost" ${m ? "" : "disabled"}>${esc(stageName("lost"))}</button></li></ol>
+      <div id="lost-box" ${d.stage === "lost" ? "" : "hidden"} class="lost-box"><b>${ar ? "سبب الرفض" : "Why did they say no?"}</b>
+        <div class="opts">${Object.keys(LOSS).map(k => `<label><input type="radio" name="lr" value="${k}" ${d.loss_reason === k ? "checked" : ""} ${m ? "" : "disabled"}> ${esc(lossName(k))}</label>`).join("")}</div>
+        <textarea class="input" id="lr-d" rows="2" dir="auto" placeholder="${ar ? "تفاصيل: ماذا قال العميل بالضبط؟" : "Details: what exactly did the client say?"}" ${m ? "" : "disabled"}>${esc(d.loss_details || "")}</textarea>
+        ${m ? `<button class="btn danger" id="lr-save" type="button">${ar ? "حفظ كـ «مرفوض»" : "Save as lost"}</button>` : ""}</div>
+    </section>
+    <div class="grid g2">
+      <section class="card"><h2>${ar ? "المتابعة القادمة" : "Next follow-up"}</h2>
+        <p class="sub">${d.next_follow_up_at ? `${fdt(d.next_follow_up_at)} ${d.overdue ? `<span class="chip c-red">${ar ? "متأخرة" : "overdue"}</span>` : d.due_today ? `<span class="chip c-amber">${ar ? "اليوم" : "today"}</span>` : ""}` : (ar ? "لا يوجد موعد. حدّد موعداً حتى لا ننسى العميل." : "No date set. Set one so nobody is forgotten.")}</p>
+        ${m ? `<div class="filters"><input class="input" type="datetime-local" id="fu" value="${toLocalInput(d.next_follow_up_at)}">${[1, 3, 7].map(n => `<button class="btn sm" type="button" data-fu="${n}">+${n} ${ar ? (n === 1 ? "يوم" : "أيام") : (n === 1 ? "day" : "days")}</button>`).join("")}<button class="btn sm primary" id="fu-save" type="button">${ar ? "حفظ" : "Save"}</button></div>
+          <div class="grid g2" style="margin-top:12px"><label class="fld"><span>${ar ? "القيمة المتوقعة (ر.س)" : "Expected value (SAR)"}</span><input class="input" id="dv" type="number" min="0" step="100" dir="ltr" value="${d.value_sar ?? ""}"></label>
+            <label class="fld"><span>${ar ? "المسؤول" : "Owner"}</span><select class="input" id="dow"><option value="">—</option>${(r.staff || []).map(s => `<option value="${s.id}" ${d.owner_id === s.id ? "selected" : ""}>${esc(s.name)}</option>`).join("")}</select></label></div>
+          <div class="grid g2"><label class="fld"><span>${ar ? "الشركة" : "Company"}</span><input class="input" id="dco" dir="auto" value="${esc(d.company || "")}"></label><label class="fld"><span>${ar ? "مهتم بـ" : "Interested in"}</span><input class="input" id="din" dir="auto" value="${esc(d.product_interest || "")}"></label></div>
+          <button class="btn" id="d-save" type="button">${ar ? "حفظ البيانات" : "Save details"}</button>` : ""}
+      </section>
+      <section class="card"><h2>${ar ? "تقييم العميل (فيدباك)" : "Client feedback"}</h2>
+        ${r.feedback.length ? r.feedback.map(f => `<div class="fb"><b class="stars-s">${"★".repeat(f.rating)}${"☆".repeat(5 - f.rating)}</b> ${f.decision ? `<span class="chip">${esc(L2(DECISION, f.decision))}</span>` : ""}<span class="small muted"> ${fdt(f.created_at)}</span>
+          ${f.liked ? `<p dir="auto"><b>${ar ? "أعجبه:" : "Liked:"}</b> ${esc(f.liked)}</p>` : ""}${f.improve ? `<p dir="auto"><b>${ar ? "نحسّن:" : "Improve:"}</b> ${esc(f.improve)}</p>` : ""}</div>`).join("") : `<p class="muted">${ar ? "لم يصل تقييم بعد." : "No feedback yet."}</p>`}
+        ${m && fbUrl ? `<p class="sub" style="margin-top:10px">${ar ? "أرسل للعميل رابط تقييم خاصاً به (بعد الرد عليه أو بعد العرض):" : "Send the client their private feedback link (after replying or after the proposal):"}</p>
+          <div class="filters">${d.phone ? `<a class="btn" id="fb-wa" target="_blank" rel="noopener" href="https://wa.me/${esc(String(d.phone).replace(/\D/g, ""))}?text=${encodeURIComponent(fbMsg)}">WhatsApp</a>` : ""}
+            ${d.email ? `<a class="btn" id="fb-mail" target="_blank" rel="noopener" href="https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(d.email)}&su=${encodeURIComponent(ar ? "رأيك يهمنا · HUDERA AI" : "Your feedback · HUDERA AI")}&body=${encodeURIComponent(fbMsg)}">${ic("mail")}Gmail</a>` : ""}
+            <button class="btn" id="fb-copy" type="button">${ar ? "نسخ الرابط" : "Copy link"}</button></div>${d.feedback_requested_at ? `<p class="small faint">${ar ? "آخر طلب تقييم:" : "Last requested:"} ${fdt(d.feedback_requested_at)}</p>` : ""}` : ""}
+      </section>
+    </div>
+    <section class="card"><h2>${ar ? "سجل المتابعة" : "Activity"}</h2>
+      ${m ? `<div class="note-f"><select class="input" id="nk">${["note", "call", "whatsapp", "email", "meeting"].map(k => `<option value="${k}">${esc(L2(KIND, k))}</option>`).join("")}</select>
+        <textarea class="input" id="nb" rows="2" dir="auto" placeholder="${ar ? "ماذا حدث؟ مثال: اتصلت به، طلب عرض سعر لموظف موارد بشرية، سيرد يوم الأحد." : "What happened? e.g. Called; asked for an HR assistant quote; will reply Sunday."}"></textarea>
+        <button class="btn primary" id="nb-add" type="button">${ar ? "إضافة" : "Add"}</button></div>` : ""}
+      <ul class="dtl">${r.events.map(e => ({ ...e, body: evBody(e.body) })).map(e => `<li><span class="tl-k">${esc(L2(KIND, e.kind))}</span><div>${e.kind === "stage" ? `${stageChip(e.from_stage)} → ${stageChip(e.to_stage)} ` : ""}${e.body ? `<span dir="auto">${esc(e.kind === "stage" && LOSS[String(e.body).split(" · ")[0]] ? lossName(String(e.body).split(" · ")[0]) + (String(e.body).includes(" · ") ? " · " + String(e.body).split(" · ").slice(1).join(" · ") : "") : e.body)}</span>` : ""}
+        <small class="muted">${fdt(e.at)}${e.by ? ` · ${esc(e.by)}` : ""}</small></div></li>`).join("")}</ul></section>
+    <div class="grid g2">
+      ${r.chat ? `<section class="card"><h2>${ar ? "محادثته مع المساعد الذكي" : "Conversation with the AI assistant"}</h2>${chatFacts(r.chat.facts)}${r.chat.summary ? `<p class="ai-sum" dir="auto">${esc(r.chat.summary)}</p>` : ""}
+        <details><summary>${ar ? `عرض المحادثة (${r.chat.messages.length} رسالة)` : `Show transcript (${r.chat.messages.length} messages)`}</summary>${transcript(r.chat.messages)}</details></section>` : ""}
+      ${r.request ? `<section class="card"><h2>${t("Contact requests")}</h2><p><a class="mono" href="#/leads/${r.request.id}">${esc(r.request.ref)}</a> <b dir="auto">${esc(r.request.subject)}</b> ${chip(STATUS[r.request.status])}</p><p dir="auto" class="small" style="white-space:pre-wrap">${esc(r.request.message)}</p></section>` : ""}
+      ${r.insight?.summary ? `<section class="card"><h2>${ar ? "تحليل الذكاء الاصطناعي" : "AI analysis"}</h2><p class="ai-sum" dir="auto">${esc(r.insight.summary)}</p>${r.insight.next_action ? `<div class="ai-next"><p dir="auto">${esc(r.insight.next_action)}</p></div>` : ""}</section>` : ""}
+    </div>`;
+  const save = async args => { try { await api("admin_deal_update", { p_id: id, ...args }); toast(ar ? "تم الحفظ" : "Saved"); viewDeal(id); } catch (e) { toast(e.code === "loss_reason_required" ? (ar ? "اختر سبب الرفض أولاً" : "Choose a reason first") : e.message); } };
+  $$(".stepper [data-st]").forEach(b => b.addEventListener("click", () => { const st = b.dataset.st; if (st === "lost") { $("#lost-box").hidden = false; $("#lost-box input")?.focus(); return; } if (st !== d.stage) save({ p_stage: st }); }));
+  $("#lr-save")?.addEventListener("click", () => { const lr = $("input[name=lr]:checked")?.value; if (!lr) { toast(ar ? "اختر سبب الرفض" : "Choose a reason"); return; } save({ p_stage: "lost", p_loss_reason: lr, p_loss_details: $("#lr-d").value || null }); });
+  $$("[data-fu]").forEach(b => b.addEventListener("click", () => { const t0 = new Date(); t0.setDate(t0.getDate() + +b.dataset.fu); t0.setHours(10, 0, 0, 0); $("#fu").value = toLocalInput(t0); }));
+  $("#fu-save")?.addEventListener("click", () => { const val = $("#fu").value; if (!val) { save({ p_clear_follow_up: true }); return; } save({ p_next_follow_up_at: new Date(val).toISOString() }); });
+  $("#d-save")?.addEventListener("click", () => save({ p_value: $("#dv").value === "" ? null : +$("#dv").value, p_owner: $("#dow").value || null, p_company: $("#dco").value || null, p_interest: $("#din").value || null }));
+  $("#nb-add")?.addEventListener("click", async () => { const body = $("#nb").value.trim(); if (!body) { $("#nb").focus(); return; }
+    try { await api("admin_deal_note", { p_id: id, p_kind: $("#nk").value, p_body: body }); viewDeal(id); } catch (e) { toast(e.message); } });
+  const markReq = () => api("admin_deal_note", { p_id: id, p_kind: "feedback_requested", p_body: "" }).catch(() => {});
+  $("#fb-wa")?.addEventListener("click", markReq); $("#fb-mail")?.addEventListener("click", markReq);
+  $("#fb-copy")?.addEventListener("click", async () => { try { await navigator.clipboard.writeText(fbUrl); markReq(); toast(ar ? "تم نسخ الرابط" : "Link copied"); } catch (e) { toast(fbUrl); } });
+}
+
+/* ---------------- conversations with the AI assistant ---------------- */
+const FACT = { name: ["Name", "الاسم"], company: ["Company", "الشركة"], role: ["Role", "المنصب"], industry: ["Industry", "النشاط"], company_size: ["Company size", "حجم الشركة"], city: ["City", "المدينة"],
+  need: ["Need", "الاحتياج"], current_process: ["Current process", "الطريقة الحالية"], pain_points: ["Pain points", "المشاكل"], goal: ["Goal", "الهدف"], timeline: ["Timeline", "التوقيت"],
+  budget: ["Budget", "الميزانية"], products_interested: ["Products", "المنتجات"], contact_preference: ["Preferred contact", "طريقة التواصل"], phone: ["Phone", "الجوال"], email: ["E-mail", "البريد"], objections: ["Objections", "الاعتراضات"] };
+function chatFacts(f) {
+  const e = Object.entries(f || {}); if (!e.length) return "";
+  return `<dl class="kv" style="margin-bottom:10px">${e.map(([k, v]) => `<dt>${esc(L2(FACT, k))}</dt><dd dir="auto">${esc(v)}</dd>`).join("")}</dl>`;
+}
+const transcript = msgs => `<div class="tx">${msgs.map(x => `<div class="cm ${x.role}" dir="auto">${esc(x.content).replace(/\n/g, "<br>")}<small>${fdt(x.at)}</small></div>`).join("")}</div>`;
+const CSTAT = { open: ["Open", "مفتوحة", "c-blue"], handed_off: ["Sent to team", "محوّلة للفريق", "c-red"], closed: ["Closed", "مغلقة", ""] };
+async function viewChats() {
+  const ar = AR_();
+  const v = page(ar ? "محادثات المساعد" : "Assistant chats");
+  v.innerHTML = `<p class="sub" style="margin:0 0 12px">${ar ? "كل محادثة مع المساعد الذكي في الموقع، وما فهمه عن العميل. المحادثات التي فيها بيانات تواصل أو طلب للفريق تُضاف تلقائياً إلى «متابعة العملاء»." : "Every conversation with the website assistant and what it learned. Chats with contact details or a request for the team are added to the Pipeline automatically."}</p>
+    <div class="filters" style="margin-bottom:12px"><input class="input" id="c-q" type="search" placeholder="${ar ? "ابحث في المحادثات" : "Search chats"}" style="flex:1;min-width:200px">
+      <select class="input" id="c-st"><option value="all">${ar ? "كل الحالات" : "Any status"}</option>${Object.entries(CSTAT).map(([k, x]) => `<option value="${k}">${ar ? x[1] : x[0]}</option>`).join("")}</select></div><div id="c-list"><div class="skel"></div></div>`;
+  const load = async () => {
+    const box = $("#c-list"); let r; try { r = await api("admin_chats_list", { p_search: $("#c-q").value.trim() || null, p_status: $("#c-st").value }); } catch (e) { box.innerHTML = failBox(e); return; }
+    box.innerHTML = r.rows.length ? `<div class="tbl-wrap"><table><thead><tr><th>${ar ? "الزائر" : "Visitor"}</th><th>${ar ? "ما فهمه المساعد" : "What the assistant learned"}</th><th>${ar ? "الاهتمام" : "Interest"}</th><th class="num">${ar ? "رسائل" : "Msgs"}</th><th>${ar ? "الحالة" : "Status"}</th><th>${ar ? "آخر رسالة" : "Last message"}</th></tr></thead><tbody>
+      ${r.rows.map(c => `<tr class="click" data-id="${c.id}" tabindex="0"><td><span class="t" dir="auto">${esc(c.full_name || c.facts?.name || (ar ? "زائر غير مسجل" : "Anonymous visitor"))}</span><span class="s" dir="ltr">${esc(c.email || c.facts?.phone || c.facts?.email || "")}</span></td>
+        <td class="small" dir="auto">${esc(c.summary || c.facts?.need || c.last_user_message || "—")}</td><td>${c.interest_level ? levelChip(c.interest_level) : "—"}</td><td class="num">${nf(c.message_count)}</td>
+        <td><span class="chip ${CSTAT[c.status]?.[2] || ""}">${esc(ar ? CSTAT[c.status]?.[1] : CSTAT[c.status]?.[0])}</span>${c.deal_id ? ` <span class="chip c-mint">${ar ? "في المتابعة" : "in pipeline"}</span>` : ""}</td><td class="small">${ago(c.last_message_at)}</td></tr>`).join("")}</tbody></table></div>`
+      : `<p class="empty">${ar ? "لا توجد محادثات بعد." : "No conversations yet."}</p>`;
+    $$("tr.click", box).forEach(tr => { const go = () => (location.hash = `#/chats/${tr.dataset.id}`); tr.addEventListener("click", go); tr.addEventListener("keydown", e => e.key === "Enter" && go()); });
+  };
+  let tm; $("#c-q").addEventListener("input", () => { clearTimeout(tm); tm = setTimeout(load, 300); }); $("#c-st").addEventListener("change", load); load();
+}
+async function viewChat(id) {
+  const ar = AR_();
+  const v = page(ar ? "محادثات المساعد" : "Assistant chats", `<a class="btn" href="#/chats">${ic("back")}${ar ? "كل المحادثات" : "All chats"}</a>`);
+  v.innerHTML = `<div class="skel"></div>`;
+  let r; try { r = await api("admin_chat_get", { p_id: id }); } catch (e) { v.innerHTML = failBox(e); return; }
+  const c = r.conversation, u = r.user;
+  $("#page-h").textContent = u?.full_name || c.facts?.name || (ar ? "زائر غير مسجل" : "Anonymous visitor");
+  v.innerHTML = `<div class="grid g2"><section class="card"><h2>${ar ? "ما فهمه المساعد" : "What the assistant learned"}</h2>
+      <div class="filters" style="margin-bottom:8px">${c.interest_level ? levelChip(c.interest_level) : ""}<span class="chip ${CSTAT[c.status]?.[2] || ""}">${esc(ar ? CSTAT[c.status]?.[1] : CSTAT[c.status]?.[0])}</span>${u ? `<a class="chip c-violet" href="#/users/${u.id}">${esc(u.email)}</a>` : `<span class="chip">${ar ? "غير مسجل" : "not signed in"}</span>`}</div>
+      ${c.summary ? `<p class="ai-sum" dir="auto">${esc(c.summary)}</p>` : ""}${chatFacts(c.facts) || `<p class="muted">${ar ? "لم يجمع تفاصيل بعد." : "No details yet."}</p>`}
+      <div class="filters">${r.deal_id ? `<a class="btn primary" href="#/pipeline/${r.deal_id}">${ar ? "فتح في متابعة العملاء" : "Open in pipeline"}</a>` : can("leads.manage") ? `<button class="btn primary" id="c-add" type="button">${ar ? "إضافة لمتابعة العملاء" : "Add to pipeline"}</button>` : ""}</div></section>
+    <section class="card"><h2>${ar ? "المحادثة" : "Transcript"} <span class="muted small">(${r.messages.length})</span></h2>${transcript(r.messages)}</section></div>`;
+  $("#c-add")?.addEventListener("click", () => {
+    if (u) addToPipeline(u.id, "chat");
+    else dealForm({ name: c.facts?.name || "" });
+  });
+}
+
 /* ---------------- router + boot ---------------- */
 function route() {
   if (!who) return;
   const [, sec, id] = location.hash.split("/");
   const first = NAV.find(n => can(n[3]))?.[0] || "overview";
-  const go = { overview: viewOverview, users: id ? () => viewUser(id) : viewUsers, leads: id ? () => viewLead(id) : viewLeads, insights: id ? () => viewInsight(id) : viewInsights, features: id ? () => viewFeature(decodeURIComponent(id)) : viewFeatures,
+  const go = { overview: viewOverview, users: id ? () => viewUser(id) : viewUsers, leads: id ? () => viewLead(id) : viewLeads, insights: id ? () => viewInsight(id) : viewInsights, pipeline: id ? () => viewDeal(id) : viewPipeline, chats: id ? () => viewChat(id) : viewChats, features: id ? () => viewFeature(decodeURIComponent(id)) : viewFeatures,
     emails: viewEmails, settings: viewSettings, audit: viewAudit }[sec];
   const need = NAV.find(n => n[0] === sec)?.[3];
   if (!go || (need && !can(need))) { location.hash = `#/${first}`; return; }
