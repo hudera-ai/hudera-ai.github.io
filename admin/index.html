@@ -258,6 +258,12 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 .of-row{display:grid;grid-template-columns:2fr 1fr 1fr 2fr auto;gap:8px;margin-bottom:8px;align-items:center}
 @media (max-width:640px){.of-row{grid-template-columns:1fr 1fr;}.of-row [name=product],.of-row [name=note]{grid-column:1/-1}}
 .of-share{display:flex;gap:8px;align-items:center;margin:8px 0;font-size:13.5px}
+/* video assistant */
+.av-pick{margin:8px 0;font-size:14px}
+.av-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;max-height:380px;overflow:auto;padding:2px}
+.av-tile{border:2px solid var(--line);border-radius:12px;background:var(--surface);padding:4px;cursor:pointer;display:flex;flex-direction:column;gap:4px;font:inherit;font-size:12px;color:inherit;text-align:center}
+.av-tile img,.av-ph{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:var(--surface-3);display:grid;place-items:center;font-size:26px}
+.av-tile.on{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
 
 </style>
 </head>
@@ -1475,7 +1481,7 @@ function offerForm(dealId, d, pre) {
 /* ---------------- AI usage & budget ---------------- */
 const usd = (n, d = 2) => n == null ? "—" : `$${Number(n).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d })}`;
 const usdSmart = n => n == null ? "—" : Number(n) > 0 && Number(n) < 0.01 ? `$${Number(n).toFixed(4)}` : usd(n);
-const FEAT = { chat: ["المساعد الذكي في الموقع", "Website AI assistant"], lead_ai: ["تحليل اهتمامات العملاء", "Interest analysis"], other: ["أخرى", "Other"] };
+const FEAT = { chat: ["المساعد الذكي في الموقع", "Website AI assistant"], avatar: ["مكالمات الفيديو (LiveAvatar)", "Video calls (LiveAvatar)"], lead_ai: ["تحليل اهتمامات العملاء", "Interest analysis"], other: ["أخرى", "Other"] };
 const tone = p => p == null ? "" : p >= 80 ? "red" : p >= 50 ? "amber" : "mint";
 async function viewAI() {
   const ar = AR_();
@@ -1540,7 +1546,9 @@ async function viewAI() {
         <h3 class="small muted" style="margin:12px 0 6px">${ar ? "آخر التنبيهات" : "Recent alerts"}</h3>
         ${(d.alerts || []).length ? d.alerts.map(a => `<div class="ai-al"><span dir="auto">${esc(a.title)}</span><span class="small faint">${fdt(a.at)}${a.sent_at ? " ✓" : ""}</span></div>`).join("") : `<p class="empty">${ar ? "لا توجد تنبيهات بعد" : "No alerts yet"}</p>`}</section>
     </div>
+    <section class="card" style="margin-top:12px"><h2>🎥 ${ar ? "مساعد الفيديو (شخص بيتكلم ويعبّر)" : "Video assistant (talking avatar)"}</h2><p class="sub">${ar ? "LiveAvatar من HeyGen، بنفس مخ المساعد الذكي بتاعنا: بيعرف المنتجات وعرض سعر العميل، والمحادثة بتتسجل في «محادثات المساعد»." : "LiveAvatar by HeyGen, powered by our own assistant: knows the products and the client's offer; every call is saved in Assistant chats."}</p><div id="ai-avatar"><div class="skel"></div></div></section>
     <p class="small faint" style="margin-top:12px">${ar ? "الأرقام تقديرية: محسوبة من عدد التوكنز لكل طلب × السعر الرسمي (Claude Haiku 5.5: ‎0.10$ لكل مليون توكن داخل و0.50$ لكل مليون خارج). الرقم الرسمي في Claude Console." : "Figures are estimates: tokens per call × the official price (Claude Haiku 5.5: $0.10 per million input tokens, $0.50 per million output). Claude Console has the official numbers."}</p>`;
+  loadAvatarCard();
   const fm = $("#ai-f");
   fm?.addEventListener("change", e => { if (e.target.name === "open") { fm.limit.disabled = e.target.checked; fm.hard.disabled = e.target.checked; } });
   $$("[data-lim]", fm || document).forEach(b => b.addEventListener("click", () => { fm.open.checked = false; fm.limit.disabled = false; fm.hard.disabled = false; fm.limit.value = b.dataset.lim; }));
@@ -1562,6 +1570,58 @@ async function aiStrip() {
       <span class="small muted">${d.credit_days_left != null ? (ar ? `الرصيد ينتهي خلال ${d.credit_days_left} يوم` : `credit expires in ${d.credit_days_left} days`) : ""}</span>`;
     v.prepend(el);
   } catch (e) {}
+}
+
+/* ---------------- video assistant (LiveAvatar) settings ---------------- */
+async function avatarFnAdmin(body) {
+  const { data: s } = await sb.auth.getSession();
+  const r = await fetch(`${cfg.supabaseUrl}/functions/v1/avatar`, { method: "POST", headers: { apikey: cfg.supabaseAnonKey, authorization: `Bearer ${s.session.access_token}`, "content-type": "application/json" }, body: JSON.stringify(body) });
+  const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`); return j;
+}
+async function loadAvatarCard() {
+  const box = $("#ai-avatar"); if (!box) return;
+  const ar = AR_();
+  let st; try { st = await api("admin_avatar_status"); } catch (e) { box.innerHTML = `<p class="small muted">${ar ? "مساعد الفيديو مش متفعّل في قاعدة البيانات لسه." : "The video assistant isn't installed in the database yet."}</p>`; return; }
+  const v = st.settings || {}, ed = st.can_edit;
+  box.innerHTML = `<div class="filters" style="justify-content:space-between"><div class="filters">
+      <span class="chip ${v.enabled ? "c-mint" : ""}">${v.enabled ? (ar ? "ظاهر على الموقع" : "Live on the website") : (ar ? "مقفول" : "Off")}</span>
+      ${v.sandbox ? `<span class="chip c-amber">${ar ? "وضع التجربة (من غير رصيد)" : "Sandbox (no credits)"}</span>` : ""}
+      <span class="chip ${st.configured ? "c-sky" : "c-red"}">${st.configured ? (ar ? "المخ متوصل بـ LiveAvatar" : "Brain connected") : (ar ? "محتاج ربط" : "Needs setup")}</span></div>
+      <span class="small muted">${ar ? `النهارده ${st.today_minutes} دقيقة · الشهر ${st.month_minutes} دقيقة` : `Today ${st.today_minutes} min · this month ${st.month_minutes} min`}</span></div>
+    <div class="av-pick">${v.avatar_name ? `<b>${esc(v.avatar_name)}</b>` : `<span class="muted">${ar ? "لسه ما اخترتش وش" : "No avatar chosen yet"}</span>`}${v.voice_name ? ` · ${ar ? "الصوت" : "voice"}: ${esc(v.voice_name)}` : ""}</div>
+    ${ed ? `<div class="filters" style="margin:10px 0">${st.configured ? "" : `<button class="btn primary sm" type="button" id="av-setup">${ar ? "١. ربط المساعد بـ LiveAvatar" : "1. Connect the brain"}</button>`}
+      <button class="btn sm" type="button" id="av-cat">${ar ? "اختيار الوش والصوت" : "Choose avatar & voice"}</button></div>
+      <form id="av-f" class="ai-form">
+        <div class="ai-sw" style="grid-column:1/-1"><label><input type="checkbox" name="enabled" ${v.enabled ? "checked" : ""} ${v.avatar_id && st.configured ? "" : "disabled"}> ${ar ? "<b>إظهار زرار مكالمة الفيديو</b> في الشات (للمسجلين بس)" : "<b>Show the video call button</b> in the chat (signed-in visitors)"}</label>
+          <label><input type="checkbox" name="sandbox" ${v.sandbox ? "checked" : ""}> ${ar ? "وضع التجربة: من غير ما يصرف رصيد (للاختبار بس)" : "Sandbox: no credits used (testing only)"}</label></div>
+        <label class="fld"><span>${ar ? "مدة المكالمة (دقايق)" : "Call length (minutes)"}</span><input class="input" name="mins" type="number" min="1" max="20" value="${Math.round((v.max_seconds || 300) / 60)}" dir="ltr"></label>
+        <label class="fld"><span>${ar ? "مكالمات لكل شخص في اليوم" : "Calls per person per day"}</span><input class="input" name="per" type="number" min="1" max="20" value="${v.sessions_per_user_day ?? 3}" dir="ltr"></label>
+        <label class="fld"><span>${ar ? "أقصى دقايق في اليوم (للكل)" : "Max minutes per day (everyone)"}</span><input class="input" name="day" type="number" min="5" max="1000" value="${v.daily_minutes ?? 60}" dir="ltr"></label>
+        <label class="fld"><span>${ar ? "تكلفة الدقيقة التقديرية ($)" : "Estimated cost per minute ($)"}</span><input class="input" name="ppm" type="number" min="0" step="0.01" value="${v.usd_per_minute ?? 0.2}" dir="ltr"></label>
+        <div style="grid-column:1/-1"><button class="btn primary" type="submit">${t("Save")}</button></div></form>` : ""}
+    <div id="av-catalog"></div>
+    ${(st.recent || []).length ? `<h3 class="small muted" style="margin:12px 0 6px">${ar ? "آخر المكالمات" : "Recent calls"}</h3>${st.recent.map(x => `<div class="ai-al"><span dir="auto">${esc(x.name || "—")}${x.live ? ` <span class="chip c-mint">${ar ? "شغالة" : "live"}</span>` : ""}</span><span class="small faint">${fdt(x.at)} · ${x.seconds != null ? `${Math.floor(x.seconds / 60)}:${String(x.seconds % 60).padStart(2, "0")}` : "—"}${x.conversation_id ? ` · <a href="#/chats/${x.conversation_id}">${ar ? "النص" : "transcript"}</a>` : ""}</span></div>`).join("")}` : ""}`;
+  $("#av-setup")?.addEventListener("click", async e => { e.target.disabled = true; try { await avatarFnAdmin({ action: "setup" }); toast(ar ? "تم ربط المساعد" : "Connected"); loadAvatarCard(); } catch (er) { toast(er.message); e.target.disabled = false; } });
+  $("#av-cat")?.addEventListener("click", () => avatarCatalog(v));
+  $("#av-f")?.addEventListener("submit", async e => {
+    e.preventDefault(); const f = new FormData(e.target);
+    try { await api("admin_avatar_set", { p_patch: { enabled: !!f.get("enabled"), sandbox: !!f.get("sandbox"), max_seconds: Math.round(+f.get("mins") * 60), sessions_per_user_day: +f.get("per"), daily_minutes: +f.get("day"), usd_per_minute: +f.get("ppm") } });
+      toast(ar ? "تم الحفظ" : "Saved"); loadAvatarCard(); } catch (er) { toast(er.message); }
+  });
+}
+async function avatarCatalog(cur) {
+  const ar = AR_(), box = $("#av-catalog"); box.innerHTML = `<div class="skel"></div>`;
+  let c; try { c = await avatarFnAdmin({ action: "catalog" }); } catch (e) { box.innerHTML = failBox(e); return; }
+  let pick = { avatar_id: cur.avatar_id, avatar_name: cur.avatar_name, voice_id: cur.voice_id, voice_name: cur.voice_name };
+  const voices = (c.voices || []).filter(x => x.id);
+  box.innerHTML = `<h3 class="small muted" style="margin:12px 0 6px">${ar ? "اختار الوش (اضغط عليه)" : "Choose the avatar"}</h3>
+    <div class="av-grid">${(c.avatars || []).filter(a => a.id).map(a => `<button type="button" class="av-tile ${a.id === cur.avatar_id ? "on" : ""}" data-id="${esc(a.id)}" data-name="${esc(a.name || "")}" data-voice="${esc(a.voice_id || "")}">${a.preview ? `<img src="${esc(a.preview)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span class="av-ph">🙂</span>`}<span>${esc(a.name || a.id.slice(0, 8))}</span></button>`).join("") || `<p class="empty">${ar ? "مفيش وشوش متاحة" : "No avatars found"}</p>`}</div>
+    <label class="fld" style="margin-top:10px"><span>${ar ? "الصوت (اختياري — لو سبته فاضي بيستخدم صوت الوش)" : "Voice (optional — empty uses the avatar's own voice)"}</span>
+      <select class="input" id="av-voice"><option value="">${ar ? "صوت الوش الافتراضي" : "Avatar's default voice"}</option>${voices.map(x => `<option value="${esc(x.id)}" ${x.id === cur.voice_id ? "selected" : ""}>${esc(x.name || x.id)}${x.language ? ` · ${esc([].concat(x.language).join(", "))}` : ""}${x.gender ? ` · ${esc(x.gender)}` : ""}</option>`).join("")}</select></label>
+    <div class="filters" style="margin-top:8px"><button class="btn primary sm" type="button" id="av-save-pick">${ar ? "حفظ الاختيار" : "Save choice"}</button><span class="small faint">${ar ? `${(c.avatars || []).length} وش · ${voices.length} صوت` : `${(c.avatars || []).length} avatars · ${voices.length} voices`}</span></div>`;
+  $$(".av-tile", box).forEach(b => b.addEventListener("click", () => { $$(".av-tile", box).forEach(x => x.classList.toggle("on", x === b)); pick.avatar_id = b.dataset.id; pick.avatar_name = b.dataset.name; }));
+  $("#av-voice", box).addEventListener("change", e => { pick.voice_id = e.target.value || null; pick.voice_name = e.target.value ? e.target.selectedOptions[0].textContent.split(" · ")[0] : null; });
+  $("#av-save-pick", box).addEventListener("click", async () => { try { await api("admin_avatar_set", { p_patch: pick }); toast(ar ? "تم الحفظ" : "Saved"); loadAvatarCard(); } catch (e) { toast(e.message); } });
 }
 
 /* ---------------- router + boot ---------------- */
