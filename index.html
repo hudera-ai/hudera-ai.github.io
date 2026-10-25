@@ -817,6 +817,27 @@ body.chat-on .chat-fab{display:none}
 .chat-gbtn:hover{border-color:var(--primary)}.chat-gbtn svg{width:16px;height:16px}
 .chat-h .chat-lang{flex:none;display:inline-flex;flex-direction:row;min-width:0}
 
+.chat-ib{width:32px;height:32px;border-radius:9px;border:1px solid var(--line-2);background:transparent;color:var(--muted);display:grid;place-items:center;cursor:pointer;flex:none;padding:0}
+.chat-ib svg{width:17px;height:17px}.chat-ib:hover{color:var(--primary);border-color:var(--primary)}
+.chat-ib[aria-pressed="true"]{background:var(--primary);color:#fff;border-color:var(--primary)}
+.chat-ib[aria-pressed="false"] .w{opacity:.25}
+.chat-mic{width:40px;height:40px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;flex:none;padding:0}
+.chat-mic svg{width:19px;height:19px}.chat-mic:hover{color:var(--primary);border-color:var(--primary)}
+.chat-mic.on{background:#DC2626;border-color:#DC2626;color:#fff;animation:micpulse 1.2s infinite}
+@keyframes micpulse{0%{box-shadow:0 0 0 0 rgba(220,38,38,.45)}70%{box-shadow:0 0 0 10px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
+.chip-btn.bk{display:inline-flex;align-items:center;gap:6px;border-color:color-mix(in srgb,var(--primary) 45%,transparent);color:var(--primary)}.chip-btn.bk svg{width:14px;height:14px}
+.chat-book small{color:var(--muted);font-size:12px;margin-top:-4px}
+.bk-days,.bk-times{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.bk-times{flex-wrap:wrap;overflow:visible}
+.bk-days button,.bk-times button{flex:none;border:1px solid var(--line-2);background:var(--surface);color:var(--text);border-radius:10px;padding:7px 10px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap}
+.bk-days button[aria-pressed="true"],.bk-times button[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
+.bk-form{display:flex;flex-direction:column;gap:6px}.bk-form[hidden]{display:none}
+.bk-in{border:1px solid var(--line-2);border-radius:10px;padding:8px 10px;font:inherit;font-size:13.5px;background:var(--surface);color:var(--ink)}
+.bk-err{margin:0;color:#DC2626;font-size:12.5px}.chat-book .btn svg{width:15px;height:15px}
+@media (max-width:640px){.chat-h small{display:none}}
+.chat-h b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-h small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-h{gap:8px}.chat-h .chat-ib{width:30px;height:30px}.chat-h .chat-lang button{padding:6px 8px;min-width:30px}
+
 </style>
 <a class="sr" href="#work">Skip to products</a>
 <header class="nav">
@@ -4567,6 +4588,94 @@ const HP = (() => {
   const CHIPS = () => chatLang() === "ar"
     ? ["أريد مساعد واتساب لخدمة العملاء", "عندنا شغل يدوي كثير في الموارد البشرية", "كم تكلفة مشروع مثل هذا؟", "أريد أشوف ديمو"]
     : ["I want a WhatsApp assistant for customers", "Our HR work is very manual", "How much does a project like this cost?", "I'd like to see a demo"];
+  /* ---- voice: speak to the assistant (browser speech recognition) and let it read replies aloud ---- */
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SVG = {
+    mic: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>`,
+    spk: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>`,
+    cal: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>`,
+  };
+  let rec = null, recOn = false;
+  const voiceOn = () => store.get("hudera.chat_voice") === "1";
+  function speak(text) {
+    if (!voiceOn() || !("speechSynthesis" in window)) return;
+    try {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(String(text).replace(/\*\*/g, "").replace(/https?:\/\/\S+/g, ""));
+      const want = chatLang() === "ar" ? "ar" : "en";
+      u.lang = want === "ar" ? "ar-SA" : "en-US";
+      const v = speechSynthesis.getVoices().find(x => x.lang?.toLowerCase().startsWith(want)); if (v) u.voice = v;
+      u.rate = 1; speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  function micToggle() {
+    if (!SR) return;
+    if (recOn) { try { rec.stop(); } catch (e) {} return; }
+    rec = new SR(); rec.lang = chatLang() === "ar" ? "ar-SA" : "en-US"; rec.interimResults = true; rec.continuous = false;
+    let finalText = "";
+    const inp = $("#chat-in"), btn = $("#chat-mic");
+    rec.onstart = () => { recOn = true; btn.classList.add("on"); btn.setAttribute("aria-pressed", "true"); inp.placeholder = ct("Listening… speak now", "أسمعك… تكلّم الآن"); };
+    rec.onresult = e => { let t = ""; for (const r of e.results) t += r[0].transcript; inp.value = t; chatGrow(); if (e.results[e.results.length - 1].isFinal) finalText = t; };
+    rec.onerror = e => { if (e.error === "not-allowed" || e.error === "service-not-allowed") chatBubble("sys", ct("Microphone access was blocked. Allow it in the browser to talk to the assistant.", "تم منع الميكروفون. اسمح به من المتصفح لتتحدث مع المساعد.")); };
+    rec.onend = () => { recOn = false; btn.classList.remove("on"); btn.setAttribute("aria-pressed", "false"); chatChrome(); if (finalText.trim()) chatSend(finalText); };
+    try { speechSynthesis?.cancel(); rec.start(); } catch (e) {}
+  }
+
+  /* ---- booking a call from the chat (slots come from the database, Saudi time) ---- */
+  const TZ = "Asia/Riyadh";
+  const dayKey = d => new Date(d).toLocaleDateString("en-CA", { timeZone: TZ });
+  const fmtDay = d => new Date(d).toLocaleDateString(chatLang() === "ar" ? "ar-SA-u-ca-gregory-nu-latn" : "en-GB", { timeZone: TZ, weekday: "short", day: "numeric", month: "short" });
+  const fmtTime = d => new Date(d).toLocaleTimeString(chatLang() === "ar" ? "ar-SA-u-nu-latn" : "en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
+  const BOOK_ERR = { slot_unavailable: ["That time was just taken. Please pick another.", "هذا الموعد حُجز للتو. اختر موعداً آخر من فضلك."],
+    contact_required: ["Add a phone/WhatsApp number or an e-mail so we can reach you.", "أضف رقم جوال/واتساب أو بريداً لنتواصل معك."],
+    invalid_phone: ["That phone number doesn't look right.", "رقم الجوال غير صحيح."], invalid_email: ["That e-mail doesn't look right.", "البريد غير صحيح."],
+    invalid_name: ["Please add your name.", "أضف اسمك من فضلك."], rate_limited: ["Too many bookings for now. Message us on WhatsApp instead.", "حجوزات كثيرة حالياً. راسلنا على واتساب."],
+    booking_disabled: ["Booking is closed right now. Message us on WhatsApp.", "الحجز متوقف حالياً. راسلنا على واتساب."] };
+  async function chatBooking() {
+    if (!sb) return; $("#chat-book")?.remove();
+    const box = $("#chat-msgs");
+    box.insertAdjacentHTML("beforeend", `<div class="chat-card chat-book" id="chat-book"><b>${ct("Book a free call", "احجز مكالمة مجانية")}</b><small>${ct("Saudi time · about 30 minutes", "بتوقيت السعودية · حوالي 30 دقيقة")}</small><div class="bk-body"><div class="cm assistant typing"><i></i><i></i><i></i></div></div></div>`);
+    box.scrollTop = 1e9;
+    let data; try { data = await rpc("booking_slots", { p_days: 7 }); } catch (e) { data = null; }
+    const body = $("#chat-book .bk-body"); if (!body) return;
+    if (!data?.enabled || !(data.slots || []).length) { body.innerHTML = `<p>${ct("No free times right now. Leave your number and we'll call you.", "لا توجد مواعيد متاحة الآن. اترك رقمك وسنتصل بك.")}</p>`; return; }
+    const days = {}; data.slots.forEach(s => (days[dayKey(s)] = days[dayKey(s)] || []).push(s));
+    const keys = Object.keys(days); let day = keys[0], slot = null;
+    const me_ = me || {};
+    body.innerHTML = `<div class="bk-days" role="group">${keys.map(k => `<button type="button" data-d="${k}">${esc(fmtDay(days[k][0]))}</button>`).join("")}</div>
+      <div class="bk-times" role="group"></div>
+      <div class="bk-form" hidden>
+        <input class="bk-in" id="bk-name" dir="auto" maxlength="120" placeholder="${ct("Your name", "اسمك")}" value="${esc(me_.full_name || "")}">
+        <input class="bk-in" id="bk-phone" dir="ltr" inputmode="tel" maxlength="20" placeholder="${ct("Phone / WhatsApp", "الجوال / واتساب")} (+966…)" value="${esc(me_.phone || "")}">
+        ${me_.email ? "" : `<input class="bk-in" id="bk-email" dir="ltr" type="email" maxlength="254" placeholder="${ct("E-mail (optional)", "البريد (اختياري)")}">`}
+        <input class="bk-in" id="bk-note" dir="auto" maxlength="300" placeholder="${ct("What would you like to discuss? (optional)", "ما الذي تريد مناقشته؟ (اختياري)")}">
+        <p class="bk-err" id="bk-err" hidden></p>
+        <button class="btn sm primary" type="button" id="bk-ok"></button></div>`;
+    const paintDays = () => $$("#chat-book .bk-days button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.d === day)));
+    const paintTimes = () => {
+      $("#chat-book .bk-times").innerHTML = days[day].map(s => `<button type="button" data-s="${s}" aria-pressed="${s === slot}">${esc(fmtTime(s))}</button>`).join("");
+      $$("#chat-book .bk-times button").forEach(b => b.addEventListener("click", () => { slot = b.dataset.s; paintTimes(); const f = $("#chat-book .bk-form"); f.hidden = false;
+        $("#bk-ok").textContent = ct(`Confirm ${fmtDay(slot)} · ${fmtTime(slot)}`, `تأكيد ${fmtDay(slot)} · ${fmtTime(slot)}`); ($("#bk-name").value ? $("#bk-phone") : $("#bk-name")).focus(); box.scrollTop = 1e9; }));
+    };
+    $$("#chat-book .bk-days button").forEach(b => b.addEventListener("click", () => { day = b.dataset.d; slot = null; $("#chat-book .bk-form").hidden = true; paintDays(); paintTimes(); }));
+    paintDays(); paintTimes();
+    $("#bk-ok").addEventListener("click", async () => {
+      const err = $("#bk-err"), ok = $("#bk-ok"); err.hidden = true; ok.disabled = true;
+      try {
+        const r = await rpc("book_call", { p_chat_token: chatToken(), p_starts_at: slot, p_name: $("#bk-name").value, p_phone: $("#bk-phone").value || null,
+          p_email: $("#bk-email")?.value || null, p_note: $("#bk-note").value || null, p_lang: chatLang() });
+        const when = `${fmtDay(r.starts_at)} · ${fmtTime(r.starts_at)}`;
+        const gcal = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ct("Call with HUDERA AI", "مكالمة مع HUDERA AI"))}&dates=${new Date(r.starts_at).toISOString().replace(/[-:]|\.\d{3}/g, "")}/${new Date(r.ends_at).toISOString().replace(/[-:]|\.\d{3}/g, "")}&details=${encodeURIComponent("https://hudera-ai.github.io")}`;
+        $("#chat-book").innerHTML = `<b>✓ ${ct("Your call is booked", "تم حجز مكالمتك")}</b><p>${esc(when)} ${ct("(Saudi time)", "(بتوقيت السعودية)")}. ${ct("Our team will contact you then.", "سيتواصل معك فريقنا في الموعد.")}</p>
+          <a class="btn sm" href="${gcal}" target="_blank" rel="noopener">${SVG.cal}${ct("Add to Google Calendar", "أضف لتقويم جوجل")}</a>`;
+        $("#chat-book").removeAttribute("id"); track("chat_message");
+      } catch (e) {
+        const m = BOOK_ERR[e.code] || ["Couldn't book. Please try again.", "تعذّر الحجز. حاول مرة أخرى."]; err.textContent = ct(m[0], m[1]); err.hidden = false; ok.disabled = false;
+        if (e.code === "slot_unavailable") setTimeout(chatBooking, 1200);
+      }
+    });
+  }
+
   function chatChrome() {
     const fab = $("#chat-fab"), pn = $("#chat-panel");
     if (fab) { fab.querySelector("span").textContent = tt("Ask HUDERA's assistant", "اسأل مساعد HUDERA"); fab.setAttribute("aria-label", tt("Open the AI assistant", "افتح المساعد الذكي")); }
@@ -4577,6 +4686,9 @@ const HP = (() => {
     $("#chat-in").placeholder = ct("Write your message…", "اكتب رسالتك…");
     $("#chat-note").innerHTML = `${ct("This chat is saved so our team can follow up with you.", "تُحفظ المحادثة ليتابع معك فريقنا.")} <a href="privacy.html" target="_blank" rel="noopener">${ct("Privacy", "الخصوصية")}</a>`;
     $$("#chat-lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === cl)));
+    $("#chat-cal")?.setAttribute("aria-label", ct("Book a call", "احجز مكالمة")); $("#chat-cal")?.setAttribute("title", ct("Book a call", "احجز مكالمة"));
+    const spk = $("#chat-spk"); if (spk) { spk.setAttribute("aria-pressed", String(voiceOn())); spk.setAttribute("aria-label", ct("Read replies aloud", "قراءة الردود بصوت")); spk.title = ct("Read replies aloud", "قراءة الردود بصوت"); }
+    const mic = $("#chat-mic"); if (mic && !recOn) { mic.setAttribute("aria-label", ct("Speak your message", "تحدّث برسالتك")); mic.title = ct("Speak your message", "تحدّث برسالتك"); }
     $("#chat-lang").setAttribute("aria-label", ct("Chat language", "لغة المحادثة"));
     const sb_ = $("#chat-auth");
     if (sb_) {
@@ -4610,6 +4722,8 @@ const HP = (() => {
     if (!(hist || []).length) {
       box.insertAdjacentHTML("beforeend", `<div class="chat-chips" id="chat-chips">${CHIPS().map(c => `<button type="button" class="chip-btn">${esc(c)}</button>`).join("")}</div>`);
       $$("#chat-chips .chip-btn").forEach(b => b.addEventListener("click", () => chatSend(b.textContent)));
+      $("#chat-chips").insertAdjacentHTML("beforeend", `<button type="button" class="chip-btn bk" id="chip-book">${SVG.cal}${ct("Book a call", "احجز مكالمة")}</button>`);
+      $("#chip-book").addEventListener("click", () => { $("#chat-chips")?.remove(); chatBooking(); });
     } else if (session && store.get("hudera.just_signed_in_chat", sessionStorage)) {
       chatBubble("assistant", ct("Thanks for signing in! Your details are saved. Shall we continue?", "شكراً لتسجيلك! تم حفظ تفاصيلك. نكمل؟"));
     }
@@ -4630,6 +4744,8 @@ const HP = (() => {
       chatBubble("assistant", j.reply || ct("Sorry, something went wrong. Please try again or message us on WhatsApp.", "عذراً، حدث خطأ. حاول مرة أخرى أو راسلنا على واتساب."), r.ok ? "" : "err");
       if (j.handoff) chatBubble("sys", ct("✓ Sent to our team. We'll contact you soon.", "✓ وصل طلبك لفريقنا وسنتواصل معك قريباً."));
       if (j.ask_signup) chatSignupCard();
+      if (j.offer_booking) chatBooking();
+      if (r.ok && j.reply) speak(j.reply);
       track("chat_message");
     } catch (e) {
       $("#chat-typing")?.remove();
@@ -4641,13 +4757,17 @@ const HP = (() => {
     if (!$("#chat-panel")) {
       document.body.insertAdjacentHTML("beforeend", `<section class="chat-panel no-l10n" id="chat-panel" role="dialog" aria-modal="false" aria-labelledby="chat-title">
         <header class="chat-h"><span class="chat-av">${ic("bot")}</span><div><b id="chat-title"></b><small id="chat-sub"></small></div>
+          <button class="chat-ib" type="button" id="chat-cal">${SVG.cal}</button><button class="chat-ib" type="button" id="chat-spk" aria-pressed="false">${SVG.spk}</button>
           <div class="chat-lang" id="chat-lang" role="group"><button type="button" data-l="ar">ع</button><button type="button" data-l="en">EN</button></div>
           <button class="icon-x" type="button" id="chat-x" aria-label="Close">${ic("x")}</button></header>
         <div class="chat-auth" id="chat-auth" hidden></div>
         <div class="chat-msgs" id="chat-msgs" aria-live="polite"><div class="cm assistant typing"><i></i><i></i><i></i></div></div>
-        <form class="chat-f" id="chat-f"><textarea id="chat-in" rows="1" maxlength="1500" dir="auto"></textarea><button class="chat-send" id="chat-send" type="submit" aria-label="Send">${ic("send")}</button></form>
+        <form class="chat-f" id="chat-f">${SR ? `<button class="chat-mic" id="chat-mic" type="button" aria-pressed="false">${SVG.mic}</button>` : ""}<textarea id="chat-in" rows="1" maxlength="1500" dir="auto"></textarea><button class="chat-send" id="chat-send" type="submit" aria-label="Send">${ic("send")}</button></form>
         <p class="chat-note" id="chat-note"></p></section>`);
       $("#chat-x").addEventListener("click", chatClose);
+      $("#chat-cal").addEventListener("click", chatBooking);
+      $("#chat-spk").addEventListener("click", () => { store.set("hudera.chat_voice", voiceOn() ? "0" : "1"); if (!voiceOn()) try { speechSynthesis.cancel(); } catch (e) {} chatChrome(); });
+      $("#chat-mic")?.addEventListener("click", micToggle);
       $$("#chat-lang button").forEach(b => b.addEventListener("click", () => {
         if (b.dataset.l === chatLang()) return;
         store.set(CHAT_LANG, b.dataset.l); chatChrome();
