@@ -172,6 +172,13 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 #view:focus{outline:none}
 .side{align-self:start}
 
+.xmenu{position:relative;display:inline-block}
+.xmenu-list{position:absolute;inset-inline-end:0;top:calc(100% + 6px);z-index:40;min-width:220px;padding:6px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface);box-shadow:0 18px 40px -18px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:2px}
+.xmenu-list[hidden]{display:none}
+.xmenu-list button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:start;padding:8px 10px;border-radius:8px;border:0;background:transparent;color:var(--ink);font:inherit;cursor:pointer}
+.xmenu-list button:hover,.xmenu-list button:focus-visible{background:var(--surface-2,rgba(127,127,127,.12))}
+.xmenu-list b{font-size:13.5px;font-weight:600}.xmenu-list small{font-size:12px;color:var(--muted)}
+
 </style>
 </head>
 <body>
@@ -179,6 +186,110 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co", "supabaseAnonKey": "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW"};
+/* ---------- HX: file exports shared by the site and the admin dashboard ----------
+   PDF  → a styled report rendered in the browser (html2pdf: html2canvas + jsPDF), so Arabic is shaped by the browser.
+   XLSX → real Excel workbook, one sheet per section (SheetJS).  CSV / JSON → plain files.
+   Libraries load from cdnjs only when the person picks that format. Nothing leaves the browser. */
+const HX = (() => {
+  const LIBS = {
+    pdf: "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js",
+    xlsx: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
+  };
+  const cache = {};
+  const load = k => (cache[k] = cache[k] || new Promise((ok, no) => {
+    const s = document.createElement("script"); s.src = LIBS[k]; s.async = true;
+    s.onload = () => ok(); s.onerror = () => { delete cache[k]; s.remove(); no(new Error("lib_failed")); };
+    document.head.appendChild(s);
+  }));
+  const e = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const save = (blob, name) => {
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  };
+  const cellText = v => (v == null || v === "" ? "" : Array.isArray(v) ? v.join(", ") : String(v));
+
+  /* sheets: [{ name, head: [..], rows: [[..], ..] }] */
+  async function xlsx(sheets, file, rtl) {
+    await load("xlsx");
+    const X = window.XLSX, wb = X.utils.book_new();
+    sheets.forEach(s => {
+      const aoa = [s.head, ...s.rows.map(r => r.map(v => (typeof v === "number" || typeof v === "boolean" ? v : cellText(v))))];
+      const ws = X.utils.aoa_to_sheet(aoa);
+      ws["!cols"] = s.head.map((_, i) => ({ wch: Math.min(60, Math.max(10, ...aoa.slice(0, 400).map(r => cellText(r[i]).length + 2))) }));
+      if (aoa.length > 1) ws["!autofilter"] = { ref: X.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: aoa.length - 1, c: s.head.length - 1 } }) };
+      X.utils.book_append_sheet(wb, ws, s.name.replace(/[\\/?*[\]:]/g, " ").slice(0, 31));
+    });
+    if (rtl) wb.Workbook = { Views: [{ RTL: true }] };
+    X.writeFile(wb, file, { compression: true });
+  }
+
+  function csv(head, rows, file) {
+    const c = v => { let s = cellText(v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return `"${s.replace(/"/g, '""')}"`; };
+    save(new Blob(["﻿" + [head.map(c).join(","), ...rows.map(r => r.map(c).join(","))].join("\r\n")], { type: "text/csv;charset=utf-8" }), file);
+  }
+  const json = (data, file) => save(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }), file);
+
+  /* report: { title, subtitle, meta: [[label, value]], sections: [{ title, kv: [[label, value]] } | { title, head, rows, note }], footer } */
+  const CSS = `.hx{background:#fff;color:#0B1220;font:12px/1.6 "IBM Plex Sans Arabic","Instrument Sans",system-ui,sans-serif;padding:6px 2px}
+.hx *{box-sizing:border-box}
+.hx-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid #3D5AFE;padding-bottom:12px;margin-bottom:6px}
+.hx-brand{display:flex;align-items:center;gap:8px;font:800 19px/1 "Bricolage Grotesque","Instrument Sans",sans-serif;color:#0B1220;direction:ltr}
+.hx-mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#3D5AFE,#22D3EE);color:#fff;display:grid;place-items:center;font-size:15px}
+.hx-brand b{color:#3D5AFE;font-weight:800}
+.hx h1{font-size:17px;line-height:1.35;margin:0 0 2px;font-weight:700}
+.hx .mut{color:#5B6478;font-size:11px}
+.hx-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 4px;color:#3A4459;font-size:11px}
+.hx-meta span b{color:#0B1220;font-weight:600}
+.hx h2{font-size:13.5px;margin:18px 0 8px;color:#1F2A44;font-weight:700;display:flex;align-items:center;gap:8px}
+.hx h2 i{display:inline-block;width:4px;height:14px;border-radius:2px;background:#3D5AFE}
+.hx h2 small{color:#5B6478;font-weight:500;font-size:11px}
+.hx table{width:100%;border-collapse:collapse;font-size:10.5px;table-layout:auto}
+.hx th{background:#EEF1FF;color:#1F2A44;text-align:start;padding:6px 7px;border:1px solid #D9DEEA;font-weight:600;white-space:nowrap}
+.hx td{padding:5px 7px;border:1px solid #E3E7F0;vertical-align:top;overflow-wrap:anywhere}
+.hx tbody tr:nth-child(even) td{background:#FAFBFE}
+.hx .kv td:first-child{width:30%;color:#5B6478;background:#F7F8FC;font-weight:500}
+.hx .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.hx .empty{color:#8A93A6;font-style:italic;padding:6px 0}
+.hx .note{color:#8A93A6;font-size:10px;margin-top:4px}
+.hx-foot{margin-top:20px;color:#8A93A6;font-size:9.5px;border-top:1px solid #E3E7F0;padding-top:8px;display:flex;justify-content:space-between;gap:12px}`;
+  const w = v => e(v).split(/(\s+)/).map(p => (!p || /^\s+$/.test(p) ? p : `<span>${p}</span>`)).join("");
+  const isLtr = v => /^[\x00-\x7F]*$/.test(v) && /[@+.:/\d]/.test(v);
+  const td = v => { const s = cellText(v); return s === "" ? "<td>—</td>" : `<td>${isLtr(s) ? `<span class="ltr">${e(s)}</span>` : w(s)}</td>`; };
+  function reportHtml(r, rtl, width) {
+    const secs = r.sections.map(s => {
+      const h = `<h2><i></i><span>${w(s.title)}</span>${s.count != null ? ` <small>(${s.count})</small>` : ""}</h2>`;
+      if (s.kv) return h + `<table class="kv"><tbody>${s.kv.map(([k, v]) => `<tr><td>${w(k)}</td>${td(v)}</tr>`).join("")}</tbody></table>`;
+      if (!s.rows.length) return h + `<p class="empty">${w(s.empty || "—")}</p>`;
+      return h + `<table><thead><tr>${s.head.map(x => `<th>${w(x)}</th>`).join("")}</tr></thead><tbody>${s.rows.map(row => `<tr>${row.map(td).join("")}</tr>`).join("")}</tbody></table>${s.note ? `<p class="note">${w(s.note)}</p>` : ""}`;
+    }).join("");
+    return `<div class="hx" dir="${rtl ? "rtl" : "ltr"}" lang="${rtl ? "ar" : "en"}" style="width:${width}px"><style>${CSS}</style>
+      <div class="hx-head"><div><h1>${w(r.title)}</h1>${r.subtitle ? `<div class="mut">${w(r.subtitle)}</div>` : ""}</div>
+        <div class="hx-brand"><span class="hx-mark">h</span><span>HUDERA <b>AI</b></span></div></div>
+      ${r.meta?.length ? `<div class="hx-meta">${r.meta.map(([k, v]) => `<span>${w(k)}: <b>${isLtr(cellText(v)) ? `<span class="ltr">${e(v)}</span>` : w(v)}</b></span>`).join("")}</div>` : ""}
+      ${secs}
+      <div class="hx-foot"><span>${w(r.footer || "")}</span><span class="ltr">hudera-ai.github.io</span></div></div>`;
+  }
+  async function pdf(r, file, { rtl = false, landscape = false } = {}) {
+    await load("pdf");
+    const width = landscape ? 1040 : 715;
+    const host = document.createElement("div");
+    host.style.cssText = "position:fixed;left:0;top:0;width:0;height:0;overflow:hidden;opacity:0;z-index:-1;pointer-events:none";
+    host.innerHTML = reportHtml(r, rtl, width);
+    document.body.appendChild(host);
+    try {
+      if (document.fonts?.ready) await document.fonts.ready;
+      await window.html2pdf().set({
+        margin: [10, 9, 12, 9], filename: file,
+        image: { type: "jpeg", quality: 0.95 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false, scrollX: 0, scrollY: 0 },
+        jsPDF: { unit: "mm", format: "a4", orientation: landscape ? "landscape" : "portrait", compress: true },
+        pagebreak: { mode: ["css", "legacy"], avoid: ["tr", "h2", ".hx-head", ".hx-meta"] },
+      }).from(host.firstElementChild).save();
+    } finally { host.remove(); }
+  }
+  return { pdf, xlsx, csv, json, load };
+})();
+
 /* HUDERA AI · admin dashboard. Every number comes from the admin_* database functions,
    which check the signed-in person's staff role on the server. */
 "use strict";
@@ -201,7 +312,7 @@ const AR = {
   "Top pages": "أكثر الصفحات زيارة", "Traffic sources": "مصادر الزيارات", "Referrers": "المواقع المُحيلة", "Devices": "الأجهزة", "Browsers": "المتصفحات",
   "Retention by sign-up week": "الاحتفاظ حسب أسبوع التسجيل", "Requests by status": "الطلبات حسب الحالة", "Show as table": "عرض كجدول",
   "Search name, e-mail or phone": "ابحث بالاسم أو البريد أو الجوال", "All": "الكل", "Active": "نشط", "Inactive": "غير نشط", "Suspended": "موقوف", "Deleted": "محذوف",
-  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
+  "Any phone": "أي جوال", "Has phone": "لديه جوال", "No phone": "بدون جوال", "Export CSV": "تصدير CSV", "Export": "تصدير", "PDF report": "تقرير PDF", "Name": "الاسم", "E-mail": "البريد", "Phone": "الجوال",
   "Registered": "تاريخ التسجيل", "Last login": "آخر دخول", "Last activity": "آخر نشاط", "Status": "الحالة", "Recent features": "آخر الميزات", "Important actions": "إجراءات مهمة",
   "Contact": "التواصل", "Previous": "السابق", "Next": "التالي", "No results": "لا توجد نتائج", "Account": "الحساب", "Timeline": "الخط الزمني", "Load more": "تحميل المزيد",
   "Send e-mail": "إرسال بريد", "Used": "استُخدمت", "Not used": "لم تُستخدم", "Unknown": "غير معروف", "Recent sessions": "آخر الجلسات", "Pages visited": "الصفحات المزارة",
@@ -406,7 +517,9 @@ async function viewOverview() {
 const uq = { search: "", activity: "all", status: "all", phone: "", from: "", to: "", sort: "created_desc", offset: 0 };
 function userArgs() { return { p_search: uq.search || null, p_activity: uq.activity, p_status: uq.status, p_has_phone: uq.phone === "" ? null : uq.phone === "yes", p_from: uq.from || null, p_to: uq.to || null, p_tz: TZ }; }
 async function viewUsers() {
-  const v = page(t("Users"), can("users.export") ? `<button class="btn" id="exp" type="button">${ic("dl")}${t("Export CSV")}</button>` : "");
+  const v = page(t("Users"), can("users.export") ? `<div class="xmenu"><button class="btn" id="exp" type="button" aria-haspopup="menu" aria-expanded="false">${ic("dl")}${t("Export")}</button>
+    <div class="xmenu-list" id="exp-menu" role="menu" hidden>${[["xlsx", "Excel (.xlsx)", LANG === "ar" ? "جدول بفلاتر" : "Spreadsheet with filters"], ["pdf", t("PDF report"), LANG === "ar" ? "للطباعة والمشاركة" : "To print or share"], ["csv", "CSV", LANG === "ar" ? "لأي برنامج آخر" : "For any other tool"]]
+      .map(([f, l, d]) => `<button type="button" role="menuitem" data-fmt="${f}"><b>${l}</b><small>${d}</small></button>`).join("")}</div></div>` : "");
   v.innerHTML = `<div class="filters">
       <input class="input" id="u-q" type="search" placeholder="${t("Search name, e-mail or phone")}" value="${esc(uq.search)}" style="flex:1;min-width:200px">
       <select class="input" id="u-act">${[["all", "All"], ["active", "Active"], ["inactive", "Inactive"]].map(([k, l]) => `<option value="${k}" ${uq.activity === k ? "selected" : ""}>${t(l)}</option>`).join("")}</select>
@@ -418,7 +531,14 @@ async function viewUsers() {
   let timer;
   $("#u-q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => { uq.search = e.target.value.trim(); uq.offset = 0; loadUsers(); }, 300); });
   [["#u-act", "activity"], ["#u-st", "status"], ["#u-ph", "phone"], ["#u-from", "from"], ["#u-to", "to"], ["#u-sort", "sort"]].forEach(([s, k]) => $(s).addEventListener("change", e => { uq[k] = e.target.value; uq.offset = 0; loadUsers(); }));
-  $("#exp")?.addEventListener("click", exportUsers);
+  const menu = $("#exp-menu");
+  if (menu) {
+    const close = () => { menu.hidden = true; $("#exp").setAttribute("aria-expanded", "false"); };
+    $("#exp").addEventListener("click", ev => { ev.stopPropagation(); menu.hidden = !menu.hidden; $("#exp").setAttribute("aria-expanded", String(!menu.hidden)); if (!menu.hidden) menu.querySelector("button")?.focus(); });
+    menu.addEventListener("keydown", ev => { if (ev.key === "Escape") { close(); $("#exp").focus(); } });
+    if (!window.__hxMenu) { window.__hxMenu = true; document.addEventListener("click", ev => { const m = $("#exp-menu"); if (m && !ev.target.closest(".xmenu")) { m.hidden = true; $("#exp")?.setAttribute("aria-expanded", "false"); } }); }
+    $$("[data-fmt]", menu).forEach(b => b.addEventListener("click", () => { close(); exportUsers(b.dataset.fmt); }));
+  }
   loadUsers();
 }
 async function loadUsers() {
@@ -439,16 +559,38 @@ function pager(r, cb) {
   return `<div class="pager"><span>${from}–${to} ${LANG === "ar" ? "من" : "of"} ${nf(r.total)}</span><span class="filters"><button class="btn sm" data-off="${r.offset - r.limit}" ${r.offset <= 0 ? "disabled" : ""}>${t("Previous")}</button><button class="btn sm" data-off="${r.offset + r.limit}" ${to >= r.total ? "disabled" : ""}>${t("Next")}</button></span></div>`;
 }
 function bindPager(box) { const cb = pagerCb; $$("[data-off]", box).forEach(b => b.addEventListener("click", () => cb(Math.max(0, +b.dataset.off)))); }
-async function exportUsers() {
+async function exportUsers(fmt = "xlsx") {
+  const btn = $("#exp"); if (btn) btn.disabled = true;
+  const ar = LANG === "ar";
   try {
     const rows = await api("admin_export_users", userArgs());
-    const cols = [["full_name", "Name"], ["email", "Email"], ["email_verified", "Email verified"], ["phone", "Phone"], ["created_at", "Registered"], ["last_login_at", "Last login"], ["last_seen_at", "Last activity"],
-                  ["status", "Account status"], ["activity", "Activity"], ["sessions", "Sessions"], ["important_actions", "Important actions"], ["contact_status", "Latest request status"], ["marketing_consent", "News consent"]];
-    const cell = v => { let s = Array.isArray(v) ? v.join("; ") : v == null ? "" : String(v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return `"${s.replace(/"/g, '""')}"`; };
-    const csv = "﻿" + [cols.map(c => c[1]).join(","), ...rows.map(r => cols.map(([k]) => cell(r[k])).join(","))].join("\r\n");
-    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" })); a.download = `hudera-users-${today()}.csv`; a.click();
-    toast(`${rows.length} ${LANG === "ar" ? "صف تم تصديره (مسجل في سجل التدقيق)" : "rows exported (recorded in the audit log)"}`);
-  } catch (e) { toast(e.message); }
+    const yn = v => (v ? (ar ? "نعم" : "Yes") : (ar ? "لا" : "No"));
+    const st = (map, v) => (map[v] ? t(map[v][0]) : v || "");
+    const day = today(), name = `hudera-users-${day}`;
+    if (fmt === "csv") {
+      const cols = [["full_name", "Name"], ["email", "Email"], ["email_verified", "Email verified"], ["phone", "Phone"], ["created_at", "Registered"], ["last_login_at", "Last login"], ["last_seen_at", "Last activity"],
+                    ["status", "Account status"], ["activity", "Activity"], ["sessions", "Sessions"], ["important_actions", "Important actions"], ["contact_status", "Latest request status"], ["marketing_consent", "News consent"]];
+      HX.csv(cols.map(c => c[1]), rows.map(r => cols.map(([k]) => r[k])), `${name}.csv`);
+    } else {
+      const head = [t("Name"), t("E-mail"), ar ? "بريد موثّق" : "E-mail verified", t("Phone"), t("Registered"), t("Last login"), t("Last activity"), ar ? "حالة الحساب" : "Account status", ar ? "النشاط" : "Activity",
+                    t("Sessions"), t("Important actions"), t("Recent features"), ar ? "حالة آخر طلب" : "Latest request", ar ? "أخبار بالبريد" : "News by e-mail", ar ? "الدور" : "Role"];
+      const data = rows.map(r => [r.full_name || "", r.email, yn(r.email_verified), r.phone || "", fdt(r.created_at), r.last_login_at ? fdt(r.last_login_at) : "", r.last_seen_at ? fdt(r.last_seen_at) : "",
+                    st(ACT, r.status), st(ACT, r.activity), r.sessions ?? 0, r.important_actions ?? 0, (r.recent_features || []).join(", "), st(STATUS, r.contact_status), yn(r.marketing_consent), r.staff_role || ""]);
+      const filters = [uq.search && [ar ? "بحث" : "Search", uq.search], uq.activity !== "all" && [ar ? "النشاط" : "Activity", t(uq.activity === "active" ? "Active" : "Inactive")],
+                       uq.status !== "all" && [ar ? "الحالة" : "Status", t(ACT[uq.status]?.[0] || uq.status)], uq.phone && [t("Phone"), t(uq.phone === "yes" ? "Has phone" : "No phone")],
+                       (uq.from || uq.to) && [t("Registered"), `${uq.from || "…"} → ${uq.to || "…"}`]].filter(Boolean);
+      if (fmt === "xlsx") await HX.xlsx([{ name: ar ? "المستخدمون" : "Users", head, rows: data }], `${name}.xlsx`, ar);
+      else {
+        const pick = [0, 1, 3, 4, 6, 8, 9, 10, 12, 13];
+        await HX.pdf({ title: ar ? "تقرير المستخدمين" : "Users report", subtitle: ar ? "HUDERA AI · لوحة الإدارة" : "HUDERA AI · Admin dashboard",
+          meta: [[ar ? "عدد المستخدمين" : "Users", String(rows.length)], [ar ? "تاريخ التصدير" : "Exported", fdt(new Date())], ...(filters.length ? filters : [[ar ? "الفلاتر" : "Filters", ar ? "بدون" : "None"]])],
+          sections: [{ title: ar ? "المستخدمون" : "Users", count: rows.length, head: pick.map(i => head[i]), rows: data.map(r => pick.map(i => r[i])), empty: t("No results") }],
+          footer: ar ? "سري: للاستخدام الداخلي فقط. التصدير مسجّل في سجل التدقيق." : "Confidential: internal use only. This export is recorded in the audit log." }, `${name}.pdf`, { rtl: ar, landscape: true });
+      }
+    }
+    toast(`${rows.length} ${ar ? "صف تم تصديره (مسجل في سجل التدقيق)" : "rows exported (recorded in the audit log)"}`);
+  } catch (e) { toast(e.message === "lib_failed" ? (ar ? "تعذّر تجهيز الملف. تأكد من الاتصال وحاول مرة أخرى." : "Couldn't prepare the file. Check your connection and try again.") : e.message); }
+  finally { if (btn) btn.disabled = false; }
 }
 
 /* ---------------- one user ---------------- */
