@@ -855,6 +855,24 @@ body.chat-on .chat-fab{display:none}
 .cv-b.end{background:#DC2626;color:#fff;border-color:#DC2626}
 @media (prefers-reduced-motion:reduce){.cv-spin{animation:none}}
 
+/* ---------- client work ---------- */
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.case{background:var(--bg);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.case-media{position:relative;aspect-ratio:16/9;background:var(--surface-2);overflow:hidden;border-bottom:1px solid var(--line)}
+.case-media img,.case-media video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.case-play{position:absolute;inset:0;margin:auto;width:66px;height:66px;border-radius:50%;border:0;background:rgba(61,90,254,.92);box-shadow:0 10px 30px rgba(11,18,32,.35);cursor:pointer;display:grid;place-items:center}
+.case-play span{width:0;height:0;border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+[dir=rtl] .case-play span{margin-left:5px}
+.case-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.case-client{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.case-client b{font-size:14px;color:var(--muted);font-weight:600}
+.case h3{font-family:var(--f-display);font-size:22px;letter-spacing:-.015em;margin:4px 0 2px}
+.case-k{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--primary-ink);margin-top:8px}
+.case p{color:var(--text);font-size:15px}
+.case ul{margin:0;padding-inline-start:18px;color:var(--text);font-size:15px;display:grid;gap:4px}
+.case-foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:860px){.cases{grid-template-columns:1fr}}
+
 </style>
 <a class="sr" href="#work">Skip to products</a>
 <header class="nav">
@@ -864,7 +882,7 @@ body.chat-on .chat-fab{display:none}
       <b>hudera</b><span>AI</span>
     </a>
     <nav class="nav-links" aria-label="Main">
-      <a href="#systems">Platforms</a><a href="#value">Value</a><a href="#work">Products</a><a href="#process">How we work</a><a href="#faq">FAQ</a><a class="keep" href="#contact">Contact</a>
+      <a href="#systems">Platforms</a><a href="#clients">Clients</a><a href="#value">Value</a><a href="#work">Products</a><a href="#process">How we work</a><a href="#faq">FAQ</a><a class="keep" href="#contact">Contact</a>
     </nav>
     <button class="lang-btn no-l10n" id="lang" type="button"></button>
     <button class="theme-btn" id="theme" type="button" aria-label="Switch theme"></button>
@@ -903,6 +921,43 @@ body.chat-on .chat-fab{display:none}
     <div class="sec-head" style="margin-top:44px"><div><span class="eyebrow">Apps on the same stack</span><h2>Focused systems for one workflow</h2><p>Smaller complete products built the same way: database, roles, workflows and reports — each one usable on its own or as a module next to the platforms.</p></div></div>
     <div class="systems" id="systems-grid"></div>
   </section>
+
+  <section class="band" id="clients"><div class="container sec">
+    <div class="sec-head"><div><span class="eyebrow">Client work</span><h2>Projects we built with real companies</h2><p>Each one started from a real problem inside a real team. The live demos run on sample data, so no client information is shown.</p></div></div>
+    <div class="cases"><article class="case" id="c-orders">
+      <div class="case-media"><img src="media/cases/orders.jpg" alt="AI order desk for a food wholesaler" loading="lazy"><button class="case-play" type="button" aria-label="Watch the video" hidden><span></span></button></div>
+      <div class="case-body">
+        <div class="case-client"><b>Food wholesale distributor · Jordan</b><span class="chip c-blue">WhatsApp + AI phone agent</span></div>
+        <h3>AI order desk for a food wholesaler</h3>
+        <p class="case-k">The problem</p><p>60% of orders came by phone, and the invoices staff took were a fraction of what the owner sold on the same call: no alternatives offered when an item ran out, and no new items suggested.</p>
+        <p class="case-k">What we built</p><ul><li>A WhatsApp assistant that reads a whole order sent in one message, in the customer's own dialect</li><li>Out-of-stock items get a same-kind alternative, and the order keeps going</li><li>New items and weekly offers suggested on every order</li><li>Orders land in a dashboard for the sales team to confirm</li><li>Next: an AI phone agent with a natural Jordanian voice on a cloud number</li></ul>
+        <div class="case-foot"><span class="chip c-mint dot">Working demo delivered · full build next</span><a class="btn sm primary" href="https://hudera-ai.github.io/orders/" target="_blank" rel="noopener">Try the live demo</a></div>
+      </div></article><article class="case" id="c-sitelog">
+      <div class="case-media"><img src="https://hudera-ai.github.io/sitelog/docs/dashboard.png" alt="Daily site reports from WhatsApp messages" loading="lazy"><button class="case-play" type="button" aria-label="Watch the video" hidden><span></span></button></div>
+      <div class="case-body">
+        <div class="case-client"><b>Petra Scan Contracting · Saudi Arabia</b><span class="chip c-blue">Construction · site operations</span></div>
+        <h3>Daily site reports from WhatsApp messages</h3>
+        <p class="case-k">The problem</p><p>Site updates arrived as scattered WhatsApp messages and photos, and the daily report took hours to put together by hand every evening.</p>
+        <p class="case-k">What we built</p><ul><li>Field messages in Arabic or English turned into a structured daily report</li><li>Approval before the report goes out</li><li>BOQ progress and earned value per item</li><li>Printable A4 report and role-based access</li></ul>
+        <div class="case-foot"><span class="chip c-mint dot">Built with the Petra team</span><a class="btn sm primary" href="https://hudera-ai.github.io/sitelog/?mode=local" target="_blank" rel="noopener">Try the live demo</a></div>
+      </div></article><article class="case" id="c-quoteflow">
+      <div class="case-media"><img src="https://hudera-ai.github.io/quoteflow/docs/dashboard.png" alt="Every inquiry to a quotation, nothing lost" loading="lazy"><button class="case-play" type="button" aria-label="Watch the video" hidden><span></span></button></div>
+      <div class="case-body">
+        <div class="case-client"><b>Petra Scan Contracting · Saudi Arabia</b><span class="chip c-blue">Sales · pricing department</span></div>
+        <h3>Every inquiry to a quotation, nothing lost</h3>
+        <p class="case-k">The problem</p><p>Inquiries came by email, WhatsApp and phone, and some waited days without a quotation or a follow-up.</p>
+        <p class="case-k">What we built</p><ul><li>Every inquiry tracked from arrival to quotation and follow-up</li><li>SLA timers and a pipeline board</li><li>Assisted quotation drafting with approvals and revisions</li><li>Win/loss reports for management</li></ul>
+        <div class="case-foot"><span class="chip c-mint dot">Built with the Petra team</span><a class="btn sm primary" href="https://hudera-ai.github.io/quoteflow/?mode=local" target="_blank" rel="noopener">Try the live demo</a></div>
+      </div></article><article class="case" id="c-attendify">
+      <div class="case-media"><img src="https://hudera-ai.github.io/attendify/docs/dashboard.png" alt="Attendance and overtime, payroll-ready" loading="lazy"><button class="case-play" type="button" aria-label="Watch the video" hidden><span></span></button></div>
+      <div class="case-body">
+        <div class="case-client"><b>Petra Scan Contracting · Saudi Arabia</b><span class="chip c-blue">HR · attendance & payroll</span></div>
+        <h3>Attendance and overtime, payroll-ready</h3>
+        <p class="case-k">The problem</p><p>Fingerprint punches had to be turned into lateness, overtime and leave by hand every month before payroll.</p>
+        <p class="case-k">What we built</p><ul><li>Device punches imported automatically</li><li>Rules engine for shifts, grace periods and night shifts</li><li>Daily sheet, leaves and holidays</li><li>Monthly payroll-ready report</li></ul>
+        <div class="case-foot"><span class="chip c-mint dot">Built with the Petra team</span><a class="btn sm primary" href="https://hudera-ai.github.io/attendify/?mode=local" target="_blank" rel="noopener">Try the live demo</a></div>
+      </div></article></div>
+  </div></section>
 
   <section class="band" id="value"><div class="container sec">
     <div class="sec-head"><div><span class="eyebrow">The business case</span><h2>What an AI employee is worth to you</h2><p>Move the sliders to match your team. The estimate uses your own numbers; plan prices are the sample prices shown in the platform demo.</p></div></div>
@@ -1246,6 +1301,47 @@ function fitPreviews() {
 }
 
 const AR_DICT = {
+"Clients": "عملاؤنا",
+"Client work": "أعمالنا مع العملاء",
+"Projects we built with real companies": "مشاريع نفّذناها مع شركات حقيقية",
+"Each one started from a real problem inside a real team. The live demos run on sample data, so no client information is shown.": "كل مشروع بدأ من مشكلة حقيقية داخل فريق حقيقي. العروض الحية تعمل على بيانات تجريبية، فلا تظهر أي معلومات تخص العملاء.",
+"The problem": "المشكلة",
+"What we built": "ما بنيناه",
+"Try the live demo": "جرّب العرض الحي",
+"Watch the video": "شاهد الفيديو",
+"Food wholesale distributor · Jordan": "موزّع مواد غذائية بالجملة · الأردن",
+"WhatsApp + AI phone agent": "واتساب + موظف هاتفي ذكي",
+"AI order desk for a food wholesaler": "مكتب طلبات ذكي لموزّع مواد غذائية",
+"60% of orders came by phone, and the invoices staff took were a fraction of what the owner sold on the same call: no alternatives offered when an item ran out, and no new items suggested.": "60% من الطلبات تأتي بالهاتف، وفاتورة الموظف كانت جزءاً بسيطاً مما يبيعه صاحب المؤسسة في نفس المكالمة: لا بديل عند نفاد الصنف، ولا اقتراح للأصناف الجديدة.",
+"A WhatsApp assistant that reads a whole order sent in one message, in the customer's own dialect": "مساعد واتساب يفهم الطلب كاملاً برسالة واحدة وبلهجة الزبون",
+"Out-of-stock items get a same-kind alternative, and the order keeps going": "الصنف غير المتوفر يُعرض له بديل من نفس النوع ويكمل الطلب",
+"New items and weekly offers suggested on every order": "اقتراح الأصناف الجديدة وعروض الأسبوع مع كل طلب",
+"Orders land in a dashboard for the sales team to confirm": "الطلبات تصل للوحة يؤكدها فريق المبيعات",
+"Next: an AI phone agent with a natural Jordanian voice on a cloud number": "المرحلة التالية: موظف هاتفي ذكي بصوت طبيعي ولهجة أردنية على رقم سحابي",
+"Working demo delivered · full build next": "سُلّم عرض تشغيلي · التنفيذ الكامل التالي",
+"Petra Scan Contracting · Saudi Arabia": "شركة بترا سكان للمقاولات · السعودية",
+"Construction · site operations": "مقاولات · عمليات المواقع",
+"Daily site reports from WhatsApp messages": "تقارير المواقع اليومية من رسائل واتساب",
+"Site updates arrived as scattered WhatsApp messages and photos, and the daily report took hours to put together by hand every evening.": "تحديثات المواقع كانت تصل رسائل وصوراً متفرقة على واتساب، وتجميع التقرير اليومي يأخذ ساعات كل مساء.",
+"Field messages in Arabic or English turned into a structured daily report": "رسائل الموقع بالعربي أو الإنجليزي تتحول إلى تقرير يومي منظم",
+"Approval before the report goes out": "اعتماد قبل إرسال التقرير",
+"BOQ progress and earned value per item": "نسبة إنجاز بنود الكميات والقيمة المكتسبة لكل بند",
+"Printable A4 report and role-based access": "تقرير A4 جاهز للطباعة وصلاحيات حسب الدور",
+"Built with the Petra team": "نُفّذ مع فريق بترا",
+"Sales · pricing department": "المبيعات · قسم التسعير",
+"Every inquiry to a quotation, nothing lost": "كل استفسار يصل لعرض سعر بلا ضياع",
+"Inquiries came by email, WhatsApp and phone, and some waited days without a quotation or a follow-up.": "الاستفسارات كانت تصل بالإيميل وواتساب والهاتف، وبعضها ينتظر أياماً بلا عرض سعر أو متابعة.",
+"Every inquiry tracked from arrival to quotation and follow-up": "متابعة كل استفسار من وصوله حتى عرض السعر والمتابعة",
+"SLA timers and a pipeline board": "مؤقتات مهلة الرد ولوحة مراحل",
+"Assisted quotation drafting with approvals and revisions": "صياغة عروض الأسعار بمساعدة الذكاء الاصطناعي مع الاعتماد والتعديلات",
+"Win/loss reports for management": "تقارير الفوز والخسارة للإدارة",
+"HR · attendance & payroll": "الموارد البشرية · الحضور والرواتب",
+"Attendance and overtime, payroll-ready": "الحضور والإضافي جاهز للرواتب",
+"Fingerprint punches had to be turned into lateness, overtime and leave by hand every month before payroll.": "بصمات الحضور كانت تتحول يدوياً كل شهر إلى تأخير وإضافي وإجازات قبل الرواتب.",
+"Device punches imported automatically": "استيراد البصمات من الجهاز تلقائياً",
+"Rules engine for shifts, grace periods and night shifts": "محرك قواعد للورديات وفترات السماح والورديات الليلية",
+"Daily sheet, leaves and holidays": "كشف يومي وإجازات وعطلات",
+"Monthly payroll-ready report": "تقرير شهري جاهز للرواتب",
 "# Oct": "# أكتوبر",
 "# Oct #": "# أكتوبر #",
 "Oct #": "أكتوبر #",
@@ -2247,7 +2343,6 @@ const AR_DICT = {
 "Breadcrumb": "مسار التنقل",
 "Next product": "المنتج التالي",
 "This demo runs in your browser on sample data. Company names, people and figures are fictional.": "هذا العرض يعمل داخل متصفحك على بيانات تجريبية. أسماء الشركات والأشخاص والأرقام افتراضية.",
-"The problem": "المشكلة",
 "Business value": "القيمة للأعمال",
 "Features": "المزايا",
 "How the workflow runs": "كيف يسير العمل",
@@ -4249,6 +4344,20 @@ document.addEventListener("DOMContentLoaded", () => {
   route();
   $("#consent-open")?.addEventListener("click", e => { e.preventDefault(); HP.showConsent(); });
   HP.init();
+});
+
+/* ---------- client work: play the case video in place ---------- */
+document.querySelectorAll(".case[data-video]").forEach(card => {
+  const media = card.querySelector(".case-media"), btn = card.querySelector(".case-play");
+  if (!media || !btn) return;
+  btn.hidden = false;
+  btn.addEventListener("click", () => {
+    const v = document.createElement("video");
+    v.src = card.dataset.video; v.controls = true; v.autoplay = true; v.playsInline = true;
+    const img = media.querySelector("img"); if (img) v.poster = img.src;
+    media.replaceChildren(v);
+    if (window.track) try { track("case_video", { case: card.id }); } catch (e) {}
+  });
 });
 
 /* ---------- HX: file exports shared by the site and the admin dashboard ----------
