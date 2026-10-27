@@ -622,6 +622,9 @@ function typedAnswer(text){
   const qt=n.split(' ').filter(t=>t.length>2&&!STOP.has(t)&&!/^(لا|بلاش|بلاه|تمام|ماشي)$/.test(t));if(!qt.length||qt.length>4)return null;
   const hits=o.map(x=>{const lt=norm(x.say||x.label).split(' ');return qt.filter(q=>lt.some(t=>variants(q).some(v=>sim(v,t)>=.85))).length});
   const mx=Math.max(...hits);if(mx>0&&hits.filter(h=>h===mx).length===1)return o[hits.indexOf(mx)];
+  /* the customer named a variant that isn't among the shown options: look it up in the whole catalogue */
+  if(!mx&&a.g&&a.g.text){const r=search(a.g.text+' '+text,1,.7)[0];const x=r&&Store.item(r.i.no);
+    if(x&&!x.hidden&&x.price!=null)return {label:x.name,fn:()=>{const q=Math.min(a.g.qty,avail(x));if(q<=0)return bot(`${esc(x.name)} مش متوفر هلأ 🙏`,300).then(nextQ);Cart.add(x.no,q,'chat');alog('اختيار',x.name);bot(`تمام ✓ ${q} × ${esc(x.name)}`,300).then(nextQ)}}}
   return null;
 }
 function nextQ(){const q=wa.queue||(wa.queue=[]);const f=q.shift();if(f)return f();return afterOrder()}
@@ -961,7 +964,7 @@ function qr(opts,cfg){
       bg.onclick=e=>{if(e.target===bg)bg.remove()};
       bg.querySelector('.send button').onclick=()=>{const c=bg.querySelector('input:checked');if(!c){toast('اختار خيار أول');return}bg.remove();fire(opts[+c.value],w)};
       $('#wa').appendChild(bg)};w.appendChild(b)}
-  closeAsk();wa.ask={opts,w,pick:!!(cfg&&cfg.pick),soft:!!(cfg&&cfg.soft),q:chat.filter(m=>m.dir==='in').slice(-3).map(m=>(m.text||stripHTML(m.html)||'').slice(0,160)).join(' / ')};
+  closeAsk();wa.ask={opts,w,pick:!!(cfg&&cfg.pick),soft:!!(cfg&&cfg.soft),g:(cfg&&cfg.g)||null,q:chat.filter(m=>m.dir==='in').slice(-3).map(m=>(m.text||stripHTML(m.html)||'').slice(0,160)).join(' / ')};
   msgsEl.appendChild(w);msgsEl.scrollTop=msgsEl.scrollHeight}
 function alog(kind,text){wa.log.push({at:nowISO(),kind,text})}
 function pcHTML(it){const p=Store.effPrice(it);return `<button type="button" class="wa-prod" data-wap="${it.no}">${tileHTML(it)}<span class="pi"><b>${esc(it.name)}</b><span>${p!=null?fmt(p)+' د.أ للكرتونة':'السعر عند التأكيد'}${it.offer?` · عرض ${it.offerPct}%`:''}</span><span>رقم ${it.no}${it.stock!=null?` · المتوفر ${fmt0(it.stock)}`:''}</span></span></button>`}
@@ -1029,8 +1032,8 @@ async function applyOrder(ok,asks,miss){
     if(have>0)opts.push({label:alt?'المتوفر + البديل':'خذ المتوفر',fn:()=>{Cart.add(o.it.no,have,'chat');if(alt)Cart.add(alt.no,o.g.qty-have,'alt');alog('انقبل',alt?'المتوفر + '+alt.name:'المتوفر');bot(`تمام ✓ ${fmt0(have)} × ${esc(o.it.name)}`+(alt?` و${o.g.qty-have} × ${esc(alt.name)}`:''),300).then(nextQ)}});
     if(alt)opts.push({label:have>0?'كله من البديل':'اه، خذ البديل',fn:()=>{Cart.add(alt.no,o.g.qty,'alt');alog('انقبل',alt.name);bot(`تمام ✓ ${o.g.qty} × ${esc(alt.name)}`,300).then(nextQ)}});
     opts.push({label:'بلاه هالصنف',fn:()=>bot('تمام، شلته من الطلب.',300).then(nextQ)});qr(opts)});
-  for(const a of asks)Q.push(async()=>{await bot(`عنا أكتر من صنف بيطابق «${esc(a.g.text)}». أي واحد بدك؟ (اكتب رقمه أو اختار)`);
-    qr(a.opts.map((it,k)=>({label:(k+1)+'. '+(it.name.length>32?it.name.slice(0,32)+'…':it.name),say:it.name,fn:()=>{const x=Store.item(it.no);const q=Math.min(a.g.qty,avail(x));Cart.add(x.no,q,'chat');alog('اختيار',x.name);bot(`تمام ✓ ${q} × ${esc(x.name)}`,300).then(nextQ)}})).concat([{label:'ولا واحد',fn:()=>bot('تمام، تركته.',300).then(nextQ)}]),{pick:true})});
+  for(const a of asks)Q.push(async()=>{await bot(`عنا أكتر من صنف بيطابق «${esc(a.g.text.replace(/^\d+\s*/,''))}». أي واحد بدك؟ (اكتب رقمه أو اختار)`);
+    qr(a.opts.map((it,k)=>({label:(k+1)+'. '+(it.name.length>32?it.name.slice(0,32)+'…':it.name),say:it.name,fn:()=>{const x=Store.item(it.no);const q=Math.min(a.g.qty,avail(x));Cart.add(x.no,q,'chat');alog('اختيار',x.name);bot(`تمام ✓ ${q} × ${esc(x.name)}`,300).then(nextQ)}})).concat([{label:'ولا واحد',fn:()=>bot('تمام، تركته.',300).then(nextQ)}]),{pick:true,g:a.g})});
   for(const m of miss)Q.push(async()=>{const weak=m.weak&&m.weak.length;const opts=weak?m.weak.slice(0,3):(m.alts&&m.alts.length?m.alts.slice(0,3):missOptions(m.g.text,m.g.qty));
     if(!opts.length){await bot(`ما لقيت «${esc(m.g.text)}» بأصنافنا 🙏 بتقدر تكتبه بطريقة تانية، أو اكتب «موظف» وبسأللك الفريق.`);return nextQ()}
     await bot((weak?`ما لقيت «${esc(m.g.text)}» بالزبط. قصدك واحد من هدول؟`:`«${esc(m.g.text)}» مش متوفر عنا 🙏 بس عنا من نفس النوع، بتحب آخذلك ${m.g.guessQty?'منه':m.g.qty+' من واحد منهم'}؟`)+opts.map(pcHTML).join('')+'\n<span class="xs muted">اكتب رقم الخيار أو «لا».</span>');
