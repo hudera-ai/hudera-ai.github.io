@@ -265,6 +265,34 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 .av-tile img,.av-ph{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:var(--surface-3);display:grid;place-items:center;font-size:26px}
 .av-tile.on{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
 
+
+.fin-tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:-4px 0 16px}
+.fin-tabs a{padding:9px 14px;border-radius:9px 9px 0 0;color:var(--muted);text-decoration:none;font-weight:600;font-size:13.5px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.fin-tabs a:hover{color:var(--ink);background:var(--surface-2)}.fin-tabs a[aria-current="page"]{color:var(--primary-ink);border-bottom-color:var(--primary)}
+.fin-alert{display:block;background:var(--amber-soft);color:var(--amber);border-radius:10px;padding:9px 12px;font-size:13.5px;margin-bottom:8px;text-decoration:none}
+.fin-alert.red{background:var(--red-soft);color:var(--red)}
+.fin-boxes{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.fin-box{border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--text)}.fin-box small{display:block;color:var(--muted);font-size:12px}
+.fin-box b{font:700 20px var(--f-d);color:var(--ink)}.fin-box.neg b,.fin-bal.neg b{color:var(--red)}
+.fin-bal{text-align:end}.fin-bal small{display:block;color:var(--muted);font-size:12px}.fin-bal b{font:700 24px var(--f-d);color:var(--ink)}
+.fin-moves{margin-top:10px;border-top:1px solid var(--line)}.fin-moves>div{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+.fin-moves .topup b{color:var(--mint)}.fin-off{opacity:.6}
+.fin-tot{margin:12px 0 0 auto;max-width:340px;display:flex;flex-direction:column;gap:4px}
+.fin-tot>div{display:flex;justify-content:space-between;gap:12px}.fin-tot span{color:var(--muted)}.fin-tot .big{border-top:1px solid var(--line);padding-top:6px;font-size:16px}
+.fin-tot .big b{font:700 18px var(--f-d);color:var(--ink)}.fin-tot .due b{color:var(--red)}.fin-tot .ok b{color:var(--mint)}
+[dir=rtl] .fin-tot{margin:12px auto 0 0}
+.h-stars{color:#F5A524;letter-spacing:1px;font-size:13px}.h-stars i{color:var(--line-2);font-style:normal}
+.h-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}.h-kv span{display:block;font-size:12px;color:var(--muted)}.h-kv div{color:var(--ink);overflow-wrap:anywhere}
+.h-note{background:var(--surface-2);border-radius:10px;padding:10px 12px;margin-top:12px;white-space:pre-wrap}
+.h-rate{display:flex;align-items:center;gap:2px;direction:ltr;justify-content:flex-end}[dir=ltr] .h-rate{justify-content:flex-start}
+.h-rate input{position:absolute;opacity:0;pointer-events:none}.h-rate label span{font-size:26px;color:var(--line-2);cursor:pointer;line-height:1}
+.h-rate label:has(input:checked) span,.h-rate label:has(~ label input:checked) span{color:#F5A524}
+.hs-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px}
+@media (max-width:640px){.h-grid{grid-template-columns:1fr}}
+.inv-row{display:grid;grid-template-columns:3fr 70px 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center}.inv-row.inv-h{margin-bottom:4px}.inv-row.inv-h span:empty{width:30px}
+.inv-line{text-align:end;font-weight:600;color:var(--ink);font-size:13px;white-space:nowrap}
+td.num,th.num{text-align:end;white-space:nowrap}
+@media (max-width:640px){.inv-row{grid-template-columns:1fr 1fr}.inv-row [name=desc]{grid-column:1/-1}.inv-row.inv-h{display:none}}
 </style>
 </head>
 <body>
@@ -405,7 +433,7 @@ const AR = {
   "New": "جديد", "Pending": "قيد الانتظار", "Contacted": "تم التواصل", "In progress": "قيد التنفيذ", "Resolved": "تم الحل", "Closed": "مغلق", "Open": "مفتوحة",
   "Assigned to": "مسند إلى", "Follow-up": "موعد المتابعة", "Save": "حفظ", "Add note": "إضافة ملاحظة", "Internal notes": "ملاحظات داخلية", "Contact attempts": "محاولات التواصل",
   "Log attempt": "تسجيل محاولة", "Status history": "سجل الحالة", "Subject": "الموضوع", "Message": "الرسالة", "Send": "إرسال", "Cancel": "إلغاء", "Retry": "إعادة المحاولة",
-  "Team": "الفريق", "Tracking": "التتبع", "E-mail service": "خدمة البريد", "Privacy": "الخصوصية", "General": "عام",
+  "Team": "الفريق", "Finance": "المالية", "Hiring": "التوظيف", "Tracking": "التتبع", "E-mail service": "خدمة البريد", "Privacy": "الخصوصية", "General": "عام",
 };
 const t = s => (LANG === "ar" && AR[s]) || s;
 const nf = n => (n == null || n === "" ? "—" : Number(n).toLocaleString("en-US"));
@@ -429,7 +457,7 @@ const ICON = {
   list: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01", menu: "M3 6h18M3 12h18M3 18h18", eye: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
   user: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", flag: "M4 22V4m0 0h13l-2 4 2 4H4", phone: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z",
   chat: "M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z", spark: "M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z", check: "M20 6 9 17l-5-5", dl: "M12 3v12m0 0-4-4m4 4 4-4M4 21h16", sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4", moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
-  back: "M15 18l-6-6 6-6", dot: "M12 12h.01",
+  back: "M15 18l-6-6 6-6", dot: "M12 12h.01", brief: "M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM8 6V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1M3 13h18", wallet: "M20 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-2M3 7h17a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-5a3 3 0 0 1 0-6h6M16 14h.01",
   cpu: "M9 3v2M15 3v2M9 19v2M15 19v2M3 9h2M3 15h2M19 9h2M19 15h2M7 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM9.5 9.5h5v5h-5z",
 };
 const ic = n => `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON[n] || ICON.dot}"/></svg>`;
@@ -499,7 +527,7 @@ function hbars(el, rows, { label, value, fmt = nf, color = "var(--s1)", onClick 
 }
 
 /* ---------------- layout ---------------- */
-const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["pipeline", "Pipeline", "flag", "leads.view"], ["insights", "Interest insights", "spark", "leads.view"], ["chats", "Assistant chats", "chat", "leads.view"], ["leads", "Leads", "inbox", "leads.view"], ["ai", "AI usage", "cpu", "analytics.view"],
+const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["pipeline", "Pipeline", "flag", "leads.view"], ["insights", "Interest insights", "spark", "leads.view"], ["chats", "Assistant chats", "chat", "leads.view"], ["leads", "Leads", "inbox", "leads.view"], ["ai", "AI usage", "cpu", "analytics.view"], ["finance", "Finance", "wallet", "finance.submit"], ["hiring", "Hiring", "brief", "hiring.view"],
   ["features", "Features", "grid", "features.view"], ["emails", "E-mails", "mail", "email.send"], ["settings", "Settings", "gear", "analytics.view"], ["audit", "Audit log", "list", "audit.view"]];
 const can = p => !!who?.perms?.includes(p);
 function shell() {
@@ -1413,10 +1441,10 @@ const PRODUCT_NAMES = ["HUDERA Workforce", "Contractor OS", "HUDERA Connect", "H
 const BILL = { one_time: ["One-time", "مرة واحدة"], monthly: ["Monthly", "شهرياً"], yearly: ["Yearly", "سنوياً"] };
 const OST = { draft: ["Draft", "مسودة", ""], sent: ["Sent to client", "مُرسل للعميل", "c-sky"], accepted: ["Accepted", "مقبول", "c-mint"], rejected: ["Rejected", "مرفوض", "c-red"] };
 const L1 = (m, k) => (m[k] || [k, k])[AR_() ? 1 : 0];
-const offerTotals = t => [["one_time", ""], ["monthly", AR_() ? " / شهر" : " / month"], ["yearly", AR_() ? " / سنة" : " / year"]].filter(([k]) => Number(t?.[k]) > 0).map(([k, s]) => `${sar(t[k])}${s}`).join(" + ") || "—";
+const offerTotals = (t, c) => [["one_time", ""], ["monthly", AR_() ? " / شهر" : " / month"], ["yearly", AR_() ? " / سنة" : " / year"]].filter(([k]) => Number(t?.[k]) > 0).map(([k, s]) => `${c && c !== "SAR" ? money(t[k], c) : sar(t[k])}${s}`).join(" + ") || "—";
 function offerText(o, d) {
   const ar = AR_();
-  const lines = o.items.map(i => `• ${i.product}: ${nf(i.price_sar)} ${ar ? "ر.س" : "SAR"} ${L1(BILL, i.billing)}${i.note ? ` (${i.note})` : ""}`).join("\n");
+  const lines = o.items.map(i => `• ${i.product}: ${money(i.price_sar, o.currency || "SAR")} ${L1(BILL, i.billing)}${i.note ? ` (${i.note})` : ""}`).join("\n");
   return ar ? `مرحباً ${d.name.split(" ")[0]}،\nيسعدنا نرسل لك عرض HUDERA AI المخصص لك:\n${lines}\n${o.client_note ? o.client_note + "\n" : ""}${o.valid_until ? `العرض ساري حتى ${fdt(o.valid_until, false)}.\n` : ""}\nأي سؤال احنا موجودين.\nفريق HUDERA AI`
     : `Hi ${d.name.split(" ")[0]},\nHere is your personal HUDERA AI offer:\n${lines}\n${o.client_note ? o.client_note + "\n" : ""}${o.valid_until ? `Valid until ${fdt(o.valid_until, false)}.\n` : ""}\nHappy to answer any question.\nThe HUDERA AI team`;
 }
@@ -1426,15 +1454,15 @@ async function loadOffers(id, d) {
   let sec = $("#d-offers"); if (!sec) { sec = document.createElement("section"); sec.className = "card"; sec.id = "d-offers"; $(".stepper").closest(".card").after(sec); }
   sec.innerHTML = `<div class="filters" style="justify-content:space-between"><h2 style="margin:0">💰 ${ar ? "عرض السعر" : "Price offer"}</h2>${m ? `<button class="btn sm primary" type="button" id="of-new">${ar ? "+ عرض جديد" : "+ New offer"}</button>` : ""}</div>
     <p class="small muted" style="margin:6px 0 10px">${ar ? "مفيش أسعار عامة. المساعد الذكي بيقول الأسعار <b>للعميل ده بس</b>، ولما العرض يكون «مُرسل» أو «مقبول» وساري ومسموح للمساعد. الملاحظة الداخلية عمرها ما بتظهر للعميل." : "No public prices. The assistant quotes prices <b>to this client only</b>, when the offer is Sent or Accepted, still valid, and shared with the assistant. Internal notes are never shown to the client."}</p>
-    ${list.length ? list.map((o, n) => `<div class="offer ${n ? "old" : ""}"><div class="filters" style="justify-content:space-between"><div class="filters"><span class="chip ${OST[o.status]?.[2] || ""}">${L1(OST, o.status)}</span>${o.expired ? `<span class="chip c-amber">${ar ? "منتهي" : "Expired"}</span>` : ""}${o.share_with_assistant && ["sent", "accepted"].includes(o.status) && !o.expired ? `<span class="chip c-violet">🤖 ${ar ? "المساعد يعرفه" : "Assistant can quote"}</span>` : ""}<b class="otot">${offerTotals(o.totals)}</b></div>
+    ${list.length ? list.map((o, n) => `<div class="offer ${n ? "old" : ""}"><div class="filters" style="justify-content:space-between"><div class="filters"><span class="chip ${OST[o.status]?.[2] || ""}">${L1(OST, o.status)}</span>${o.expired ? `<span class="chip c-amber">${ar ? "منتهي" : "Expired"}</span>` : ""}${o.share_with_assistant && ["sent", "accepted"].includes(o.status) && !o.expired ? `<span class="chip c-violet">🤖 ${ar ? "المساعد يعرفه" : "Assistant can quote"}</span>` : ""}<b class="otot">${o.number ? `<span class="mono small faint">${esc(o.number)}</span> ` : ""}${offerTotals(o.totals, o.currency)}</b></div>
         <span class="small faint">${o.valid_until ? `${ar ? "ساري حتى" : "valid until"} ${fdt(o.valid_until, false)} · ` : ""}${ago(o.updated_at)}${o.by ? ` · ${esc(o.by)}` : ""}</span></div>
-      <table class="tbl" style="margin-top:8px"><tbody>${o.items.map(i => `<tr><td dir="auto">${esc(i.product)}${i.note ? `<div class="small muted" dir="auto">${esc(i.note)}</div>` : ""}</td><td>${L1(BILL, i.billing)}</td><td style="text-align:end"><b>${sar(i.price_sar)}</b></td></tr>`).join("")}</tbody></table>
+      <table class="tbl" style="margin-top:8px"><tbody>${o.items.map(i => `<tr><td dir="auto">${esc(i.product)}${i.note ? `<div class="small muted" dir="auto">${esc(i.note)}</div>` : ""}</td><td>${L1(BILL, i.billing)}</td><td style="text-align:end"><b>${money(i.price_sar, o.currency || "SAR")}</b></td></tr>`).join("")}</tbody></table>
       ${o.client_note ? `<p class="small" dir="auto" style="margin:8px 0 0">📝 ${esc(o.client_note)}</p>` : ""}${o.internal_note ? `<p class="small muted" dir="auto" style="margin:4px 0 0">🔒 ${esc(o.internal_note)}</p>` : ""}
       <div class="filters" style="margin-top:8px">${m ? `<button class="btn sm" type="button" data-of-edit="${o.id}">${ar ? "تعديل" : "Edit"}</button>` : ""}<button class="btn sm" type="button" data-of-copy="${o.id}">${ar ? "نسخ نص العرض" : "Copy offer text"}</button>
         ${d.phone ? `<a class="btn sm" target="_blank" rel="noopener" data-of-wa="${o.id}" href="#">WhatsApp</a>` : ""}${m && o.status === "draft" ? `<button class="btn sm danger" type="button" data-of-del="${o.id}">${ar ? "حذف المسودة" : "Delete draft"}</button>` : ""}</div></div>`).join("")
       : `<p class="empty">${ar ? "لسه مفيش عرض للعميل ده." : "No offer for this client yet."}</p>`}`;
   const byId = k => list.find(o => o.id === k);
-  $("#of-new", sec)?.addEventListener("click", () => offerForm(id, d, list[0] ? { ...list[0], id: null, status: "draft" } : null));
+  $("#of-new", sec)?.addEventListener("click", () => offerForm(id, d, list[0] ? { ...list[0], id: null, status: "draft", currency: "SAR", number: null } : null));
   $$("[data-of-edit]", sec).forEach(b => b.addEventListener("click", () => offerForm(id, d, byId(b.dataset.ofEdit))));
   $$("[data-of-copy]", sec).forEach(b => b.addEventListener("click", async () => { try { await navigator.clipboard.writeText(offerText(byId(b.dataset.ofCopy), d)); toast(ar ? "تم النسخ" : "Copied"); } catch (e) { toast(e.message); } }));
   $$("[data-of-wa]", sec).forEach(a => { a.href = `https://wa.me/${String(d.phone).replace(/\D/g, "")}?text=${encodeURIComponent(offerText(byId(a.dataset.ofWa), d))}`; });
@@ -1446,7 +1474,7 @@ function offerForm(dealId, d, pre) {
   const vu = pre?.valid_until && !pre.expired ? pre.valid_until : addDays(today(), 14);
   const dlg = document.createElement("dialog"); dlg.className = "dlg dlg-wide";
   const row = (i = {}) => `<div class="of-row"><input class="input" name="product" list="of-products" dir="auto" placeholder="${ar ? "المنتج أو الخدمة" : "Product or service"}" value="${esc(i.product || "")}">
-      <input class="input" name="price" type="number" min="0" step="1" dir="ltr" placeholder="${ar ? "السعر ر.س" : "Price SAR"}" value="${esc(i.price_sar ?? "")}">
+      <input class="input" name="price" type="number" min="0" step="1" dir="ltr" placeholder="${ar ? `السعر ${(CUR[pre?.currency || "SAR"] || CUR.SAR)[0]}` : `Price ${pre?.currency || "SAR"}`}" value="${esc(i.price_sar ?? "")}">
       <select class="input" name="billing">${Object.keys(BILL).map(k => `<option value="${k}" ${i.billing === k ? "selected" : ""}>${L1(BILL, k)}</option>`).join("")}</select>
       <input class="input" name="note" dir="auto" placeholder="${ar ? "تفاصيل (اختياري)" : "Details (optional)"}" value="${esc(i.note || "")}"><button class="btn sm" type="button" data-rm aria-label="${ar ? "حذف" : "Remove"}">✕</button></div>`;
   dlg.innerHTML = `<form method="dialog" id="of-f"><h2>${ar ? `عرض سعر لـ ${esc(d.name)}` : `Offer for ${esc(d.name)}`}</h2>
@@ -1462,7 +1490,7 @@ function offerForm(dealId, d, pre) {
   document.body.appendChild(dlg); dlg.showModal();
   const f = $("#of-f", dlg), rows = $("#of-rows", dlg);
   const read = () => $$(".of-row", rows).map(r => ({ product: r.querySelector("[name=product]").value.trim(), price_sar: r.querySelector("[name=price]").value, billing: r.querySelector("[name=billing]").value, note: r.querySelector("[name=note]").value.trim() })).filter(i => i.product);
-  const tot = () => { const t2 = { one_time: 0, monthly: 0, yearly: 0 }; read().forEach(i => { t2[i.billing] += Number(i.price_sar) || 0; }); $("#of-tot", dlg).innerHTML = `${ar ? "الإجمالي:" : "Total:"} <b>${offerTotals(t2)}</b>`; };
+  const tot = () => { const t2 = { one_time: 0, monthly: 0, yearly: 0 }; read().forEach(i => { t2[i.billing] += Number(i.price_sar) || 0; }); $("#of-tot", dlg).innerHTML = `${ar ? "الإجمالي:" : "Total:"} <b>${offerTotals(t2, pre?.currency)}</b>`; };
   const bindRm = () => $$("[data-rm]", rows).forEach(b => b.onclick = () => { if ($$(".of-row", rows).length > 1) b.closest(".of-row").remove(); tot(); });
   $("#of-add", dlg).addEventListener("click", () => { rows.insertAdjacentHTML("beforeend", row({ billing: "one_time" })); bindRm(); });
   rows.addEventListener("input", tot); rows.addEventListener("change", tot); bindRm(); tot();
@@ -1624,13 +1652,553 @@ async function avatarCatalog(cur) {
   $("#av-save-pick", box).addEventListener("click", async () => { try { await api("admin_avatar_set", { p_patch: pick }); toast(ar ? "تم الحفظ" : "Saved"); loadAvatarCard(); } catch (e) { toast(e.message); } });
 }
 
+/* ---------------- finance (ERP): quotes → invoices → payments, expenses with approval, petty cash, 4 currencies ---------------- */
+const L = (ar, en) => (AR_() ? ar : en);
+const CUR = { SAR: ["ر.س", "SAR", "ريال سعودي"], EGP: ["ج.م", "EGP", "جنيه مصري"], USD: ["$", "USD", "دولار أمريكي"], JOD: ["د.أ", "JOD", "دينار أردني"] };
+const CURS = ["EGP", "SAR", "USD", "JOD"];
+const money = (v, c = "SAR", dec) => {
+  if (v == null || v === "") return "—";
+  const n = Number(v), d = dec ?? (Math.abs(n % 1) > 0.004 ? 2 : 0);
+  return `${n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d })} ${(CUR[c] || [c, c])[AR_() ? 0 : 1]}`;
+};
+const curName = c => (AR_() ? `${CUR[c][2]} (${CUR[c][1]})` : `${CUR[c][1]}`);
+const INV_ST = { draft: ["مسودة", "Draft", ""], unpaid: ["مستنية الدفع", "Unpaid", "c-sky"], partial: ["مدفوعة جزئياً", "Partly paid", "c-violet"], paid: ["مدفوعة", "Paid", "c-mint"], overdue: ["متأخرة", "Overdue", "c-red"], void: ["ملغية", "Void", ""] };
+const EXP_ST = { pending: ["مستني موافقة", "Waiting approval", "c-amber"], approved: ["متوافق عليه", "Approved", "c-mint"], rejected: ["مرفوض", "Rejected", "c-red"] };
+const EXP_CAT = { subscriptions: ["اشتراكات وبرامج", "Subscriptions & software"], hosting: ["سيرفرات ودومين", "Hosting & domain"], ads: ["إعلانات", "Ads"], freelancers: ["فريلانسرز وفريق", "Freelancers & team"],
+  equipment: ["أجهزة ومعدات", "Equipment"], travel: ["مواصلات وسفر", "Transport & travel"], office: ["مكتب وأدوات", "Office & supplies"], fees: ["رسوم بنكية وحكومية", "Bank & gov. fees"], other: ["أخرى", "Other"] };
+const PAID_FROM = { company: ["حساب الشركة", "Company account"], partner: ["شريك دفع من جيبه", "A partner paid"], petty_cash: ["البيتي كاش", "Petty cash"] };
+const PAY_M = { bank: ["تحويل بنكي", "Bank transfer"], cash: ["كاش", "Cash"], card: ["كارت", "Card"], wallet: ["محفظة (فودافون كاش / إنستاباي)", "Wallet (Vodafone Cash / InstaPay)"], other: ["أخرى", "Other"] };
+const FL = (m, k) => (m[k] || [k, k])[AR_() ? 0 : 1];
+const chip2 = (m, k) => `<span class="chip ${m[k]?.[2] || ""}">${esc(FL(m, k))}</span>`;
+const FERR = { invoice_locked: ["الفاتورة دي عليها دفعات، فالمبلغ والعملة مقفولين. لو فيه غلط: ألغيها واعمل واحدة جديدة.", "This invoice has payments, so the amounts and currency are locked. Void it and issue a new one."],
+  invoice_not_issued: ["لازم تصدر الفاتورة الأول قبل ما تسجل دفعة.", "Issue the invoice before recording a payment."], amount_too_big: ["المبلغ أكبر من المتبقي على الفاتورة.", "The amount is more than what's left on the invoice."],
+  own_expense: ["القرار ده لازم شريك تاني ياخده: مينفعش توافق على مصروف إنت سجّلته أو عدّلته، أو تعلّم «اترجعله» على فلوس راجعة لك.", "Another partner has to do this: you can't decide an expense you logged or edited, or mark your own repayment."], invoice_has_payments: ["الفاتورة عليها دفعات. امسح الدفعات الأول (بتتسجل في سجل التدقيق) وبعدين ألغيها.", "This invoice has payments. Delete them first (they stay in the audit log), then void it."], expense_decided: ["المصروف ده اتاخد فيه قرار خلاص.", "This expense was already decided."],
+  reason_required: ["اكتب سبب الرفض.", "Write the reason for rejecting."], box_locked: ["الخزنة دي عليها حركات، فمينفعش تغيّر عملتها.", "This cash box has movements, so its currency can't change."],
+  invalid_input: ["راجع البيانات: فيه خانة ناقصة أو رقم مش مظبوط.", "Check the form: a field is missing or a number is wrong."], not_found: ["مش لاقي العنصر ده (ممكن يكون اتمسح).", "Not found (it may have been removed)."] };
+const ferr = e => (FERR[e.code] ? FL(FERR, e.code) : e.message);
+const fin = { lookup: null };
+async function finLookup(force) { if (!fin.lookup || force) fin.lookup = await api("admin_fin_lookup"); return fin.lookup; }
+const rateSar = (c, rates) => Number((rates || fin.lookup?.settings?.rates || {})[c] || (c === "SAR" ? 1 : 0));
+
+const FIN_TABS = [["overview", "نظرة عامة", "Overview", "finance.view"], ["quotes", "عروض الأسعار", "Quotes", "finance.view"], ["invoices", "الفواتير", "Invoices", "finance.view"],
+  ["expenses", "المصاريف", "Expenses", "finance.submit"], ["cash", "البيتي كاش", "Petty cash", "finance.view"], ["setup", "إعدادات المالية", "Finance settings", "finance.view"]];
+function finPage(tab, tools = "") {
+  const v = page(L("المالية", "Finance"), tools);
+  const tabs = FIN_TABS.filter(x => can(x[3]));
+  v.innerHTML = `${tabs.length > 1 ? `<nav class="fin-tabs" aria-label="${L("أقسام المالية", "Finance sections")}">${tabs.map(([k, a, e]) => `<a href="#/finance/${k}" ${k === tab ? 'aria-current="page"' : ""}>${L(a, e)}</a>`).join("")}</nav>` : ""}<div id="fin-body">${skel(4)}</div>`;
+  return $("#fin-body", v);
+}
+function viewFinance() {
+  const [, , tab = "", id] = location.hash.split("/");
+  const first = can("finance.view") ? "overview" : "expenses";
+  const T = { overview: finOverview, quotes: finQuotes, invoices: id ? () => finInvoice(id) : finInvoices, expenses: finExpenses, cash: finCash, setup: finSetup };
+  const need = FIN_TABS.find(x => x[0] === tab)?.[3];
+  if (!T[tab] || (need && !can(need))) { location.hash = `#/finance/${first}`; return; }
+  T[tab]();
+}
+const finQuick = () => `${can("finance.manage") ? `<button class="btn sm primary" type="button" data-fq="quote">+ ${L("عرض سعر", "Quote")}</button><button class="btn sm primary" type="button" data-fq="invoice">+ ${L("فاتورة", "Invoice")}</button>` : ""}<button class="btn sm primary" type="button" data-fq="expense">+ ${L("مصروف", "Expense")}</button>`;
+function bindQuick(after) {
+  $$("[data-fq]").forEach(b => b.addEventListener("click", () => ({ quote: () => quoteForm(null, after), invoice: () => invoiceForm(null, after), expense: () => expenseForm(null, after) })[b.dataset.fq]()));
+}
+
+/* ---- overview ---- */
+async function finOverview() {
+  const box = finPage("overview", finQuick()); bindQuick(finOverview);
+  let d; try { [d] = await Promise.all([api("admin_fin_overview", { p_months: 6 }), finLookup(true)]); } catch (e) { box.innerHTML = failBox(e); return; }
+  const net = Number(d.month.income_sar) - Number(d.month.expenses_sar);
+  const kpi = (label, val, note = "", cls = "") => `<div class="kpi ${cls}"><small>${label}</small><b>${val}</b>${note ? `<span>${note}</span>` : ""}</div>`;
+  const alerts = [];
+  if (d.pending_expenses > 0) alerts.push(`<a class="fin-alert" href="#/finance/expenses">⏳ <b>${d.pending_expenses}</b> ${L("مصروف مستني موافقة شريك", "expenses waiting for a partner's approval")} ←</a>`);
+  (d.overdue || []).forEach(i => alerts.push(`<a class="fin-alert red" href="#/finance/invoices/${i.id}">⚠️ ${L("فاتورة متأخرة", "Overdue invoice")} <b>${esc(i.number)}</b> · ${esc(i.client_name)} · ${L("باقي", "due")} <b>${money(i.balance, i.currency)}</b> · ${L("كان معادها", "was due")} ${fdt(i.due_date, false)}</a>`));
+  box.innerHTML = `${alerts.join("")}
+    <div class="grid g4" style="margin-bottom:14px">
+      ${kpi(L("اتحصّل الشهر ده", "Collected this month"), money(d.month.income_sar, "SAR"), L("كل العملات محولة لريال", "all currencies in SAR"))}
+      ${kpi(L("مصاريف الشهر ده", "Expenses this month"), money(d.month.expenses_sar, "SAR"), L("المتوافق عليها بس", "approved only"))}
+      ${kpi(L("الصافي", "Net"), money(net, "SAR"), L("المحصّل ناقص المصاريف", "collected minus expenses"), net < 0 ? "alert" : "")}
+      ${kpi(L("فلوس لينا عند العملاء", "Owed to us"), money(d.outstanding_sar, "SAR"), `${(d.overdue || []).length} ${L("فاتورة متأخرة", "overdue")} · ${d.quotes_open} ${L("عرض مفتوح", "open quotes")}`, (d.overdue || []).length ? "alert" : "")}
+    </div>
+    <div class="grid g2">
+      <section class="card"><h2>${L("الداخل والخارج", "Money in vs out")}</h2><p class="sub">${L("آخر 6 شهور · بالريال", "Last 6 months · SAR")}</p><div id="fin-ch"></div></section>
+      <section class="card"><h2>${L("حسب العملة", "By currency")}</h2><p class="sub">${L("بالعملة الأصلية من غير تحويل", "In each original currency")}</p>
+        <div class="tbl-wrap"><table><thead><tr><th>${L("العملة", "Currency")}</th><th class="num">${L("فواتير صادرة", "Invoiced")}</th><th class="num">${L("اتحصّل", "Collected")}</th><th class="num">${L("باقي عند العملاء", "Outstanding")}</th><th class="num">${L("مصاريف الشهر", "Expenses (month)")}</th></tr></thead>
+        <tbody>${d.by_currency.map(r => `<tr><td><b>${CUR[r.currency][1]}</b></td><td class="num">${money(r.invoiced, r.currency)}</td><td class="num">${money(r.collected, r.currency)}</td><td class="num">${Number(r.outstanding) > 0 ? `<b>${money(r.outstanding, r.currency)}</b>` : money(0, r.currency)}</td><td class="num">${money(r.expenses_month, r.currency)}</td></tr>`).join("")}</tbody></table></div></section>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <section class="card"><h2>${L("البيتي كاش", "Petty cash")}</h2><p class="sub">${L("الرصيد في كل خزنة دلوقتي", "Balance in each cash box now")}</p>
+        ${(d.boxes || []).length ? `<div class="fin-boxes">${d.boxes.map(b => `<a class="fin-box ${Number(b.balance) < 0 ? "neg" : ""}" href="#/finance/cash"><small>${esc(b.name)}${b.custodian ? ` · ${esc(b.custodian)}` : ""}</small><b>${money(b.balance, b.currency)}</b></a>`).join("")}</div>`
+          : `<p class="empty">${L("لسه مفيش خزنة. اعمل واحدة من «البيتي كاش».", "No cash box yet. Create one in Petty cash.")}</p>`}</section>
+      <section class="card"><h2>${L("المصاريف حسب النوع", "Expenses by category")}</h2><p class="sub">${L("آخر 6 شهور · بالريال", "Last 6 months · SAR")}</p><div id="fin-cat"></div></section>
+    </div>
+    <p class="small faint" style="margin-top:12px">${L("أسعار التحويل للريال", "Conversion rates to SAR")}: ${CURS.filter(c => c !== "SAR").map(c => `1 ${CUR[c][1]} = ${rateSar(c, d.rates)} SAR`).join(" · ")} · <a href="#/finance/setup">${L("تعديل", "Edit")}</a></p>`;
+  const s = d.series || [];
+  chart($("#fin-ch"), { type: "bar", labels: s.map(x => new Date(x.month + "-15T12:00:00Z").toLocaleDateString(loc(), { month: "short", timeZone: "UTC" })),
+    series: [{ name: L("اتحصّل", "Collected"), color: "var(--s3)", values: s.map(x => Number(x.income_sar)) }, { name: L("مصاريف", "Expenses"), color: "var(--s2)", values: s.map(x => Number(x.expenses_sar)) }], fmt: n => nf(Math.round(n)) });
+  hbars($("#fin-cat"), d.by_category || [], { label: r => FL(EXP_CAT, r.category), value: r => Number(r.sar), fmt: n => money(n, "SAR"), color: "var(--s2)" });
+}
+
+/* ---- shared form bits ---- */
+const curSelect = (name, val, dis) => `<select class="input" name="${name}" ${dis ? "disabled" : ""}>${CURS.map(c => `<option value="${c}" ${c === val ? "selected" : ""}>${curName(c)}</option>`).join("")}</select>`;
+const clientOptions = sel => `<option value="">${L("— اختار عميل —", "— choose a client —")}</option>${(fin.lookup?.clients || []).map(c => `<option value="${c.id}" ${c.id === sel ? "selected" : ""}>${esc(c.name)}${c.company ? ` · ${esc(c.company)}` : ""}</option>`).join("")}`;
+function dlgOpen(html, wide = true) { const dlg = document.createElement("dialog"); dlg.className = `dlg${wide ? " dlg-wide" : ""}`; dlg.innerHTML = html; document.body.appendChild(dlg); dlg.showModal(); return dlg; }
+const dlgBtns = (okLabel, extra = "") => `<div class="filters" style="justify-content:flex-end;margin-top:6px">${extra}<button class="btn" value="cancel" type="submit" formnovalidate>${L("إلغاء", "Cancel")}</button><button class="btn primary" value="ok" type="submit">${okLabel}</button></div>`;
+
+/* ---- quotes ---- */
+async function finQuotes() {
+  const box = finPage("quotes", finQuick()); bindQuick(finQuotes);
+  let list; try { [list] = await Promise.all([api("admin_fin_quotes"), finLookup()]); } catch (e) { box.innerHTML = failBox(e); return; }
+  const tot = o => { const t2 = o.totals || {}; return [["one_time", ""], ["monthly", L(" / شهر", " / mo")], ["yearly", L(" / سنة", " / yr")]].filter(([k]) => Number(t2[k]) > 0).map(([k, s]) => money(t2[k], o.currency) + s).join(" + ") || "—"; };
+  box.innerHTML = `<p class="small muted" style="margin:0 0 10px">${L("عرض السعر بيتعمل لعميل، ولما يوافق تحوّله فاتورة بضغطة. العروض دي هي نفسها اللي في «متابعة العملاء».", "A quote is made for a client; once accepted, turn it into an invoice in one click. These are the same offers shown in the Pipeline.")}</p>
+    ${list.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("الرقم", "No.")}</th><th>${L("العميل", "Client")}</th><th>${L("الإجمالي", "Total")}</th><th>${t("Status")}</th><th>${L("ساري حتى", "Valid until")}</th><th></th></tr></thead><tbody>
+      ${list.map(o => `<tr><td class="mono">${esc(o.number || "")}</td><td><a class="t" href="#/pipeline/${o.deal_id}" dir="auto">${esc(o.client)}</a>${o.company ? `<span class="s" dir="auto">${esc(o.company)}</span>` : ""}</td>
+        <td><b>${tot(o)}</b></td><td><span class="chip ${OST[o.status]?.[2] || ""}">${L1(OST, o.status)}</span>${o.expired && o.status === "sent" ? ` <span class="chip c-amber">${L("منتهي", "Expired")}</span>` : ""}</td>
+        <td>${o.valid_until ? fdt(o.valid_until, false) : "—"}</td>
+        <td><div class="filters" style="flex-wrap:nowrap">${can("finance.manage") ? `<button class="btn sm" type="button" data-q-edit="${o.id}">${L("تعديل", "Edit")}</button>` : ""}
+          <button class="btn sm" type="button" data-q-print="${o.id}">${L("طباعة / PDF", "Print / PDF")}</button>
+          ${o.invoice ? `<a class="btn sm" href="#/finance/invoices/${o.invoice.id}">🧾 ${esc(o.invoice.number)}</a>` : can("finance.manage") && ["accepted", "sent"].includes(o.status) ? `<button class="btn sm primary" type="button" data-q-inv="${o.id}">${L("حوّلها فاتورة", "Make invoice")}</button>` : ""}</div></td></tr>`).join("")}</tbody></table></div>`
+      : `<div class="card"><p class="empty">${L("لسه مفيش عروض أسعار. اضغط «+ عرض سعر».", "No quotes yet. Press “+ Quote”.")}</p></div>`}`;
+  const byId = k => list.find(o => o.id === k);
+  $$("[data-q-edit]", box).forEach(b => b.addEventListener("click", () => quoteForm(byId(b.dataset.qEdit), finQuotes)));
+  $$("[data-q-print]", box).forEach(b => b.addEventListener("click", () => printDoc("quote", byId(b.dataset.qPrint))));
+  $$("[data-q-inv]", box).forEach(b => b.addEventListener("click", async () => { b.disabled = true;
+    try { const r = await api("admin_fin_invoice_from_quote", { p_offer: b.dataset.qInv }); toast(L("اتعملت فاتورة مسودة. راجعها واضغط «إصدار».", "Draft invoice created. Review it and press Issue.")); location.hash = `#/finance/invoices/${r.id}`; }
+    catch (e) { toast(ferr(e)); b.disabled = false; } }));
+}
+async function quoteForm(pre, after) {
+  try { await finLookup(); } catch (e) { toast(e.message); return; }
+  const items = pre?.items?.length ? pre.items : [{ product: "", price_sar: "", billing: "one_time", note: "" }];
+  const row = (i = {}) => `<div class="of-row"><input class="input" name="product" list="q-products" dir="auto" placeholder="${L("المنتج أو الخدمة", "Product or service")}" value="${esc(i.product || "")}">
+      <input class="input" name="price" type="number" min="0" step="0.01" dir="ltr" placeholder="${L("السعر", "Price")}" value="${esc(i.price_sar ?? "")}">
+      <select class="input" name="billing">${Object.keys(BILL).map(k => `<option value="${k}" ${i.billing === k ? "selected" : ""}>${L1(BILL, k)}</option>`).join("")}</select>
+      <input class="input" name="note" dir="auto" placeholder="${L("تفاصيل (اختياري)", "Details (optional)")}" value="${esc(i.note || "")}"><button class="btn sm" type="button" data-rm aria-label="${L("حذف", "Remove")}">✕</button></div>`;
+  const dlg = dlgOpen(`<form method="dialog" id="q-f"><h2>${pre?.id ? `${L("تعديل عرض السعر", "Edit quote")} <span class="mono">${esc(pre.number || "")}</span>` : L("عرض سعر جديد", "New quote")}</h2>
+    ${pre?.id ? `<p class="small muted" style="margin:-6px 0 10px">${L("العميل", "Client")}: <b dir="auto">${esc(pre.client || "")}</b></p>` : `
+    <div class="seg" role="group" style="margin-bottom:10px"><button type="button" data-cm="old" aria-pressed="true">${L("عميل موجود", "Existing client")}</button><button type="button" data-cm="new" aria-pressed="false">${L("عميل جديد", "New client")}</button></div>
+    <div id="q-old"><label class="fld"><span>${L("العميل", "Client")}</span><select class="input" name="deal">${clientOptions()}</select></label></div>
+    <div id="q-new" hidden class="grid g2"><label class="fld"><span>${L("اسم العميل *", "Client name *")}</span><input class="input" name="cname" dir="auto"></label><label class="fld"><span>${L("الشركة", "Company")}</span><input class="input" name="ccomp" dir="auto"></label>
+      <label class="fld"><span>${t("Phone")}</span><input class="input" name="cphone" dir="ltr"></label><label class="fld"><span>${t("E-mail")}</span><input class="input" name="cmail" type="email" dir="ltr"></label></div>`}
+    <label class="fld" style="max-width:260px"><span>${L("العملة", "Currency")}</span>${curSelect("cur", pre?.currency || "SAR")}</label>
+    <datalist id="q-products">${PRODUCT_NAMES.map(p => `<option value="${p}">`).join("")}<option value="${L("حل مخصص", "Custom solution")}"><option value="${L("رسوم التجهيز والتدريب", "Setup & training")}"><option value="Digital marketing AI"><option value="${L("استشارة", "Consultation")}"></datalist>
+    <div id="q-rows">${items.map(row).join("")}</div><button class="btn sm" type="button" id="q-add">+ ${L("بند", "Item")}</button>
+    <p class="otot" id="q-tot" style="margin:10px 0"></p>
+    <div class="grid g2"><label class="fld"><span>${L("ساري حتى", "Valid until")}</span><input class="input" type="date" name="valid" value="${esc(pre?.valid_until && !pre.expired ? pre.valid_until : addDays(today(), 14))}"></label>
+      <label class="fld"><span>${t("Status")}</span><select class="input" name="status">${Object.keys(OST).map(k => `<option value="${k}" ${(pre?.status || "draft") === k ? "selected" : ""}>${L1(OST, k)}</option>`).join("")}</select></label></div>
+    <label class="fld"><span>${L("ملاحظة للعميل (بتظهر في الطباعة)", "Note for the client (printed)")}</span><input class="input" name="cnote" dir="auto" value="${esc(pre?.client_note || "")}" placeholder="${L("مثلاً: شامل التدريب وشهر دعم", "e.g. includes training and a month of support")}"></label>
+    <label class="fld"><span>🔒 ${L("ملاحظة داخلية (للفريق بس)", "Internal note (team only)")}</span><input class="input" name="inote" dir="auto" value="${esc(pre?.internal_note || "")}"></label>
+    ${dlgBtns(t("Save"))}</form>`);
+  const f = $("#q-f", dlg), rows = $("#q-rows", dlg);
+  let mode = "old";
+  $$("[data-cm]", dlg).forEach(b => b.addEventListener("click", () => { mode = b.dataset.cm; $$("[data-cm]", dlg).forEach(x => x.setAttribute("aria-pressed", x === b)); $("#q-old", dlg).hidden = mode !== "old"; $("#q-new", dlg).hidden = mode !== "new"; }));
+  const read = () => $$(".of-row", rows).map(r => ({ product: r.querySelector("[name=product]").value.trim(), price_sar: r.querySelector("[name=price]").value, billing: r.querySelector("[name=billing]").value, note: r.querySelector("[name=note]").value.trim() })).filter(i => i.product);
+  const tot = () => { const c = f.cur.value, t2 = { one_time: 0, monthly: 0, yearly: 0 }; read().forEach(i => { t2[i.billing] += Number(i.price_sar) || 0; });
+    $("#q-tot", dlg).innerHTML = `${L("الإجمالي:", "Total:")} <b>${[["one_time", ""], ["monthly", L(" / شهر", " / month")], ["yearly", L(" / سنة", " / year")]].filter(([k]) => t2[k] > 0).map(([k, s]) => money(t2[k], c) + s).join(" + ") || "—"}</b>`; };
+  const bindRm = () => $$("[data-rm]", rows).forEach(b => b.onclick = () => { if ($$(".of-row", rows).length > 1) b.closest(".of-row").remove(); tot(); });
+  $("#q-add", dlg).addEventListener("click", () => { rows.insertAdjacentHTML("beforeend", row({ billing: "one_time" })); bindRm(); });
+  f.addEventListener("input", tot); f.addEventListener("change", tot); bindRm(); tot();
+  dlg.addEventListener("close", async () => {
+    if (dlg.returnValue === "ok") {
+      const its = read(), args = { p_id: pre?.id || null, p_deal: null, p_new_client: null, p_currency: f.cur.value, p_items: its, p_valid_until: f.valid.value || null, p_status: f.status.value, p_client_note: f.cnote.value || null, p_internal_note: f.inote.value || null };
+      if (!pre?.id) { if (mode === "old") args.p_deal = f.deal.value || null; else args.p_new_client = { name: f.cname.value.trim(), company: f.ccomp.value.trim(), phone: f.cphone.value.trim(), email: f.cmail.value.trim() }; }
+      const bad = (!pre?.id && !args.p_deal && !args.p_new_client?.name) ? L("اختار العميل أو اكتب اسمه", "Choose the client or type a name") : its.some(i => i.price_sar === "") ? L("اكتب سعر لكل بند", "Enter a price for every item") : null;
+      if (bad) { toast(bad); dlg.remove(); quoteForm({ ...(pre || {}), items: its, currency: f.cur.value }, after); return; }
+      try { await api("admin_fin_quote_save", args); toast(L("تم حفظ عرض السعر", "Quote saved")); fin.lookup = null; after?.(); } catch (e) { toast(ferr(e)); }
+    }
+    dlg.remove();
+  });
+}
+
+/* ---- invoices ---- */
+const finState = { inv: "", q: "", exp: "pending" };
+async function finInvoices() {
+  const box = finPage("invoices", `${finQuick()}<button class="btn sm" type="button" id="inv-xl">${ic("dl")} Excel</button>`); bindQuick(finInvoices);
+  let list; try { list = await api("admin_fin_invoices", { p_state: finState.inv || null, p_q: finState.q || null }); } catch (e) { box.innerHTML = failBox(e); return; }
+  const seg = [["", L("الكل", "All")], ["unpaid", FL(INV_ST, "unpaid")], ["partial", FL(INV_ST, "partial")], ["overdue", FL(INV_ST, "overdue")], ["paid", FL(INV_ST, "paid")], ["draft", FL(INV_ST, "draft")], ["void", FL(INV_ST, "void")]];
+  box.innerHTML = `<div class="filters" style="margin-bottom:10px"><div class="seg" role="group">${seg.map(([k, l]) => `<button type="button" data-is="${k}" aria-pressed="${finState.inv === k}">${l}</button>`).join("")}</div>
+      <input class="input" id="inv-q" type="search" placeholder="${L("دور برقم الفاتورة أو اسم العميل", "Search number or client")}" value="${esc(finState.q)}" style="min-width:220px"></div>
+    ${list.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("الرقم", "No.")}</th><th>${L("العميل", "Client")}</th><th>${L("التاريخ", "Date")}</th><th>${L("الاستحقاق", "Due")}</th><th class="num">${L("الإجمالي", "Total")}</th><th class="num">${L("المتبقي", "Balance")}</th><th>${t("Status")}</th></tr></thead><tbody>
+      ${list.map(i => `<tr class="click" data-inv="${i.id}"><td class="mono">${esc(i.number)}</td><td><span class="t" dir="auto">${esc(i.client_name)}</span>${i.client_company ? `<span class="s" dir="auto">${esc(i.client_company)}</span>` : ""}</td><td>${fdt(i.issue_date, false)}</td><td>${i.due_date ? fdt(i.due_date, false) : "—"}</td>
+        <td class="num"><b>${money(i.total, i.currency)}</b></td><td class="num">${["paid", "void", "draft"].includes(i.state) ? "—" : money(i.balance, i.currency)}</td><td>${chip2(INV_ST, i.state)}</td></tr>`).join("")}</tbody></table></div>`
+      : `<div class="card"><p class="empty">${L("مفيش فواتير هنا.", "No invoices here.")}</p></div>`}`;
+  $$("[data-is]", box).forEach(b => b.addEventListener("click", () => { finState.inv = b.dataset.is; finInvoices(); }));
+  let tm; $("#inv-q", box).addEventListener("input", e => { clearTimeout(tm); tm = setTimeout(() => { finState.q = e.target.value.trim(); finInvoices().then(() => { const q = $("#inv-q"); q?.focus(); q?.setSelectionRange(q.value.length, q.value.length); }); }, 350); });
+  $$("[data-inv]", box).forEach(r => r.addEventListener("click", () => { location.hash = `#/finance/invoices/${r.dataset.inv}`; }));
+  $("#inv-xl").addEventListener("click", () => HX.xlsx([{ name: L("الفواتير", "Invoices"), head: [L("الرقم", "No."), L("العميل", "Client"), L("الشركة", "Company"), L("التاريخ", "Date"), L("الاستحقاق", "Due"), L("العملة", "Currency"), L("الإجمالي", "Total"), L("المدفوع", "Paid"), L("المتبقي", "Balance"), L("بالريال", "Total SAR"), t("Status")],
+    rows: list.map(i => [i.number, i.client_name, i.client_company || "", i.issue_date, i.due_date || "", i.currency, Number(i.total), Number(i.paid), Number(i.balance), Number(i.total_sar), FL(INV_ST, i.state)]) }], `HUDERA-invoices-${today()}.xlsx`, AR_()).catch(e => toast(e.message)));
+}
+async function finInvoice(id) {
+  const box = finPage("invoices", `<a class="btn sm" href="#/finance/invoices">${ic("back")} ${L("كل الفواتير", "All invoices")}</a>`);
+  let i; try { [i] = await Promise.all([api("admin_fin_invoice", { p_id: id }), finLookup()]); } catch (e) { box.innerHTML = failBox({ message: ferr(e) }); return; }
+  const m = can("finance.manage"), live = i.status === "issued";
+  box.innerHTML = `<section class="card"><div class="filters" style="justify-content:space-between;align-items:flex-start">
+      <div><h2 style="font-size:22px"><span class="mono">${esc(i.number)}</span> ${chip2(INV_ST, i.state)}</h2>
+        <p class="sub" style="margin:4px 0 0"><b dir="auto">${esc(i.client_name)}</b>${i.client_company ? ` · <span dir="auto">${esc(i.client_company)}</span>` : ""}${i.client_phone ? ` · <span dir="ltr">${esc(i.client_phone)}</span>` : ""}${i.client_email ? ` · <span dir="ltr">${esc(i.client_email)}</span>` : ""}</p>
+        <p class="small muted" style="margin:4px 0 0">${L("التاريخ", "Date")} ${fdt(i.issue_date, false)}${i.due_date ? ` · ${L("الاستحقاق", "Due")} ${fdt(i.due_date, false)}` : ""}${i.offer_number ? ` · ${L("من عرض", "from quote")} <span class="mono">${esc(i.offer_number)}</span>` : ""}${i.deal_id ? ` · <a href="#/pipeline/${i.deal_id}">${L("ملف العميل", "Client file")}</a>` : ""}</p></div>
+      <div class="filters">${m && i.status === "draft" ? `<button class="btn sm primary" type="button" id="iv-issue">${L("إصدار الفاتورة", "Issue invoice")}</button>` : ""}
+        ${m && i.status !== "void" ? `<button class="btn sm" type="button" id="iv-edit">${L("تعديل", "Edit")}</button>` : ""}
+        <button class="btn sm" type="button" id="iv-print">${L("طباعة / PDF", "Print / PDF")}</button><button class="btn sm" type="button" id="iv-copy">${L("نسخ نص للعميل", "Copy text for client")}</button>
+        ${i.client_phone && i.status !== "void" ? `<a class="btn sm" id="iv-wa" target="_blank" rel="noopener" href="#">WhatsApp</a>` : ""}
+        ${m && i.status !== "void" ? `<button class="btn sm danger" type="button" id="iv-void">${L("إلغاء الفاتورة", "Void")}</button>` : ""}</div></div>
+    ${i.status === "void" ? `<div class="warn" style="margin-top:10px">${L("الفاتورة دي ملغية", "This invoice is void")}: ${esc(i.void_reason || "")}</div>` : ""}
+    ${i.status === "draft" ? `<div class="warn" style="margin-top:10px">${L("دي مسودة: مش محسوبة في الأرقام ولا تقدر تسجل عليها دفعات لحد ما تضغط «إصدار الفاتورة».", "Draft: not counted and can't take payments until you press Issue.")}</div>` : ""}
+    <div class="tbl-wrap" style="margin-top:12px"><table><thead><tr><th>${L("البند", "Item")}</th><th class="num">${L("الكمية", "Qty")}</th><th class="num">${L("السعر", "Price")}</th><th class="num">${L("الإجمالي", "Amount")}</th></tr></thead>
+      <tbody>${i.items.map(x => `<tr><td dir="auto">${esc(x.desc)}</td><td class="num">${nf(x.qty)}</td><td class="num">${money(x.price, i.currency)}</td><td class="num">${money(x.line, i.currency)}</td></tr>`).join("")}</tbody></table></div>
+    <div class="fin-tot"><div><span>${L("المجموع", "Subtotal")}</span><b>${money(i.subtotal, i.currency)}</b></div>${Number(i.discount) > 0 ? `<div><span>${L("خصم", "Discount")}</span><b>− ${money(i.discount, i.currency)}</b></div>` : ""}
+      ${Number(i.vat_rate) > 0 ? `<div><span>${L("ضريبة", "VAT")} ${nf(i.vat_rate)}%</span><b>${money(i.vat_amount, i.currency)}</b></div>` : ""}<div class="big"><span>${L("الإجمالي", "Total")}</span><b>${money(i.total, i.currency)}</b></div>
+      ${live ? `<div><span>${L("اتدفع", "Paid")}</span><b>${money(i.paid, i.currency)}</b></div><div class="big ${Number(i.balance) > 0 ? "due" : "ok"}"><span>${L("المتبقي", "Balance")}</span><b>${money(i.balance, i.currency)}</b></div>` : ""}
+      ${i.currency !== "SAR" ? `<div class="small faint"><span>${L("تقريباً بالريال", "≈ in SAR")}</span><span>${money(i.total_sar, "SAR")}</span></div>` : ""}</div>
+    ${i.notes ? `<p class="small" dir="auto" style="margin:10px 0 0">📝 ${esc(i.notes)}</p>` : ""}</section>
+    <section class="card" style="margin-top:14px"><div class="filters" style="justify-content:space-between"><h2 style="margin:0">${L("الدفعات", "Payments")}</h2>${m && live && Number(i.balance) > 0 ? `<button class="btn sm primary" type="button" id="iv-pay">+ ${L("تسجيل دفعة", "Record payment")}</button>` : ""}</div>
+      ${i.payments.length ? `<div class="tbl-wrap" style="margin-top:10px"><table><thead><tr><th>${L("التاريخ", "Date")}</th><th class="num">${L("المبلغ", "Amount")}</th><th>${L("الطريقة", "Method")}</th><th>${L("مرجع", "Reference")}</th><th>${L("سجّلها", "By")}</th><th></th></tr></thead><tbody>
+        ${i.payments.map(p => `<tr><td>${fdt(p.paid_on, false)}</td><td class="num"><b>${money(p.amount, i.currency)}</b></td><td>${esc(FL(PAY_M, p.method))}</td><td dir="auto">${esc(p.reference || "")}${p.note ? `<span class="s" dir="auto">${esc(p.note)}</span>` : ""}</td><td>${esc(p.by || "")}</td><td>${m ? `<button class="btn sm ghost" type="button" data-pdel="${p.id}" aria-label="${L("حذف الدفعة", "Delete payment")}">✕</button>` : ""}</td></tr>`).join("")}</tbody></table></div>`
+        : `<p class="empty">${live ? L("لسه مفيش دفعات.", "No payments yet.") : "—"}</p>`}</section>`;
+  const txt = () => L(`مرحباً ${i.client_name.split(" ")[0]}،\nمرفق فاتورة HUDERA AI رقم ${i.number}\nالإجمالي: ${money(i.total, i.currency)}${live && Number(i.paid) > 0 ? `\nاتدفع: ${money(i.paid, i.currency)} · المتبقي: ${money(i.balance, i.currency)}` : ""}${i.due_date ? `\nآخر موعد للدفع: ${fdt(i.due_date, false)}` : ""}${fin.lookup?.settings?.company?.bank ? `\n\nبيانات التحويل:\n${fin.lookup.settings.company.bank}` : ""}\n\nشكراً لثقتك،\nفريق HUDERA AI`,
+    `Hi ${i.client_name.split(" ")[0]},\nPlease find HUDERA AI invoice ${i.number}\nTotal: ${money(i.total, i.currency)}${live && Number(i.paid) > 0 ? `\nPaid: ${money(i.paid, i.currency)} · Balance: ${money(i.balance, i.currency)}` : ""}${i.due_date ? `\nDue by: ${fdt(i.due_date, false)}` : ""}${fin.lookup?.settings?.company?.bank ? `\n\nBank details:\n${fin.lookup.settings.company.bank}` : ""}\n\nThank you,\nThe HUDERA AI team`);
+  const re = () => finInvoice(id);
+  $("#iv-print").addEventListener("click", () => printDoc("invoice", i));
+  $("#iv-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(txt()); toast(L("تم النسخ", "Copied")); } catch (e) { toast(e.message); } });
+  const wa = $("#iv-wa"); if (wa) wa.href = `https://wa.me/${String(i.client_phone).replace(/\D/g, "")}?text=${encodeURIComponent(txt())}`;
+  $("#iv-edit")?.addEventListener("click", () => invoiceForm(i, re));
+  $("#iv-issue")?.addEventListener("click", async e => { e.target.disabled = true;
+    try { await api("admin_fin_invoice_save", { p_id: i.id, p_data: { ...invData(i), status: "issued" } }); toast(L("اتصدرت الفاتورة", "Invoice issued")); re(); } catch (er) { toast(ferr(er)); e.target.disabled = false; } });
+  $("#iv-void")?.addEventListener("click", () => {
+    const dlg = dlgOpen(`<form method="dialog"><h2>${L("إلغاء الفاتورة", "Void invoice")} <span class="mono">${esc(i.number)}</span></h2><p class="small muted">${L("الفاتورة الملغية بتفضل موجودة برقمها (للسجل) بس مش بتتحسب.", "A void invoice keeps its number for the record but isn't counted.")}</p>
+      <label class="fld"><span>${L("السبب *", "Reason *")}</span><input class="input" name="why" dir="auto" required></label>${dlgBtns(L("إلغاء الفاتورة", "Void"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_fin_invoice_void", { p_id: i.id, p_reason: $("[name=why]", dlg).value }); toast(L("اتلغت", "Voided")); re(); } catch (e) { toast(ferr(e)); } } dlg.remove(); });
+  });
+  $("#iv-pay")?.addEventListener("click", () => {
+    const dlg = dlgOpen(`<form method="dialog"><h2>${L("تسجيل دفعة", "Record payment")} · <span class="mono">${esc(i.number)}</span></h2>
+      <div class="grid g2"><label class="fld"><span>${L("المبلغ", "Amount")} (${CUR[i.currency][1]})</span><input class="input" name="amt" type="number" min="0.01" step="0.01" max="${i.balance}" value="${i.balance}" dir="ltr" required></label>
+        <label class="fld"><span>${L("التاريخ", "Date")}</span><input class="input" name="on" type="date" value="${today()}" required></label>
+        <label class="fld"><span>${L("الطريقة", "Method")}</span><select class="input" name="method">${Object.keys(PAY_M).map(k => `<option value="${k}">${FL(PAY_M, k)}</option>`).join("")}</select></label>
+        <label class="fld"><span>${L("رقم العملية / مرجع", "Reference")}</span><input class="input" name="ref" dir="auto"></label></div>
+      <label class="fld"><span>${L("ملاحظة", "Note")}</span><input class="input" name="note" dir="auto"></label>${dlgBtns(t("Save"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { const g = n => $(`[name=${n}]`, dlg).value;
+      try { await api("admin_fin_payment_add", { p_invoice: i.id, p_paid_on: g("on"), p_amount: +g("amt"), p_method: g("method"), p_reference: g("ref") || null, p_note: g("note") || null }); toast(L("اتسجلت الدفعة", "Payment recorded")); re(); } catch (e) { toast(ferr(e)); } } dlg.remove(); });
+  });
+  $$("[data-pdel]", box).forEach(b => b.addEventListener("click", () => {
+    const dlg = dlgOpen(`<form method="dialog"><h2>${L("حذف الدفعة؟", "Delete this payment?")}</h2><p class="small muted">${L("استخدمها لو الدفعة اتسجلت غلط. هتتسجل في سجل التدقيق.", "Use this if the payment was entered by mistake. It's kept in the audit log.")}</p>${dlgBtns(L("حذف", "Delete"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_fin_payment_delete", { p_id: b.dataset.pdel }); re(); } catch (e) { toast(ferr(e)); } } dlg.remove(); });
+  }));
+}
+const invData = i => ({ deal_id: i.deal_id, offer_id: i.offer_id, client_name: i.client_name, client_company: i.client_company, client_email: i.client_email, client_phone: i.client_phone, currency: i.currency,
+  items: i.items.map(x => ({ desc: x.desc, qty: x.qty, price: x.price })), discount: i.discount, vat_rate: i.vat_rate, issue_date: i.issue_date, due_date: i.due_date, notes: i.notes, status: i.status });
+async function invoiceForm(pre, after) {
+  try { await finLookup(); } catch (e) { toast(e.message); return; }
+  const S = fin.lookup.settings || {}, locked = pre && Number(pre.paid) > 0;
+  const items = pre?.items?.length ? pre.items : [{ desc: "", qty: 1, price: "" }];
+  const row = (x = {}) => `<div class="inv-row"><input class="input" name="desc" dir="auto" list="q-products" placeholder="${L("البند / الخدمة", "Item / service")}" value="${esc(x.desc || "")}">
+    <input class="input" name="qty" type="number" min="0.01" step="0.01" dir="ltr" value="${esc(x.qty ?? 1)}" aria-label="${L("الكمية", "Qty")}"><input class="input" name="price" type="number" min="0" step="0.01" dir="ltr" placeholder="${L("السعر", "Price")}" value="${esc(x.price ?? "")}">
+    <span class="inv-line"></span><button class="btn sm" type="button" data-rm aria-label="${L("حذف", "Remove")}">✕</button></div>`;
+  const dlg = dlgOpen(`<form method="dialog" id="i-f"><h2>${pre ? `${L("تعديل الفاتورة", "Edit invoice")} <span class="mono">${esc(pre.number)}</span>` : L("فاتورة جديدة", "New invoice")}</h2>
+    ${locked ? `<div class="warn">${L("عليها دفعات: العملة مقفولة، والإجمالي مينفعش يقل عن المدفوع.", "Has payments: currency locked and the total can't go below what's paid.")}</div>` : ""}
+    <div class="grid g2"><label class="fld"><span>${L("من عميل في متابعة العملاء (اختياري)", "Client from the pipeline (optional)")}</span><select class="input" name="deal">${clientOptions(pre?.deal_id)}</select></label>
+      <label class="fld"><span>${L("اسم العميل على الفاتورة *", "Client name on invoice *")}</span><input class="input" name="cname" dir="auto" value="${esc(pre?.client_name || "")}" required></label>
+      <label class="fld"><span>${L("الشركة", "Company")}</span><input class="input" name="ccomp" dir="auto" value="${esc(pre?.client_company || "")}"></label>
+      <label class="fld"><span>${t("Phone")}</span><input class="input" name="cphone" dir="ltr" value="${esc(pre?.client_phone || "")}"></label>
+      <label class="fld"><span>${t("E-mail")}</span><input class="input" name="cmail" type="email" dir="ltr" value="${esc(pre?.client_email || "")}"></label>
+      <label class="fld"><span>${L("العملة", "Currency")}</span>${curSelect("cur", pre?.currency || "SAR", locked)}</label></div>
+    <datalist id="q-products">${PRODUCT_NAMES.map(p => `<option value="${p}">`).join("")}<option value="Digital marketing AI"><option value="${L("استشارة", "Consultation")}"><option value="${L("رسوم التجهيز والتدريب", "Setup & training")}"></datalist>
+    <div class="inv-row inv-h small muted"><span>${L("البند", "Item")}</span><span>${L("الكمية", "Qty")}</span><span>${L("السعر", "Price")}</span><span>${L("الإجمالي", "Amount")}</span><span></span></div>
+    <div id="i-rows">${items.map(row).join("")}</div><button class="btn sm" type="button" id="i-add">+ ${L("بند", "Item")}</button>
+    <div class="grid g4" style="margin-top:12px"><label class="fld"><span>${L("خصم (مبلغ)", "Discount (amount)")}</span><input class="input" name="disc" type="number" min="0" step="0.01" dir="ltr" value="${esc(pre?.discount ?? 0)}"></label>
+      <label class="fld"><span>${L("ضريبة %", "VAT %")}</span><input class="input" name="vat" type="number" min="0" max="100" step="0.01" dir="ltr" value="${esc(pre?.vat_rate ?? S.vat_default ?? 0)}"></label>
+      <label class="fld"><span>${L("تاريخ الفاتورة", "Invoice date")}</span><input class="input" name="issue" type="date" value="${esc(pre?.issue_date || today())}"></label>
+      <label class="fld"><span>${L("آخر موعد للدفع", "Due date")}</span><input class="input" name="due" type="date" value="${esc(pre ? pre.due_date || "" : addDays(today(), 7))}"></label></div>
+    <p class="otot" id="i-tot" style="margin:4px 0 10px"></p>
+    <label class="fld"><span>${L("ملاحظة على الفاتورة (بتظهر للعميل)", "Note on the invoice (shown to the client)")}</span><input class="input" name="notes" dir="auto" value="${esc(pre?.notes || "")}"></label>
+    ${dlgBtns(pre?.status === "issued" ? t("Save") : L("إصدار الفاتورة", "Issue invoice"), pre?.status === "issued" || locked ? "" : `<button class="btn" value="draft" type="submit">${L("حفظ كمسودة", "Save as draft")}</button>`)}</form>`);
+  const f = $("#i-f", dlg), rows = $("#i-rows", dlg);
+  f.deal.addEventListener("change", () => { const c = fin.lookup.clients.find(x => x.id === f.deal.value); if (c) { f.cname.value = c.name || ""; f.ccomp.value = c.company || ""; f.cphone.value = c.phone || ""; f.cmail.value = c.email || ""; } });
+  const read = () => $$(".inv-row:not(.inv-h)", rows).map(r => ({ desc: r.querySelector("[name=desc]").value.trim(), qty: r.querySelector("[name=qty]").value || 1, price: r.querySelector("[name=price]").value })).filter(x => x.desc);
+  const tot = () => { const c = f.cur.value; let sub = 0;
+    $$(".inv-row:not(.inv-h)", rows).forEach(r => { const l = (+r.querySelector("[name=qty]").value || 0) * (+r.querySelector("[name=price]").value || 0); sub += l; r.querySelector(".inv-line").textContent = l ? money(l, c) : ""; });
+    const disc = Math.min(+f.disc.value || 0, sub), vat = Math.round((sub - disc) * (+f.vat.value || 0)) / 100;
+    $("#i-tot", dlg).innerHTML = `${L("الإجمالي:", "Total:")} <b>${money(sub - disc + vat, c)}</b>${vat ? ` <span class="small muted">(${L("شامل ضريبة", "incl. VAT")} ${money(vat, c)})</span>` : ""}`; };
+  const bindRm = () => $$("[data-rm]", rows).forEach(b => b.onclick = () => { if ($$(".inv-row", rows).length > 1) b.closest(".inv-row").remove(); tot(); });
+  $("#i-add", dlg).addEventListener("click", () => { rows.insertAdjacentHTML("beforeend", row()); bindRm(); });
+  f.addEventListener("input", tot); f.addEventListener("change", tot); bindRm(); tot();
+  dlg.addEventListener("close", async () => {
+    const rv = dlg.returnValue;
+    if (rv === "ok" || rv === "draft") {
+      const its = read(), data = { deal_id: f.deal.value || null, offer_id: pre?.offer_id || null, client_name: f.cname.value.trim(), client_company: f.ccomp.value.trim(), client_phone: f.cphone.value.trim(), client_email: f.cmail.value.trim(),
+        currency: f.cur.value, items: its, discount: f.disc.value || 0, vat_rate: f.vat.value || 0, issue_date: f.issue.value || null, due_date: f.due.value || null, notes: f.notes.value.trim(), status: rv === "draft" ? "draft" : "issued" };
+      const bad = !data.client_name ? L("اكتب اسم العميل", "Enter the client's name") : !its.length ? L("ضيف بند واحد على الأقل", "Add at least one item") : its.some(x => x.price === "") ? L("اكتب سعر لكل بند", "Enter a price for every item") : null;
+      if (bad) { toast(bad); dlg.remove(); invoiceForm({ ...(pre || {}), ...data, number: pre?.number, paid: pre?.paid }, after); return; }
+      try { const r = await api("admin_fin_invoice_save", { p_id: pre?.id || null, p_data: data }); toast(rv === "draft" ? L("اتحفظت كمسودة", "Saved as draft") : L("تم حفظ الفاتورة", "Invoice saved"));
+        if (!pre) location.hash = `#/finance/invoices/${r.id}`; else after?.(); } catch (e) { toast(ferr(e)); }
+    }
+    dlg.remove();
+  });
+}
+
+/* ---- printable A4 (quote or invoice) → browser print / Save as PDF ---- */
+function printDoc(kind, x) {
+  const co = fin.lookup?.settings?.company || {}, cur = x.currency || "SAR", isInv = kind === "invoice";
+  const m2 = (v, c = cur) => `${Number(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CUR[c][1]}`;
+  const d = v => v ? new Date(v + "T12:00:00Z").toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }) : "";
+  const rows = isInv ? x.items.map((r, n) => `<tr><td>${n + 1}</td><td dir="auto">${esc(r.desc)}</td><td class="n">${nf(r.qty)}</td><td class="n">${m2(r.price)}</td><td class="n">${m2(r.line)}</td></tr>`).join("")
+    : x.items.map((r, n) => `<tr><td>${n + 1}</td><td dir="auto">${esc(r.product)}${r.note ? `<div class="mut" dir="auto">${esc(r.note)}</div>` : ""}</td><td>${BILL[r.billing][1]} · ${BILL[r.billing][0]}</td><td class="n">${m2(r.price_sar)}</td></tr>`).join("");
+  const T = x.totals || {};
+  const totals = isInv ? `<tr><td>المجموع · Subtotal</td><td class="n">${m2(x.subtotal)}</td></tr>${Number(x.discount) > 0 ? `<tr><td>خصم · Discount</td><td class="n">− ${m2(x.discount)}</td></tr>` : ""}${Number(x.vat_rate) > 0 ? `<tr><td>ضريبة ${nf(x.vat_rate)}% · VAT</td><td class="n">${m2(x.vat_amount)}</td></tr>` : ""}
+      <tr class="g"><td>الإجمالي · Total</td><td class="n">${m2(x.total)}</td></tr>${x.status === "issued" && Number(x.paid) > 0 ? `<tr><td>المدفوع · Paid</td><td class="n">${m2(x.paid)}</td></tr><tr class="g"><td>المتبقي · Balance due</td><td class="n">${m2(x.balance)}</td></tr>` : ""}`
+    : [["one_time", "مرة واحدة · One-time"], ["monthly", "شهرياً · Monthly"], ["yearly", "سنوياً · Yearly"]].filter(([k]) => Number(T[k]) > 0).map(([k, l]) => `<tr class="g"><td>${l}</td><td class="n">${m2(T[k])}</td></tr>`).join("");
+  const client = isInv ? { n: x.client_name, c: x.client_company, p: x.client_phone, e: x.client_email } : { n: x.client, c: x.company };
+  const html = `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>${esc(x.number || "")}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>@page{size:A4;margin:14mm}*{box-sizing:border-box}body{font:12px/1.6 "IBM Plex Sans Arabic",system-ui,sans-serif;color:#0B1220;margin:0}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #3D5AFE;padding-bottom:12px}.br{font:800 22px/1 system-ui;direction:ltr}.br b{color:#3D5AFE}
+.br small{display:block;font:500 11px system-ui;color:#5B6478;margin-top:6px}h1{margin:0;font-size:22px}h1 small{display:block;font-size:12px;color:#5B6478;font-weight:600}
+.meta{display:flex;justify-content:space-between;gap:20px;margin:14px 0}.box{background:#F5F7FC;border-radius:10px;padding:10px 12px;flex:1}.box b{display:block;font-size:13.5px}.mut{color:#5B6478;font-size:11px}
+table{width:100%;border-collapse:collapse;margin-top:8px}th{background:#0B1A4A;color:#fff;text-align:start;padding:7px 8px;font-weight:600;font-size:11px}td{padding:7px 8px;border-bottom:1px solid #E3E7F0;vertical-align:top}
+.n{text-align:end;direction:ltr;white-space:nowrap}.tt{width:55%;margin-inline-start:auto;margin-top:10px}.tt td{border:0;padding:4px 8px}.tt .g td{font-weight:700;font-size:14px;border-top:1.5px solid #0B1A4A}
+.note{margin-top:14px;padding:10px 12px;border:1px dashed #C9D1E6;border-radius:10px;white-space:pre-wrap}.ft{margin-top:26px;color:#8A93A6;font-size:10px;border-top:1px solid #E3E7F0;padding-top:8px;display:flex;justify-content:space-between;gap:12px}
+.ltr{direction:ltr;unicode-bidi:isolate}</style></head><body>
+<div class="hd"><div><h1>${isInv ? "فاتورة" : "عرض سعر"} <small>${isInv ? "INVOICE" : "QUOTATION"} · <span class="ltr">${esc(x.number || "")}</span></small></h1></div>
+<div class="br">hudera <b>AI</b><small>${esc(co.name_ar || "")}${co.vat_no ? ` · VAT ${esc(co.vat_no)}` : ""}</small></div></div>
+<div class="meta"><div class="box"><span class="mut">${isInv ? "فاتورة إلى · Bill to" : "مقدم إلى · Prepared for"}</span><b dir="auto">${esc(client.n || "")}</b>${client.c ? `<div dir="auto">${esc(client.c)}</div>` : ""}${client.p ? `<div class="ltr">${esc(client.p)}</div>` : ""}${client.e ? `<div class="ltr">${esc(client.e)}</div>` : ""}</div>
+<div class="box"><span class="mut">${isInv ? "التاريخ · Date" : "التاريخ · Date"}</span><b class="ltr">${d(isInv ? x.issue_date : String(x.updated_at || "").slice(0, 10))}</b>
+${isInv && x.due_date ? `<span class="mut">آخر موعد للدفع · Due</span><b class="ltr">${d(x.due_date)}</b>` : ""}${!isInv && x.valid_until ? `<span class="mut">ساري حتى · Valid until</span><b class="ltr">${d(x.valid_until)}</b>` : ""}
+<span class="mut">العملة · Currency</span><b>${CUR[cur][2]} · ${cur}</b></div></div>
+<table><thead><tr><th>#</th><th>${isInv ? "البند · Item" : "المنتج / الخدمة · Product / service"}</th>${isInv ? `<th class="n">الكمية · Qty</th><th class="n">السعر · Price</th><th class="n">الإجمالي · Amount</th>` : `<th>الدفع · Billing</th><th class="n">السعر · Price</th>`}</tr></thead><tbody>${rows}</tbody></table>
+<table class="tt"><tbody>${totals}</tbody></table>
+${(isInv ? x.notes : x.client_note) ? `<div class="note" dir="auto">${esc(isInv ? x.notes : x.client_note)}</div>` : ""}
+${isInv && co.bank ? `<div class="note"><b>بيانات التحويل · Payment details</b>\n${esc(co.bank)}</div>` : ""}
+<div class="ft"><span>${esc(co.footer || (isInv ? "شكراً لثقتك · Thank you for your business" : "يسعدنا نرد على أي سؤال · Happy to answer any question"))}</span><span class="ltr">${[co.email, co.phone, co.website].filter(Boolean).map(esc).join(" · ")}${co.address ? ` · ${esc(co.address)}` : ""}</span></div>
+</body></html>`;
+  const fr = document.createElement("iframe"); fr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden"; document.body.appendChild(fr);
+  fr.srcdoc = html;
+  fr.onload = () => { setTimeout(() => { try { fr.contentWindow.focus(); fr.contentWindow.print(); } catch (e) { toast(e.message); } setTimeout(() => fr.remove(), 60000); }, 450); };
+}
+
+/* ---- expenses ---- */
+async function finExpenses() {
+  const box = finPage("expenses", `<button class="btn sm primary" type="button" data-fq="expense">+ ${L("مصروف", "Expense")}</button>${can("finance.view") ? `<button class="btn sm" type="button" id="ex-xl">${ic("dl")} Excel</button>` : ""}`); bindQuick(finExpenses);
+  let list; try { [list] = await Promise.all([api("admin_fin_expenses", { p_status: finState.exp || null }), finLookup()]); } catch (e) { box.innerHTML = failBox(e); return; }
+  const seg = [["pending", FL(EXP_ST, "pending")], ["approved", FL(EXP_ST, "approved")], ["rejected", FL(EXP_ST, "rejected")], ["", L("الكل", "All")]];
+  const sumSar = list.reduce((a, e) => a + Number(e.amount_sar || 0), 0);
+  box.innerHTML = `<p class="small muted" style="margin:0 0 10px">${can("finance.view") ? L("أي مصروف بيتسجل «مستني موافقة»، وأي شريك يوافق عليه. محدش يوافق على مصروفه هو. المصروف بيتحسب في الأرقام بعد الموافقة بس.", "Every expense starts as waiting; any partner can approve it, but not their own. It only counts once approved.")
+      : L("سجّل المصروف وارفع صورة الإيصال على Drive وحط اللينك. الشركاء هيوافقوا عليه.", "Log the expense and add a link to the receipt photo. A partner will approve it.")}</p>
+    <div class="filters" style="margin-bottom:10px;justify-content:space-between"><div class="seg" role="group">${seg.map(([k, l]) => `<button type="button" data-es="${k}" aria-pressed="${finState.exp === k}">${l}</button>`).join("")}</div>
+      ${list.length ? `<span class="small muted">${list.length} ${L("مصروف", "expenses")} · ≈ <b>${money(sumSar, "SAR")}</b></span>` : ""}</div>
+    ${list.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("التاريخ", "Date")}</th><th>${L("المصروف", "Expense")}</th><th class="num">${L("المبلغ", "Amount")}</th><th>${L("اتدفع من", "Paid from")}</th><th>${t("Status")}</th><th></th></tr></thead><tbody>
+      ${list.map(e => `<tr><td>${fdt(e.spent_on, false)}<span class="s mono">${esc(e.number)}</span></td>
+        <td><span class="t" dir="auto">${esc(e.description)}</span><span class="s">${esc(FL(EXP_CAT, e.category))}${e.project ? ` · ${esc(e.project)}` : ""} · ${L("سجّله", "by")} ${esc(e.by || "—")}${e.receipt_url ? ` · <a href="${esc(e.receipt_url)}" target="_blank" rel="noopener">${L("الإيصال", "receipt")} ↗</a>` : ""}</span></td>
+        <td class="num"><b>${money(e.amount, e.currency)}</b>${e.currency !== "SAR" ? `<span class="s">≈ ${money(e.amount_sar, "SAR")}</span>` : ""}</td>
+        <td>${esc(FL(PAID_FROM, e.paid_from))}${e.paid_from === "petty_cash" && e.box_name ? `<span class="s">${esc(e.box_name)}</span>` : ""}${e.paid_from === "partner" ? `<span class="s">${esc(e.paid_by_name || "")} · ${e.status === "approved" ? (e.reimbursed ? `✓ ${L("اترجعله", "repaid")}` : L("لسه مترجعلوش", "not repaid yet")) : ""}</span>` : ""}</td>
+        <td>${chip2(EXP_ST, e.status)}${e.decided_by_name ? `<span class="s">${esc(e.decided_by_name)}${e.decision_note ? `: ${esc(e.decision_note)}` : ""}</span>` : ""}</td>
+        <td><div class="filters" style="flex-wrap:nowrap">${e.can_decide ? `<button class="btn sm primary" type="button" data-ok="${e.id}">✓ ${L("موافقة", "Approve")}</button><button class="btn sm danger" type="button" data-no="${e.id}">${L("رفض", "Reject")}</button>` : ""}
+          ${e.status === "pending" && e.mine && !e.can_decide && can("finance.approve") ? `<span class="small faint">${L("مستني شريك تاني", "needs another partner")}</span>` : ""}
+          ${e.status === "pending" && (e.mine || can("finance.manage")) ? `<button class="btn sm" type="button" data-ed="${e.id}">${L("تعديل", "Edit")}</button><button class="btn sm ghost" type="button" data-del="${e.id}" aria-label="${L("حذف", "Delete")}">✕</button>` : ""}
+          ${e.status === "approved" && e.paid_from === "partner" && can("finance.manage") ? `<button class="btn sm" type="button" data-rb="${e.id}" data-v="${!e.reimbursed}">${e.reimbursed ? L("إلغاء «اترجعله»", "Undo repaid") : L("اترجعله ✓", "Mark repaid")}</button>` : ""}</div></td></tr>`).join("")}</tbody></table></div>`
+      : `<div class="card"><p class="empty">${finState.exp === "pending" ? L("مفيش مصاريف مستنية موافقة 👌", "Nothing waiting for approval 👌") : L("مفيش مصاريف هنا.", "No expenses here.")}</p></div>`}`;
+  const byId = k => list.find(e => e.id === k);
+  $$("[data-es]", box).forEach(b => b.addEventListener("click", () => { finState.exp = b.dataset.es; finExpenses(); }));
+  $$("[data-ok]", box).forEach(b => b.addEventListener("click", async () => { b.disabled = true; try { await api("admin_fin_expense_decide", { p_id: b.dataset.ok, p_approve: true }); toast(L("تمت الموافقة", "Approved")); finExpenses(); } catch (e) { toast(ferr(e)); b.disabled = false; } }));
+  $$("[data-no]", box).forEach(b => b.addEventListener("click", () => {
+    const dlg = dlgOpen(`<form method="dialog"><h2>${L("رفض المصروف", "Reject expense")}</h2><p class="small muted" dir="auto">${esc(byId(b.dataset.no).description)} · ${money(byId(b.dataset.no).amount, byId(b.dataset.no).currency)}</p>
+      <label class="fld"><span>${L("السبب *", "Reason *")}</span><input class="input" name="why" dir="auto" required></label>${dlgBtns(L("رفض", "Reject"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_fin_expense_decide", { p_id: b.dataset.no, p_approve: false, p_note: $("[name=why]", dlg).value }); toast(L("اترفض", "Rejected")); finExpenses(); } catch (e) { toast(ferr(e)); } } dlg.remove(); });
+  }));
+  $$("[data-ed]", box).forEach(b => b.addEventListener("click", () => expenseForm(byId(b.dataset.ed), finExpenses)));
+  $$("[data-del]", box).forEach(b => b.addEventListener("click", () => {
+    const dlg = dlgOpen(`<form method="dialog"><h2>${L("حذف المصروف؟", "Delete this expense?")}</h2><p class="small muted" dir="auto">${esc(byId(b.dataset.del).description)}</p>${dlgBtns(L("حذف", "Delete"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_fin_expense_delete", { p_id: b.dataset.del }); finExpenses(); } catch (e) { toast(ferr(e)); } } dlg.remove(); });
+  }));
+  $$("[data-rb]", box).forEach(b => b.addEventListener("click", async () => { try { await api("admin_fin_expense_reimbursed", { p_id: b.dataset.rb, p_value: b.dataset.v === "true" }); finExpenses(); } catch (e) { toast(ferr(e)); } }));
+  $("#ex-xl")?.addEventListener("click", async () => {
+    try { const all = await api("admin_fin_expenses", { p_status: null });
+      await HX.xlsx([{ name: L("المصاريف", "Expenses"), head: [L("الرقم", "No."), L("التاريخ", "Date"), L("النوع", "Category"), L("الوصف", "Description"), L("المبلغ", "Amount"), L("العملة", "Currency"), L("بالريال", "SAR"), L("اتدفع من", "Paid from"), L("دفعه", "Paid by"), L("اترجعله", "Repaid"), t("Status"), L("قرار", "Decided by"), L("سجّله", "Logged by"), L("الإيصال", "Receipt")],
+        rows: all.map(e => [e.number, e.spent_on, FL(EXP_CAT, e.category), e.description, Number(e.amount), e.currency, Number(e.amount_sar), FL(PAID_FROM, e.paid_from) + (e.box_name ? ` · ${e.box_name}` : ""), e.paid_by_name || "", e.paid_from === "partner" ? (e.reimbursed ? "✓" : "✗") : "", FL(EXP_ST, e.status), e.decided_by_name || "", e.by || "", e.receipt_url || ""]) }], `HUDERA-expenses-${today()}.xlsx`, AR_()); }
+    catch (e) { toast(e.message); }
+  });
+}
+async function expenseForm(pre, after, opts = {}) {
+  try { await finLookup(); } catch (e) { toast(e.message); return; }
+  const boxes = (fin.lookup.boxes || []).filter(b => b.active), team = fin.lookup.team || [], me = fin.lookup.me;
+  const pf = pre?.paid_from || opts.paid_from || "company";
+  const dlg = dlgOpen(`<form method="dialog" id="e-f"><h2>${pre ? `${L("تعديل مصروف", "Edit expense")} <span class="mono">${esc(pre.number)}</span>` : L("مصروف جديد", "New expense")}</h2>
+    <label class="fld"><span>${L("اتصرف على إيه؟ *", "What was it for? *")}</span><input class="input" name="desc" dir="auto" required value="${esc(pre?.description || "")}" placeholder="${L("مثلاً: اشتراك Claude Max لشهر نوفمبر", "e.g. Claude Max for November")}"></label>
+    <div class="grid g2"><label class="fld"><span>${L("المبلغ *", "Amount *")}</span><input class="input" name="amt" type="number" min="0.01" step="0.01" dir="ltr" required value="${esc(pre?.amount ?? "")}"></label>
+      <label class="fld" id="e-curw"><span>${L("العملة", "Currency")}</span>${curSelect("cur", pre?.currency || "EGP")}</label>
+      <label class="fld"><span>${L("النوع", "Category")}</span><select class="input" name="cat">${Object.keys(EXP_CAT).map(k => `<option value="${k}" ${(pre?.category || "subscriptions") === k ? "selected" : ""}>${FL(EXP_CAT, k)}</option>`).join("")}</select></label>
+      <label class="fld"><span>${L("التاريخ", "Date")}</span><input class="input" name="on" type="date" value="${esc(pre?.spent_on || today())}"></label></div>
+    <div class="fld"><span>${L("اتدفع منين؟", "Paid from?")}</span><div class="seg" role="group">${Object.keys(PAID_FROM).filter(k => k !== "petty_cash" || boxes.length).map(k => `<button type="button" data-pf="${k}" aria-pressed="${pf === k}">${FL(PAID_FROM, k)}</button>`).join("")}</div></div>
+    <label class="fld" id="e-box" ${pf === "petty_cash" ? "" : "hidden"}><span>${L("الخزنة", "Cash box")}</span><select class="input" name="box">${boxes.map(b => `<option value="${b.id}" data-cur="${b.currency}" ${(pre?.box_id || opts.box_id) === b.id ? "selected" : ""}>${esc(b.name)} (${CUR[b.currency][1]})</option>`).join("")}</select></label>
+    <label class="fld" id="e-by" ${pf === "partner" ? "" : "hidden"}><span>${L("مين دفع من جيبه؟ (هيترجعله)", "Who paid personally? (to be repaid)")}</span><select class="input" name="by">${team.map(m => `<option value="${m.id}" ${(pre?.paid_by || me) === m.id ? "selected" : ""}>${esc(m.name)}</option>`).join("")}</select></label>
+    <div class="grid g2"><label class="fld"><span>${L("لعميل / مشروع معين؟ (اختياري)", "For a client / project? (optional)")}</span><select class="input" name="deal"><option value="">${L("— مصروف عام للشركة —", "— general company expense —")}</option>${(fin.lookup.clients || []).map(c => `<option value="${c.id}" ${pre?.deal_id === c.id ? "selected" : ""}>${esc(c.company || c.name)}</option>`).join("")}</select></label>
+      <label class="fld"><span>${L("لينك صورة الإيصال (Drive)", "Receipt link (Drive)")}</span><input class="input" name="rcpt" type="url" dir="ltr" placeholder="https://drive.google.com/…" value="${esc(pre?.receipt_url || "")}"></label></div>
+    ${dlgBtns(pre ? t("Save") : L("تسجيل المصروف", "Log expense"))}</form>`);
+  const f = $("#e-f", dlg); let mode = pf;
+  const sync = () => { $("#e-box", dlg).hidden = mode !== "petty_cash"; $("#e-by", dlg).hidden = mode !== "partner";
+    const bc = mode === "petty_cash" ? f.box.selectedOptions[0]?.dataset.cur : null; if (bc) { f.cur.value = bc; } f.cur.disabled = !!bc; };
+  $$("[data-pf]", dlg).forEach(b => b.addEventListener("click", () => { mode = b.dataset.pf; $$("[data-pf]", dlg).forEach(x => x.setAttribute("aria-pressed", x === b)); sync(); }));
+  f.box?.addEventListener("change", sync); sync();
+  dlg.addEventListener("close", async () => {
+    if (dlg.returnValue === "ok") {
+      const data = { description: f.desc.value.trim(), amount: f.amt.value, currency: f.cur.value, category: f.cat.value, spent_on: f.on.value || null, paid_from: mode,
+        box_id: mode === "petty_cash" ? f.box.value : null, paid_by: mode === "partner" ? f.by.value : null, deal_id: f.deal.value || null, receipt_url: f.rcpt.value.trim() || null };
+      try { await api("admin_fin_expense_save", { p_id: pre?.id || null, p_data: data }); toast(pre ? L("تم الحفظ", "Saved") : L("اتسجل ومستني موافقة شريك", "Logged, waiting for a partner's approval")); fin.lookup = null; after?.(); } catch (e) { toast(ferr(e)); }
+    }
+    dlg.remove();
+  });
+}
+
+/* ---- petty cash ---- */
+async function finCash() {
+  const m = can("finance.manage");
+  const box = finPage("cash", m ? `<button class="btn sm primary" type="button" id="cb-new">+ ${L("خزنة جديدة", "New cash box")}</button>` : "");
+  let list; try { [list] = await Promise.all([api("admin_fin_cash"), finLookup(true)]); } catch (e) { box.innerHTML = failBox(e); return; }
+  box.innerHTML = `<p class="small muted" style="margin:0 0 10px">${L("البيتي كاش = فلوس كاش مع حد من الفريق للمصاريف الصغيرة. بتموّل الخزنة، وكل مصروف منها بيتسجل «من البيتي كاش» ويتخصم من الرصيد بعد الموافقة.", "Petty cash is money a team member holds for small expenses. Top it up; each expense paid from it is deducted once approved.")}</p>
+    ${list.length ? `<div class="grid g2">${list.map(b => `<section class="card ${b.active ? "" : "fin-off"}"><div class="filters" style="justify-content:space-between;align-items:flex-start">
+        <div><h2>${esc(b.name)} ${b.active ? "" : `<span class="chip">${L("مقفولة", "Closed")}</span>`}</h2><p class="sub" style="margin:0">${b.custodian ? `${L("مع", "Held by")} ${esc(b.custodian)} · ` : ""}${CUR[b.currency][2]}</p></div>
+        <div class="fin-bal ${Number(b.balance) < 0 ? "neg" : ""}"><small>${L("الرصيد", "Balance")}</small><b>${money(b.balance, b.currency)}</b></div></div>
+      <div class="small muted" style="margin:8px 0">${L("اتموّلت", "Topped up")} ${money(b.topped_up, b.currency)} · ${L("اتصرف", "Spent")} ${money(b.spent, b.currency)}${Number(b.pending) > 0 ? ` · <span style="color:var(--amber)">${L("مستني موافقة", "pending")} ${money(b.pending, b.currency)}</span>` : ""}</div>
+      ${Number(b.balance) < 0 ? `<div class="warn">${L("الرصيد بالسالب: اتصرف أكتر من اللي اتموّل. موّل الخزنة.", "Negative: more was spent than topped up. Top it up.")}</div>` : ""}
+      <div class="filters">${b.active && m ? `<button class="btn sm primary" type="button" data-tu="${b.id}">+ ${L("تمويل", "Top up")}</button>` : ""}${b.active ? `<button class="btn sm" type="button" data-sp="${b.id}">+ ${L("مصروف من الخزنة", "Spend from box")}</button>` : ""}${m ? `<button class="btn sm" type="button" data-be="${b.id}">${L("تعديل", "Edit")}</button>` : ""}</div>
+      ${b.moves.length ? `<div class="fin-moves">${b.moves.slice(0, 12).map(x => `<div class="${x.kind}"><span>${x.kind === "topup" ? "⬆️" : "⬇️"} <span dir="auto">${esc(x.text || (x.kind === "topup" ? L("تمويل", "Top-up") : ""))}</span>${x.status && x.status !== "approved" ? ` ${chip2(EXP_ST, x.status)}` : ""}<span class="small faint"> · ${fdt(x.date, false)}${x.by ? ` · ${esc(x.by)}` : ""}</span></span><b>${x.kind === "topup" ? "+" : "−"} ${money(x.amount, b.currency)}</b></div>`).join("")}</div>` : `<p class="empty" style="padding:12px">${L("مفيش حركات لسه", "No movements yet")}</p>`}</section>`).join("")}</div>`
+      : `<div class="card"><p class="empty">${L("لسه مفيش خزنة. اعمل واحدة (مثلاً «خزنة مصر» بالجنيه مع م. أحمد).", "No cash box yet. Create one (e.g. “Egypt box” in EGP held by Ahmed).")}</p></div>`}`;
+  const byId = k => list.find(b => b.id === k);
+  const boxForm = pre => {
+    const dlg = dlgOpen(`<form method="dialog"><h2>${pre ? L("تعديل الخزنة", "Edit cash box") : L("خزنة جديدة", "New cash box")}</h2>
+      <label class="fld"><span>${L("الاسم *", "Name *")}</span><input class="input" name="n" dir="auto" required value="${esc(pre?.name || "")}" placeholder="${L("مثلاً: خزنة مصر", "e.g. Egypt box")}"></label>
+      <div class="grid g2"><label class="fld"><span>${L("الفلوس مع مين؟", "Held by")}</span><select class="input" name="c"><option value="">—</option>${(fin.lookup.team || []).map(u => `<option value="${u.id}" ${pre?.custodian_id === u.id ? "selected" : ""}>${esc(u.name)}</option>`).join("")}</select></label>
+        <label class="fld"><span>${L("العملة", "Currency")}</span>${curSelect("cur", pre?.currency || "EGP")}</label></div>
+      ${pre ? `<label class="of-share"><input type="checkbox" name="a" ${pre.active ? "checked" : ""}> ${L("الخزنة شغالة", "Box is active")}</label>` : ""}${dlgBtns(t("Save"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { const g = n => $(`[name=${n}]`, dlg);
+      try { await api("admin_fin_box_save", { p_id: pre?.id || null, p_name: g("n").value, p_custodian: g("c").value || null, p_currency: g("cur").value, p_active: pre ? g("a").checked : true }); toast(L("تم الحفظ", "Saved")); finCash(); } catch (e) { toast(ferr(e)); } } dlg.remove(); });
+  };
+  $("#cb-new")?.addEventListener("click", () => boxForm(null));
+  $$("[data-be]", box).forEach(b => b.addEventListener("click", () => boxForm(byId(b.dataset.be))));
+  $$("[data-sp]", box).forEach(b => b.addEventListener("click", () => expenseForm(null, finCash, { paid_from: "petty_cash", box_id: b.dataset.sp })));
+  $$("[data-tu]", box).forEach(b => b.addEventListener("click", () => { const x = byId(b.dataset.tu);
+    const dlg = dlgOpen(`<form method="dialog"><h2>${L("تمويل", "Top up")} · ${esc(x.name)}</h2>
+      <div class="grid g2"><label class="fld"><span>${L("المبلغ", "Amount")} (${CUR[x.currency][1]})</span><input class="input" name="a" type="number" min="0.01" step="0.01" dir="ltr" required></label><label class="fld"><span>${L("التاريخ", "Date")}</span><input class="input" name="d" type="date" value="${today()}"></label></div>
+      <label class="fld"><span>${L("ملاحظة", "Note")}</span><input class="input" name="n" dir="auto" placeholder="${L("مثلاً: من حساب الشركة / من د. عبدالله", "e.g. from the company account")}"></label>${dlgBtns(t("Save"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { const g = n => $(`[name=${n}]`, dlg).value;
+      try { await api("admin_fin_topup_add", { p_box: x.id, p_on: g("d"), p_amount: +g("a"), p_note: g("n") || null }); toast(L("اتموّلت", "Topped up")); finCash(); } catch (e) { toast(ferr(e)); } } dlg.remove(); });
+  }));
+}
+
+/* ---- finance settings ---- */
+async function finSetup() {
+  const box = finPage("setup");
+  let lk; try { lk = await finLookup(true); } catch (e) { box.innerHTML = failBox(e); return; }
+  const S = lk.settings || {}, R = S.rates || {}, C = S.company || {}, m = can("finance.manage");
+  const fld = (k, label, ltr, ph = "") => `<label class="fld"><span>${label}</span><input class="input" name="co_${k}" ${ltr ? 'dir="ltr"' : 'dir="auto"'} value="${esc(C[k] || "")}" placeholder="${esc(ph)}" ${m ? "" : "disabled"}></label>`;
+  box.innerHTML = `<form id="fs-f"><div class="grid g2">
+    <section class="card"><h2>${L("أسعار التحويل", "Exchange rates")}</h2><p class="sub">${L("بنستخدمها عشان نجمع كل العملات في رقم واحد بالريال (للوحة بس). الفواتير نفسها بتفضل بعملتها.", "Used to add all currencies up in SAR on the dashboard. Invoices keep their own currency.")}</p>
+      ${["USD", "EGP", "JOD"].map(c => `<label class="fld"><span>1 ${CUR[c][1]} = ? SAR</span><input class="input" name="r_${c}" type="number" min="0.0001" step="0.0001" dir="ltr" value="${esc(R[c] ?? "")}" ${m ? "" : "disabled"}></label>`).join("")}
+      <p class="small faint" id="fs-help"></p>
+      <label class="fld"><span>${L("الضريبة الافتراضية على الفواتير الجديدة %", "Default VAT on new invoices %")}</span><input class="input" name="vat" type="number" min="0" max="100" step="0.01" dir="ltr" value="${esc(S.vat_default ?? 0)}" ${m ? "" : "disabled"}></label>
+      <p class="small muted">${L("سيبها 0 لحد ما تسجلوا ضريبياً. في السعودية 15% لو اتسجلتوا.", "Keep 0 until you're VAT-registered (15% in Saudi Arabia once registered).")}</p></section>
+    <section class="card"><h2>${L("بيانات الشركة على الفواتير", "Company details on invoices")}</h2><p class="sub">${L("بتظهر في طباعة الفاتورة وعرض السعر.", "Printed on invoices and quotes.")}</p>
+      <div class="grid g2">${fld("name_ar", L("الاسم بالعربي", "Name (Arabic)"))}${fld("name_en", L("الاسم بالإنجليزي", "Name (English)"), true)}${fld("email", t("E-mail"), true)}${fld("phone", t("Phone"), true)}${fld("website", L("الموقع", "Website"), true)}${fld("vat_no", L("الرقم الضريبي", "VAT number"), true)}</div>
+      ${fld("address", L("العنوان", "Address"))}
+      <label class="fld"><span>${L("بيانات التحويل (بنك / إنستاباي / فودافون كاش)", "Payment details (bank / InstaPay / wallet)")}</span><textarea class="input" name="co_bank" dir="auto" style="min-height:90px" ${m ? "" : "disabled"} placeholder="${L("اسم البنك، اسم الحساب، IBAN…", "Bank, account name, IBAN…")}">${esc(C.bank || "")}</textarea></label>
+      ${fld("footer", L("سطر في آخر الفاتورة", "Footer line"), false, L("شكراً لثقتك", "Thank you for your business"))}</section></div>
+    ${m ? `<div style="margin-top:12px"><button class="btn primary" type="submit">${t("Save")}</button></div>` : ""}</form>`;
+  const f = $("#fs-f", box);
+  const help = () => { const u = +f.r_USD.value, e = +f.r_EGP.value; $("#fs-help").textContent = u && e ? L(`يعني 1 دولار ≈ ${(u / e).toFixed(2)} جنيه`, `i.e. 1 USD ≈ ${(u / e).toFixed(2)} EGP`) : ""; };
+  f.addEventListener("input", help); help();
+  f.addEventListener("submit", async e => { e.preventDefault();
+    const company = {}; ["name_ar", "name_en", "email", "phone", "website", "vat_no", "address", "bank", "footer"].forEach(k => { company[k] = f[`co_${k}`].value.trim(); });
+    try { await api("admin_fin_settings_save", { p_patch: { rates: { USD: f.r_USD.value, EGP: f.r_EGP.value, JOD: f.r_JOD.value }, vat_default: f.vat.value || 0, company } }); fin.lookup = null; toast(L("تم الحفظ", "Saved")); } catch (er) { toast(ferr(er)); } });
+}
+
+/* ---------------- hiring: applications from the website's careers page ---------------- */
+const HST = { new: ["جديد", "New", "c-blue"], reviewing: ["بنراجعه", "Reviewing", "c-amber"], shortlisted: ["مرشّح", "Shortlisted", "c-violet"], interview: ["مقابلة", "Interview", "c-sky"], hired: ["اتقبل", "Hired", "c-mint"], rejected: ["مش مناسب", "Not a fit", ""] };
+const HYRS = { "0": ["أقل من سنة", "< 1 yr"], "1-2": ["سنة لـ 2", "1–2 yrs"], "3-5": ["3 لـ 5 سنين", "3–5 yrs"], "6-9": ["6 لـ 9 سنين", "6–9 yrs"], "10+": ["أكتر من 10 سنين", "10+ yrs"] };
+const HWT = { freelance: ["فريلانس", "Freelance"], part_time: ["بارت تايم", "Part-time"], full_time: ["فول تايم", "Full-time"] };
+const hState = { st: "", role: "", q: "" };
+const stars = n => n ? `<span class="h-stars" aria-label="${n}/5">${"★".repeat(n)}<i>${"★".repeat(5 - n)}</i></span>` : "";
+const careersUrl = () => new URL("../careers/", location.href).href;
+async function openCv(a) {
+  if (a.cv_path) {
+    const w = window.open("about:blank", "_blank");
+    try { const { data, error } = await sb.storage.from("cvs").createSignedUrl(a.cv_path, 600); if (error) throw error; if (w) w.location.href = data.signedUrl; else location.href = data.signedUrl; }
+    catch (e) { w?.close(); toast(L("مقدرتش أفتح الملف: ", "Couldn't open the file: ") + e.message); }
+  } else if (a.cv_url) window.open(a.cv_url, "_blank", "noopener");
+}
+async function viewHiring() {
+  const v = page(L("التوظيف", "Hiring"), `<a class="btn sm" href="${careersUrl()}" target="_blank" rel="noopener">${L("صفحة التقديم", "Careers page")} ↗</a><button class="btn sm" type="button" id="h-copy">${L("نسخ اللينك", "Copy link")}</button><button class="btn sm" type="button" id="h-xl">${ic("dl")} Excel</button>`);
+  v.innerHTML = skel(4);
+  let d; try { d = await api("admin_hiring", { p_status: hState.st || null, p_role: hState.role || null, p_q: hState.q || null }); } catch (e) { v.innerHTML = failBox(e); return; }
+  const roles = d.settings?.roles || [], rl = k => { const r = roles.find(x => x.key === k); return r ? (AR_() ? r.ar : r.en) : k; };
+  const total = Object.values(d.counts || {}).reduce((a, b) => a + b, 0);
+  v.innerHTML = `${d.settings?.open === false ? `<div class="warn">${L("فورم التقديم مقفول دلوقتي على الموقع.", "The careers form is closed on the website.")}</div>` : ""}
+    <div class="filters" style="margin-bottom:12px;justify-content:space-between">
+      <div class="seg" role="group">${[["", `${L("الكل", "All")} (${total})`], ...Object.keys(HST).map(k => [k, `${FL(HST, k)} (${d.counts?.[k] || 0})`])].map(([k, l]) => `<button type="button" data-hs="${k}" aria-pressed="${hState.st === k}">${l}</button>`).join("")}</div>
+      <div class="filters"><select class="input" id="h-role"><option value="">${L("كل المجالات", "All fields")}</option>${roles.map(r => `<option value="${esc(r.key)}" ${hState.role === r.key ? "selected" : ""}>${esc(AR_() ? r.ar : r.en)} (${d.by_role?.[r.key] || 0})</option>`).join("")}</select>
+        <input class="input" type="search" id="h-q" placeholder="${L("دور بالاسم أو المهارة", "Search name or skill")}" value="${esc(hState.q)}">${d.can_edit ? `<button class="btn sm" type="button" id="h-set">${ic("gear")} ${L("المجالات المفتوحة", "Open fields")}</button>` : ""}</div></div>
+    ${d.items.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("المتقدم", "Applicant")}</th><th>${L("المجال", "Field")}</th><th>${L("الخبرة", "Experience")}</th><th>${L("النوع", "Type")}</th><th>${L("قدّم", "Applied")}</th><th>${t("Status")}</th><th>CV</th></tr></thead><tbody>
+      ${d.items.map((a, i) => `<tr class="click" data-hi="${i}"><td><span class="t" dir="auto">${esc(a.full_name)}</span><span class="s">${a.location ? `<span dir="auto">${esc(a.location)}</span> · ` : ""}<span dir="ltr">${esc(a.phone || "")}</span></span></td>
+        <td>${esc(a.role === "other" && a.role_other ? a.role_other : rl(a.role))}${a.skills ? `<span class="s" dir="auto">${esc(a.skills.slice(0, 60))}${a.skills.length > 60 ? "…" : ""}</span>` : ""}</td>
+        <td><b>${FL(HYRS, a.years)}</b></td><td>${FL(HWT, a.work_type)}${a.hours_week ? `<span class="s">${a.hours_week} ${L("س/أسبوع", "h/wk")}</span>` : ""}</td>
+        <td>${ago(a.created_at)}</td><td>${chip2(HST, a.status)} ${stars(a.rating)}</td>
+        <td><button class="btn sm" type="button" data-cv="${i}">${a.cv_path ? "📄 " + L("الملف", "File") : "🔗 " + L("لينك", "Link")}</button></td></tr>`).join("")}</tbody></table></div>`
+      : `<div class="card"><p class="empty">${total ? L("مفيش طلبات بالفلتر ده.", "No applications match.") : L("لسه مفيش طلبات. شارك لينك صفحة التقديم في بوست التوظيف.", "No applications yet. Share the careers page link in the hiring post.")}</p></div>`}`;
+  $$("[data-hs]", v).forEach(b => b.addEventListener("click", () => { hState.st = b.dataset.hs; viewHiring(); }));
+  $("#h-role", v).addEventListener("change", e => { hState.role = e.target.value; viewHiring(); });
+  let tm; $("#h-q", v).addEventListener("input", e => { clearTimeout(tm); tm = setTimeout(() => { hState.q = e.target.value.trim(); viewHiring().then(() => { const q = $("#h-q"); q?.focus(); q?.setSelectionRange(q.value.length, q.value.length); }); }, 350); });
+  $$("[data-cv]", v).forEach(b => b.addEventListener("click", e => { e.stopPropagation(); openCv(d.items[+b.dataset.cv]); }));
+  $$("[data-hi]", v).forEach(r => r.addEventListener("click", () => hiringDialog(d.items[+r.dataset.hi], d.can_edit, rl)));
+  $("#h-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(careersUrl()); toast(L("اتنسخ اللينك", "Link copied")); } catch (e) { toast(careersUrl()); } });
+  $("#h-set")?.addEventListener("click", () => hiringSettings(d.settings));
+  $("#h-xl").addEventListener("click", () => HX.xlsx([{ name: L("طلبات التوظيف", "Applications"), head: [L("الرقم", "Ref"), L("الاسم", "Name"), t("E-mail"), t("Phone"), L("المكان", "Location"), L("المجال", "Field"), L("الخبرة", "Experience"), L("النوع", "Type"), L("ساعات/أسبوع", "Hours/wk"), L("السعر المتوقع", "Expected rate"), L("المهارات", "Skills"), L("الأعمال", "Portfolio"), L("لينك الـ CV", "CV link"), L("ملف CV", "CV file"), t("Status"), L("التقييم", "Rating"), L("ملاحظة الفريق", "Team note"), L("التاريخ", "Date")],
+    rows: d.items.map(a => [a.ref, a.full_name, a.email || "", a.phone || "", a.location || "", a.role === "other" && a.role_other ? a.role_other : rl(a.role), FL(HYRS, a.years), FL(HWT, a.work_type), a.hours_week || "", a.expected_rate || "", a.skills || "", a.portfolio_url || "", a.cv_url || "", a.cv_name || (a.cv_path ? "✓" : ""), FL(HST, a.status), a.rating || "", a.staff_note || "", fdt(a.created_at, false)]) }], `HUDERA-applications-${today()}.xlsx`, AR_()).catch(e => toast(e.message)));
+}
+function hiringDialog(a, canEdit, rl) {
+  const wa = a.phone ? `https://wa.me/${String(a.phone).replace(/\D/g, "")}?text=${encodeURIComponent(L(`أهلاً ${a.full_name.split(" ")[0]}، معاك فريق HUDERA AI بخصوص طلبك (${a.ref}) على وظيفة ${a.role === "other" && a.role_other ? a.role_other : rl(a.role)}.`, `Hi ${a.full_name.split(" ")[0]}, this is the HUDERA AI team about your application (${a.ref}) for ${a.role === "other" && a.role_other ? a.role_other : rl(a.role)}.`))}` : "";
+  const row = (k, val) => val ? `<div class="h-kv"><span>${k}</span><div dir="auto">${val}</div></div>` : "";
+  const dlg = dlgOpen(`<form method="dialog" id="h-f"><div class="filters" style="justify-content:space-between;align-items:flex-start"><div><h2 style="margin:0" dir="auto">${esc(a.full_name)}</h2>
+      <p class="small muted" style="margin:2px 0 0">${esc(a.role === "other" && a.role_other ? a.role_other : rl(a.role))} · ${FL(HYRS, a.years)} · <span class="mono">${esc(a.ref)}</span></p></div>${chip2(HST, a.status)}</div>
+    <div class="filters" style="margin:12px 0">${a.cv_path || a.cv_url ? `<button class="btn sm primary" type="button" id="h-cv">${a.cv_path ? "📄 " + L("افتح الـ CV", "Open CV") : "🔗 " + L("لينك الـ CV", "CV link")}</button>` : ""}
+      ${wa ? `<a class="btn sm" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ""}${a.email ? `<a class="btn sm" href="https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(a.email)}&su=${encodeURIComponent("HUDERA AI · " + a.ref)}" target="_blank" rel="noopener">Gmail</a>` : ""}
+      ${a.portfolio_url ? `<a class="btn sm" href="${esc(a.portfolio_url)}" target="_blank" rel="noopener">${L("أعماله", "Portfolio")} ↗</a>` : ""}</div>
+    <div class="h-grid">${row(t("E-mail"), `<span dir="ltr">${esc(a.email || "")}</span>`)}${row(t("Phone"), `<span dir="ltr">${esc(a.phone || "")}</span>`)}${row(L("المكان", "Location"), esc(a.location || ""))}
+      ${row(L("نوع الشغل", "Work type"), FL(HWT, a.work_type) + (a.hours_week ? ` · ${a.hours_week} ${L("ساعة في الأسبوع", "h / week")}` : ""))}${row(L("السعر المتوقع", "Expected rate"), esc(a.expected_rate || ""))}
+      ${row(L("المهارات", "Skills"), esc(a.skills || ""))}${row(L("الملف", "File"), a.cv_name ? `<span dir="ltr">${esc(a.cv_name)}</span>` : "")}${row(L("قدّم", "Applied"), fdt(a.created_at) + (a.updated_at && a.updated_at !== a.created_at ? ` · ${L("آخر تحديث", "updated")} ${ago(a.updated_at)}` : ""))}</div>
+    ${a.note ? `<div class="h-note" dir="auto">💬 ${esc(a.note)}</div>` : ""}
+    ${canEdit ? `<div class="grid g2" style="margin-top:12px"><label class="fld"><span>${t("Status")}</span><select class="input" name="st">${Object.keys(HST).map(k => `<option value="${k}" ${a.status === k ? "selected" : ""}>${FL(HST, k)}</option>`).join("")}</select></label>
+      <div class="fld"><span>${L("تقييمك", "Your rating")}</span><div class="h-rate" role="radiogroup">${[1, 2, 3, 4, 5].map(n => `<label><input type="radio" name="rt" value="${n}" ${a.rating === n ? "checked" : ""}><span>★</span></label>`).join("")}<button class="btn sm ghost" type="button" id="h-clr">${L("مسح", "Clear")}</button></div></div></div>
+      <label class="fld"><span>🔒 ${L("ملاحظة الفريق (المتقدم مش بيشوفها)", "Team note (not shown to the applicant)")}</span><textarea class="input" name="nt" dir="auto" style="min-height:80px">${esc(a.staff_note || "")}</textarea></label>
+      ${a.updated_by_name ? `<p class="small faint" style="margin:0">${L("آخر تعديل", "Last change")}: ${esc(a.updated_by_name)} · ${ago(a.updated_at)}</p>` : ""}${dlgBtns(t("Save"))}`
+      : `${a.staff_note ? `<p class="small muted">🔒 ${esc(a.staff_note)}</p>` : ""}<div class="filters" style="justify-content:flex-end"><button class="btn" value="cancel" type="submit">${L("قفل", "Close")}</button></div>`}</form>`);
+  $("#h-cv", dlg)?.addEventListener("click", () => openCv(a));
+  let clr = false; $("#h-clr", dlg)?.addEventListener("click", () => { $$("input[name=rt]", dlg).forEach(x => { x.checked = false; }); clr = true; });
+  $$("input[name=rt]", dlg).forEach(x => x.addEventListener("change", () => { clr = false; }));
+  dlg.addEventListener("close", async () => {
+    if (dlg.returnValue === "ok" && canEdit) {
+      const rt = $("input[name=rt]:checked", dlg)?.value;
+      try { await api("admin_hiring_update", { p_id: a.id, p_status: $("[name=st]", dlg).value, p_rating: rt ? +rt : null, p_note: $("[name=nt]", dlg).value, p_clear_rating: clr && !rt }); toast(L("تم الحفظ", "Saved")); viewHiring(); } catch (e) { toast(ferr(e)); }
+    }
+    dlg.remove();
+  });
+}
+function hiringSettings(s) {
+  const roles = (s?.roles || []).map(r => ({ ...r }));
+  const dlg = dlgOpen(`<form method="dialog" id="hs-f"><h2>${L("المجالات المفتوحة في فورم التقديم", "Fields open on the careers form")}</h2>
+    <label class="of-share"><input type="checkbox" name="open" ${s?.open === false ? "" : "checked"}> <b>${L("فورم التقديم مفتوح على الموقع", "Careers form is open on the website")}</b></label>
+    <div id="hs-rows">${roles.map((r, i) => `<div class="hs-row"><input type="checkbox" data-i="${i}" ${r.open === false ? "" : "checked"} ${r.key === "other" ? "" : ""} aria-label="${L("مفتوح", "Open")}"><input class="input" data-ar="${i}" dir="rtl" value="${esc(r.ar)}"><input class="input" data-en="${i}" dir="ltr" value="${esc(r.en)}"></div>`).join("")}</div>
+    <button class="btn sm" type="button" id="hs-add">+ ${L("مجال جديد", "New field")}</button>
+    <p class="small muted">${L("شيل العلامة عشان تقفل مجال من غير ما تمسح طلباته. «مجال تاني» لازم يفضل موجود.", "Untick to close a field without losing its applications. “Something else” must stay.")}</p>${dlgBtns(t("Save"))}</form>`);
+  $("#hs-add", dlg).addEventListener("click", () => { const i = roles.length; roles.push({ key: "", ar: "", en: "", open: true });
+    $("#hs-rows", dlg).insertAdjacentHTML("beforeend", `<div class="hs-row"><input type="checkbox" data-i="${i}" checked><input class="input" data-ar="${i}" dir="rtl" placeholder="${L("بالعربي", "Arabic")}"><input class="input" data-en="${i}" dir="ltr" placeholder="English"></div>`); });
+  dlg.addEventListener("close", async () => {
+    if (dlg.returnValue === "ok") {
+      const out = roles.map((r, i) => { const en = $(`[data-en="${i}"]`, dlg).value.trim(); return { key: r.key || en.toLowerCase().replace(/[^a-z]+/g, "_").replace(/^_|_$/g, "").slice(0, 40) || `role_${i}`, ar: $(`[data-ar="${i}"]`, dlg).value.trim(), en, open: $(`[data-i="${i}"]`, dlg).checked }; }).filter(r => r.ar && r.en);
+      try { await api("admin_hiring_settings", { p_open: $("[name=open]", dlg).checked, p_roles: out }); toast(L("تم الحفظ", "Saved")); viewHiring(); } catch (e) { toast(ferr(e)); }
+    }
+    dlg.remove();
+  });
+}
+
 /* ---------------- router + boot ---------------- */
 function route() {
   if (!who) return;
   const [, sec, id] = location.hash.split("/");
   const first = NAV.find(n => can(n[3]))?.[0] || "overview";
   const go = { overview: viewOverview, users: id ? () => viewUser(id) : viewUsers, leads: id ? () => viewLead(id) : viewLeads, insights: id ? () => viewInsight(id) : viewInsights, pipeline: id ? () => viewDeal(id) : viewPipeline, chats: id ? () => viewChat(id) : viewChats, ai: viewAI, features: id ? () => viewFeature(decodeURIComponent(id)) : viewFeatures,
-    emails: viewEmails, settings: viewSettings, audit: viewAudit }[sec];
+    emails: viewEmails, settings: viewSettings, audit: viewAudit, finance: viewFinance, hiring: viewHiring }[sec];
   const need = NAV.find(n => n[0] === sec)?.[3];
   if (!go || (need && !can(need))) { location.hash = `#/${first}`; return; }
   go(); $("#view")?.focus({ preventScroll: true });
