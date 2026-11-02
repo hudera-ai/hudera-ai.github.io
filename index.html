@@ -4587,6 +4587,9 @@ const HP = (() => {
       : `<button class="acct-btn" id="acct-btn" type="button">${gIcon}<span>Sign in</span></button>`;
     $("#acct-btn").addEventListener("click", () => me ? openPanel() : signIn("nav"));
   }
+  // The admin-dashboard button shows only for the company account itself; every other account (team members included) sees a normal profile.
+  const ADMIN_EMAILS = [CONTACT.email];
+  const isCompanyAdmin = u => !!(u && u.staff_role && ADMIN_EMAILS.includes(String(u.email || "").trim().toLowerCase()));
   function openPanel() {
     closePanel(); track("profile_opened");
     const reqs = (me.requests || []).map(r => `<li><span class="mono no-l10n">${esc(r.ref)}</span><span class="t">${esc(r.subject)}</span>${chip(STATUS[r.status]?.[0] || r.status, (STATUS[r.status]?.[1] || "c-grey").slice(2))}<small>${new Date(r.created_at).toLocaleDateString(LANG === "ar" ? "ar-EG-u-ca-gregory-nu-latn" : "en-GB", { day: "numeric", month: "short", year: "numeric" })}</small></li>`).join("");
@@ -4595,7 +4598,7 @@ const HP = (() => {
       <div class="acct-head">${avatarHtml(me, "lg")}<div><h2 id="acct-h" class="no-l10n">${esc(me.full_name || me.email)}</h2>
         <p><span class="no-l10n">${esc(me.email)}</span> ${me.email_verified ? `<span class="chip c-mint">Verified by Google</span>` : ""}</p></div>
         <button class="icon-x" type="button" id="acct-close" aria-label="Close">${ic("x")}</button></div>
-      ${me.staff_role ? `<a class="btn primary" href="admin/">${ic("chart")}Admin dashboard</a>` : ""}
+      ${isCompanyAdmin(me) ? `<a class="btn primary" href="admin/">${ic("chart")}Admin dashboard</a>` : ""}
       <form class="acct-sec" id="acct-phone"><label for="acct-ph"><b>Phone / WhatsApp</b><small>Optional. Only used to reply to your requests. Without it we reply by e-mail.</small></label>
         <div class="row"><input class="input" id="acct-ph" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+966 5x xxx xxxx" value="${esc(me.phone || "")}"><button class="btn" type="submit">Save</button></div></form>
       <label class="acct-sec chk"><input type="checkbox" id="acct-mk" ${me.marketing_consent ? "checked" : ""}><span><b>News by e-mail</b><small>Occasional updates about new HUDERA products. You can turn this off at any time.</small></span></label>
