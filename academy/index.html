@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HUDERA Academy · التأسيس في الذكاء الاصطناعي العملي</title>
+<meta name="description" content="كورس التأسيس في الذكاء الاصطناعي العملي من HUDERA Academy: 8 سيشنز، فيديوهات شرح قصيرة، لايف أونلاين في مجموعة صغيرة، تاسكات بتتصحح، ومشروع نهائي وشهادة.">
+<meta property="og:title" content="HUDERA Academy · التأسيس في الذكاء الاصطناعي العملي">
+<meta property="og:description" content="من إنك تستخدم الـ AI صح، لحد ما تبني بيه حاجة شغالة. 8 سيشنز · لايف + فيديوهات · شهادة.">
+<meta property="og:image" content="https://hudera-ai.github.io/og.png">
+<meta property="og:url" content="https://hudera-ai.github.io/academy/">
+<link rel="canonical" href="https://hudera-ai.github.io/academy/">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#F5F6FB;--surface:#fff;--surface2:#EFF1F8;--ink:#0B1220;--text:#1F2637;--muted:#5B6478;--faint:#8A93A6;--line:#E3E7F0;--line2:#D5DAE6;
+  --primary:#3D5AFE;--primary-ink:#2C44D6;--primary-soft:#E9EDFF;--cyan:#06B6D4;--ok:#0FA97A;--ok-soft:#DDF6EC;--warn:#B7791F;--warn-soft:#FDF1DC;--err:#D9363E;--err-soft:#FDE6E7;
+  --hero1:#0B1A4A;--hero2:#1B2E86;--radius:18px;--shadow:0 1px 2px rgba(11,18,32,.04),0 6px 24px rgba(11,18,32,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0A0F1A;--surface:#111827;--surface2:#172036;--ink:#F3F6FC;--text:#DCE2EE;--muted:#9AA4BA;--faint:#6F7A91;--line:#232D42;--line2:#2E3A54;
+  --primary:#7088FF;--primary-ink:#9AACFF;--primary-soft:#1B2450;--ok:#34D3A4;--ok-soft:#0F3328;--warn:#F2B35B;--warn-soft:#3A2A10;--err:#FF7A80;--err-soft:#3D1A1D;--shadow:none;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 "IBM Plex Sans Arabic",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--primary-ink)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:14px;height:62px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);direction:ltr}
+.brand i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#3D5AFE,#22D3EE);color:#fff;display:grid;place-items:center;font:800 17px "Bricolage Grotesque",sans-serif;font-style:normal}
+.brand b{font:800 18px "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}.brand span{font:600 13px "Bricolage Grotesque",sans-serif;color:var(--muted);border-inline-start:1px solid var(--line2);padding-inline-start:8px}
+nav.links{display:flex;gap:4px;margin-inline-start:auto;align-items:center}
+nav.links a{padding:7px 11px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px}
+nav.links a:hover,nav.links a[aria-current=page]{color:var(--ink);background:var(--surface2)}
+.who{display:flex;align-items:center;gap:8px}.who img{width:30px;height:30px;border-radius:50%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--primary)}.btn.sm{height:34px;padding:0 12px;font-size:14px;border-radius:10px}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}.btn.primary:hover{background:var(--primary-ink)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--muted)}.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.big{height:52px;padding:0 24px;font-size:17px;border-radius:14px}
+section{padding:46px 0}
+h1,h2,h3{color:var(--ink);line-height:1.3;margin:0}
+h2.sec{font-size:clamp(24px,4vw,32px);margin-bottom:6px}.lead{color:var(--muted);margin:0 0 22px;font-size:17px}
+/* hero */
+.hero{background:radial-gradient(1200px 500px at 85% -10%,#22D3EE33,transparent 60%),linear-gradient(160deg,var(--hero1),var(--hero2));color:#E8EDFF;padding:56px 0 64px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:auto -10% -40% auto;width:520px;height:520px;border-radius:50%;border:1px solid #ffffff14;box-shadow:0 0 0 60px #ffffff08,0 0 0 120px #ffffff05}
+.hero .tag{display:inline-flex;gap:8px;align-items:center;background:#ffffff14;border:1px solid #ffffff24;border-radius:99px;padding:4px 12px;font-size:14px;font-weight:600}
+.hero h1{color:#fff;font-size:clamp(32px,6vw,54px);margin:14px 0 10px;letter-spacing:-.01em;max-width:780px}
+.hero p{font-size:clamp(17px,2.4vw,20px);color:#C9D3FF;max-width:640px;margin:0 0 22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}.chips span{background:#ffffff12;border-radius:10px;padding:5px 12px;font-size:14.5px}
+.hero .btn.primary{background:#fff;color:#1B2E86;border-color:#fff}.hero .btn.primary:hover{background:#E9EDFF}
+.hero .btn.out{background:transparent;color:#fff;border-color:#ffffff55}
+.hero .row{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+/* cards & grids */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.outcome{display:flex;gap:12px;align-items:flex-start}.outcome i{flex:none;width:30px;height:30px;border-radius:9px;background:var(--primary-soft);color:var(--primary-ink);display:grid;place-items:center;font-style:normal;font-weight:800}
+.how{counter-reset:h}.how .card{position:relative}.how .card:before{counter-increment:h;content:counter(h);position:absolute;top:16px;inset-inline-end:18px;font:800 40px "Bricolage Grotesque";color:var(--line2)}
+.how b{display:block;color:var(--ink);font-size:17px;margin:4px 0}.how p{margin:0;color:var(--muted);font-size:15px}.how .ic{font-size:26px}
+/* curriculum */
+.mod{border:1px solid var(--line);border-radius:16px;background:var(--surface);margin-bottom:10px;overflow:hidden}
+.mod summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:center;padding:16px 18px}
+.mod summary::-webkit-details-marker{display:none}
+.mod .num{flex:none;width:42px;height:42px;border-radius:12px;background:var(--surface2);display:grid;place-items:center;font:800 18px "Bricolage Grotesque";color:var(--primary-ink)}
+.mod[open] .num{background:var(--primary);color:#fff}
+.mod summary b{display:block;color:var(--ink);font-size:17px}.mod summary small{color:var(--muted);font-size:14px}
+.mod summary .chev{margin-inline-start:auto;color:var(--faint);transition:transform .2s}.mod[open] .chev{transform:rotate(180deg)}
+.mod .body{padding:0 18px 18px 18px;border-top:1px solid var(--line)}
+.mod ul{margin:12px 0 0;padding:0;list-style:none}.mod li{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:15px}.mod li:last-child{border:0}
+.mod li .m{margin-inline-start:auto;color:var(--faint);font-size:13.5px;white-space:nowrap}
+.taskline{margin-top:10px;background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:8px 12px;font-size:14.5px;font-weight:600}
+/* levels */
+.levels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.lv{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center;position:relative}
+.lv .badge{width:46px;height:46px;border-radius:14px;margin:0 auto 8px;display:grid;place-items:center;font:800 18px "Bricolage Grotesque";color:#fff;background:linear-gradient(135deg,#94A3B8,#64748B)}
+.lv:nth-child(2) .badge{background:linear-gradient(135deg,#22D3EE,#0891B2)}.lv:nth-child(3) .badge{background:linear-gradient(135deg,#7088FF,#3D5AFE)}
+.lv:nth-child(4) .badge{background:linear-gradient(135deg,#A78BFA,#7C3AED)}.lv:nth-child(5) .badge{background:linear-gradient(135deg,#FBBF24,#D97706)}
+.lv b{display:block;color:var(--ink)}.lv small{color:var(--muted);font-size:13px;line-height:1.5;display:block}
+.lv.me{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}.lv.off{opacity:.55}
+/* packages */
+.pkg{display:flex;flex-direction:column;gap:6px;position:relative}
+.pkg.pop{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft),var(--shadow)}
+.pkg .flag{position:absolute;top:-12px;inset-inline-start:18px;background:var(--primary);color:#fff;border-radius:99px;padding:2px 12px;font-size:13px;font-weight:700}
+.pkg h3{font-size:19px}.pkg .pnote{color:var(--muted);font-size:14px;margin:0}
+.price{display:flex;align-items:baseline;gap:6px;margin:8px 0 2px;direction:ltr;justify-content:flex-end}
+[dir=rtl] .price{justify-content:flex-start;flex-direction:row-reverse}
+.price b{font:800 40px "Bricolage Grotesque";color:var(--ink)}.price span{color:var(--muted);font-weight:600}
+.egp{color:var(--faint);font-size:14px;margin:0 0 6px}
+.pkg ul{list-style:none;padding:0;margin:6px 0 14px;flex:1}.pkg li{padding:5px 0;font-size:15px;display:flex;gap:8px}.pkg li:before{content:"✓";color:var(--ok);font-weight:800}
+.persess{font-size:13.5px;color:var(--muted);background:var(--surface2);border-radius:9px;padding:4px 10px;display:inline-block;margin-bottom:6px}
+/* cohort */
+.cohort{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.cohort .dates{display:flex;flex-wrap:wrap;gap:6px}
+.cohort .dates span{background:var(--surface2);border-radius:9px;padding:3px 10px;font-size:13.5px}
+.seats{font-weight:700;color:var(--ok)}.seats.low{color:var(--warn)}
+.inst{display:flex;gap:16px;align-items:center}.inst .av{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#3D5AFE,#22D3EE);display:grid;place-items:center;color:#fff;font:800 28px "Bricolage Grotesque";flex:none}
+.faq details{border-bottom:1px solid var(--line);padding:12px 0}.faq summary{cursor:pointer;font-weight:700;color:var(--ink)}.faq p{margin:8px 0 0;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--faint);font-size:14px}footer .wrap{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}footer a{color:inherit}
+/* forms */
+.f{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;min-width:0}.f>span,.lg{font-weight:700;color:var(--ink);font-size:15px}.f small,.hint{color:var(--faint);font-size:13px;font-weight:400}
+input[type=text],input[type=tel],input[type=url],textarea,select{width:100%;height:46px;border:1px solid var(--line2);border-radius:12px;padding:0 12px;font:inherit;font-size:15.5px;background:var(--surface);color:var(--ink)}
+textarea{height:auto;min-height:84px;padding:10px 12px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb,var(--primary) 40%,transparent);border-color:var(--primary)}
+.bad{border-color:var(--err)!important}
+.pick{display:grid;gap:8px}.pick label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line2);border-radius:14px;padding:12px 14px;cursor:pointer;background:var(--surface)}
+.pick input{accent-color:var(--primary);margin-top:6px}.pick label:has(input:checked){border-color:var(--primary);background:var(--primary-soft)}
+.pick b{color:var(--ink)}.pick small{display:block;color:var(--muted)}.pick .pr{margin-inline-start:auto;font:800 18px "Bricolage Grotesque";color:var(--ink);direction:ltr;white-space:nowrap}
+.seg{display:flex;flex-wrap:wrap;gap:6px}.seg label{flex:1 1 110px;text-align:center;border:1px solid var(--line2);border-radius:12px;padding:9px 6px;cursor:pointer;font-size:14.5px;background:var(--surface)}
+.seg input{position:absolute;opacity:0;pointer-events:none}.seg label:has(input:checked){border-color:var(--primary);background:var(--primary-soft);color:var(--ink);font-weight:700}
+.seg label:has(input:focus-visible),.pick label:has(input:focus-visible){outline:2px solid var(--primary)}
+.paybox{background:var(--surface2);border-radius:14px;padding:14px 16px;margin-bottom:14px}.paybox .amt{font:800 26px "Bricolage Grotesque";color:var(--ink);direction:ltr;display:inline-block}
+.paybox .acct{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line2);padding:8px 0;font-size:15px}.paybox .acct b{direction:ltr;color:var(--ink)}
+.drop{border:2px dashed var(--line2);border-radius:14px;padding:18px 14px;text-align:center;cursor:pointer;color:var(--muted)}.drop:hover,.drop.over{border-color:var(--primary);background:var(--primary-soft)}
+.drop b{display:block;color:var(--ink)}
+.filepick{display:flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:12px;padding:10px 12px}.filepick .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:ltr;text-align:start;font-weight:600;color:var(--ink)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;margin:4px 0 16px}.consent input{margin-top:5px;accent-color:var(--primary);width:18px;height:18px}
+.msg{padding:11px 14px;border-radius:12px;margin-top:12px;font-size:14.5px;background:var(--err-soft);color:var(--err)}.msg.ok{background:var(--ok-soft);color:var(--ok)}
+.note{padding:12px 14px;border-radius:12px;background:var(--warn-soft);color:var(--warn);font-size:15px}
+.gbtn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px;border-radius:13px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.gbtn svg{width:20px;height:20px}
+.narrow{max-width:720px;margin:0 auto}
+.state{text-align:center;padding:24px 8px}.state .ic{width:64px;height:64px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;font-size:30px;background:var(--surface2)}
+.state b{display:block;font-size:22px;color:var(--ink)}
+/* learner */
+.dash-h{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.ring{--p:0;width:96px;height:96px;border-radius:50%;background:conic-gradient(var(--primary) calc(var(--p)*1%),var(--surface2) 0);display:grid;place-items:center;flex:none}
+.ring>div{width:76px;height:76px;border-radius:50%;background:var(--surface);display:grid;place-items:center;text-align:center;line-height:1.1}
+.ring b{font:800 22px "Bricolage Grotesque";color:var(--ink)}.ring small{font-size:11.5px;color:var(--muted)}
+.lvpill{display:inline-flex;gap:6px;align-items:center;border-radius:99px;padding:3px 12px;font-weight:700;font-size:14px;background:var(--primary-soft);color:var(--primary-ink)}
+.next{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#E8EDFF;border:0}
+.next b{color:#fff;font-size:18px;display:block}.next .btn{background:#fff;color:#1B2E86;border-color:#fff}
+.sess{display:flex;gap:14px;align-items:center;text-decoration:none;color:inherit}
+.sess .num{flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font:800 19px "Bricolage Grotesque";background:var(--primary-soft);color:var(--primary-ink)}
+.sess.lock .num{background:var(--surface2);color:var(--faint)}.sess.done .num{background:var(--ok-soft);color:var(--ok)}
+.sess b{display:block;color:var(--ink);font-size:16.5px}.sess small{color:var(--muted);font-size:14px}
+.sess .st{margin-inline-start:auto;text-align:end;font-size:13.5px;color:var(--muted);white-space:nowrap}
+.list>*{border-bottom:1px solid var(--line);padding:14px 4px}.list>*:last-child{border:0}
+.chip{display:inline-block;border-radius:99px;padding:2px 10px;font-size:13px;font-weight:700;background:var(--surface2);color:var(--muted)}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}.chip.warn{background:var(--warn-soft);color:var(--warn)}.chip.blue{background:var(--primary-soft);color:var(--primary-ink)}.chip.err{background:var(--err-soft);color:var(--err)}
+.tabs{display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--line);margin:16px 0 18px;scrollbar-width:none}
+.tabs button{border:0;background:none;padding:10px 14px;font:inherit;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--primary)}
+.player{background:#0B1220;border-radius:16px;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center;color:#9AA4BA;position:relative}
+.player video,.player iframe{width:100%;height:100%;border:0;display:block;background:#000}
+.player .soon{text-align:center;padding:20px}.player .soon b{display:block;color:#fff;font-size:18px}
+.lessons{display:grid;gap:8px}.lesson{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;background:var(--surface)}
+.lesson[aria-current=true]{border-color:var(--primary);background:var(--primary-soft)}.lesson .ck{width:24px;height:24px;border-radius:50%;border:2px solid var(--line2);display:grid;place-items:center;flex:none;font-size:13px}
+.lesson.d .ck{background:var(--ok);border-color:var(--ok);color:#fff}.lesson b{font-size:15px;color:var(--ink)}.lesson small{margin-inline-start:auto;color:var(--faint);white-space:nowrap}
+.pts{margin:10px 0 0;padding-inline-start:20px}.pts li{margin:4px 0}
+.vgrid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:16px;align-items:start}
+.rub{width:100%;border-collapse:collapse;font-size:15px}.rub td{padding:8px 6px;border-bottom:1px solid var(--line)}.rub td:last-child{text-align:end;white-space:nowrap;font-weight:700;color:var(--ink)}
+.q{border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;background:var(--surface)}.q p{margin:0 0 8px;font-weight:700;color:var(--ink)}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border-radius:10px;cursor:pointer}.q label:hover{background:var(--surface2)}.q input{accent-color:var(--primary);margin-top:6px}
+.q label.right{background:var(--ok-soft)}.q label.wrong{background:var(--err-soft)}.q .why{margin-top:8px;font-size:14.5px;color:var(--muted);background:var(--surface2);border-radius:10px;padding:8px 12px}
+.score{font:800 44px "Bricolage Grotesque";color:var(--ink)}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}.tbl th,.tbl td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:start}.tbl th{color:var(--muted);font-size:13.5px;font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+.kpi small{display:block;color:var(--muted);font-size:13.5px}.kpi b{font:800 26px "Bricolage Grotesque";color:var(--ink)}
+.cert{border:2px solid var(--primary);border-radius:18px;padding:22px;text-align:center;background:linear-gradient(180deg,var(--primary-soft),var(--surface))}
+.skel{height:120px;border-radius:16px;background:linear-gradient(90deg,var(--surface2),var(--surface),var(--surface2));background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+[hidden]{display:none!important}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:60;max-width:90vw}
+@media (max-width:900px){.g4,.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:1fr}.levels{grid-template-columns:repeat(2,minmax(0,1fr))}.vgrid{grid-template-columns:1fr}}
+@media (max-width:640px){.g2,.g4{grid-template-columns:1fr}nav.links a.hm{display:none}.brand span{display:none}section{padding:34px 0}.card{padding:18px 15px}.levels{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#/"><i>h</i><b>HUDERA</b><span>Academy</span></a>
+  <nav class="links" id="nav"></nav>
+</div></header>
+<main id="app"><div class="wrap" style="padding-top:30px"><div class="skel"></div></div></main>
+<footer><div class="wrap"><span>HUDERA Academy · من HUDERA AI</span><span><a href="../">الموقع</a> · <a href="#/verify">التحقق من شهادة</a> · <a href="../privacy.html">الخصوصية</a> · <a href="mailto:hudera.ai@gmail.com" dir="ltr">hudera.ai@gmail.com</a></span></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co", "supabaseAnonKey": "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW"};
+(() => {
+  "use strict";
+  const cfg = window.HUDERA_LOCAL || HUDERA_CONFIG, $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { global: { fetch: (u, o = {}) => { const h = new Headers(o.headers || {}); const k = cfg.supabaseAnonKey; if (k && !k.includes(".") && h.get("Authorization") === "Bearer " + k) h.delete("Authorization"); return fetch(u, { ...o, headers: h }); } },
+    auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
+  const app = $("#app");
+  const G_ICON = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>`;
+  const E = { consent_required: "لازم توافق على الشروط", proof_required: "ارفع صورة التحويل أو اكتب رقم العملية", proof_missing: "صورة التحويل مترفعتش. ارفعها تاني.",
+    invalid_phone: "اكتب رقم موبايل صحيح بكود الدولة (مثلاً +20)", invalid_name: "اكتب اسمك بالكامل", cohort_closed: "الدفعة دي اتقفلت. اختار دفعة تانية.", cohort_full: "الدفعة دي كملت. اختار دفعة تانية.",
+    already_enrolled: "إنت مشترك بالفعل في الدفعة دي.", invalid_package: "اختار باقة", academy_closed: "التسجيل مقفول دلوقتي.", rate_limited: "جرّبت كتير النهارده. جرّب بكرة.",
+    session_locked: "السيشن دي لسه مقفولة.", file_missing: "الملف مترفعش. ارفعه تاني.", file_required: "ارفع ملف أو حط لينك.", invalid_link: "اللينك مش صحيح، لازم يبدأ بـ https://",
+    already_graded: "التاسك ده اتصحح خلاص.", no_attempts_left: "خلّصت المحاولات التلاتة.", not_active: "اشتراكك لسه ما اتفعّلش.", not_authenticated: "سجّل دخول الأول.", generic: "حصلت مشكلة. جرّب تاني." };
+  const errMsg = e => E[String(e?.message || "").split(/\s/)[0]] || E.generic;
+  const toast = m => { const t = document.createElement("div"); t.className = "toast"; t.textContent = m; document.body.appendChild(t); setTimeout(() => t.remove(), 3200); };
+  const fmtDT = (v, time = true) => v ? new Date(v).toLocaleString("ar-EG-u-nu-latn", { timeZone: "Africa/Cairo", weekday: "long", day: "numeric", month: "long", ...(time ? { hour: "numeric", minute: "2-digit" } : {}) }) : "";
+  const fmtD = v => v ? new Date(v + (String(v).length === 10 ? "T12:00:00Z" : "")).toLocaleDateString("ar-EG-u-nu-latn", { day: "numeric", month: "long", year: "numeric" }) : "";
+  const rpc = async (fn, args) => { const { data, error } = await sb.rpc(fn, args); if (error) throw error; return data; };
+  const rnd = () => [...crypto.getRandomValues(new Uint8Array(8))].map(b => b.toString(16).padStart(2, "0")).join("");
+
+  let user = null, cat = null, course = null, enrId = null;
+  const mineActive = () => (cat?.mine || []).find(m => ["active", "completed"].includes(m.status));
+  const minePending = () => (cat?.mine || []).find(m => m.status === "pending");
+
+  async function loadCatalog() { cat = await rpc("academy_catalog", { p_slug: "ai-foundations" }); const a = mineActive(); enrId = a?.id || null; return cat; }
+  async function loadCourse() { course = enrId ? await rpc("academy_course", { p_enrollment: enrId }) : null; return course; }
+
+  function nav() {
+    const r = location.hash.split("/")[1] || "";
+    const a = (h, t, k, cls = "") => `<a href="${h}" class="${cls}" ${r === k ? 'aria-current="page"' : ""}>${t}</a>`;
+    $("#nav").innerHTML = (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : "") + a("#/course", "الكورس", "course", enrId ? "hm" : "")
+      + (user ? `<span class="who">${user.user_metadata?.avatar_url ? `<img src="${esc(user.user_metadata.avatar_url)}" alt="" referrerpolicy="no-referrer">` : ""}<button class="btn sm ghost" id="out" type="button">خروج</button></span>`
+              : `<button class="btn sm" id="in" type="button">${G_ICON} دخول</button>`);
+    $("#out")?.addEventListener("click", async () => { await sb.auth.signOut(); location.hash = "#/course"; location.reload(); });
+    $("#in")?.addEventListener("click", () => signIn());
+  }
+  function signIn(back = location.hash || "#/") {
+    try { sessionStorage.setItem("hudera-return", "/academy/"); sessionStorage.setItem("academy-back", back); } catch (e) {}
+    sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: "select_account" } } });
+  }
+
+  /* ---------------------------------------------------------------- landing */
+  const pkgs = () => (cat?.packages || []);
+  const rate = () => Number(cat?.payment?.egp_rate) || 0;
+  const egp = usd => rate() ? `≈ ${(Math.round(usd * rate() / 10) * 10).toLocaleString("en-US")} جنيه` : "";
+  const nSess = () => (cat?.sessions || []).length || 8;
+  function viewLanding() {
+    const c = cat.course, m = c.meta || {}, coh = (cat.cohorts || []).find(c => new Date(c.starts_on) >= new Date(new Date().toDateString())) || (cat.cohorts || [])[0], pend = minePending();
+    const totalMin = (cat.sessions || []).reduce((a, s) => a + s.lessons.reduce((x, l) => x + (l.mins || 0), 0), 0);
+    app.innerHTML = `
+    <div class="hero"><div class="wrap">
+      <span class="tag">🎓 ${esc(m.brand || "HUDERA Academy")} · كورس التأسيس</span>
+      <h1>${esc(c.title)}</h1><p>${esc(c.tagline)}. ${esc(m.promise || "")}</p>
+      <div class="chips"><span>📚 ${nSess()} سيشنز في 4 أسابيع</span><span>🎬 ${nSess()} فيديوهات شرح · حوالي ${Math.round(totalMin / 60)} ساعات</span><span>🎙️ لايف أونلاين في مجموعة صغيرة</span><span>📝 تاسكات بتتصحح</span><span>🏅 شهادة برقم تحقق</span></div>
+      <div class="row">${pend ? `<a class="btn primary big" href="#/enroll">طلبك قيد المراجعة ←</a>` : `<a class="btn primary big" href="#/enroll">احجز مكانك</a>`}<a class="btn out big" href="#curr">شوف المنهج</a></div>
+    </div></div>
+    <section><div class="wrap">
+      <h2 class="sec">هتطلع من الكورس بإيه؟</h2><p class="lead">${esc(m.audience || "")}</p>
+      <div class="g2">${(m.outcomes || []).map((o, i) => `<div class="card outcome"><i>${i + 1}</i><span>${esc(o)}</span></div>`).join("")}</div>
+    </div></section>
+    <section style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
+      <h2 class="sec">السيشن الواحدة ماشية إزاي؟</h2><p class="lead">نفس الإيقاع كل سيشن، عشان تتعلم بإيدك مش بودنك بس.</p>
+      <div class="g4 how">
+        <div class="card"><div class="ic">🎬</div><b>اتفرج على فيديو السيشن</b><p>فيديو حوالي نص ساعة بالمصري، متقسّم لفصول تقدر تنط بينها. بيتفتح قبل اللايف بيومين.</p></div>
+        <div class="card"><div class="ic">🎙️</div><b>احضر اللايف</b><p>ساعة ونص أونلاين: تطبيق عملي على تخصصك وأسئلة، في مجموعة صغيرة.</p></div>
+        <div class="card"><div class="ic">📝</div><b>سلّم التاسك وحل الكويز</b><p>تاسك عملي بيتصحح بدرجة وتعليق مكتوب، وكويز 6 أسئلة بيتصحح على طول.</p></div>
+        <div class="card"><div class="ic">🔓</div><b>السيشن الجاية تتفتح</b><p>أول ما تسلّم التاسك، السيشن اللي بعدها تتفتح في ميعادها. وتطلع مستوى كل ما تعدّي.</p></div>
+      </div>
+    </div></section>
+    <section id="curr"><div class="wrap">
+      <h2 class="sec">المنهج</h2><p class="lead">${nSess()} سيشنز من الفهم للبناء. دوس على أي سيشن تشوف فيها إيه.</p>
+      ${(cat.sessions || []).map((s, i) => `<details class="mod" ${i === 0 ? "open" : ""}><summary><span class="num">${s.n}</span><span><b>${esc(s.title)}</b><small>${esc(s.goal || "")}</small></span><span class="chev">⌄</span></summary>
+        <div class="body"><ul>${s.lessons.map(l => `<li><span>🎬</span><span><b>فيديو حوالي ${l.mins} دقيقة</b></span></li>` + (l.chapters || []).map((c, i) => `<li><span class="m" style="margin:0">${i + 1}</span><span>${esc(c)}</span></li>`).join("")).join("")}</ul>
+        ${s.task ? `<div class="taskline">📝 التاسك: ${esc(s.task)}</div>` : ""}</div></details>`).join("")}
+    </div></section>
+    <section style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
+      <h2 class="sec">مراحل ومستويات</h2><p class="lead">كل سيشن بتعدّيها (تاسك ${m.task_pass || 60}٪ وكويز ${m.quiz_pass || 60}٪) بتقرّبك من المستوى اللي بعده. والشهادة لما تخلّص بنسبة ${m.pass_mark || 70}٪ أو أكتر.</p>
+      <div class="levels">${(m.levels || []).map(l => `<div class="lv"><div class="badge">${l.n}</div><b>${esc(l.ar)}</b><small>${esc(l.desc)}</small></div>`).join("")}</div>
+      <div class="card" style="margin-top:14px"><b style="color:var(--ink)">التقييم</b> · ${(m.grading || []).map(g => `${esc(g[0])} <b>${g[1]}٪</b>`).join(" · ")}</div>
+    </div></section>
+    <section id="pk"><div class="wrap">
+      <h2 class="sec">الباقات</h2><p class="lead">الأسعار بالدولار، وبتدفع بالجنيه بسعر اليوم (إنستاباي أو فودافون كاش).</p>
+      <div class="g3">${pkgs().map(p => `<div class="card pkg ${p.default ? "pop" : ""}">${p.default ? `<span class="flag">الأكتر اختياراً</span>` : ""}
+        <h3>${esc(p.ar)}</h3><p class="pnote">${esc(p.note || "")}</p>
+        <div class="price"><b>$${Number(p.usd)}</b><span>للكورس كامل</span></div>${rate() ? `<p class="egp">${egp(p.usd)}</p>` : ""}
+        <span class="persess">يعني حوالي $${(Number(p.usd) / nSess()).toFixed(1)} للسيشن</span>
+        <ul>${(p.features || []).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
+        <a class="btn ${p.default ? "primary" : ""}" href="#/enroll/${esc(p.key)}">اختار الباقة دي</a></div>`).join("")}</div>
+    </div></section>
+    ${coh ? `<section style="padding-top:0"><div class="wrap"><div class="card cohort"><div><b style="color:var(--ink);font-size:18px">الدفعة الجاية: ${esc(coh.name)}</b><br><span style="color:var(--muted)">بتبدأ ${fmtD(coh.starts_on)} · اللايف ${coh.schedule?.[0]?.live_at ? new Date(coh.schedule[0].live_at).toLocaleTimeString("ar-EG-u-nu-latn", { timeZone: "Africa/Cairo", hour: "numeric", minute: "2-digit" }) + " بتوقيت القاهرة" : ""}</span></div>
+      <span class="seats ${coh.seats - coh.taken <= 3 ? "low" : ""}">باقي ${Math.max(coh.seats - coh.taken, 0)} مكان من ${coh.seats}</span>
+      <div class="dates">${(coh.schedule || []).map(s => `<span>س${s.n} · ${s.live_at ? new Date(s.live_at).toLocaleDateString("ar-EG-u-nu-latn", { timeZone: "Africa/Cairo", weekday: "short", day: "numeric", month: "short" }) : "—"}</span>`).join("")}</div>
+      <a class="btn primary" href="#/enroll" style="margin-inline-start:auto">احجز مكانك</a></div></div></section>` : ""}
+    <section style="padding-top:0"><div class="wrap g2">
+      <div class="card inst"><div class="av">م</div><div><b style="color:var(--ink);font-size:18px">${esc(m.instructor || "")}</b><br><span style="color:var(--muted)">${esc(m.instructor_title || "")}</span><p style="margin:6px 0 0;font-size:15px">بيبني أنظمة ذكاء اصطناعي حقيقية للشركات في HUDERA AI، وبيعلّم اللي بيستخدمه في الشغل كل يوم.</p></div></div>
+      <div class="card"><b style="color:var(--ink)">هتحتاج إيه؟</b>${(m.tools || []).map(t => `<p style="margin:6px 0 0;font-size:15px"><b>${esc(t[0])}:</b> ${esc(t[1])}</p>`).join("")}</div>
+    </div></section>
+    <section style="padding-top:0"><div class="wrap narrow faq"><h2 class="sec" style="margin-bottom:10px">أسئلة متكررة</h2>
+      <details><summary>لازم أكون بعرف برمجة؟</summary><p>لأ. أول 5 سيشنز من غير برمجة خالص، وفي سيشن 6 بنكتب كود Python بسيط مع بعض خطوة بخطوة، والـ AI بيساعدك تكتبه.</p></details>
+      <details><summary>لو فاتني لايف؟</summary><p>الفيديوهات موجودة دايماً، وتسجيل اللايف بيتحط على المنصة. بس الحضور جزء من التقييم (10٪).</p></details>
+      <details><summary>الدفع إزاي؟</summary><p>بتحوّل المبلغ بالجنيه بسعر اليوم على إنستاباي أو فودافون كاش، وترفع صورة التحويل في فورم التسجيل، ونفعّل حسابك خلال 24 ساعة.</p></details>
+      <details><summary>الشهادة معتمدة؟</summary><p>شهادة من HUDERA Academy برقم تحقق، أي حد يقدر يتأكد منها من صفحة «التحقق من شهادة». قيمتها الحقيقية في المشروع اللي هتعرضه.</p></details>
+      <details><summary>ينفع أسترد فلوسي؟</summary><p>لو قررت تنسحب قبل السيشن الأولى بترجعلك فلوسك كاملة. بعد كده مفيش استرداد.</p></details>
+    </div></section>`;
+  }
+
+  /* ---------------------------------------------------------------- enroll */
+  let proof = null;
+  function viewEnroll(pkgKey) {
+    const pend = minePending(), act = mineActive(), rej = (cat.mine || []).find(m => m.status === "rejected");
+    if (act) { location.hash = "#/learn"; return; }
+    if (!user) {
+      app.innerHTML = `<section><div class="wrap narrow"><div class="card state"><div class="ic">🔐</div><b>سجّل دخول بجوجل الأول</b>
+        <p style="color:var(--muted)">حسابك على الأكاديمية هيكون بإيميل جوجل بتاعك: منه هتتفرج وتسلّم وتتابع درجاتك.</p><button class="gbtn" id="g" type="button">${G_ICON} الدخول بحساب جوجل</button></div></div></section>`;
+      $("#g").addEventListener("click", () => signIn(location.hash)); return;
+    }
+    if (pend) {
+      app.innerHTML = `<section><div class="wrap narrow"><div class="card state"><div class="ic">⏳</div><b>طلبك وصل وقيد المراجعة</b>
+        <p style="color:var(--muted)">الدفعة: ${esc(pend.cohort)} · بتبدأ ${fmtD(pend.starts_on)}<br>${(cat.payment || {}).instapay || (cat.payment || {}).vodafone_cash ? "هنراجع التحويل ونفعّل حسابك خلال 24 ساعة، وهتلاقي الكورس هنا أول ما يتفعّل." : "هنكلمك على واتساب ببيانات التحويل، وبعد الدفع حسابك بيتفعّل وهتلاقي الكورس هنا."}</p>
+        <button class="btn" id="re" type="button">عدّل الطلب</button></div></div></section>`;
+      $("#re").addEventListener("click", () => form(pkgKey, pend)); return;
+    }
+    form(pkgKey, rej);
+  }
+  function form(pkgKey, prev) {
+    const P = pkgs(), def = P.find(p => p.key === pkgKey) || P.find(p => p.default) || P[0], C = cat.cohorts || [], me = cat.me || {}, pay = cat.payment || {};
+    const book = !pay.instapay && !pay.vodafone_cash; /* no payment numbers yet: reserve now, pay after we message on WhatsApp */
+    if (!C.length) { app.innerHTML = `<section><div class="wrap narrow"><div class="card state"><div class="ic">📅</div><b>مفيش دفعة مفتوحة دلوقتي</b><p style="color:var(--muted)">الدفعة الجاية هتتعلن قريب على صفحاتنا.</p></div></div></section>`; return; }
+    proof = null;
+    app.innerHTML = `<section><div class="wrap narrow"><h2 class="sec">احجز مكانك</h2><p class="lead">${book ? "خطوة واحدة: بياناتك، والدفعة، والباقة. وهنبعتلك بيانات التحويل على واتساب." : "خطوة واحدة: بياناتك، والدفعة، والباقة، وصورة التحويل."}</p>
+      ${prev?.reject_reason ? `<div class="note" style="margin-bottom:14px">طلبك اللي فات اترفض: ${esc(prev.reject_reason)}. صلّح المطلوب وابعت تاني.</div>` : ""}
+      <form class="card" id="ef" novalidate>
+        <div class="g2"><label class="f"><span>الاسم بالكامل (هيتكتب في الشهادة)</span><input type="text" id="nm" maxlength="120" value="${esc(me.name || user.user_metadata?.full_name || "")}"></label>
+          <label class="f"><span>رقم الموبايل / واتساب <small>(بكود الدولة)</small></span><input type="tel" id="ph" dir="ltr" maxlength="24" placeholder="+20 10 1234 5678" value="${esc(me.phone || "")}"></label></div>
+        <label class="f"><span>بتدرس إيه / بتشتغل إيه؟</span><input type="text" id="st" maxlength="160" placeholder="مثلاً: هندسة مدني سنة 3 – جامعة القاهرة"></label>
+        <label class="f"><span>عايز تطلع من الكورس بإيه؟ <small>(اختياري)</small></span><textarea id="gl" maxlength="600"></textarea></label>
+        <div class="f"><span class="lg">الدفعة</span><div class="pick" id="coh">${C.map((c, i) => `<label><input type="radio" name="coh" value="${c.id}" ${i === 0 ? "checked" : ""}><span><b>${esc(c.name)}</b><small>بتبدأ ${fmtD(c.starts_on)} · باقي ${Math.max(c.seats - c.taken, 0)} مكان</small></span></label>`).join("")}</div></div>
+        <div class="f"><span class="lg">الباقة</span><div class="pick" id="pk">${P.map(p => `<label><input type="radio" name="pk" value="${esc(p.key)}" ${p.key === def.key ? "checked" : ""}><span><b>${esc(p.ar)}</b><small>${esc((p.features || []).slice(1, 3).join(" · "))}</small></span><span class="pr">$${Number(p.usd)}</span></label>`).join("")}</div></div>
+        <div class="paybox"><span style="color:var(--muted)">المبلغ المطلوب</span><br><span class="amt" id="amt"></span> <span id="amtE" style="color:var(--muted)"></span>
+          ${pay.instapay ? `<div class="acct"><span>إنستاباي</span><b>${esc(pay.instapay)}</b></div>` : ""}${pay.vodafone_cash ? `<div class="acct"><span>فودافون كاش</span><b>${esc(pay.vodafone_cash)}</b></div>` : ""}
+          ${!pay.instapay && !pay.vodafone_cash ? `<div class="acct"><span>بيانات التحويل</span><b>هنبعتهالك على واتساب</b></div>` : ""}
+          <p style="margin:6px 0 0;font-size:14px;color:var(--muted)">${book ? "احجز مكانك دلوقتي، وهنكلمك على واتساب ببيانات التحويل. حسابك بيتفعّل بعد الدفع." : esc(pay.note || "")}</p></div>
+        ${book ? "" : `
+        <div class="f"><span class="lg">حوّلت إزاي؟</span><div class="seg" id="pm"><label><input type="radio" name="pm" value="instapay" checked>إنستاباي</label><label><input type="radio" name="pm" value="vodafone_cash">فودافون كاش</label><label><input type="radio" name="pm" value="bank">تحويل بنكي</label><label><input type="radio" name="pm" value="other">غير كده</label></div></div>
+        <label class="f"><span>رقم العملية / اسم المحوّل</span><input type="text" id="rf" maxlength="120" dir="auto"></label>
+        <div class="f"><span class="lg">صورة التحويل</span><input type="file" id="pf" accept="image/*,.pdf" hidden>
+          <div class="drop" id="dr" role="button" tabindex="0"><b>اضغط وارفع سكرين شوت التحويل</b><span>صورة أو PDF · لحد 5 ميجا</span></div>
+          <div class="filepick" id="pk2" hidden><span>🧾</span><span class="nm" id="pn"></span><button class="btn sm ghost" type="button" id="un">شيل</button></div></div>`}
+        <label class="consent"><input type="checkbox" id="cs"><span>موافق إن HUDERA Academy تحتفظ ببياناتي وشغلي على المنصة عشان الكورس والشهادة، وفاهم إن الاسترداد متاح قبل أول سيشن بس. <a href="../privacy.html" target="_blank">الخصوصية</a></span></label>
+        <button class="btn primary big" style="width:100%" id="go" type="submit">${book ? "احجز مكاني" : "ابعت طلب الاشتراك"}</button><div class="msg" id="er" role="alert" hidden></div>
+      </form></div></section>`;
+    const upd = () => { const p = P.find(x => x.key === $("input[name=pk]:checked")?.value) || def; $("#amt").textContent = `$${Number(p.usd)}`; $("#amtE").textContent = rate() ? `(${egp(p.usd)})` : ""; };
+    $("#pk").addEventListener("change", upd); upd();
+    if (!book) {
+    const pick = f => { if (!f) return; if (f.size > 5 * 1024 * 1024) return toast("الملف أكبر من 5 ميجا"); if (!/^image\//.test(f.type) && f.type !== "application/pdf") return toast("ارفع صورة أو PDF"); proof = f; $("#pn").textContent = f.name; $("#pk2").hidden = false; $("#dr").hidden = true; };
+    $("#dr").addEventListener("click", () => $("#pf").click()); $("#dr").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("#pf").click(); } });
+    $("#pf").addEventListener("change", e => pick(e.target.files[0])); $("#un").addEventListener("click", () => { proof = null; $("#pf").value = ""; $("#pk2").hidden = true; $("#dr").hidden = false; });
+    ["dragover", "dragenter"].forEach(v => $("#dr").addEventListener(v, e => { e.preventDefault(); $("#dr").classList.add("over"); }));
+    ["dragleave", "drop"].forEach(v => $("#dr").addEventListener(v, e => { e.preventDefault(); $("#dr").classList.remove("over"); }));
+    $("#dr").addEventListener("drop", e => pick(e.dataTransfer.files[0]));
+    }
+    $("#ef").addEventListener("submit", async e => {
+      e.preventDefault(); const er = $("#er"); er.hidden = true; const bad = (m, el) => { er.textContent = m; er.hidden = false; el?.classList.add("bad"); el?.focus(); };
+      $$(".bad").forEach(x => x.classList.remove("bad"));
+      if ($("#nm").value.trim().length < 2) return bad(E.invalid_name, $("#nm"));
+      if ($("#ph").value.replace(/\D/g, "").length < 8) return bad(E.invalid_phone, $("#ph"));
+      if (!book && !proof && $("#rf").value.trim().length < 3) return bad(E.proof_required, $("#rf"));
+      if (!$("#cs").checked) return bad(E.consent_required, $("#cs"));
+      const go = $("#go"); go.disabled = true;
+      try {
+        let proof_path = null;
+        if (proof) { go.textContent = "بيترفع الإيصال…"; const ext = proof.type === "application/pdf" ? "pdf" : (proof.type.split("/")[1] || "jpg").replace("jpeg", "jpg");
+          proof_path = `${user.id}/pay/receipt_${rnd()}.${ext}`; const { error } = await sb.storage.from("academy-files").upload(proof_path, proof, { contentType: proof.type, upsert: false }); if (error) throw new Error("file_missing"); }
+        go.textContent = "بيتبعت…";
+        await rpc("academy_enroll", { p: { cohort_id: $("input[name=coh]:checked").value, package: $("input[name=pk]:checked").value, full_name: $("#nm").value.trim(), phone: $("#ph").value.trim(),
+          study: $("#st").value.trim(), goal: $("#gl").value.trim(), pay_method: book ? "other" : $("input[name=pm]:checked").value, pay_ref: book ? "حجز: بيانات التحويل هتتبعت على واتساب" : $("#rf").value.trim(), proof_path, consent: true } });
+        await loadCatalog(); nav(); viewEnroll(); window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (x) { bad(errMsg(x)); } finally { go.disabled = false; go.textContent = book ? "احجز مكاني" : "ابعت طلب الاشتراك"; }
+    });
+  }
+
+  /* ---------------------------------------------------------------- learner dashboard */
+  const gateText = s => s.gate.open ? "" : s.gate.reason === "prev_task" ? "سلّم تاسك السيشن اللي قبلها عشان تتفتح" : s.gate.reason === "not_yet" ? (s.opens_at ? `بتتفتح ${fmtDT(s.opens_at, false)}` : "ميعادها لسه ما اتحددش") : "مقفولة";
+  const sessState = (s, sm) => { const r = sm.sessions.find(x => x.n === s.n) || {}; if (r.passed) return "done"; if (!s.gate.open) return "lock"; return "open"; };
+  function levelInfo(sm) {
+    const L = sm.levels || [], cur = sm.level || L[0], nxt = L.find(l => l.n === (cur?.n || 1) + 1);
+    return { cur, nxt, left: nxt ? Math.max(nxt.need - sm.passed, 0) : 0 };
+  }
+  function nextAction() {
+    const S = course.sessions;
+    for (const s of S) {
+      if (!s.gate.open) continue;
+      const l = s.lessons.find(x => !x.done); if (l) return { t: `كمّل سيشن ${s.n}: ${l.title}`, h: `#/s/${s.n}`, b: "اتفرج" };
+      if (s.task && !s.submission) return { t: `سلّم تاسك سيشن ${s.n}: ${s.task.title}`, h: `#/s/${s.n}/task`, b: "سلّم", d: s.due_at };
+      if (s.submission?.status === "returned") return { t: `المدرب رجّعلك تاسك سيشن ${s.n}، عدّله وسلّم تاني`, h: `#/s/${s.n}/task`, b: "عدّل" };
+      if (s.quiz.count && s.quiz.best == null) return { t: `حل كويز سيشن ${s.n}`, h: `#/s/${s.n}/quiz`, b: "ابدأ" };
+    }
+    const lk = S.find(s => !s.gate.open);
+    return lk ? { t: `السيشن الجاية: ${lk.title}`, s: gateText(lk), h: `#/s/${lk.n}`, b: "التفاصيل" } : { t: "خلّصت كل السيشنز 🎉", h: "#/progress", b: "شوف نتيجتك" };
+  }
+  function viewLearn() {
+    const sm = course.summary, li = levelInfo(sm), lessonsAll = course.sessions.flatMap(s => s.lessons), done = lessonsAll.filter(l => l.done).length;
+    const pct = Math.round(100 * sm.passed / (sm.total || 1)), na = nextAction(), first = (course.enrollment.full_name || "").split(" ")[0];
+    app.innerHTML = `<section><div class="wrap">
+      <div class="dash-h"><div class="ring" style="--p:${pct}"><div><b>${sm.passed}/${sm.total}</b><small>سيشن خلصت</small></div></div>
+        <div><h2 style="font-size:26px">أهلاً ${esc(first)} 👋</h2><p style="margin:2px 0 6px;color:var(--muted)">${esc(course.course.title)} · ${esc(course.cohort.name)}</p>
+          <span class="lvpill">🏅 مستواك: ${esc(li.cur?.ar || "")}</span> ${li.nxt ? `<small style="color:var(--muted)">باقي ${li.left} سيشن لمستوى «${esc(li.nxt.ar)}»</small>` : ""}</div></div>
+      <div class="card next" style="margin:18px 0"><div><small style="color:#C9D3FF">الخطوة الجاية</small><b>${esc(na.t)}</b>${na.s ? `<small style="color:#C9D3FF">${esc(na.s)}</small>` : ""}${na.d ? `<small style="color:#C9D3FF">آخر ميعاد: ${fmtDT(na.d)}</small>` : ""}</div><a class="btn" href="${na.h}">${na.b} ←</a></div>
+      <div class="kpis" style="margin-bottom:18px"><div class="kpi"><small>فيديوهات اتفرجت عليها</small><b>${done}/${lessonsAll.length}</b></div><div class="kpi"><small>متوسط التاسكات</small><b>${sm.task_sofar ?? "—"}</b></div>
+        <div class="kpi"><small>متوسط الكويزات</small><b>${sm.quiz_sofar != null ? sm.quiz_sofar + "٪" : "—"}</b></div><div class="kpi"><small>الحضور</small><b>${sm.attendance_sofar != null ? sm.attendance_sofar + "٪" : "—"}</b></div></div>
+      ${course.cohort.live_link ? `<p style="margin:-6px 0 14px"><a class="btn sm" href="${esc(course.cohort.live_link)}" target="_blank" rel="noopener">🎙️ لينك اللايف</a></p>` : ""}
+      <div class="card list">${course.sessions.map(s => { const st = sessState(s, sm), sub = s.submission;
+        const meta = st === "lock" ? gateText(s) : [s.live_at ? `🎙️ ${fmtDT(s.live_at)}` : "", sub ? (sub.status === "graded" ? `📝 ${sub.score}/100` : sub.status === "returned" ? "📝 محتاج تعديل" : "📝 اتسلّم") : (s.task ? "📝 لسه" : ""), s.quiz.best != null ? `✅ كويز ${s.quiz.best}٪` : ""].filter(Boolean).join(" · ");
+        return `<a class="sess ${st}" href="#/s/${s.n}"><span class="num">${st === "done" ? "✓" : st === "lock" ? "🔒" : s.n}</span><span><b>${esc(s.title)}</b><small>${meta}</small></span>
+          <span class="st">${st === "done" ? '<span class="chip ok">عدّيتها</span>' : st === "lock" ? '<span class="chip">مقفولة</span>' : '<span class="chip blue">مفتوحة</span>'}</span></a>`; }).join("")}</div>
+    </div></section>`;
+  }
+
+  /* ---------------------------------------------------------------- session */
+  let curLesson = 0;
+  async function videoSrc(l) {
+    if (l.video_path) { const { data, error } = await sb.storage.from("academy-videos").createSignedUrl(l.video_path, 3 * 3600); if (!error) return { type: "file", url: data.signedUrl }; }
+    if (l.video_url) { const y = l.video_url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/); return y ? { type: "yt", url: `https://www.youtube-nocookie.com/embed/${y[1]}?rel=0` } : { type: "link", url: l.video_url }; }
+    return null;
+  }
+  function viewSession(n, tab = "videos") {
+    const s = course.sessions.find(x => x.n === +n); if (!s) { location.hash = "#/learn"; return; }
+    if (!s.gate.open) {
+      app.innerHTML = `<section><div class="wrap narrow"><a href="#/learn">→ لوحتي</a><div class="card state" style="margin-top:12px"><div class="ic">🔒</div><b>سيشن ${s.n}: ${esc(s.title)}</b><p style="color:var(--muted)">${esc(gateText(s))}</p>
+        ${s.gate.reason === "prev_task" ? `<a class="btn primary" href="#/s/${s.n - 1}/task">روح لتاسك سيشن ${s.n - 1}</a>` : ""}
+        <div style="text-align:start;margin-top:16px"><b style="color:var(--ink)">فيها إيه؟</b><ul class="pts">${s.lessons.flatMap(l => (l.chapters || []).map(c => c.title || c)).map(t => `<li>${esc(t)}</li>`).join("")}</ul>${s.task ? `<p class="taskline">📝 ${esc(s.task.title)}</p>` : ""}</div></div></div></section>`; return;
+    }
+    const tabs = [["videos", "🎬 الفيديو"], ["live", "🎙️ اللايف"], ["task", "📝 التاسك"], ["quiz", "✅ الكويز"], ["more", "📚 مصادر"]];
+    app.innerHTML = `<section><div class="wrap"><a href="#/learn">→ لوحتي</a>
+      <h2 style="font-size:clamp(22px,4vw,30px);margin-top:8px">سيشن ${s.n}: ${esc(s.title)}</h2><p style="color:var(--muted);margin:4px 0 0">${esc(s.goal || "")}</p>
+      <div class="tabs" role="tablist">${tabs.map(([k, t]) => `<button role="tab" aria-selected="${k === tab}" data-tab="${k}">${t}</button>`).join("")}</div><div id="tb"></div></div></section>`;
+    $$("[data-tab]").forEach(b => b.addEventListener("click", () => { history.replaceState(null, "", `#/s/${s.n}/${b.dataset.tab}`); $$("[data-tab]").forEach(x => x.setAttribute("aria-selected", x === b)); paintTab(s, b.dataset.tab); }));
+    paintTab(s, tab);
+  }
+  function paintTab(s, tab) {
+    const tb = $("#tb");
+    if (tab === "videos") {
+      const l = s.lessons[0]; if (!l) { tb.innerHTML = `<div class="card"><p>مفيش فيديو في السيشن دي.</p></div>`; return; }
+      const CH = (l.chapters || []).map((c, i) => ({ ...c, i })), fmtT = t => t == null ? "" : `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+      if (curLesson >= CH.length) curLesson = 0;
+      tb.innerHTML = `<div class="vgrid"><div><div class="player" id="pl"><div class="soon">…</div></div><div class="card" style="margin-top:12px" id="lp"></div></div>
+        <div><div class="card" style="padding:14px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px"><b style="color:var(--ink)">فصول الفيديو</b><small style="color:var(--faint)">حوالي ${l.mins} دقيقة</small></div>
+          <div class="lessons">${CH.map(c => `<div class="lesson ${c.i === curLesson ? "" : ""}" data-i="${c.i}" ${c.i === curLesson ? 'aria-current="true"' : ""} role="button" tabindex="0"><span class="ck">${c.i + 1}</span><b>${esc(c.title)}</b><small dir="ltr">${fmtT(c.t)}</small></div>`).join("")}</div>
+          <button class="btn ${l.done ? "" : "primary"}" id="dn" type="button" style="width:100%;margin-top:12px">${l.done ? "✓ اتفرجت على الفيديو" : "علّم إنك خلصت الفيديو"}</button></div>
+        <div class="card" style="margin-top:12px"><b style="color:var(--ink)">أهداف السيشن</b><ul class="pts">${s.objectives.map(o => `<li>${esc(o)}</li>`).join("")}</ul></div></div></div>`;
+      const showCh = i => { curLesson = i; const c = CH[i]; $$(".lesson", tb).forEach(x => x.setAttribute("aria-current", +x.dataset.i === i)); if (c) $("#lp").innerHTML = `<b style="color:var(--ink);font-size:17px">${i + 1}. ${esc(c.title)}</b><ul class="pts">${(c.points || []).map(p => `<li>${esc(p)}</li>`).join("")}</ul>`; };
+      showCh(curLesson);
+      let vid = null, yt = null;
+      $$(".lesson", tb).forEach(x => { const go = () => { const i = +x.dataset.i, t = CH[i].t; showCh(i); if (vid && t != null) { vid.currentTime = t; vid.play().catch(() => {}); } else if (yt && t != null) yt.src = yt.dataset.base + `&start=${Math.floor(t)}&autoplay=1`; }; x.addEventListener("click", go); x.addEventListener("keydown", e => { if (e.key === "Enter") go(); }); });
+      $("#dn").addEventListener("click", async () => { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: !l.done }); l.done = !l.done; paintTab(s, "videos"); } catch (e) { toast(errMsg(e)); } });
+      videoSrc(l).then(v => { const pl = $("#pl"); if (!pl) return;
+        if (!v) pl.innerHTML = `<div class="soon"><b>🎬 الفيديو بيتجهّز</b>هيتنزل هنا قبل اللايف. لحد ما ينزل اقرا نقط كل فصل.</div>`;
+        else if (v.type === "file") { pl.innerHTML = `<video controls controlsList="nodownload" preload="metadata" playsinline src="${esc(v.url)}"></video>`; vid = $("video", pl);
+          vid.addEventListener("timeupdate", () => { let k = 0; CH.forEach(c => { if (c.t != null && vid.currentTime >= c.t) k = c.i; }); if (k !== curLesson) showCh(k); });
+          vid.addEventListener("ended", async () => { if (!l.done) { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: true }); l.done = true; toast("✓ اتعلّم إنك خلصت الفيديو"); paintTab(s, "videos"); } catch (e) {} } }); vid.addEventListener("contextmenu", e => e.preventDefault()); }
+        else if (v.type === "yt") { pl.innerHTML = `<iframe src="${esc(v.url)}" data-base="${esc(v.url)}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(l.title)}"></iframe>`; yt = $("iframe", pl); }
+        else pl.innerHTML = `<div class="soon"><a class="btn" href="${esc(v.url)}" target="_blank" rel="noopener">افتح الفيديو ↗</a></div>`; });
+    }
+    if (tab === "live") {
+      const soon = s.live_at && new Date(s.live_at) - Date.now() < 30 * 60 * 1000 && Date.now() - new Date(s.live_at) < 3 * 3600 * 1000;
+      tb.innerHTML = `<div class="g2"><div class="card"><b style="color:var(--ink);font-size:18px">🎙️ ${s.live_at ? fmtDT(s.live_at) : "الميعاد هيتحدد"}</b><p style="color:var(--muted);margin:4px 0 12px">بتوقيت القاهرة · 90 دقيقة</p>
+          ${s.live_link ? `<a class="btn ${soon ? "primary" : ""}" href="${esc(s.live_link)}" target="_blank" rel="noopener">${soon ? "ادخل اللايف دلوقتي" : "لينك اللايف"}</a>` : `<span class="chip">اللينك هيتحط قبل اللايف</span>`}
+          ${s.recording_url ? `<p><a class="btn sm" href="${esc(s.recording_url)}" target="_blank" rel="noopener">▶ تسجيل اللايف</a></p>` : ""}
+          ${s.present != null ? `<p>${s.present ? '<span class="chip ok">اتسجل حضورك</span>' : '<span class="chip err">اتسجلت غياب</span>'}</p>` : ""}</div>
+        <div class="card"><b style="color:var(--ink)">خطة اللايف</b><table class="tbl">${(s.live_plan || []).map(p => `<tr><td style="width:60px;color:var(--muted)">${p[0]} د</td><td>${esc(p[1])}</td></tr>`).join("") || `<tr><td>اتفرج على الفيديوهات قبل اللايف، واللايف كله تطبيق على تخصصك وأسئلة.</td></tr>`}</table></div></div>`;
+    }
+    if (tab === "task") taskTab(s, tb);
+    if (tab === "quiz") quizTab(s, tb);
+    if (tab === "more") tb.innerHTML = `<div class="card">${(s.resources || []).length ? `<ul class="pts">${s.resources.map(r => `<li>${r[1] ? `<a href="${esc(r[1])}" target="_blank" rel="noopener">${esc(r[0])} ↗</a>` : esc(r[0])}</li>`).join("")}</ul>` : "<p>مفيش مصادر إضافية للسيشن دي.</p>"}</div>`;
+  }
+  let taskFile = null;
+  function taskTab(s, tb) {
+    const t = s.task, sub = s.submission; taskFile = null;
+    if (!t) { tb.innerHTML = `<div class="card"><p>مفيش تاسك في السيشن دي.</p></div>`; return; }
+    const can = !sub || sub.status !== "graded";
+    tb.innerHTML = `<div class="vgrid"><div>
+      <div class="card"><h3 style="font-size:20px">${esc(t.title)}</h3><p>${esc(t.brief)}</p><b style="color:var(--ink)">المطلوب خطوة بخطوة</b><ol class="pts">${t.steps.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+        <b style="color:var(--ink)">هتسلّم إيه</b><ul class="pts">${t.deliverables.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+        ${s.due_at ? `<p class="note" style="margin-top:10px">آخر ميعاد: ${fmtDT(s.due_at)}. التسليم بعده بيتقبل بس بيتعلّم «متأخر».</p>` : ""}</div>
+      ${can ? `<form class="card" id="tf" style="margin-top:12px" novalidate><h3 style="font-size:18px">${sub ? (sub.status === "returned" ? "سلّم النسخة المعدّلة" : "تحديث التسليم") : "سلّم التاسك"}</h3>
+        <input type="file" id="tfl" hidden accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.png,.jpg,.jpeg,.webp,.txt,.csv">
+        <div class="drop" id="tdr" role="button" tabindex="0"><b>ارفع ملف</b><span>PDF أو Word أو Excel أو صور أو ZIP · لحد 20 ميجا</span></div>
+        <div class="filepick" id="tpk" hidden><span>📎</span><span class="nm" id="tpn"></span><button class="btn sm ghost" type="button" id="tun">شيل</button></div>
+        <label class="f" style="margin-top:12px"><span>أو لينك (Google Doc / Colab / Drive / GitHub)</span><input type="url" id="tln" dir="ltr" placeholder="https://" value="${esc(sub?.link_url || "")}"><small>خلّي اللينك «أي حد معاه اللينك يقدر يشوف».</small></label>
+        <label class="f"><span>ملاحظة للمدرب <small>(اختياري)</small></span><textarea id="tnt" maxlength="2000">${esc(sub?.note || "")}</textarea></label>
+        <button class="btn primary" id="tgo" type="submit">سلّم</button><div class="msg" id="ter" hidden></div></form>` : ""}
+    </div><div>
+      ${sub ? `<div class="card"><b style="color:var(--ink)">تسليمك</b><p style="margin:6px 0">${sub.status === "graded" ? '<span class="chip ok">اتصحح</span>' : sub.status === "returned" ? '<span class="chip warn">محتاج تعديل</span>' : '<span class="chip blue">مستني التصحيح</span>'} ${sub.late ? '<span class="chip warn">متأخر</span>' : ""} <small style="color:var(--muted)">نسخة ${sub.version} · ${fmtDT(sub.submitted_at)}</small></p>
+        ${sub.file_name ? `<p>📎 <span dir="ltr">${esc(sub.file_name)}</span></p>` : ""}${sub.link_url ? `<p>🔗 <a href="${esc(sub.link_url)}" target="_blank" rel="noopener" dir="ltr">${esc(sub.link_url.slice(0, 60))}</a></p>` : ""}
+        ${sub.status === "graded" ? `<div class="score">${sub.score}<small style="font-size:18px;color:var(--muted)">/100</small></div>` : ""}
+        ${sub.feedback ? `<div class="why" style="background:var(--surface2);border-radius:12px;padding:10px 12px;margin-top:8px"><b>تعليق المدرب:</b><br>${esc(sub.feedback).replace(/\n/g, "<br>")}</div>` : ""}</div>` : ""}
+      <div class="card" style="margin-top:12px"><b style="color:var(--ink)">التصحيح هيبقى على إيه؟</b><table class="rub">${t.rubric.map((r, i) => `<tr><td>${esc(r.c)}</td><td dir="ltr">${sub?.rubric_scores ? `${sub.rubric_scores[i]} / ` : ""}${r.pts}</td></tr>`).join("")}</table></div>
+    </div></div>`;
+    if (!can) return;
+    const pick = f => { if (!f) return; if (f.size > 20 * 1024 * 1024) return toast("الملف أكبر من 20 ميجا"); taskFile = f; $("#tpn").textContent = f.name; $("#tpk").hidden = false; $("#tdr").hidden = true; };
+    $("#tdr").addEventListener("click", () => $("#tfl").click()); $("#tfl").addEventListener("change", e => pick(e.target.files[0]));
+    $("#tun").addEventListener("click", () => { taskFile = null; $("#tfl").value = ""; $("#tpk").hidden = true; $("#tdr").hidden = false; });
+    ["dragover", "dragenter"].forEach(v => $("#tdr").addEventListener(v, e => { e.preventDefault(); $("#tdr").classList.add("over"); }));
+    ["dragleave", "drop"].forEach(v => $("#tdr").addEventListener(v, e => { e.preventDefault(); $("#tdr").classList.remove("over"); }));
+    $("#tdr").addEventListener("drop", e => pick(e.dataTransfer.files[0]));
+    $("#tf").addEventListener("submit", async e => {
+      e.preventDefault(); const er = $("#ter"); er.hidden = true; const ln = $("#tln").value.trim();
+      if (!taskFile && !ln) { er.textContent = E.file_required; er.hidden = false; return; }
+      if (ln && !/^https?:\/\/[^\s/]+\.[^\s]+$/i.test(ln)) { er.textContent = E.invalid_link; er.hidden = false; return; }
+      const go = $("#tgo"); go.disabled = true;
+      try {
+        let file_path = null;
+        if (taskFile) { go.textContent = "بيترفع…"; const ext = (taskFile.name.split(".").pop() || "pdf").toLowerCase().replace("jpeg", "jpg");
+          file_path = `${user.id}/task/s${s.n}_${rnd()}.${ext}`; const { error } = await sb.storage.from("academy-files").upload(file_path, taskFile, { contentType: taskFile.type || undefined, upsert: false }); if (error) throw new Error("file_missing"); }
+        go.textContent = "بيتبعت…";
+        const r = await rpc("academy_submit", { p: { enrollment_id: enrId, session_n: s.n, file_path, file_name: taskFile?.name?.slice(0, 200) || null, link_url: ln || null, note: $("#tnt").value.trim() } });
+        toast(r.late ? "اتسلّم ✓ (متأخر)" : "اتسلّم ✓ والسيشن الجاية هتتفتح في ميعادها"); await loadCourse(); viewSession(s.n, "task");
+      } catch (x) { er.textContent = errMsg(x); er.hidden = false; } finally { go.disabled = false; go.textContent = "سلّم"; }
+    });
+  }
+  function quizTab(s, tb, result) {
+    const q = s.quiz, left = q.max_attempts - q.attempts;
+    if (!q.count) { tb.innerHTML = `<div class="card"><p>مفيش كويز في السيشن دي.</p></div>`; return; }
+    const mark = result ? Object.fromEntries(result.marking.map(m => [m.n, m])) : null;
+    tb.innerHTML = `<div class="narrow" style="margin:0"><div class="card" style="margin-bottom:12px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+        ${result ? `<div class="score">${result.score}٪</div><div><b style="color:var(--ink)">${result.correct} من ${result.total} صح</b><br><small style="color:var(--muted)">أحسن درجة: ${result.best}٪ · المحاولات: ${result.attempts}/${q.max_attempts}</small></div>`
+                 : `<div><b style="color:var(--ink)">${q.count} أسئلة · 3 محاولات · أحسن درجة هي اللي بتتحسب</b><br><small style="color:var(--muted)">${q.best != null ? `أحسن درجة لحد دلوقتي: ${q.best}٪ · ` : ""}باقي ${left} محاولة · النجاح ${course.course.meta?.quiz_pass || 60}٪</small></div>`}</div>
+      <form id="qf">${q.questions.map(z => `<div class="q"><p>${z.n}. ${esc(z.q)}</p>${z.o.map((o, i) => { const m = mark?.[z.n]; const cls = m ? (i === m.answer ? "right" : i === m.chosen ? "wrong" : "") : "";
+          return `<label class="${cls}"><input type="radio" name="q${z.n}" value="${i}" ${m && m.chosen === i ? "checked" : ""} ${m ? "disabled" : ""}><span>${esc(o)}</span></label>`; }).join("")}
+        ${mark?.[z.n] ? `<div class="why">${mark[z.n].ok ? "✓ " : "✗ "}${esc(mark[z.n].why || "")}</div>` : ""}</div>`).join("")}
+      ${result ? (result.attempts < q.max_attempts ? `<button class="btn" type="button" id="qa">حاول تاني</button>` : "") : (left > 0 ? `<button class="btn primary" type="submit" id="qg">صحّح</button>` : `<p class="note">خلّصت المحاولات التلاتة.</p>`)}
+      <div class="msg" id="qer" hidden></div></form></div>`;
+    $("#qa")?.addEventListener("click", async () => { await loadCourse(); quizTab(course.sessions.find(x => x.n === s.n), tb); });
+    $("#qf").addEventListener("submit", async e => {
+      e.preventDefault(); const ans = q.questions.map(z => { const v = $(`input[name=q${z.n}]:checked`); return v ? +v.value : null; });
+      if (ans.some(a => a == null)) { $("#qer").textContent = "جاوب على كل الأسئلة الأول"; $("#qer").hidden = false; return; }
+      $("#qg").disabled = true;
+      try { const r = await rpc("academy_quiz_submit", { p_enrollment: enrId, p_session_n: s.n, p_answers: ans }); s.quiz.attempts = r.attempts; s.quiz.best = r.best; quizTab(s, tb, r); window.scrollTo({ top: 0, behavior: "smooth" }); }
+      catch (x) { $("#qer").textContent = errMsg(x); $("#qer").hidden = false; $("#qg").disabled = false; }
+    });
+  }
+
+  /* ---------------------------------------------------------------- progress & certificate */
+  function viewProgress() {
+    const sm = course.summary, en = course.enrollment, m = course.course.meta || {}, li = levelInfo(sm);
+    app.innerHTML = `<section><div class="wrap"><h2 class="sec">تقدّمك</h2><p class="lead">${esc(course.course.title)} · ${esc(course.cohort.name)}</p>
+      <div class="levels" style="margin-bottom:18px">${(sm.levels || []).map(l => `<div class="lv ${l.n === li.cur?.n ? "me" : l.n > (li.cur?.n || 1) ? "off" : ""}"><div class="badge">${l.n}</div><b>${esc(l.ar)}</b><small>${esc(l.desc)}</small></div>`).join("")}</div>
+      <div class="kpis" style="margin-bottom:18px">${(m.grading || []).map((g, i) => `<div class="kpi"><small>${esc(g[0])} · ${g[1]}٪</small><b>${[sm.task_sofar, sm.quiz_sofar, sm.project, sm.attendance_sofar][i] ?? "—"}</b><small>${["متوسط التاسكات اللي اتصححت", "متوسط الكويزات اللي حليتها", "درجة المشروع", "من السيشنز اللي اتسجل فيها حضور"][i]}</small></div>`).join("")}</div>
+      <div class="g2"><div class="card"><table class="tbl"><thead><tr><th>السيشن</th><th>التاسك</th><th>الكويز</th><th>الحضور</th><th></th></tr></thead><tbody>
+        ${sm.sessions.map(r => `<tr><td>${r.n}</td><td>${r.task ?? (r.task_status === "returned" ? "تعديل" : "—")}</td><td>${r.quiz != null ? r.quiz + "٪" : "—"}</td><td>${r.present == null ? "—" : r.present ? "✓" : "✗"}</td><td>${r.passed ? '<span class="chip ok">عدّى</span>' : ""}</td></tr>`).join("")}</tbody></table></div>
+      <div>${en.certificate_no ? `<div class="cert"><div style="font-size:42px">🏅</div><b style="font-size:22px;color:var(--ink)">مبروك! خلّصت الكورس</b><p>رقم الشهادة: <b dir="ltr">${esc(en.certificate_no)}</b><br>النتيجة: ${sm.final}٪</p>
+          <button class="btn primary" id="pc" type="button">اطبع / احفظ الشهادة PDF</button> <a class="btn" href="#/verify/${esc(en.certificate_no)}">لينك التحقق</a></div>`
+        : `<div class="card"><b style="color:var(--ink);font-size:18px">النتيجة لحد دلوقتي: ${sm.final}٪</b><p style="color:var(--muted)">الشهادة لما تسلّم كل التاسكات وتتصحح والمشروع النهائي، وتوصل ${sm.pass_mark}٪ أو أكتر.</p>
+          <div class="bar" style="height:10px;border-radius:9px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:${Math.min(100, sm.final / sm.pass_mark * 100)}%;background:var(--primary)"></i></div></div>`}</div></div>
+    </div></section>`;
+    $("#pc")?.addEventListener("click", () => printCert(en, sm));
+  }
+  function printCert(en, sm) {
+    const url = `${location.origin}${location.pathname}#/verify/${en.certificate_no}`;
+    const html = `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>${esc(en.certificate_no)}</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>@page{size:A4 landscape;margin:0}*{box-sizing:border-box}body{margin:0;font-family:"IBM Plex Sans Arabic",sans-serif;color:#0B1220}
+.c{width:297mm;height:210mm;padding:16mm;background:linear-gradient(160deg,#fff 60%,#EEF2FF);position:relative}
+.b{position:absolute;inset:9mm;border:2px solid #3D5AFE;border-radius:8mm}.in{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.lg{display:flex;gap:10px;align-items:center;direction:ltr;font:800 22px "Bricolage Grotesque"}.lg i{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#3D5AFE,#22D3EE);color:#fff;display:grid;place-items:center;font-style:normal}
+h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spacing:.02em}.s{color:#5B6478;font-size:18px;margin:6px 0 18px}
+.n{font-size:40px;font-weight:700;margin:4px 0 10px;border-bottom:2px solid #E3E7F0;padding:0 30px 6px}.t{font-size:20px;max-width:200mm}
+.f{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:flex-end;font-size:13px;color:#5B6478}.f b{display:block;color:#0B1220;font-size:15px}</style></head>
+<body><div class="c"><div class="b"></div><div class="in"><div class="lg"><i>h</i>HUDERA Academy</div><h1>CERTIFICATE · شهادة إتمام</h1><p class="s">تشهد HUDERA Academy أن</p>
+<div class="n">${esc(en.full_name)}</div><p class="t">أتمّ بنجاح كورس <b>${esc(course.course.title)}</b> (${esc(course.course.title_en || "")})، ${course.sessions.length} سيشنز ومشروع نهائي، بنتيجة <b>${sm.final}٪</b>.</p>
+<div class="f"><div><b>${esc(course.course.meta?.instructor || "")}</b>${esc(course.course.meta?.instructor_title || "")}</div><div><b dir="ltr">${esc(en.certificate_no)}</b>${new Date(en.certified_at || Date.now()).toLocaleDateString("ar-EG-u-nu-latn", { day: "numeric", month: "long", year: "numeric" })}</div><div style="direction:ltr;text-align:left"><b>Verify</b>${esc(url)}</div></div></div></div></body></html>`;
+    const fr = document.createElement("iframe"); fr.style.cssText = "position:fixed;width:0;height:0;border:0;visibility:hidden"; document.body.appendChild(fr); fr.srcdoc = html;
+    fr.onload = () => setTimeout(() => { try { fr.contentWindow.focus(); fr.contentWindow.print(); } catch (e) { toast(e.message); } setTimeout(() => fr.remove(), 60000); }, 700);
+  }
+  async function viewVerify(code) {
+    app.innerHTML = `<section><div class="wrap narrow"><h2 class="sec">التحقق من شهادة</h2><p class="lead">اكتب رقم الشهادة اللي مكتوب تحت.</p>
+      <form class="card" id="vf" style="display:flex;gap:10px;flex-wrap:wrap"><input type="text" id="vc" dir="ltr" placeholder="HA26-0001-ABCD" value="${esc(code || "")}" style="flex:1;min-width:200px"><button class="btn primary" type="submit">تحقق</button></form><div id="vr" style="margin-top:12px"></div></div></section>`;
+    const run = async c => { if (!c) return; $("#vr").innerHTML = `<div class="skel" style="height:80px"></div>`;
+      try { const r = await rpc("academy_verify", { p_code: c.trim() }); $("#vr").innerHTML = r.valid ? `<div class="cert"><div style="font-size:36px">✅</div><b style="font-size:20px;color:var(--ink)">شهادة سليمة</b><p>${esc(r.name)}<br>${esc(r.course)} · ${esc(r.cohort)}<br>اتصدرت ${fmtD(r.issued)} · النتيجة ${r.score}٪</p></div>`
+        : `<div class="msg">الرقم ده مش موجود. اتأكد إنك كاتبه صح.</div>`; } catch (e) { $("#vr").innerHTML = `<div class="msg">${errMsg(e)}</div>`; } };
+    $("#vf").addEventListener("submit", e => { e.preventDefault(); history.replaceState(null, "", `#/verify/${encodeURIComponent($("#vc").value.trim())}`); run($("#vc").value); });
+    run(code);
+  }
+
+  /* ---------------------------------------------------------------- router */
+  async function route() {
+    const [, r = "", a, b] = location.hash.split("/");
+    nav(); window.scrollTo(0, 0);
+    try {
+      if (r === "verify") return viewVerify(a ? decodeURIComponent(a) : "");
+      if (r === "enroll") return viewEnroll(a);
+      if ((r === "learn" || r === "s" || r === "progress") && !enrId) { location.hash = user ? "#/enroll" : "#/course"; return; }
+      if (r === "learn") { await loadCourse(); return viewLearn(); }
+      if (r === "s") { if (!course) await loadCourse(); return viewSession(a, b || "videos"); }
+      if (r === "progress") { await loadCourse(); return viewProgress(); }
+      if (r === "" && enrId) { location.hash = "#/learn"; return; }
+      viewLanding();
+    } catch (e) { app.innerHTML = `<section><div class="wrap narrow"><div class="msg">${errMsg(e)}</div></div></section>`; }
+  }
+  window.addEventListener("hashchange", route);
+  (async () => {
+    const qs = new URLSearchParams(location.search);
+    const { data } = await sb.auth.getSession(); user = data.session?.user || null;
+    if (qs.has("code")) history.replaceState(null, "", location.pathname + location.hash);
+    let back = null; try { back = sessionStorage.getItem("academy-back"); sessionStorage.removeItem("academy-back"); sessionStorage.removeItem("hudera-return"); } catch (e) {}
+    sb.auth.onAuthStateChange(async (ev, s) => { const was = user?.id; user = s?.user || null; if ((user?.id || null) !== (was || null)) { await loadCatalog().catch(() => {}); route(); } });
+    try { await loadCatalog(); } catch (e) { app.innerHTML = `<section><div class="wrap narrow"><div class="msg">الأكاديمية مش متاحة دلوقتي. جرّب كمان شوية.</div></div></section>`; return; }
+    if (back && back !== location.hash) { location.hash = back; return; }
+    route();
+  })();
+})();
+</script>
+</body>
+</html>
