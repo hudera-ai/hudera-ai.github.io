@@ -433,7 +433,7 @@ const AR = {
   "New": "جديد", "Pending": "قيد الانتظار", "Contacted": "تم التواصل", "In progress": "قيد التنفيذ", "Resolved": "تم الحل", "Closed": "مغلق", "Open": "مفتوحة",
   "Assigned to": "مسند إلى", "Follow-up": "موعد المتابعة", "Save": "حفظ", "Add note": "إضافة ملاحظة", "Internal notes": "ملاحظات داخلية", "Contact attempts": "محاولات التواصل",
   "Log attempt": "تسجيل محاولة", "Status history": "سجل الحالة", "Subject": "الموضوع", "Message": "الرسالة", "Send": "إرسال", "Cancel": "إلغاء", "Retry": "إعادة المحاولة",
-  "Team": "الفريق", "Finance": "المالية", "Hiring": "التوظيف", "Tracking": "التتبع", "E-mail service": "خدمة البريد", "Privacy": "الخصوصية", "General": "عام",
+  "Team": "الفريق", "Finance": "المالية", "Hiring": "التوظيف", "Academy": "الأكاديمية", "Tracking": "التتبع", "E-mail service": "خدمة البريد", "Privacy": "الخصوصية", "General": "عام",
 };
 const t = s => (LANG === "ar" && AR[s]) || s;
 const nf = n => (n == null || n === "" ? "—" : Number(n).toLocaleString("en-US"));
@@ -457,7 +457,7 @@ const ICON = {
   list: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01", menu: "M3 6h18M3 12h18M3 18h18", eye: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
   user: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", flag: "M4 22V4m0 0h13l-2 4 2 4H4", phone: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z",
   chat: "M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z", spark: "M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z", check: "M20 6 9 17l-5-5", dl: "M12 3v12m0 0-4-4m4 4 4-4M4 21h16", sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4", moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
-  back: "M15 18l-6-6 6-6", dot: "M12 12h.01", brief: "M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM8 6V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1M3 13h18", wallet: "M20 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-2M3 7h17a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-5a3 3 0 0 1 0-6h6M16 14h.01",
+  back: "M15 18l-6-6 6-6", dot: "M12 12h.01", cap: "M22 9 12 4 2 9l10 5 10-5zM6 11.5V16c3 2.5 9 2.5 12 0v-4.5M22 9v6", brief: "M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM8 6V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1M3 13h18", wallet: "M20 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-2M3 7h17a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-5a3 3 0 0 1 0-6h6M16 14h.01",
   cpu: "M9 3v2M15 3v2M9 19v2M15 19v2M3 9h2M3 15h2M19 9h2M19 15h2M7 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM9.5 9.5h5v5h-5z",
 };
 const ic = n => `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON[n] || ICON.dot}"/></svg>`;
@@ -527,7 +527,7 @@ function hbars(el, rows, { label, value, fmt = nf, color = "var(--s1)", onClick 
 }
 
 /* ---------------- layout ---------------- */
-const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["pipeline", "Pipeline", "flag", "leads.view"], ["insights", "Interest insights", "spark", "leads.view"], ["chats", "Assistant chats", "chat", "leads.view"], ["leads", "Leads", "inbox", "leads.view"], ["ai", "AI usage", "cpu", "analytics.view"], ["finance", "Finance", "wallet", "finance.submit"], ["hiring", "Hiring", "brief", "hiring.view"],
+const NAV = [["overview", "Overview", "home", "analytics.view"], ["users", "Users", "users", "users.view"], ["pipeline", "Pipeline", "flag", "leads.view"], ["insights", "Interest insights", "spark", "leads.view"], ["chats", "Assistant chats", "chat", "leads.view"], ["leads", "Leads", "inbox", "leads.view"], ["ai", "AI usage", "cpu", "analytics.view"], ["finance", "Finance", "wallet", "finance.submit"], ["hiring", "Hiring", "brief", "hiring.view"], ["academy", "Academy", "cap", "academy.view"],
   ["features", "Features", "grid", "features.view"], ["emails", "E-mails", "mail", "email.send"], ["settings", "Settings", "gear", "analytics.view"], ["audit", "Audit log", "list", "audit.view"]];
 const can = p => !!who?.perms?.includes(p);
 function shell() {
@@ -2192,13 +2192,264 @@ function hiringSettings(s) {
   });
 }
 
+/* ---------------- academy: enrollment requests, grading, students' progress, cohorts & schedule, lesson videos, packages ---------------- */
+const AC_ST = { pending: ["مستني التفعيل", "Waiting", "c-amber"], active: ["مفعّل", "Active", "c-mint"], completed: ["خلّص + شهادة", "Certified", "c-violet"], rejected: ["مرفوض", "Rejected", "c-red"], withdrawn: ["انسحب", "Withdrawn", ""] };
+const AC_PAY = { instapay: ["إنستاباي", "InstaPay"], vodafone_cash: ["فودافون كاش", "Vodafone Cash"], bank: ["تحويل بنكي", "Bank"], cash: ["كاش", "Cash"], other: ["أخرى", "Other"] };
+const AC_ERR = { reason_required: ["اكتب السبب.", "Write the reason."], feedback_required: ["اكتب تعليق للطالب (5 حروف على الأقل).", "Write feedback for the student."],
+  not_eligible: ["الطالب لسه ما وصلش لشروط الشهادة.", "The student hasn't met the certificate requirements yet."], file_missing: ["الملف مش موجود على التخزين.", "File not found in storage."],
+  invalid_link: ["اللينك لازم يبدأ بـ https://", "The link must start with https://"] };
+const acErr = e => (AC_ERR[e.code] ? FL(AC_ERR, e.code) : typeof ferr === "function" ? ferr(e) : e.message);
+const acDT = v => v ? new Date(v).toLocaleString(loc(), { timeZone: "Africa/Cairo", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "—";
+const ac = { data: null, tab: "", cohort: "", st: "pending" };
+const AC_TABS = [["requests", "طلبات الاشتراك", "Requests", "academy.view"], ["grading", "التصحيح", "Grading", "academy.view"], ["students", "الطلاب", "Students", "academy.view"],
+  ["cohorts", "الدفعات والمواعيد", "Cohorts", "academy.view"], ["content", "المحتوى والفيديوهات", "Content", "academy.view"], ["setup", "الباقات والدفع", "Packages", "academy.manage"]];
+async function acLoad(force) { if (!ac.data || force) ac.data = await api("admin_academy"); return ac.data; }
+function acPage(tab, tools = "") {
+  const v = page(L("الأكاديمية", "Academy"), `<a class="btn sm" href="../academy/" target="_blank" rel="noopener">${L("صفحة الأكاديمية", "Academy site")} ↗</a>${tools}`);
+  const d = ac.data || {};
+  const badge = k => k === "requests" && d.pending ? ` <span class="chip c-amber">${d.pending}</span>` : k === "grading" && d.to_grade ? ` <span class="chip c-amber">${d.to_grade}</span>` : "";
+  v.innerHTML = `<nav class="fin-tabs">${AC_TABS.filter(x => can(x[3])).map(([k, a, e]) => `<a href="#/academy/${k}" ${k === tab ? 'aria-current="page"' : ""}>${L(a, e)}${badge(k)}</a>`).join("")}</nav><div id="ac-body">${skel(4)}</div>`;
+  return $("#ac-body", v);
+}
+async function viewAcademy() {
+  const [, , tab = ""] = location.hash.split("/");
+  try { await acLoad(true); } catch (e) { page(L("الأكاديمية", "Academy")).innerHTML = failBox(e); return; }
+  const T = { requests: acRequests, grading: acGrading, students: acStudents, cohorts: acCohorts, content: acContent, setup: acSetup };
+  if (!T[tab] || (tab === "setup" && !can("academy.manage"))) { location.hash = `#/academy/${ac.data.pending ? "requests" : ac.data.to_grade ? "grading" : "students"}`; return; }
+  T[tab]();
+}
+const acCohortSel = (id = "ac-coh", all = true) => `<select class="input" id="${id}">${all ? `<option value="">${L("كل الدفعات", "All cohorts")}</option>` : ""}${(ac.data.cohorts || []).map(c => `<option value="${c.id}" ${c.id === ac.cohort ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select>`;
+async function acSigned(bucket, path) {
+  const w = window.open("about:blank", "_blank");
+  try { const { data, error } = await sb.storage.from(bucket).createSignedUrl(path, 600); if (error) throw error; if (w) w.location.href = data.signedUrl; else location.href = data.signedUrl; }
+  catch (e) { w?.close(); toast(L("مقدرتش أفتح الملف: ", "Couldn't open the file: ") + e.message); }
+}
+const acPkg = k => { const p = (ac.data.settings?.packages || []).find(x => x.key === k); return p ? `${esc(AR_() ? p.ar : p.en || p.ar)} · $${p.usd}` : esc(k); };
+
+/* ---- requests ---- */
+async function acRequests() {
+  const box = acPage("requests");
+  const seg = [["pending", FL(AC_ST, "pending")], ["active", FL(AC_ST, "active")], ["completed", FL(AC_ST, "completed")], ["rejected", FL(AC_ST, "rejected")], ["", L("الكل", "All")]];
+  let list; try { list = await api("admin_academy_enrollments", { p_cohort: ac.cohort || null, p_status: ac.st || null }); } catch (e) { box.innerHTML = failBox(e); return; }
+  box.innerHTML = `<div class="filters" style="margin-bottom:10px;justify-content:space-between"><div class="seg" role="group">${seg.map(([k, l]) => `<button type="button" data-st="${k}" aria-pressed="${ac.st === k}">${l}</button>`).join("")}</div>${acCohortSel()}</div>
+    ${list.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("الطالب", "Student")}</th><th>${L("الدفعة / الباقة", "Cohort / package")}</th><th>${L("الدفع", "Payment")}</th><th>${L("طلب", "Requested")}</th><th>${t("Status")}</th><th></th></tr></thead><tbody>
+      ${list.map((e, i) => `<tr><td><span class="t" dir="auto">${esc(e.full_name)}</span><span class="s"><span dir="ltr">${esc(e.phone || "")}</span> · <span dir="ltr">${esc(e.email || "")}</span>${e.study ? ` · ${esc(e.study)}` : ""}</span></td>
+        <td>${esc(e.cohort)}<span class="s">${acPkg(e.package)}</span></td>
+        <td>${esc(FL(AC_PAY, e.pay_method || "other"))}${e.pay_ref ? `<span class="s" dir="auto">${esc(e.pay_ref)}</span>` : ""}${e.paid_amount ? `<span class="s">${money(e.paid_amount, e.paid_currency)}${e.invoice_number ? ` · 🧾 ${esc(e.invoice_number)}` : ""}</span>` : ""}</td>
+        <td>${ago(e.created_at)}</td><td>${chip2(AC_ST, e.status)}${e.reject_reason ? `<span class="s">${esc(e.reject_reason)}</span>` : ""}</td>
+        <td><div class="filters" style="flex-wrap:nowrap">${e.proof_path ? `<button class="btn sm" type="button" data-proof="${i}">🧾 ${L("الإيصال", "Receipt")}</button>` : ""}
+          ${can("academy.manage") && e.status !== "active" && e.status !== "completed" ? `<button class="btn sm primary" type="button" data-ok="${i}">${L("تفعيل", "Activate")}</button>` : ""}
+          ${can("academy.manage") && ["pending", "active"].includes(e.status) ? `<button class="btn sm ${e.status === "pending" ? "danger" : "ghost"}" type="button" data-no="${i}">${e.status === "pending" ? L("رفض", "Reject") : L("سحب", "Withdraw")}</button>` : ""}</div></td></tr>`).join("")}</tbody></table></div>`
+      : `<div class="card"><p class="empty">${ac.st === "pending" ? L("مفيش طلبات مستنية 👌", "No pending requests 👌") : L("مفيش حاجة هنا.", "Nothing here.")}</p></div>`}`;
+  $$("[data-st]", box).forEach(b => b.addEventListener("click", () => { ac.st = b.dataset.st; acRequests(); }));
+  $("#ac-coh", box).addEventListener("change", e => { ac.cohort = e.target.value; acRequests(); });
+  $$("[data-proof]", box).forEach(b => b.addEventListener("click", () => acSigned("academy-files", list[+b.dataset.proof].proof_path)));
+  $$("[data-ok]", box).forEach(b => b.addEventListener("click", () => {
+    const e = list[+b.dataset.ok], p = (ac.data.settings?.packages || []).find(x => x.key === e.package), rate = Number(ac.data.settings?.payment?.egp_rate) || 0;
+    const dlg = dlgOpen(`<form method="dialog"><h2>${L("تفعيل اشتراك", "Activate")} · <span dir="auto">${esc(e.full_name)}</span></h2>
+      <p class="small muted">${esc(e.cohort)} · ${acPkg(e.package)} · ${esc(FL(AC_PAY, e.pay_method || "other"))} ${e.pay_ref ? `· <span dir="auto">${esc(e.pay_ref)}</span>` : ""}</p>
+      <div class="grid g2"><label class="fld"><span>${L("المبلغ اللي وصل فعلاً", "Amount received")}</span><input class="input" name="amt" type="number" min="0" step="0.01" dir="ltr" value="${p ? (rate ? Math.round(p.usd * rate) : p.usd) : ""}"></label>
+        <label class="fld"><span>${L("العملة", "Currency")}</span>${curSelect("cur", rate ? "EGP" : "USD")}</label></div>
+      ${can("finance.manage") ? `<label class="of-share"><input type="checkbox" name="rec" checked> ${L("سجّل المبلغ في المالية (فاتورة مدفوعة باسم الطالب)", "Record it in Finance (a paid invoice in the student's name)")}</label>` : `<p class="small muted">${L("تسجيل الإيراد في المالية محتاج صلاحية المالية.", "Recording income needs Finance permission.")}</p>`}
+      ${dlgBtns(L("فعّل", "Activate"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { const g = n => $(`[name=${n}]`, dlg);
+      try { await api("admin_academy_decide", { p: { id: e.id, approve: true, amount: g("amt").value || null, currency: g("cur").value, record_income: !!g("rec")?.checked } }); toast(L("اتفعّل ✓ الطالب يقدر يدخل الكورس دلوقتي", "Activated ✓")); ac.data = null; viewAcademy(); }
+      catch (er) { toast(acErr(er)); } } dlg.remove(); });
+  }));
+  $$("[data-no]", box).forEach(b => b.addEventListener("click", () => { const e = list[+b.dataset.no];
+    const dlg = dlgOpen(`<form method="dialog"><h2>${e.status === "pending" ? L("رفض الطلب", "Reject") : L("سحب الاشتراك", "Withdraw")} · <span dir="auto">${esc(e.full_name)}</span></h2>
+      <label class="fld"><span>${L("السبب (الطالب هيشوفه)", "Reason (shown to the student)")}</span><input class="input" name="why" dir="auto" required placeholder="${L("مثلاً: التحويل ما وصلش", "e.g. payment not received")}"></label>${dlgBtns(L("تأكيد", "Confirm"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_academy_decide", { p: { id: e.id, approve: false, reason: $("[name=why]", dlg).value } }); ac.data = null; viewAcademy(); } catch (er) { toast(acErr(er)); } } dlg.remove(); });
+  }));
+}
+
+/* ---- grading ---- */
+async function acGrading() {
+  const box = acPage("grading");
+  let list; try { list = await api("admin_academy_submissions", { p_status: ac.gst ?? "submitted", p_cohort: ac.cohort || null }); } catch (e) { box.innerHTML = failBox(e); return; }
+  const seg = [["submitted", L("مستني التصحيح", "To grade")], ["returned", L("رجعت للتعديل", "Returned")], ["graded", L("اتصححت", "Graded")], ["", L("الكل", "All")]];
+  box.innerHTML = `<div class="filters" style="margin-bottom:10px;justify-content:space-between"><div class="seg" role="group">${seg.map(([k, l]) => `<button type="button" data-gs="${k}" aria-pressed="${(ac.gst ?? "submitted") === k}">${l}</button>`).join("")}</div>${acCohortSel()}</div>
+    ${list.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("الطالب", "Student")}</th><th>${L("السيشن / التاسك", "Session / task")}</th><th>${L("اتسلّم", "Submitted")}</th><th>${t("Status")}</th><th></th></tr></thead><tbody>
+      ${list.map((s, i) => `<tr><td><span class="t" dir="auto">${esc(s.student)}</span><span class="s">${esc(s.cohort)}</span></td><td>${L("سيشن", "Session")} ${s.session_n}<span class="s">${esc(s.task?.title || "")}</span></td>
+        <td>${ago(s.submitted_at)}${s.late ? ` <span class="chip c-amber">${L("متأخر", "Late")}</span>` : ""}${s.version > 1 ? ` <span class="chip">v${s.version}</span>` : ""}</td>
+        <td>${s.status === "graded" ? `<b>${s.score}/100</b><span class="s">${esc(s.graded_by_name || "")}</span>` : s.status === "returned" ? `<span class="chip c-amber">${L("رجعت", "Returned")}</span>` : `<span class="chip c-sky">${L("جديد", "New")}</span>`}</td>
+        <td><button class="btn sm ${s.status === "submitted" ? "primary" : ""}" type="button" data-g="${i}">${s.status === "submitted" ? L("صحّح", "Grade") : L("فتح", "Open")}</button></td></tr>`).join("")}</tbody></table></div>`
+      : `<div class="card"><p class="empty">${L("مفيش تسليمات هنا 👌", "Nothing here 👌")}</p></div>`}`;
+  $$("[data-gs]", box).forEach(b => b.addEventListener("click", () => { ac.gst = b.dataset.gs; acGrading(); }));
+  $("#ac-coh", box).addEventListener("change", e => { ac.cohort = e.target.value; acGrading(); });
+  $$("[data-g]", box).forEach(b => b.addEventListener("click", () => acGradeDialog(list[+b.dataset.g])));
+}
+function acGradeDialog(s) {
+  const R = s.task?.rubric || [], edit = can("academy.grade") && s.status !== "graded";
+  const dlg = dlgOpen(`<form method="dialog" id="gf"><h2>${L("تصحيح", "Grade")} · <span dir="auto">${esc(s.student)}</span></h2>
+    <p class="small muted">${L("سيشن", "Session")} ${s.session_n}: ${esc(s.task?.title || "")} · ${fdt(s.submitted_at)}${s.late ? ` · ${L("متأخر", "late")}` : ""}</p>
+    <div class="filters" style="margin:6px 0 12px">${s.file_path ? `<button class="btn sm primary" type="button" id="g-file">📎 ${esc(s.file_name || L("الملف", "File"))}</button>` : ""}${s.link_url ? `<a class="btn sm" href="${esc(s.link_url)}" target="_blank" rel="noopener">🔗 ${L("افتح اللينك", "Open link")}</a>` : ""}</div>
+    ${s.note ? `<div class="h-note" dir="auto">💬 ${esc(s.note)}</div>` : ""}
+    <details style="margin:10px 0"><summary class="small muted">${L("المطلوب في التاسك", "Task brief")}</summary><p class="small">${esc(s.task?.brief || "")}</p><ol class="small">${(s.task?.steps || []).map(x => `<li>${esc(x)}</li>`).join("")}</ol></details>
+    <table class="tbl"><tbody>${R.map((r, i) => `<tr><td>${esc(r.c)}</td><td style="width:130px"><span style="display:inline-flex;gap:6px;align-items:center;white-space:nowrap;direction:ltr"><input class="input" data-r="${i}" type="number" min="0" max="${r.pts}" step="1" style="width:70px" value="${s.rubric_scores?.[i] ?? ""}" ${edit ? "" : "disabled"}><span class="small muted">/ ${r.pts}</span></span></td></tr>`).join("")}
+      <tr><td><b>${L("الإجمالي", "Total")}</b></td><td><b id="g-tot" dir="ltr">${s.score ?? 0} / 100</b></td></tr></tbody></table>
+    <label class="fld" style="margin-top:10px"><span>${L("تعليقك للطالب (هيشوفه)", "Feedback for the student")}</span><textarea class="input" name="fb" dir="auto" style="min-height:110px" ${edit ? "" : "disabled"}>${esc(s.feedback || "")}</textarea></label>
+    ${edit ? `<div class="filters" style="justify-content:flex-end;margin-top:6px"><button class="btn" value="cancel" type="submit" formnovalidate>${L("إلغاء", "Cancel")}</button><button class="btn" value="return" type="submit">${L("رجّعه للتعديل", "Return for changes")}</button><button class="btn primary" value="ok" type="submit">${L("احفظ الدرجة", "Save grade")}</button></div>`
+      : `<div class="filters" style="justify-content:flex-end"><button class="btn" value="cancel" type="submit">${L("قفل", "Close")}</button></div>`}</form>`);
+  const tot = () => { $("#g-tot", dlg).textContent = `${$$("[data-r]", dlg).reduce((a, x) => a + (+x.value || 0), 0)} / 100`; };
+  $$("[data-r]", dlg).forEach(x => x.addEventListener("input", tot)); if (edit) tot();
+  $("#g-file", dlg)?.addEventListener("click", () => acSigned("academy-files", s.file_path));
+  dlg.addEventListener("close", async () => {
+    const rv = dlg.returnValue;
+    if (rv === "ok" || rv === "return") {
+      const scores = $$("[data-r]", dlg).map(x => x.value === "" ? null : +x.value);
+      if (rv === "ok" && scores.some((v, i) => v == null || v < 0 || v > R[i].pts)) { toast(L("ادّي درجة لكل بند في حدوده", "Score every criterion within its limit")); dlg.remove(); acGradeDialog({ ...s, rubric_scores: scores, feedback: $("[name=fb]", dlg).value }); return; }
+      try { await api("admin_academy_grade", { p_id: s.id, p_rubric: rv === "ok" ? scores : null, p_feedback: $("[name=fb]", dlg).value, p_return: rv === "return" }); toast(rv === "ok" ? L("اتحفظت الدرجة ✓", "Graded ✓") : L("رجع للطالب", "Returned")); ac.data = null; viewAcademy(); }
+      catch (e) { toast(acErr(e)); }
+    }
+    dlg.remove();
+  });
+}
+
+/* ---- students' progress ---- */
+async function acStudents() {
+  if (!ac.cohort && ac.data.cohorts?.length) ac.cohort = ac.data.cohorts.find(c => c.active)?.id || ac.data.cohorts[0].id;
+  const box = acPage("students", `<button class="btn sm" type="button" id="ac-xl">${ic("dl")} Excel</button>`);
+  let list; try { list = (await api("admin_academy_enrollments", { p_cohort: ac.cohort || null, p_status: null })).filter(e => ["active", "completed"].includes(e.status)); } catch (e) { box.innerHTML = failBox(e); return; }
+  const coh = (ac.data.cohorts || []).find(c => c.id === ac.cohort), N = coh?.sessions?.length || 8;
+  const cell = r => r ? `<td class="num" title="${L("تاسك", "Task")} ${r.task ?? "—"} · ${L("كويز", "Quiz")} ${r.quiz ?? "—"}${r.present != null ? ` · ${r.present ? L("حضر", "present") : L("غاب", "absent")}` : ""}">${r.passed ? "✅" : r.task_status === "returned" ? "↩️" : r.task != null ? `<b>${r.task}</b>` : r.quiz != null ? "·" : "—"}</td>` : "<td>—</td>";
+  box.innerHTML = `<div class="filters" style="margin-bottom:10px">${acCohortSel("ac-coh", false)}${coh && can("academy.grade") ? `<button class="btn sm" type="button" id="ac-att">✔ ${L("سجّل الحضور", "Attendance")}</button>` : ""}</div>
+    ${list.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("الطالب", "Student")}</th><th>${L("المستوى", "Level")}</th>${Array.from({ length: N }, (_, i) => `<th class="num">${i + 1}</th>`).join("")}<th class="num">${L("النتيجة", "Score")}</th><th></th></tr></thead><tbody>
+      ${list.map((e, i) => { const sm = e.summary || {}; return `<tr><td><span class="t" dir="auto">${esc(e.full_name)}</span><span class="s">${acPkg(e.package)}</span></td><td>${esc(sm.level?.[AR_() ? "ar" : "en"] || "")}</td>
+        ${Array.from({ length: N }, (_, k) => cell((sm.sessions || []).find(r => r.n === k + 1))).join("")}<td class="num"><b>${sm.final ?? 0}</b>${e.certificate_no ? `<span class="s mono">${esc(e.certificate_no)}</span>` : ""}</td>
+        <td><div class="filters" style="flex-wrap:nowrap">${can("academy.manage") ? (e.certificate_no && e.status === "completed" ? `<span class="chip c-violet">🏅</span>` : sm.can_certify ? `<button class="btn sm primary" type="button" data-cert="${i}">🏅 ${L("الشهادة", "Certify")}</button>` : "") + `<button class="btn sm ghost" type="button" data-unl="${i}" title="${L("فتح سيشنز يدوي", "Manual unlock")}">🔓</button>` : ""}</div></td></tr>`; }).join("")}</tbody></table></div>
+      <p class="small muted">✅ ${L("عدّى السيشن (تاسك وكويز فوق النجاح)", "passed")} · ${L("رقم = درجة التاسك", "number = task score")} · ↩️ ${L("رجع للتعديل", "returned")} · ${L("الشهادة لما الطالب يكمّل كل التاسكات ويوصل لنسبة النجاح", "Certificate once all tasks are graded and the pass mark is reached")}</p>`
+      : `<div class="card"><p class="empty">${L("مفيش طلاب مفعّلين في الدفعة دي.", "No active students in this cohort.")}</p></div>`}`;
+  $("#ac-coh", box)?.addEventListener("change", e => { ac.cohort = e.target.value; acStudents(); });
+  $$("[data-cert]", box).forEach(b => b.addEventListener("click", async () => { b.disabled = true; try { const r = await api("admin_academy_certificate", { p_id: list[+b.dataset.cert].id }); toast(`🏅 ${r.certificate_no}`); acStudents(); } catch (e) { toast(acErr(e)); b.disabled = false; } }));
+  $$("[data-unl]", box).forEach(b => b.addEventListener("click", () => { const e = list[+b.dataset.unl];
+    const dlg = dlgOpen(`<form method="dialog"><h2>🔓 ${L("فتح سيشنز يدوي", "Manual unlock")} · <span dir="auto">${esc(e.full_name)}</span></h2><p class="small muted">${L("السيشنز لحد الرقم ده تتفتح للطالب حتى لو ميعادها ما جاش أو ما سلّمش التاسك اللي قبلها (مثلاً لو كان عنده ظرف). 0 = الطبيعي.", "Sessions up to this number open for the student regardless of date or previous task. 0 = normal.")}</p>
+      <label class="fld"><span>${L("افتح لحد سيشن", "Unlock up to session")}</span><input class="input" name="u" type="number" min="0" max="${N}" dir="ltr" value="${e.unlocked_upto || 0}"></label>
+      <label class="fld"><span>${L("ملاحظة داخلية", "Internal note")}</span><input class="input" name="n" dir="auto" value="${esc(e.staff_note || "")}"></label>${dlgBtns(t("Save"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_academy_enrollment_update", { p_id: e.id, p_unlocked_upto: +$("[name=u]", dlg).value || 0, p_note: $("[name=n]", dlg).value }); toast(L("اتحفظ", "Saved")); acStudents(); } catch (er) { toast(acErr(er)); } } dlg.remove(); });
+  }));
+  $("#ac-att", box)?.addEventListener("click", () => {
+    const dlg = dlgOpen(`<form method="dialog"><h2>✔ ${L("حضور اللايف", "Live attendance")} · ${esc(coh.name)}</h2>
+      <label class="fld"><span>${L("السيشن", "Session")}</span><select class="input" name="s">${coh.sessions.map(s => `<option value="${s.n}" ${s.live_at && new Date(s.live_at) < new Date() ? "selected" : ""}>${s.n}. ${esc(s.title)}${s.live_at ? ` · ${acDT(s.live_at)}` : ""}</option>`).join("")}</select></label>
+      <div>${list.map(e => `<label class="of-share"><input type="checkbox" name="p" value="${e.id}" checked> <span dir="auto">${esc(e.full_name)}</span></label>`).join("")}</div>${dlgBtns(t("Save"))}</form>`, false);
+    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_academy_attendance", { p_cohort: coh.id, p_session_n: +$("[name=s]", dlg).value, p_present: $$("[name=p]:checked", dlg).map(x => x.value) }); toast(L("اتسجل الحضور ✓", "Attendance saved ✓")); acStudents(); } catch (er) { toast(acErr(er)); } } dlg.remove(); });
+  });
+  $("#ac-xl").addEventListener("click", () => HX.xlsx([{ name: L("الطلاب", "Students"), head: [L("الاسم", "Name"), t("E-mail"), t("Phone"), L("الدفعة", "Cohort"), L("الباقة", "Package"), L("المستوى", "Level"), L("سيشنز عدّاها", "Passed"),
+      L("متوسط التاسكات", "Tasks"), L("متوسط الكويزات", "Quizzes"), L("المشروع", "Project"), L("الحضور", "Attendance"), L("النتيجة", "Final"), L("الشهادة", "Certificate")],
+    rows: list.map(e => { const sm = e.summary || {}; return [e.full_name, e.email || "", e.phone || "", e.cohort, e.package, sm.level?.ar || "", sm.passed, sm.task_sofar ?? "", sm.quiz_sofar ?? "", sm.project ?? "", sm.attendance_sofar ?? "", sm.final ?? 0, e.certificate_no || ""]; }) }],
+    `HUDERA-academy-${today()}.xlsx`, AR_()).catch(er => toast(er.message)));
+}
+
+/* ---- cohorts & schedule ---- */
+const acLocal = v => { if (!v) return ""; const d = new Date(v); const p = new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Cairo", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(d).reduce((a, x) => (a[x.type] = x.value, a), {}); return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`; };
+const acFromLocal = v => { if (!v) return null; const g = new Date(v + ":00Z"); const off = new Date(g.toLocaleString("en-US", { timeZone: "Africa/Cairo" })) - new Date(g.toLocaleString("en-US", { timeZone: "UTC" })); return new Date(g.getTime() - off).toISOString(); };
+function acCohorts() {
+  const m = can("academy.manage"), box = acPage("cohorts", m ? `<button class="btn sm primary" type="button" id="ac-new">+ ${L("دفعة جديدة", "New cohort")}</button>` : "");
+  const C = ac.data.cohorts || [];
+  box.innerHTML = C.length ? C.map((c, i) => `<section class="card" style="margin-bottom:14px"><div class="filters" style="justify-content:space-between;align-items:flex-start">
+      <div><h2 style="margin:0">${esc(c.name)} <span class="chip ${c.status === "open" ? "c-mint" : c.status === "running" ? "c-sky" : ""}">${{ open: L("التسجيل مفتوح", "Open"), running: L("شغالة", "Running"), closed: L("مقفولة", "Closed") }[c.status]}</span></h2>
+        <p class="sub" style="margin:2px 0 0">${L("بتبدأ", "Starts")} ${fdt(c.starts_on, false)} · ${c.active}/${c.seats} ${L("طالب مفعّل", "active")}${c.pending ? ` · ${c.pending} ${L("مستني", "pending")}` : ""}${c.live_link ? ` · <a href="${esc(c.live_link)}" target="_blank" rel="noopener">${L("لينك اللايف", "Live link")}</a>` : ""}</p></div>
+      ${m ? `<button class="btn sm" type="button" data-ed="${i}">${L("تعديل المواعيد", "Edit schedule")}</button>` : ""}</div>
+    <div class="tbl-wrap" style="margin-top:10px"><table><thead><tr><th>#</th><th>${L("السيشن", "Session")}</th><th>${L("بتتفتح", "Opens")}</th><th>${L("اللايف (القاهرة)", "Live (Cairo)")}</th><th>${L("تسليم التاسك", "Task due")}</th><th>${L("التسجيل", "Recording")}</th></tr></thead><tbody>
+      ${c.sessions.map(s => `<tr><td>${s.n}</td><td>${esc(s.title)}</td><td>${acDT(s.opens_at)}</td><td><b>${acDT(s.live_at)}</b></td><td>${acDT(s.due_at)}</td><td>${s.recording_url ? `<a href="${esc(s.recording_url)}" target="_blank" rel="noopener">▶</a>` : "—"}</td></tr>`).join("")}</tbody></table></div></section>`).join("")
+    : `<div class="card"><p class="empty">${L("لسه مفيش دفعات. اعمل أول دفعة.", "No cohorts yet.")}</p></div>`;
+  $("#ac-new")?.addEventListener("click", () => acCohortForm());
+  $$("[data-ed]", box).forEach(b => b.addEventListener("click", () => acCohortForm(C[+b.dataset.ed])));
+}
+function acCohortForm(c) {
+  const course = ac.data.courses?.[0], days = [L("الأحد", "Sun"), L("الاتنين", "Mon"), L("التلات", "Tue"), L("الأربع", "Wed"), L("الخميس", "Thu"), L("الجمعة", "Fri"), L("السبت", "Sat")];
+  const dlg = dlgOpen(`<form method="dialog" id="cf"><h2>${c ? L("تعديل الدفعة", "Edit cohort") : L("دفعة جديدة", "New cohort")}</h2>
+    <div class="grid g2"><label class="fld"><span>${L("الاسم", "Name")}</span><input class="input" name="nm" dir="auto" required value="${esc(c?.name || "")}" placeholder="${L("مثلاً: الدفعة الأولى · نوفمبر 2026", "e.g. Cohort 1 · Nov 2026")}"></label>
+      <label class="fld"><span>${L("أول يوم", "Start date")}</span><input class="input" name="sd" type="date" required value="${esc(c?.starts_on || "")}"></label>
+      <label class="fld"><span>${L("عدد الأماكن", "Seats")}</span><input class="input" name="se" type="number" min="1" max="500" dir="ltr" value="${c?.seats || 15}"></label>
+      <label class="fld"><span>${t("Status")}</span><select class="input" name="st">${["open", "running", "closed"].map(k => `<option value="${k}" ${(c?.status || "open") === k ? "selected" : ""}>${{ open: L("التسجيل مفتوح", "Open"), running: L("شغالة (التسجيل مقفول)", "Running"), closed: L("مقفولة", "Closed") }[k]}</option>`).join("")}</select></label></div>
+    <label class="fld"><span>${L("لينك اللايف الثابت (Meet / Zoom)", "Fixed live link (Meet / Zoom)")}</span><input class="input" name="ll" type="url" dir="ltr" value="${esc(c?.live_link || "")}" placeholder="https://meet.google.com/…"></label>
+    ${c ? `<div class="tbl-wrap"><table><thead><tr><th>#</th><th>${L("بتتفتح", "Opens")}</th><th>${L("اللايف", "Live")}</th><th>${L("التسليم", "Due")}</th><th>${L("تسجيل اللايف (لينك)", "Recording link")}</th></tr></thead><tbody>
+      ${c.sessions.map(s => `<tr data-sid="${s.session_id}"><td>${s.n}</td><td><input class="input" type="datetime-local" data-k="opens_at" value="${acLocal(s.opens_at)}"></td><td><input class="input" type="datetime-local" data-k="live_at" value="${acLocal(s.live_at)}"></td>
+        <td><input class="input" type="datetime-local" data-k="due_at" value="${acLocal(s.due_at)}"></td><td><input class="input" type="url" dir="ltr" data-k="recording_url" value="${esc(s.recording_url || "")}" placeholder="https://"></td></tr>`).join("")}</tbody></table></div>
+      <p class="small muted">${L("المواعيد بتوقيت القاهرة.", "Times are Cairo time.")}</p>`
+    : `<div class="fld"><span>${L("أيام اللايف", "Live days")}</span><div class="filters">${days.map((d, i) => `<label class="of-share"><input type="checkbox" name="dy" value="${i}" ${[0, 3].includes(i) ? "checked" : ""}> ${d}</label>`).join("")}</div></div>
+      <label class="fld" style="max-width:200px"><span>${L("الساعة (القاهرة)", "Time (Cairo)")}</span><input class="input" name="tm" type="time" value="19:00"></label>
+      <p class="small muted">${L("هيتعمل جدول الـ 8 سيشنز أوتوماتيك: الفيديوهات بتتفتح قبل كل لايف بيومين، والتاسك آخر ميعاده قبل اللايف اللي بعده بيوم. تقدر تعدّل أي ميعاد بعدين.", "The 8-session schedule is generated: videos open 2 days before each live, tasks are due a day before the next live. You can edit any date later.")}</p>`}
+    ${dlgBtns(t("Save"))}</form>`);
+  dlg.addEventListener("close", async () => {
+    if (dlg.returnValue === "ok") { const g = n => $(`[name=${n}]`, dlg);
+      const p = { id: c?.id || null, course_id: c?.course_id || course?.id, name: g("nm").value.trim(), starts_on: g("sd").value, seats: g("se").value, status: g("st").value, live_link: g("ll").value.trim() };
+      if (!c) { p.days = $$("[name=dy]:checked", dlg).map(x => +x.value); p.time = g("tm").value; }
+      else p.sessions = $$("tr[data-sid]", dlg).map(r => ({ session_id: r.dataset.sid, opens_at: acFromLocal($("[data-k=opens_at]", r).value), live_at: acFromLocal($("[data-k=live_at]", r).value), due_at: acFromLocal($("[data-k=due_at]", r).value), recording_url: $("[data-k=recording_url]", r).value.trim() }));
+      if (!p.name || !p.starts_on) { toast(L("اكتب الاسم وأول يوم", "Name and start date are required")); }
+      else { try { await api("admin_academy_cohort_save", { p }); toast(L("اتحفظت ✓", "Saved ✓")); ac.data = null; viewAcademy(); } catch (e) { toast(acErr(e)); } } }
+    dlg.remove();
+  });
+}
+
+/* ---- content & lesson videos ---- */
+function acContent() {
+  const box = acPage("content"), co = ac.data.courses?.[0], m = can("academy.manage");
+  if (!co) { box.innerHTML = `<div class="card"><p class="empty">${L("المحتوى لسه ما اتحطش.", "No content yet.")}</p></div>`; return; }
+  const all = co.sessions.flatMap(s => s.lessons), ready = all.filter(l => l.video_path || l.video_url).length;
+  box.innerHTML = `<p class="small muted" style="margin:0 0 10px">${esc(co.title)} · ${ready}/${all.length} ${L("فيديو جاهز", "videos ready")} · ${L("الفيديوهات بتترفع على تخزين خاص، والطالب بيشوفها بس لما السيشن تتفتح له.", "Videos are stored privately; a student can only stream them once the session is open for them.")}</p>
+    ${co.sessions.map(s => `<section class="card" style="margin-bottom:12px"><h2 style="margin:0 0 6px">${s.n}. ${esc(s.title)}</h2>
+      <div class="tbl-wrap"><table><tbody>${s.lessons.map(l => `<tr><td style="width:40px">${s.n}.${l.n}</td><td>${esc(l.title)}<span class="s">${l.mins} ${L("د", "min")}</span></td>
+        <td>${l.video_path ? `<span class="chip c-mint">✓ ${L("مرفوع", "Uploaded")}</span><span class="s mono">${esc(l.video_path)}</span>` : l.video_url ? `<span class="chip c-sky">🔗 ${L("لينك", "Link")}</span><span class="s" dir="ltr">${esc(l.video_url.slice(0, 50))}</span>` : `<span class="chip c-amber">${L("لسه", "Missing")}</span>`}</td>
+        <td>${m ? `<button class="btn sm" type="button" data-v="${l.id}">${l.video_path || l.video_url ? L("تغيير", "Replace") : L("ارفع فيديو", "Add video")}</button>` : ""}${l.video_path ? `<button class="btn sm ghost" type="button" data-play="${esc(l.video_path)}">▶</button>` : ""}</td></tr>`).join("")}</tbody></table></div>
+      <p class="small muted" style="margin:8px 0 0">📝 ${esc(s.task?.title || "—")} · ✅ ${s.quiz_count} ${L("سؤال", "questions")}</p></section>`).join("")}`;
+  $$("[data-play]", box).forEach(b => b.addEventListener("click", () => acSigned("academy-videos", b.dataset.play)));
+  $$("[data-v]", box).forEach(b => b.addEventListener("click", () => {
+    const l = all.find(x => x.id === b.dataset.v), s = co.sessions.find(x => x.lessons.includes(l));
+    const dlg = dlgOpen(`<form method="dialog"><h2>🎬 ${esc(l.title)}</h2>
+      <label class="fld"><span>${L("ارفع ملف MP4 (لحد 50 ميجا)", "Upload an MP4 (up to 50 MB)")}</span><input class="input" type="file" name="f" accept="video/mp4,video/webm"></label>
+      <div class="bar" id="v-bar" hidden><i style="display:block;height:6px;width:40%;background:var(--primary)"></i></div>
+      <label class="fld"><span>${L("أو لينك يوتيوب غير مدرج (Unlisted) أو أي لينك https", "Or an unlisted YouTube link / any https link")}</span><input class="input" name="u" type="url" dir="ltr" value="${esc(l.video_url || "")}" placeholder="https://youtu.be/…"></label>
+      ${(l.chapters || []).length ? `<div class="fld"><span>${L("بداية كل فصل (دقيقة:ثانية)", "Chapter start times (m:ss)")}</span>${l.chapters.map((c, i) => `<label class="filters" style="flex-wrap:nowrap;margin-bottom:6px"><input class="input" data-ct="${i}" dir="ltr" style="width:90px" value="${c.t == null ? "" : `${Math.floor(c.t / 60)}:${String(Math.round(c.t % 60)).padStart(2, "0")}`}" placeholder="0:00"><span>${i + 1}. ${esc(c.title)}</span></label>`).join("")}</div>` : ""}
+      ${dlgBtns(t("Save"))}</form>`, false);
+    dlg.addEventListener("close", async () => {
+      if (dlg.returnValue === "ok") { const f = $("[name=f]", dlg).files[0], u = $("[name=u]", dlg).value.trim();
+        try {
+          let path = f ? null : l.video_path;
+          if (f) { if (f.size > 50 * 1024 * 1024) throw new Error(L("الملف أكبر من 50 ميجا", "File is over 50 MB")); toast(L("بيترفع الفيديو…", "Uploading…"));
+            path = `${co.slug}/s${s.n}/l${l.n}-${Date.now().toString(36)}.${f.type === "video/webm" ? "webm" : "mp4"}`;
+            const { error } = await sb.storage.from("academy-videos").upload(path, f, { contentType: f.type || "video/mp4", upsert: false }); if (error) throw error; }
+          const times = $$("[data-ct]", dlg).map(x => { const m = x.value.trim().match(/^(\d{1,3}):(\d{1,2})$/); return m ? +m[1] * 60 + +m[2] : null; });
+          await api("admin_academy_lesson_video", { p_lesson: l.id, p_path: f ? path : (u ? null : path), p_url: u || null, p_times: times.length ? times : null }); toast(L("اتحفظ ✓", "Saved ✓")); ac.data = null; viewAcademy();
+        } catch (e) { toast(acErr(e)); } }
+      dlg.remove();
+    });
+  }));
+}
+
+/* ---- packages & payment details ---- */
+function acSetup() {
+  const box = acPage("setup"), S = ac.data.settings || {}, P = S.packages || [], pay = S.payment || {};
+  const row = (p = {}) => `<div class="card ac-pk" style="margin-bottom:10px"><div class="grid g4"><label class="fld"><span>${L("الكود", "Key")}</span><input class="input" data-k="key" dir="ltr" value="${esc(p.key || "")}" placeholder="cohort"></label>
+      <label class="fld"><span>${L("الاسم بالعربي", "Arabic name")}</span><input class="input" data-k="ar" value="${esc(p.ar || "")}"></label><label class="fld"><span>${L("الاسم بالإنجليزي", "English name")}</span><input class="input" data-k="en" dir="ltr" value="${esc(p.en || "")}"></label>
+      <label class="fld"><span>${L("السعر بالدولار", "Price USD")}</span><input class="input" data-k="usd" type="number" min="0" step="1" dir="ltr" value="${esc(p.usd ?? "")}"></label></div>
+    <label class="fld"><span>${L("جملة تحت الاسم", "Tagline")}</span><input class="input" data-k="note" value="${esc(p.note || "")}"></label>
+    <label class="fld"><span>${L("المميزات (سطر لكل ميزة)", "Features (one per line)")}</span><textarea class="input" data-k="features" style="min-height:90px">${esc((p.features || []).join("\n"))}</textarea></label>
+    <div class="filters" style="justify-content:space-between"><label class="of-share"><input type="radio" name="def" ${p.default ? "checked" : ""}> ${L("الباقة المقترحة", "Highlighted")}</label><button class="btn sm ghost" type="button" data-rm>✕ ${L("شيل الباقة", "Remove")}</button></div></div>`;
+  box.innerHTML = `<form id="as-f"><div class="grid g2"><section><h2 style="margin:0 0 8px">${L("الباقات", "Packages")}</h2><div id="pks">${P.map(row).join("")}</div><button class="btn sm" type="button" id="pk-add">+ ${L("باقة", "Package")}</button></section>
+    <section><div class="card"><h2 style="margin:0 0 8px">${L("الدفع", "Payment")}</h2>
+      <label class="of-share"><input type="checkbox" name="open" ${S.open === false ? "" : "checked"}> <b>${L("التسجيل في الأكاديمية مفتوح", "Enrollment is open")}</b></label>
+      <label class="fld"><span>${L("حساب إنستاباي", "InstaPay handle")}</span><input class="input" name="ip" dir="ltr" value="${esc(pay.instapay || "")}" placeholder="name@instapay"></label>
+      <label class="fld"><span>${L("رقم فودافون كاش", "Vodafone Cash number")}</span><input class="input" name="vc" dir="ltr" value="${esc(pay.vodafone_cash || "")}"></label>
+      <label class="fld"><span>${L("سعر الدولار بالجنيه (للعرض بس)", "USD → EGP rate (display only)")}</span><input class="input" name="rt" type="number" step="0.01" dir="ltr" value="${esc(pay.egp_rate ?? "")}"></label>
+      <label class="fld"><span>${L("رسالة الدفع للطالب", "Payment note for students")}</span><textarea class="input" name="nt">${esc(pay.note || "")}</textarea></label>
+      <button class="btn primary" type="submit">${t("Save")}</button></div></section></div></form>`;
+  const bindRm = () => $$("[data-rm]", box).forEach(b => b.onclick = () => { if ($$(".ac-pk", box).length > 1) b.closest(".ac-pk").remove(); });
+  $("#pk-add").addEventListener("click", () => { $("#pks").insertAdjacentHTML("beforeend", row()); bindRm(); }); bindRm();
+  $("#as-f").addEventListener("submit", async e => { e.preventDefault();
+    const packages = $$(".ac-pk", box).map(c => { const g = k => $(`[data-k=${k}]`, c).value.trim(); return { key: g("key"), ar: g("ar"), en: g("en"), usd: g("usd"), note: g("note"), features: g("features").split("\n").map(x => x.trim()).filter(Boolean), default: $("[name=def]", c).checked }; });
+    try { await api("admin_academy_settings", { p: { open: $("[name=open]", box).checked, packages, payment: { instapay: $("[name=ip]", box).value.trim(), vodafone_cash: $("[name=vc]", box).value.trim(), egp_rate: $("[name=rt]", box).value, note: $("[name=nt]", box).value.trim() } } });
+      toast(L("اتحفظ ✓", "Saved ✓")); ac.data = null; } catch (er) { toast(er.code === "invalid_input" ? L("راجع الباقات: الكود بالإنجليزي الصغير (مثلاً cohort)، والاسم، والسعر رقم.", "Check packages: key in lowercase letters, a name and a numeric price.") : acErr(er)); } });
+}
+
 /* ---------------- router + boot ---------------- */
 function route() {
   if (!who) return;
   const [, sec, id] = location.hash.split("/");
   const first = NAV.find(n => can(n[3]))?.[0] || "overview";
   const go = { overview: viewOverview, users: id ? () => viewUser(id) : viewUsers, leads: id ? () => viewLead(id) : viewLeads, insights: id ? () => viewInsight(id) : viewInsights, pipeline: id ? () => viewDeal(id) : viewPipeline, chats: id ? () => viewChat(id) : viewChats, ai: viewAI, features: id ? () => viewFeature(decodeURIComponent(id)) : viewFeatures,
-    emails: viewEmails, settings: viewSettings, audit: viewAudit, finance: viewFinance, hiring: viewHiring }[sec];
+    emails: viewEmails, settings: viewSettings, audit: viewAudit, finance: viewFinance, hiring: viewHiring, academy: viewAcademy }[sec];
   const need = NAV.find(n => n[0] === sec)?.[3];
   if (!go || (need && !can(need))) { location.hash = `#/${first}`; return; }
   go(); $("#view")?.focus({ preventScroll: true });
