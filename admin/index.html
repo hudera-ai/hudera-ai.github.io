@@ -2384,34 +2384,61 @@ function acCohortForm(c) {
 }
 
 /* ---- content & lesson videos ---- */
-function acContent() {
+async function acR2Upload(base, obj, f, onp) {
+  const tok = (await sb.auth.getSession()).data.session?.access_token; if (!tok) throw new Error(L("سجّل دخول تاني", "Sign in again"));
+  const u = `${base}/up/${obj}`, H = { authorization: `Bearer ${tok}` };
+  const j = async r => { const d = await r.json().catch(() => ({})); if (!r.ok) throw new Error(d.error || `HTTP ${r.status}`); return d; };
+  const { uploadId } = await j(await fetch(`${u}?mpu=create`, { method: "POST", headers: { ...H, "x-content-type": f.type || "video/mp4" } }));
+  const PART = 50 * 1024 * 1024, n = Math.ceil(f.size / PART), parts = [];
+  try {
+    for (let i = 0; i < n; i++) { parts.push(await j(await fetch(`${u}?mpu=${uploadId}&part=${i + 1}`, { method: "PUT", headers: H, body: f.slice(i * PART, Math.min(f.size, (i + 1) * PART)) }))); onp?.((i + 1) / n); }
+    return await j(await fetch(`${u}?mpu=${uploadId}&done`, { method: "POST", headers: { ...H, "content-type": "application/json" }, body: JSON.stringify({ parts }) }));
+  } catch (e) { fetch(`${u}?mpu=${uploadId}`, { method: "DELETE", headers: H }).catch(() => {}); throw e; }
+}
+async function acPlayR2(lesson) {
+  const w = window.open("about:blank", "_blank");
+  try { const r = await api("academy_video_ticket", { p_lesson: lesson }); if (w) w.location.href = r.url; else location.href = r.url; }
+  catch (e) { w?.close(); toast(acErr(e)); }
+}
+async function acContent() {
   const box = acPage("content"), co = ac.data.courses?.[0], m = can("academy.manage");
+  if (ac.vbase == null) { try { ac.vbase = (await api("admin_academy_video_base", { p_base: null })).base || ""; } catch { ac.vbase = ""; } }
+  const vb = ac.vbase;
   if (!co) { box.innerHTML = `<div class="card"><p class="empty">${L("المحتوى لسه ما اتحطش.", "No content yet.")}</p></div>`; return; }
   const all = co.sessions.flatMap(s => s.lessons), ready = all.filter(l => l.video_path || l.video_url).length;
   box.innerHTML = `<p class="small muted" style="margin:0 0 10px">${esc(co.title)} · ${ready}/${all.length} ${L("فيديو جاهز", "videos ready")} · ${L("الفيديوهات بتترفع على تخزين خاص، والطالب بيشوفها بس لما السيشن تتفتح له.", "Videos are stored privately; a student can only stream them once the session is open for them.")}</p>
+    <section class="card" style="margin-bottom:12px"><h2 style="margin:0 0 6px">☁️ ${L("سيرفر الفيديوهات (Cloudflare R2)", "Video server (Cloudflare R2)")}</h2>
+      <p class="small muted" style="margin:0 0 8px">${vb ? `${L("شغّال ✓ الفيديوهات الجديدة بتترفع على Cloudflare (10 جيجا مجانًا، من غير حد 50 ميجا).", "Active ✓ new videos go to Cloudflare (10 GB free, no 50 MB limit).")} <span class="mono" dir="ltr">${esc(vb)}</span>` : L("مش متوصل لسه — الفيديوهات بتترفع على Supabase (حد أقصى 50 ميجا للملف).", "Not connected — videos go to Supabase (50 MB per file).")}</p>
+      ${m ? `<form id="vb-f" class="filters" style="flex-wrap:nowrap"><input class="input" name="b" dir="ltr" value="${esc(vb)}" placeholder="https://academy-video.<account>.workers.dev"><button class="btn sm" type="submit">${t("Save")}</button></form>` : ""}</section>
     ${co.sessions.map(s => `<section class="card" style="margin-bottom:12px"><h2 style="margin:0 0 6px">${s.n}. ${esc(s.title)}</h2>
       <div class="tbl-wrap"><table><tbody>${s.lessons.map(l => `<tr><td style="width:40px">${s.n}.${l.n}</td><td>${esc(l.title)}<span class="s">${l.mins} ${L("د", "min")}</span></td>
-        <td>${l.video_path ? `<span class="chip c-mint">✓ ${L("مرفوع", "Uploaded")}</span><span class="s mono">${esc(l.video_path)}</span>` : l.video_url ? `<span class="chip c-sky">🔗 ${L("لينك", "Link")}</span><span class="s" dir="ltr">${esc(l.video_url.slice(0, 50))}</span>` : `<span class="chip c-amber">${L("لسه", "Missing")}</span>`}</td>
-        <td>${m ? `<button class="btn sm" type="button" data-v="${l.id}">${l.video_path || l.video_url ? L("تغيير", "Replace") : L("ارفع فيديو", "Add video")}</button>` : ""}${l.video_path ? `<button class="btn sm ghost" type="button" data-play="${esc(l.video_path)}">▶</button>` : ""}</td></tr>`).join("")}</tbody></table></div>
+        <td>${l.video_path ? `<span class="chip c-mint">✓ ${l.video_path.startsWith("r2:") ? "Cloudflare" : L("مرفوع", "Uploaded")}</span><span class="s mono">${esc(l.video_path)}</span>` : l.video_url ? `<span class="chip c-sky">🔗 ${L("لينك", "Link")}</span><span class="s" dir="ltr">${esc(l.video_url.slice(0, 50))}</span>` : `<span class="chip c-amber">${L("لسه", "Missing")}</span>`}</td>
+        <td>${m ? `<button class="btn sm" type="button" data-v="${l.id}">${l.video_path || l.video_url ? L("تغيير", "Replace") : L("ارفع فيديو", "Add video")}</button>` : ""}${l.video_path ? `<button class="btn sm ghost" type="button" data-play="${esc(l.video_path)}" data-lid="${l.id}">▶</button>` : ""}</td></tr>`).join("")}</tbody></table></div>
       <p class="small muted" style="margin:8px 0 0">📝 ${esc(s.task?.title || "—")} · ✅ ${s.quiz_count} ${L("سؤال", "questions")}</p></section>`).join("")}`;
-  $$("[data-play]", box).forEach(b => b.addEventListener("click", () => acSigned("academy-videos", b.dataset.play)));
+  $$("[data-play]", box).forEach(b => b.addEventListener("click", () => b.dataset.play.startsWith("r2:") ? acPlayR2(b.dataset.lid) : acSigned("academy-videos", b.dataset.play)));
+  $("#vb-f", box)?.addEventListener("submit", async e => { e.preventDefault();
+    try { ac.vbase = (await api("admin_academy_video_base", { p_base: $("[name=b]", e.target).value.trim() })).base || ""; toast(L("اتحفظ ✓", "Saved ✓")); acContent(); } catch (er) { toast(acErr(er)); } });
   $$("[data-v]", box).forEach(b => b.addEventListener("click", () => {
     const l = all.find(x => x.id === b.dataset.v), s = co.sessions.find(x => x.lessons.includes(l));
     const dlg = dlgOpen(`<form method="dialog"><h2>🎬 ${esc(l.title)}</h2>
-      <label class="fld"><span>${L("ارفع ملف MP4 (لحد 50 ميجا)", "Upload an MP4 (up to 50 MB)")}</span><input class="input" type="file" name="f" accept="video/mp4,video/webm"></label>
-      <div class="bar" id="v-bar" hidden><i style="display:block;height:6px;width:40%;background:var(--primary)"></i></div>
+      <label class="fld"><span>${vb ? L("ارفع ملف MP4 (على Cloudflare، أي حجم لحد 5 جيجا)", "Upload an MP4 (to Cloudflare, up to 5 GB)") : L("ارفع ملف MP4 (لحد 50 ميجا)", "Upload an MP4 (up to 50 MB)")}</span><input class="input" type="file" name="f" accept="video/mp4,video/webm"></label>
+      <div class="bar" id="v-bar" hidden><i style="display:block;height:6px;width:0;background:var(--primary)"></i></div>
+      ${vb ? `<label class="fld"><span>${L("أو اسم ملف موجود بالفعل على R2", "Or an object already in R2")}</span><input class="input" name="r2" dir="ltr" value="${esc(l.video_path?.startsWith("r2:") ? l.video_path.slice(3) : "")}" placeholder="ai-foundations/s1/l1.mp4"></label>` : ""}
       <label class="fld"><span>${L("أو لينك يوتيوب غير مدرج (Unlisted) أو أي لينك https", "Or an unlisted YouTube link / any https link")}</span><input class="input" name="u" type="url" dir="ltr" value="${esc(l.video_url || "")}" placeholder="https://youtu.be/…"></label>
       ${(l.chapters || []).length ? `<div class="fld"><span>${L("بداية كل فصل (دقيقة:ثانية)", "Chapter start times (m:ss)")}</span>${l.chapters.map((c, i) => `<label class="filters" style="flex-wrap:nowrap;margin-bottom:6px"><input class="input" data-ct="${i}" dir="ltr" style="width:90px" value="${c.t == null ? "" : `${Math.floor(c.t / 60)}:${String(Math.round(c.t % 60)).padStart(2, "0")}`}" placeholder="0:00"><span>${i + 1}. ${esc(c.title)}</span></label>`).join("")}</div>` : ""}
       ${dlgBtns(t("Save"))}</form>`, false);
     dlg.addEventListener("close", async () => {
-      if (dlg.returnValue === "ok") { const f = $("[name=f]", dlg).files[0], u = $("[name=u]", dlg).value.trim();
+      if (dlg.returnValue === "ok") { const f = $("[name=f]", dlg).files[0], u = $("[name=u]", dlg).value.trim(), r2 = ($("[name=r2]", dlg)?.value || "").trim().replace(/^r2:/, "");
         try {
-          let path = f ? null : l.video_path;
-          if (f) { if (f.size > 50 * 1024 * 1024) throw new Error(L("الملف أكبر من 50 ميجا", "File is over 50 MB")); toast(L("بيترفع الفيديو…", "Uploading…"));
-            path = `${co.slug}/s${s.n}/l${l.n}-${Date.now().toString(36)}.${f.type === "video/webm" ? "webm" : "mp4"}`;
-            const { error } = await sb.storage.from("academy-videos").upload(path, f, { contentType: f.type || "video/mp4", upsert: false }); if (error) throw error; }
+          let path = f ? null : (r2 ? `r2:${r2}` : l.video_path);
+          if (f) { const obj = `${co.slug}/s${s.n}/l${l.n}-${Date.now().toString(36)}.${f.type === "video/webm" ? "webm" : "mp4"}`;
+            if (vb) { if (f.size > 5 * 1024 ** 3) throw new Error(L("الملف أكبر من 5 جيجا", "File is over 5 GB"));
+              toast(L("بيترفع الفيديو على Cloudflare… سيب الصفحة مفتوحة", "Uploading to Cloudflare… keep this page open"));
+              await acR2Upload(vb, obj, f, p => toast(`${L("بيترفع", "Uploading")} ${Math.round(p * 100)}%`)); path = `r2:${obj}`; }
+            else { if (f.size > 50 * 1024 * 1024) throw new Error(L("الملف أكبر من 50 ميجا", "File is over 50 MB")); toast(L("بيترفع الفيديو…", "Uploading…"));
+              path = obj; const { error } = await sb.storage.from("academy-videos").upload(path, f, { contentType: f.type || "video/mp4", upsert: false }); if (error) throw error; } }
           const times = $$("[data-ct]", dlg).map(x => { const m = x.value.trim().match(/^(\d{1,3}):(\d{1,2})$/); return m ? +m[1] * 60 + +m[2] : null; });
-          await api("admin_academy_lesson_video", { p_lesson: l.id, p_path: f ? path : (u ? null : path), p_url: u || null, p_times: times.length ? times : null }); toast(L("اتحفظ ✓", "Saved ✓")); ac.data = null; viewAcademy();
+          await api("admin_academy_lesson_video", { p_lesson: l.id, p_path: f || r2 ? path : (u ? null : path), p_url: u || null, p_times: times.length ? times : null }); toast(L("اتحفظ ✓", "Saved ✓")); ac.data = null; viewAcademy();
         } catch (e) { toast(acErr(e)); } }
       dlg.remove();
     });
