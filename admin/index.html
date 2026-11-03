@@ -381,7 +381,7 @@ const HX = (() => {
         <div class="hx-brand"><span class="hx-mark">h</span><span>HUDERA <b>AI</b></span></div></div>
       ${r.meta?.length ? `<div class="hx-meta">${r.meta.map(([k, v]) => `<span>${w(k)}: <b>${isLtr(cellText(v)) ? `<span class="ltr">${e(v)}</span>` : w(v)}</b></span>`).join("")}</div>` : ""}
       ${secs}
-      <div class="hx-foot"><span>${w(r.footer || "")}</span><span class="ltr">hudera-ai.github.io</span></div></div>`;
+      <div class="hx-foot"><span>${w(r.footer || "")}</span><span class="ltr">hudera.ai</span></div></div>`;
   }
   async function pdf(r, file, { rtl = false, landscape = false } = {}) {
     await load("pdf");
