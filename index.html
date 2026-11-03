@@ -1047,7 +1047,7 @@ body.chat-on .chat-fab{display:none}
   </section>
 
   <footer class="container site">
-    <div class="foot-l"><span>© 2026 HUDERA AI · AI employees &amp; SaaS platforms</span><nav class="social" aria-label="HUDERA AI on the web"><a href="https://www.linkedin.com/company/hudera/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/hudera-ai" target="_blank" rel="noopener">GitHub</a><a href="https://www.facebook.com/huderaai" target="_blank" rel="noopener">Facebook</a><a href="mailto:hudera.ai@gmail.com">hudera.ai@gmail.com</a><a href="careers/">Careers · وظائف</a><a href="privacy.html">Privacy</a><a href="#" id="consent-open">Analytics choices</a></nav></div>
+    <div class="foot-l"><span>© 2026 HUDERA AI · AI employees &amp; SaaS platforms</span><nav class="social" aria-label="HUDERA AI on the web"><a href="https://www.linkedin.com/company/hudera/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/hudera-ai" target="_blank" rel="noopener">GitHub</a><a href="https://www.facebook.com/huderaai" target="_blank" rel="noopener">Facebook</a><a href="mailto:info@hudera.ai">info@hudera.ai</a><a href="careers/">Careers · وظائف</a><a href="privacy.html">Privacy</a><a href="#" id="consent-open">Analytics choices</a></nav></div>
     <p>Product demos on this page run in your browser on sample data; company names, people and figures inside them are fictional. WhatsApp is a trademark of Meta Platforms, Inc. Chat screens are HUDERA demo interfaces for solutions built on the WhatsApp Business Platform.</p>
   </footer>
 </main>
@@ -4040,7 +4040,7 @@ function renderSystem(s) {
 }
 
 /* ================= Site: products, home, product pages, router ================= */
-const CONTACT = { email: "hudera.ai@gmail.com", whatsapp: "+20 155 515 9139", wa: "201555159139", linkedin: "https://www.linkedin.com/company/hudera/", facebook: "https://www.facebook.com/huderaai", github: "https://github.com/hudera-ai" };
+const CONTACT = { email: "info@hudera.ai", whatsapp: "+20 155 515 9139", wa: "201555159139", linkedin: "https://www.linkedin.com/company/hudera/", facebook: "https://www.facebook.com/huderaai", github: "https://github.com/hudera-ai" };
 const REPO = { connect: "hudera-connect" };
 const repoUrl = id => `${CONTACT.github}/${REPO[id] || id}`;
 const waLink = text => `https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(text)}`;
@@ -4588,7 +4588,7 @@ const HP = (() => {
     $("#acct-btn").addEventListener("click", () => me ? openPanel() : signIn("nav"));
   }
   // The admin-dashboard button shows only for the company account itself; every other account (team members included) sees a normal profile.
-  const ADMIN_EMAILS = [CONTACT.email];
+  const ADMIN_EMAILS = ["hudera.ai@gmail.com"];
   const isCompanyAdmin = u => !!(u && u.staff_role && ADMIN_EMAILS.includes(String(u.email || "").trim().toLowerCase()));
   function openPanel() {
     closePanel(); track("profile_opened");
@@ -5024,7 +5024,7 @@ const HP = (() => {
     if (!me) {
       host.innerHTML = `<div class="req-signin"><h3>Send us a request</h3><p>Sign in with Google to send a request and follow its status. We only receive your name, e-mail and photo from Google.</p>
         <button class="btn primary g-btn" type="button" id="req-signin">${gIcon}<span>Continue with Google</span></button>
-        <p class="muted small">Prefer not to sign in? <a ${waAttr("Hi HUDERA AI, I'd like to talk about a project.", "مرحباً HUDERA AI، أرغب في الحديث عن مشروع.")} data-wa-place="contact">Message us on WhatsApp</a> or <a href="mailto:hudera.ai@gmail.com">e-mail us</a>.</p></div>`;
+        <p class="muted small">Prefer not to sign in? <a ${waAttr("Hi HUDERA AI, I'd like to talk about a project.", "مرحباً HUDERA AI، أرغب في الحديث عن مشروع.")} data-wa-place="contact">Message us on WhatsApp</a> or <a href="mailto:info@hudera.ai">e-mail us</a>.</p></div>`;
       $("#req-signin").addEventListener("click", () => signIn("contact"));
       return;
     }
