@@ -394,7 +394,8 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   /* ---------------------------------------------------------------- session */
   let curLesson = 0;
   async function videoSrc(l) {
-    if (l.video_path) { const { data, error } = await sb.storage.from("academy-videos").createSignedUrl(l.video_path, 3 * 3600); if (!error) return { type: "file", url: data.signedUrl }; }
+    if (l.video_path?.startsWith("r2:")) { try { const r = await rpc("academy_video_ticket", { p_lesson: l.id }); return { type: "file", url: r.url }; } catch (e) { console.warn(e); } }
+    else if (l.video_path) { const { data, error } = await sb.storage.from("academy-videos").createSignedUrl(l.video_path, 3 * 3600); if (!error) return { type: "file", url: data.signedUrl }; }
     if (l.video_url) { const y = l.video_url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/); return y ? { type: "yt", url: `https://www.youtube-nocookie.com/embed/${y[1]}?rel=0` } : { type: "link", url: l.video_url }; }
     return null;
   }
