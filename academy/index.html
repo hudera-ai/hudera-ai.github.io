@@ -96,7 +96,7 @@ h2.sec{font-size:clamp(24px,4vw,32px);margin-bottom:6px}.lead{color:var(--muted)
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--faint);font-size:14px}footer .wrap{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}footer a{color:inherit}
 /* forms */
 .f{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;min-width:0}.f>span,.lg{font-weight:700;color:var(--ink);font-size:15px}.f small,.hint{color:var(--faint);font-size:13px;font-weight:400}
-input[type=text],input[type=tel],input[type=url],textarea,select{width:100%;height:46px;border:1px solid var(--line2);border-radius:12px;padding:0 12px;font:inherit;font-size:15.5px;background:var(--surface);color:var(--ink)}
+input[type=text],input[type=tel],input[type=url],input[type=number],input[type=email],textarea,select{width:100%;height:46px;border:1px solid var(--line2);border-radius:12px;padding:0 12px;font:inherit;font-size:15.5px;background:var(--surface);color:var(--ink)}
 textarea{height:auto;min-height:84px;padding:10px 12px;resize:vertical}
 input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb,var(--primary) 40%,transparent);border-color:var(--primary)}
 .bad{border-color:var(--err)!important}
@@ -161,6 +161,16 @@ input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb,var(
 .cert{border:2px solid var(--primary);border-radius:18px;padding:22px;text-align:center;background:linear-gradient(180deg,var(--primary-soft),var(--surface))}
 .skel{height:120px;border-radius:16px;background:linear-gradient(90deg,var(--surface2),var(--surface),var(--surface2));background-size:200% 100%;animation:sh 1.2s infinite}
 @keyframes sh{to{background-position:-200% 0}}
+/* register */
+.rg-steps{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}.rg-steps span{display:flex;align-items:center;gap:8px;flex:1 1 150px;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 12px;font-weight:700;color:var(--muted);font-size:14.5px}
+.rg-steps b{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--surface2);font-size:13px;flex:none}
+.rg-steps .on{border-color:var(--primary);color:var(--ink)}.rg-steps .on b{background:var(--primary);color:#fff}.rg-steps .done b{background:var(--ok);color:#fff}
+.rg-tel{display:flex;direction:ltr;border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:var(--surface)}.rg-tel span{display:grid;place-items:center;padding:0 12px;background:var(--surface2);color:var(--muted);font-weight:700;font-size:15px}
+.rg-tel input{border:0!important;border-radius:0!important}.rg-tel:focus-within{outline:2px solid color-mix(in srgb,var(--primary) 40%,transparent);border-color:var(--primary)}
+.hp{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none}
+.rg-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}.rg-nav .row{display:flex;gap:8px;flex-wrap:wrap}
+.rg .seg label{flex:1 1 130px}.rg .pick label{padding:10px 14px}
+.rgcta{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-color:var(--primary)}
 [hidden]{display:none!important}
 .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:60;max-width:90vw}
 @media (max-width:900px){.g4,.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:1fr}.levels{grid-template-columns:repeat(2,minmax(0,1fr))}.vgrid{grid-template-columns:1fr}}
@@ -207,7 +217,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   function nav() {
     const r = location.hash.split("/")[1] || "";
     const a = (h, t, k, cls = "") => `<a href="${h}" class="${cls}" ${r === k ? 'aria-current="page"' : ""}>${t}</a>`;
-    $("#nav").innerHTML = (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : "") + a("#/course", "الدورة", "course", enrId ? "hm" : "")
+    $("#nav").innerHTML = (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : a("#/register", "سجّل الآن", "register")) + a("#/course", "الدورة", "course", enrId ? "hm" : "")
       + (user ? `<span class="who">${user.user_metadata?.avatar_url ? `<img src="${esc(user.user_metadata.avatar_url)}" alt="" referrerpolicy="no-referrer">` : ""}<button class="btn sm ghost" id="out" type="button">خروج</button></span>`
               : `<button class="btn sm" id="in" type="button">${G_ICON} دخول</button>`);
     $("#out")?.addEventListener("click", async () => { await sb.auth.signOut(); location.hash = "#/course"; location.reload(); });
@@ -231,7 +241,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       <span class="tag">🎓 ${esc(m.brand || "HUDERA Academy")} · دورة التأسيس</span>
       <h1>${esc(c.title)}</h1><p>${esc(c.tagline)}. ${esc(m.promise || "")}</p>
       <div class="chips"><span>📚 ${nSess()} جلسات في 4 أسابيع</span><span>🎬 ${nSess()} فيديوهات شرح · نحو ${Math.round(totalMin / 60)} ساعات</span><span>🎙️ لقاءات مباشرة في مجموعة صغيرة</span><span>📝 مهام تُصحَّح بدرجة وتعليق</span><span>🏅 شهادة برقم تحقق</span><span>🛡️ ضمان استرداد المبلغ</span></div>
-      <div class="row">${pend ? `<a class="btn primary big" href="#/enroll">طلبك قيد المراجعة ←</a>` : `<a class="btn primary big" href="#/enroll">احجز مقعدك</a>`}<a class="btn out big" href="#curr">اطّلع على المنهج</a></div>
+      <div class="row">${pend ? `<a class="btn primary big" href="#/enroll">طلبك قيد المراجعة ←</a>` : `<a class="btn primary big" href="#/register">سجّل الآن واعرف مسارك</a><a class="btn out big" href="#/enroll">احجز مقعدك في الدورة</a>`}<a class="btn out big" href="#curr">اطّلع على المنهج</a></div>
     </div></div>
     <section><div class="wrap">
       <h2 class="sec">ماذا ستكتسب من الدورة؟</h2><p class="lead">${esc(m.audience || "")}</p>
@@ -275,6 +285,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       <div class="card inst"><div class="av">م</div><div><b style="color:var(--ink);font-size:18px">${esc(m.instructor || "")}</b><br><span style="color:var(--muted)">${esc(m.instructor_title || "")}</span><p style="margin:6px 0 0;font-size:15px">يبني أنظمة ذكاء اصطناعي حقيقية للشركات في HUDERA AI، ويعلّم ما يستخدمه في العمل يومياً.</p></div></div>
       <div class="card"><b style="color:var(--ink)">ماذا ستحتاج؟</b>${(m.tools || []).map(t => `<p style="margin:6px 0 0;font-size:15px"><b>${esc(t[0])}:</b> ${esc(t[1])}</p>`).join("")}</div>
     </div></section>
+    <section style="padding-top:0"><div class="wrap"><div class="card rgcta"><div><b style="color:var(--ink);font-size:19px">مش متأكد أي مسار يناسبك؟</b><p style="margin:4px 0 0;color:var(--muted)">سجّل بياناتك وحُلّ اختبار مستوى قصيراً (8 أسئلة)، ونقترح لك المسار المناسب ونتواصل معك على واتساب.</p></div><a class="btn primary big" href="#/register">سجّل الآن مجاناً</a></div></div></section>
     <section style="padding-top:0"><div class="wrap narrow faq"><h2 class="sec" style="margin-bottom:10px">أسئلة شائعة</h2>
       <details><summary>هل يجب أن أعرف البرمجة؟</summary><p>لا. أول 5 جلسات بلا برمجة إطلاقاً، وفي الجلسة 6 نكتب معاً كود Python بسيطاً خطوة بخطوة، ويساعدك الذكاء الاصطناعي في كتابته.</p></details>
       <details><summary>ماذا لو فاتني لقاء مباشر؟</summary><p>الفيديوهات متاحة دائماً، وتسجيل اللقاء يُرفع على المنصة. لكن الحضور جزء من التقييم (10٪)، وحضور 85% من اللقاءات شرط لضمان الاسترداد.</p></details>
@@ -588,12 +599,162 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
     run(code);
   }
 
+  /* ---------------------------------------------------------------- register (no sign-in): who you are, your goal, a free level check */
+  const RG_COUNTRIES = [["EG", "مصر", "20"], ["SA", "السعودية", "966"], ["AE", "الإمارات", "971"], ["KW", "الكويت", "965"], ["QA", "قطر", "974"], ["BH", "البحرين", "973"],
+    ["OM", "عُمان", "968"], ["JO", "الأردن", "962"], ["PS", "فلسطين", "970"], ["LB", "لبنان", "961"], ["SY", "سوريا", "963"], ["IQ", "العراق", "964"], ["YE", "اليمن", "967"],
+    ["LY", "ليبيا", "218"], ["TN", "تونس", "216"], ["DZ", "الجزائر", "213"], ["MA", "المغرب", "212"], ["SD", "السودان", "249"], ["MR", "موريتانيا", "222"], ["SO", "الصومال", "252"],
+    ["TR", "تركيا", "90"], ["GB", "المملكة المتحدة", "44"], ["DE", "ألمانيا", "49"], ["FR", "فرنسا", "33"], ["US", "الولايات المتحدة", "1"], ["CA", "كندا", "1"], ["ZZ", "دولة أخرى", ""]];
+  const RG_OCC = [["school", "طالب مدرسة"], ["university", "طالب جامعي"], ["employee", "موظف"], ["business", "صاحب عمل"], ["freelancer", "عمل حر"], ["job_seeker", "أبحث عن عمل"], ["other", "أخرى"]];
+  const RG_AI = [["none", "لم أستخدمها", "أعرف الاسم فقط"], ["sometimes", "أحياناً", "أسئلة عامة من وقت لآخر"], ["regular", "بانتظام", "جزء من شغلي أو دراستي"], ["advanced", "متقدم", "أكتب أوامر دقيقة وأبني بها أدوات"]];
+  const RG_GOAL = [["basics", "أفهم الأساسيات وأبدأ صح"], ["work", "أطوّر شغلي الحالي وأوفّر وقتي"], ["job", "أحصل على وظيفة أو فرصة أفضل"], ["build", "أبني أدوات وأتمتة ووكلاء ذكاء اصطناعي"],
+    ["business", "أطوّر مشروعي أو شركتي"], ["content", "صناعة المحتوى والتسويق"]];
+  const RG_TOOLS = [["chatgpt", "ChatGPT"], ["gemini", "Gemini"], ["claude", "Claude"], ["copilot", "Copilot"], ["deepseek", "DeepSeek"], ["midjourney", "Midjourney"], ["canva", "Canva AI"], ["other", "أخرى"]];
+  const RG_LANG = [["egy", "مصري"], ["gulf", "خليجي"], ["msa", "فصحى"], ["en", "English"]];
+  const RG_TIMES = [["morning", "صباحاً"], ["afternoon", "بعد الظهر"], ["evening", "مساءً"], ["weekend", "نهاية الأسبوع"]];
+  const RG_DEV = [["laptop", "لابتوب أو كمبيوتر"], ["both", "لابتوب وموبايل"], ["phone", "موبايل فقط"]];
+  const RG_SRC = [["facebook", "فيسبوك"], ["instagram", "إنستجرام"], ["linkedin", "لينكدإن"], ["tiktok", "تيك توك"], ["whatsapp", "واتساب"], ["friend", "صديق أو زميل"], ["google", "بحث جوجل"], ["other", "أخرى"]];
+  const RG_LEVEL = { beginner: ["مبتدئ", "تعرف الفكرة، والبداية الصحيحة ستفرق معك كثيراً."], basic: ["أساسي", "تستخدم الأدوات أحياناً، وتحتاج طريقة منظمة وأوامر أدق."],
+    intermediate: ["متوسط", "تستخدمها بانتظام، والخطوة التالية تنظيم أدق وتحقق من النتائج."], advanced: ["متقدم", "تكتب أوامر دقيقة وتتحقق من النتائج، وجاهز للبناء والأتمتة."] };
+  // the free level check: bank questions 1, 3, 6, 9, 11, 13, 16, 18 (options in bank order; the server holds the key)
+  const RG_QUIZ = [
+    ["ماذا يفعل نموذج لغوي مثل ChatGPT أو Claude عندما يجيب عن سؤالك؟", ["يبحث في قاعدة بيانات فيها إجابات جاهزة", "يولّد النص جزءاً بعد جزء بناءً على أنماط تعلّمها من كمّ ضخم من النصوص", "يحوّل السؤال إلى خبير بشري يرد عليه", "ينسخ أول نتيجة تظهر في محرك البحث"]],
+    ["ماذا تعني «الهلوسة» عند الحديث عن نماذج الذكاء الاصطناعي؟", ["أن يتوقف النموذج عن الرد فجأة", "أن يرفض النموذج الإجابة عن الأسئلة الصعبة", "أن يقدّم النموذج معلومة خاطئة أو مختلقة بثقة كأنها صحيحة", "أن يكرر النموذج الجملة نفسها أكثر من مرة"]],
+    ["تحتاج إرسال بريد عمل مهم لعميل. ما أفضل طريقة لاستخدام الذكاء الاصطناعي؟", ["تطلب مسودة أولى، ثم تراجعها وتعدّلها بنفسك قبل الإرسال", "ترسل ما يكتبه النموذج مباشرة لتوفير الوقت", "لا تستخدمه في المراسلات أبداً", "تطلب منه إرسال البريد نيابة عنك"]],
+    ["تريد تحليل جدول المبيعات الشهري بالذكاء الاصطناعي. ما الأسلوب الأسلم؟", ["تقبل الأرقام النهائية كما هي", "تطلب المؤشرات مع شرح خطوات الحساب، ثم تتحقق من عيّنة منها يدوياً", "تطلب منه تخمين الأرقام دون رفع الجدول", "تكتفي بسؤاله: هل مبيعاتنا جيدة؟"]],
+    ["أيّ الأوامر التالية أوضح؟", ["«اكتب منشوراً»", "«اكتب منشوراً جميلاً عن الذكاء الاصطناعي»", "«اكتب منشوراً على لينكد إن من 120 كلمة، بنبرة مهنية، موجّهاً لمديري المشاريع، عن فائدة واحدة لأتمتة التقارير، واختمه بسؤال»", "«منشور لينكد إن عن AI بسرعة»"]],
+    ["جاءت الإجابة عامة وطويلة أكثر من اللازم. ما أفضل خطوة تالية؟", ["تبدأ محادثة جديدة بالأمر نفسه", "تحدد الجمهور والطول والشكل المطلوب، وتطلب إعادة الكتابة", "تكتب «أعد المحاولة» فقط", "تتوقف عن استخدام الأداة"]],
+    ["قبل لصق بيانات عملاء في أداة ذكاء اصطناعي عامة، ماذا تفعل؟", ["تراجع سياسة شركتك، وتحذف البيانات الحساسة أو تخفيها", "تلصقها كما هي لأن الأداة آمنة دائماً", "ترسلها لزميل ليلصقها بدلاً منك", "تلصق نصفها فقط"]],
+    ["طلبت من النموذج مراجع علمية لبحث، فأعطاك قائمة مرتبة. ما الخطر الأساسي؟", ["أن تكون المراجع قديمة قليلاً", "أن تكون باللغة الإنجليزية", "أن يكون بعضها غير موجود أصلاً، لذلك يجب فتح كل مرجع والتأكد منه", "لا يوجد خطر لأن النموذج لا يخطئ في المراجع"]]];
+  const RG_E = { invalid_age: "اكتب عمراً صحيحاً (من 6 إلى 90 سنة)", invalid_country: "اختر الدولة", invalid_email: "البريد الإلكتروني غير صحيح", invalid_occupation: "اختر وضعك الحالي",
+    invalid_ai_use: "اختر مدى استخدامك للذكاء الاصطناعي", invalid_goal: "اختر هدفك الأساسي", guardian_required: "اكتب اسم ولي الأمر", guardian_phone: "اكتب رقم واتساب صحيحاً لولي الأمر",
+    rate_limited: "محاولات كثيرة من نفس الشبكة. حاول بعد قليل.", invalid_phone: "اكتب رقم واتساب صحيحاً" };
+  const rgKey = "hudera-academy-register";
+  const rg = { step: 1, d: {}, order: null, token: null, res: null };
+  const rgPhone = (raw, cc) => {
+    let v = String(raw || "").replace(/[\s\-().]/g, "").replace(/[٠-٩]/g, c => "٠١٢٣٤٥٦٧٨٩".indexOf(c));
+    if (!v) return "";
+    if (v.startsWith("00")) v = "+" + v.slice(2);
+    if (v.startsWith("+")) return v;
+    const dial = (RG_COUNTRIES.find(c => c[0] === cc) || [])[2];
+    return dial ? "+" + dial + v.replace(/^0+/, "") : v;
+  };
+  const rgUtm = () => { const q = new URLSearchParams(location.search), o = {}; ["utm_source", "utm_medium", "utm_campaign", "ref"].forEach(k => { if (q.get(k)) o[k] = q.get(k).slice(0, 80); }); o.path = "/academy/#/register"; return o; };
+  const rgSave = () => { try { sessionStorage.setItem(rgKey, JSON.stringify({ d: rg.d, step: rg.step, token: rg.token, order: rg.order })); } catch (e) {} };
+  const rgLoad = () => { try { const x = JSON.parse(sessionStorage.getItem(rgKey) || "null"); if (x) Object.assign(rg, x); } catch (e) {} };
+  const opts = (list, sel, ph) => (ph ? `<option value="">${ph}</option>` : "") + list.map(([k, l]) => `<option value="${k}" ${k === sel ? "selected" : ""}>${esc(l)}</option>`).join("");
+  const segs = (name, list, sel, multi = false) => `<div class="seg" role="group">${list.map(([k, l]) => `<label><input type="${multi ? "checkbox" : "radio"}" name="${name}" value="${k}" ${(multi ? (sel || []).includes(k) : sel === k) ? "checked" : ""}>${esc(l)}</label>`).join("")}</div>`;
+
+  function viewRegister() {
+    rgLoad();
+    if (!rg.token) rg.token = crypto.randomUUID ? crypto.randomUUID() : rnd() + rnd();
+    if (!rg.order) rg.order = RG_QUIZ.map(q => q[1].map((_, i) => i).sort(() => Math.random() - 0.5));
+    if (rg.res) return rgResult();
+    const d = rg.d, steps = ["بياناتك", "خلفيتك وهدفك", "اختبار المستوى"];
+    const head = `<div class="rg-steps">${steps.map((s, i) => `<span class="${i + 1 === rg.step ? "on" : i + 1 < rg.step ? "done" : ""}"><b>${i + 1 < rg.step ? "✓" : i + 1}</b>${s}</span>`).join("")}</div>`;
+    let body = "";
+    if (rg.step === 1) {
+      const cc = d.country || "EG", dial = (RG_COUNTRIES.find(c => c[0] === cc) || [])[2];
+      body = `<div class="g2">
+        <label class="f"><span>الاسم بالكامل</span><input type="text" name="full_name" autocomplete="name" value="${esc(d.full_name || "")}" required></label>
+        <label class="f"><span>العمر</span><input type="number" name="age" inputmode="numeric" min="6" max="90" value="${esc(d.age || "")}" required></label>
+        <label class="f"><span>الدولة</span><select name="country">${opts(RG_COUNTRIES.map(c => [c[0], c[1]]), cc)}</select></label>
+        <label class="f"><span>المدينة <small>(اختياري)</small></span><input type="text" name="city" value="${esc(d.city || "")}"></label>
+        <label class="f"><span>رقم واتساب</span><div class="rg-tel"><span dir="ltr">${dial ? "+" + dial : "+"}</span><input type="tel" name="phone" dir="ltr" inputmode="tel" autocomplete="tel" placeholder="${cc === "EG" ? "01xxxxxxxxx" : cc === "SA" ? "05xxxxxxxx" : ""}" value="${esc(d.phone || "")}" required></div><small>${dial ? "اكتب الرقم كما تكتبه في بلدك، أو بالصيغة الدولية" : "اكتب الرقم بالصيغة الدولية، مثل +44…"}</small></label>
+        <label class="f"><span>البريد الإلكتروني <small>(اختياري)</small></span><input type="email" name="email" dir="ltr" autocomplete="email" value="${esc(d.email || "")}"></label>
+        </div>
+        <div class="f"><span class="lg">وضعك الحالي</span>${segs("occupation", RG_OCC, d.occupation)}</div>
+        <label class="f"><span>مجال دراستك أو عملك <small>(مثلاً: محاسبة، تسويق، طب، هندسة، ثانوية عامة)</small></span><input type="text" name="field" value="${esc(d.field || "")}"></label>
+        <div id="rg-guard" ${+d.age && +d.age < 18 ? "" : "hidden"}><div class="note" style="margin-bottom:12px">لأن العمر أقل من 18 سنة، نحتاج بيانات ولي الأمر للتواصل معه.</div>
+          <div class="g2"><label class="f"><span>اسم ولي الأمر</span><input type="text" name="guardian_name" value="${esc(d.guardian_name || "")}"></label>
+          <label class="f"><span>رقم واتساب ولي الأمر</span><input type="tel" name="guardian_phone" dir="ltr" inputmode="tel" value="${esc(d.guardian_phone || "")}"></label></div></div>`;
+    } else if (rg.step === 2) {
+      body = `<div class="f"><span class="lg">ما مدى استخدامك للذكاء الاصطناعي حالياً؟</span><div class="pick">${RG_AI.map(([k, l, s]) => `<label><input type="radio" name="ai_use" value="${k}" ${d.ai_use === k ? "checked" : ""}><span><b>${l}</b><small>${s}</small></span></label>`).join("")}</div></div>
+        <div class="f"><span class="lg">الأدوات التي جرّبتها <small>(اختر كل ما ينطبق)</small></span>${segs("tools", RG_TOOLS, d.tools, true)}</div>
+        <div class="f"><span class="lg">هدفك الأساسي من التعلّم</span><div class="pick">${RG_GOAL.map(([k, l]) => `<label><input type="radio" name="goal" value="${k}" ${d.goal === k ? "checked" : ""}><span><b>${l}</b></span></label>`).join("")}</div></div>
+        <label class="f"><span>احكِ لنا باختصار ماذا تريد أن تحقق <small>(اختياري)</small></span><textarea name="goal_note" maxlength="600">${esc(d.goal_note || "")}</textarea></label>
+        <div class="f"><span class="lg">لغة الشرح المفضّلة</span>${segs("lang", RG_LANG, d.lang)}</div>
+        <div class="f"><span class="lg">الأوقات المناسبة للقاءات المباشرة <small>(بتوقيت بلدك)</small></span>${segs("times", RG_TIMES, d.times, true)}</div>
+        <div class="f"><span class="lg">الجهاز الذي ستتعلّم عليه</span>${segs("device", RG_DEV, d.device)}</div>
+        <label class="f"><span>كيف عرفت HUDERA Academy؟</span><select name="source">${opts(RG_SRC, d.source, "اختر")}</select></label>`;
+    } else {
+      const ans = d.quiz || [];
+      body = `<p style="margin:0 0 14px;color:var(--muted)">8 أسئلة قصيرة (نحو دقيقتين) تساعدنا نحدد مستواك والمسار الأنسب لك بدقة. لا توجد درجة نجاح أو رسوب، ويمكنك تخطّيه.</p>
+        ${RG_QUIZ.map(([q, o], i) => `<div class="q"><p>${i + 1}. ${esc(q)}</p>${rg.order[i].map(j => `<label><input type="radio" name="q${i}" value="${j}" ${ans[i] === j ? "checked" : ""}><span>${esc(o[j])}</span></label>`).join("")}</div>`).join("")}
+        <label class="consent"><input type="checkbox" name="consent" ${d.consent ? "checked" : ""}><span>أوافق على أن تتواصل معي HUDERA Academy عبر واتساب أو البريد بخصوص التسجيل، وعلى <a href="../privacy.html" target="_blank" rel="noopener">سياسة الخصوصية</a>.</span></label>`;
+    }
+    app.innerHTML = `<section class="rg"><div class="wrap narrow">
+      <h1 style="font-size:clamp(26px,5vw,36px)">سجّل في HUDERA Academy</h1>
+      <p class="lead" style="margin-top:6px">بياناتك تساعدنا نختار لك المسار المناسب ونتواصل معك على واتساب لتأكيده. التسجيل مجاني ولا يحتاج حساباً.</p>
+      ${head}<form class="card" id="rgf" novalidate><input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">${body}
+        <div id="rgm"></div>
+        <div class="row rg-nav">${rg.step > 1 ? `<button class="btn" type="button" id="rgb">→ السابق</button>` : `<span></span>`}
+          ${rg.step < 3 ? `<button class="btn primary big" type="submit">التالي ←</button>` : `<span class="row"><button class="btn ghost" type="button" id="rgs">تخطَّ الاختبار وأرسل</button><button class="btn primary big" type="submit">أرسل التسجيل</button></span>`}</div>
+      </form></div></section>`;
+    const f = $("#rgf");
+    const collect = () => {
+      const fd = new FormData(f), g = k => (fd.get(k) ?? "").toString().trim();
+      if (rg.step === 1) Object.assign(d, { full_name: g("full_name"), age: g("age"), country: g("country"), city: g("city"), phone: g("phone"), email: g("email"), occupation: g("occupation"),
+        field: g("field"), guardian_name: g("guardian_name"), guardian_phone: g("guardian_phone") });
+      if (rg.step === 2) Object.assign(d, { ai_use: g("ai_use"), tools: fd.getAll("tools"), goal: g("goal"), goal_note: g("goal_note"), lang: g("lang"), times: fd.getAll("times"), device: g("device"), source: g("source") });
+      if (rg.step === 3) { d.quiz = RG_QUIZ.map((_, i) => fd.get("q" + i) == null ? null : +fd.get("q" + i)); d.consent = !!fd.get("consent"); }
+      d.website = g("website"); rgSave();
+    };
+    const bad = (name, m) => { const el = f.elements[name]; if (el && el.classList) { el.classList.add("bad"); el.focus?.(); } $("#rgm").innerHTML = `<div class="msg">${m}</div>`; return false; };
+    const check = () => {
+      $$(".bad", f).forEach(x => x.classList.remove("bad")); $("#rgm").innerHTML = "";
+      if (rg.step === 1) {
+        if (d.full_name.length < 2) return bad("full_name", "اكتب اسمك بالكامل");
+        if (!(+d.age >= 6 && +d.age <= 90)) return bad("age", RG_E.invalid_age);
+        if (!/^\+[1-9]\d{7,14}$/.test(rgPhone(d.phone, d.country))) return bad("phone", RG_E.invalid_phone);
+        if (d.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return bad("email", RG_E.invalid_email);
+        if (!d.occupation) return bad("x", RG_E.invalid_occupation);
+        if (+d.age < 18 && d.guardian_name.length < 2) return bad("guardian_name", RG_E.guardian_required);
+        if (+d.age < 18 && !/^\+[1-9]\d{7,14}$/.test(rgPhone(d.guardian_phone, d.country))) return bad("guardian_phone", RG_E.guardian_phone);
+      }
+      if (rg.step === 2) { if (!d.ai_use) return bad("x", RG_E.invalid_ai_use); if (!d.goal) return bad("x", RG_E.invalid_goal); }
+      if (rg.step === 3 && !d.consent) return bad("consent", "يجب الموافقة على التواصل وسياسة الخصوصية");
+      return true;
+    };
+    f.age?.addEventListener("input", () => { $("#rg-guard").hidden = !(+f.age.value && +f.age.value < 18); });
+    f.country?.addEventListener("change", () => { collect(); viewRegister(); });
+    $("#rgb")?.addEventListener("click", () => { collect(); rg.step--; rgSave(); viewRegister(); window.scrollTo(0, 0); });
+    const send = async (withQuiz) => {
+      collect(); if (!check()) return;
+      const btns = $$("button", f); btns.forEach(b => b.disabled = true); $("#rgm").innerHTML = `<div class="msg ok">جارٍ الإرسال…</div>`;
+      try {
+        rg.res = await rpc("academy_register", { p: { ...d, phone: rgPhone(d.phone, d.country), guardian_phone: +d.age < 18 ? rgPhone(d.guardian_phone, d.country) : null,
+          quiz: withQuiz && d.quiz.some(x => x != null) ? d.quiz : null, consent: true, client_token: rg.token, utm: rgUtm() } });
+        rgSave(); rgResult(); window.scrollTo(0, 0);
+      } catch (e) { const k = String(e?.message || "").split(/\s/)[0]; $("#rgm").innerHTML = `<div class="msg">${RG_E[k] || E[k] || E.generic}</div>`; btns.forEach(b => b.disabled = false); }
+    };
+    $("#rgs")?.addEventListener("click", () => send(false));
+    f.addEventListener("submit", e => { e.preventDefault(); collect(); if (rg.step < 3) { if (check()) { rg.step++; rgSave(); viewRegister(); window.scrollTo(0, 0); } } else send(true); });
+  }
+
+  function rgResult() {
+    const r = rg.res || {}, t = r.track_info || {}, lv = RG_LEVEL[r.level] || RG_LEVEL.beginner, name = (rg.d.full_name || "").split(/\s+/)[0];
+    const wa = `https://wa.me/201555159139?text=${encodeURIComponent(`مرحباً، سجّلت في HUDERA Academy ورقم التسجيل ${r.ref || ""}`)}`;
+    app.innerHTML = `<section><div class="wrap narrow">
+      <div class="card state"><div class="ic">🎉</div><b>تم تسجيلك${name ? " يا " + esc(name) : ""}</b>
+        ${r.ref ? `<p style="margin:6px 0 0;color:var(--muted)">رقم التسجيل: <b dir="ltr" style="color:var(--ink)">${esc(r.ref)}</b></p>` : ""}<p style="color:var(--muted);margin:4px 0 0">سيتواصل معك فريقنا على واتساب خلال 48 ساعة لتأكيد المسار والموعد.</p></div>
+      ${r.level ? `<div class="g2" style="margin-top:14px">
+        <div class="card"><small style="color:var(--muted)">مستواك الحالي</small><div style="display:flex;align-items:baseline;gap:10px;margin:4px 0"><b style="font-size:24px;color:var(--ink)">${lv[0]}</b>${r.score != null ? `<span class="chip blue">${r.score} من 8</span>` : `<span class="chip">بحسب إجاباتك</span>`}</div><p style="margin:0;font-size:15px;color:var(--muted)">${lv[1]}</p></div>
+        <div class="card" style="border-color:var(--primary)"><small style="color:var(--muted)">المسار المقترح لك</small><b style="display:block;font-size:20px;color:var(--ink);margin:4px 0">${esc(t.ar || "")}</b>
+          <p style="margin:0 0 8px;font-size:15px;color:var(--muted)">${esc(t.for || "")}</p>${t.open ? `<span class="chip ok">التسجيل مفتوح الآن</span>` : `<span class="chip warn">قريباً · ستكون من أوائل من نتواصل معهم</span>`}</div></div>` : ""}
+      <div class="row" style="margin-top:16px;gap:10px;flex-wrap:wrap">${t.open ? `<a class="btn primary big" href="#/course">اطّلع على الدورة والمنهج</a>` : `<a class="btn primary big" href="#/course">تعرّف على الأكاديمية</a>`}
+        <a class="btn big" href="${wa}" target="_blank" rel="noopener">تواصل معنا على واتساب</a></div>
+      <p style="margin-top:18px;font-size:14px;color:var(--faint)">المسار المقترح مبدئي، ويؤكده فريقنا معك بعد التواصل. <button class="btn sm ghost" type="button" id="rgn">تسجيل شخص آخر</button></p>
+    </div></section>`;
+    $("#rgn").addEventListener("click", () => { try { sessionStorage.removeItem(rgKey); } catch (e) {} Object.assign(rg, { step: 1, d: {}, order: null, token: null, res: null }); viewRegister(); });
+  }
+
   /* ---------------------------------------------------------------- router */
   async function route() {
     const [, r = "", a, b] = location.hash.split("/");
     nav(); window.scrollTo(0, 0);
     try {
       if (r === "verify") return viewVerify(a ? decodeURIComponent(a) : "");
+      if (r === "register") return viewRegister();
       if (r === "enroll") return viewEnroll(a);
       if ((r === "learn" || r === "s" || r === "progress") && !enrId) { location.hash = user ? "#/enroll" : "#/course"; return; }
       if (r === "learn") { await loadCourse(); return viewLearn(); }
@@ -610,7 +771,7 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
     if (qs.has("code")) history.replaceState(null, "", location.pathname + location.hash);
     let back = null; try { back = sessionStorage.getItem("academy-back"); sessionStorage.removeItem("academy-back"); sessionStorage.removeItem("hudera-return"); } catch (e) {}
     sb.auth.onAuthStateChange(async (ev, s) => { const was = user?.id; user = s?.user || null; if ((user?.id || null) !== (was || null)) { await loadCatalog().catch(() => {}); route(); } });
-    try { await loadCatalog(); } catch (e) { app.innerHTML = `<section><div class="wrap narrow"><div class="msg">الأكاديمية غير متاحة حالياً. حاول بعد قليل.</div></div></section>`; return; }
+    try { await loadCatalog(); } catch (e) { if (location.hash.startsWith("#/register")) { route(); return; } app.innerHTML = `<section><div class="wrap narrow"><div class="msg">الأكاديمية غير متاحة حالياً. حاول بعد قليل.</div></div></section>`; return; }
     if (back && back !== location.hash) { location.hash = back; return; }
     route();
   })();
