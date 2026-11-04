@@ -141,6 +141,10 @@ input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb,var(
 .player{background:#0B1220;border-radius:16px;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center;color:#9AA4BA;position:relative}
 .player video,.player iframe{width:100%;height:100%;border:0;display:block;background:#000}
 .player .soon{text-align:center;padding:20px}.player .soon b{display:block;color:#fff;font-size:18px}
+.lng{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}.lng>span{color:var(--muted);font-size:14px}
+.lng button{border:1px solid var(--line,#d9dee8);background:var(--card,#fff);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}
+.lng button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}.lng .cc{margin-inline-start:auto}
+.player video::cue{font-size:1.05em;line-height:1.5;background:rgba(0,0,0,.72);color:#fff}
 .lessons{display:grid;gap:8px}.lesson{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;background:var(--surface)}
 .lesson[aria-current=true]{border-color:var(--primary);background:var(--primary-soft)}.lesson .ck{width:24px;height:24px;border-radius:50%;border:2px solid var(--line2);display:grid;place-items:center;flex:none;font-size:13px}
 .lesson.d .ck{background:var(--ok);border-color:var(--ok);color:#fff}.lesson b{font-size:15px;color:var(--ink)}.lesson small{margin-inline-start:auto;color:var(--faint);white-space:nowrap}
@@ -394,10 +398,34 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   /* ---------------------------------------------------------------- session */
   let curLesson = 0;
   async function videoSrc(l) {
-    if (l.video_path?.startsWith("r2:")) { try { const r = await rpc("academy_video_ticket", { p_lesson: l.id }); return { type: "file", url: r.url }; } catch (e) { console.warn(e); } }
+    if (l.video_path?.startsWith("r2:")) { try { const r = await rpc("academy_video_ticket", { p_lesson: l.id }); return { type: "file", url: r.url, tracks: r.tracks || [] }; } catch (e) { console.warn(e); } }
     else if (l.video_path) { const { data, error } = await sb.storage.from("academy-videos").createSignedUrl(l.video_path, 3 * 3600); if (!error) return { type: "file", url: data.signedUrl }; }
     if (l.video_url) { const y = l.video_url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/); return y ? { type: "yt", url: `https://www.youtube-nocookie.com/embed/${y[1]}?rel=0` } : { type: "link", url: l.video_url }; }
     return null;
+  }
+  /* one video (picture + sound effects) + one voice-over track per language, kept in sync; subtitles per language */
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  function langPlayer(vid, TR, pl) {
+    const au = document.createElement("audio"); au.preload = "auto"; pl.appendChild(au);
+    let li = Math.max(0, TR.findIndex(t => t.lang === LS.get("hx_lang"))), cc = LS.get("hx_cc") !== "0", hold = false;
+    const bar = document.createElement("div"); bar.className = "lng"; pl.after(bar);
+    const paint = () => { bar.innerHTML = `<span>🔊 لغة الشرح:</span>${TR.map((t, i) => `<button type="button" data-l="${i}" aria-pressed="${i === li}">${esc(t.label)}</button>`).join("")}<button type="button" class="cc" aria-pressed="${cc}">${cc ? "الترجمة ✓" : "الترجمة ✗"}</button>`;
+      $$("[data-l]", bar).forEach(b => b.addEventListener("click", () => pick(+b.dataset.l))); $(".cc", bar).addEventListener("click", () => { cc = !cc; LS.set("hx_cc", cc ? "1" : "0"); subs(); paint(); }); };
+    const subs = () => { [...vid.textTracks].forEach(t => { t.mode = cc && t.language === TR[li].lang ? "showing" : "hidden"; }); };
+    TR.forEach(t => { if (!t.vtt) return; fetch(t.vtt).then(r => r.ok ? r.text() : "").then(txt => { if (!txt) return; const k = document.createElement("track"); k.kind = "subtitles"; k.srclang = t.lang; k.label = t.label; k.src = URL.createObjectURL(new Blob([txt], { type: "text/vtt" })); vid.appendChild(k); k.addEventListener("load", subs); setTimeout(subs, 50); }).catch(() => {}); });
+    const sync = force => { if (!au.src || isNaN(au.duration)) return; if (force || Math.abs(au.currentTime - vid.currentTime) > 0.25) au.currentTime = Math.min(vid.currentTime, au.duration); };
+    const go = () => { if (vid.paused) return; sync(false); au.play().catch(() => {}); };
+    function pick(i) { li = i; LS.set("hx_lang", TR[i].lang); const was = !vid.paused; au.src = TR[i].audio; au.playbackRate = vid.playbackRate;
+      au.addEventListener("loadedmetadata", () => { sync(true); if (was && !vid.paused) au.play().catch(() => {}); }, { once: true }); subs(); paint(); }
+    vid.addEventListener("play", go); vid.addEventListener("playing", go);
+    vid.addEventListener("pause", () => au.pause()); vid.addEventListener("waiting", () => au.pause()); vid.addEventListener("ended", () => au.pause());
+    vid.addEventListener("seeking", () => sync(true)); vid.addEventListener("seeked", () => { sync(true); go(); });
+    vid.addEventListener("timeupdate", () => { if (!vid.paused) sync(false); });
+    vid.addEventListener("ratechange", () => { au.playbackRate = vid.playbackRate; });
+    const vol = () => { au.volume = vid.volume; au.muted = vid.muted; }; vid.addEventListener("volumechange", vol);
+    au.addEventListener("waiting", () => { if (!vid.paused) { hold = true; vid.pause(); } });
+    au.addEventListener("canplay", () => { if (hold) { hold = false; vid.play().catch(() => {}); } });
+    pick(li); vol();
   }
   function viewSession(n, tab = "videos") {
     const s = course.sessions.find(x => x.n === +n); if (!s) { location.hash = "#/learn"; return; }
@@ -432,6 +460,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       videoSrc(l).then(v => { const pl = $("#pl"); if (!pl) return;
         if (!v) pl.innerHTML = `<div class="soon"><b>🎬 الفيديو بيتجهّز</b>هيتنزل هنا قبل اللايف. لحد ما ينزل اقرا نقط كل فصل.</div>`;
         else if (v.type === "file") { pl.innerHTML = `<video controls controlsList="nodownload" preload="metadata" playsinline src="${esc(v.url)}"></video>`; vid = $("video", pl);
+          if (v.tracks?.length) langPlayer(vid, v.tracks, pl);
           vid.addEventListener("timeupdate", () => { let k = 0; CH.forEach(c => { if (c.t != null && vid.currentTime >= c.t) k = c.i; }); if (k !== curLesson) showCh(k); });
           vid.addEventListener("ended", async () => { if (!l.done) { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: true }); l.done = true; toast("✓ اتعلّم إنك خلصت الفيديو"); paintTab(s, "videos"); } catch (e) {} } }); vid.addEventListener("contextmenu", e => e.preventDefault()); }
         else if (v.type === "yt") { pl.innerHTML = `<iframe src="${esc(v.url)}" data-base="${esc(v.url)}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(l.title)}"></iframe>`; yt = $("iframe", pl); }
