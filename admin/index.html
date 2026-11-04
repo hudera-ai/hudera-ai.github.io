@@ -2384,6 +2384,7 @@ function acCohortForm(c) {
 }
 
 /* ---- content & lesson videos ---- */
+const AC_LANGS = [["eg", "مصري"], ["gulf", "خليجي"], ["en", "English"]];
 async function acR2Upload(base, obj, f, onp) {
   const tok = (await sb.auth.getSession()).data.session?.access_token; if (!tok) throw new Error(L("سجّل دخول تاني", "Sign in again"));
   const u = `${base}/up/${obj}`, H = { authorization: `Bearer ${tok}` };
@@ -2412,7 +2413,7 @@ async function acContent() {
       ${m ? `<form id="vb-f" class="filters" style="flex-wrap:nowrap"><input class="input" name="b" dir="ltr" value="${esc(vb)}" placeholder="https://academy-video.<account>.workers.dev"><button class="btn sm" type="submit">${t("Save")}</button></form>` : ""}</section>
     ${co.sessions.map(s => `<section class="card" style="margin-bottom:12px"><h2 style="margin:0 0 6px">${s.n}. ${esc(s.title)}</h2>
       <div class="tbl-wrap"><table><tbody>${s.lessons.map(l => `<tr><td style="width:40px">${s.n}.${l.n}</td><td>${esc(l.title)}<span class="s">${l.mins} ${L("د", "min")}</span></td>
-        <td>${l.video_path ? `<span class="chip c-mint">✓ ${l.video_path.startsWith("r2:") ? "Cloudflare" : L("مرفوع", "Uploaded")}</span><span class="s mono">${esc(l.video_path)}</span>` : l.video_url ? `<span class="chip c-sky">🔗 ${L("لينك", "Link")}</span><span class="s" dir="ltr">${esc(l.video_url.slice(0, 50))}</span>` : `<span class="chip c-amber">${L("لسه", "Missing")}</span>`}</td>
+        <td>${l.video_path ? `<span class="chip c-mint">✓ ${l.video_path.startsWith("r2:") ? "Cloudflare" : L("مرفوع", "Uploaded")}</span><span class="s mono">${esc(l.video_path)}</span>${(l.audio_tracks || []).length ? `<span class="s">🔊 ${l.audio_tracks.map(x => esc(x.label)).join(" · ")}</span>` : ""}` : l.video_url ? `<span class="chip c-sky">🔗 ${L("لينك", "Link")}</span><span class="s" dir="ltr">${esc(l.video_url.slice(0, 50))}</span>` : `<span class="chip c-amber">${L("لسه", "Missing")}</span>`}</td>
         <td>${m ? `<button class="btn sm" type="button" data-v="${l.id}">${l.video_path || l.video_url ? L("تغيير", "Replace") : L("ارفع فيديو", "Add video")}</button>` : ""}${l.video_path ? `<button class="btn sm ghost" type="button" data-play="${esc(l.video_path)}" data-lid="${l.id}">▶</button>` : ""}</td></tr>`).join("")}</tbody></table></div>
       <p class="small muted" style="margin:8px 0 0">📝 ${esc(s.task?.title || "—")} · ✅ ${s.quiz_count} ${L("سؤال", "questions")}</p></section>`).join("")}`;
   $$("[data-play]", box).forEach(b => b.addEventListener("click", () => b.dataset.play.startsWith("r2:") ? acPlayR2(b.dataset.lid) : acSigned("academy-videos", b.dataset.play)));
@@ -2426,6 +2427,11 @@ async function acContent() {
       ${vb ? `<label class="fld"><span>${L("أو اسم ملف موجود بالفعل على R2", "Or an object already in R2")}</span><input class="input" name="r2" dir="ltr" value="${esc(l.video_path?.startsWith("r2:") ? l.video_path.slice(3) : "")}" placeholder="ai-foundations/s1/l1.mp4"></label>` : ""}
       <label class="fld"><span>${L("أو لينك يوتيوب غير مدرج (Unlisted) أو أي لينك https", "Or an unlisted YouTube link / any https link")}</span><input class="input" name="u" type="url" dir="ltr" value="${esc(l.video_url || "")}" placeholder="https://youtu.be/…"></label>
       ${(l.chapters || []).length ? `<div class="fld"><span>${L("بداية كل فصل (دقيقة:ثانية)", "Chapter start times (m:ss)")}</span>${l.chapters.map((c, i) => `<label class="filters" style="flex-wrap:nowrap;margin-bottom:6px"><input class="input" data-ct="${i}" dir="ltr" style="width:90px" value="${c.t == null ? "" : `${Math.floor(c.t / 60)}:${String(Math.round(c.t % 60)).padStart(2, "0")}`}" placeholder="0:00"><span>${i + 1}. ${esc(c.title)}</span></label>`).join("")}</div>` : ""}
+      ${vb ? `<fieldset class="fld" style="border:1px solid var(--line);border-radius:12px;padding:10px 12px"><legend style="padding:0 6px"><b>🔊 ${L("لغات الشرح (اختياري)", "Voice-over languages (optional)")}</b></legend>
+        <p class="small muted" style="margin:0 0 8px">${L("الفيديو نفسه من غير صوت الشرح، ولكل لغة ملف صوت (m4a/mp3) وملف ترجمة (vtt). الطالب يختار اللغة تحت الفيديو.", "The video has no voice-over; each language has an audio file (m4a/mp3) and a subtitles file (vtt). Students pick the language under the video.")}</p>
+        ${AC_LANGS.map(([k, lb]) => { const cur = (l.audio_tracks || []).find(x => x.lang === k); return `<div class="filters" style="flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center"><b style="min-width:70px">${lb}</b>${cur ? `<span class="chip c-mint">✓</span>` : `<span class="chip c-amber">${L("لسه", "Missing")}</span>`}
+          <label class="small">${L("صوت", "Audio")} <input type="file" data-ta="${k}" accept="audio/mp4,audio/x-m4a,audio/mpeg,.m4a,.mp3"></label><label class="small">${L("ترجمة", "Subtitles")} <input type="file" data-tv="${k}" accept=".vtt,text/vtt"></label>
+          ${cur ? `<label class="small"><input type="checkbox" data-tx="${k}"> ${L("شيل اللغة دي", "Remove")}</label>` : ""}</div>`; }).join("")}</fieldset>` : ""}
       ${dlgBtns(t("Save"))}</form>`, false);
     dlg.addEventListener("close", async () => {
       if (dlg.returnValue === "ok") { const f = $("[name=f]", dlg).files[0], u = $("[name=u]", dlg).value.trim(), r2 = ($("[name=r2]", dlg)?.value || "").trim().replace(/^r2:/, "");
@@ -2438,7 +2444,20 @@ async function acContent() {
             else { if (f.size > 50 * 1024 * 1024) throw new Error(L("الملف أكبر من 50 ميجا", "File is over 50 MB")); toast(L("بيترفع الفيديو…", "Uploading…"));
               path = obj; const { error } = await sb.storage.from("academy-videos").upload(path, f, { contentType: f.type || "video/mp4", upsert: false }); if (error) throw error; } }
           const times = $$("[data-ct]", dlg).map(x => { const m = x.value.trim().match(/^(\d{1,3}):(\d{1,2})$/); return m ? +m[1] * 60 + +m[2] : null; });
-          await api("admin_academy_lesson_video", { p_lesson: l.id, p_path: f || r2 ? path : (u ? null : path), p_url: u || null, p_times: times.length ? times : null }); toast(L("اتحفظ ✓", "Saved ✓")); ac.data = null; viewAcademy();
+          await api("admin_academy_lesson_video", { p_lesson: l.id, p_path: f || r2 ? path : (u ? null : path), p_url: u || null, p_times: times.length ? times : null });
+          if (vb) { let tr = (l.audio_tracks || []).map(x => ({ ...x })), ch = false; const stamp = Date.now().toString(36);
+            for (const [k, lb] of AC_LANGS) {
+              if ($(`[data-tx="${k}"]`, dlg)?.checked) { tr = tr.filter(x => x.lang !== k); ch = true; continue; }
+              const fa = $(`[data-ta="${k}"]`, dlg)?.files[0], fv = $(`[data-tv="${k}"]`, dlg)?.files[0]; if (!fa && !fv) continue;
+              let cur = tr.find(x => x.lang === k); if (!cur && !fa) throw new Error(L(`ارفع ملف الصوت لـ ${lb} الأول`, `Upload the ${lb} audio first`));
+              if (!cur) { cur = { lang: k, label: lb }; tr.push(cur); }
+              const pre = `${co.slug}/s${s.n}/l${l.n}-${k}-${stamp}`;
+              if (fa) { const ext = /mpeg|mp3/.test(fa.type + fa.name) ? "mp3" : "m4a"; toast(`${L("بيترفع صوت", "Uploading audio")} ${lb}…`);
+                await acR2Upload(vb, `${pre}.${ext}`, new File([fa], fa.name, { type: ext === "mp3" ? "audio/mpeg" : "audio/mp4" }), p => toast(`${lb} ${Math.round(p * 100)}%`)); cur.audio = `r2:${pre}.${ext}`; }
+              if (fv) { await acR2Upload(vb, `${pre}.vtt`, new File([fv], fv.name, { type: "text/vtt" })); cur.vtt = `r2:${pre}.vtt`; }
+              ch = true; }
+            if (ch) { tr.sort((a, b) => AC_LANGS.findIndex(x => x[0] === a.lang) - AC_LANGS.findIndex(x => x[0] === b.lang)); await api("admin_academy_lesson_tracks", { p_lesson: l.id, p_tracks: tr }); } }
+          toast(L("اتحفظ ✓", "Saved ✓")); ac.data = null; viewAcademy();
         } catch (e) { toast(acErr(e)); } }
       dlg.remove();
     });
