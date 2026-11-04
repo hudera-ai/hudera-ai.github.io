@@ -95,12 +95,15 @@ button{font:inherit;color:inherit}
 /* ---------- nav ---------- */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
 .nav .container{display:flex;align-items:center;gap:20px;height:64px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);direction:ltr}
 .logo svg{width:32px;height:32px}
 .logo b{font-family:var(--f-display);font-size:23px;font-weight:700;letter-spacing:-.02em}
 .logo span{font-family:var(--f-display);font-size:23px;font-weight:400;color:var(--faint);margin-inline-start:-4px}
 .nav-links{display:flex;gap:4px;margin-inline-start:auto}
-.nav-links a{font-size:14.5px;font-weight:500;color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px}
+.nav-links a{font-size:14.5px;font-weight:500;color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;white-space:nowrap}
+.nav-links .nav-cta{display:none}
+.menu-btn{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);place-items:center;cursor:pointer;color:var(--ink);flex:none}
+.menu-btn svg{width:20px;height:20px}.menu-btn .x{display:none}.nav.open .menu-btn .x{display:block}.nav.open .menu-btn .bars{display:none}
 .nav-links a:hover{color:var(--ink);background:var(--surface-2)}
 .theme-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;color:var(--muted)}
 .theme-btn svg{width:18px;height:18px}
@@ -468,7 +471,7 @@ table.t .faint{color:var(--faint)}
   .phone-duo>.browser{width:100%}
 }
 @media (max-width:820px){
-  .nav-links a:not(.keep){display:none}
+
   .products{grid-template-columns:1fr}
   .pcard.featured .preview{aspect-ratio:16/10}
   .pgrid{grid-template-columns:1fr}
@@ -564,10 +567,20 @@ html[lang="ar"] .phead h1{line-height:1.2}
 .app-top h4{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .sr{left:0;top:0}
 @media (max-width:440px){
-  .nav-links{display:none}
-  .nav .container{gap:8px}
-  .nav .container>.lang-btn{margin-inline-start:auto}
+  .nav .container{gap:6px}
+  .logo{gap:7px}.logo svg{width:28px;height:28px}.logo b,.logo span{font-size:20px}
+  .theme-btn,.menu-btn{width:34px;height:34px}.acct-btn{width:34px!important;height:34px}
   .lang-btn{padding:0 10px;font-size:13.5px}
+}
+/* tablet + phone: the section links live behind a menu button */
+@media (max-width:1140px){
+  .menu-btn{display:grid}
+  .nav .container>.lang-btn{margin-inline-start:auto}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:2px;margin:0;padding:10px max(16px,env(safe-area-inset-left,0px)) 18px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -24px rgba(0,0,0,.45);max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow:auto}
+  .nav.open .nav-links{display:flex}
+  .nav-links a{display:block;font-size:16.5px;font-weight:600;color:var(--ink);padding:13px 14px;border-radius:10px}
+  .nav-links a:active{background:var(--surface-2)}
+  .nav-links .nav-cta{display:block;margin-top:8px;text-align:center;background:var(--primary);color:#fff}
 }
 @media (max-width:380px){
   .phone,.hero-stage .phone{width:min(290px,calc(100vw - 64px))}
@@ -609,7 +622,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
 .hero-ai{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);padding-block:64px 56px}
 .hero-ai h1 .hl{background:linear-gradient(100deg,var(--primary),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
 .agent-stage{display:flex;gap:20px;align-items:flex-start;position:relative}
-.agent-stage::before{content:"";position:absolute;inset:8% -4% 0 10%;background:radial-gradient(60% 60% at 40% 40%,var(--primary-soft),transparent 70%);z-index:-1;filter:blur(8px)}
+.agent-stage::before{content:"";position:absolute;inset:8% 0 0 10%;background:radial-gradient(60% 60% at 40% 40%,var(--primary-soft),transparent 70%);z-index:-1;filter:blur(8px)}
 .agent-stage #hero-phone .phone{width:268px}
 .agent-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;margin-top:28px}
 .agent-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);padding:14px 14px 10px}
@@ -692,7 +705,7 @@ html[lang="ar"] .phead h1{line-height:1.2}
 .wa-float svg{width:22px;height:22px}
 .wa-float:hover{background:#1FBE5A}
 @media (max-width:1100px){.hero-ai{grid-template-columns:1fr}.agent-stage{max-width:760px}.roi{grid-template-columns:1fr}}
-@media (max-width:820px){.faq{grid-template-columns:1fr}.vs>div{grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1fr)}.vs>div>*{padding:11px 10px;font-size:13.5px}}
+@media (max-width:820px){.agent-stage{flex-direction:column;align-items:center}.agent-side{margin-top:0;width:100%}.faq{grid-template-columns:1fr}.vs>div{grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1fr)}.vs>div>*{padding:11px 10px;font-size:13.5px}}
 @media (max-width:640px){
   .agent-stage{flex-direction:column;align-items:center}
   .agent-side{margin-top:0;width:100%}
@@ -882,13 +895,14 @@ body.chat-on .chat-fab{display:none}
       <svg viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" rx="30" fill="#3D5AFE"/><g transform="translate(-1.5 0)"><path d="M40 28 V92" stroke="#fff" stroke-width="12" stroke-linecap="round"/><path d="M40 70 A20 20 0 0 1 80 70 V78" stroke="#fff" stroke-width="12" stroke-linecap="round" fill="none"/><circle cx="80" cy="92" r="9" fill="#16C79A"/></g></svg>
       <b>hudera</b><span>AI</span>
     </a>
-    <nav class="nav-links" aria-label="Main">
-      <a href="#systems">Platforms</a><a href="#clients">Clients</a><a href="#value">Value</a><a href="#work">Products</a><a href="#process">How we work</a><a href="#faq">FAQ</a><a class="keep" href="#contact">Contact</a>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#systems">Platforms</a><a href="#clients">Clients</a><a href="#value">Value</a><a href="#work">Products</a><a href="#process">How we work</a><a href="#faq">FAQ</a><a class="keep" href="#contact">Contact</a><a class="nav-cta" href="#contact">Book a call</a>
     </nav>
     <button class="lang-btn no-l10n" id="lang" type="button"></button>
     <button class="theme-btn" id="theme" type="button" aria-label="Switch theme"></button>
     <div class="acct" id="acct" hidden></div>
     <a class="btn primary sm" href="#contact">Book a call</a>
+    <button class="menu-btn" id="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
 </header>
 
@@ -2236,6 +2250,7 @@ const AR_DICT = {
 "Contact": "تواصل معنا",
 "Book a call": "احجز مكالمة",
 "Switch theme": "تبديل المظهر",
+"Menu": "القائمة",
 "Switch to dark theme": "التبديل إلى المظهر الداكن",
 "Switch to light theme": "التبديل إلى المظهر الفاتح",
 "AI automation · SaaS · WhatsApp": "أتمتة بالذكاء الاصطناعي · SaaS · واتساب",
@@ -4336,6 +4351,12 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#lang").addEventListener("click", () => setLang(LANG === "ar" ? "en" : "ar"));
   $$("[data-i]").forEach(x => x.insertAdjacentHTML("afterbegin", ic(x.dataset.i)));
   [["p1", "Arabic & English"], ["p2", "A person approves anything sensitive"], ["p3", "Every decision traced"]].forEach(([id, t]) => { $("#" + id).innerHTML = ic("check") + esc(t); });
+  { const nv = $(".nav"), nb = $("#menu"), set = o => { nv.classList.toggle("open", o); nb.setAttribute("aria-expanded", o ? "true" : "false"); };
+    nb.addEventListener("click", e => { e.stopPropagation(); set(!nv.classList.contains("open")); });
+    $$(".nav-links a").forEach(a => a.addEventListener("click", () => set(false)));
+    document.addEventListener("click", e => { if (nv.classList.contains("open") && !nv.contains(e.target)) set(false); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && nv.classList.contains("open")) { set(false); nb.focus(); } });
+    matchMedia("(min-width:1141px)").addEventListener("change", e => { if (e.matches) set(false); }); }
   initTheme(); renderHome(); renderSystems(); renderHero(); initContact(); initRoi(); initMoreDemos();
   const wf = $("#wa-float"); if (wf && CONTACT.wa) { wf.outerHTML = `<a class="wa-float" ${waAttr("Hi HUDERA AI, I'd like to talk about an AI employee for my company.", "مرحباً HUDERA AI، أرغب في التحدث عن موظف ذكاء اصطناعي لشركتي.")} aria-label="Chat on WhatsApp">${ic("chat")}<span>WhatsApp</span></a>`; }
   $("#products").addEventListener("click", e => { const o = e.target.closest("[data-open]"); if (o && e.isTrusted) location.hash = "p-" + o.dataset.open; });
