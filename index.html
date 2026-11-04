@@ -3026,7 +3026,46 @@ const AR_DICT = {
 "Earned-value engine": "محرك القيمة المكتسبة",
 "6 test suites": "6 مجموعات اختبار",
 "5 sample projects": "5 مشاريع تجريبية",
-"4 AI agents": "4 وكلاء ذكاء اصطناعي"
+"4 AI agents": "4 وكلاء ذكاء اصطناعي",
+"Medical lab platform: website, patient portal, results": "منصة معمل تحاليل: موقع وبوابة مرضى ونتائج",
+"A complete platform for a medical laboratory: a public website with online booking, a patient portal opened by WhatsApp invitation codes, a staff dashboard, and PDF reports protected by a QR verification page.": "منصة كاملة لمعمل تحاليل طبية: موقع عام بحجز أونلاين، وبوابة مرضى تُفتح بكود دعوة على واتساب، ولوحة إدارة للفريق، وتقارير PDF محمية بصفحة تحقق عبر QR.",
+"This is a front-end demo running in your browser on sample data for a fictional lab. Use the bar at the top to switch between the website, the patient portal and the dashboard; sign-in is automatic. Everything you change stays on your device.": "هذا عرض يعمل في متصفحك على بيانات تجريبية لمعمل وهمي. استخدم الشريط العلوي للتنقل بين الموقع وبوابة المريض ولوحة الإدارة، والدخول يتم تلقائياً. كل ما تغيّره يُحفظ على جهازك فقط.",
+"Super admin": "مدير النظام",
+"Reception": "الاستقبال",
+"Lab technician": "فني المعمل",
+"Reviewing doctor": "الطبيب المراجع",
+"Report approver": "معتمد التقارير",
+"Open the Demo guide from the top bar and enter the dashboard as Reception: add a patient, create a 30-day invitation code and copy the WhatsApp message.": "افتح «دليل التجربة» من الشريط العلوي وادخل لوحة الإدارة بدور الاستقبال: أضف مريضاً، وأنشئ كود دعوة لمدة 30 يوماً، وانسخ رسالة واتساب.",
+"Open the invitation link, activate the account with a PIN and land in the patient portal.": "افتح رابط الدعوة، وفعّل الحساب برمز PIN، لتدخل بوابة المريض.",
+"Sign in as the technician, create a report with tests and results and send it for review; approve it as the doctor and publish it as the approver.": "ادخل بدور فني المعمل، وأنشئ تقريراً بالتحاليل والنتائج وأرسله للمراجعة، ثم وافق عليه بدور الطبيب وانشره بدور معتمد التقارير.",
+"Download the PDF report and open its QR verification page.": "حمّل التقرير بصيغة PDF وافتح صفحة التحقق الخاصة به عبر QR.",
+"Book a test or a home sample collection from the public website.": "احجز تحليلاً أو سحب عينة من المنزل من الموقع العام.",
+"Lab website": "موقع المعمل",
+"Arabic and English website with the tests catalogue, offers, home collection booking and WhatsApp.": "موقع بالعربية والإنجليزية فيه دليل التحاليل والعروض وحجز السحب المنزلي وواتساب.",
+"Patient portal": "بوابة المريض",
+"Invitation codes sent on WhatsApp, PIN sign-in, and every report and appointment in one place.": "أكواد دعوة تُرسل على واتساب، ودخول برمز PIN، وكل التقارير والمواعيد في مكان واحد.",
+"Review and approval": "المراجعة والاعتماد",
+"The technician enters results, a doctor reviews and an approver publishes; every step is logged.": "الفني يُدخل النتائج، والطبيب يراجع، والمعتمد ينشر، وكل خطوة مسجّلة.",
+"Secure PDF reports": "تقارير PDF آمنة",
+"Units and reference ranges filled in automatically, with a watermark, a barcode and a QR verification page.": "الوحدات والمعدلات الطبيعية تُملأ تلقائياً، مع علامة مائية وباركود وصفحة تحقق عبر QR.",
+"Lab dashboard": "لوحة المعمل",
+"Patients, reports in progress, invitations, appointments and monthly test volume.": "المرضى، والتقارير قيد الإجراء، والدعوات، والمواعيد، وحجم التحاليل الشهري.",
+"Invitation codes": "أكواد الدعوة",
+"Valid, expired, used and revoked codes, extendable from the dashboard.": "أكواد صالحة ومنتهية ومستخدمة وملغاة، ويمكن تمديدها من لوحة الإدارة.",
+"Patient books": "المريض يحجز",
+"From the website or WhatsApp, including home collection.": "من الموقع أو واتساب، ومنها السحب المنزلي.",
+"Lab": "المعمل",
+"Results entered": "إدخال النتائج",
+"The technician picks the tests; units and ranges fill in.": "الفني يختار التحاليل، والوحدات والمعدلات تُملأ تلقائياً.",
+"Doctor approves": "الطبيب يعتمد",
+"The approver publishes the final report.": "معتمد التقارير ينشر التقرير النهائي.",
+"The patient gets a link and an invitation code.": "المريض يستلم رابطاً وكود دعوة.",
+"Portal": "البوابة",
+"Report delivered": "التقرير يصل",
+"View, download and verify the PDF by QR.": "عرض التقرير وتحميله والتحقق منه عبر QR.",
+"6 staff roles": "6 أدوار للفريق",
+"22 sample patients": "22 مريضاً تجريبياً",
+"5 test scenarios": "5 سيناريوهات تجربة"
 };
 
 /* ================= i18n: Arabic / English =================
@@ -4020,6 +4059,16 @@ const SYSTEMS = [
     flow: [["Device", "Punches", "Fingerprint device export or push."], ["Engine", "Day records", "Status, late, early, worked, overtime per employee per day."], ["HR", "Exceptions", "Missing punches, leaves, manual fixes."], ["Report", "Monthly figures", "Additions and deductions per employee."], ["Payroll", "Locked month", "Figures frozen and exported."]],
     stack: ["Node.js", "Express", "SQLite (sql.js)", "Vanilla JS", "Device push API", "14 tests"],
     stats: ["40 employees", "3 months of punches", "14 tests"] },
+  { id: "medlab", name: "MedLab", repo: "medlab", kind: "Medical lab platform: website, patient portal, results", cat: "saas", noRepo: true,
+    tagline: "A complete platform for a medical laboratory: a public website with online booking, a patient portal opened by WhatsApp invitation codes, a staff dashboard, and PDF reports protected by a QR verification page.",
+    company: "Nabd Medical Lab (fictional)",
+    note: "This is a front-end demo running in your browser on sample data for a fictional lab. Use the bar at the top to switch between the website, the patient portal and the dashboard; sign-in is automatic. Everything you change stays on your device.",
+    users: [["admin@labdemo.com", "Super admin"], ["reception@labdemo.com", "Reception"], ["tech@labdemo.com", "Lab technician"], ["doctor@labdemo.com", "Reviewing doctor"], ["approver@labdemo.com", "Report approver"]],
+    tryit: ["Open the Demo guide from the top bar and enter the dashboard as Reception: add a patient, create a 30-day invitation code and copy the WhatsApp message.", "Open the invitation link, activate the account with a PIN and land in the patient portal.", "Sign in as the technician, create a report with tests and results and send it for review; approve it as the doctor and publish it as the approver.", "Download the PDF report and open its QR verification page.", "Book a test or a home sample collection from the public website."],
+    features: [["globe", "Lab website", "Arabic and English website with the tests catalogue, offers, home collection booking and WhatsApp."], ["users", "Patient portal", "Invitation codes sent on WhatsApp, PIN sign-in, and every report and appointment in one place."], ["check", "Review and approval", "The technician enters results, a doctor reviews and an approver publishes; every step is logged."], ["file", "Secure PDF reports", "Units and reference ranges filled in automatically, with a watermark, a barcode and a QR verification page."], ["chart", "Lab dashboard", "Patients, reports in progress, invitations, appointments and monthly test volume."], ["clock", "Invitation codes", "Valid, expired, used and revoked codes, extendable from the dashboard."]],
+    flow: [["Booking", "Patient books", "From the website or WhatsApp, including home collection."], ["Lab", "Results entered", "The technician picks the tests; units and ranges fill in."], ["Review", "Doctor approves", "The approver publishes the final report."], ["Notify", "WhatsApp message", "The patient gets a link and an invitation code."], ["Portal", "Report delivered", "View, download and verify the PDF by QR."]],
+    stack: ["React", "TypeScript", "Tailwind CSS", "PDF + QR", "Arabic / English"],
+    stats: ["6 staff roles", "22 sample patients", "5 test scenarios"] },
 ];
 const S = id => SYSTEMS.find(s => s.id === id);
 const sysDemo = s => `${PAGES}/${s.repo}/?mode=local`;
@@ -4029,11 +4078,11 @@ function renderSystems() {
   const host = $("#systems-grid"), plat = $("#platforms-grid"); if (!host) return;
   const card = s => `<article class="scard${s.platform ? " plat" : ""}">
       <a class="shot" href="#s-${s.id}" aria-label="${s.name}"><img src="${sysShot(s, "dashboard")}" alt="${s.name} dashboard" loading="lazy"></a>
-      <div class="body"><div class="meta">${s.platform ? chip(s.kind, "blue", false) : chip(CATS.find(c => c[0] === s.cat)[1], CAT_C[s.cat], false)}${chip(s.platform ? "AI agents" : "Complete system", "green", false)}${chip("Open source", "grey", false)}</div>
+      <div class="body"><div class="meta">${s.platform ? chip(s.kind, "blue", false) : chip(CATS.find(c => c[0] === s.cat)[1], CAT_C[s.cat], false)}${chip(s.platform ? "AI agents" : "Complete system", "green", false)}${s.noRepo ? "" : chip("Open source", "grey", false)}</div>
       <h3>${s.name}</h3><p>${s.tagline}</p>
       <div class="feat">${s.features.slice(0, 3).map(f => `<span>${ic("check")}${f[1]}</span>`).join("")}</div>
       <div class="stats">${s.stats.map(x => `<span>${x}</span>`).join("")}</div>
-      <div class="foot"><a class="btn primary sm" href="#s-${s.id}">${ic("play")}Try it yourself</a><a class="btn sm" href="${CONTACT.github}/${s.repo}" target="_blank" rel="noopener">${ic("grid")}Code on GitHub</a></div></div></article>`;
+      <div class="foot"><a class="btn primary sm" href="#s-${s.id}">${ic("play")}Try it yourself</a>${s.noRepo ? "" : `<a class="btn sm" href="${CONTACT.github}/${s.repo}" target="_blank" rel="noopener">${ic("grid")}Code on GitHub</a>`}</div></div></article>`;
   if (plat) plat.innerHTML = SYSTEMS.filter(s => s.platform).map(card).join("");
   host.innerHTML = SYSTEMS.filter(s => !s.platform).map(card).join("");
 }
@@ -4044,13 +4093,13 @@ function renderSystem(s) {
   v.innerHTML = `<div class="container pview">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="#systems">${ic("back")}All systems</a><span>/</span><span>${s.platform ? "Platform" : "Complete system"}</span></nav>
     <div class="phead"><div><div class="row">${chip(CATS.find(c => c[0] === s.cat)[1], CAT_C[s.cat], false)}${chip(s.kind, s.platform ? "blue" : "grey", false)}${chip(s.platform ? "AI agents" : "Complete system", "green", false)}</div><h1>${s.name}</h1><p class="tag">${s.tagline}</p></div>
-      <div class="acts"><a class="btn primary" href="${sysDemo(s)}" target="_blank" rel="noopener">${ic("play")}Open the live demo</a><a class="btn" href="${CONTACT.github}/${s.repo}" target="_blank" rel="noopener">${ic("grid")}Code on GitHub</a><a class="btn" href="#contact" data-interest="${s.id}">Discuss a similar solution</a></div></div>
+      <div class="acts"><a class="btn primary" href="${sysDemo(s)}" target="_blank" rel="noopener">${ic("play")}Open the live demo</a>${s.noRepo ? "" : `<a class="btn" href="${CONTACT.github}/${s.repo}" target="_blank" rel="noopener">${ic("grid")}Code on GitHub</a>`}<a class="btn" href="#contact" data-interest="${s.id}">Discuss a similar solution</a></div></div>
     <div class="sys-frame"><div class="sys-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url" dir="ltr">${PAGES}/${s.repo}/</span><a href="${sysDemo(s)}" target="_blank" rel="noopener">Open in a new tab ${ic("arrow")}</a></div>
       <iframe src="${sysDemo(s)}" title="${s.name} live demo" loading="lazy" allow="clipboard-write"></iframe></div>
-    <p style="font-size:13px;color:var(--faint);margin-top:12px">This is the real application running in your browser with a SQLite database (WebAssembly). Everything you change is saved on your device only. Sample company: ${s.company}. Demo users use the password <code class="no-l10n">demo1234</code>.</p>
+    ${s.note ? `<p style="font-size:13px;color:var(--faint);margin-top:12px">${s.note}</p>` : `<p style="font-size:13px;color:var(--faint);margin-top:12px">This is the real application running in your browser with a SQLite database (WebAssembly). Everything you change is saved on your device only. Sample company: ${s.company}. Demo users use the password <code class="no-l10n">demo1234</code>.</p>`}
     <div class="pgrid">
       <div class="pbox"><h3>Try this</h3><ol class="tryit">${s.tryit.map(x => `<li>${x}</li>`).join("")}</ol></div>
-      <div class="pbox"><h3>Sign in as</h3><div class="users">${s.users.map(([e, r]) => `<div><b class="no-l10n" dir="ltr">${e}</b><span>${r}</span></div>`).join("")}</div><p class="small" style="margin-top:10px">Same code runs as a real server: <code class="no-l10n">npm install && npm start</code> → REST API, sessions, integrations.</p></div>
+      <div class="pbox"><h3>Sign in as</h3><div class="users">${s.users.map(([e, r]) => `<div><b class="no-l10n" dir="ltr">${e}</b><span>${r}</span></div>`).join("")}</div>${s.noRepo ? "" : `<p class="small" style="margin-top:10px">Same code runs as a real server: <code class="no-l10n">npm install && npm start</code> → REST API, sessions, integrations.</p>`}</div>
       <div class="pbox"><h3>Built with</h3><div class="stack" style="margin:0">${s.stack.map(x => chip(x, "grey", false)).join("")}</div><div class="stats" style="margin-top:12px">${s.stats.map(x => `<span>${x}</span>`).join("")}</div></div></div>
     <h2 class="h-sub">What's inside</h2><div class="features">${s.features.map(([icn, t, d]) => `<div class="feature"><span class="ico">${ic(icn)}</span><div><b>${t}</b><span>${d}</span></div></div>`).join("")}</div>
     <h2 class="h-sub">How the workflow runs</h2><div class="flowline">${s.flow.map(([k, t, d], j) => `<div class="flowstep"><small>${String(j + 1).padStart(2, "0")} · ${k}</small><b>${t}</b><span>${d}</span></div>${j < s.flow.length - 1 ? `<span class="flowarrow">${ic("arrow")}</span>` : ""}`).join("")}</div>
