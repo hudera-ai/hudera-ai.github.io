@@ -2201,7 +2201,7 @@ const AC_ERR = { reason_required: ["اكتب السبب.", "Write the reason."],
 const acErr = e => (AC_ERR[e.code] ? FL(AC_ERR, e.code) : typeof ferr === "function" ? ferr(e) : e.message);
 const acDT = v => v ? new Date(v).toLocaleString(loc(), { timeZone: "Africa/Cairo", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "—";
 const ac = { data: null, tab: "", cohort: "", st: "pending" };
-const AC_TABS = [["requests", "طلبات الاشتراك", "Requests", "academy.view"], ["grading", "التصحيح", "Grading", "academy.view"], ["students", "الطلاب", "Students", "academy.view"],
+const AC_TABS = [["leads", "المسجلين", "Sign-ups", "academy.view"], ["requests", "طلبات الاشتراك", "Requests", "academy.view"], ["grading", "التصحيح", "Grading", "academy.view"], ["students", "الطلاب", "Students", "academy.view"],
   ["cohorts", "الدفعات والمواعيد", "Cohorts", "academy.view"], ["content", "المحتوى والفيديوهات", "Content", "academy.view"], ["setup", "الباقات والدفع", "Packages", "academy.manage"]];
 async function acLoad(force) { if (!ac.data || force) ac.data = await api("admin_academy"); return ac.data; }
 function acPage(tab, tools = "") {
@@ -2214,8 +2214,8 @@ function acPage(tab, tools = "") {
 async function viewAcademy() {
   const [, , tab = ""] = location.hash.split("/");
   try { await acLoad(true); } catch (e) { page(L("الأكاديمية", "Academy")).innerHTML = failBox(e); return; }
-  const T = { requests: acRequests, grading: acGrading, students: acStudents, cohorts: acCohorts, content: acContent, setup: acSetup };
-  if (!T[tab] || (tab === "setup" && !can("academy.manage"))) { location.hash = `#/academy/${ac.data.pending ? "requests" : ac.data.to_grade ? "grading" : "students"}`; return; }
+  const T = { leads: acLeads, requests: acRequests, grading: acGrading, students: acStudents, cohorts: acCohorts, content: acContent, setup: acSetup };
+  if (!T[tab] || (tab === "setup" && !can("academy.manage"))) { location.hash = `#/academy/${ac.data.pending ? "requests" : ac.data.to_grade ? "grading" : "leads"}`; return; }
   T[tab]();
 }
 const acCohortSel = (id = "ac-coh", all = true) => `<select class="input" id="${id}">${all ? `<option value="">${L("كل الدفعات", "All cohorts")}</option>` : ""}${(ac.data.cohorts || []).map(c => `<option value="${c.id}" ${c.id === ac.cohort ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select>`;
@@ -2261,6 +2261,89 @@ async function acRequests() {
       <label class="fld"><span>${L("السبب (الطالب هيشوفه)", "Reason (shown to the student)")}</span><input class="input" name="why" dir="auto" required placeholder="${L("مثلاً: التحويل ما وصلش", "e.g. payment not received")}"></label>${dlgBtns(L("تأكيد", "Confirm"))}</form>`, false);
     dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_academy_decide", { p: { id: e.id, approve: false, reason: $("[name=why]", dlg).value } }); ac.data = null; viewAcademy(); } catch (er) { toast(acErr(er)); } } dlg.remove(); });
   }));
+}
+
+/* ---- registrations (public sign-up form: age, country, background, level check, suggested track) ---- */
+const AL_ST = { new: ["جديد", "New", "c-sky"], contacted: ["اتكلمنا معاه", "Contacted", "c-blue"], no_answer: ["مردّش", "No answer", "c-amber"], qualified: ["مناسب · مستني الدفعة", "Qualified", "c-violet"],
+  enrolled: ["اشترك", "Enrolled", "c-mint"], not_fit: ["مش مناسب", "Not a fit", "c-red"] };
+const AL_LV = { beginner: ["مبتدئ", "Beginner"], basic: ["أساسي", "Basic"], intermediate: ["متوسط", "Intermediate"], advanced: ["متقدم", "Advanced"] };
+const AL_OCC = { school: ["طالب مدرسة", "School student"], university: ["طالب جامعي", "University student"], employee: ["موظف", "Employee"], business: ["صاحب عمل", "Business owner"], freelancer: ["عمل حر", "Freelancer"], job_seeker: ["بيدوّر على شغل", "Job seeker"], other: ["أخرى", "Other"] };
+const AL_AI = { none: ["ماستخدمش", "Never used"], sometimes: ["أحياناً", "Sometimes"], regular: ["بانتظام", "Regularly"], advanced: ["متقدم", "Advanced"] };
+const AL_GOAL = { basics: ["يفهم الأساسيات", "Learn the basics"], work: ["يطوّر شغله", "Improve at work"], job: ["وظيفة أفضل", "Better job"], build: ["يبني أدوات وأتمتة", "Build tools"], business: ["يطوّر مشروعه", "Grow a business"], content: ["محتوى وتسويق", "Content & marketing"] };
+const AL_LANG = { egy: ["مصري", "Egyptian"], gulf: ["خليجي", "Gulf"], msa: ["فصحى", "MSA"], en: ["English", "English"] };
+const AL_TIME = { morning: ["صباحاً", "Morning"], afternoon: ["بعد الظهر", "Afternoon"], evening: ["مساءً", "Evening"], weekend: ["ويك إند", "Weekend"] };
+const AL_DEV = { laptop: ["لابتوب", "Laptop"], both: ["لابتوب وموبايل", "Laptop + phone"], phone: ["موبايل بس", "Phone only"] };
+const AL_CC = { EG: "مصر", SA: "السعودية", AE: "الإمارات", KW: "الكويت", QA: "قطر", BH: "البحرين", OM: "عُمان", JO: "الأردن", PS: "فلسطين", LB: "لبنان", SY: "سوريا", IQ: "العراق", YE: "اليمن",
+  LY: "ليبيا", TN: "تونس", DZ: "الجزائر", MA: "المغرب", SD: "السودان", MR: "موريتانيا", SO: "الصومال", TR: "تركيا", GB: "بريطانيا", DE: "ألمانيا", FR: "فرنسا", US: "أمريكا", CA: "كندا", ZZ: "أخرى" };
+const alTr = (tracks, k) => { const x = (tracks || []).find(t => t.key === k); return x ? (AR_() ? x.ar : x.en || x.ar) : (k || "—"); };
+const alWa = (l, tracks) => {
+  const to = (l.age < 18 && l.guardian_phone ? l.guardian_phone : l.phone).replace(/\D/g, ""), first = String(l.age < 18 && l.guardian_name ? l.guardian_name : l.full_name).split(/\s+/)[0];
+  const msg = `أهلاً ${first} 👋\nمعاك فريق HUDERA Academy بخصوص تسجيلك (${l.ref})${l.age < 18 ? ` لـ ${l.full_name}` : ""}.\nحسب بياناتك، المسار المقترح: «${alTr(tracks, l.track || l.suggested_track)}».\nممكن نتكلم دقيقتين نأكد المسار والمواعيد المناسبة ليك؟`;
+  return `https://wa.me/${to}?text=${encodeURIComponent(msg)}`;
+};
+async function acLeads() {
+  const box = acPage("leads", `<a class="btn sm" href="../academy/register/" target="_blank" rel="noopener">${L("لينك التسجيل", "Sign-up link")} ↗</a>`);
+  ac.lst ??= "new"; ac.ltr ??= ""; ac.lq ??= "";
+  let d; try { d = await api("admin_academy_leads", { p_status: ac.lst || null, p_track: ac.ltr || null, p_q: ac.lq || null }); } catch (e) { box.innerHTML = failBox(e); return; }
+  const list = d.items || [], tr = d.tracks || [], c = d.counts || {};
+  const seg = [["new", FL(AL_ST, "new")], ["contacted", FL(AL_ST, "contacted")], ["no_answer", FL(AL_ST, "no_answer")], ["qualified", FL(AL_ST, "qualified")], ["enrolled", FL(AL_ST, "enrolled")], ["not_fit", FL(AL_ST, "not_fit")], ["", L("الكل", "All")]];
+  const link = "https://hudera.ai/academy/register/";
+  box.innerHTML = `<div class="grid g4" style="margin-bottom:12px">
+      <div class="kpi"><small>${L("إجمالي المسجلين", "Total sign-ups")}</small><b>${d.total || 0}</b></div>
+      <div class="kpi"><small>${L("جديد · محتاج تواصل", "New · to contact")}</small><b>${c.new || 0}</b></div>
+      <div class="kpi"><small>${L("مناسبين · مستنيين دفعة", "Qualified")}</small><b>${c.qualified || 0}</b></div>
+      <div class="kpi"><small>${L("اشتركوا", "Enrolled")}</small><b>${c.enrolled || 0}</b></div></div>
+    <div class="card" style="margin-bottom:12px;padding:12px 14px"><div class="filters" style="justify-content:space-between;align-items:center">
+      <span class="small">${L("حسب المسار:", "By track:")} ${tr.map(t => `<span class="chip ${t.open ? "c-mint" : ""}" style="margin-inline-start:4px">${esc(AR_() ? t.ar : t.en || t.ar)} · ${(d.by_track || {})[t.key] || 0}</span>`).join("")}</span>
+      <span class="filters" style="flex-wrap:nowrap"><input class="input" dir="ltr" value="${link}" readonly style="width:250px;font-size:13px"><button class="btn sm" type="button" id="al-copy">${L("انسخ اللينك", "Copy link")}</button></span></div></div>
+    <div class="filters" style="margin-bottom:10px;justify-content:space-between"><div class="seg" role="group">${seg.map(([k, l]) => `<button type="button" data-ls="${k}" aria-pressed="${ac.lst === k}">${l}${k && c[k] ? ` <span class="small muted">${c[k]}</span>` : ""}</button>`).join("")}</div>
+      <span class="filters"><select class="input" id="al-tr"><option value="">${L("كل المسارات", "All tracks")}</option>${tr.map(t => `<option value="${t.key}" ${t.key === ac.ltr ? "selected" : ""}>${esc(AR_() ? t.ar : t.en || t.ar)}</option>`).join("")}</select>
+      <input class="input" id="al-q" type="search" placeholder="${L("اسم أو رقم أو مجال", "Name, phone or field")}" value="${esc(ac.lq)}" style="width:190px"><button class="btn sm" type="button" id="al-csv">${t("Export CSV")}</button></span></div>
+    ${list.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("المسجّل", "Person")}</th><th>${L("السن / الدولة", "Age / country")}</th><th>${L("الخلفية والهدف", "Background & goal")}</th><th>${L("المستوى", "Level")}</th><th>${L("المسار", "Track")}</th><th>${L("سجّل", "Signed up")}</th><th>${t("Status")}</th><th></th></tr></thead><tbody>
+      ${list.map((l, i) => `<tr><td><span class="t" dir="auto">${esc(l.full_name)}</span><span class="s"><span dir="ltr">${esc(l.phone)}</span>${l.email ? ` · <span dir="ltr">${esc(l.email)}</span>` : ""} · <span dir="ltr">${esc(l.ref)}</span></span>
+          ${l.age < 18 ? `<span class="s">👤 ${L("ولي الأمر", "Guardian")}: <span dir="auto">${esc(l.guardian_name || "")}</span> · <span dir="ltr">${esc(l.guardian_phone || "")}</span></span>` : ""}</td>
+        <td>${l.age} ${L("سنة", "y")}<span class="s">${esc(AL_CC[l.country] || l.country)}${l.city ? ` · ${esc(l.city)}` : ""}</span></td>
+        <td>${esc(FL(AL_OCC, l.occupation))}${l.field ? ` · <span dir="auto">${esc(l.field)}</span>` : ""}<span class="s">🎯 ${esc(FL(AL_GOAL, l.goal))} · AI: ${esc(FL(AL_AI, l.ai_use))}</span></td>
+        <td>${esc(FL(AL_LV, l.level))}${l.quiz_score != null ? `<span class="s" dir="ltr">${l.quiz_score}/8</span>` : `<span class="s">${L("من غير اختبار", "no quiz")}</span>`}</td>
+        <td>${esc(alTr(tr, l.track || l.suggested_track))}${l.track && l.track !== l.suggested_track ? `<span class="s">${L("المقترح", "Suggested")}: ${esc(alTr(tr, l.suggested_track))}</span>` : l.track ? `<span class="s">✓ ${L("متأكد", "Confirmed")}</span>` : `<span class="s">${L("مقترح", "Suggested")}</span>`}</td>
+        <td>${ago(l.created_at)}${l.submissions > 1 ? ` <span class="chip">×${l.submissions}</span>` : ""}</td><td>${chip2(AL_ST, l.status)}${l.handled_by_name ? `<span class="s">${esc(l.handled_by_name)}</span>` : ""}</td>
+        <td><div class="filters" style="flex-wrap:nowrap"><a class="btn sm primary" href="${alWa(l, tr)}" target="_blank" rel="noopener" data-wa="${i}">${L("واتساب", "WhatsApp")}</a><button class="btn sm" type="button" data-lo="${i}">${L("فتح", "Open")}</button></div></td></tr>`).join("")}</tbody></table></div>`
+      : `<div class="card"><p class="empty">${ac.lst === "new" && !ac.lq ? L("مفيش تسجيلات جديدة 👌", "No new sign-ups 👌") : L("مفيش حاجة هنا.", "Nothing here.")}</p></div>`}`;
+  $$("[data-ls]", box).forEach(b => b.addEventListener("click", () => { ac.lst = b.dataset.ls; acLeads(); }));
+  $("#al-tr", box).addEventListener("change", e => { ac.ltr = e.target.value; acLeads(); });
+  let qt; $("#al-q", box).addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { ac.lq = e.target.value.trim(); acLeads().then(() => { const q = $("#al-q"); q?.focus(); q?.setSelectionRange(q.value.length, q.value.length); }); }, 400); });
+  $("#al-copy", box).addEventListener("click", async () => { try { await navigator.clipboard.writeText(link); toast(L("اتنسخ ✓", "Copied ✓")); } catch (e) { toast(link); } });
+  $("#al-csv", box).addEventListener("click", () => HX.csv(["Ref", "Name", "Age", "Country", "City", "Phone", "Email", "Occupation", "Field", "AI use", "Tools", "Goal", "Goal note", "Language", "Times", "Device", "Source",
+      "Guardian", "Guardian phone", "Quiz /8", "Level", "Suggested track", "Track", "Status", "Note", "Signed up"],
+    list.map(l => [l.ref, l.full_name, l.age, AL_CC[l.country] || l.country, l.city, l.phone, l.email, FL(AL_OCC, l.occupation), l.field, FL(AL_AI, l.ai_use), (l.tools || []).join(" "), FL(AL_GOAL, l.goal), l.goal_note,
+      l.lang ? FL(AL_LANG, l.lang) : "", (l.times || []).map(x => FL(AL_TIME, x)).join(" "), l.device ? FL(AL_DEV, l.device) : "", l.source, l.guardian_name, l.guardian_phone, l.quiz_score ?? "",
+      FL(AL_LV, l.level), alTr(tr, l.suggested_track), l.track ? alTr(tr, l.track) : "", FL(AL_ST, l.status), l.note, l.created_at]), `academy-signups-${new Date().toISOString().slice(0, 10)}.csv`));
+  // opening WhatsApp marks a new sign-up as contacted
+  $$("[data-wa]", box).forEach(a => a.addEventListener("click", () => { const l = list[+a.dataset.wa]; if (l.status === "new") api("admin_academy_lead_update", { p: { id: l.id, status: "contacted" } }).then(() => setTimeout(acLeads, 800)).catch(() => {}); }));
+  $$("[data-lo]", box).forEach(b => b.addEventListener("click", () => alDialog(list[+b.dataset.lo], tr)));
+}
+function alDialog(l, tr) {
+  const row = (k, v) => v ? `<tr><td class="muted" style="width:150px">${k}</td><td dir="auto">${v}</td></tr>` : "";
+  const dlg = dlgOpen(`<form method="dialog"><h2><span dir="auto">${esc(l.full_name)}</span> · <span dir="ltr" class="small muted">${esc(l.ref)}</span></h2>
+    <table class="tbl"><tbody>
+      ${row(L("السن", "Age"), `${l.age} ${L("سنة", "years")}`)}${row(L("الدولة", "Country"), esc((AL_CC[l.country] || l.country) + (l.city ? " · " + l.city : "")))}
+      ${row(L("واتساب", "WhatsApp"), `<span dir="ltr">${esc(l.phone)}</span>`)}${row(L("البريد", "E-mail"), l.email ? `<span dir="ltr">${esc(l.email)}</span>` : "")}
+      ${l.age < 18 ? row(L("ولي الأمر", "Guardian"), `${esc(l.guardian_name || "")} · <span dir="ltr">${esc(l.guardian_phone || "")}</span>`) : ""}
+      ${row(L("الوضع الحالي", "Occupation"), esc(FL(AL_OCC, l.occupation) + (l.field ? " · " + l.field : "")))}
+      ${row(L("استخدام AI", "AI use"), esc(FL(AL_AI, l.ai_use)) + ((l.tools || []).length ? ` · <span dir="ltr">${esc(l.tools.join(", "))}</span>` : ""))}
+      ${row(L("الهدف", "Goal"), esc(FL(AL_GOAL, l.goal)) + (l.goal_note ? `<div class="small">${esc(l.goal_note)}</div>` : ""))}
+      ${row(L("لغة الشرح", "Language"), l.lang ? esc(FL(AL_LANG, l.lang)) : "")}${row(L("المواعيد", "Times"), (l.times || []).map(x => esc(FL(AL_TIME, x))).join("، "))}
+      ${row(L("الجهاز", "Device"), l.device ? esc(FL(AL_DEV, l.device)) + (l.device === "phone" ? ` <span class="chip c-amber">${L("محتاج لابتوب للجلسات العملية", "needs a laptop for hands-on sessions")}</span>` : "") : "")}
+      ${row(L("عرفنا منين", "Source"), esc(l.source || "") + (l.utm?.utm_source ? ` · utm: ${esc(l.utm.utm_source)}` : ""))}
+      ${row(L("المستوى", "Level"), esc(FL(AL_LV, l.level)) + (l.quiz_score != null ? ` · <span dir="ltr">${l.quiz_score}/8</span>` : ` · ${L("من غير اختبار (حسب كلامه)", "self-reported")}`))}
+      ${row(L("المسار المقترح", "Suggested track"), esc(alTr(tr, l.suggested_track)))}
+    </tbody></table>
+    <div class="grid g2" style="margin-top:12px"><label class="fld"><span>${L("المسار النهائي", "Final track")}</span><select class="input" name="tr"><option value="">${L("— زي المقترح —", "— as suggested —")}</option>${tr.map(t => `<option value="${t.key}" ${t.key === l.track ? "selected" : ""}>${esc(AR_() ? t.ar : t.en || t.ar)}</option>`).join("")}</select></label>
+      <label class="fld"><span>${t("Status")}</span><select class="input" name="st">${Object.keys(AL_ST).map(k => `<option value="${k}" ${k === l.status ? "selected" : ""}>${esc(FL(AL_ST, k))}</option>`).join("")}</select></label></div>
+    <label class="fld"><span>${L("ملاحظات الفريق", "Team notes")}</span><textarea class="input" name="note" rows="3" dir="auto">${esc(l.note || "")}</textarea></label>
+    ${dlgBtns(L("احفظ", "Save"), `<a class="btn" href="${alWa(l, tr)}" target="_blank" rel="noopener" style="margin-inline-end:auto">${L("راسله على واتساب", "Message on WhatsApp")}</a>`)}</form>`);
+  dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { const g = n => $(`[name=${n}]`, dlg).value;
+    try { await api("admin_academy_lead_update", { p: { id: l.id, status: g("st"), track: g("tr"), note: g("note") } }); toast(L("اتحفظ ✓", "Saved ✓")); acLeads(); } catch (er) { toast(acErr(er)); } } dlg.remove(); });
 }
 
 /* ---- grading ---- */
