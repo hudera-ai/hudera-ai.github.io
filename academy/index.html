@@ -144,6 +144,9 @@ input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb,var(
 .lng{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}.lng>span{color:var(--muted);font-size:14px}
 .lng button{border:1px solid var(--line2);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
 .lng button:hover{border-color:var(--primary)}.lng button[aria-pressed="true"]{background:var(--primary);color:#fff;border-color:var(--primary)}.lng .cc{margin-inline-start:auto}
+.player .wm{position:absolute;z-index:3;pointer-events:none;user-select:none;color:#fff;opacity:.34;font-size:clamp(11px,1.6vw,15px);font-weight:600;text-shadow:0 1px 2px #000;white-space:nowrap;transition:top 1.2s ease,left 1.2s ease;direction:ltr}
+.player .takeover{position:absolute;inset:0;z-index:4;background:rgba(11,18,32,.92);display:grid;place-items:center;text-align:center;padding:20px;color:#fff}.player .takeover p{color:#C9D1E6;margin:6px 0 14px;max-width:460px}
+.player:fullscreen{border-radius:0;aspect-ratio:auto;width:100vw;height:100vh}.player:fullscreen video{object-fit:contain}
 .player video::cue{font-size:1.05em;line-height:1.5;background:rgba(0,0,0,.72);color:#fff}
 .lessons{display:grid;gap:8px}.lesson{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;background:var(--surface)}
 .lesson[aria-current=true]{border-color:var(--primary);background:var(--primary-soft)}.lesson .ck{width:24px;height:24px;border-radius:50%;border:2px solid var(--line2);display:grid;place-items:center;flex:none;font-size:13px}
@@ -199,7 +202,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     invalid_phone: "اكتب رقم جوال صحيحاً مع رمز الدولة (مثلاً +966 أو +20)", invalid_name: "اكتب اسمك بالكامل", cohort_closed: "أُغلقت هذه الدفعة. اختر دفعة أخرى.", cohort_full: "اكتمل عدد هذه الدفعة. اختر دفعة أخرى.",
     already_enrolled: "أنت مشترك بالفعل في هذه الدفعة.", invalid_package: "اختر باقة", academy_closed: "التسجيل مغلق حالياً.", rate_limited: "تجاوزت عدد المحاولات المسموح اليوم. حاول غداً.",
     session_locked: "هذه الجلسة لم تُفتح بعد.", file_missing: "لم يُرفع الملف. ارفعه مرة أخرى.", file_required: "ارفع ملفاً أو ضع رابطاً.", invalid_link: "الرابط غير صحيح، يجب أن يبدأ بـ https://",
-    already_graded: "هذه المهمة صُحِّحت بالفعل.", no_attempts_left: "استنفدت المحاولات الثلاث.", not_active: "لم يُفعَّل اشتراكك بعد.", not_authenticated: "سجّل الدخول أولاً.", generic: "حدثت مشكلة. حاول مرة أخرى." };
+    already_graded: "هذه المهمة صُحِّحت بالفعل.", no_attempts_left: "استنفدت المحاولات الثلاث.", not_active: "لم يُفعَّل اشتراكك بعد.", not_authenticated: "سجّل الدخول أولاً.", device_required: "حدّث الصفحة ثم حاول مرة أخرى.", generic: "حدثت مشكلة. حاول مرة أخرى." };
   const errMsg = e => E[String(e?.message || "").split(/\s/)[0]] || E.generic;
   const toast = m => { const t = document.createElement("div"); t.className = "toast"; t.textContent = m; document.body.appendChild(t); setTimeout(() => t.remove(), 3200); };
   const fmtDT = (v, time = true) => v ? new Date(v).toLocaleString("ar-EG-u-nu-latn", { timeZone: "Africa/Cairo", weekday: "long", day: "numeric", month: "long", ...(time ? { hour: "numeric", minute: "2-digit" } : {}) }) : "";
@@ -339,7 +342,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         <div class="f"><span class="lg">صورة التحويل</span><input type="file" id="pf" accept="image/*,.pdf" hidden>
           <div class="drop" id="dr" role="button" tabindex="0"><b>اضغط وارفع صورة إيصال التحويل</b><span>صورة أو PDF · حتى 5 ميجابايت</span></div>
           <div class="filepick" id="pk2" hidden><span>🧾</span><span class="nm" id="pn"></span><button class="btn sm ghost" type="button" id="un">إزالة</button></div></div>`}
-        <label class="consent"><input type="checkbox" id="cs"><span>أوافق على احتفاظ HUDERA Academy ببياناتي وأعمالي على المنصة لأغراض الدورة والشهادة، وأفهم شروط الاسترداد: كاملاً قبل الجلسة الأولى، أو بعد إتمام الدورة بشرط حضور 85% من اللقاءات وتسليم كل المهام والاختبارات وطلبه خلال 14 يوماً من آخر جلسة. <a href="../privacy.html" target="_blank">الخصوصية</a></span></label>
+        <label class="consent"><input type="checkbox" id="cs"><span>أوافق على احتفاظ HUDERA Academy ببياناتي وأعمالي على المنصة لأغراض الدورة والشهادة، وأفهم شروط الاسترداد: كاملاً قبل الجلسة الأولى، أو بعد إتمام الدورة بشرط حضور 85% من اللقاءات وتسليم كل المهام والاختبارات وطلبه خلال 14 يوماً من آخر جلسة. وأفهم أن الحساب شخصي: لا تجوز مشاركته أو مشاركة الفيديوهات أو تسجيلها، ويعمل على جهازين فقط، ويظهر اسمي على الفيديو أثناء المشاهدة، وتُوقف المشاركة الاشتراك دون استرداد. <a href="../privacy.html" target="_blank">الخصوصية</a></span></label>
         <button class="btn primary big" style="width:100%" id="go" type="submit">${book ? "احجز مقعدي" : "أرسل طلب الاشتراك"}</button><div class="msg" id="er" role="alert" hidden></div>
       </form></div></section>`;
     const upd = () => { const p = P.find(x => x.key === $("input[name=pk]:checked")?.value) || def; $("#amt").textContent = `$${Number(p.usd)}`; $("#amtE").textContent = rate() ? `(${egp(p.usd)})` : ""; };
@@ -412,13 +415,24 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   /* ---------------------------------------------------------------- session */
   let curLesson = 0;
   async function videoSrc(l) {
-    if (l.video_path?.startsWith("r2:")) { try { const r = await rpc("academy_video_ticket", { p_lesson: l.id }); return { type: "file", url: r.url, tracks: r.tracks || [] }; } catch (e) { console.warn(e); } }
+    if (l.video_path?.startsWith("r2:")) { try { const r = await rpc("academy_video_ticket", { p_lesson: l.id, p_device: DEV, p_label: DEV_LABEL }); if (r && r.ok === false) return { type: r.reason || "limit" }; return { type: "file", url: r.url, tracks: r.tracks || [], ttl: +r.expires_in || 5400 }; } catch (e) { console.warn(e); } }
     else if (l.video_path) { const { data, error } = await sb.storage.from("academy-videos").createSignedUrl(l.video_path, 3 * 3600); if (!error) return { type: "file", url: data.signedUrl }; }
     if (l.video_url) { const y = l.video_url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/); return y ? { type: "yt", url: `https://www.youtube-nocookie.com/embed/${y[1]}?rel=0` } : { type: "link", url: l.video_url }; }
     return null;
   }
   /* one video (picture + sound effects) + one voice-over track per language, kept in sync; subtitles per language */
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  /* this browser's device id: kept in localStorage and a cookie, so it survives a cleared cache on most phones */
+  const DEV = (() => { const ok = v => /^[A-Za-z0-9_-]{16,64}$/.test(v || ""); let d = LS.get("hx_dev");
+    if (!ok(d)) { const m = document.cookie.match(/(?:^|;\s*)hx_dev=([A-Za-z0-9_-]+)/); d = m && m[1]; }
+    if (!ok(d)) d = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now() + String(Math.random()).slice(2)).replace(/[^A-Za-z0-9]/g, "").slice(0, 32);
+    LS.set("hx_dev", d); try { document.cookie = `hx_dev=${d}; max-age=63072000; path=/academy; SameSite=Lax; Secure`; } catch (e) {} return d; })();
+  const DEV_LABEL = (() => { const u = navigator.userAgent; const os = /iPhone/.test(u) ? "iPhone" : /iPad/.test(u) ? "iPad" : /Android/.test(u) ? "Android" : /Windows/.test(u) ? "Windows" : /Mac OS X/.test(u) ? "Mac" : /Linux/.test(u) ? "Linux" : "جهاز";
+    const br = /Edg\//.test(u) ? "Edge" : /OPR\//.test(u) ? "Opera" : /Firefox\//.test(u) ? "Firefox" : /SamsungBrowser/.test(u) ? "Samsung" : /Chrome\//.test(u) ? "Chrome" : /Safari\//.test(u) ? "Safari" : ""; return br ? `${os} · ${br}` : os; })();
+  const WA = "https://wa.me/201555159139";
+  /* the native full-screen button would hide the watermark: full-screen the player box instead */
+  let FS_PL = null;
+  document.addEventListener("fullscreenchange", () => { const f = document.fullscreenElement; if (FS_PL && f && f.tagName === "VIDEO" && FS_PL.contains(f)) document.exitFullscreen().then(() => FS_PL.requestFullscreen?.()).catch(() => {}); });
   function langPlayer(vid, TR, pl) {
     const au = document.createElement("audio"); au.preload = "auto"; pl.appendChild(au);
     let li = Math.max(0, TR.findIndex(t => t.lang === LS.get("hx_lang"))), cc = LS.get("hx_cc") !== "0", hold = false;
@@ -440,6 +454,38 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     au.addEventListener("waiting", () => { if (!vid.paused) { hold = true; vid.pause(); } });
     au.addEventListener("canplay", () => { if (hold) { hold = false; vid.play().catch(() => {}); } });
     pick(li); vol();
+    return { swap(N) { N.forEach(n => { const t = TR.find(x => x.lang === n.lang); if (t) t.audio = n.audio; }); const at = vid.currentTime; au.src = TR[li].audio;
+      au.addEventListener("loadedmetadata", () => { au.currentTime = Math.min(at, au.duration || at); if (!vid.paused) au.play().catch(() => {}); }, { once: true }); } };
+  }
+  /* protection around a playing video: a moving name watermark, one device at a time, tickets renewed before they run out */
+  function guardPlayer(vid, pl, l, v, lp) {
+    const wm = document.createElement("div"); wm.className = "wm"; wm.setAttribute("aria-hidden", "true");
+    wm.textContent = [course?.enrollment?.full_name || user?.user_metadata?.full_name, user?.email].filter(Boolean).join(" · "); pl.appendChild(wm);
+    const move = () => { wm.style.top = (6 + Math.random() * 78) + "%"; wm.style.left = (2 + Math.random() * Math.max(2, 96 - (wm.offsetWidth / Math.max(1, pl.offsetWidth)) * 100)) + "%"; }; move();
+    let busy = false, renewAt = Date.now() + Math.max(60, v.ttl - 600) * 1000;
+    async function renew(takeover) { if (busy) return; busy = true;
+      try { const n = await videoSrc(l); if (!n || n.type !== "file") { if (n?.type === "device_limit") showLimit(pl); return; }
+        const at = vid.currentTime, was = takeover || !vid.paused; vid.src = n.url; renewAt = Date.now() + Math.max(60, n.ttl - 600) * 1000; if (lp && n.tracks?.length) lp.swap(n.tracks);
+        vid.addEventListener("loadedmetadata", () => { fixes = 0; vid.currentTime = at; if (was) vid.play().catch(() => {}); }, { once: true });
+        pl.querySelector(".takeover")?.remove(); } catch (e) { console.warn(e); } finally { busy = false; } }
+    const mine = async () => { try { return await rpc("academy_video_ping", { p_device: DEV }) !== false; } catch (e) { return true; } };
+    const takenOver = () => { vid.pause(); if (pl.querySelector(".takeover")) return; const o = document.createElement("div"); o.className = "takeover";
+      o.innerHTML = `<div><b style="font-size:18px">الفيديو يعمل الآن على جهاز آخر</b><p>يمكن تشغيل الحساب على جهاز واحد في نفس الوقت. اضغط «تابع هنا» لتكمل المشاهدة على هذا الجهاز، وسيتوقف الجهاز الآخر.</p><button class="btn primary" type="button">تابع هنا</button></div>`;
+      pl.appendChild(o); $("button", o).addEventListener("click", () => renew(true)); };
+    /* a refused range request: renew only if this device is still the one playing, never take over silently */
+    let lastFix = 0, fixes = 0;   // a file that cannot play must not turn into a request loop: at most 3 renewals, 30 s apart
+    vid.addEventListener("error", async () => { if (!vid.src || busy || fixes >= 3 || Date.now() - lastFix < 30000) return; lastFix = Date.now(); fixes++;
+      if (await mine()) renew(false); else takenOver(); });
+    vid.addEventListener("play", () => { if (Date.now() > renewAt) renew(true); });
+    FS_PL = pl;
+    const tick = setInterval(async () => {
+      if (!document.body.contains(pl)) { clearInterval(tick); return; }
+      move(); if (vid.paused) return;
+      if (!(await mine())) { takenOver(); return; }
+      if (Date.now() > renewAt) renew(false); }, 45000);
+  }
+  function showLimit(pl) {
+    pl.innerHTML = `<div class="soon"><b>📱 هذا الحساب مسجَّل على جهازين</b>الحساب شخصي ويعمل على جهازين فقط. إذا غيّرت جهازك أو هاتفك، راسلنا على واتساب لنعيد تعيين الأجهزة خلال اليوم.<br><a class="btn primary" style="margin-top:12px" href="${WA}?text=${encodeURIComponent("أريد إعادة تعيين أجهزة حسابي في HUDERA Academy: " + (user?.email || ""))}" target="_blank" rel="noopener">راسلنا على واتساب</a></div>`;
   }
   function viewSession(n, tab = "videos") {
     const s = course.sessions.find(x => x.n === +n); if (!s) { location.hash = "#/learn"; return; }
@@ -473,8 +519,9 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       $("#dn").addEventListener("click", async () => { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: !l.done }); l.done = !l.done; paintTab(s, "videos"); } catch (e) { toast(errMsg(e)); } });
       videoSrc(l).then(v => { const pl = $("#pl"); if (!pl) return;
         if (!v) pl.innerHTML = `<div class="soon"><b>🎬 الفيديو قيد التجهيز</b>سيُرفع هنا قبل اللقاء المباشر، وحتى ذلك الحين اقرأ نقاط كل فصل.</div>`;
-        else if (v.type === "file") { pl.innerHTML = `<video controls controlsList="nodownload" preload="metadata" playsinline src="${esc(v.url)}"></video>`; vid = $("video", pl);
-          if (v.tracks?.length) langPlayer(vid, v.tracks, pl);
+        else if (v.type === "device_limit") showLimit(pl);
+        else if (v.type === "file") { pl.innerHTML = `<video controls controlsList="nodownload noremoteplayback" disablepictureinpicture disableremoteplayback preload="metadata" playsinline src="${esc(v.url)}"></video>`; vid = $("video", pl);
+          const lp = v.tracks?.length ? langPlayer(vid, v.tracks, pl) : null; guardPlayer(vid, pl, l, v, lp);
           vid.addEventListener("timeupdate", () => { let k = 0; CH.forEach(c => { if (c.t != null && vid.currentTime >= c.t) k = c.i; }); if (k !== curLesson) showCh(k); });
           vid.addEventListener("ended", async () => { if (!l.done) { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: true }); l.done = true; toast("✓ سُجِّل الفيديو كمكتمل"); paintTab(s, "videos"); } catch (e) {} } }); vid.addEventListener("contextmenu", e => e.preventDefault()); }
         else if (v.type === "yt") { pl.innerHTML = `<iframe src="${esc(v.url)}" data-base="${esc(v.url)}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(l.title)}"></iframe>`; yt = $("iframe", pl); }
