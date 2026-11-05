@@ -150,7 +150,13 @@ input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb,var(
 .lng button:hover{border-color:var(--primary)}.lng button[aria-pressed="true"]{background:var(--primary);color:#fff;border-color:var(--primary)}.lng .cc{margin-inline-start:auto}
 .player .wm{position:absolute;z-index:3;pointer-events:none;user-select:none;color:#fff;opacity:.34;font-size:clamp(11px,1.6vw,15px);font-weight:600;text-shadow:0 1px 2px #000;white-space:nowrap;transition:top 1.2s ease,left 1.2s ease;direction:ltr}
 .player .takeover{position:absolute;inset:0;z-index:4;background:rgba(11,18,32,.92);display:grid;place-items:center;text-align:center;padding:20px;color:#fff}.player .takeover p{color:#C9D1E6;margin:6px 0 14px;max-width:460px}
-.player:fullscreen{border-radius:0;aspect-ratio:auto;width:100vw;height:100vh}.player:fullscreen video{object-fit:contain}
+.player:fullscreen{border-radius:0;aspect-ratio:auto;width:100vw;height:100vh}.player:fullscreen video,.player.ffs video{object-fit:contain}
+.player .fsbtn{position:absolute;top:10px;left:10px;z-index:5;width:42px;height:42px;border-radius:12px;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.player .wm{opacity:0;transition:opacity .8s ease}.player .wm.on{opacity:.3}
+.player.ffs{position:fixed;inset:0;z-index:9999;border-radius:0;aspect-ratio:auto;width:100vw;height:100vh;height:100dvh;margin:0}
+@media (orientation:portrait){.player.ffs{inset:auto;top:0;left:0;width:100vh;width:100dvh;height:100vw;transform-origin:top left;transform:rotate(90deg) translateY(-100%)}}
+body.ffs-on{overflow:hidden}
+html,body{max-width:100%;overflow-x:clip}
 .player video::cue{font-size:1.05em;line-height:1.5;background:rgba(0,0,0,.72);color:#fff}
 .lessons{display:grid;gap:8px}.lesson{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;background:var(--surface)}
 .lesson[aria-current=true]{border-color:var(--primary);background:var(--primary-soft)}.lesson .ck{width:24px;height:24px;border-radius:50%;border:2px solid var(--line2);display:grid;place-items:center;flex:none;font-size:13px}
@@ -434,9 +440,20 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   const DEV_LABEL = (() => { const u = navigator.userAgent; const os = /iPhone/.test(u) ? "iPhone" : /iPad/.test(u) ? "iPad" : /Android/.test(u) ? "Android" : /Windows/.test(u) ? "Windows" : /Mac OS X/.test(u) ? "Mac" : /Linux/.test(u) ? "Linux" : "جهاز";
     const br = /Edg\//.test(u) ? "Edge" : /OPR\//.test(u) ? "Opera" : /Firefox\//.test(u) ? "Firefox" : /SamsungBrowser/.test(u) ? "Samsung" : /Chrome\//.test(u) ? "Chrome" : /Safari\//.test(u) ? "Safari" : ""; return br ? `${os} · ${br}` : os; })();
   const WA = "https://wa.me/201555159139";
-  /* the native full-screen button would hide the watermark: full-screen the player box instead */
+  /* full screen: our own button full-screens the player box (watermark and subtitles stay), landscape on phones; iPhone has no element full screen, so it gets a CSS full screen turned sideways */
   let FS_PL = null;
-  document.addEventListener("fullscreenchange", () => { const f = document.fullscreenElement; if (FS_PL && f && f.tagName === "VIDEO" && FS_PL.contains(f)) document.exitFullscreen().then(() => FS_PL.requestFullscreen?.()).catch(() => {}); });
+  const fsOff = () => { if (FS_PL) FS_PL.classList.remove("ffs"); document.body.classList.remove("ffs-on"); try { screen.orientation?.unlock?.(); } catch (e) {} };
+  document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement) fsOff(); });
+  document.addEventListener("webkitfullscreenchange", () => { if (!document.webkitFullscreenElement) fsOff(); });
+  function toggleFs(pl) {
+    if (document.fullscreenElement || document.webkitFullscreenElement) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+    if (pl.classList.contains("ffs")) { fsOff(); return; }
+    const req = pl.requestFullscreen || pl.webkitRequestFullscreen;
+    const fake = () => { pl.classList.add("ffs"); document.body.classList.add("ffs-on"); };
+    if (req) { try { const r = req.call(pl, { navigationUI: "hide" }); if (r && r.then) r.then(() => screen.orientation?.lock?.("landscape").catch(() => {})).catch(fake); } catch (e) { fake(); } }
+    else fake();
+  }
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && FS_PL?.classList.contains("ffs")) fsOff(); });
   function langPlayer(vid, TR, pl) {
     const au = document.createElement("audio"); au.preload = "auto"; pl.appendChild(au);
     let li = Math.max(0, TR.findIndex(t => t.lang === LS.get("hx_lang"))), cc = LS.get("hx_cc") !== "0", hold = false;
@@ -463,9 +480,15 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   }
   /* protection around a playing video: a moving name watermark, one device at a time, tickets renewed before they run out */
   function guardPlayer(vid, pl, l, v, lp) {
+    /* a short personal code (first 6 characters of the account id) instead of the e-mail; it shows for a few seconds at random places and times */
     const wm = document.createElement("div"); wm.className = "wm"; wm.setAttribute("aria-hidden", "true");
-    wm.textContent = [course?.enrollment?.full_name || user?.user_metadata?.full_name, user?.email].filter(Boolean).join(" · "); pl.appendChild(wm);
-    const move = () => { wm.style.top = (6 + Math.random() * 78) + "%"; wm.style.left = (2 + Math.random() * Math.max(2, 96 - (wm.offsetWidth / Math.max(1, pl.offsetWidth)) * 100)) + "%"; }; move();
+    const first = String(course?.enrollment?.full_name || user?.user_metadata?.full_name || "").trim().split(/\s+/)[0] || "";
+    wm.textContent = [first, "HX-" + String(user?.id || "").replace(/-/g, "").slice(0, 6).toUpperCase()].filter(Boolean).join(" · "); pl.appendChild(wm);
+    const move = () => { wm.style.top = (6 + Math.random() * 78) + "%"; wm.style.left = (2 + Math.random() * Math.max(2, 96 - (wm.offsetWidth / Math.max(1, pl.offsetWidth)) * 100)) + "%"; };
+    const flash = () => { if (!document.body.contains(pl)) return; if (!vid.paused) { move(); wm.classList.add("on"); setTimeout(() => wm.classList.remove("on"), 4500); } setTimeout(flash, 35000 + Math.random() * 50000); };
+    setTimeout(flash, 8000 + Math.random() * 12000);
+    const fb = document.createElement("button"); fb.type = "button"; fb.className = "fsbtn"; fb.title = "ملء الشاشة"; fb.setAttribute("aria-label", "ملء الشاشة"); fb.textContent = "⛶"; pl.appendChild(fb);
+    fb.addEventListener("click", () => toggleFs(pl));
     let busy = false, renewAt = Date.now() + Math.max(60, v.ttl - 600) * 1000;
     async function renew(takeover) { if (busy) return; busy = true;
       try { const n = await videoSrc(l); if (!n || n.type !== "file") { if (n?.type === "device_limit") showLimit(pl); return; }
@@ -484,7 +507,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     FS_PL = pl;
     const tick = setInterval(async () => {
       if (!document.body.contains(pl)) { clearInterval(tick); return; }
-      move(); if (vid.paused) return;
+      if (vid.paused) return;
       if (!(await mine())) { takenOver(); return; }
       if (Date.now() > renewAt) renew(false); }, 45000);
   }
@@ -524,7 +547,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       videoSrc(l).then(v => { const pl = $("#pl"); if (!pl) return;
         if (!v) pl.innerHTML = `<div class="soon"><b>🎬 الفيديو قيد التجهيز</b>سيُرفع هنا قبل اللقاء المباشر، وحتى ذلك الحين اقرأ نقاط كل فصل.</div>`;
         else if (v.type === "device_limit") showLimit(pl);
-        else if (v.type === "file") { pl.innerHTML = `<video controls controlsList="nodownload noremoteplayback" disablepictureinpicture disableremoteplayback preload="metadata" playsinline src="${esc(v.url)}"></video>`; vid = $("video", pl);
+        else if (v.type === "file") { pl.innerHTML = `<video controls controlsList="nodownload noremoteplayback nofullscreen" disablepictureinpicture disableremoteplayback preload="metadata" playsinline src="${esc(v.url)}"></video>`; vid = $("video", pl);
           const lp = v.tracks?.length ? langPlayer(vid, v.tracks, pl) : null; guardPlayer(vid, pl, l, v, lp);
           vid.addEventListener("timeupdate", () => { let k = 0; CH.forEach(c => { if (c.t != null && vid.currentTime >= c.t) k = c.i; }); if (k !== curLesson) showCh(k); });
           vid.addEventListener("ended", async () => { if (!l.done) { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: true }); l.done = true; toast("✓ سُجِّل الفيديو كمكتمل"); paintTab(s, "videos"); } catch (e) {} } }); vid.addEventListener("contextmenu", e => e.preventDefault()); }
