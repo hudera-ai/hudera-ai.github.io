@@ -233,6 +233,8 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   const rate = () => Number(cat?.payment?.egp_rate) || 0;
   const egp = usd => rate() ? `≈ ${(Math.round(usd * rate() / 10) * 10).toLocaleString("en-US")} جنيه` : "";
   const nSess = () => (cat?.sessions || []).length || 8;
+  const weeksTxt = c => { const d = (c?.schedule || []).map(s => s.live_at).filter(Boolean).map(v => new Date(v).getTime()).sort((a, b) => a - b);
+    if (d.length < 2) return ""; const w = Math.round((d[d.length - 1] - d[0]) / 6048e5) + 1; return d.length === w ? "· جلسة كل أسبوع" : `في ${w} أسابيع`; };
   function viewLanding() {
     const c = cat.course, m = c.meta || {}, coh = (cat.cohorts || []).find(c => new Date(c.starts_on) >= new Date(new Date().toDateString())) || (cat.cohorts || [])[0], pend = minePending();
     const totalMin = (cat.sessions || []).reduce((a, s) => a + s.lessons.reduce((x, l) => x + (l.mins || 0), 0), 0);
@@ -240,7 +242,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     <div class="hero"><div class="wrap">
       <span class="tag">🎓 ${esc(m.brand || "HUDERA Academy")} · دورة التأسيس</span>
       <h1>${esc(c.title)}</h1><p>${esc(c.tagline)}. ${esc(m.promise || "")}</p>
-      <div class="chips"><span>📚 ${nSess()} جلسات في 4 أسابيع</span><span>🎬 ${nSess()} فيديوهات شرح · نحو ${Math.round(totalMin / 60)} ساعات</span><span>🎙️ لقاءات مباشرة في مجموعة صغيرة</span><span>📝 مهام تُصحَّح بدرجة وتعليق</span><span>🏅 شهادة برقم تحقق</span><span>🛡️ ضمان استرداد المبلغ</span></div>
+      <div class="chips"><span>📚 ${nSess()} جلسات ${weeksTxt(coh)}</span><span>🎬 ${nSess()} فيديوهات شرح · نحو ${Math.round(totalMin / 60)} ساعات</span><span>🎙️ لقاءات مباشرة في مجموعة صغيرة</span><span>📝 مهام تُصحَّح بدرجة وتعليق</span><span>🏅 شهادة برقم تحقق</span><span>🛡️ ضمان استرداد المبلغ</span></div>
       <div class="row">${pend ? `<a class="btn primary big" href="#/enroll">طلبك قيد المراجعة ←</a>` : `<a class="btn primary big" href="#/register">سجّل الآن واعرف مسارك</a><a class="btn out big" href="#/enroll">احجز مقعدك في الدورة</a>`}<a class="btn out big" href="#curr">اطّلع على المنهج</a></div>
     </div></div>
     <section><div class="wrap">
@@ -625,6 +627,7 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
     ["جاءت الإجابة عامة وطويلة أكثر من اللازم. ما أفضل خطوة تالية؟", ["تبدأ محادثة جديدة بالأمر نفسه", "تحدد الجمهور والطول والشكل المطلوب، وتطلب إعادة الكتابة", "تكتب «أعد المحاولة» فقط", "تتوقف عن استخدام الأداة"]],
     ["قبل لصق بيانات عملاء في أداة ذكاء اصطناعي عامة، ماذا تفعل؟", ["تراجع سياسة شركتك، وتحذف البيانات الحساسة أو تخفيها", "تلصقها كما هي لأن الأداة آمنة دائماً", "ترسلها لزميل ليلصقها بدلاً منك", "تلصق نصفها فقط"]],
     ["طلبت من النموذج مراجع علمية لبحث، فأعطاك قائمة مرتبة. ما الخطر الأساسي؟", ["أن تكون المراجع قديمة قليلاً", "أن تكون باللغة الإنجليزية", "أن يكون بعضها غير موجود أصلاً، لذلك يجب فتح كل مرجع والتأكد منه", "لا يوجد خطر لأن النموذج لا يخطئ في المراجع"]]];
+  const nextCoh = () => (cat?.cohorts || []).find(c => c.status === "open" && new Date(c.starts_on) >= new Date(new Date().toDateString()) && (c.seats - (c.taken || 0)) > 0);
   const RG_E = { invalid_age: "اكتب عمراً صحيحاً (من 6 إلى 90 سنة)", invalid_country: "اختر الدولة", invalid_email: "البريد الإلكتروني غير صحيح", invalid_occupation: "اختر وضعك الحالي",
     invalid_ai_use: "اختر مدى استخدامك للذكاء الاصطناعي", invalid_goal: "اختر هدفك الأساسي", guardian_required: "اكتب اسم ولي الأمر", guardian_phone: "اكتب رقم واتساب صحيحاً لولي الأمر",
     rate_limited: "محاولات كثيرة من نفس الشبكة. حاول بعد قليل.", invalid_phone: "اكتب رقم واتساب صحيحاً" };
@@ -740,8 +743,8 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
       ${r.level ? `<div class="g2" style="margin-top:14px">
         <div class="card"><small style="color:var(--muted)">مستواك الحالي</small><div style="display:flex;align-items:baseline;gap:10px;margin:4px 0"><b style="font-size:24px;color:var(--ink)">${lv[0]}</b>${r.score != null ? `<span class="chip blue">${r.score} من 8</span>` : `<span class="chip">بحسب إجاباتك</span>`}</div><p style="margin:0;font-size:15px;color:var(--muted)">${lv[1]}</p></div>
         <div class="card" style="border-color:var(--primary)"><small style="color:var(--muted)">المسار المقترح لك</small><b style="display:block;font-size:20px;color:var(--ink);margin:4px 0">${esc(t.ar || "")}</b>
-          <p style="margin:0 0 8px;font-size:15px;color:var(--muted)">${esc(t.for || "")}</p>${t.open ? `<span class="chip ok">التسجيل مفتوح الآن</span>` : `<span class="chip warn">قريباً · ستكون من أوائل من نتواصل معهم</span>`}</div></div>` : ""}
-      <div class="row" style="margin-top:16px;gap:10px;flex-wrap:wrap">${t.open ? `<a class="btn primary big" href="#/course">اطّلع على الدورة والمنهج</a>` : `<a class="btn primary big" href="#/course">تعرّف على الأكاديمية</a>`}
+          <p style="margin:0 0 8px;font-size:15px;color:var(--muted)">${esc(t.for || "")}</p>${t.open ? `<span class="chip ok">التسجيل مفتوح الآن${nextCoh() ? ` · الدفعة القادمة تبدأ ${fmtD(nextCoh().starts_on)}` : ""}</span>` : `<span class="chip warn">قريباً · ستكون من أوائل من نتواصل معهم</span>`}</div></div>` : ""}
+      <div class="row" style="margin-top:16px;gap:10px;flex-wrap:wrap">${t.open && nextCoh() ? `<a class="btn primary big" href="#/enroll">احجز مقعدك في ${esc(nextCoh().name)}</a><a class="btn big" href="#/course">اطّلع على المنهج</a>` : t.open ? `<a class="btn primary big" href="#/course">اطّلع على الدورة والمنهج</a>` : `<a class="btn primary big" href="#/course">تعرّف على الأكاديمية</a>`}
         <a class="btn big" href="${wa}" target="_blank" rel="noopener">تواصل معنا على واتساب</a></div>
       <p style="margin-top:18px;font-size:14px;color:var(--faint)">المسار المقترح مبدئي، ويؤكده فريقنا معك بعد التواصل. <button class="btn sm ghost" type="button" id="rgn">تسجيل شخص آخر</button></p>
     </div></section>`;
