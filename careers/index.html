@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>انضم لفريق HUDERA AI · Careers</title>
-<meta name="description" content="HUDERA AI بتدوّر على فريلانسرز عن بُعد: باك إند، فرونت إند، تصميم محادثات، اختبار جودة، إدخال بيانات وأكتر. قدّم في دقيقتين.">
+<meta name="description" content="وظايف HUDERA AI عن بُعد: مدرّب ذكاء اصطناعي للأكاديمية، مطوّر Backend وتكاملات AI، تسويق رقمي وإعلانات، وأدوار مع المشاريع. شوف المطلوب لكل دور وقدّم في دقيقتين.">
 <meta property="og:title" content="انضم لفريق HUDERA AI">
 <meta property="og:description" content="شغل عن بُعد بالساعة أو بالمشروع. اختار مجالك وابعت الـ CV في دقيقتين.">
 <meta property="og:image" content="https://hudera.ai/og.png">
@@ -75,6 +75,24 @@ input.bad,.opts.bad,.drop.bad{border-color:var(--err)!important;outline-color:va
 .done b{display:block;font-size:22px;color:var(--ink)}.done .ref{display:inline-block;margin-top:8px;background:var(--surface2);border-radius:9px;padding:3px 12px;font-weight:700;direction:ltr}
 .mine{margin-top:8px;font-size:14px;color:var(--muted)}.mine div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:8px 0}
 .foot{margin-top:18px;color:var(--faint);font-size:13px;text-align:center}.foot a{color:inherit}
+.jobs{display:flex;flex-direction:column;gap:10px}
+.job{border:1px solid var(--line2);border-radius:14px;background:var(--surface)}
+.job>summary{list-style:none;cursor:pointer;padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.job>summary::-webkit-details-marker{display:none}
+.job>summary b{color:var(--ink);font-size:16px;flex:1 1 220px}
+.job>summary small{color:var(--muted);font-size:13px;flex-basis:100%}
+.job>summary::after{content:"+";font-weight:700;color:var(--primary);font-size:20px;line-height:1}
+.job[open]>summary::after{content:"–"}
+.tier{font-size:12px;font-weight:700;border-radius:99px;padding:1px 10px;white-space:nowrap}
+.tier.urgent{background:var(--err-soft);color:var(--err)}.tier.project{background:var(--primary-soft);color:var(--primary)}
+.jb{padding:0 14px 14px;border-top:1px solid var(--line)}
+.jb p{margin:10px 0 6px;color:var(--text)}
+.jb h3{font-size:14px;color:var(--ink);margin:10px 0 4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{background:var(--surface2);border-radius:99px;padding:2px 10px;font-size:13.5px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.facts div{background:var(--surface2);border-radius:10px;padding:8px 10px;font-size:14px}.facts div span{display:block;color:var(--muted);font-size:12.5px}
+.apply{margin-top:12px;height:44px;padding:0 18px;border:0;border-radius:11px;background:var(--primary);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+@media (max-width:560px){.facts{grid-template-columns:1fr}}
 [hidden]{display:none!important}
 @media (max-width:560px){.grid{grid-template-columns:1fr}.card{padding:18px 14px}}
 </style>
@@ -83,6 +101,8 @@ input.bad,.opts.bad,.drop.bad{border-color:var(--err)!important;outline-color:va
 <main>
   <header><a class="brand" href="../"><i>h</i><span>HUDERA AI</span></a><button class="hbtn" id="lang" type="button">English</button></header>
   <section class="hero"><h1 data-t="title"></h1><p data-t="lead"></p><div class="perks" id="perks"></div></section>
+
+  <section class="card" id="jobs" hidden><h2 data-t="jobsT"></h2><p class="sub" data-t="jobsS"></p><div class="jobs" id="joblist"></div></section>
 
   <section class="card" id="closed" hidden><h2 data-t="closedT"></h2><p class="sub" data-t="closedS"></p></section>
 
@@ -145,6 +165,8 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   const T = {
     ar: { title: "انضم لفريق HUDERA AI", lead: "شغل عن بُعد، بالساعة أو بالمشروع. اختار مجالك وابعت الـ CV في دقيقتين، وفريقنا هيتواصل معاك لو فيه شغل مناسب.",
       perks: ["🌍 عن بُعد من أي مكان", "⏱️ بالساعة أو بالمشروع", "🤖 مشاريع ذكاء اصطناعي حقيقية", "🇸🇦 🇪🇬 🇯🇴 عملاء في المنطقة"],
+      jobsT: "الوظايف المفتوحة دلوقتي", jobsS: "افتح الدور اللي يناسبك وشوف المطلوب، وبعدين قدّم في دقيقتين. لو مجالك مش موجود، اختار «مجال تاني» في الفورم.", apply: "قدّم على الدور ده",
+      JL: { exp: "خبرة في", must: "مهارات أساسية", nice: "ميزة إضافية", yrs: "سنين الخبرة", type: "نوع الشغل", fields: "المجالات" }, TIER: { urgent: "مطلوب دلوقتي", project: "مع المشاريع" },
       closedT: "التقديم مقفول دلوقتي", closedS: "مفيش وظايف مفتوحة حالياً. تابعنا على لينكدإن وفيسبوك عشان تعرف أول ما نفتح.",
       authT: "سجّل دخول بجوجل", authS: "عشان نوصلك صح ونحمي بياناتك. ثانية واحدة ومش هننشر حاجة باسمك.", gIn: "الدخول بحساب جوجل",
       formT: "بياناتك", signedAs: "متسجل بـ", notYou: "مش إنت؟", name: "الاسم بالكامل", phone: "رقم الموبايل / واتساب", phoneH: "(بكود الدولة)", loc: "إنت فين؟ (المدينة والدولة)", locP: "مثلاً: القاهرة، مصر",
@@ -163,6 +185,8 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         not_authenticated: "انتهت جلستك. سجّل دخول تاني.", cv_missing: "الملف مترفعش. ارفعه تاني.", generic: "حصلت مشكلة. جرّب تاني." } },
     en: { title: "Join the HUDERA AI team", lead: "Remote work, hourly or per project. Pick your field and send your CV in two minutes; we'll reach out when there's a fit.",
       perks: ["🌍 Remote, anywhere", "⏱️ Hourly or per project", "🤖 Real AI projects", "🇸🇦 🇪🇬 🇯🇴 Clients across the region"],
+      jobsT: "Open roles", jobsS: "Open a role to see what we need, then apply in two minutes. Not listed? Choose “Something else” in the form.", apply: "Apply for this role",
+      JL: { exp: "Experience in", must: "Must-have skills", nice: "Nice to have", yrs: "Experience", type: "Work type", fields: "Fields" }, TIER: { urgent: "Hiring now", project: "With projects" },
       closedT: "Applications are closed", closedS: "No open roles right now. Follow us on LinkedIn and Facebook to hear first.",
       authT: "Sign in with Google", authS: "So we reach the right person and keep your data safe. One tap; we never post anything.", gIn: "Continue with Google",
       formT: "Your details", signedAs: "Signed in as", notYou: "Not you?", name: "Full name", phone: "Mobile / WhatsApp", phoneH: "(with country code)", loc: "Where are you? (city, country)", locP: "e.g. Cairo, Egypt",
@@ -180,6 +204,9 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         upload: "The file didn't upload. Try again or paste a link instead.", rate_limited: "You've applied several times today. Try again tomorrow.", careers_closed: "Applications are closed right now.", net: "Connection problem. Try again.",
         not_authenticated: "Your session ended. Sign in again.", cv_missing: "The file didn't upload. Upload it again.", generic: "Something went wrong. Try again." } } };
   const t = k => T[lang][k];
+  const JOBS = {"academy":{"tier":"urgent","ar":{"t":"مدرّب ومساعد تدريس ذكاء اصطناعي","type":"دوام جزئي مسائي، أونلاين","yrs":"سنتين أو أكتر تدريس أو تدريب","about":"تقدّم لقاء مباشر أسبوعي لطلبة HUDERA Academy (ساعة ونص)، وتصحّح مهام الطلبة بدرجة وتعليق مكتوب، وتتابع معاهم.","exp":["تدريس أو تدريب الكبار أو طلبة الجامعة","استخدام عملي يومي لـ ChatGPT وClaude وGemini","هندسة البرومبت وتصميم تمارين عملية","تصحيح المهام وكتابة ملاحظات بنّاءة"],"must":["شرح واضح بالفصحى المبسطة أونلاين","إدارة لقاء على Google Meet","كتابة عربية سليمة"],"nice":["أساسيات Python واستخدام API","تحليل البيانات بأدوات AI","Canva للعروض"],"fields":"التعليم الإلكتروني، التدريب المؤسسي، الجامعات ومراكز التدريب"},"en":{"t":"AI Instructor & Teaching Assistant","type":"Part-time, evenings, online","yrs":"2+ years teaching or training","about":"Run a weekly live session (90 min) for HUDERA Academy students, grade their tasks with a score and written feedback, and follow up with them.","exp":["Teaching or training adults / university students","Daily hands-on use of ChatGPT, Claude and Gemini","Prompt engineering and practical exercises","Grading with constructive feedback"],"must":["Clear online delivery in Modern Standard Arabic","Running sessions on Google Meet","Strong written Arabic"],"nice":["Python basics and calling APIs","Data analysis with AI tools","Canva for slides"],"fields":"EdTech, corporate training, universities and training centres"}},"backend":{"tier":"urgent","ar":{"t":"مطوّر Backend وتكاملات ذكاء اصطناعي","type":"مستقل بالساعة أو بالمشروع، عن بُعد","yrs":"3 سنين أو أكتر (أو سنتين مع بورتفوليو قوي)","about":"تبني الأنظمة اللي بنسلّمها للعملاء: مساعدين واتساب للطلبات، ووكلاء صوتيين بيردوا على المكالمات، وربط الذكاء الاصطناعي بأنظمة الشركات.","exp":["بناء APIs وقواعد بيانات لأنظمة حقيقية","ربط نماذج اللغة (OpenAI وClaude وGemini)","WhatsApp Business Cloud API والـ Webhooks","الوكلاء الصوتيين والاتصالات (Twilio أو ما يشبهه)"],"must":["TypeScript/Node.js أو Python","PostgreSQL وSQL قوي","Supabase: Auth وRLS وEdge Functions","REST وWebhooks","Git/GitHub"],"nice":["Deno وCloudflare Workers","pgvector وRAG","n8n أو Make","Vapi أو Retell أو ElevenLabs"],"fields":"SaaS، الشات بوت وخدمة العملاء، أنظمة الطلبات والتوزيع، تكامل ERP/CRM"},"en":{"t":"Backend & AI Integrations Developer","type":"Freelance, hourly or per project, remote","yrs":"3+ years (or 2 with a strong portfolio)","about":"Build the systems we deliver to clients: WhatsApp ordering assistants, voice agents that answer calls, and AI connected to company systems.","exp":["Building APIs and databases for real systems","Integrating LLMs (OpenAI, Claude, Gemini)","WhatsApp Business Cloud API and webhooks","Voice agents and telephony (Twilio or similar)"],"must":["TypeScript/Node.js or Python","Strong PostgreSQL and SQL","Supabase: Auth, RLS, Edge Functions","REST and webhooks","Git/GitHub"],"nice":["Deno, Cloudflare Workers","pgvector, RAG","n8n or Make","Vapi, Retell or ElevenLabs"],"fields":"SaaS, chatbots and customer service, ordering and distribution, ERP/CRM integration"}},"marketing":{"tier":"urgent","ar":{"t":"أخصائي تسويق رقمي وإعلانات ممولة","type":"دوام جزئي أو مستقل بعقد شهري، عن بُعد","yrs":"من سنتين لـ 4 سنين، بنتايج بالأرقام","about":"تدير إعلانات HUDERA Academy وخدماتنا على فيسبوك وإنستجرام وتيك توك، لجمهور الخليج ومصر، وتطلّع تقرير أسبوعي بالنتايج.","exp":["حملات Meta (فيسبوك وإنستجرام) وتيك توك","حملات تسجيل لكورسات أو خدمات","استهداف جمهور الخليج ومصر","قياس النتايج بـ Pixel وUTM"],"must":["Meta Ads Manager","TikTok Ads","كتابة إعلانية عربية (فصحى وخليجي)","قراءة الأرقام (CPL وCPA)"],"nice":["Google Ads وLinkedIn Ads","GA4 وTag Manager","Canva وCapCut","الشغل مع صنّاع محتوى UGC"],"fields":"التعليم والكورسات، خدمات B2B، التقنية"},"en":{"t":"Performance Marketer / Media Buyer","type":"Part-time or monthly freelance, remote","yrs":"2–4 years, with results in numbers","about":"Run ads for HUDERA Academy and our services on Facebook, Instagram and TikTok for Gulf and Egyptian audiences, with a weekly results report.","exp":["Meta (Facebook & Instagram) and TikTok campaigns","Sign-up campaigns for courses or services","Targeting Gulf and Egyptian audiences","Tracking with Pixel and UTM"],"must":["Meta Ads Manager","TikTok Ads","Arabic ad copy (MSA and Gulf)","Reading the numbers (CPL, CPA)"],"nice":["Google Ads, LinkedIn Ads","GA4, Tag Manager","Canva, CapCut","Working with UGC creators"],"fields":"Education and courses, B2B services, tech"}},"conversation":{"tier":"project","ar":{"t":"مصمّم محادثات ومهندس برومبت","type":"مستقل بالساعة، مع المشاريع","yrs":"من سنة لـ 3 سنين","about":"تكتب سيناريوهات مساعدين الواتساب والوكلاء الصوتيين والبرومبتات بتاعتهم، وتختبر الردود باللهجات.","exp":["تصميم مسارات شات بوت أو مراكز اتصال","كتابة System Prompts","اختبار وتقييم ردود النماذج"],"must":["كتابة عربية ممتازة بالفصحى واللهجات (خليجي وشامي ومصري)","إنجليزي جيد","هندسة البرومبت"],"nice":["Voiceflow أو Botpress","أساسيات JSON","خبرة بالصوت والنبرة"],"fields":"خدمة العملاء، المبيعات والطلبات، مراكز الاتصال"},"en":{"t":"Conversation Designer / Prompt Engineer","type":"Freelance, hourly, per project","yrs":"1–3 years","about":"Write the flows and prompts for our WhatsApp assistants and voice agents, and test replies across Arabic dialects.","exp":["Designing chatbot or call-centre flows","Writing system prompts","Testing and evaluating model replies"],"must":["Excellent Arabic writing, MSA and dialects (Gulf, Levantine, Egyptian)","Good English","Prompt engineering"],"nice":["Voiceflow or Botpress","JSON basics","Voice and tone experience"],"fields":"Customer service, sales and ordering, call centres"}},"frontend":{"tier":"project","ar":{"t":"مطوّر واجهات Frontend","type":"مستقل بالساعة، مع المشاريع","yrs":"سنتين أو أكتر","about":"تبني لوحات التحكم والتقارير وصفحات الأنظمة اللي بنسلّمها، بالعربي RTL ومتظبطة على الموبايل.","exp":["لوحات تحكم وداشبوردات","واجهات عربية RTL متجاوبة","ربط الواجهة بـ Supabase"],"must":["HTML وCSS وJavaScript قوي","React أو ما يشبهه","RTL","مكتبات الرسوم البيانية"],"nice":["Tailwind","TypeScript","Playwright","حس تصميم UI"],"fields":"SaaS، الأنظمة الإدارية، التجارة الإلكترونية"},"en":{"t":"Frontend Developer","type":"Freelance, hourly, per project","yrs":"2+ years","about":"Build the dashboards, reports and system pages we deliver, in Arabic RTL and mobile-ready.","exp":["Dashboards and admin panels","Responsive Arabic RTL interfaces","Connecting the UI to Supabase"],"must":["Strong HTML, CSS, JavaScript","React or similar","RTL layouts","Charting libraries"],"nice":["Tailwind","TypeScript","Playwright","An eye for UI"],"fields":"SaaS, business systems, e-commerce"}},"qa":{"tier":"project","ar":{"t":"مختبر جودة (QA)","type":"مستقل بالساعة، مع المشاريع","yrs":"من سنة لسنتين","about":"تختبر كل نظام قبل التسليم: الموبايل والصلاحيات والواتساب والصوت والعربي، وتكتب تقارير أخطاء واضحة.","exp":["اختبار يدوي لتطبيقات ويب وموبايل","كتابة حالات اختبار","تقارير أخطاء بالصور والخطوات"],"must":["Test Cases","تقارير Bugs واضحة","الاختبار على أجهزة مختلفة","دقة عالية"],"nice":["Playwright أو Cypress","Postman","أساسيات اختبار الأمان"],"fields":"SaaS، التطبيقات، الشات بوت"},"en":{"t":"QA Tester","type":"Freelance, hourly, per project","yrs":"1–2 years","about":"Test every system before delivery: mobile, permissions, WhatsApp, voice and Arabic, with clear bug reports.","exp":["Manual testing of web and mobile apps","Writing test cases","Bug reports with screenshots and steps"],"must":["Test cases","Clear bug reports","Testing across devices","Attention to detail"],"nice":["Playwright or Cypress","Postman","Security testing basics"],"fields":"SaaS, apps, chatbots"}},"data_entry":{"tier":"project","ar":{"t":"مسؤول بيانات","type":"مستقل بالساعة، مع المشاريع","yrs":"سنة أو أكتر","about":"تجهّز وتنضّف بيانات العملاء (المنتجات والأسعار والعملاء) قبل ما تترفع على الأنظمة.","exp":["تنظيف ومطابقة بيانات Excel","إدخال بيانات دقيق"],"must":["Excel قوي (XLOOKUP وPivot)","دقة","عربي وإنجليزي"],"nice":["Google Sheets","SQL بسيط","Power Query"],"fields":"التوزيع والتجارة، المحاسبة"},"en":{"t":"Data Specialist","type":"Freelance, hourly, per project","yrs":"1+ year","about":"Prepare and clean client data (products, prices, customers) before it goes into our systems.","exp":["Cleaning and matching Excel data","Accurate data entry"],"must":["Strong Excel (XLOOKUP, Pivot)","Accuracy","Arabic and English"],"nice":["Google Sheets","Basic SQL","Power Query"],"fields":"Distribution and trade, accounting"}}};
+  const want = { get: () => { try { return sessionStorage.getItem("hudera-role"); } catch (e) { return null; } }, set: v => { try { sessionStorage.setItem("hudera-role", v); } catch (e) {} } };
+  if (qs.get("role")) want.set(qs.get("role"));
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { global: { fetch: (u, o = {}) => { const h = new Headers(o.headers || {}); const k = cfg.supabaseAnonKey; if (k && !k.includes(".") && h.get("Authorization") === "Bearer " + k) h.delete("Authorization"); return fetch(u, { ...o, headers: h }); } },
     auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
@@ -192,12 +219,20 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     $$("[data-t]").forEach(el => { el.textContent = t(el.dataset.t); });
     $$("[data-ph]").forEach(el => { el.placeholder = t(el.dataset.ph); });
     $("#perks").innerHTML = t("perks").map(p => `<span>${esc(p)}</span>`).join("");
-    const sel = $("input[name=role]:checked")?.value, ys = $("input[name=yrs]:checked")?.value, wt = $("input[name=wt]:checked")?.value || "freelance";
+    const sel = $("input[name=role]:checked")?.value || want.get(), ys = $("input[name=yrs]:checked")?.value, wt = $("input[name=wt]:checked")?.value || "freelance";
     $("#roles").innerHTML = info.roles.map(r => `<label><input type="radio" name="role" value="${esc(r.key)}" ${r.key === sel ? "checked" : ""}>${esc(r[lang] || r.ar)}</label>`).join("");
     $("#years").innerHTML = Object.entries(t("Y")).map(([k, v]) => `<label><input type="radio" name="yrs" value="${k}" ${k === ys ? "checked" : ""}>${v}</label>`).join("");
     $("#wtype").innerHTML = Object.entries(t("W")).map(([k, v]) => `<label><input type="radio" name="wt" value="${k}" ${k === wt ? "checked" : ""}>${v}</label>`).join("");
     if (user) $("#who").innerHTML = `${user.user_metadata?.avatar_url ? `<img src="${esc(user.user_metadata.avatar_url)}" alt="" width="28" height="28" style="border-radius:50%" referrerpolicy="no-referrer">` : ""}<span>${t("signedAs")} <b dir="ltr">${esc(user.email)}</b></span><button type="button" id="out">${t("notYou")}</button>`;
     $("#out")?.addEventListener("click", async () => { await sb.auth.signOut(); location.reload(); });
+    const L = t("JL"), open = info.open ? info.roles.filter(r => JOBS[r.key]) : [];
+    $("#jobs").hidden = !open.length;
+    $("#joblist").innerHTML = open.map(r => { const j = JOBS[r.key], d = j[lang], c = xs => `<div class="chips">${xs.map(x => `<span>${esc(x)}</span>`).join("")}</div>`;
+      return `<details class="job"><summary><b>${esc(d.t)}</b><span class="tier ${j.tier}">${esc(t("TIER")[j.tier] || "")}</span><small>${esc(d.type)} · ${esc(d.yrs)}</small></summary><div class="jb"><p>${esc(d.about)}</p>
+        <h3>${L.exp}</h3>${c(d.exp)}<h3>${L.must}</h3>${c(d.must)}<h3>${L.nice}</h3>${c(d.nice)}
+        <div class="facts"><div><span>${L.yrs}</span>${esc(d.yrs)}</div><div><span>${L.type}</span>${esc(d.type)}</div><div style="grid-column:1/-1"><span>${L.fields}</span>${esc(d.fields)}</div></div>
+        <button class="apply" type="button" data-apply="${esc(r.key)}">${t("apply")}</button></div></details>`; }).join("");
+    $("#other-w").hidden = $("input[name=role]:checked")?.value !== "other";
     mine();
   }
   function mine() {
@@ -219,6 +254,12 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   $("#g-in").addEventListener("click", () => {
     try { sessionStorage.setItem("hudera-return", "/careers/"); } catch (e) {}
     sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + "/careers/", queryParams: { prompt: "select_account" } } });
+  });
+  $("#joblist").addEventListener("click", e => {
+    const b = e.target.closest("[data-apply]"); if (!b) return;
+    want.set(b.dataset.apply);
+    const r = $(`input[name=role][value="${b.dataset.apply}"]`); if (r) { r.checked = true; $("#roles").classList.remove("bad"); $("#other-w").hidden = true; }
+    (user ? $("#form") : $("#s-auth")).scrollIntoView({ behavior: "smooth", block: "start" });
   });
   $("#roles").addEventListener("change", () => { $("#other-w").hidden = $("input[name=role]:checked")?.value !== "other"; $("#roles").classList.remove("bad"); });
   $$("[data-cv]").forEach(b => b.addEventListener("click", () => { cvMode = b.dataset.cv; $$("[data-cv]").forEach(x => x.setAttribute("aria-pressed", x === b)); $("#cv-file").hidden = cvMode !== "file"; $("#cv-link").hidden = cvMode !== "link"; }));
