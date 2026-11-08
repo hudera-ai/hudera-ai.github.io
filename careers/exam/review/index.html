@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مراجعة اختبارات التوظيف · HUDERA AI</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#F6F7FB;--surface:#fff;--surface2:#F0F2F8;--ink:#0B1220;--text:#1F2637;--muted:#5B6478;--line:#E3E7F0;--primary:#3D5AFE;--ok:#0FA97A;--ok-soft:#DDF6EC;--err:#D9363E;--err-soft:#FDE6E7;--warn:#B7791F;--warn-soft:#FFF4DB}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 "IBM Plex Sans Arabic","Instrument Sans",system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
+h1{font-size:22px;margin:0;color:var(--ink)}
+.btn{border:0;background:var(--primary);color:#fff;border-radius:9px;padding:7px 14px;font:inherit;font-weight:700;cursor:pointer}.btn.ghost{background:var(--surface2);color:var(--ink)}
+select,input,textarea{font:inherit;border:1px solid var(--line);border-radius:9px;padding:6px 10px;background:var(--surface);color:var(--text)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}th{background:var(--ink);color:#fff;font-size:13px}
+tr.sel td{background:#EEF1FF}tbody tr{cursor:pointer}
+.pill{display:inline-block;border-radius:20px;padding:0 9px;font-size:12px;font-weight:700}
+.s-submitted{background:var(--ok-soft);color:var(--ok)}.s-terminated{background:var(--err-soft);color:var(--err)}.s-started{background:var(--warn-soft);color:var(--warn)}
+.v0{color:var(--ok)}.v1{color:var(--warn)}.v2{color:var(--err);font-weight:700}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:16px}
+.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+video{width:100%;border-radius:10px;background:#000}
+.segs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.ev{max-height:280px;overflow:auto;font-size:13px;background:var(--surface2);border-radius:10px;padding:8px}
+.ev div{display:flex;gap:8px;justify-content:space-between;border-bottom:1px dashed var(--line)}
+.ans{border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px}
+.ans.ok{border-color:var(--ok)}.ans.bad{border-color:var(--err)}
+.ans pre{white-space:pre-wrap;font:inherit;background:var(--surface2);padding:8px;border-radius:8px;margin:6px 0 0}
+.muted{color:var(--muted)}.hidden{display:none}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>مراجعة اختبارات التوظيف</h1><div><select id="role"><option value="">كل الأدوار</option></select> <button class="btn ghost" id="reload" type="button">تحديث</button> <span class="muted" id="who"></span></div></header>
+<div id="msg"></div>
+<table><thead><tr><th>المتقدم</th><th>الدور</th><th>الحالة</th><th>اختيار من متعدد</th><th>مخالفات</th><th>تقييم الفريق</th><th>البداية</th></tr></thead><tbody id="rows"><tr><td colspan="7">جاري التحميل…</td></tr></tbody></table>
+<div class="panel hidden" id="detail"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co", "supabaseAnonKey": "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW"};
+(() => {
+  "use strict";
+  const cfg = HUDERA_CONFIG, $ = s => document.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { global: { fetch: (u, o = {}) => { const h = new Headers(o.headers || {}); const k = cfg.supabaseAnonKey; if (k && !k.includes(".") && h.get("Authorization") === "Bearer " + k) h.delete("Authorization"); return fetch(u, { ...o, headers: h }); } },
+    auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
+  const ROLES = { backend: "Backend", academy: "مدرّب الأكاديمية", marketing: "تسويق وإعلانات", conversation: "مصمّم محادثات", frontend: "Frontend", qa: "QA", data_entry: "مسؤول بيانات" };
+  const ST = { submitted: "سلّم", terminated: "اتقفل (مخالفات)", started: "لسه شغال" };
+  const EVN = { left_page: "خرج من الصفحة", blur: "ساب نافذة الاختبار", fullscreen_exit: "خرج من ملء الشاشة", paste: "محاولة لصق", copy: "محاولة نسخ", cut: "محاولة قص", shortcut: "اختصار ممنوع", screen_stopped: "وقف مشاركة الشاشة", camera_stopped: "الكاميرا وقفت", burst_typing: "نص كبير اتكتب مرة واحدة", devtools: "أدوات المطور مفتوحة", resumed: "رجع للاختبار بعد ما خرج", resumed_client: "استكمال", submitted: "سلّم", terminated: "اتقفل", upload_failed: "فشل رفع جزء من التسجيل", reset_by_team: "الفريق فتحله محاولة تانية", dragstart: "محاولة سحب" };
+  let list = [], cur = null;
+  Object.entries(ROLES).forEach(([k, t]) => $("#role").insertAdjacentHTML("beforeend", `<option value="${k}">${esc(t)}</option>`));
+  const fmt = d => d ? new Date(d).toLocaleString("ar-EG", { dateStyle: "short", timeStyle: "short" }) : "";
+  async function load() {
+    const { data, error } = await sb.rpc("admin_exams", { p_role: $("#role").value || null });
+    if (error) { $("#rows").innerHTML = `<tr><td colspan="7">${esc(/forbidden/.test(error.message) ? "الصفحة دي لفريق التوظيف بس." : error.message)}</td></tr>`; return; }
+    list = data || [];
+    $("#rows").innerHTML = list.length ? list.map((a, i) => `<tr data-i="${i}" class="${cur && cur.id === a.id ? "sel" : ""}"><td><b>${esc(a.name)}</b><br><span class="muted">${esc(a.email)} ${a.ref ? "· " + esc(a.ref) : ""}</span></td>
+      <td>${esc(ROLES[a.role] || a.role)}</td><td><span class="pill s-${a.status}">${ST[a.status] || a.status}</span></td>
+      <td>${a.mcq_max ? `<b>${a.mcq_score}/${a.mcq_max}</b>` : "—"}</td><td class="${a.violations ? (a.violations >= 3 ? "v2" : "v1") : "v0"}">${a.violations}</td>
+      <td>${a.review_score ?? "—"}</td><td>${fmt(a.started_at)}</td></tr>`).join("") : `<tr><td colspan="7" class="muted">مفيش اختبارات لسه.</td></tr>`;
+  }
+  $("#rows").addEventListener("click", e => { const tr = e.target.closest("tr[data-i]"); if (tr) show(list[+tr.dataset.i]); });
+  async function show(a) {
+    cur = a; load();
+    const segs = (a.recordings || []).slice().sort();
+    $("#detail").classList.remove("hidden");
+    $("#detail").innerHTML = `<h2 style="margin:0 0 6px">${esc(a.name)} · ${esc(ROLES[a.role] || a.role)}</h2>
+      <p class="muted">بدأ ${fmt(a.started_at)} · سلّم ${fmt(a.submitted_at) || "—"} · ${a.client ? esc(a.client.ua || "") : ""}</p>
+      <div class="grid"><div><video id="vid" controls preload="metadata"></video>
+        <div class="segs">${segs.length ? segs.map((p, i) => `<button class="btn ghost" data-p="${esc(p)}" type="button">جزء ${i + 1}</button>`).join("") : `<span class="muted">مفيش تسجيلات مرفوعة.</span>`}</div>
+        <h3>التقييم</h3><p><input id="rs" type="number" min="0" max="100" placeholder="الدرجة من 100" value="${a.review_score ?? ""}"></p>
+        <p><textarea id="rn" rows="4" style="width:100%" placeholder="ملاحظات الفريق">${esc(a.review_note || "")}</textarea></p>
+        <button class="btn" id="save" type="button">حفظ التقييم</button> <button class="btn ghost" id="reset" type="button">فتح محاولة تانية</button> <span id="sv" class="muted"></span>
+        <h3>سجل المراقبة</h3><div class="ev">${(a.events || []).map(e => `<div><span>${esc(EVN[e.type] || e.type)}</span><span class="muted">${new Date(e.t).toLocaleTimeString("ar-EG")}</span></div>`).join("") || "<span class='muted'>مفيش أحداث.</span>"}</div></div>
+      <div><h3>الإجابات</h3>${(a.answers || []).map((q, i) => { const g = q.given; const ok = q.kind === "mcq" && g !== null && g !== undefined && +g === q.correct;
+        return `<div class="ans ${q.kind === "mcq" ? (ok ? "ok" : "bad") : ""}"><b>${i + 1}. ${esc(q.q)}</b>${q.kind === "mcq"
+          ? `<div class="muted">إجابته: ${g === null || g === undefined ? "—" : esc(q.options[+g])}${ok ? " ✅" : ` ❌ · الصح: ${esc(q.options[q.correct])}`}</div>`
+          : `<pre>${esc(g || "—")}</pre>`}</div>`; }).join("")}</div></div>`;
+    $("#detail").querySelectorAll("[data-p]").forEach(b => b.onclick = async () => {
+      const { data, error } = await sb.storage.from("exam-rec").createSignedUrl(b.dataset.p, 3600);
+      if (error) return alert(error.message); $("#vid").src = data.signedUrl; $("#vid").play();
+    });
+    if (segs[0]) $("#detail").querySelector("[data-p]").click();
+    $("#save").onclick = async () => { const { error } = await sb.rpc("admin_exam_review", { p_id: a.id, p_score: $("#rs").value === "" ? null : +$("#rs").value, p_note: $("#rn").value });
+      $("#sv").textContent = error ? error.message : "اتحفظ ✓"; if (!error) load(); };
+    $("#reset").onclick = async () => { if (!confirm("تفتح للمتقدم ده محاولة تانية (40 دقيقة من دلوقتي)؟")) return; const { error } = await sb.rpc("admin_exam_reset", { p_id: a.id }); $("#sv").textContent = error ? error.message : "اتفتحت ✓"; load(); };
+    $("#detail").scrollIntoView({ behavior: "smooth" });
+  }
+  $("#reload").onclick = load; $("#role").onchange = load;
+  (async () => {
+    const { data } = await sb.auth.getSession();
+    if (!data.session) { $("#rows").innerHTML = `<tr><td colspan="7">سجّل الدخول من <a href="/admin/">لوحة الإدارة</a> الأول، وارجع للصفحة دي.</td></tr>`; return; }
+    $("#who").textContent = data.session.user.email; load();
+  })();
+})();
+</script>
+</body>
+</html>
