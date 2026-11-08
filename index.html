@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<script>try{var hr=sessionStorage.getItem("hudera-return");if(hr&&/^\/[a-z-]+\/$/.test(hr)&&/[?&]code=/.test(location.search)){sessionStorage.removeItem("hudera-return");location.replace(hr+location.search)}}catch(e){}</script>
+<script>try{var hr=sessionStorage.getItem("hudera-return");if(hr&&/^\/[a-z-]+\/([a-z-]+\/)?$/.test(hr)&&/[?&]code=/.test(location.search)){sessionStorage.removeItem("hudera-return");location.replace(hr+location.search)}}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>HUDERA AI (هوديرا) | موظفون بالذكاء الاصطناعي للشركات</title>
 <meta name="description" content="هوديرا (HUDERA AI): موظفون بالذكاء الاصطناعي للشركات في السعودية والخليج ومصر، للموارد البشرية والتحصيل والمبيعات وتشغيل المواقع. يعملون على واتساب بالعربية والإنجليزية وعلى بيانات شركتك، وكل قرار حساس يعتمده شخص.">
@@ -112,6 +112,8 @@ button{font:inherit;color:inherit}
 .logo span{font-family:var(--f-display);font-size:23px;font-weight:400;color:var(--faint);margin-inline-start:-4px}
 .nav-links{display:flex;gap:4px;margin-inline-start:auto}
 .nav-links a{font-size:14.5px;font-weight:500;color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;white-space:nowrap}
+@media (min-width:1141px) and (max-width:1340px){.nav-links a{padding:8px 6px;font-size:13.5px}}
+@media (min-width:1341px) and (max-width:1500px){.nav-links a{padding:8px 9px}}
 .nav-links .nav-cta{display:none}
 .menu-btn{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);place-items:center;cursor:pointer;color:var(--ink);flex:none}
 .menu-btn svg{width:20px;height:20px}.menu-btn .x{display:none}.nav.open .menu-btn .x{display:block}.nav.open .menu-btn .bars{display:none}
@@ -181,6 +183,7 @@ section{scroll-margin-top:80px}
 /* ---------- process ---------- */
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;position:relative}
+.team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.member{display:flex;gap:20px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px}.member img{width:120px;height:120px;border-radius:50%;object-fit:cover;flex:0 0 120px}.member h3{margin:0}.mrole{display:inline-block;color:var(--primary);font-weight:600;font-size:14px;margin:4px 0 8px}.member p{margin:0 0 10px;color:var(--muted)}.mlinks{display:flex;gap:14px;flex-wrap:wrap}.mlinks a{font-weight:600;font-size:14px}.team-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}@media (max-width:760px){.team{grid-template-columns:1fr}.member{flex-direction:column;text-align:center}.mlinks{justify-content:center}}
 .step .k{font-family:var(--f-mono);font-size:12px;color:var(--primary-ink)}
 .step h3{font-size:18px;margin-top:10px}
 .step p{font-size:14.5px;color:var(--muted);margin-top:8px}
@@ -907,7 +910,7 @@ body.chat-on .chat-fab{display:none}
       <b>hudera</b><span>AI</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Main">
-      <a href="#systems">Platforms</a><a href="#clients">Clients</a><a href="#value">Value</a><a href="#work">Products</a><a href="#process">How we work</a><a href="#faq">FAQ</a><a class="keep" href="#contact">Contact</a><a class="nav-cta" href="#contact">Book a call</a>
+      <a href="#systems">Platforms</a><a href="#clients">Clients</a><a href="#value">Value</a><a href="#work">Products</a><a href="#process">How we work</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="academy/">Academy</a><a class="keep" href="#contact">Contact</a><a class="nav-cta" href="#contact">Book a call</a>
     </nav>
     <button class="lang-btn no-l10n" id="lang" type="button"></button>
     <button class="theme-btn" id="theme" type="button" aria-label="Switch theme"></button>
@@ -1040,6 +1043,19 @@ body.chat-on .chat-fab{display:none}
     </div>
   </section>
 
+  <section class="container sec" id="about">
+    <div class="sec-head"><div><span class="eyebrow">About us</span><h2>The team behind HUDERA AI</h2><p>We are an AI company building AI employees and smart platforms for companies in the Gulf and Egypt. Every system we deliver works on the client's own data, in Arabic and English, with a person approving every sensitive decision.</p></div></div>
+    <div class="team">
+      <article class="member"><img src="media/team/ahmed.jpg" alt="Eng. Ahmed Ramadan" width="120" height="120" loading="lazy">
+        <div><h3>Eng. Ahmed Ramadan</h3><span class="mrole">Co-Founder &amp; CEO</span><p>Leads the company's vision, partnerships and client relationships.</p>
+        <div class="mlinks"><a href="https://www.linkedin.com/in/ramadanium/" target="_blank" rel="noopener">LinkedIn</a><a href="team/ahmed/">Portfolio</a></div></div></article>
+      <article class="member"><img src="media/team/mahmoud.jpg" alt="Eng. Mahmoud Shehab" width="120" height="120" loading="lazy">
+        <div><h3>Eng. Mahmoud Shehab</h3><span class="mrole">Co-Founder &amp; CTO</span><p>Leads technology and builds our AI employees and platforms.</p>
+        <div class="mlinks"><a href="https://www.linkedin.com/in/mahmoud-shahab/" target="_blank" rel="noopener">LinkedIn</a><a href="team/mahmoud/">Portfolio</a></div></div></article>
+    </div>
+    <div class="team-cta"><a class="btn" href="academy/">HUDERA Academy</a><a class="btn" href="careers/">Join our team</a></div>
+  </section>
+
   <section class="container sec" id="faq">
     <div class="sec-head"><div><span class="eyebrow">Questions</span><h2>Before you hire an AI employee</h2></div></div>
     <div class="faq">
@@ -1072,7 +1088,7 @@ body.chat-on .chat-fab{display:none}
   </section>
 
   <footer class="container site">
-    <div class="foot-l"><span>© 2026 HUDERA AI · AI employees &amp; SaaS platforms</span><nav class="social" aria-label="HUDERA AI on the web"><a href="https://www.linkedin.com/company/hudera/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/hudera-ai" target="_blank" rel="noopener">GitHub</a><a href="https://www.facebook.com/huderaai" target="_blank" rel="noopener">Facebook</a><a href="mailto:info@hudera.ai">info@hudera.ai</a><a href="careers/">Careers · وظائف</a><a href="privacy.html">Privacy</a><a href="#" id="consent-open">Analytics choices</a></nav></div>
+    <div class="foot-l"><span>© 2026 HUDERA AI · AI employees &amp; SaaS platforms</span><nav class="social" aria-label="HUDERA AI on the web"><a href="https://www.linkedin.com/company/hudera/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/hudera-ai" target="_blank" rel="noopener">GitHub</a><a href="https://www.facebook.com/huderaai" target="_blank" rel="noopener">Facebook</a><a href="mailto:info@hudera.ai">info@hudera.ai</a><a href="academy/">HUDERA Academy · الأكاديمية</a><a href="careers/">Careers · وظائف</a><a href="privacy.html">Privacy</a><a href="#" id="consent-open">Analytics choices</a></nav></div>
     <p>Product demos on this page run in your browser on sample data; company names, people and figures inside them are fictional. WhatsApp is a trademark of Meta Platforms, Inc. Chat screens are HUDERA demo interfaces for solutions built on the WhatsApp Business Platform.</p>
   </footer>
 </main>
@@ -2258,6 +2274,21 @@ const AR_DICT = {
 "Services": "الخدمات",
 "Products": "المنتجات",
 "How we work": "طريقة عملنا",
+"Academy": "الأكاديمية",
+"About": "من نحن",
+"About us": "من نحن",
+"The team behind HUDERA AI": "الفريق وراء HUDERA AI",
+"We are an AI company building AI employees and smart platforms for companies in the Gulf and Egypt. Every system we deliver works on the client's own data, in Arabic and English, with a person approving every sensitive decision.": "شركة ذكاء اصطناعي نبني موظفين بالذكاء الاصطناعي ومنصات ذكية للشركات في الخليج ومصر. كل نظام نسلّمه يعمل على بيانات العميل نفسه، بالعربية والإنجليزية، ويعتمد شخصٌ كل قرار حسّاس.",
+"Eng. Ahmed Ramadan": "م. أحمد رمضان",
+"Eng. Mahmoud Shehab": "م. محمود شهاب",
+"Co-Founder & CEO": "الشريك المؤسس والرئيس التنفيذي",
+"Co-Founder & CTO": "الشريك المؤسس والمدير التقني",
+"Leads the company's vision, partnerships and client relationships.": "يقود رؤية الشركة والشراكات والعلاقة مع العملاء.",
+"Leads technology and builds our AI employees and platforms.": "يقود التقنية ويبني موظفينا الرقميين ومنصاتنا.",
+"Portfolio": "البورتفوليو",
+"HUDERA Academy": "أكاديمية HUDERA",
+"Join our team": "انضم لفريقنا",
+"Careers": "وظائف",
 "Contact": "تواصل معنا",
 "Book a call": "احجز مكالمة",
 "Switch theme": "تبديل المظهر",
