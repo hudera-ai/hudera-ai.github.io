@@ -196,7 +196,7 @@ html,body{max-width:100%;overflow-x:clip}
   <nav class="links" id="nav"></nav>
 </div></header>
 <main id="app"><div class="wrap" style="padding-top:30px"><div class="skel"></div></div></main>
-<footer><div class="wrap"><span>HUDERA Academy · من HUDERA AI</span><span><a href="../">الموقع</a> · <a href="#/verify">التحقق من شهادة</a> · <a href="../privacy.html">الخصوصية</a> · <a href="mailto:info@hudera.ai" dir="ltr">info@hudera.ai</a></span></div></footer>
+<footer><div class="wrap"><span>HUDERA Academy · من <a href="../">HUDERA AI</a></span><span><a href="../">الموقع</a> · <a href="#/verify">التحقق من شهادة</a> · <a href="../privacy.html">الخصوصية</a> · <a href="mailto:info@hudera.ai" dir="ltr">info@hudera.ai</a></span></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co", "supabaseAnonKey": "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW"};
@@ -230,7 +230,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   function nav() {
     const r = location.hash.split("/")[1] || "";
     const a = (h, t, k, cls = "") => `<a href="${h}" class="${cls}" ${r === k ? 'aria-current="page"' : ""}>${t}</a>`;
-    $("#nav").innerHTML = (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : a("#/register", "سجّل الآن", "register")) + a("#/course", "الدورة", "course", enrId ? "hm" : "")
+    $("#nav").innerHTML = (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : a("#/register", "سجّل الآن", "register")) + a("#/course", "الدورة", "course", enrId ? "hm" : "") + `<a href="../" class="hm">HUDERA AI</a>`
       + (user ? `<span class="who">${user.user_metadata?.avatar_url ? `<img src="${esc(user.user_metadata.avatar_url)}" alt="" referrerpolicy="no-referrer">` : ""}<button class="btn sm ghost" id="out" type="button">خروج</button></span>`
               : `<button class="btn sm" id="in" type="button">${G_ICON} دخول</button>`);
     $("#out")?.addEventListener("click", async () => { await sb.auth.signOut(); location.hash = "#/course"; location.reload(); });
