@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>اختبار التوظيف · HUDERA AI</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#F6F7FB;--surface:#fff;--surface2:#F0F2F8;--ink:#0B1220;--text:#1F2637;--muted:#5B6478;--line:#E3E7F0;--primary:#3D5AFE;--primary-soft:#E9EDFF;--ok:#0FA97A;--ok-soft:#DDF6EC;--err:#D9363E;--err-soft:#FDE6E7;--warn:#B7791F;--warn-soft:#FFF4DB}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 "IBM Plex Sans Arabic","Instrument Sans",system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:22px 16px 90px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--ink);text-decoration:none;font-size:19px;direction:ltr}
+.brand i{width:28px;height:28px;border-radius:8px;background:#3D5AFE;color:#fff;display:grid;place-items:center;font-style:normal;font-size:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+h1{font-size:28px;line-height:1.35;color:var(--ink);margin:0 0 6px}
+h2{font-size:19px;color:var(--ink);margin:0 0 10px}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;background:var(--primary);color:#fff;border-radius:11px;padding:11px 20px;font:inherit;font-weight:700;cursor:pointer}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:var(--surface2);color:var(--ink)}
+.btn.ok{background:var(--ok)}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.rules div{background:var(--surface2);border-radius:12px;padding:12px 14px;font-size:15px}
+.rules b{display:block;color:var(--ink)}
+.checks{list-style:none;padding:0;margin:12px 0}
+.checks li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.st{font-size:13px;font-weight:700;border-radius:20px;padding:2px 10px;background:var(--surface2);color:var(--muted);white-space:nowrap}
+.st.ok{background:var(--ok-soft);color:var(--ok)}.st.bad{background:var(--err-soft);color:var(--err)}
+label.agree{display:flex;gap:10px;align-items:flex-start;margin:14px 0}
+.alert{border-radius:12px;padding:12px 14px;margin:10px 0;font-size:15px}
+.alert.err{background:var(--err-soft);color:var(--err)}.alert.warn{background:var(--warn-soft);color:var(--warn)}.alert.ok{background:var(--ok-soft);color:var(--ok)}
+.bar{position:sticky;top:0;z-index:30;background:var(--ink);color:#fff;border-radius:0 0 14px 14px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin:-22px -16px 16px}
+.bar b{font-size:20px;font-variant-numeric:tabular-nums;direction:ltr}
+.bar .rec{display:flex;align-items:center;gap:7px;font-size:14px}
+.bar .rec i{width:10px;height:10px;border-radius:50%;background:#FF4D4F;animation:p 1.2s infinite}
+@keyframes p{50%{opacity:.25}}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;margin-bottom:12px;user-select:none;-webkit-user-select:none}
+.q .n{font-weight:700;color:var(--primary);font-size:14px}
+.q p{margin:4px 0 10px;color:var(--ink);font-weight:600}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;cursor:pointer}
+.q label:has(input:checked){border-color:var(--primary);background:var(--primary-soft)}
+textarea{width:100%;min-height:170px;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;background:var(--surface);color:var(--text);resize:vertical}
+#cam{position:fixed;bottom:14px;left:14px;width:170px;height:128px;border-radius:12px;object-fit:cover;border:3px solid #FF4D4F;z-index:40;background:#000;transform:scaleX(-1)}
+.ov{position:fixed;inset:0;background:rgba(6,10,20,.92);z-index:50;display:grid;place-items:center;padding:20px}
+.ov .card{max-width:520px;text-align:center}
+.hidden{display:none!important}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
+@media (max-width:640px){.rules{grid-template-columns:1fr}}
+</style>
+</head>
+<body oncontextmenu="return false">
+<main>
+<header><a class="brand" href="/careers/"><i>h</i>hudera <span style="color:#8A93A6;font-weight:600">AI</span></a><span class="muted" id="who"></span></header>
+<div id="app"><div class="card">جاري التحميل…</div></div>
+<footer>اختبار التوظيف · HUDERA AI · <a href="/privacy.html">الخصوصية</a> · <a href="mailto:info@hudera.ai" dir="ltr">info@hudera.ai</a></footer>
+</main>
+<video id="cam" class="hidden" autoplay muted playsinline></video>
+<div id="ov" class="ov hidden"><div class="card"><h2 id="ov-t"></h2><p id="ov-p" class="muted"></p><button class="btn" id="ov-b" type="button"></button></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co", "supabaseAnonKey": "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW"};
+(() => {
+  "use strict";
+  const cfg = HUDERA_CONFIG, $ = s => document.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { global: { fetch: (u, o = {}) => { const h = new Headers(o.headers || {}); const k = cfg.supabaseAnonKey; if (k && !k.includes(".") && h.get("Authorization") === "Bearer " + k) h.delete("Authorization"); return fetch(u, { ...o, headers: h }); } },
+    auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
+  const ROLES = { backend: "مطوّر Backend وتكاملات ذكاء اصطناعي", academy: "مدرّب ومساعد تدريس ذكاء اصطناعي", marketing: "أخصائي تسويق رقمي وإعلانات ممولة",
+    conversation: "مصمّم محادثات ومهندس برومبت", frontend: "مطوّر واجهات Frontend", qa: "مختبر جودة (QA)", data_entry: "مسؤول بيانات" };
+  const MAX_VIOL = 5, SEG_MS = 3 * 60 * 1000;
+  const qs = new URLSearchParams(location.search);
+  let role = qs.get("role") || (() => { try { return sessionStorage.getItem("hudera-exam-role"); } catch (e) { return null; } })() || "";
+  if (role) try { sessionStorage.setItem("hudera-exam-role", role); } catch (e) {}
+  let user = null, att = null, answers = {}, started = false, done = false, viol = 0, skew = 0;
+  let screenStream = null, camStream = null, recorder = null, seg = 0, uploads = Promise.resolve(), drawTimer = null, saveTimer = null, tick = null;
+  const app = $("#app");
+  const errMsg = e => { const m = (e && (e.message || e.error_description || e)) + ""; const map = { apply_first: "لازم تقدّم على الدور ده الأول من صفحة التوظيف قبل الاختبار.", no_exam_for_role: "مفيش اختبار متاح للدور ده حاليًا.", attempt_closed: "الاختبار ده اتقفل.", not_authenticated: "سجّل الدخول الأول." }; for (const k in map) if (m.includes(k)) return map[k]; return m; };
+
+  function overlay(t, p, b, fn) { $("#ov-t").textContent = t; $("#ov-p").textContent = p; $("#ov-b").textContent = b; $("#ov-b").onclick = fn; $("#ov").classList.remove("hidden"); }
+  function hideOverlay() { $("#ov").classList.add("hidden"); }
+
+  // ------------------------------------------------------------ proctoring events
+  let lastEv = {};
+  async function ev(type, detail) {
+    if (!att || done) return;
+    const now = Date.now(); if (lastEv[type] && now - lastEv[type] < 1500) return; lastEv[type] = now;
+    try { const { data } = await sb.rpc("exam_event", { p_attempt: att.attempt_id, p_type: type, p_detail: detail || null }); if (data && typeof data.violations === "number") viol = data.violations; } catch (e) {}
+    paintViol();
+    if (started && viol >= MAX_VIOL) submit(true);
+  }
+  function paintViol() { const el = $("#viol"); if (el) { el.textContent = `مخالفات: ${viol} من ${MAX_VIOL}`; el.style.color = viol ? "#FFB4B6" : ""; } }
+  function guard() {
+    const block = e => { if (!started) return; e.preventDefault(); e.stopPropagation(); ev(e.type === "drop" ? "paste" : e.type, null); toast("النسخ واللصق غير مسموح أثناء الاختبار."); return false; };
+    ["copy", "cut", "paste", "drop", "dragstart"].forEach(t => document.addEventListener(t, block, true));
+    document.addEventListener("keydown", e => {
+      if (!started) return;
+      const k = (e.key || "").toLowerCase(), mod = e.ctrlKey || e.metaKey;
+      if ((mod && ["c", "v", "x", "a", "p", "s", "u", "f"].includes(k)) || (mod && e.shiftKey && ["i", "j", "c"].includes(k)) || k === "f12" || k === "printscreen" || (e.altKey && k === "tab")) {
+        e.preventDefault(); e.stopPropagation(); ev("shortcut", { key: (mod ? "mod+" : "") + k }); toast("الاختصار ده مقفول أثناء الاختبار.");
+      }
+    }, true);
+    document.addEventListener("beforeinput", e => { if (started && /^insertFrom(Paste|Drop|Yank)|insertReplacementText/.test(e.inputType || "")) { e.preventDefault(); ev("paste", { via: e.inputType }); } }, true);
+    document.addEventListener("input", e => { if (started && e.target.tagName === "TEXTAREA" && e.data && e.data.length > 40) ev("burst_typing", { len: e.data.length }); }, true);
+    document.addEventListener("visibilitychange", () => { if (started && document.hidden) { ev("left_page", null); } });
+    window.addEventListener("blur", () => { if (started) { ev("blur", null); } });
+    window.addEventListener("focus", () => { if (started && viol) toast(`تم تسجيل خروجك من صفحة الاختبار (${viol}/${MAX_VIOL}). عند ${MAX_VIOL} مخالفات يتم إنهاء الاختبار تلقائيًا.`, true); });
+    document.addEventListener("fullscreenchange", () => {
+      if (!started || done) return;
+      if (!document.fullscreenElement) { ev("fullscreen_exit", null); overlay("ارجع لوضع ملء الشاشة", "الاختبار لازم يكون في وضع ملء الشاشة طول الوقت. الخروج اتسجّل كمخالفة.", "رجوع لملء الشاشة", async () => { try { await document.documentElement.requestFullscreen(); hideOverlay(); } catch (e) {} }); }
+    });
+    window.addEventListener("beforeunload", e => { if (started && !done) { e.preventDefault(); e.returnValue = ""; } });
+    setInterval(() => { if (started && !done && (window.outerWidth - window.innerWidth > 220 || window.outerHeight - window.innerHeight > 260)) ev("devtools", null); }, 4000);
+  }
+  let toastT;
+  function toast(m, warn) { let el = $("#toast"); if (!el) return; el.textContent = m; el.className = "alert " + (warn ? "warn" : "err"); el.classList.remove("hidden"); clearTimeout(toastT); toastT = setTimeout(() => el.classList.add("hidden"), 6000); }
+
+  // ------------------------------------------------------------ media
+  async function getCamera() { camStream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, frameRate: 15 }, audio: true }); $("#cam").srcObject = camStream; $("#cam").classList.remove("hidden");
+    camStream.getVideoTracks()[0].addEventListener("ended", () => { if (started) { ev("camera_stopped", null); overlay("الكاميرا وقفت", "شغّل الكاميرا تاني علشان تكمل الاختبار.", "تشغيل الكاميرا", async () => { try { await getCamera(); hideOverlay(); } catch (e) {} }); } }); }
+  async function getScreen() {
+    const s = await navigator.mediaDevices.getDisplayMedia({ video: { displaySurface: "monitor", frameRate: 6 }, audio: false, monitorTypeSurfaces: "include", selfBrowserSurface: "include", surfaceSwitching: "exclude" });
+    const tr = s.getVideoTracks()[0], st = tr.getSettings ? tr.getSettings() : {};
+    if (st.displaySurface && st.displaySurface !== "monitor") { s.getTracks().forEach(t => t.stop()); throw new Error("لازم تختار «الشاشة بالكامل» (Entire screen) مش نافذة أو تاب."); }
+    screenStream = s; const v = document.createElement("video"); v.muted = true; v.srcObject = s; await v.play(); screenStream._v = v;
+    tr.addEventListener("ended", () => { if (started && !done) { ev("screen_stopped", null); overlay("مشاركة الشاشة وقفت", "لازم تشارك الشاشة بالكامل طول الاختبار. الإيقاف اتسجّل كمخالفة.", "مشاركة الشاشة تاني", async () => { try { await getScreen(); hideOverlay(); restartRec(); } catch (e) { toast(errMsg(e)); } }); } });
+  }
+  // composite: full screen + camera picture-in-picture, 6 fps, recorded in 3-minute self-contained segments
+  const canvas = document.createElement("canvas"); canvas.width = 1280; canvas.height = 720; const ctx = canvas.getContext("2d");
+  function draw() {
+    ctx.fillStyle = "#000"; ctx.fillRect(0, 0, 1280, 720);
+    const v = screenStream && screenStream._v; if (v && v.videoWidth) { const r = Math.min(1280 / v.videoWidth, 720 / v.videoHeight), w = v.videoWidth * r, h = v.videoHeight * r; ctx.drawImage(v, (1280 - w) / 2, (720 - h) / 2, w, h); }
+    const c = $("#cam"); if (c.videoWidth) { ctx.drawImage(c, 1280 - 260, 720 - 196, 248, 186); ctx.strokeStyle = "#FF4D4F"; ctx.lineWidth = 3; ctx.strokeRect(1280 - 260, 720 - 196, 248, 186); }
+    ctx.fillStyle = "rgba(0,0,0,.6)"; ctx.fillRect(0, 0, 460, 26); ctx.fillStyle = "#fff"; ctx.font = "14px sans-serif"; ctx.fillText(`${user?.email || ""} · ${role} · ${new Date().toISOString().slice(0, 19).replace("T", " ")}Z`, 8, 18);
+  }
+  function startRec() {
+    const tracks = [...canvas.captureStream(6).getVideoTracks(), ...(camStream ? camStream.getAudioTracks() : [])];
+    const mime = ["video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm"].find(m => MediaRecorder.isTypeSupported(m)) || "";
+    const r = new MediaRecorder(new MediaStream(tracks), { mimeType: mime, videoBitsPerSecond: 450000, audioBitsPerSecond: 32000 });
+    const chunks = []; r.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+    r.onstop = () => { const blob = new Blob(chunks, { type: "video/webm" }); if (blob.size) uploads = uploads.then(() => upload(blob)); };
+    r.start(10000); recorder = r; r._t = setTimeout(() => { if (!done) restartRec(); }, SEG_MS);
+  }
+  function restartRec() { if (recorder) { clearTimeout(recorder._t); if (recorder.state !== "inactive") recorder.stop(); } startRec(); }
+  async function upload(blob) {
+    seg++; const path = `${user.id}/${att.attempt_id}/seg-${String(seg).padStart(3, "0")}.webm`;
+    for (let i = 0; i < 3; i++) {
+      const { error } = await sb.storage.from("exam-rec").upload(path, blob, { contentType: "video/webm", upsert: false });
+      if (!error || /exists/i.test(error.message || "")) { try { await sb.rpc("exam_add_recording", { p_attempt: att.attempt_id, p_path: path }); } catch (e) {} return; }
+      await new Promise(r => setTimeout(r, 2000 * (i + 1)));
+    }
+    ev("upload_failed", { seg });
+  }
+
+  // ------------------------------------------------------------ screens
+  function needRole() {
+    app.innerHTML = `<div class="card"><h1>اختبار التوظيف</h1><p class="muted">اختار الدور اللي قدّمت عليه:</p>${Object.entries(ROLES).map(([k, t]) => `<p><a class="btn ghost" href="?role=${k}">${esc(t)}</a></p>`).join("")}</div>`;
+  }
+  function login() {
+    app.innerHTML = `<div class="card"><h1>اختبار التوظيف · ${esc(ROLES[role] || role)}</h1><p class="muted">سجّل الدخول بنفس حساب Google اللي قدّمت بيه على الوظيفة.</p><button class="btn" id="g" type="button">الدخول بحساب Google</button></div>`;
+    $("#g").onclick = () => { try { sessionStorage.setItem("hudera-return", "/careers/exam/"); } catch (e) {}
+      sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + "/careers/exam/", queryParams: { prompt: "select_account" } } }); };
+  }
+  function intro() {
+    const mobile = /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent) || !navigator.mediaDevices?.getDisplayMedia;
+    app.innerHTML = `<div class="card"><h1>اختبار ${esc(ROLES[role] || role)}</h1>
+      <p class="muted">مدة الاختبار <b>40 دقيقة</b>: أسئلة اختيار من متعدد وسؤالين مكتوبين. اقرأ القواعد كويس قبل ما تبدأ، لأن الاختبار مرة واحدة بس.</p>
+      ${mobile ? `<div class="alert err">الاختبار لازم يكون من كمبيوتر أو لابتوب (Chrome أو Edge). الموبايل والتابلت مش مدعومين.</div>` : ""}
+      <div class="rules">
+        <div><b>🎥 الكاميرا والمايك شغالين</b>طول الاختبار ومتسجلين. لازم وشّك يكون واضح.</div>
+        <div><b>🖥️ تسجيل الشاشة بالكامل</b>هتشارك «الشاشة بالكامل» مش نافذة، وشاشة واحدة بس.</div>
+        <div><b>🚫 ممنوع النسخ واللصق</b>Copy وPaste وCut والاختصارات مقفولة.</div>
+        <div><b>🤖 ممنوع أي أداة ذكاء اصطناعي</b>أو أي موقع أو برنامج تاني. الخروج من صفحة الاختبار بيتسجّل.</div>
+        <div><b>⛶ ملء الشاشة</b>الاختبار بيشتغل في وضع ملء الشاشة، والخروج منه مخالفة.</div>
+        <div><b>⚠️ ${MAX_VIOL} مخالفات = إنهاء تلقائي</b>والتسجيل كله بيتراجع من فريق التوظيف.</div>
+      </div>
+      <label class="agree"><input type="checkbox" id="ok"> <span>قريت القواعد وموافق على تسجيل الكاميرا والصوت والشاشة طول مدة الاختبار لغرض التقييم فقط. التسجيلات بيشوفها فريق التوظيف بس، وبتتمسح بعد انتهاء عملية الاختيار.</span></label>
+      <button class="btn" id="go" type="button" disabled>تجهيز الأجهزة</button></div>`;
+    $("#ok").onchange = e => $("#go").disabled = !e.target.checked || mobile;
+    $("#go").onclick = checks;
+  }
+  async function checks() {
+    app.innerHTML = `<div class="card"><h2>تجهيز الأجهزة</h2><ul class="checks">
+      <li><span>شاشة واحدة متوصلة</span><span class="st" id="c-scr">…</span></li>
+      <li><span>الكاميرا والمايك</span><span class="st" id="c-cam">…</span></li>
+      <li><span>مشاركة الشاشة بالكامل</span><span class="st" id="c-share">…</span></li>
+      <li><span>وضع ملء الشاشة</span><span class="st" id="c-fs">…</span></li></ul>
+      <div id="c-msg"></div><button class="btn" id="retry" type="button">متابعة</button></div>`;
+    const set = (id, ok, t) => { const el = $("#" + id); el.className = "st " + (ok ? "ok" : "bad"); el.textContent = t || (ok ? "تمام" : "مش جاهز"); };
+    const fail = m => { $("#c-msg").innerHTML = `<div class="alert err">${esc(m)}</div>`; $("#retry").textContent = "حاول تاني"; };
+    $("#retry").onclick = async () => {
+      $("#c-msg").innerHTML = "";
+      if (window.screen.isExtended) { set("c-scr", false, "فيه شاشة إضافية"); return fail("افصل أي شاشة إضافية واستخدم شاشة واحدة بس، وبعدين اضغط حاول تاني."); } set("c-scr", true);
+      try { if (!camStream) await getCamera(); set("c-cam", true); } catch (e) { set("c-cam", false); return fail("اسمح للمتصفح باستخدام الكاميرا والمايك من أيقونة القفل جنب العنوان، وبعدين حاول تاني."); }
+      try { if (!screenStream) await getScreen(); set("c-share", true); } catch (e) { set("c-share", false); return fail(errMsg(e).includes("Entire") || errMsg(e).includes("الشاشة") ? errMsg(e) : "لازم توافق على مشاركة «الشاشة بالكامل» (Entire screen)."); }
+      try { await document.documentElement.requestFullscreen(); set("c-fs", true); } catch (e) { set("c-fs", false); return fail("اسمح بوضع ملء الشاشة."); }
+      begin();
+    };
+    $("#retry").click();
+  }
+  async function begin() {
+    const client = { ua: navigator.userAgent.slice(0, 200), w: screen.width, h: screen.height, tz: Intl.DateTimeFormat().resolvedOptions().timeZone };
+    const { data, error } = await sb.rpc("exam_start", { p_role: role, p_client: client });
+    if (error) { stopAll(); app.innerHTML = `<div class="card"><div class="alert err">${esc(errMsg(error))}</div><a class="btn" href="/careers/?role=${encodeURIComponent(role)}">صفحة التقديم</a></div>`; return; }
+    if (data.status !== "started") { stopAll(); finished(data.status); return; }
+    att = data; answers = data.answers || {}; skew = new Date(data.now).getTime() - Date.now();
+    drawTimer = setInterval(draw, 1000 / 6); startRec(); started = true;
+    if (data.resumed) ev("resumed_client", null);
+    paintExam();
+  }
+  function paintExam() {
+    let n = 0;
+    app.innerHTML = `<div class="bar"><span class="rec"><i></i>جاري التسجيل</span><span id="viol" class="muted" style="color:#9AA4BA">مخالفات: 0 من ${MAX_VIOL}</span><b id="tm">--:--</b></div>
+      <div id="toast" class="alert hidden"></div>
+      ${att.questions.map(q => { n++; const id = esc(q.id);
+        return `<div class="q"><span class="n">سؤال ${n} · ${q.kind === "mcq" ? "اختيار من متعدد" : `سؤال مكتوب (${q.points} درجات)`}</span><p>${esc(q.q_ar)}</p>${q.kind === "mcq"
+          ? q.options.map((o, i) => `<label><input type="radio" name="${id}" value="${i}" ${String(answers[q.id]) === String(i) ? "checked" : ""}> <span>${esc(o)}</span></label>`).join("")
+          : `<textarea data-q="${id}" spellcheck="false" autocomplete="off" placeholder="اكتب إجابتك هنا بنفسك…">${esc(answers[q.id] || "")}</textarea>`}</div>`; }).join("")}
+      <div class="card"><p class="muted">بعد التسليم مش هتقدر تعدّل إجاباتك.</p><button class="btn ok" id="sub" type="button">تسليم الاختبار</button></div>`;
+    app.addEventListener("change", e => { if (e.target.type === "radio") { answers[e.target.name] = Number(e.target.value); queueSave(); } });
+    app.addEventListener("input", e => { if (e.target.dataset.q) { answers[e.target.dataset.q] = e.target.value.slice(0, 8000); queueSave(); } });
+    $("#sub").onclick = () => { const left = att.questions.filter(q => answers[q.id] === undefined || answers[q.id] === "").length;
+      if (confirmBox(left)) submit(false); };
+    paintViol(); tick = setInterval(timer, 1000); timer();
+  }
+  function confirmBox(left) { return window.confirm(left ? `فيه ${left} سؤال من غير إجابة. تسلّم برضه؟` : "متأكد إنك عايز تسلّم الاختبار؟"); }
+  function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(() => sb.rpc("exam_save", { p_attempt: att.attempt_id, p_answers: answers }).then(() => {}, () => {}), 1500); }
+  function timer() { const ms = new Date(att.deadline).getTime() - (Date.now() + skew); const el = $("#tm"); if (!el) return;
+    const s = Math.max(0, Math.floor(ms / 1000)); el.textContent = `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; if (s <= 300) el.style.color = "#FFB4B6"; if (s === 0) submit(false); }
+  function stopAll() { clearInterval(drawTimer); clearInterval(tick); [screenStream, camStream].forEach(s => s && s.getTracks().forEach(t => t.stop())); $("#cam").classList.add("hidden"); }
+  let submitting = false;
+  async function submit(terminated) {
+    if (submitting || done) return; submitting = true; done = true; started = false; hideOverlay();
+    app.innerHTML = `<div class="card"><h2>جاري تسليم الاختبار ورفع التسجيل…</h2><p class="muted">ما تقفلش الصفحة لحد ما تظهر رسالة التأكيد.</p></div>`;
+    if (recorder) { clearTimeout(recorder._t); if (recorder.state !== "inactive") recorder.stop(); }
+    await new Promise(r => setTimeout(r, 600)); await uploads;
+    let st = terminated ? "terminated" : "submitted";
+    try { const { data } = await sb.rpc("exam_submit", { p_attempt: att.attempt_id, p_answers: answers, p_terminated: !!terminated }); if (data && data.status) st = data.status; } catch (e) {}
+    stopAll(); try { if (document.fullscreenElement) await document.exitFullscreen(); } catch (e) {}
+    finished(st);
+  }
+  function finished(st) {
+    const t = st === "terminated" ? ["تم إنهاء الاختبار", "الاختبار اتقفل تلقائيًا بسبب تكرار المخالفات. فريق التوظيف هيراجع التسجيل ويتواصل معاك."]
+      : st === "expired" ? ["انتهى وقت الاختبار", "الوقت المسموح للاختبار ده خلص. لو حصلت مشكلة تقنية ابعتلنا على info@hudera.ai."]
+      : ["تم تسليم الاختبار ✅", "شكرًا لوقتك. فريق التوظيف هيراجع إجاباتك والتسجيل، وهنتواصل معاك بالخطوة الجاية خلال أيام عمل قليلة."];
+    app.innerHTML = `<div class="card"><h1>${t[0]}</h1><p class="muted">${t[1]}</p><a class="btn ghost" href="/">الموقع الرئيسي</a></div>`;
+  }
+
+  // ------------------------------------------------------------ boot
+  guard();
+  (async () => {
+    const { data } = await sb.auth.getSession();
+    if (qs.has("code")) history.replaceState(null, "", location.pathname + (role ? `?role=${encodeURIComponent(role)}` : ""));
+    try { sessionStorage.removeItem("hudera-return"); } catch (e) {}
+    user = data.session?.user || null;
+    if (user) $("#who").textContent = user.email || "";
+    if (!role || !ROLES[role]) return needRole();
+    if (!user) return login();
+    intro();
+  })();
+})();
+</script>
+</body>
+</html>
