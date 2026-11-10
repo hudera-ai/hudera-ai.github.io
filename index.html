@@ -21,6 +21,9 @@
 <meta property="og:image" content="https://hudera.ai/og.png">
 <meta property="og:url" content="https://hudera.ai/">
 <link rel="canonical" href="https://hudera.ai/">
+<link rel="alternate" hreflang="ar" href="https://hudera.ai/">
+<link rel="alternate" hreflang="en" href="https://hudera.ai/en/">
+<link rel="alternate" hreflang="x-default" href="https://hudera.ai/">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://hudera.ai/#org", "name": "HUDERA AI", "alternateName": ["HUDERA", "Hudera AI", "هوديرا", "هوديرا للذكاء الاصطناعي", "HUDERA AI (هوديرا)"], "url": "https://hudera.ai/", "logo": {"@type": "ImageObject", "url": "https://hudera.ai/icon-512.png", "width": 512, "height": 512}, "image": "https://hudera.ai/og.png", "email": "info@hudera.ai", "description": "HUDERA AI builds AI employees and SaaS platforms for companies in Saudi Arabia, the Gulf and Egypt: WhatsApp assistants in Arabic and English, dashboards and workflow automation.", "sameAs": ["https://www.linkedin.com/company/hudera/", "https://www.facebook.com/huderaai", "https://www.youtube.com/@huderaai", "https://www.tiktok.com/@huderaai", "https://github.com/hudera-ai"], "legalName": "HUDERA AI", "areaServed": ["SA", "AE", "KW", "QA", "BH", "OM", "JO", "EG"], "knowsAbout": ["AI employees", "WhatsApp AI assistant", "Arabic AI chatbot", "business automation", "AI for HR", "AI for collections", "van sales app", "AI training courses", "موظف ذكاء اصطناعي", "مساعد واتساب بالذكاء الاصطناعي", "أتمتة الأعمال"], "founder": [{"@type": "Person", "name": "Mahmoud Shehab", "jobTitle": "Co-founder & CTO", "sameAs": ["https://www.linkedin.com/in/mahmoud-shahab/"]}, {"@type": "Person", "name": "Ahmed Ramadan", "jobTitle": "Co-founder", "sameAs": ["https://www.linkedin.com/in/ramadanium/"]}], "contactPoint": [{"@type": "ContactPoint", "contactType": "sales", "email": "info@hudera.ai", "availableLanguage": ["Arabic", "English"]}]}, {"@type": "WebSite", "@id": "https://hudera.ai/#website", "name": "HUDERA AI", "alternateName": ["هوديرا", "HUDERA", "هوديرا للذكاء الاصطناعي"], "url": "https://hudera.ai/", "inLanguage": ["ar", "en"], "publisher": {"@id": "https://hudera.ai/#org"}}, {"@type": "EducationalOrganization", "@id": "https://hudera.ai/academy/#academy", "name": "HUDERA Academy", "alternateName": "أكاديمية هوديرا", "url": "https://hudera.ai/academy/", "parentOrganization": {"@id": "https://hudera.ai/#org"}}]}</script>
 <meta property="og:site_name" content="HUDERA AI">
 <meta name="twitter:card" content="summary_large_image">
@@ -3147,7 +3150,8 @@ const AR_DICT = {
    The page is written in English. In Arabic mode every visible string is looked up in AR_DICT
    (exact text first, then a number-agnostic template where digits become "#").
    Chat bubbles inside the phone frames are never touched: they follow the chat's own language. */
-let LANG = (() => { try { const v = localStorage.getItem("hudera-lang"); if (v === "en" || v === "ar") return v; } catch (e) {} return "ar"; })();
+const ON_EN = /^\/en(\/|$)/.test(location.pathname);
+let LANG = ON_EN ? "en" : "ar";
 const tt = (en, ar) => (LANG === "ar" ? ar : en);
 const L10N_SKIP = ".phone, .no-l10n, script, style";
 const L10N_ATTRS = ["placeholder", "aria-label", "title", "data-c"];
@@ -3245,7 +3249,10 @@ const waAttr = (en, ar) => `href="${waLink(tt(en, ar))}" data-wa-en="${esc(en)}"
 function refreshWa() { document.querySelectorAll("[data-wa-en]").forEach(a => { a.href = waLink(LANG === "ar" ? a.dataset.waAr : a.dataset.waEn); }); }
 function setLang(v) {
   if (v === LANG) return;
-  LANG = v; try { localStorage.setItem("hudera-lang", v); } catch (e) {}
+  try { localStorage.setItem("hudera-lang", v); } catch (e) {}
+  if (v === "en" && !ON_EN) { location.href = "/en/" + location.hash; return; }
+  if (v === "ar" && ON_EN) { location.href = "/" + location.hash; return; }
+  LANG = v;
   applyLangAttrs();
   if (LANG === "ar") localize(document.body); else unlocalize(document.body);
   refreshWa();
