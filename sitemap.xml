@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://hudera.ai/</loc></url>
-  <url><loc>https://hudera.ai/academy/</loc></url>
-  <url><loc>https://hudera.ai/careers/</loc></url>
-  <url><loc>https://hudera.ai/privacy.html</loc></url>
-  <url><loc>https://hudera.ai/orders/</loc></url>
-  <url><loc>https://hudera.ai/sitelog/</loc></url>
-  <url><loc>https://hudera.ai/quoteflow/</loc></url>
-  <url><loc>https://hudera.ai/attendify/</loc></url>
-  <url><loc>https://hudera.ai/workforce/</loc></url>
+  <url><loc>https://hudera.ai/</loc><lastmod>2026-11-10</lastmod><priority>1.0</priority></url>
+  <url><loc>https://hudera.ai/academy/</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://hudera.ai/careers/</loc><lastmod>2026-11-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://hudera.ai/privacy.html</loc><lastmod>2026-11-10</lastmod><priority>0.3</priority></url>
 </urlset>
