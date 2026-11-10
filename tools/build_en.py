@@ -20,6 +20,7 @@ fix = ('<script>document.addEventListener("click",function(ev){var a=ev.target.c
        'var id=a.getAttribute("href").slice(1);ev.preventDefault();if(!id){window.scrollTo({top:0,behavior:"smooth"});history.replaceState(null,"",location.pathname);return;}'
        'var t=document.getElementById(id);if(t)t.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState(null,"","#"+id);},true);</script>\n</head>')
 e = e.replace('</head>', fix, 1)
+e = e.replace('<a href="blog/" data-blog>', '<a href="en/blog/" data-blog>', 1)
 (root / "en").mkdir(exist_ok=True)
 (root / "en" / "index.html").write_text(e, encoding="utf-8")
 print("en/index.html rebuilt")
