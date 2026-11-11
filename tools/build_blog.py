@@ -11,6 +11,7 @@ WA = "https://wa.me/201555159139"
 ARTICLES = [
  {
   "pair": "ai-employee-whatsapp",
+  "product": ("connect", "HUDERA Connect: مساعد واتساب ذكي يرد على العملاء ويحجز المواعيد", "HUDERA Connect: a WhatsApp AI assistant that answers customers and books appointments"),
   "date": "2026-11-10",
   "ar": {
    "slug": "ai-employee-whatsapp",
@@ -134,6 +135,7 @@ ARTICLES = [
  },
  {
   "pair": "van-sales-gps",
+  "product": ("vansales", "VanSales: برنامج مندوبي المبيعات بتتبع GPS وحسابات سحابية", "VanSales: van sales software with GPS tracking and cloud accounting"),
   "date": "2026-11-10",
   "ar": {
    "slug": "van-sales-app-gps",
@@ -281,11 +283,11 @@ def tracker(lang):
 def chrome(lang, body, alt=None):
     if lang == "ar":
         nav = f'<a href="/">الرئيسية</a><a href="/blog/">المدونة</a><a href="/academy/">الأكاديمية</a><a href="{alt or "/en/blog/"}" lang="en">English</a>'
-        foot = '<span>© 2026 HUDERA AI (هوديرا)</span><a href="mailto:info@hudera.ai">info@hudera.ai</a>'
+        foot = '<span>© 2026 HUDERA AI (هوديرا)</span><span><a href="/products/">المنتجات</a> · <a href="/blog/">المدونة</a> · <a href="mailto:info@hudera.ai">info@hudera.ai</a></span>'
         home = "/"
     else:
         nav = f'<a href="/en/">Home</a><a href="/en/blog/">Blog</a><a href="/academy/">Academy</a><a href="{alt or "/blog/"}" lang="ar">عربي</a>'
-        foot = '<span>© 2026 HUDERA AI (هوديرا)</span><a href="mailto:info@hudera.ai">info@hudera.ai</a>'
+        foot = '<span>© 2026 HUDERA AI (هوديرا)</span><span><a href="/en/products/">Products</a> · <a href="/en/blog/">Blog</a> · <a href="mailto:info@hudera.ai">info@hudera.ai</a></span>'
         home = "/en/"
     return f"""<body>
 <header><div class="bar"><a class="logo" href="{home}"><img src="/favicon-96x96.png" alt="HUDERA AI">HUDERA AI</a><nav>{nav}</nav></div></header>

@@ -128,6 +128,7 @@ def english_page(src):
     e = e.replace('<meta property="og:url" content="https://hudera.ai/">', '<meta property="og:url" content="https://hudera.ai/en/">', 1)
     e = e.replace('<link rel="canonical" href="https://hudera.ai/">', '<link rel="canonical" href="https://hudera.ai/en/">', 1)
     e = e.replace('<a href="blog/" data-blog>', '<a href="en/blog/" data-blog>')
+    e = e.replace('<a href="products/" data-products>', '<a href="en/products/" data-products>')
     # <base href="/"> would send in-page "#x" links to the Arabic home page; keep them on /en/
     fix = ('<script>document.addEventListener("click",function(ev){var a=ev.target.closest&&ev.target.closest(\'a[href^="#"]\');'
            'if(!a||ev.defaultPrevented)return;ev.preventDefault();var h=a.getAttribute("href");'
