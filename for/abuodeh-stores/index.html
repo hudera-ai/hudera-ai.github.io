@@ -296,6 +296,22 @@ footer p{margin:6px 0;max-width:80ch}
 .push small{color:var(--muted);display:block}
 .fresh td .pill{white-space:nowrap}
 
+.hero.plain h1{max-width:24ch;margin-top:22px}
+.hero.plain p{font-size:19px;max-width:62ch}
+.what{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:w}
+.what li{counter-increment:w;border:1px solid var(--line);border-radius:20px;padding:22px;background:#fff}
+.what li::before{content:counter(w);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--brand);color:var(--on-brand,#fff);font-weight:800;margin-bottom:12px}
+.what b{display:block;font-family:var(--f-display);font-size:20px;line-height:1.5;margin-bottom:6px}
+.what span{color:var(--muted);font-size:16px}
+.hint{margin:0 0 20px;padding:14px 38px 14px 18px;border-radius:16px;background:var(--chip-bg);font-size:15.5px;max-width:640px}
+.hint li{margin:3px 0}
+#m-guard[aria-pressed=false]{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}50%{box-shadow:0 0 0 6px var(--chip-bg)}}
+@media (prefers-reduced-motion:reduce){#m-guard[aria-pressed=false]{animation:none;outline:2px solid var(--focus)}}
+#why .duo .n{font-size:clamp(52px,11vw,120px)}
+#why .duo .vs{padding-bottom:40px}
+@media (max-width:820px){.what{grid-template-columns:1fr}}
+
 .mark{font-family:"Cairo",sans-serif;font-weight:900;font-size:22px;color:var(--brand);line-height:1.1}
 .mark small{display:block;font-family:"Tajawal",sans-serif;font-weight:500;font-size:11.5px;color:var(--muted);letter-spacing:0}
 .duo .a .n{color:var(--brand)}.duo .b .n{color:var(--bad)}
@@ -315,39 +331,31 @@ footer p{margin:6px 0;max-width:80ch}
   <span class="mark">أبو عودة ستورز<small>Abu Odeh Stores</small></span>
   <span class="x">×</span>
   <span class="hud">HUDERA <b>AI</b></span>
-  <nav aria-label="أقسام العرض"><a href="#voices">صوت العميل</a><a href="#journey">طلب واحد بطريقتين</a><a href="#fresh">سجل الطزاجة</a><a href="#cases">الحالات المفتوحة</a><a href="#pilot">التجربة</a></nav>
+  <nav aria-label="أقسام العرض"><a href="#what">ماذا يفعل</a><a href="#journey">شاهده يعمل</a><a href="#cases">الشكاوى</a><a href="#why">لماذا</a><a href="#pilot">التجربة</a></nav>
 </div></header>
 <main>
-<section class="hero"><div class="wrap">
+<section class="hero plain"><div class="wrap">
   <span class="tag demo">عرض مُعدّ لإدارة أبو عودة ستورز، نوفمبر 2026</span>
-  <div class="duo" style="margin-top:26px">
-    <div class="a"><div class="n">4.2</div><div class="l">تقييم فرع طريق المطار</div><div class="s">جوجل ماب، 1,219 تقييمًا</div></div>
-    <div class="vs">منها</div>
-    <div class="b"><div class="n">110</div><div class="l">تقييمًا بنجمة واحدة</div><div class="s">جوجل ماب، الفرع نفسه</div></div>
-  </div>
-  <h1>الناس تحب المكان. والنجمة الواحدة تأتي حين يُقال للعميل «عشر دقايق» وتمرّ ساعة.</h1>
-  <p>قرأنا تقييمات فرع طريق المطار على جوجل ماب. أغلب الناس راضون. والشكوى التي قرأناها تتكرر في طلبات الهاتف وقسم اللحوم والمشاوي: موعد يُقال شفهيًا ولا يتحقق، وصنف يُكتشف غيابه بعد الانتظار.</p>
-  <a class="go" href="#journey">شاهد الطلب نفسه بطريقتين</a>
-  <div style="margin-top:14px"><span class="tag real">الأرقام من جوجل ماب، 11 نوفمبر 2026</span></div>
+  <h1>مكتب الطلبات: مساعد ذكي على واتساب يعطي عميلكم موعدًا حقيقيًا لطلبه</h1>
+  <p>نظام من HUDERA AI يعمل بجانب الكاشير والمخزون الحاليين، دون تغييرهما. يستقبل طلبات اللحوم والمشاوي على واتساب، ويسأل القسم عن التوفر والدور قبل أن يعد العميل، ويرسل للقسم تذكرة مكتوبة، ويخبر العميل حين يجهز طلبه.</p>
+  <a class="go" href="#journey">شاهده يعمل</a>
 </div></section>
 
-<section id="voices"><div class="wrap">
-  <div class="sec-head"><span class="tag real">نصوص حقيقية من تقييمات فرع طريق المطار على جوجل ماب</span>
-  <h2>ما كتبه عملاؤكم</h2></div>
-  <p class="lead">أربع ملاحظات من آخر شهرين.</p>
-  <div class="quotes">
-    <div class="q"><p>«يمر أكثر من ساعة والطلب لسه مش جاهز، وبالآخر ممكن يطلع الطلب مش موجود من الأساس»</p><div class="m"><span>قبل أسبوع</span></div></div>
-    <div class="q"><p>طلب لحمة بالهاتف، قيل له عشر دقائق، ثم صارت ساعة عند وصوله.</p><div class="m"><span>قبل شهرين · بتصرف</span></div></div>
-    <div class="q"><p>«اغلب السلع بدون اسعار»</p><div class="m"><span>قبل شهرين</span></div></div>
-    <div class="q"><p>«دايما بيحطوا لابيل بتاريخ اليوم و مرات كثير بتكون البضاعه قديمه»</p><div class="m"><span>قبل شهرين</span></div></div>
-  </div>
-  <div class="zero"><b>قريبًا</b><span>هذا ما يظهر على abuodehstores.com منذ 2025. خارج تطبيقات التوصيل، الطلب المباشر منكم بالهاتف، والوعد شفهي.</span></div>
+<section id="what"><div class="wrap">
+  <div class="sec-head"><h2>ماذا يفعل مكتب الطلبات؟</h2></div>
+  <ol class="what">
+    <li><b>يستقبل الطلب مكتوبًا</b><span>العميل يكتب طلبه على واتساب، فلا يضيع طلب قيل في مكالمة.</span></li>
+    <li><b>يسأل القسم قبل أن يعد</b><span>التوفر والدور الحالي من قسم المشاوي أولًا، ثم موعد حقيقي للعميل.</span></li>
+    <li><b>يخبر العميل حين يجهز</b><span>رسالة «طلبك جاهز» برقم الطلب، والبديل يُعرض قبل أن يتحرك من بيته.</span></li>
+  </ol>
 </div></section>
+
 
 <section id="journey"><div class="wrap">
-  <div class="sec-head"><span class="tag demo">سيناريو توضيحي مبني على الشكاوى أعلاه</span>
-  <h2>طلب واحد، بطريقتين</h2></div>
+  <div class="sec-head"><span class="tag demo">سيناريو توضيحي مبني على شكاوى حقيقية</span>
+  <h2>شاهده يعمل: طلب واحد بطريقتين</h2></div>
   <p class="lead">أبو محمد عنده عزومة الجمعة. يريد 2 كيلو كباب و1 كيلو شقف مشوية، ويمرّ يستلمها بعد الصلاة.</p>
+  <ol class="hint"><li>اقرأ ما يحدث اليوم.</li><li>اضغط زر «مع مكتب الطلبات».</li><li>اضغط أزرار الرد داخل الهاتف، وشاهد الخطوات تتحقق واحدة واحدة.</li></ol>
   <div class="modes" role="group" aria-label="طريقة الطلب"><button type="button" id="m-now" aria-pressed="true">كما يحدث اليوم</button><button type="button" id="m-guard" aria-pressed="false">مع مكتب الطلبات</button></div>
   <div class="journey">
     <div>
@@ -408,6 +416,30 @@ footer p{margin:6px 0;max-width:80ch}
       <div class="done" id="r-done"></div>
     </aside>
   </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <div class="sec-head"><span class="tag real">الأرقام من جوجل ماب، 11 نوفمبر 2026</span>
+  <h2>لماذا تحتاجونه؟ ما تقوله التقييمات</h2></div>
+  <div class="duo">
+    <div class="a"><div class="n">4.2</div><div class="l">تقييم فرع طريق المطار</div><div class="s">جوجل ماب، 1,219 تقييمًا</div></div>
+    <div class="vs">منها</div>
+    <div class="b"><div class="n">110</div><div class="l">تقييمًا بنجمة واحدة</div><div class="s">جوجل ماب، الفرع نفسه</div></div>
+  </div>
+  <p class="lead" style="margin-top:22px"><b>الناس تحب المكان. والنجمة الواحدة تأتي حين يُقال للعميل «عشر دقايق» وتمرّ ساعة.</b> قرأنا تقييمات فرع طريق المطار على جوجل ماب. أغلب الناس راضون. والشكوى التي قرأناها تتكرر في طلبات الهاتف وقسم اللحوم والمشاوي: موعد يُقال شفهيًا ولا يتحقق، وصنف يُكتشف غيابه بعد الانتظار.</p>
+</div></section>
+
+<section id="voices"><div class="wrap">
+  <div class="sec-head"><span class="tag real">نصوص حقيقية من تقييمات فرع طريق المطار على جوجل ماب</span>
+  <h2>ما كتبه عملاؤكم</h2></div>
+  <p class="lead">أربع ملاحظات من آخر شهرين.</p>
+  <div class="quotes">
+    <div class="q"><p>«يمر أكثر من ساعة والطلب لسه مش جاهز، وبالآخر ممكن يطلع الطلب مش موجود من الأساس»</p><div class="m"><span>قبل أسبوع</span></div></div>
+    <div class="q"><p>طلب لحمة بالهاتف، قيل له عشر دقائق، ثم صارت ساعة عند وصوله.</p><div class="m"><span>قبل شهرين · بتصرف</span></div></div>
+    <div class="q"><p>«اغلب السلع بدون اسعار»</p><div class="m"><span>قبل شهرين</span></div></div>
+    <div class="q"><p>«دايما بيحطوا لابيل بتاريخ اليوم و مرات كثير بتكون البضاعه قديمه»</p><div class="m"><span>قبل شهرين</span></div></div>
+  </div>
+  <div class="zero"><b>قريبًا</b><span>هذا ما يظهر على abuodehstores.com منذ 2025. خارج تطبيقات التوصيل، الطلب المباشر منكم بالهاتف، والوعد شفهي.</span></div>
 </div></section>
 
 <section id="pilot"><div class="wrap">
