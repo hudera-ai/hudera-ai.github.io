@@ -61,7 +61,7 @@ x.last=now;s("hudera.sid",JSON.stringify(x));return{vid:vid,sid:x.id,ctx:x.ctx}}
 function send(name,props,keep){var c=consent();if(!c||c.analytics!==true)return;try{var i=ids();fetch(U+"/rest/v1/rpc/track",{method:"POST",keepalive:!!keep,headers:{apikey:K,"content-type":"application/json"},
 body:JSON.stringify({p_visitor:i.vid,p_session:i.sid,p_context:i.ctx,p_events:[{id:id(),name:name,at:new Date().toISOString(),path:location.pathname,props:props||{}}]})}).catch(function(){})}catch(e){}}
 function pv(){send("page_view",{title:document.title.slice(0,120),lang:document.documentElement.lang})}
-document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');if(a)send("whatsapp_clicked",{placement:"blog"},true)});
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');if(a)send("whatsapp_clicked",{placement:/\/products\//.test(location.pathname)?"product":"blog"},true)});
 if(consent())pv();else{var d=document.createElement("div");d.className="consent";d.setAttribute("role","dialog");d.setAttribute("aria-label",T[2]);
 d.innerHTML="<p><b>"+T[0]+"</b> "+T[1]+' <a href="/privacy.html">'+T[2]+'</a></p><div class="row"><button type="button" data-c="0">'+T[3]+'</button><button type="button" class="p" data-c="1">'+T[4]+"</button></div>";
 d.addEventListener("click",function(e){var b=e.target.closest("[data-c]");if(!b)return;s("hudera.consent",JSON.stringify({v:"2026-10",analytics:b.getAttribute("data-c")==="1",at:new Date().toISOString()}));d.remove();pv()});

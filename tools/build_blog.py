@@ -74,6 +74,7 @@ ARTICLES = [
  {
   "pair": "collections-whatsapp",
   "date": "2026-11-10",
+  "product": ("hesabo", "Hesabo: مساعد واتساب لكشوف الحساب وتأكيد المدفوعات", "Hesabo: a WhatsApp assistant for statements and payment confirmations"),
   "ar": {
    "slug": "collections-automation-whatsapp",
    "title": "أتمتة التحصيل على واتساب: كيف تقلل المتأخرات بدون ضغط على فريق الحسابات؟",
@@ -267,7 +268,7 @@ x.last=now;s("hudera.sid",JSON.stringify(x));return{vid:vid,sid:x.id,ctx:x.ctx}}
 function send(name,props,keep){var c=consent();if(!c||c.analytics!==true)return;try{var i=ids();fetch(U+"/rest/v1/rpc/track",{method:"POST",keepalive:!!keep,headers:{apikey:K,"content-type":"application/json"},
 body:JSON.stringify({p_visitor:i.vid,p_session:i.sid,p_context:i.ctx,p_events:[{id:id(),name:name,at:new Date().toISOString(),path:location.pathname,props:props||{}}]})}).catch(function(){})}catch(e){}}
 function pv(){send("page_view",{title:document.title.slice(0,120),lang:document.documentElement.lang})}
-document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');if(a)send("whatsapp_clicked",{placement:"blog"},true)});
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');if(a)send("whatsapp_clicked",{placement:/\\/products\\//.test(location.pathname)?"product":"blog"},true)});
 if(consent())pv();else{var d=document.createElement("div");d.className="consent";d.setAttribute("role","dialog");d.setAttribute("aria-label",T[2]);
 d.innerHTML="<p><b>"+T[0]+"</b> "+T[1]+' <a href="/privacy.html">'+T[2]+'</a></p><div class="row"><button type="button" data-c="0">'+T[3]+'</button><button type="button" class="p" data-c="1">'+T[4]+"</button></div>";
 d.addEventListener("click",function(e){var b=e.target.closest("[data-c]");if(!b)return;s("hudera.consent",JSON.stringify({v:"2026-10",analytics:b.getAttribute("data-c")==="1",at:new Date().toISOString()}));d.remove();pv()});
@@ -277,13 +278,13 @@ def tracker(lang):
     import json as _j
     return TRACK_CSS + TRACK_JS.replace("__U__", SB_URL).replace("__K__", SB_KEY).replace("__T__", _j.dumps(list(CONSENT[lang]), ensure_ascii=False))
 
-def chrome(lang, body):
+def chrome(lang, body, alt=None):
     if lang == "ar":
-        nav = '<a href="/">الرئيسية</a><a href="/blog/">المدونة</a><a href="/academy/">الأكاديمية</a><a href="/en/blog/" lang="en">English</a>'
+        nav = f'<a href="/">الرئيسية</a><a href="/blog/">المدونة</a><a href="/academy/">الأكاديمية</a><a href="{alt or "/en/blog/"}" lang="en">English</a>'
         foot = '<span>© 2026 HUDERA AI (هوديرا)</span><a href="mailto:info@hudera.ai">info@hudera.ai</a>'
         home = "/"
     else:
-        nav = '<a href="/en/">Home</a><a href="/en/blog/">Blog</a><a href="/academy/">Academy</a><a href="/blog/" lang="ar">عربي</a>'
+        nav = f'<a href="/en/">Home</a><a href="/en/blog/">Blog</a><a href="/academy/">Academy</a><a href="{alt or "/blog/"}" lang="ar">عربي</a>'
         foot = '<span>© 2026 HUDERA AI (هوديرا)</span><a href="mailto:info@hudera.ai">info@hudera.ai</a>'
         home = "/en/"
     return f"""<body>
@@ -293,7 +294,7 @@ def chrome(lang, body):
 {tracker(lang)}
 </body></html>"""
 
-def article(a, lang, other_url, date):
+def article(a, lang, other_url, date, product=None):
     url = f"{SITE}/blog/{a['slug']}/" if lang == "ar" else f"{SITE}/en/blog/{a['slug']}/"
     blog = "/blog/" if lang == "ar" else "/en/blog/"
     homeu = "/" if lang == "ar" else "/en/"
@@ -313,10 +314,15 @@ def article(a, lang, other_url, date):
     wa = f"{WA}?text={quote(a['wa_text'])}"
     demos = "/" if lang == "ar" else "/en/"
     demo_lbl = "جرّب النماذج الحية" if lang == "ar" else "Try the demos"
+    prod = ""
+    if product:
+        pid, t_ar, t_en = product
+        prod = (f'<p class="lead" style="font-size:17px;margin-top:22px"><b>المنتج المرتبط:</b> <a href="/products/{pid}/">{e(t_ar)}</a></p>' if lang == "ar"
+                else f'<p class="lead" style="font-size:17px;margin-top:22px"><b>Related product:</b> <a href="/en/products/{pid}/">{e(t_en)}</a></p>')
     body = f"""<div class="crumbs"><a href="{homeu}">{e(a['home'])}</a> › <a href="{blog}">{e(a['crumb'])}</a></div>
 <article><h1>{e(a['title'])}</h1><div class="meta">{e(a['by'])} · <time datetime="{date}">{date}</time></div>
 <p class="lead">{e(a['lead'])}</p>{secs}
-<section class="faq"><h2>{e(a['faq_h'])}</h2>{faq}</section>
+<section class="faq"><h2>{e(a['faq_h'])}</h2>{faq}</section>{prod}
 <div class="cta"><p>{e(a['cta'])}</p><a class="btn" href="{wa}" target="_blank" rel="noopener">{e(a['cta_btn'])}</a><a class="btn alt" href="{demos}">{demo_lbl}</a></div></article>"""
     other_lang = "en" if lang == "ar" else "ar"
     return url, head(lang, a["title"] + " | HUDERA AI", a["desc"], url, other_lang, other_url, ld) + chrome(lang, body)
@@ -333,23 +339,28 @@ def index(lang, items):
           "publisher": {"@type": "Organization", "name": "HUDERA AI", "url": SITE + "/"}}
     return head(lang, t, d, url, "en" if lang == "ar" else "ar", alt, ld) + chrome(lang, f"<h1>{h1}</h1><p class='lead'>{e(d)}</p><div class='cards'>{cards}</div>")
 
-ar_items, en_items, urls = [], [], []
-for A in ARTICLES:
-    ar, en, date = A["ar"], A["en"], A["date"]
-    ar_url, en_url = f"{SITE}/blog/{ar['slug']}/", f"{SITE}/en/blog/{en['slug']}/"
-    _, page = article(ar, "ar", en_url, date)
-    p = root / "blog" / ar["slug"]; p.mkdir(parents=True, exist_ok=True); (p / "index.html").write_text(page, encoding="utf-8")
-    _, page = article(en, "en", ar_url, date)
-    p = root / "en" / "blog" / en["slug"]; p.mkdir(parents=True, exist_ok=True); (p / "index.html").write_text(page, encoding="utf-8")
-    ar_items.append((f"/blog/{ar['slug']}/", ar["title"], ar["desc"])); en_items.append((f"/en/blog/{en['slug']}/", en["title"], en["desc"]))
-    urls += [(ar_url, date), (en_url, date)]
-(root / "blog").mkdir(exist_ok=True); (root / "blog" / "index.html").write_text(index("ar", ar_items), encoding="utf-8")
-(root / "en" / "blog").mkdir(parents=True, exist_ok=True); (root / "en" / "blog" / "index.html").write_text(index("en", en_items), encoding="utf-8")
+def main():
+    ar_items, en_items, urls = [], [], []
+    for A in ARTICLES:
+        ar, en, date = A["ar"], A["en"], A["date"]
+        ar_url, en_url = f"{SITE}/blog/{ar['slug']}/", f"{SITE}/en/blog/{en['slug']}/"
+        _, page = article(ar, "ar", en_url, date, A.get("product"))
+        p = root / "blog" / ar["slug"]; p.mkdir(parents=True, exist_ok=True); (p / "index.html").write_text(page, encoding="utf-8")
+        _, page = article(en, "en", ar_url, date, A.get("product"))
+        p = root / "en" / "blog" / en["slug"]; p.mkdir(parents=True, exist_ok=True); (p / "index.html").write_text(page, encoding="utf-8")
+        ar_items.append((f"/blog/{ar['slug']}/", ar["title"], ar["desc"])); en_items.append((f"/en/blog/{en['slug']}/", en["title"], en["desc"]))
+        urls += [(ar_url, date), (en_url, date)]
+    (root / "blog").mkdir(exist_ok=True); (root / "blog" / "index.html").write_text(index("ar", ar_items), encoding="utf-8")
+    (root / "en" / "blog").mkdir(parents=True, exist_ok=True); (root / "en" / "blog" / "index.html").write_text(index("en", en_items), encoding="utf-8")
 
-# keep sitemap in sync
-sm = root / "sitemap.xml"; s = sm.read_text(encoding="utf-8")
-for u, d in [(f"{SITE}/blog/", ARTICLES[-1]["date"]), (f"{SITE}/en/blog/", ARTICLES[-1]["date"])] + urls:
-    if f"<loc>{u}</loc>" not in s:
-        s = s.replace("</urlset>", f"  <url><loc>{u}</loc><lastmod>{d}</lastmod><priority>0.6</priority></url>\n</urlset>")
-sm.write_text(s, encoding="utf-8")
-print("blog built:", len(ARTICLES), "article pairs")
+    # keep sitemap in sync
+    sm = root / "sitemap.xml"; s = sm.read_text(encoding="utf-8")
+    for u, d in [(f"{SITE}/blog/", ARTICLES[-1]["date"]), (f"{SITE}/en/blog/", ARTICLES[-1]["date"])] + urls:
+        if f"<loc>{u}</loc>" not in s:
+            s = s.replace("</urlset>", f"  <url><loc>{u}</loc><lastmod>{d}</lastmod><priority>0.6</priority></url>\n</urlset>")
+    sm.write_text(s, encoding="utf-8")
+    print("blog built:", len(ARTICLES), "article pairs")
+
+
+if __name__ == "__main__":
+    main()
