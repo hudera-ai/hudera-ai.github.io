@@ -336,6 +336,12 @@ def index(lang, items):
     d = ("مقالات عملية عن موظفي الذكاء الاصطناعي، وأتمتة واتساب، والتحصيل والموارد البشرية للشركات في السعودية والخليج ومصر."
          if lang == "ar" else "Practical articles on AI employees, WhatsApp automation, collections and HR for businesses in Saudi Arabia, the Gulf and Egypt.")
     cards = "".join(f'<a class="card" href="{u}"><b>{e(ti)}</b><span>{e(de)}</span></a>' for u, ti, de in reversed(items))
+    # fixed sections built by tools/build_ai_news.py
+    feat = ([("/blog/ai-news/", "أخبار الذكاء الاصطناعي اليومية", "أهم خبر كل يوم، مختصر وبالمصادر، مع ما يعنيه لشركتك."),
+             ("/blog/ai-models/", "ترتيب ومقارنة نماذج الذكاء الاصطناعي", "Gemini و Claude و GPT: من يتصدر في المحادثة والبرمجة والبحث، بالتاريخ والمصدر.")] if lang == "ar" else
+            [("/en/blog/ai-news/", "Daily AI news", "The key story each day, short and sourced, with what it means for your business."),
+             ("/en/blog/ai-models/", "AI model rankings and comparison", "Gemini, Claude and GPT: who leads in chat, coding and search, with dates and sources.")])
+    cards = "".join(f'<a class="card" href="{u}"><b>{e(ti)}</b><span>{e(de)}</span></a>' for u, ti, de in feat) + cards
     h1 = "المدونة" if lang == "ar" else "Blog"
     ld = {"@context": "https://schema.org", "@type": "Blog", "name": t, "url": url, "inLanguage": lang,
           "publisher": {"@type": "Organization", "name": "HUDERA AI", "url": SITE + "/"}}

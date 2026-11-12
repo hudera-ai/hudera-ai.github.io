@@ -1,0 +1,113 @@
+[
+ {
+  "date": "2026-11-04",
+  "slug": "chatgpt-images-2-6-gifs",
+  "tag": {"ar": "أدوات", "en": "Tools"},
+  "ar": {
+   "title": "ChatGPT يصنع صوراً متحركة GIF مع تحديث Images 2.6",
+   "desc": "OpenAI أطلقت Images 2.6 يوم 4 نوفمبر 2026: إنشاء GIF من وصف نصي أو صورة، توليد أسرع، ونموذجان جديدان للمطورين.",
+   "body": [
+    "أطلقت OpenAI يوم 4 نوفمبر 2026 تحديث Images 2.6. أبرز ما فيه أن ChatGPT صار يحوّل وصفاً نصياً أو صورة مرفوعة إلى صورة متحركة GIF، مع إمكانية تغيير السرعة وتعديل كل إطار على حدة.",
+    "التحديث متاح في ChatGPT و Codex وعبر الـ API، والتوليد أسرع بنحو 50% بحسب التغطيات. للمطورين نموذجان جديدان باسم GPT-Image-2.6 Flare و Sunburst. القيد الحالي: لا يمكن تعديل ملف GIF جاهز ترفعه أنت، فالميزة تعمل على ما يولّده ChatGPT أو على صورة ثابتة يحوّلها."
+   ],
+   "biz": "لو عندك متجر أو صفحة سوشيال: صورة المنتج الثابتة تتحول إلى حركة قصيرة للإعلان أو للبريد بدون برنامج مونتاج. جرّبها على منتج واحد وقارن التفاعل قبل أن تعمّمها."
+  },
+  "en": {
+   "title": "ChatGPT now makes animated GIFs with Images 2.6",
+   "desc": "OpenAI released Images 2.6 on 4 November 2026: GIFs from a prompt or a photo, faster generation and two new API models.",
+   "body": [
+    "OpenAI released Images 2.6 on 4 November 2026. The headline change: ChatGPT can turn a text prompt or an uploaded photo into an animated GIF, and you can then change its speed or edit single frames.",
+    "It is available in ChatGPT, Codex and the API, and coverage puts generation at about 50% faster. Developers get two new models, GPT-Image-2.6 Flare and Sunburst. One limit for now: you cannot edit a GIF you upload yourself; it works on GIFs ChatGPT made or on a still image it animates."
+   ],
+   "biz": "If you run a shop or a social page, a still product photo can become a short loop for an ad or an email without editing software. Try it on one product and compare engagement before rolling it out."
+  },
+  "sources": [
+   ["TechRepublic", "https://www.techrepublic.com/article/news-chatgpt-images-2-6-gif-creation/"],
+   ["BetaNews", "https://betanews.com/article/chatgpt-images-gifs-faster-generation/"],
+   ["Mezha", "https://mezha.ua/en/news/chatgpt-images-2-6-316895/"]
+  ]
+ },
+ {
+  "date": "2026-11-10",
+  "slug": "claude-sheets-whiteboards-data",
+  "tag": {"ar": "أدوات العمل", "en": "Work tools"},
+  "ar": {
+   "title": "Claude يضيف جداول ولوحات عمل مشتركة ولوحات بيانات",
+   "desc": "Anthropic أعلنت يوم 10 نوفمبر 2026 عن Claude Sheets و Claude Whiteboards (تجريبيتان) و Claude Data، لكل الخطط المدفوعة.",
+   "body": [
+    "أعلنت Anthropic يوم 10 نوفمبر 2026 ثلاث إضافات في Claude. الأولى Claude Sheets: جداول يبنيها Claude ويعدّلها معك بتبويبات ومعادلات وقوائم منسدلة، وتُصدَّر إلى xlsx أو CSV. الثانية Claude Whiteboards: لوحة مشتركة يعصف عليها الفريق الأفكار مع Claude ثم تتحول إلى مستند أو عرض.",
+    "الثالثة Claude Data، وهي الاسم الجديد للوحات Dashboards التي ظهرت تجريبياً في أكتوبر، وأصبحت متاحة رسمياً. الثلاث متاحة على كل الخطط المدفوعة، و Sheets و Whiteboards ما زالتا في المرحلة التجريبية."
+   ],
+   "biz": "الاتجاه واضح: المساعد لم يعد يكتب نصاً فقط، بل يسلّم جدولاً أو لوحة متابعة جاهزة للمشاركة. للشركات الصغيرة هذا يختصر وقت التقارير الأسبوعية، بشرط مراجعة الأرقام قبل اعتمادها."
+  },
+  "en": {
+   "title": "Claude adds spreadsheets, shared whiteboards and data dashboards",
+   "desc": "On 10 November 2026 Anthropic announced Claude Sheets and Claude Whiteboards (both beta) and Claude Data, on all paid plans.",
+   "body": [
+    "Anthropic announced three additions to Claude on 10 November 2026. Claude Sheets are spreadsheets Claude builds and edits with you, with tabs, formulas and drop-downs, exportable to xlsx or CSV. Claude Whiteboards is a shared board where a team brainstorms with Claude and then turns the board into a doc or a deck.",
+    "Claude Data is the new name for the Dashboards feature that appeared in beta in October, and it is now generally available. All three are on every paid plan; Sheets and Whiteboards are still in beta."
+   ],
+   "biz": "The direction is clear: assistants now hand over a finished sheet or a live dashboard, not only text. For a small company that shortens weekly reporting, as long as someone checks the numbers before they are used."
+  },
+  "sources": [
+   ["Anthropic (claude.com)", "https://claude.com/resources/articles/sheets-whiteboards-data"]
+  ]
+ },
+ {
+  "date": "2026-11-10",
+  "slug": "gemini-4-carbon-available",
+  "tag": {"ar": "نماذج", "en": "Models"},
+  "ar": {
+   "title": "Google تفتح Gemini 4 Carbon للمطورين والشركات",
+   "desc": "منذ 10 نوفمبر 2026 أصبح Gemini 4 Carbon متاحاً للمطورين والشركات بالدفع ولمشتركي AI Ultra، بعد أسبوعين من إتاحة محدودة.",
+   "body": [
+    "بعد إعلانه يوم 28 أكتوبر لفئة محدودة من فرق الأمن السيبراني، فتحت Google نموذجها الأقوى Gemini 4 Carbon يوم 10 نوفمبر 2026. المطورون والشركات يصلون إليه عبر Google AI Studio و Gemini للأعمال، ومشتركو AI Ultra يجدونه في تطبيق Gemini و Antigravity ووضع AI في البحث.",
+    "السعر التمهيدي 2 دولار لكل مليون رمز إدخال و10 دولارات للإخراج حتى 30 نوفمبر، وهو نفس سعر Gemini 4 Argon الذي يبقى متاحاً بجانبه. انتبه أن Carbon «يفكر» أطول، فالتكلفة الفعلية للمهمة قد تكون أعلى من السعر الاسمي."
+   ],
+   "biz": "لا تغيّر النموذج الذي تعمل عليه شركتك لمجرد صدور نموذج أحدث. اختبر Carbon على مهمة واحدة حقيقية عندك، وقارن الدقة والتكلفة والزمن مع ما تستخدمه الآن، ثم قرر."
+  },
+  "en": {
+   "title": "Google opens Gemini 4 Carbon to developers and businesses",
+   "desc": "Since 10 November 2026 Gemini 4 Carbon is available to paying developers, businesses and AI Ultra subscribers, two weeks after a limited debut.",
+   "body": [
+    "After a 28 October debut limited to a group of cyber defenders, Google opened its strongest model, Gemini 4 Carbon, on 10 November 2026. Paying developers and businesses reach it through Google AI Studio and Gemini for business; AI Ultra subscribers get it in the Gemini app, Antigravity and AI Mode in Search.",
+    "Introductory pricing is $2 per million input tokens and $10 per million output tokens until 30 November, the same rate as Gemini 4 Argon, which stays available beside it. Carbon thinks for longer, so the real cost of a task can be higher than the list price suggests."
+   ],
+   "biz": "Do not switch the model your company runs on just because a newer one shipped. Test Carbon on one real task of yours, compare accuracy, cost and time with what you use today, then decide."
+  },
+  "sources": [
+   ["9to5Google", "https://9to5google.com/2026/11/10/gemini-app-4-carbon/"],
+   ["Technology.org", "https://www.technology.org/2026/11/11/gemini-4-carbon-available-developers-ai-ultra-pricing/"],
+   ["TechJournal", "https://techjournal.org/gemini-4-carbon-rollout"]
+  ]
+ },
+ {
+  "date": "2026-11-11",
+  "slug": "deepmind-gemini-robotics-2-5-alphagenome-2",
+  "tag": {"ar": "أبحاث", "en": "Research"},
+  "ar": {
+   "title": "DeepMind تعلن Gemini Robotics 2.5 للروبوتات و AlphaGenome 2 للجينات",
+   "desc": "إعلانان من Google DeepMind في نوفمبر 2026: نموذج روبوتات نجح بنسبة 96% في تجربة بمصنع مرسيدس، ونموذج يتنبأ بأثر تغيّرات الحمض النووي على خلايا محددة.",
+   "body": [
+    "أعلنت Google DeepMind نموذج Gemini Robotics 2.5، وهو نموذج «رؤية ولغة وحركة» يحوّل ما يراه الروبوت وما يُطلب منه إلى حركة. بحسب الشركة، نجح النموذج بنسبة 96% في تعبئة قطع سيارات ضمن تجربة إثبات مفهوم على خط إنتاج حقيقي لدى مرسيدس بنز.",
+    "وفي إعلان منفصل يوم 11 نوفمبر 2026 قدّمت AlphaGenome 2، نموذج يتنبأ بكيفية تأثير تغيّرات الحمض النووي على أنواع خلايا بعينها، مثل خلية عضلة القلب، وليس على متوسط النسيج. تذكر التغطيات أنه تدرّب على 107 ملايين ملف خلوي ويكتشف نحو ضعف المتغيرات المسببة مقارنة بالإصدار السابق."
+   ],
+   "biz": "الخبران بعيدان عن مكتبك اليوم، لكن رقم المصنع مهم: الذكاء الاصطناعي يخرج من الشاشة إلى خطوط الإنتاج. والأرقام مصدرها الشركة نفسها وتجربة واحدة، فانتظر نتائج مستقلة قبل البناء عليها."
+  },
+  "en": {
+   "title": "DeepMind announces Gemini Robotics 2.5 and AlphaGenome 2",
+   "desc": "Two Google DeepMind announcements in November 2026: a robotics model that hit 96% in a Mercedes-Benz trial, and a model that predicts how DNA changes affect specific cells.",
+   "body": [
+    "Google DeepMind announced Gemini Robotics 2.5, a vision-language-action model that turns what a robot sees and is told into movement. According to the company, it packed automotive parts with a 96% success rate in a proof-of-concept on a real Mercedes-Benz line.",
+    "Separately, on 11 November 2026 it introduced AlphaGenome 2, which predicts how DNA variants act in particular cell types, such as a heart muscle cell, instead of a tissue average. Coverage says it was trained on 107 million cell profiles and finds close to twice as many causal variants as its predecessor."
+   ],
+   "biz": "Neither item changes your office today, but the factory number matters: AI is moving off the screen and onto production lines. The figures come from the company and a single trial, so wait for independent results before building on them."
+  },
+  "sources": [
+   ["SiliconANGLE", "https://siliconangle.com/2026/11/11/google-deepmind-releases-new-advanced-robotics-ai-model-and-next-generation-gene-prediction-model/"],
+   ["Google DeepMind", "https://deepmind.google/blog/"],
+   ["AI Weekly", "https://aiweekly.co/alerts/deepminds-gemini-robotics-25-hits-96-on-mercedes-benz-line"],
+   ["ShiftDelete", "https://shiftdelete.net/en/alphagenome-2"]
+  ]
+ }
+]

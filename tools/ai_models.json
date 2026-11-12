@@ -1,0 +1,21 @@
+{
+ "updated": "2026-11-12",
+ "tables": [
+  {"id": "text", "ar": "المحادثة والكتابة العامة (Arena Text)", "en": "General chat and writing (Arena Text)", "asof": "2026-11-11", "unit": "Elo",
+   "rows": [["Gemini 4 Carbon", "Google", 1526], ["Gemini 4 Argon", "Google", 1522], ["Muse Wonder", "Meta", 1511], ["Claude Opus 5.5", "Anthropic", 1506], ["Claude Fable 5", "Anthropic", 1504]]},
+  {"id": "webdev", "ar": "بناء المواقع والتطبيقات (Arena WebDev)", "en": "Building websites and apps (Arena WebDev)", "asof": "2026-11-12", "unit": "Elo",
+   "rows": [["Claude Fable 5.2", "Anthropic", 1836], ["Claude Opus 5.5", "Anthropic", 1814], ["Claude Sonnet 5.5", "Anthropic", 1773], ["Gemini 4 Carbon", "Google", 1768], ["GPT-6 Astra", "OpenAI", 1764], ["GPT-6.1 Sol", "OpenAI", 1743]]},
+  {"id": "search", "ar": "البحث على الإنترنت (Arena Search)", "en": "Web search (Arena Search)", "asof": "2026-11-09", "unit": "Elo",
+   "rows": [["GPT-5.6 Sol", "OpenAI", 1256], ["GPT-6.1 Sol", "OpenAI", 1249]]},
+  {"id": "vision", "ar": "فهم الصور (Arena Vision)", "en": "Understanding images (Arena Vision)", "asof": "2026-11-02", "unit": "Elo",
+   "rows": [["Claude Fable 5", "Anthropic", 1325], ["Claude Opus 5.5", "Anthropic", 1321], ["Claude Opus 5", "Anthropic", 1320]]},
+  {"id": "aa", "ar": "مؤشر الذكاء المركّب (Artificial Analysis v5)", "en": "Composite intelligence index (Artificial Analysis v5)", "asof": "2026-10-28", "unit": "/100",
+   "rows": [["Gemini 4 Carbon", "Google", 59], ["Claude Opus 5.5", "Anthropic", 58], ["GPT-6 Astra", "OpenAI", 57]]}
+ ],
+ "sources": [
+  ["Arena (LMArena): Text leaderboard", "https://arena.ai/leaderboard/chat/text"],
+  ["BenchLeader: LMArena Text", "https://www.benchleader.com/benchmarks/lmarena_text"],
+  ["tbreak: Artificial Analysis Intelligence Index v5", "https://tbreak.com/gemini-4-carbon-artificial-analysis-claude-opus-5-5/"],
+  ["Lindy: Gemini 4 Carbon vs Claude Opus 5.5", "https://www.lindy.ai/blog/gemini-4-carbon-vs-claude-opus-5-5"]
+ ]
+}
