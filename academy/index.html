@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>HUDERA Academy · التأسيس في الذكاء الاصطناعي العملي</title>
-<meta name="description" content="دورة التأسيس في الذكاء الاصطناعي العملي من HUDERA Academy: 8 جلسات، وفيديوهات شرح، ولقاءات مباشرة عبر الإنترنت في مجموعة صغيرة، ومهام تُصحَّح، ومشروع نهائي وشهادة، مع ضمان استرداد المبلغ.">
+<meta name="description" content="دورة التأسيس في الذكاء الاصطناعي العملي من HUDERA Academy: 8 جلسات أونلاين 100٪، وفيديوهات شرح، ومهام تُصحَّح، ومشروع نهائي وشهادة، ودعم ومتابعة من خلال المنصة، مع ضمان استرداد المبلغ.">
 <meta property="og:title" content="HUDERA Academy · التأسيس في الذكاء الاصطناعي العملي">
-<meta property="og:description" content="من استخدام الذكاء الاصطناعي بالشكل الصحيح إلى بناء أداة تعمل به. 8 جلسات · لقاءات مباشرة وفيديوهات · شهادة.">
+<meta property="og:description" content="من استخدام الذكاء الاصطناعي بالشكل الصحيح إلى بناء أداة تعمل به. 8 جلسات أونلاين · فيديوهات ومهام · دعم ومتابعة من خلال المنصة · شهادة.">
 <meta property="og:image" content="https://hudera.ai/og.png">
 <meta property="og:url" content="https://hudera.ai/academy/">
 <link rel="canonical" href="https://hudera.ai/academy/">
@@ -185,6 +185,27 @@ html,body{max-width:100%;overflow-x:clip}
 .rg .seg label{flex:1 1 130px}.rg .pick label{padding:10px 14px}
 .rgcta{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-color:var(--primary)}
 [hidden]{display:none!important}
+/* task submission status */
+.tstat{display:flex;gap:12px;align-items:flex-start;border-radius:16px;padding:14px 16px;margin-bottom:12px;border:1px solid var(--line)}
+.tstat .i{flex:none;font-size:24px;line-height:1.2}.tstat b{display:block;color:var(--ink);font-size:17px}.tstat p{margin:4px 0 0;font-size:15px}
+.tstat.ok{background:var(--ok-soft);border-color:color-mix(in srgb,var(--ok) 40%,transparent)}.tstat.ok b{color:var(--ok)}
+.tstat.done{background:var(--primary-soft);border-color:color-mix(in srgb,var(--primary) 35%,transparent)}
+.tstat.back{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 40%,transparent)}.tstat.back b{color:var(--warn)}
+.tstat .fb{background:var(--surface);border-radius:12px;padding:10px 12px;margin-top:10px;font-size:15px;color:var(--text)}
+.tstat.big{padding:18px}.tstat.big b{font-size:19px}
+details.resub>summary{list-style:none;cursor:pointer;display:inline-flex}details.resub>summary::-webkit-details-marker{display:none}
+/* kids academy promo */
+.kids{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:center;border:0;color:#E8EDFF;
+  background:radial-gradient(500px 260px at 10% 0%,#22D3EE40,transparent 60%),radial-gradient(420px 240px at 95% 110%,#16C79A40,transparent 60%),linear-gradient(150deg,#0B1324,#1B2E86 70%,#3D5AFE)}
+.kids .kt{display:inline-flex;gap:6px;align-items:center;background:#ffffff18;border:1px solid #ffffff2a;border-radius:99px;padding:3px 12px;font-size:13.5px;font-weight:700;color:#fff}
+.kids h2{color:#fff;font:800 clamp(24px,4vw,34px) "Bricolage Grotesque","IBM Plex Sans Arabic",sans-serif;margin:10px 0 2px}
+.kids .ar{color:#22D3EE;font-weight:700;margin:0 0 8px}.kids p{color:#C9D3FF;margin:0 0 14px;font-size:16.5px}
+.kids .kc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}.kids .kc span{background:#ffffff14;border-radius:9px;padding:3px 10px;font-size:14px}
+.kids .btn{background:#16C79A;border-color:#16C79A;color:#0B1324}.kids .btn:hover{background:#22D3EE;border-color:#22D3EE}
+.kids .art{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.kids .art i{aspect-ratio:1;border-radius:18px;display:grid;place-items:center;font-size:34px;font-style:normal;background:#ffffff12;border:1px solid #ffffff1f}
+.kids .art i:nth-child(2){background:#22D3EE33}.kids .art i:nth-child(4){background:#16C79A33}.kids .art i:nth-child(6){background:#3D5AFE55}
+nav.links a.kd{color:#0E9F7B}@media (prefers-color-scheme:dark){nav.links a.kd{color:#16C79A}}
+@media (max-width:760px){.kids{grid-template-columns:1fr}.kids .art{display:none}}
 .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:60;max-width:90vw}
 @media (max-width:900px){.g4,.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:1fr}.levels{grid-template-columns:repeat(2,minmax(0,1fr))}.vgrid{grid-template-columns:1fr}}
 @media (max-width:640px){.g2,.g4{grid-template-columns:1fr}nav.links a.hm{display:none}.brand span{display:none}section{padding:34px 0}.card{padding:18px 15px}.levels{grid-template-columns:1fr 1fr}}
@@ -196,7 +217,7 @@ html,body{max-width:100%;overflow-x:clip}
   <nav class="links" id="nav"></nav>
 </div></header>
 <main id="app"><div class="wrap" style="padding-top:30px"><div class="skel"></div></div></main>
-<footer><div class="wrap"><span>HUDERA Academy · من <a href="../">HUDERA AI</a></span><span><a href="../">الموقع</a> · <a href="#/verify">التحقق من شهادة</a> · <a href="../privacy.html">الخصوصية</a> · <a href="mailto:info@hudera.ai" dir="ltr">info@hudera.ai</a></span></div></footer>
+<footer><div class="wrap"><span>HUDERA Academy · من <a href="../">HUDERA AI</a></span><span><a href="../">الموقع</a> · <a href="/academy/kids/">HUDERA Kids Academy</a> · <a href="#/verify">التحقق من شهادة</a> · <a href="../privacy.html">الخصوصية</a> · <a href="mailto:info@hudera.ai" dir="ltr">info@hudera.ai</a></span></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co", "supabaseAnonKey": "sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW"};
@@ -230,7 +251,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   function nav() {
     const r = location.hash.split("/")[1] || "";
     const a = (h, t, k, cls = "") => `<a href="${h}" class="${cls}" ${r === k ? 'aria-current="page"' : ""}>${t}</a>`;
-    $("#nav").innerHTML = (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : a("#/register", "سجّل الآن", "register")) + a("#/course", "الدورة", "course", enrId ? "hm" : "") + `<a href="../" class="hm">HUDERA AI</a>`
+    $("#nav").innerHTML = (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : a("#/register", "سجّل الآن", "register")) + a("#/course", "الدورة", "course", enrId ? "hm" : "") + `<a href="/academy/kids/" class="hm kd" title="HUDERA Kids Academy · هوديرا كيدز أكاديمي">Kids Academy</a><a href="../" class="hm">HUDERA AI</a>`
       + (user ? `<span class="who">${user.user_metadata?.avatar_url ? `<img src="${esc(user.user_metadata.avatar_url)}" alt="" referrerpolicy="no-referrer">` : ""}<button class="btn sm ghost" id="out" type="button">خروج</button></span>`
               : `<button class="btn sm" id="in" type="button">${G_ICON} دخول</button>`);
     $("#out")?.addEventListener("click", async () => { await sb.auth.signOut(); location.hash = "#/course"; location.reload(); });
@@ -246,8 +267,12 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   const rate = () => Number(cat?.payment?.egp_rate) || 0;
   const egp = usd => rate() ? `≈ ${(Math.round(usd * rate() / 10) * 10).toLocaleString("en-US")} جنيه` : "";
   const nSess = () => (cat?.sessions || []).length || 8;
-  const weeksTxt = c => { const d = (c?.schedule || []).map(s => s.live_at).filter(Boolean).map(v => new Date(v).getTime()).sort((a, b) => a - b);
+  const weeksTxt = c => { const d = (c?.schedule || []).map(s => s.opens_at || s.live_at).filter(Boolean).map(v => new Date(v).getTime()).sort((a, b) => a - b);
     if (d.length < 2) return ""; const w = Math.round((d[d.length - 1] - d[0]) / 6048e5) + 1; return d.length === w ? "· جلسة كل أسبوع" : `في ${w} أسابيع`; };
+  /* no live meetings: drop any catalog line (package features, tools, grading weights) that still mentions a live meeting or attendance */
+  const LIVE_RX = /لقاء|لقاءات|لايف|\blive\b|zoom|زووم|\bmeet\b|حضور|attendance|جلسة مباشرة|جلسات مباشرة|بث مباشر/i;
+  const noLive = a => (a || []).filter(x => !LIVE_RX.test(Array.isArray(x) ? x.join(" ") : String(x ?? "")));
+  const SUPPORT_TXT = "أي سؤال أو مشكلة تبعتها على المنصة وبنرد عليك";
   function viewLanding() {
     const c = cat.course, m = c.meta || {}, coh = (cat.cohorts || []).find(c => new Date(c.starts_on) >= new Date(new Date().toDateString())) || (cat.cohorts || [])[0], pend = minePending();
     const totalMin = (cat.sessions || []).reduce((a, s) => a + s.lessons.reduce((x, l) => x + (l.mins || 0), 0), 0);
@@ -255,7 +280,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     <div class="hero"><div class="wrap">
       <span class="tag">🎓 ${esc(m.brand || "HUDERA Academy")} · دورة التأسيس</span>
       <h1>${esc(c.title)}</h1><p>${esc(c.tagline)}. ${esc(m.promise || "")}</p>
-      <div class="chips"><span>📚 ${nSess()} جلسات ${weeksTxt(coh)}</span><span>🎬 ${nSess()} فيديوهات شرح · نحو ${Math.round(totalMin / 60)} ساعات</span><span>🎙️ لقاءات مباشرة في مجموعة صغيرة</span><span>📝 مهام تُصحَّح بدرجة وتعليق</span><span>🏅 شهادة برقم تحقق</span><span>🛡️ ضمان استرداد المبلغ</span></div>
+      <div class="chips"><span>📚 ${nSess()} جلسات ${weeksTxt(coh)}</span><span>🎬 ${nSess()} فيديوهات شرح · نحو ${Math.round(totalMin / 60)} ساعات</span><span>💻 أونلاين 100٪ من أي مكان</span><span>💬 دعم ومتابعة من خلال المنصة</span><span>📝 مهام تُصحَّح بدرجة وتعليق</span><span>🏅 شهادة برقم تحقق</span><span>🛡️ ضمان استرداد المبلغ</span></div>
       <div class="row">${pend ? `<a class="btn primary big" href="#/enroll">طلبك قيد المراجعة ←</a>` : `<a class="btn primary big" href="#/register">سجّل الآن واعرف مسارك</a><a class="btn out big" href="#/enroll">احجز مقعدك في الدورة</a>`}<a class="btn out big" href="#curr">اطّلع على المنهج</a></div>
     </div></div>
     <section><div class="wrap">
@@ -265,8 +290,8 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     <section style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
       <h2 class="sec">كيف تسير كل جلسة؟</h2><p class="lead">الإيقاع نفسه في كل جلسة، لتتعلّم بالتطبيق لا بالاستماع فقط.</p>
       <div class="g4 how">
-        <div class="card"><div class="ic">🎬</div><b>شاهد فيديو الجلسة</b><p>فيديو نحو نصف ساعة، تختار لغة الشرح فيه: المصرية أو الخليجية أو الإنجليزية، ومقسّم إلى فصول تتنقّل بينها. يُتاح قبل اللقاء المباشر بيومين.</p></div>
-        <div class="card"><div class="ic">🎙️</div><b>احضر اللقاء المباشر</b><p>ساعة ونصف عبر الإنترنت: تطبيق عملي على تخصصك وإجابة أسئلتك، في مجموعة صغيرة.</p></div>
+        <div class="card"><div class="ic">🎬</div><b>شاهد فيديو الجلسة</b><p>فيديو نحو نصف ساعة، تختار لغة الشرح فيه: المصرية أو الخليجية أو الإنجليزية، ومقسّم إلى فصول تتنقّل بينها. يُتاح على المنصة في موعد الجلسة، وتشاهده في الوقت اللي يناسبك.</p></div>
+        <div class="card"><div class="ic">💬</div><b>اسأل على المنصة</b><p>دعم ومتابعة من خلال المنصة: ${SUPPORT_TXT}، ومن غير مواعيد لازم تلتزم بيها.</p></div>
         <div class="card"><div class="ic">📝</div><b>سلّم المهمة وحُلّ الاختبار</b><p>مهمة عملية تُصحَّح بدرجة وتعليق مكتوب، واختبار من 6 أسئلة يُصحَّح فوراً.</p></div>
         <div class="card"><div class="ic">🔓</div><b>تُفتح الجلسة التالية</b><p>بمجرد تسليم المهمة تُفتح الجلسة التالية في موعدها، وترتقي مستوى مع كل جلسة تجتازها.</p></div>
       </div>
@@ -280,33 +305,40 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     <section style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
       <h2 class="sec">مراحل ومستويات</h2><p class="lead">كل جلسة تجتازها (المهمة ${m.task_pass || 60}٪ والاختبار ${m.quiz_pass || 60}٪) تقرّبك من المستوى التالي، وتحصل على الشهادة عند إتمام الدورة بنسبة ${m.pass_mark || 70}٪ أو أكثر.</p>
       <div class="levels">${(m.levels || []).map(l => `<div class="lv"><div class="badge">${l.n}</div><b>${esc(l.ar)}</b><small>${esc(l.desc)}</small></div>`).join("")}</div>
-      <div class="card" style="margin-top:14px"><b style="color:var(--ink)">التقييم</b> · ${(m.grading || []).map(g => `${esc(g[0])} <b>${g[1]}٪</b>`).join(" · ")}</div>
+      <div class="card" style="margin-top:14px"><b style="color:var(--ink)">التقييم</b> · ${noLive(m.grading).map(g => `${esc(g[0])} <b>${g[1]}٪</b>`).join(" · ")}</div>
     </div></section>
     <section id="pk"><div class="wrap">
       <h2 class="sec">الباقات</h2><p class="lead">السعر 50$ للجلسة الواحدة. من مصر يمكنك الدفع بالجنيه بسعر اليوم عبر إنستاباي أو فودافون كاش، ومن الدول الأخرى نتواصل معك بوسيلة الدفع المناسبة.</p>
       <div class="g3">${pkgs().map(p => `<div class="card pkg ${p.default ? "pop" : ""}">${p.default ? `<span class="flag">الأكثر اختياراً</span>` : ""}
-        <h3>${esc(p.ar)}</h3><p class="pnote">${esc(p.note || "")}</p>
+        <h3>${esc(p.ar)}</h3><p class="pnote">${LIVE_RX.test(p.note || "") ? "" : esc(p.note || "")}</p>
         <div class="price"><b>$${Math.round(Number(p.usd) / nSess())}</b><span>للجلسة الواحدة</span></div>
         <span class="persess">الدورة كاملة $${Number(p.usd)} (${nSess()} جلسات)${rate() ? ` · ${egp(p.usd)}` : ""}</span>
-        <ul>${(p.features || []).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
+        <ul>${noLive(p.features).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
         <a class="btn ${p.default ? "primary" : ""}" href="#/enroll/${esc(p.key)}">اختر هذه الباقة</a></div>`).join("")}</div>
-      <div class="card" style="margin-top:14px;border-color:var(--ok)"><b style="color:var(--ink)">🛡️ ضمان الاستفادة أو استرداد المبلغ</b><p style="margin:6px 0 0;font-size:15px">إذا أتممت الدورة ولم تستفد، نردّ لك المبلغ كاملاً، بشرط أن تكون حضرت 85% من اللقاءات المباشرة على الأقل، وسلّمت كل المهام، وحللت كل الاختبارات، وطلبت الاسترداد خلال 14 يوماً من آخر جلسة. وإذا انسحبت قبل الجلسة الأولى يُردّ لك المبلغ كاملاً.</p></div>
+      <div class="card" style="margin-top:14px;border-color:var(--ok)"><b style="color:var(--ink)">🛡️ ضمان الاستفادة أو استرداد المبلغ</b><p style="margin:6px 0 0;font-size:15px">إذا أتممت الدورة ولم تستفد، نردّ لك المبلغ كاملاً، بشرط أن تكون أتممت كل دروس الجلسات (الفيديوهات)، وسلّمت كل المهام، وحللت كل الاختبارات، وطلبت الاسترداد خلال 14 يوماً من آخر جلسة. وإذا انسحبت قبل الجلسة الأولى يُردّ لك المبلغ كاملاً.</p></div>
     </div></section>
-    ${coh ? `<section style="padding-top:0"><div class="wrap"><div class="card cohort"><div><b style="color:var(--ink);font-size:18px">الدفعة القادمة: ${esc(coh.name)}</b><br><span style="color:var(--muted)">تبدأ ${fmtD(coh.starts_on)} · اللقاءات المباشرة الساعة ${coh.schedule?.[0]?.live_at ? new Date(coh.schedule[0].live_at).toLocaleTimeString("ar-EG-u-nu-latn", { timeZone: "Africa/Cairo", hour: "numeric", minute: "2-digit" }) + " بتوقيت القاهرة" : ""}</span></div>
+    ${coh ? `<section style="padding-top:0"><div class="wrap"><div class="card cohort"><div><b style="color:var(--ink);font-size:18px">الدفعة القادمة: ${esc(coh.name)}</b><br><span style="color:var(--muted)">تبدأ ${fmtD(coh.starts_on)} · أونلاين بالكامل، وكل جلسة تُفتح على المنصة في موعدها</span></div>
       <span class="seats ${coh.seats - coh.taken <= 3 ? "low" : ""}">المقاعد المتبقية: ${Math.max(coh.seats - coh.taken, 0)} من ${coh.seats}</span>
-      <div class="dates">${(coh.schedule || []).map(s => `<span>ج${s.n} · ${s.live_at ? new Date(s.live_at).toLocaleDateString("ar-EG-u-nu-latn", { timeZone: "Africa/Cairo", weekday: "short", day: "numeric", month: "short" }) : "—"}</span>`).join("")}</div>
+      <div class="dates">${(coh.schedule || []).map(s => `<span>ج${s.n} · ${(s.opens_at || s.live_at) ? new Date(s.opens_at || s.live_at).toLocaleDateString("ar-EG-u-nu-latn", { timeZone: "Africa/Cairo", weekday: "short", day: "numeric", month: "short" }) : "—"}</span>`).join("")}</div>
       <a class="btn primary" href="#/enroll" style="margin-inline-start:auto">احجز مقعدك</a></div></div></section>` : ""}
     <section style="padding-top:0"><div class="wrap g2">
       <div class="card inst"><div class="av">م</div><div><b style="color:var(--ink);font-size:18px">${esc(m.instructor || "")}</b><br><span style="color:var(--muted)">${esc(m.instructor_title || "")}</span><p style="margin:6px 0 0;font-size:15px">يبني أنظمة ذكاء اصطناعي حقيقية للشركات في HUDERA AI، ويعلّم ما يستخدمه في العمل يومياً.</p></div></div>
-      <div class="card"><b style="color:var(--ink)">ماذا ستحتاج؟</b>${(m.tools || []).map(t => `<p style="margin:6px 0 0;font-size:15px"><b>${esc(t[0])}:</b> ${esc(t[1])}</p>`).join("")}</div>
+      <div class="card"><b style="color:var(--ink)">ماذا ستحتاج؟</b>${noLive(m.tools).map(t => `<p style="margin:6px 0 0;font-size:15px"><b>${esc(t[0])}:</b> ${esc(t[1])}</p>`).join("")}</div>
     </div></section>
     <section style="padding-top:0"><div class="wrap"><div class="card rgcta"><div><b style="color:var(--ink);font-size:19px">مش متأكد أي مسار يناسبك؟</b><p style="margin:4px 0 0;color:var(--muted)">سجّل بياناتك وحُلّ اختبار مستوى قصيراً (8 أسئلة)، ونقترح لك المسار المناسب ونتواصل معك على واتساب.</p></div><a class="btn primary big" href="#/register">سجّل الآن مجاناً</a></div></div></section>
+    <section style="padding-top:0" id="kids"><div class="wrap"><div class="card kids">
+      <div><span class="kt">🧒 جديد · للأطفال من 8 إلى 12 سنة</span><h2>HUDERA Kids Academy</h2><p class="ar">«هوديرا كيدز أكاديمي»</p>
+        <p>كورس ذكاء اصطناعي للأطفال من 8 لـ 12 سنة، أونلاين من البيت: طفلك يعلّم الكمبيوتر يميّز الصور، ويألّف قصة، ويصنع لعبته الأولى. الأماكن محدودة.</p>
+        <div class="kc"><span>💻 أونلاين من البيت</span><span>🎬 فيديو ونشاط في كل جلسة</span><span>👨‍👩‍👧 ولي الأمر يسجّل ويتابع</span><span>🎟️ الأماكن محدودة</span></div>
+        <a class="btn big" href="/academy/kids/">اعرف أكتر واحجز مكان طفلك ←</a></div>
+      <div class="art" aria-hidden="true"><i>🤖</i><i>🎨</i><i>📷</i><i>📖</i><i>🎮</i><i>✨</i></div>
+    </div></div></section>
     <section style="padding-top:0"><div class="wrap narrow faq"><h2 class="sec" style="margin-bottom:10px">أسئلة شائعة</h2>
       <details><summary>هل يجب أن أعرف البرمجة؟</summary><p>لا. أول 5 جلسات بلا برمجة إطلاقاً، وفي الجلسة 6 نكتب معاً كود Python بسيطاً خطوة بخطوة، ويساعدك الذكاء الاصطناعي في كتابته.</p></details>
-      <details><summary>ماذا لو فاتني لقاء مباشر؟</summary><p>الفيديوهات متاحة دائماً، وتسجيل اللقاء يُرفع على المنصة. لكن الحضور جزء من التقييم (10٪)، وحضور 85% من اللقاءات شرط لضمان الاسترداد.</p></details>
+      <details><summary>هل فيه لقاءات مباشرة أو مواعيد لازم أحضرها؟</summary><p>لا. الدورة أونلاين 100٪ على المنصة: تشاهد فيديوهات الجلسات في الوقت اللي يناسبك، وتسلّم المهام وتحل الاختبارات قبل آخر موعد. والدعم والمتابعة من خلال المنصة: ${SUPPORT_TXT}.</p></details>
       <details><summary>كيف أدفع؟</summary><p>من مصر: تحوّل المبلغ بالجنيه بسعر اليوم عبر إنستاباي أو فودافون كاش، وترفع صورة التحويل في نموذج التسجيل، ونفعّل حسابك خلال 24 ساعة. ومن الدول الأخرى نتواصل معك بوسيلة الدفع المناسبة.</p></details>
       <details><summary>هل الشهادة معتمدة؟</summary><p>شهادة من HUDERA Academy برقم تحقق، يمكن لأي شخص التأكد منها من صفحة «التحقق من شهادة». وقيمتها الحقيقية في المشروع الذي ستعرضه.</p></details>
-      <details><summary>هل يمكنني استرداد المبلغ؟</summary><p>نعم، في حالتين: إذا انسحبت قبل الجلسة الأولى يُردّ لك المبلغ كاملاً. وإذا أتممت الدورة ولم تستفد يُردّ لك المبلغ كاملاً، بشرط حضور 85% من اللقاءات المباشرة على الأقل، وتسليم كل المهام، وحل كل الاختبارات، وطلب الاسترداد خلال 14 يوماً من آخر جلسة.</p></details>
+      <details><summary>هل يمكنني استرداد المبلغ؟</summary><p>نعم، في حالتين: إذا انسحبت قبل الجلسة الأولى يُردّ لك المبلغ كاملاً. وإذا أتممت الدورة ولم تستفد يُردّ لك المبلغ كاملاً، بشرط إتمام كل دروس الجلسات (الفيديوهات)، وتسليم كل المهام، وحل كل الاختبارات، وطلب الاسترداد خلال 14 يوماً من آخر جلسة.</p></details>
     </div></section>`;
   }
 
@@ -341,7 +373,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         <label class="f"><span>ماذا تدرس أو تعمل؟</span><input type="text" id="st" maxlength="160" placeholder="مثلاً: هندسة مدنية، السنة الثالثة"></label>
         <label class="f"><span>ماذا تريد أن تكتسب من الدورة؟ <small>(اختياري)</small></span><textarea id="gl" maxlength="600"></textarea></label>
         <div class="f"><span class="lg">الدفعة</span><div class="pick" id="coh">${C.map((c, i) => `<label><input type="radio" name="coh" value="${c.id}" ${i === 0 ? "checked" : ""}><span><b>${esc(c.name)}</b><small>تبدأ ${fmtD(c.starts_on)} · المقاعد المتبقية: ${Math.max(c.seats - c.taken, 0)}</small></span></label>`).join("")}</div></div>
-        <div class="f"><span class="lg">الباقة</span><div class="pick" id="pk">${P.map(p => `<label><input type="radio" name="pk" value="${esc(p.key)}" ${p.key === def.key ? "checked" : ""}><span><b>${esc(p.ar)}</b><small>${esc((p.features || []).slice(1, 3).join(" · "))}</small></span><span class="pr">$${Number(p.usd)}</span></label>`).join("")}</div></div>
+        <div class="f"><span class="lg">الباقة</span><div class="pick" id="pk">${P.map(p => `<label><input type="radio" name="pk" value="${esc(p.key)}" ${p.key === def.key ? "checked" : ""}><span><b>${esc(p.ar)}</b><small>${esc(noLive(p.features).slice(1, 3).join(" · "))}</small></span><span class="pr">$${Number(p.usd)}</span></label>`).join("")}</div></div>
         <div class="paybox"><span style="color:var(--muted)">المبلغ المطلوب</span><br><span class="amt" id="amt"></span> <span id="amtE" style="color:var(--muted)"></span>
           ${pay.instapay ? `<div class="acct"><span>إنستاباي</span><b>${esc(pay.instapay)}</b></div>` : ""}${pay.vodafone_cash ? `<div class="acct"><span>فودافون كاش</span><b>${esc(pay.vodafone_cash)}</b></div>` : ""}
           ${!pay.instapay && !pay.vodafone_cash ? `<div class="acct"><span>بيانات التحويل</span><b>نرسلها لك عبر واتساب</b></div>` : ""}
@@ -352,7 +384,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         <div class="f"><span class="lg">صورة التحويل</span><input type="file" id="pf" accept="image/*,.pdf" hidden>
           <div class="drop" id="dr" role="button" tabindex="0"><b>اضغط وارفع صورة إيصال التحويل</b><span>صورة أو PDF · حتى 5 ميجابايت</span></div>
           <div class="filepick" id="pk2" hidden><span>🧾</span><span class="nm" id="pn"></span><button class="btn sm ghost" type="button" id="un">إزالة</button></div></div>`}
-        <label class="consent"><input type="checkbox" id="cs"><span>أوافق على احتفاظ HUDERA Academy ببياناتي وأعمالي على المنصة لأغراض الدورة والشهادة، وأفهم شروط الاسترداد: كاملاً قبل الجلسة الأولى، أو بعد إتمام الدورة بشرط حضور 85% من اللقاءات وتسليم كل المهام والاختبارات وطلبه خلال 14 يوماً من آخر جلسة. وأفهم أن الحساب شخصي: لا تجوز مشاركته أو مشاركة الفيديوهات أو تسجيلها، ويعمل على جهازين فقط، ويظهر اسمي على الفيديو أثناء المشاهدة، وتُوقف المشاركة الاشتراك دون استرداد. <a href="../privacy.html" target="_blank">الخصوصية</a></span></label>
+        <label class="consent"><input type="checkbox" id="cs"><span>أوافق على احتفاظ HUDERA Academy ببياناتي وأعمالي على المنصة لأغراض الدورة والشهادة، وأفهم شروط الاسترداد: كاملاً قبل الجلسة الأولى، أو بعد إتمام الدورة بشرط إتمام كل دروس الجلسات وتسليم كل المهام والاختبارات وطلبه خلال 14 يوماً من آخر جلسة. وأفهم أن الحساب شخصي: لا تجوز مشاركته أو مشاركة الفيديوهات أو تسجيلها، ويعمل على جهازين فقط، ويظهر اسمي على الفيديو أثناء المشاهدة، وتُوقف المشاركة الاشتراك دون استرداد. <a href="../privacy.html" target="_blank">الخصوصية</a></span></label>
         <button class="btn primary big" style="width:100%" id="go" type="submit">${book ? "احجز مقعدي" : "أرسل طلب الاشتراك"}</button><div class="msg" id="er" role="alert" hidden></div>
       </form></div></section>`;
     const upd = () => { const p = P.find(x => x.key === $("input[name=pk]:checked")?.value) || def; $("#amt").textContent = `$${Number(p.usd)}`; $("#amtE").textContent = rate() ? `(${egp(p.usd)})` : ""; };
@@ -413,13 +445,20 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
           <span class="lvpill">🏅 مستواك: ${esc(li.cur?.ar || "")}</span> ${li.nxt ? `<small style="color:var(--muted)">المتبقي لمستوى «${esc(li.nxt.ar)}»: ${li.left} جلسة</small>` : ""}</div></div>
       <div class="card next" style="margin:18px 0"><div><small style="color:#C9D3FF">الخطوة التالية</small><b>${esc(na.t)}</b>${na.s ? `<small style="color:#C9D3FF">${esc(na.s)}</small>` : ""}${na.d ? `<small style="color:#C9D3FF">آخر موعد: ${fmtDT(na.d)}</small>` : ""}</div><a class="btn" href="${na.h}">${na.b} ←</a></div>
       <div class="kpis" style="margin-bottom:18px"><div class="kpi"><small>فيديوهات شاهدتها</small><b>${done}/${lessonsAll.length}</b></div><div class="kpi"><small>متوسط المهام</small><b>${sm.task_sofar ?? "—"}</b></div>
-        <div class="kpi"><small>متوسط الاختبارات</small><b>${sm.quiz_sofar != null ? sm.quiz_sofar + "٪" : "—"}</b></div><div class="kpi"><small>الحضور</small><b>${sm.attendance_sofar != null ? sm.attendance_sofar + "٪" : "—"}</b></div></div>
-      ${course.cohort.live_link ? `<p style="margin:-6px 0 14px"><a class="btn sm" href="${esc(course.cohort.live_link)}" target="_blank" rel="noopener">🎙️ رابط اللقاء المباشر</a></p>` : ""}
+        <div class="kpi"><small>متوسط الاختبارات</small><b>${sm.quiz_sofar != null ? sm.quiz_sofar + "٪" : "—"}</b></div><div class="kpi"><small>مهام سلّمتها</small><b>${course.sessions.filter(s => s.task && s.submission).length}/${course.sessions.filter(s => s.task).length}</b></div></div>
       <div class="card list">${course.sessions.map(s => { const st = sessState(s, sm), sub = s.submission;
-        const meta = st === "lock" ? gateText(s) : [s.live_at ? `🎙️ ${fmtDT(s.live_at)}` : "", sub ? (sub.status === "graded" ? `📝 ${sub.score}/100` : sub.status === "returned" ? "📝 يحتاج تعديلاً" : "📝 سُلِّمت") : (s.task ? "📝 لم تُسلَّم" : ""), s.quiz.best != null ? `✅ الاختبار ${s.quiz.best}٪` : ""].filter(Boolean).join(" · ");
+        const meta = st === "lock" ? gateText(s) : [sub ? (sub.status === "graded" ? `📝 اتصحح · ${sub.score ?? "—"}/100` : sub.status === "returned" ? "📝 رجع للتعديل" : "📥 تم الاستلام · في انتظار التصحيح") : (s.task ? "📝 لم تُسلَّم" : ""), s.quiz.best != null ? `✅ الاختبار ${s.quiz.best}٪` : ""].filter(Boolean).join(" · ");
         return `<a class="sess ${st}" href="#/s/${s.n}"><span class="num">${st === "done" ? "✓" : st === "lock" ? "🔒" : s.n}</span><span><b>${esc(s.title)}</b><small>${meta}</small></span>
           <span class="st">${st === "done" ? '<span class="chip ok">اجتزتها</span>' : st === "lock" ? '<span class="chip">مغلقة</span>' : '<span class="chip blue">مفتوحة</span>'}</span></a>`; }).join("")}</div>
+      ${supportCard()}
     </div></section>`;
+  }
+  /* no live meetings: questions and problems go through the platform (the note with each task) and messages */
+  function supportCard(n) {
+    const txt = `سؤال في HUDERA Academy${n ? ` · الجلسة ${n}` : ""}${user?.email ? ` · ${user.email}` : ""}:\n`;
+    return `<div class="card" style="margin-top:14px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><b style="color:var(--ink)">💬 عندك سؤال أو مشكلة؟</b>
+      <p style="margin:4px 0 0;color:var(--muted);font-size:15px">الدعم والمتابعة من خلال المنصة: ${SUPPORT_TXT}. سؤال عن المهمة؟ اكتبه في «ملاحظة للمدرب» وانت بتسلّم. سؤال عن الشرح أو مشكلة تقنية؟ ابعتهولنا في رسالة.</p></div>
+      <a class="btn" href="${WA}?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">ابعت رسالة</a></div>`;
   }
 
   /* ---------------------------------------------------------------- session */
@@ -521,7 +560,9 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         ${s.gate.reason === "prev_task" ? `<a class="btn primary" href="#/s/${s.n - 1}/task">اذهب إلى مهمة الجلسة ${s.n - 1}</a>` : ""}
         <div style="text-align:start;margin-top:16px"><b style="color:var(--ink)">ماذا تتضمّن؟</b><ul class="pts">${s.lessons.flatMap(l => (l.chapters || []).map(c => c.title || c)).map(t => `<li>${esc(t)}</li>`).join("")}</ul>${s.task ? `<p class="taskline">📝 ${esc(s.task.title)}</p>` : ""}</div></div></div></section>`; return;
     }
-    const tabs = [["videos", "🎬 الفيديو"], ["live", "🎙️ اللقاء المباشر"], ["task", "📝 المهمة"], ["quiz", "✅ الاختبار"], ["more", "📚 مصادر"]];
+    if (tab === "live") tab = "help";   /* old links to the removed live tab */
+    const sub = s.submission, tlabel = !s.task ? "📝 المهمة" : !sub ? "📝 المهمة" : sub.status === "graded" ? "📝 المهمة ✓" : sub.status === "returned" ? "📝 المهمة · تعديل" : "📝 المهمة · اتسلّمت";
+    const tabs = [["videos", "🎬 الفيديو"], ["task", tlabel], ["quiz", "✅ الاختبار"], ["more", "📚 مصادر"], ["help", "💬 أسئلة ودعم"]];
     app.innerHTML = `<section><div class="wrap"><a href="#/learn">→ لوحتي</a>
       <h2 style="font-size:clamp(22px,4vw,30px);margin-top:8px">الجلسة ${s.n}: ${esc(s.title)}</h2><p style="color:var(--muted);margin:4px 0 0">${esc(s.goal || "")}</p>
       <div class="tabs" role="tablist">${tabs.map(([k, t]) => `<button role="tab" aria-selected="${k === tab}" data-tab="${k}">${t}</button>`).join("")}</div><div id="tb"></div></div></section>`;
@@ -545,7 +586,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       $$(".lesson", tb).forEach(x => { const go = () => { const i = +x.dataset.i, t = CH[i].t; showCh(i); if (vid && t != null) { vid.currentTime = t; vid.play().catch(() => {}); } else if (yt && t != null) yt.src = yt.dataset.base + `&start=${Math.floor(t)}&autoplay=1`; }; x.addEventListener("click", go); x.addEventListener("keydown", e => { if (e.key === "Enter") go(); }); });
       $("#dn").addEventListener("click", async () => { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: !l.done }); l.done = !l.done; paintTab(s, "videos"); } catch (e) { toast(errMsg(e)); } });
       videoSrc(l).then(v => { const pl = $("#pl"); if (!pl) return;
-        if (!v) pl.innerHTML = `<div class="soon"><b>🎬 الفيديو قيد التجهيز</b>سيُرفع هنا قبل اللقاء المباشر، وحتى ذلك الحين اقرأ نقاط كل فصل.</div>`;
+        if (!v) pl.innerHTML = `<div class="soon"><b>🎬 الفيديو قيد التجهيز</b>سيُرفع هنا في موعد الجلسة، وحتى ذلك الحين اقرأ نقاط كل فصل.</div>`;
         else if (v.type === "device_limit") showLimit(pl);
         else if (v.type === "file") { pl.innerHTML = `<video controls controlsList="nodownload noremoteplayback nofullscreen" disablepictureinpicture disableremoteplayback preload="metadata" playsinline src="${esc(v.url)}"></video>`; vid = $("video", pl);
           const lp = v.tracks?.length ? langPlayer(vid, v.tracks, pl) : null; guardPlayer(vid, pl, l, v, lp);
@@ -554,61 +595,79 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         else if (v.type === "yt") { pl.innerHTML = `<iframe src="${esc(v.url)}" data-base="${esc(v.url)}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(l.title)}"></iframe>`; yt = $("iframe", pl); }
         else pl.innerHTML = `<div class="soon"><a class="btn" href="${esc(v.url)}" target="_blank" rel="noopener">افتح الفيديو ↗</a></div>`; });
     }
-    if (tab === "live") {
-      const soon = s.live_at && new Date(s.live_at) - Date.now() < 30 * 60 * 1000 && Date.now() - new Date(s.live_at) < 3 * 3600 * 1000;
-      tb.innerHTML = `<div class="g2"><div class="card"><b style="color:var(--ink);font-size:18px">🎙️ ${s.live_at ? fmtDT(s.live_at) : "سيُحدَّد الموعد"}</b><p style="color:var(--muted);margin:4px 0 12px">بتوقيت القاهرة · 90 دقيقة</p>
-          ${s.live_link ? `<a class="btn ${soon ? "primary" : ""}" href="${esc(s.live_link)}" target="_blank" rel="noopener">${soon ? "ادخل اللقاء الآن" : "رابط اللقاء المباشر"}</a>` : `<span class="chip">يُضاف الرابط قبل اللقاء</span>`}
-          ${s.recording_url ? `<p><a class="btn sm" href="${esc(s.recording_url)}" target="_blank" rel="noopener">▶ تسجيل اللقاء</a></p>` : ""}
-          ${s.present != null ? `<p>${s.present ? '<span class="chip ok">سُجِّل حضورك</span>' : '<span class="chip err">سُجِّل غيابك</span>'}</p>` : ""}</div>
-        <div class="card"><b style="color:var(--ink)">خطة اللقاء</b><table class="tbl">${(s.live_plan || []).map(p => `<tr><td style="width:60px;color:var(--muted)">${p[0]} د</td><td>${esc(p[1])}</td></tr>`).join("") || `<tr><td>شاهد الفيديوهات قبل اللقاء، فاللقاء كله تطبيق على تخصصك وإجابة أسئلتك.</td></tr>`}</table></div></div>`;
-    }
+    if (tab === "help") tb.innerHTML = `<div class="narrow" style="margin:0">${supportCard(s.n)}</div>`;
     if (tab === "task") taskTab(s, tb);
     if (tab === "quiz") quizTab(s, tb);
     if (tab === "more") tb.innerHTML = `<div class="card">${(s.resources || []).length ? `<ul class="pts">${s.resources.map(r => `<li>${r[1] ? `<a href="${esc(r[1])}" target="_blank" rel="noopener">${esc(r[0])} ↗</a>` : esc(r[0])}</li>`).join("")}</ul>` : "<p>لا توجد مصادر إضافية لهذه الجلسة.</p>"}</div>`;
   }
-  let taskFile = null;
+  let taskFile = null, justSent = 0;
+  const RECEIVED_TXT = "✅ تم الاستلام — تاسكك وصلنا وهو في انتظار التصحيح. مش محتاج ترفعه تاني.";
+  /* the submission's state, shown at the top of the task tab so it is seen first (on phones too): submitted → received, graded → score + feedback, returned → feedback + re-upload */
+  function taskStatus(sub, fresh) {
+    if (!sub) return "";
+    const meta = [sub.submitted_at ? `اتسلّم ${fmtDT(sub.submitted_at)}` : "", sub.version ? `نسخة ${sub.version}` : ""].filter(Boolean).join(" · ");
+    const late = sub.late ? ` <span class="chip warn">متأخر</span>` : "";
+    const what = [sub.file_name ? `📎 <span dir="ltr">${esc(sub.file_name)}</span>` : "", sub.link_url ? `🔗 <a href="${esc(sub.link_url)}" target="_blank" rel="noopener" dir="ltr">${esc(String(sub.link_url).slice(0, 60))}</a>` : ""].filter(Boolean).join(" · ");
+    const fb = sub.feedback ? `<div class="fb"><b style="font-size:15px;color:var(--ink)">تعليق المدرب:</b>${esc(sub.feedback).replace(/\n/g, "<br>")}</div>` : "";
+    const line = (meta || late) ? `<p style="color:var(--muted)">${meta}${late}</p>` : "";
+    if (sub.status === "graded") return `<div class="tstat done" role="status"><span class="i">🏁</span><div><b>اتصحح · الدرجة ${sub.score ?? "—"}/100</b>${line}${what ? `<p>${what}</p>` : ""}${fb}</div></div>`;
+    if (sub.status === "returned") return `<div class="tstat back" role="status"><span class="i">↩️</span><div><b>رجع للتعديل</b><p>المدرب رجّع التاسك عشان تعدّله: اقرا التعليق، عدّل المطلوب، وارفع النسخة المعدّلة من النموذج تحت.</p>${line}${fb}</div></div>`;
+    return `<div class="tstat ok ${fresh ? "big" : ""}" role="status">${fresh ? "" : `<span class="i">✅</span>`}<div><b>${fresh ? RECEIVED_TXT : "تم الاستلام · في انتظار التصحيح"}</b>${line}${what ? `<p>${what}</p>` : ""}
+      <p>${fresh ? "الدرجة وتعليق المدرب هيظهروا هنا أول ما يتصحح." : "مش محتاج ترفعه تاني. الدرجة وتعليق المدرب هيظهروا هنا أول ما يتصحح."}</p>${fb}</div></div>`;
+  }
   function taskTab(s, tb) {
     const t = s.task, sub = s.submission; taskFile = null;
     if (!t) { tb.innerHTML = `<div class="card"><p>لا توجد مهمة في هذه الجلسة.</p></div>`; return; }
-    const can = !sub || sub.status !== "graded";
-    tb.innerHTML = `<div class="vgrid"><div>
-      <div class="card"><h3 style="font-size:20px">${esc(t.title)}</h3><p>${esc(t.brief)}</p><b style="color:var(--ink)">المطلوب خطوة بخطوة</b><ol class="pts">${t.steps.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
-        <b style="color:var(--ink)">ماذا ستسلّم</b><ul class="pts">${t.deliverables.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
-        ${s.due_at ? `<p class="note" style="margin-top:10px">آخر موعد: ${fmtDT(s.due_at)}. يُقبل التسليم بعده لكن يُعلَّم «متأخراً».</p>` : ""}</div>
-      ${can ? `<form class="card" id="tf" style="margin-top:12px" novalidate><h3 style="font-size:18px">${sub ? (sub.status === "returned" ? "سلّم النسخة المعدّلة" : "تحديث التسليم") : "سلّم المهمة"}</h3>
+    const graded = sub?.status === "graded", returned = sub?.status === "returned", waiting = !!sub && !graded && !returned;
+    const fresh = waiting && justSent === s.n; justSent = 0;
+    const can = !graded;
+    const formHtml = `<form class="card" id="tf" style="margin-top:12px" novalidate><h3 style="font-size:18px">${returned ? "سلّم النسخة المعدّلة" : waiting ? "رفع نسخة معدّلة" : "سلّم المهمة"}</h3>
+        ${waiting ? `<p class="note" style="margin:6px 0 12px">تاسكك الحالي وصلنا بالفعل. ارفع نسخة جديدة بس لو عدّلت حاجة فيه، وهتتسجّل كنسخة جديدة.</p>` : ""}
         <input type="file" id="tfl" hidden accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.png,.jpg,.jpeg,.webp,.txt,.csv">
         <div class="drop" id="tdr" role="button" tabindex="0"><b>ارفع ملفاً</b><span>PDF أو Word أو Excel أو صور أو ZIP · حتى 20 ميجابايت</span></div>
         <div class="filepick" id="tpk" hidden><span>📎</span><span class="nm" id="tpn"></span><button class="btn sm ghost" type="button" id="tun">إزالة</button></div>
         <label class="f" style="margin-top:12px"><span>أو رابط (Google Doc / Colab / Drive / GitHub)</span><input type="url" id="tln" dir="ltr" placeholder="https://" value="${esc(sub?.link_url || "")}"><small>اجعل صلاحية الرابط «أي شخص لديه الرابط يمكنه العرض».</small></label>
-        <label class="f"><span>ملاحظة للمدرب <small>(اختياري)</small></span><textarea id="tnt" maxlength="2000">${esc(sub?.note || "")}</textarea></label>
-        <button class="btn primary" id="tgo" type="submit">سلّم</button><div class="msg" id="ter" hidden></div></form>` : ""}
+        <label class="f"><span>ملاحظة أو سؤال للمدرب <small>(اختياري)</small></span><textarea id="tnt" maxlength="2000">${esc(sub?.note || "")}</textarea></label>
+        <button class="btn ${waiting ? "" : "primary"}" id="tgo" type="submit">${returned ? "سلّم النسخة المعدّلة" : waiting ? "رفع نسخة معدّلة" : "سلّم"}</button><div class="msg" id="ter" hidden></div></form>`;
+    tb.innerHTML = `${taskStatus(sub, fresh)}<div class="vgrid"><div>
+      <div class="card"><h3 style="font-size:20px">${esc(t.title)}</h3><p>${esc(t.brief)}</p><b style="color:var(--ink)">المطلوب خطوة بخطوة</b><ol class="pts">${t.steps.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+        <b style="color:var(--ink)">ماذا ستسلّم</b><ul class="pts">${t.deliverables.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+        ${s.due_at && !sub ? `<p class="note" style="margin-top:10px">آخر موعد: ${fmtDT(s.due_at)}. يُقبل التسليم بعده لكن يُعلَّم «متأخراً».</p>` : ""}</div>
+      ${!can ? "" : waiting ? `<details class="resub" style="margin-top:12px"><summary class="btn sm">رفع نسخة معدّلة</summary>${formHtml}</details>` : formHtml}
     </div><div>
-      ${sub ? `<div class="card"><b style="color:var(--ink)">تسليمك</b><p style="margin:6px 0">${sub.status === "graded" ? '<span class="chip ok">صُحِّحت</span>' : sub.status === "returned" ? '<span class="chip warn">تحتاج تعديلاً</span>' : '<span class="chip blue">بانتظار التصحيح</span>'} ${sub.late ? '<span class="chip warn">متأخر</span>' : ""} <small style="color:var(--muted)">نسخة ${sub.version} · ${fmtDT(sub.submitted_at)}</small></p>
-        ${sub.file_name ? `<p>📎 <span dir="ltr">${esc(sub.file_name)}</span></p>` : ""}${sub.link_url ? `<p>🔗 <a href="${esc(sub.link_url)}" target="_blank" rel="noopener" dir="ltr">${esc(sub.link_url.slice(0, 60))}</a></p>` : ""}
-        ${sub.status === "graded" ? `<div class="score">${sub.score}<small style="font-size:18px;color:var(--muted)">/100</small></div>` : ""}
-        ${sub.feedback ? `<div class="why" style="background:var(--surface2);border-radius:12px;padding:10px 12px;margin-top:8px"><b>تعليق المدرب:</b><br>${esc(sub.feedback).replace(/\n/g, "<br>")}</div>` : ""}</div>` : ""}
-      <div class="card" style="margin-top:12px"><b style="color:var(--ink)">على أي أساس تُصحَّح؟</b><table class="rub">${t.rubric.map((r, i) => `<tr><td>${esc(r.c)}</td><td dir="ltr">${sub?.rubric_scores ? `${sub.rubric_scores[i]} / ` : ""}${r.pts}</td></tr>`).join("")}</table></div>
+      <div class="card"><b style="color:var(--ink)">على أي أساس تُصحَّح؟</b><table class="rub">${t.rubric.map((r, i) => `<tr><td>${esc(r.c)}</td><td dir="ltr">${sub?.rubric_scores ? `${sub.rubric_scores[i] ?? "—"} / ` : ""}${r.pts}</td></tr>`).join("")}</table></div>
     </div></div>`;
     if (!can) return;
+    const label = $("#tgo").textContent;
     const pick = f => { if (!f) return; if (f.size > 20 * 1024 * 1024) return toast("حجم الملف أكبر من 20 ميجابايت"); taskFile = f; $("#tpn").textContent = f.name; $("#tpk").hidden = false; $("#tdr").hidden = true; };
     $("#tdr").addEventListener("click", () => $("#tfl").click()); $("#tfl").addEventListener("change", e => pick(e.target.files[0]));
+    $("#tdr").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("#tfl").click(); } });
     $("#tun").addEventListener("click", () => { taskFile = null; $("#tfl").value = ""; $("#tpk").hidden = true; $("#tdr").hidden = false; });
     ["dragover", "dragenter"].forEach(v => $("#tdr").addEventListener(v, e => { e.preventDefault(); $("#tdr").classList.add("over"); }));
     ["dragleave", "drop"].forEach(v => $("#tdr").addEventListener(v, e => { e.preventDefault(); $("#tdr").classList.remove("over"); }));
     $("#tdr").addEventListener("drop", e => pick(e.dataTransfer.files[0]));
     $("#tf").addEventListener("submit", async e => {
-      e.preventDefault(); const er = $("#ter"); er.hidden = true; const ln = $("#tln").value.trim();
+      e.preventDefault(); const er = $("#ter"); er.hidden = true; const ln = $("#tln").value.trim(), note = $("#tnt").value.trim();
       if (!taskFile && !ln) { er.textContent = E.file_required; er.hidden = false; return; }
       if (ln && !/^https?:\/\/[^\s/]+\.[^\s]+$/i.test(ln)) { er.textContent = E.invalid_link; er.hidden = false; return; }
+      if (waiting && !confirm("تاسكك متسلّم بالفعل ووصلنا. متأكد إنك عايز ترفع نسخة معدّلة؟")) return;
       const go = $("#tgo"); go.disabled = true;
+      let r;
       try {
         let file_path = null;
         if (taskFile) { go.textContent = "جارٍ الرفع…"; const ext = (taskFile.name.split(".").pop() || "pdf").toLowerCase().replace("jpeg", "jpg");
           file_path = `${user.id}/task/s${s.n}_${rnd()}.${ext}`; const { error } = await sb.storage.from("academy-files").upload(file_path, taskFile, { contentType: taskFile.type || undefined, upsert: false }); if (error) throw new Error("file_missing"); }
         go.textContent = "جارٍ الإرسال…";
-        const r = await rpc("academy_submit", { p: { enrollment_id: enrId, session_n: s.n, file_path, file_name: taskFile?.name?.slice(0, 200) || null, link_url: ln || null, note: $("#tnt").value.trim() } });
-        toast(r.late ? "سُلِّمت ✓ (متأخرة)" : "سُلِّمت ✓ وستُفتح الجلسة التالية في موعدها"); await loadCourse(); viewSession(s.n, "task");
-      } catch (x) { er.textContent = errMsg(x); er.hidden = false; } finally { go.disabled = false; go.textContent = "سلّم"; }
+        r = await rpc("academy_submit", { p: { enrollment_id: enrId, session_n: s.n, file_path, file_name: taskFile?.name?.slice(0, 200) || null, link_url: ln || null, note } });
+      } catch (x) { er.textContent = errMsg(x); er.hidden = false; go.disabled = false; go.textContent = label; return; }
+      /* the task is in: from here on never show an error, so nobody uploads it again */
+      const local = { ...(sub || {}), status: "submitted", version: r?.version ?? null, submitted_at: r?.submitted_at || new Date().toISOString(), late: !!r?.late,
+        file_name: taskFile?.name?.slice(0, 200) || null, link_url: ln || null, note, score: null, feedback: null, rubric_scores: null };
+      justSent = s.n; toast(r?.late ? "✅ تم الاستلام (متأخر)" : "✅ تم الاستلام");
+      try { await loadCourse(); } catch (x) { console.warn(x); }
+      const s2 = course?.sessions?.find(x => x.n === s.n) || s;
+      if (!s2.submission || (returned && s2.submission.status === "returned" && s2.submission.version === sub?.version)) s2.submission = local;   // reload failed or came back stale
+      viewSession(s.n, "task"); window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
   function quizTab(s, tb, result) {
@@ -638,9 +697,9 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     const sm = course.summary, en = course.enrollment, m = course.course.meta || {}, li = levelInfo(sm);
     app.innerHTML = `<section><div class="wrap"><h2 class="sec">تقدّمك</h2><p class="lead">${esc(course.course.title)} · ${esc(course.cohort.name)}</p>
       <div class="levels" style="margin-bottom:18px">${(sm.levels || []).map(l => `<div class="lv ${l.n === li.cur?.n ? "me" : l.n > (li.cur?.n || 1) ? "off" : ""}"><div class="badge">${l.n}</div><b>${esc(l.ar)}</b><small>${esc(l.desc)}</small></div>`).join("")}</div>
-      <div class="kpis" style="margin-bottom:18px">${(m.grading || []).map((g, i) => `<div class="kpi"><small>${esc(g[0])} · ${g[1]}٪</small><b>${[sm.task_sofar, sm.quiz_sofar, sm.project, sm.attendance_sofar][i] ?? "—"}</b><small>${["متوسط المهام المصحَّحة", "متوسط الاختبارات التي حللتها", "درجة المشروع", "من الجلسات المسجَّل فيها الحضور"][i]}</small></div>`).join("")}</div>
-      <div class="g2"><div class="card"><table class="tbl"><thead><tr><th>الجلسة</th><th>المهمة</th><th>الاختبار</th><th>الحضور</th><th></th></tr></thead><tbody>
-        ${sm.sessions.map(r => `<tr><td>${r.n}</td><td>${r.task ?? (r.task_status === "returned" ? "تعديل" : "—")}</td><td>${r.quiz != null ? r.quiz + "٪" : "—"}</td><td>${r.present == null ? "—" : r.present ? "✓" : "✗"}</td><td>${r.passed ? '<span class="chip ok">اجتاز</span>' : ""}</td></tr>`).join("")}</tbody></table></div>
+      <div class="kpis" style="margin-bottom:18px">${(m.grading || []).map((g, i) => [g, i]).filter(([g, i]) => i < 3 && !LIVE_RX.test(String(g?.[0] ?? ""))).map(([g, i]) => `<div class="kpi"><small>${esc(g[0])} · ${g[1]}٪</small><b>${[sm.task_sofar, sm.quiz_sofar, sm.project][i] ?? "—"}</b><small>${["متوسط المهام المصحَّحة", "متوسط الاختبارات التي حللتها", "درجة المشروع"][i]}</small></div>`).join("")}</div>
+      <div class="g2"><div class="card"><table class="tbl"><thead><tr><th>الجلسة</th><th>المهمة</th><th>الاختبار</th><th></th></tr></thead><tbody>
+        ${sm.sessions.map(r => `<tr><td>${r.n}</td><td>${r.task ?? (r.task_status === "returned" ? "رجع للتعديل" : r.task_status && r.task_status !== "graded" ? "تم الاستلام" : "—")}</td><td>${r.quiz != null ? r.quiz + "٪" : "—"}</td><td>${r.passed ? '<span class="chip ok">اجتاز</span>' : ""}</td></tr>`).join("")}</tbody></table></div>
       <div>${en.certificate_no ? `<div class="cert"><div style="font-size:42px">🏅</div><b style="font-size:22px;color:var(--ink)">مبارك! أتممت الدورة</b><p>رقم الشهادة: <b dir="ltr">${esc(en.certificate_no)}</b><br>النتيجة: ${sm.final}٪</p>
           <button class="btn primary" id="pc" type="button">اطبع / احفظ الشهادة PDF</button> <a class="btn" href="#/verify/${esc(en.certificate_no)}">رابط التحقق</a></div>`
         : `<div class="card"><b style="color:var(--ink);font-size:18px">النتيجة حتى الآن: ${sm.final}٪</b><p style="color:var(--muted)">تحصل على الشهادة بعد تسليم كل المهام وتصحيحها والمشروع النهائي، والوصول إلى ${sm.pass_mark}٪ أو أكثر.</p>
@@ -750,7 +809,7 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
         <div class="f"><span class="lg">هدفك الأساسي من التعلّم</span><div class="pick">${RG_GOAL.map(([k, l]) => `<label><input type="radio" name="goal" value="${k}" ${d.goal === k ? "checked" : ""}><span><b>${l}</b></span></label>`).join("")}</div></div>
         <label class="f"><span>احكِ لنا باختصار ماذا تريد أن تحقق <small>(اختياري)</small></span><textarea name="goal_note" maxlength="600">${esc(d.goal_note || "")}</textarea></label>
         <div class="f"><span class="lg">لغة الشرح المفضّلة</span>${segs("lang", RG_LANG, d.lang)}</div>
-        <div class="f"><span class="lg">الأوقات المناسبة للقاءات المباشرة <small>(بتوقيت بلدك)</small></span>${segs("times", RG_TIMES, d.times, true)}</div>
+        <div class="f"><span class="lg">الأوقات اللي غالباً هتذاكر فيها <small>(بتوقيت بلدك · الدورة أونلاين وتذاكر في الوقت اللي يناسبك)</small></span>${segs("times", RG_TIMES, d.times, true)}</div>
         <div class="f"><span class="lg">الجهاز الذي ستتعلّم عليه</span>${segs("device", RG_DEV, d.device)}</div>
         <label class="f"><span>كيف عرفت HUDERA Academy؟</span><select name="source">${opts(RG_SRC, d.source, "اختر")}</select></label>`;
     } else {
