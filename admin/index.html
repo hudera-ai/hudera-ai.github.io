@@ -289,6 +289,38 @@ details.tv{margin-top:8px}details.tv summary{cursor:pointer;font-size:12.5px;col
 .h-rate label:has(input:checked) span,.h-rate label:has(~ label input:checked) span{color:#F5A524}
 .hs-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px}
 @media (max-width:640px){.h-grid{grid-template-columns:1fr}}
+/* hiring: stages strip, job filter, applicant table (cards on phones), evaluation */
+.hz-hint{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;background:var(--primary-soft);color:var(--ink);border-radius:12px;padding:12px 14px}
+.hz-hint ol{margin:6px 0 0;padding-inline-start:20px;line-height:1.8;font-size:13.5px}
+.hz-stages{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.hz-stage{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 11px;cursor:pointer;font:inherit;color:inherit;min-width:0}
+.hz-stage:hover{border-color:var(--faint)}.hz-stage[aria-pressed="true"]{border-color:var(--primary);background:var(--primary-soft)}
+.hz-stage small{font-size:12px;font-weight:700;color:var(--muted)}.hz-stage b{font:700 24px var(--f-d);color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.2}
+.hz-stage span:not(.chip){font-size:11.5px;color:var(--faint);line-height:1.35}
+.hz-jobs{display:flex;flex-wrap:wrap;gap:6px}
+.hz-job{border:1px solid var(--line-2);background:var(--surface);border-radius:99px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer;color:var(--text)}
+.hz-job b{color:var(--ink);margin-inline-start:4px}.hz-job[aria-pressed="true"]{border-color:var(--primary);background:var(--primary-soft);color:var(--primary-ink)}
+.hz-tbl td a.t{text-decoration:none}.hz-tbl td a.t:hover{text-decoration:underline}.hz-tbl .tags{gap:4px}.hz-tbl .tag{font-size:11.5px;padding:1px 8px}
+.hz-bar{display:inline-block;width:56px;height:6px;border-radius:4px;background:var(--surface-3);overflow:hidden;vertical-align:middle;margin-inline-start:4px}
+.hz-bar i{display:block;height:100%;background:var(--primary);border-radius:4px}.hz-bar.ok i{background:var(--mint)}.hz-bar.mid i{background:var(--amber)}.hz-bar.low i{background:var(--red)}
+.hz-nav{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.hz-ev{display:grid;grid-template-columns:minmax(0,1.6fr) 130px minmax(0,1fr);gap:6px 14px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.hz-ev:first-child{border-top:0}.hz-ev b{color:var(--ink)}.hz-ev .s{display:block;margin-top:2px}
+.hz-in{display:flex;align-items:center;gap:6px;direction:ltr}.hz-in .input{width:80px;text-align:center}
+.kv dd .s{display:block;margin-top:2px}
+.hz-exam{background:var(--surface-2);border-radius:10px;padding:9px 12px;margin:0 0 4px;line-height:1.9}.hz-exam .s{display:block}
+.hz-total{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--surface-2);border-radius:12px;padding:12px 14px;margin-top:10px}
+.hz-total .big{font:700 34px var(--f-d);color:var(--ink)}.hz-total .meter{margin:0}
+#view .card[id^="hz-"]{scroll-margin-top:80px}
+@media (max-width:1100px){.hz-stages{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:760px){
+  .hz-tbl thead{display:none}.hz-tbl,.hz-tbl tbody{display:block}
+  .hz-tbl tr{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;padding:12px;border-bottom:1px solid var(--line)}.hz-tbl tr:last-child{border-bottom:0}
+  .hz-tbl td{border:0;padding:0;max-width:none!important}.hz-tbl td:first-child,.hz-tbl td:nth-child(5){grid-column:1/-1}
+  .hz-tbl td[data-l]:not([data-l=""])::before{content:attr(data-l);display:block;font-size:11px;font-weight:700;color:var(--faint)}
+  .hz-ev{grid-template-columns:1fr auto}.hz-ev .c{grid-column:1/-1}
+}
+@media (max-width:520px){.hz-stages{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .inv-row{display:grid;grid-template-columns:3fr 70px 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center}.inv-row.inv-h{margin-bottom:4px}.inv-row.inv-h span:empty{width:30px}
 .inv-line{text-align:end;font-weight:600;color:var(--ink);font-size:13px;white-space:nowrap}
 td.num,th.num{text-align:end;white-space:nowrap}
@@ -2104,13 +2136,36 @@ async function finSetup() {
     try { await api("admin_fin_settings_save", { p_patch: { rates: { USD: f.r_USD.value, EGP: f.r_EGP.value, JOD: f.r_JOD.value }, vat_default: f.vat.value || 0, company } }); fin.lookup = null; toast(L("تم الحفظ", "Saved")); } catch (er) { toast(ferr(er)); } });
 }
 
-/* ---------------- hiring: applications from the website's careers page ---------------- */
+/* ---------------- hiring: applications from the website's careers page ----------------
+   #/hiring       → counts per stage and per job, filters, sort, one row per applicant.
+   #/hiring/<id>  → the applicant's page: basic data, how/when they registered, every field they sent, skills, CV,
+                    evaluation (CV 20% + test 50% + interview 30%), notes and history.
+   Data: admin_hiring (applications), admin_exams (online test, optional) and admin_hiring_extra / admin_hiring_eval
+   (scores + registration source; migration 20261113000100_hiring_eval.sql). Until that migration runs the page still works:
+   the evaluation shows "—" with a note, and nothing else breaks. */
 const HST = { new: ["جديد", "New", "c-blue"], reviewing: ["بنراجعه", "Reviewing", "c-amber"], shortlisted: ["مرشّح", "Shortlisted", "c-violet"], interview: ["مقابلة", "Interview", "c-sky"], hired: ["اتقبل", "Hired", "c-mint"], rejected: ["مش مناسب", "Not a fit", ""] };
+const HST_HINT = { new: ["لسه محدش راجعه", "Not reviewed yet"], reviewing: ["بنراجع الـ CV والبيانات", "Checking CV and details"], shortlisted: ["عدّى الفرز · الاختبار", "Passed screening · test"], interview: ["متحدد له مقابلة", "Interview stage"], hired: ["اتقبل في الفريق", "Joined the team"], rejected: ["مش مناسب حالياً", "Not a fit for now"] };
 const HYRS = { "0": ["أقل من سنة", "< 1 yr"], "1-2": ["سنة لـ 2", "1–2 yrs"], "3-5": ["3 لـ 5 سنين", "3–5 yrs"], "6-9": ["6 لـ 9 سنين", "6–9 yrs"], "10+": ["أكتر من 10 سنين", "10+ yrs"] };
+const HYRS_N = { "0": 0, "1-2": 1, "3-5": 3, "6-9": 6, "10+": 10 };
 const HWT = { freelance: ["فريلانس", "Freelance"], part_time: ["بارت تايم", "Part-time"], full_time: ["فول تايم", "Full-time"] };
-const hState = { st: "", role: "", q: "" };
+const HREC = { strong_yes: ["رشّحه بقوة", "Strong yes", "c-mint"], yes: ["مناسب", "Yes", "c-sky"], maybe: ["محتاج نظرة تانية", "Maybe", "c-amber"], no: ["مش مناسب", "No", "c-red"] };
+const HW = { cv: 20, test: 50, interview: 30 };
+const HWL = { cv: ["الـ CV والخبرة", "CV & experience"], test: ["الاختبار", "Test"], interview: ["المقابلة", "Interview"] };
+const HSRC = { direct: ["دخل مباشرة (لينك أو كتب العنوان)", "Direct (link or typed URL)"], search: ["بحث (جوجل وغيره)", "Search (Google etc.)"], social: ["سوشيال ميديا", "Social media"], referral: ["لينك من موقع تاني", "Link from another site"], campaign: ["حملة إعلانية (UTM)", "Campaign (UTM)"] };
+const HEXAM_ROLES = ["academy", "backend", "marketing", "conversation", "frontend", "qa", "data_entry"];
+const HEXAM_ST = { submitted: ["سلّم", "Submitted", "c-mint"], terminated: ["اتقفل (مخالفات)", "Closed (violations)", "c-red"], started: ["لسه بيحل", "In progress", "c-amber"] };
+/* labels for every field the careers form sends (anything new the form adds still shows, under its raw key) */
+const HFORM = [["full_name", "الاسم بالكامل", "Full name"], ["email", "الإيميل (من حساب جوجل)", "E-mail (Google account)"], ["phone", "الموبايل / واتساب", "Mobile / WhatsApp"], ["location", "المكان (المدينة والدولة)", "Location (city, country)"],
+  ["role", "المجال اللي قدّم عليه", "Field applied for"], ["role_other", "المجال اللي كتبه (لو اختار «مجال تاني»)", "Field typed (if “something else”)"], ["years", "سنين الخبرة في المجال", "Years of experience"], ["work_type", "نوع الشغل اللي يناسبه", "Preferred work type"],
+  ["hours_week", "ساعات متاح في الأسبوع", "Hours available per week"], ["expected_rate", "السعر المتوقع", "Expected rate"], ["skills", "أهم مهاراته وأدواته", "Key skills and tools"], ["cv_name", "اسم ملف الـ CV", "CV file name"], ["cv_url", "لينك الـ CV", "CV link"],
+  ["cv_path", "مكان ملف الـ CV على السيرفر", "CV file path (storage)"], ["portfolio_url", "لينك أعماله", "Portfolio link"], ["note", "رسالته لينا", "Message to us"], ["lang", "لغة الفورم", "Form language"], ["consent", "موافقة على حفظ البيانات", "Consent to keep data"], ["ref", "رقم الطلب", "Reference"]];
+const HFORM_SKIP = /^(id|user_id|status|rating|staff_note|created_at|updated_at|updated_by.*|eval_.*|evaluated_.*|reviewed_.*)$/;
+const hState = { st: "", role: "", q: "", rec: "", sort: "new", server: false, cache: null };
 const stars = n => n ? `<span class="h-stars" aria-label="${n}/5">${"★".repeat(n)}<i>${"★".repeat(5 - n)}</i></span>` : "";
 const careersUrl = () => new URL("../careers/", location.href).href;
+const examUrl = role => new URL(`../careers/exam/?role=${encodeURIComponent(role)}`, location.href).href;
+const examReviewUrl = () => new URL("../careers/exam/review/", location.href).href;
+const hMissing = e => /could not find the function|schema cache|does not exist|PGRST202|42883|42703/i.test(`${e?.code || ""} ${e?.message || ""}`);
 async function openCv(a) {
   if (a.cv_path) {
     const w = window.open("about:blank", "_blank");
@@ -2118,60 +2173,297 @@ async function openCv(a) {
     catch (e) { w?.close(); toast(L("مقدرتش أفتح الملف: ", "Couldn't open the file: ") + e.message); }
   } else if (a.cv_url) window.open(a.cv_url, "_blank", "noopener");
 }
+
+/* one load feeds the list and the applicant page (cached for a minute; saves clear it) */
+async function hLoad(force) {
+  if (!force && hState.cache && Date.now() - hState.cache.at < 60000) return hState.cache;
+  const args = hState.server ? { p_status: hState.st || null, p_role: hState.role || null, p_q: hState.q || null } : { p_status: null, p_role: null, p_q: null };
+  const [d, x, exams] = await Promise.all([api("admin_hiring", args), api("admin_hiring_extra").catch(e => ({ _err: e })), api("admin_exams", { p_role: null }).catch(() => [])]);
+  const total = Object.values(d.counts || {}).reduce((s, n) => s + n, 0);
+  /* the server may cap the list; then filters must go to the server instead of being applied here */
+  if (!hState.server && total > (d.items || []).length) { hState.server = true; return hLoad(true); }
+  const roles = d.settings?.roles || [];
+  hState.cache = { at: Date.now(), d, total, roles, exams: Array.isArray(exams) ? exams : [],
+    x: x && !x._err ? x : null, xMissing: !!x?._err && hMissing(x._err), xErr: x?._err || null,
+    rl: k => { const r = roles.find(y => y.key === k); return r ? (AR_() ? r.ar : r.en) : k; } };
+  return hState.cache;
+}
+const hRole = (c, a) => (a.role === "other" && a.role_other ? a.role_other : c.rl(a.role));
+const hExam = (c, a) => c.exams.find(e => e.ref && e.ref === a.ref) || c.exams.find(e => e.role === a.role && a.email && String(e.email || "").toLowerCase() === String(a.email).toLowerCase()) || null;
+const hExamPct = e => (!e ? null : e.review_score != null ? e.review_score : e.mcq_max ? Math.round((100 * e.mcq_score) / e.mcq_max) : null);
+function hEval(c, a) {
+  const x = c.x?.items?.[a.id] || {}, pick = k => x[k] ?? a[`eval_${k}`] ?? null;
+  const parts = { cv: pick("cv"), test: pick("test"), interview: pick("interview") };
+  let testAuto = false;
+  if (parts.test == null) { const p = hExamPct(hExam(c, a)); if (p != null) { parts.test = p; testAuto = true; } }
+  const have = Object.keys(HW).filter(k => parts[k] != null), sum = have.reduce((s, k) => s + (parts[k] * HW[k]) / 100, 0);
+  return { ...parts, testAuto, have, missing: Object.keys(HW).filter(k => parts[k] == null), total: have.length === 3 ? Math.round(sum * 10) / 10 : null, partial: Math.round(sum * 10) / 10,
+    rec: x.recommendation ?? a.eval_recommendation ?? null, at: x.evaluated_at ?? a.evaluated_at ?? null, by: x.evaluated_by_name || "", log: x.log || [], x };
+}
+const hSuggest = tot => (tot == null ? null : tot >= 85 ? "strong_yes" : tot >= 70 ? "yes" : tot >= 55 ? "maybe" : "no");
+const hTone = n => (n == null ? "" : n >= 70 ? "ok" : n >= 55 ? "mid" : "low");
+const hBar = n => `<span class="hz-bar ${hTone(n)}"><i style="width:${Math.max(3, Math.min(100, n || 0))}%"></i></span>`;
+function hSkills(s) {
+  const seen = new Set();
+  return String(s || "").split(/[,،;؛\n•|]+|\s[-–]\s|\s+و(?=[A-Za-z])/).map(x => x.trim().replace(/^[-–•.\s]+|[.\s]+$/g, "")).filter(x => x && x.length <= 60 && !seen.has(x.toLowerCase()) && seen.add(x.toLowerCase()));
+}
+const hSkillChips = (s, max = 99) => { const k = hSkills(s); return k.length ? `<div class="tags">${k.slice(0, max).map(x => `<span class="tag" dir="auto">${esc(x)}</span>`).join("")}${k.length > max ? `<span class="tag">+${k.length - max}</span>` : ""}</div>` : `<span class="faint">—</span>`; };
+function hSourceLine(c, a) {
+  const v = c.x?.items?.[a.id]?.visit, bits = [];
+  if (v) { bits.push(FL(HSRC, v.source) || v.source); const w = v.utm_source || v.referrer; if (w) bits.push(w); }
+  return bits;
+}
+const hCvKind = a => (a.cv_path ? `📄 ${L("رفع ملف", "Uploaded a file")}` : a.cv_url ? `🔗 ${L("حط لينك", "Pasted a link")}` : L("من غير CV", "No CV"));
+function hScoreCell(c, a) {
+  const e = hEval(c, a);
+  const main = e.total != null ? `<b class="num">${e.total}</b><span class="faint">/100</span> ${hBar(e.total)}`
+    : e.have.length ? `<span class="muted">${L("جزئي", "Partial")} ${e.partial}</span><span class="s">${L("ناقص", "Missing")}: ${e.missing.map(k => FL(HWL, k)).join("، ")}</span>`
+    : `<span class="faint">—</span><span class="s">${L("لسه متقيّمش", "Not scored yet")}</span>`;
+  return `${main}${e.rec ? `<div style="margin-top:4px">${chip2(HREC, e.rec)}</div>` : ""}`;
+}
+function hFiltered(c) {
+  const q = hState.q.trim().toLowerCase();
+  return (c.d.items || []).filter(a => (!hState.st || a.status === hState.st) && (!hState.role || a.role === hState.role)
+    && (!hState.rec || (hState.rec === "none" ? !hEval(c, a).rec : hEval(c, a).rec === hState.rec))
+    && (!q || [a.full_name, a.email, a.phone, a.skills, a.ref, a.location, a.role_other, hRole(c, a)].some(f => String(f || "").toLowerCase().includes(q))));
+}
+function hSorted(c, list) {
+  const order = Object.keys(HST), score = a => { const e = hEval(c, a); return e.total ?? (e.have.length ? e.partial - 100 : -1000); };
+  const by = { new: (x, y) => new Date(y.created_at) - new Date(x.created_at), old: (x, y) => new Date(x.created_at) - new Date(y.created_at), score: (x, y) => score(y) - score(x),
+    exp: (x, y) => (HYRS_N[y.years] ?? -1) - (HYRS_N[x.years] ?? -1), name: (x, y) => String(x.full_name || "").localeCompare(String(y.full_name || ""), AR_() ? "ar" : "en"),
+    stage: (x, y) => order.indexOf(x.status) - order.indexOf(y.status) }[hState.sort] || (() => 0);
+  return list.slice().sort(by);
+}
+
 async function viewHiring() {
-  const v = page(L("التوظيف", "Hiring"), `<a class="btn sm" href="${careersUrl()}" target="_blank" rel="noopener">${L("صفحة التقديم", "Careers page")} ↗</a><button class="btn sm" type="button" id="h-copy">${L("نسخ اللينك", "Copy link")}</button><button class="btn sm" type="button" id="h-xl">${ic("dl")} Excel</button>`);
+  const v = page(L("التوظيف", "Hiring"), `<a class="btn sm" href="${careersUrl()}" target="_blank" rel="noopener">${L("صفحة التقديم", "Careers page")} ↗</a><a class="btn sm" href="${examReviewUrl()}" target="_blank" rel="noopener">${L("مراجعة الاختبارات", "Test reviews")} ↗</a><button class="btn sm" type="button" id="h-copy">${L("نسخ لينك التقديم", "Copy careers link")}</button><button class="btn sm" type="button" id="h-xl">${ic("dl")} Excel</button>`);
   v.innerHTML = skel(4);
-  let d; try { d = await api("admin_hiring", { p_status: hState.st || null, p_role: hState.role || null, p_q: hState.q || null }); } catch (e) { v.innerHTML = failBox(e); return; }
-  const roles = d.settings?.roles || [], rl = k => { const r = roles.find(x => x.key === k); return r ? (AR_() ? r.ar : r.en) : k; };
-  const total = Object.values(d.counts || {}).reduce((a, b) => a + b, 0);
-  v.innerHTML = `${d.settings?.open === false ? `<div class="warn">${L("فورم التقديم مقفول دلوقتي على الموقع.", "The careers form is closed on the website.")}</div>` : ""}
-    <div class="filters" style="margin-bottom:12px;justify-content:space-between">
-      <div class="seg" role="group">${[["", `${L("الكل", "All")} (${total})`], ...Object.keys(HST).map(k => [k, `${FL(HST, k)} (${d.counts?.[k] || 0})`])].map(([k, l]) => `<button type="button" data-hs="${k}" aria-pressed="${hState.st === k}">${l}</button>`).join("")}</div>
-      <div class="filters"><select class="input" id="h-role"><option value="">${L("كل المجالات", "All fields")}</option>${roles.map(r => `<option value="${esc(r.key)}" ${hState.role === r.key ? "selected" : ""}>${esc(AR_() ? r.ar : r.en)} (${d.by_role?.[r.key] || 0})</option>`).join("")}</select>
-        <input class="input" type="search" id="h-q" placeholder="${L("دور بالاسم أو المهارة", "Search name or skill")}" value="${esc(hState.q)}">${d.can_edit ? `<button class="btn sm" type="button" id="h-set">${ic("gear")} ${L("المجالات المفتوحة", "Open fields")}</button>` : ""}</div></div>
-    ${d.items.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("المتقدم", "Applicant")}</th><th>${L("المجال", "Field")}</th><th>${L("الخبرة", "Experience")}</th><th>${L("النوع", "Type")}</th><th>${L("قدّم", "Applied")}</th><th>${t("Status")}</th><th>CV</th></tr></thead><tbody>
-      ${d.items.map((a, i) => `<tr class="click" data-hi="${i}"><td><span class="t" dir="auto">${esc(a.full_name)}</span><span class="s">${a.location ? `<span dir="auto">${esc(a.location)}</span> · ` : ""}<span dir="ltr">${esc(a.phone || "")}</span></span></td>
-        <td>${esc(a.role === "other" && a.role_other ? a.role_other : rl(a.role))}${a.skills ? `<span class="s" dir="auto">${esc(a.skills.slice(0, 60))}${a.skills.length > 60 ? "…" : ""}</span>` : ""}</td>
-        <td><b>${FL(HYRS, a.years)}</b></td><td>${FL(HWT, a.work_type)}${a.hours_week ? `<span class="s">${a.hours_week} ${L("س/أسبوع", "h/wk")}</span>` : ""}</td>
-        <td>${ago(a.created_at)}</td><td>${chip2(HST, a.status)} ${stars(a.rating)}</td>
-        <td><button class="btn sm" type="button" data-cv="${i}">${a.cv_path ? "📄 " + L("الملف", "File") : "🔗 " + L("لينك", "Link")}</button></td></tr>`).join("")}</tbody></table></div>`
-      : `<div class="card"><p class="empty">${total ? L("مفيش طلبات بالفلتر ده.", "No applications match.") : L("لسه مفيش طلبات. شارك لينك صفحة التقديم في بوست التوظيف.", "No applications yet. Share the careers page link in the hiring post.")}</p></div>`}`;
-  $$("[data-hs]", v).forEach(b => b.addEventListener("click", () => { hState.st = b.dataset.hs; viewHiring(); }));
-  $("#h-role", v).addEventListener("change", e => { hState.role = e.target.value; viewHiring(); });
-  let tm; $("#h-q", v).addEventListener("input", e => { clearTimeout(tm); tm = setTimeout(() => { hState.q = e.target.value.trim(); viewHiring().then(() => { const q = $("#h-q"); q?.focus(); q?.setSelectionRange(q.value.length, q.value.length); }); }, 350); });
-  $$("[data-cv]", v).forEach(b => b.addEventListener("click", e => { e.stopPropagation(); openCv(d.items[+b.dataset.cv]); }));
-  $$("[data-hi]", v).forEach(r => r.addEventListener("click", () => hiringDialog(d.items[+r.dataset.hi], d.can_edit, rl)));
+  let c; try { c = await hLoad(); } catch (e) { v.innerHTML = failBox(e); return; }
+  const d = c.d, all = d.items || [];
+  const cnt = hState.server ? (d.counts || {}) : all.reduce((m, a) => ((m[a.status] = (m[a.status] || 0) + 1), m), {});
+  const byRole = hState.server ? (d.by_role || {}) : all.reduce((m, a) => ((m[a.role] = (m[a.role] || 0) + 1), m), {});
+  const jobs = c.roles.filter(r => byRole[r.key] || r.open !== false);
+  const hint = store.get("hudera-hz-hint") !== "off", tot = hState.server ? c.total : all.length;
+  v.innerHTML = `${d.settings?.open === false ? `<div class="warn">${L("فورم التقديم مقفول دلوقتي على الموقع. افتحه من «المجالات المفتوحة».", "The careers form is closed on the website. Open it from “Open fields”.")}</div>` : ""}
+    ${hint && tot ? `<div class="hz-hint" id="hz-hint"><div><b>${L("إزاي تستخدم الصفحة دي؟", "How to use this page")}</b>
+      <ol><li>${L("اختار متقدم من الجدول (اضغط على الصف) عشان تشوف كل بياناته: اتسجل إزاي ومتى، وكل اللي كتبه في الفورم، ومهاراته، والـ CV.", "Pick an applicant (click the row) to see everything: how and when they registered, every answer in the form, skills and CV.")}</li>
+      <li>${L("في قسم «التقييم» حط 3 درجات من 100: الـ CV (20%)، الاختبار (50%)، المقابلة (30%). المجموع بيتحسب لوحده.", "In “Evaluation”, enter 3 scores out of 100: CV (20%), test (50%), interview (30%). The total is calculated for you.")}</li>
+      <li>${L("انقله للمرحلة اللي بعدها: جديد ← بنراجعه ← مرشّح ← مقابلة ← اتقبل أو مش مناسب.", "Move them to the next stage: New → Reviewing → Shortlisted → Interview → Hired or Not a fit.")}</li></ol></div>
+      <button class="btn sm ghost" type="button" id="hz-hint-x" aria-label="${L("إخفاء", "Hide")}">✕</button></div>` : ""}
+    ${c.xMissing ? `<div class="warn">${L("التقييم ومصدر التسجيل محتاجين تحديث قاعدة البيانات (migration ‎20261113000100_hiring_eval.sql). لحد ما يتشغّل، الدرجات هتظهر «—» وباقي الصفحة شغالة عادي.", "Scores and registration source need the database update (migration 20261113000100_hiring_eval.sql). Until it runs, scores show “—”; everything else works.")}</div>`
+      : c.xErr ? `<div class="warn">${L("مقدرتش أجيب التقييمات: ", "Couldn't load the scores: ")}${esc(c.xErr.message)}</div>` : ""}
+    <section class="card"><h2>${L("المراحل", "Stages")}</h2><p class="sub">${L("اضغط على مرحلة عشان تفلتر بيها. الرقم = عدد المتقدمين فيها.", "Click a stage to filter. The number is how many applicants are in it.")}</p>
+      <div class="hz-stages" role="group">${[["", L("الكل", "All"), tot, L("كل الطلبات", "Every application")], ...Object.keys(HST).map(k => [k, FL(HST, k), cnt[k] || 0, FL(HST_HINT, k)])]
+        .map(([k, l, n, h]) => `<button type="button" class="hz-stage" data-hs="${k}" aria-pressed="${hState.st === k}"><small>${k ? chip2(HST, k) : esc(l)}</small><b>${nf(n)}</b><span>${esc(h)}</span></button>`).join("")}</div>
+      ${jobs.length ? `<h2 style="margin-top:14px">${L("حسب الوظيفة", "By job")}</h2><div class="hz-jobs">${jobs.map(r => `<button type="button" class="hz-job" data-hr="${esc(r.key)}" aria-pressed="${hState.role === r.key}">${esc(AR_() ? r.ar : r.en)} <b>${nf(byRole[r.key] || 0)}</b>${r.open === false ? ` <span class="faint small">(${L("مقفول", "closed")})</span>` : ""}</button>`).join("")}</div>` : ""}</section>
+    <div class="filters" style="justify-content:space-between">
+      <div class="filters"><select class="input" id="h-role" aria-label="${L("الوظيفة", "Job")}"><option value="">${L("كل الوظايف", "All jobs")}</option>${c.roles.map(r => `<option value="${esc(r.key)}" ${hState.role === r.key ? "selected" : ""}>${esc(AR_() ? r.ar : r.en)} (${byRole[r.key] || 0})</option>`).join("")}</select>
+        <select class="input" id="h-st" aria-label="${t("Status")}"><option value="">${L("كل المراحل", "All stages")}</option>${Object.keys(HST).map(k => `<option value="${k}" ${hState.st === k ? "selected" : ""}>${FL(HST, k)} (${cnt[k] || 0})</option>`).join("")}</select>
+        <select class="input" id="h-rec" aria-label="${L("التوصية", "Recommendation")}"><option value="">${L("كل التوصيات", "Any recommendation")}</option>${Object.keys(HREC).map(k => `<option value="${k}" ${hState.rec === k ? "selected" : ""}>${FL(HREC, k)}</option>`).join("")}<option value="none" ${hState.rec === "none" ? "selected" : ""}>${L("من غير توصية", "No recommendation")}</option></select>
+        <input class="input" type="search" id="h-q" placeholder="${L("دوّر بالاسم أو الإيميل أو المهارة", "Search name, e-mail or skill")}" value="${esc(hState.q)}" style="min-width:220px"></div>
+      <div class="filters"><label>${L("ترتيب", "Sort")} <select class="input" id="h-sort">${[["new", L("الأحدث", "Newest")], ["old", L("الأقدم", "Oldest")], ["score", L("أعلى تقييم", "Highest score")], ["exp", L("أكتر خبرة", "Most experience")], ["stage", L("المرحلة", "Stage")], ["name", L("الاسم", "Name")]].map(([k, l]) => `<option value="${k}" ${hState.sort === k ? "selected" : ""}>${l}</option>`).join("")}</select></label>
+        ${d.can_edit ? `<button class="btn sm" type="button" id="h-set">${ic("gear")} ${L("المجالات المفتوحة", "Open fields")}</button>` : ""}</div></div>
+    <div id="hz-list"></div>`;
+  const draw = () => {
+    const list = hSorted(c, hFiltered(c)), box = $("#hz-list", v);
+    if (!box) return;
+    if (!list.length) { box.innerHTML = `<div class="card"><p class="empty">${tot ? L("مفيش متقدمين بالفلتر ده. جرّب «الكل» أو امسح البحث.", "No applicants match. Try “All” or clear the search.") : L("لسه مفيش طلبات. شارك لينك صفحة التقديم في بوست التوظيف، وأول ما حد يقدّم هيظهر هنا.", "No applications yet. Share the careers page link in the hiring post; new applicants show up here.")}</p></div>`; return; }
+    box.innerHTML = `<p class="small muted" style="margin:0 0 8px">${L(`بيعرض ${list.length} من ${tot} متقدم · اضغط على أي صف عشان تفتح صفحة المتقدم وتقيّمه`, `Showing ${list.length} of ${tot} · click a row to open the applicant and score them`)}</p>
+      <div class="tbl-wrap"><table class="hz-tbl"><thead><tr><th>${L("المتقدم", "Applicant")}</th><th>${L("الوظيفة", "Job")}</th><th>${L("قدّم", "Applied")}</th><th>${L("اتسجل منين", "How they applied")}</th><th>${L("المهارات", "Skills")}</th><th>${L("الخبرة", "Experience")}</th><th>${L("المرحلة", "Stage")}</th><th>${L("التقييم /100", "Score /100")}</th></tr></thead><tbody>
+      ${list.map(a => { const src = hSourceLine(c, a); return `<tr class="click" data-id="${esc(a.id)}">
+        <td data-l=""><a class="t" href="#/hiring/${esc(a.id)}" dir="auto">${esc(a.full_name)}</a><span class="s" dir="ltr">${esc(a.email || a.phone || "")}</span></td>
+        <td data-l="${L("الوظيفة", "Job")}"><span dir="auto">${esc(hRole(c, a))}</span><span class="s mono">${esc(a.ref || "")}</span></td>
+        <td data-l="${L("قدّم", "Applied")}">${fdt(a.created_at, false)}<span class="s">${ago(a.created_at)}</span></td>
+        <td data-l="${L("اتسجل منين", "How they applied")}">${L("فورم الموقع", "Website form")}<span class="s">${hCvKind(a)}</span>${src.length ? `<span class="s" dir="auto">${esc(src.join(" · "))}</span>` : ""}</td>
+        <td data-l="${L("المهارات", "Skills")}" style="max-width:260px">${hSkillChips(a.skills, 4)}</td>
+        <td data-l="${L("الخبرة", "Experience")}"><b>${esc(FL(HYRS, a.years) || "—")}</b><span class="s">${esc(FL(HWT, a.work_type) || "")}${a.hours_week ? ` · ${a.hours_week} ${L("س/أسبوع", "h/wk")}` : ""}</span></td>
+        <td data-l="${L("المرحلة", "Stage")}">${chip2(HST, a.status)}${a.rating ? `<span class="s">${stars(a.rating)}</span>` : ""}</td>
+        <td data-l="${L("التقييم", "Score")}">${hScoreCell(c, a)}</td></tr>`; }).join("")}</tbody></table></div>`;
+    $$("tr[data-id]", box).forEach(r => r.addEventListener("click", e => { if (!e.target.closest("a")) location.hash = `#/hiring/${r.dataset.id}`; }));
+  };
+  draw();
+  const refilter = () => { if (hState.server) { hState.cache = null; viewHiring(); } else viewHiring(); };
+  $$("[data-hs]", v).forEach(b => b.addEventListener("click", () => { hState.st = b.dataset.hs; refilter(); }));
+  $$("[data-hr]", v).forEach(b => b.addEventListener("click", () => { hState.role = hState.role === b.dataset.hr ? "" : b.dataset.hr; refilter(); }));
+  $("#h-role", v).addEventListener("change", e => { hState.role = e.target.value; refilter(); });
+  $("#h-st", v).addEventListener("change", e => { hState.st = e.target.value; refilter(); });
+  $("#h-rec", v).addEventListener("change", e => { hState.rec = e.target.value; draw(); });
+  $("#h-sort", v).addEventListener("change", e => { hState.sort = e.target.value; draw(); });
+  let tm; $("#h-q", v).addEventListener("input", e => { clearTimeout(tm); tm = setTimeout(() => { hState.q = e.target.value; if (hState.server) { hState.cache = null; viewHiring().then(() => { const q = $("#h-q"); q?.focus(); q?.setSelectionRange(q.value.length, q.value.length); }); } else draw(); }, hState.server ? 350 : 120); });
+  $("#hz-hint-x", v)?.addEventListener("click", () => { store.set("hudera-hz-hint", "off"); $("#hz-hint")?.remove(); });
   $("#h-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(careersUrl()); toast(L("اتنسخ اللينك", "Link copied")); } catch (e) { toast(careersUrl()); } });
   $("#h-set")?.addEventListener("click", () => hiringSettings(d.settings));
-  $("#h-xl").addEventListener("click", () => HX.xlsx([{ name: L("طلبات التوظيف", "Applications"), head: [L("الرقم", "Ref"), L("الاسم", "Name"), t("E-mail"), t("Phone"), L("المكان", "Location"), L("المجال", "Field"), L("الخبرة", "Experience"), L("النوع", "Type"), L("ساعات/أسبوع", "Hours/wk"), L("السعر المتوقع", "Expected rate"), L("المهارات", "Skills"), L("الأعمال", "Portfolio"), L("لينك الـ CV", "CV link"), L("ملف CV", "CV file"), t("Status"), L("التقييم", "Rating"), L("ملاحظة الفريق", "Team note"), L("التاريخ", "Date")],
-    rows: d.items.map(a => [a.ref, a.full_name, a.email || "", a.phone || "", a.location || "", a.role === "other" && a.role_other ? a.role_other : rl(a.role), FL(HYRS, a.years), FL(HWT, a.work_type), a.hours_week || "", a.expected_rate || "", a.skills || "", a.portfolio_url || "", a.cv_url || "", a.cv_name || (a.cv_path ? "✓" : ""), FL(HST, a.status), a.rating || "", a.staff_note || "", fdt(a.created_at, false)]) }], `HUDERA-applications-${today()}.xlsx`, AR_()).catch(e => toast(e.message)));
+  $("#h-xl").addEventListener("click", () => HX.xlsx([{ name: L("طلبات التوظيف", "Applications"), head: [L("الرقم", "Ref"), L("الاسم", "Name"), t("E-mail"), t("Phone"), L("المكان", "Location"), L("الوظيفة", "Job"), L("الخبرة", "Experience"), L("النوع", "Type"), L("ساعات/أسبوع", "Hours/wk"), L("السعر المتوقع", "Expected rate"), L("المهارات", "Skills"), L("الأعمال", "Portfolio"), L("لينك الـ CV", "CV link"), L("ملف CV", "CV file"), L("مصدر الزيارة", "Visit source"), L("المرحلة", "Stage"), L("درجة الـ CV", "CV score"), L("درجة الاختبار", "Test score"), L("درجة المقابلة", "Interview score"), L("المجموع /100", "Total /100"), L("التوصية", "Recommendation"), L("النجوم", "Stars"), L("ملاحظة الفريق", "Team note"), L("التاريخ", "Date")],
+    rows: hSorted(c, hFiltered(c)).map(a => { const e = hEval(c, a); return [a.ref, a.full_name, a.email || "", a.phone || "", a.location || "", hRole(c, a), FL(HYRS, a.years), FL(HWT, a.work_type), a.hours_week || "", a.expected_rate || "", a.skills || "", a.portfolio_url || "", a.cv_url || "", a.cv_name || (a.cv_path ? "✓" : ""), hSourceLine(c, a).join(" · "), FL(HST, a.status), e.cv ?? "", e.test ?? "", e.interview ?? "", e.total ?? "", e.rec ? FL(HREC, e.rec) : "", a.rating || "", a.staff_note || "", fdt(a.created_at, false)]; }) }], `HUDERA-applications-${today()}.xlsx`, AR_()).catch(e => toast(e.message)));
 }
-function hiringDialog(a, canEdit, rl) {
-  const wa = a.phone ? `https://wa.me/${String(a.phone).replace(/\D/g, "")}?text=${encodeURIComponent(L(`أهلاً ${a.full_name.split(" ")[0]}، معاك فريق HUDERA AI بخصوص طلبك (${a.ref}) على وظيفة ${a.role === "other" && a.role_other ? a.role_other : rl(a.role)}.`, `Hi ${a.full_name.split(" ")[0]}, this is the HUDERA AI team about your application (${a.ref}) for ${a.role === "other" && a.role_other ? a.role_other : rl(a.role)}.`))}` : "";
-  const row = (k, val) => val ? `<div class="h-kv"><span>${k}</span><div dir="auto">${val}</div></div>` : "";
-  const dlg = dlgOpen(`<form method="dialog" id="h-f"><div class="filters" style="justify-content:space-between;align-items:flex-start"><div><h2 style="margin:0" dir="auto">${esc(a.full_name)}</h2>
-      <p class="small muted" style="margin:2px 0 0">${esc(a.role === "other" && a.role_other ? a.role_other : rl(a.role))} · ${FL(HYRS, a.years)} · <span class="mono">${esc(a.ref)}</span></p></div>${chip2(HST, a.status)}</div>
-    <div class="filters" style="margin:12px 0">${a.cv_path || a.cv_url ? `<button class="btn sm primary" type="button" id="h-cv">${a.cv_path ? "📄 " + L("افتح الـ CV", "Open CV") : "🔗 " + L("لينك الـ CV", "CV link")}</button>` : ""}
-      ${wa ? `<a class="btn sm" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ""}${a.email ? `<a class="btn sm" href="https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(a.email)}&su=${encodeURIComponent("HUDERA AI · " + a.ref)}" target="_blank" rel="noopener">Gmail</a>` : ""}
-      ${a.portfolio_url ? `<a class="btn sm" href="${esc(a.portfolio_url)}" target="_blank" rel="noopener">${L("أعماله", "Portfolio")} ↗</a>` : ""}</div>
-    <div class="h-grid">${row(t("E-mail"), `<span dir="ltr">${esc(a.email || "")}</span>`)}${row(t("Phone"), `<span dir="ltr">${esc(a.phone || "")}</span>`)}${row(L("المكان", "Location"), esc(a.location || ""))}
-      ${row(L("نوع الشغل", "Work type"), FL(HWT, a.work_type) + (a.hours_week ? ` · ${a.hours_week} ${L("ساعة في الأسبوع", "h / week")}` : ""))}${row(L("السعر المتوقع", "Expected rate"), esc(a.expected_rate || ""))}
-      ${row(L("المهارات", "Skills"), esc(a.skills || ""))}${row(L("الملف", "File"), a.cv_name ? `<span dir="ltr">${esc(a.cv_name)}</span>` : "")}${row(L("قدّم", "Applied"), fdt(a.created_at) + (a.updated_at && a.updated_at !== a.created_at ? ` · ${L("آخر تحديث", "updated")} ${ago(a.updated_at)}` : ""))}</div>
-    ${a.note ? `<div class="h-note" dir="auto">💬 ${esc(a.note)}</div>` : ""}
-    ${canEdit ? `<div class="grid g2" style="margin-top:12px"><label class="fld"><span>${t("Status")}</span><select class="input" name="st">${Object.keys(HST).map(k => `<option value="${k}" ${a.status === k ? "selected" : ""}>${FL(HST, k)}</option>`).join("")}</select></label>
-      <div class="fld"><span>${L("تقييمك", "Your rating")}</span><div class="h-rate" role="radiogroup">${[1, 2, 3, 4, 5].map(n => `<label><input type="radio" name="rt" value="${n}" ${a.rating === n ? "checked" : ""}><span>★</span></label>`).join("")}<button class="btn sm ghost" type="button" id="h-clr">${L("مسح", "Clear")}</button></div></div></div>
-      <label class="fld"><span>🔒 ${L("ملاحظة الفريق (المتقدم مش بيشوفها)", "Team note (not shown to the applicant)")}</span><textarea class="input" name="nt" dir="auto" style="min-height:80px">${esc(a.staff_note || "")}</textarea></label>
-      ${a.updated_by_name ? `<p class="small faint" style="margin:0">${L("آخر تعديل", "Last change")}: ${esc(a.updated_by_name)} · ${ago(a.updated_at)}</p>` : ""}${dlgBtns(t("Save"))}`
-      : `${a.staff_note ? `<p class="small muted">🔒 ${esc(a.staff_note)}</p>` : ""}<div class="filters" style="justify-content:flex-end"><button class="btn" value="cancel" type="submit">${L("قفل", "Close")}</button></div>`}</form>`);
-  $("#h-cv", dlg)?.addEventListener("click", () => openCv(a));
-  let clr = false; $("#h-clr", dlg)?.addEventListener("click", () => { $$("input[name=rt]", dlg).forEach(x => { x.checked = false; }); clr = true; });
-  $$("input[name=rt]", dlg).forEach(x => x.addEventListener("change", () => { clr = false; }));
-  dlg.addEventListener("close", async () => {
-    if (dlg.returnValue === "ok" && canEdit) {
-      const rt = $("input[name=rt]:checked", dlg)?.value;
-      try { await api("admin_hiring_update", { p_id: a.id, p_status: $("[name=st]", dlg).value, p_rating: rt ? +rt : null, p_note: $("[name=nt]", dlg).value, p_clear_rating: clr && !rt }); toast(L("تم الحفظ", "Saved")); viewHiring(); } catch (e) { toast(ferr(e)); }
-    }
-    dlg.remove();
+
+/* keeps whatever the patch doesn't change (admin_hiring_update always writes status, rating and note together) */
+async function hUpdate(a, patch) {
+  const r = patch.rating;
+  await api("admin_hiring_update", { p_id: a.id, p_status: patch.status ?? a.status, p_rating: r > 0 ? r : r === undefined ? a.rating || null : null, p_note: patch.note ?? (a.staff_note || ""), p_clear_rating: r === 0 });
+  hState.cache = null;
+}
+function hFormValue(c, a, k) {
+  const val = a[k];
+  if (val == null || val === "" || (Array.isArray(val) && !val.length)) return `<span class="faint">— ${L("ساب الخانة فاضية", "left empty")}</span>`;
+  if (k === "role") return esc(c.rl(val));
+  if (k === "years") return esc(FL(HYRS, val));
+  if (k === "work_type") return esc(FL(HWT, val));
+  if (k === "lang") return val === "ar" ? "عربي" : val === "en" ? "English" : esc(val);
+  if (k === "hours_week") return `${esc(val)} ${L("ساعة", "h")}`;
+  if (k === "cv_path") return `<span class="mono small" dir="ltr">${esc(val)}</span> <span class="faint small">(${L("الملف نفسه من قسم الـ CV", "open it from the CV section")})</span>`;
+  if (typeof val === "boolean") return val ? `✓ ${L("أيوه", "Yes")}` : `✗ ${L("لأ", "No")}`;
+  if (typeof val === "object") return `<pre class="msg mono small" style="margin:0">${esc(JSON.stringify(val, null, 2))}</pre>`;
+  const s = String(val);
+  if (/^https?:\/\/\S+$/i.test(s)) return `<a href="${esc(s)}" target="_blank" rel="noopener noreferrer" dir="ltr">${esc(s)}</a>`;
+  if (k === "email" || k === "phone" || k === "ref") return `<span dir="ltr">${esc(s)}</span>`;
+  return `<span dir="auto" style="white-space:pre-wrap">${esc(s)}</span>`;
+}
+
+async function viewApplicant(id) {
+  const v = page(L("التوظيف", "Hiring"), `<a class="btn" href="#/hiring">${ic("back")}${L("كل المتقدمين", "All applicants")}</a>`);
+  v.innerHTML = `<div class="skel"></div>`;
+  let c, a;
+  try { c = await hLoad(); a = (c.d.items || []).find(x => String(x.id) === id); if (!a) { c = await hLoad(true); a = (c.d.items || []).find(x => String(x.id) === id); } } catch (e) { v.innerHTML = failBox(e); return; }
+  if (!a) { v.innerHTML = `<div class="card"><p class="empty">${L("مش لاقي الطلب ده. ممكن يكون اتمسح أو الفلتر مخبّيه.", "Application not found. It may have been removed or hidden by a filter.")} <a href="#/hiring">${L("ارجع للقائمة", "Back to the list")}</a></p></div>`; return; }
+  $("#page-h").textContent = a.full_name; document.title = `${a.full_name} · HUDERA AI Admin`;
+  const canEdit = !!(c.d.can_edit ?? c.x?.can_edit), evalOk = !!c.x, ev = hEval(c, a), ex = hExam(c, a), exPct = hExamPct(ex), xi = c.x?.items?.[a.id] || {};
+  const list = hSorted(c, hFiltered(c)), idx = list.findIndex(x => x.id === a.id), prev = idx > 0 ? list[idx - 1] : null, next = idx >= 0 && idx < list.length - 1 ? list[idx + 1] : null;
+  const role = hRole(c, a), first = String(a.full_name || "").split(" ")[0];
+  const wa = a.phone ? `https://wa.me/${String(a.phone).replace(/\D/g, "")}?text=${encodeURIComponent(L(`أهلاً ${first}، معاك فريق HUDERA AI بخصوص طلبك (${a.ref}) على وظيفة ${role}.`, `Hi ${first}, this is the HUDERA AI team about your application (${a.ref}) for ${role}.`))}` : "";
+  const others = (c.d.items || []).filter(x => x.id !== a.id && a.email && String(x.email || "").toLowerCase() === String(a.email).toLowerCase());
+  const order = ["new", "reviewing", "shortlisted", "interview"], at = order.indexOf(a.status);
+  const nextStep = { new: L("افتح الـ CV وحط «درجة الـ CV» تحت، وبعدها انقله لـ «بنراجعه».", "Open the CV, enter the CV score below, then move them to “Reviewing”."),
+    reviewing: L("لو مناسب: انقله «مرشّح» وابعتله لينك الاختبار (تحت في التقييم). لو لأ: «مش مناسب».", "If promising: move to “Shortlisted” and send the test link (in Evaluation). If not: “Not a fit”."),
+    shortlisted: ex ? L("الاختبار وصل. راجع إجاباته وحط درجة الاختبار، وبعدين حدد مقابلة.", "The test is in. Review it, enter the test score, then schedule an interview.") : L("مستنيين يحل الاختبار. ابعتله لينك الاختبار على واتساب.", "Waiting for the test. Send the test link on WhatsApp."),
+    interview: L("بعد المقابلة حط «درجة المقابلة» واختار التوصية، وبعدها «اتقبل» أو «مش مناسب».", "After the interview, enter its score and a recommendation, then “Hired” or “Not a fit”."),
+    hired: L("اتقبل. ابعتله الخطوات الجاية (العقد وطريقة الدفع والبداية).", "Hired. Send the next steps (contract, payment method, start date)."),
+    rejected: L("مش مناسب حالياً. ممكن تبعتله رسالة شكر مهذبة.", "Not a fit for now. Consider a polite thank-you message.") }[a.status] || "";
+  const sec = (key, title, sub, body, cls = "") => `<section class="card ${cls}" id="hz-${key}"><h2>${title}</h2>${sub ? `<p class="sub">${sub}</p>` : ""}${body}</section>`;
+  const kv = rows => `<dl class="kv">${rows.filter(Boolean).map(([k, val]) => `<dt>${k}</dt><dd>${val}</dd>`).join("")}</dl>`;
+  const visit = xi.visit, ft = xi.first_touch, acct = xi.account;
+  const known = HFORM.map(f => f[0]), formKeys = [...known.filter(k => k in a || ["full_name", "phone", "role", "years", "skills", "note"].includes(k)), ...Object.keys(a).filter(k => !known.includes(k) && !HFORM_SKIP.test(k)).sort()].filter(k => !HFORM_SKIP.test(k));
+  const flab = k => { const f = HFORM.find(x => x[0] === k); return f ? L(f[1], f[2]) : `<span class="mono">${esc(k)}</span>`; };
+  const skills = hSkills(a.skills);
+  const evRow = k => { const val = k === "test" && ev.testAuto ? null : ev[k];
+    return `<div class="hz-ev"><div><b>${FL(HWL, k)}</b> <span class="chip nodot">${HW[k]}%</span><span class="s small muted">${{ cv: L("الخبرة ومستوى الـ CV والأعمال اللي بعتها", "Experience, CV quality and portfolio"), test: L("درجة الاختبار الأونلاين بعد مراجعة الإجابات", "Online test score after reviewing the answers"), interview: L("انطباعك من المقابلة (التواصل، الفهم، الالتزام)", "Your interview impression (communication, understanding, commitment)") }[k]}</span></div>
+      <label class="hz-in"><input class="input num" type="number" min="0" max="100" step="1" inputmode="numeric" name="ev-${k}" value="${val ?? ""}" placeholder="${k === "test" && ev.testAuto ? ev.test : "—"}" ${canEdit && evalOk ? "" : "disabled"} aria-label="${FL(HWL, k)} /100"><span class="faint">/100</span></label>
+      <div class="c small muted" data-contrib="${k}"></div></div>`; };
+  const tl = [];
+  tl.push([a.created_at, "brief", L("قدّم على الوظيفة من فورم الموقع", "Applied through the website form"), `${esc(role)} · <span class="mono">${esc(a.ref || "")}</span>`]);
+  if (acct?.created_at) tl.push([acct.created_at, "user", L("عمل حساب على الموقع بجوجل", "Created a site account with Google"), ""]);
+  if (ex?.started_at) tl.push([ex.started_at, "cap", L("بدأ الاختبار الأونلاين", "Started the online test"), ""]);
+  if (ex?.submitted_at) tl.push([ex.submitted_at, "cap", ex.status === "terminated" ? L("الاختبار اتقفل بسبب مخالفات", "Test closed for violations") : L("سلّم الاختبار", "Submitted the test"), ex.mcq_max ? `${L("اختيار من متعدد", "Multiple choice")}: ${ex.mcq_score}/${ex.mcq_max}` : ""]);
+  (ev.log || []).forEach(l => tl.push([l.t, "check", `${L("اتقيّم", "Scored")}${l.by_name ? ` · ${esc(l.by_name)}` : ""}`, `CV ${l.cv ?? "—"} · ${L("اختبار", "test")} ${l.test ?? "—"} · ${L("مقابلة", "interview")} ${l.interview ?? "—"}${l.total != null ? ` · <b>${l.total}/100</b>` : ""}${l.rec ? ` · ${esc(FL(HREC, l.rec))}` : ""}`]));
+  if (a.updated_at && a.updated_at !== a.created_at) tl.push([a.updated_at, "flag", L("آخر تعديل على الطلب", "Last change to the application"), a.updated_by_name ? `${L("من", "by")} ${esc(a.updated_by_name)} · ${L("المرحلة الحالية", "current stage")}: ${esc(FL(HST, a.status))}` : L("ممكن يكون هو قدّم تاني على نفس المجال", "may be the applicant re-applying for the same field")]);
+  tl.sort((x, y) => new Date(y[0]) - new Date(x[0]));
+
+  v.innerHTML = `
+    <section class="card"><div class="prof"><span class="av">${esc((a.full_name || "?").trim()[0] || "?")}</span>
+      <div style="min-width:0"><h2 dir="auto">${esc(a.full_name)}</h2><p class="small muted" style="margin:2px 0 6px">${esc(role)} · ${esc(FL(HYRS, a.years) || "—")} · <span class="mono">${esc(a.ref || "")}</span> · ${L("قدّم", "applied")} ${ago(a.created_at)}</p>
+        <div class="filters">${chip2(HST, a.status)}${ev.rec ? chip2(HREC, ev.rec) : ""}${ev.total != null ? `<span class="chip nodot c-blue">${L("التقييم", "Score")} ${ev.total}/100</span>` : ""}${a.rating ? stars(a.rating) : ""}</div></div>
+      <span style="flex:1"></span>
+      <div class="filters">${prev ? `<a class="btn sm" href="#/hiring/${esc(prev.id)}" title="${esc(prev.full_name)}">${L("→ السابق", "← Previous")}</a>` : ""}${idx >= 0 ? `<span class="small faint">${idx + 1} / ${list.length}</span>` : ""}${next ? `<a class="btn sm" href="#/hiring/${esc(next.id)}" title="${esc(next.full_name)}">${L("التالي ←", "Next →")}</a>` : ""}</div></div>
+      <div class="filters" style="margin-top:12px">${a.cv_path || a.cv_url ? `<button class="btn sm primary" type="button" data-cv>${a.cv_path ? "📄 " + L("افتح الـ CV", "Open CV") : "🔗 " + L("لينك الـ CV", "CV link")}</button>` : ""}
+        ${wa ? `<a class="btn sm" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ""}${a.email ? `<a class="btn sm" href="https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(a.email)}&su=${encodeURIComponent("HUDERA AI · " + (a.ref || ""))}" target="_blank" rel="noopener">Gmail</a>` : ""}
+        ${a.portfolio_url ? `<a class="btn sm" href="${esc(a.portfolio_url)}" target="_blank" rel="noopener noreferrer">${L("أعماله", "Portfolio")} ↗</a>` : ""}
+        ${ex ? `<a class="btn sm" href="${examReviewUrl()}" target="_blank" rel="noopener">${L("إجابات الاختبار والتسجيل", "Test answers & recording")} ↗</a>` : ""}
+        ${xi.user_id && can("users.view") ? `<a class="btn sm" href="#/users/${esc(xi.user_id)}">${ic("user")}${L("حسابه على الموقع", "Site account")}</a>` : ""}</div>
+      <ol class="stepper" aria-label="${L("المرحلة", "Stage")}">${Object.keys(HST).map(k => { const i = order.indexOf(k), cur = k === a.status;
+        return `<li class="${cur ? `cur${k === "hired" ? " won" : k === "rejected" ? " lost" : ""}` : (i >= 0 && (at > i || a.status === "hired")) ? "done" : ""}${i < 0 ? " end" : ""}"><button type="button" data-st="${k}" ${canEdit && !cur ? "" : "disabled"} aria-current="${cur ? "step" : "false"}">${esc(FL(HST, k))}</button></li>`; }).join("")}</ol>
+      ${nextStep ? `<div class="ai-next" style="margin:12px 0 0"><small>${L("الخطوة الجاية", "Next step")}</small><p>${nextStep}</p></div>` : ""}
+      <nav class="hz-nav" aria-label="${L("أقسام الصفحة", "Sections")}">${[["basic", L("البيانات الأساسية", "Basic details")], ["reg", L("اتسجل إزاي ومتى", "How & when")], ["form", L("كل اللي كتبه في الفورم", "Everything in the form")], ["skills", L("المهارات", "Skills")], ["cv", L("الـ CV", "CV")], ["eval", L("التقييم", "Evaluation")], ["notes", L("الملاحظات والسجل", "Notes & history")]].map(([k, l]) => `<button class="btn sm ghost" type="button" data-go="${k}">${l}</button>`).join("")}</nav></section>
+
+    <div class="grid g2">
+      ${sec("basic", L("البيانات الأساسية", "Basic details"), "", kv([[L("الاسم", "Name"), `<span dir="auto">${esc(a.full_name)}</span>`],
+        [t("E-mail"), a.email ? `<a href="mailto:${esc(a.email)}" dir="ltr">${esc(a.email)}</a>` : "—"], [L("الموبايل / واتساب", "Mobile / WhatsApp"), a.phone ? `<span dir="ltr">${esc(a.phone)}</span>${wa ? ` · <a href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ""}` : "—"],
+        [L("المكان", "Location"), a.location ? `<span dir="auto">${esc(a.location)}</span>` : "—"], [L("الوظيفة", "Job"), `<span dir="auto">${esc(role)}</span>${a.role === "other" ? ` <span class="chip nodot">${L("مجال تاني", "other")}</span>` : ""}`],
+        [L("سنين الخبرة", "Experience"), esc(FL(HYRS, a.years) || "—")], [L("نوع الشغل", "Work type"), `${esc(FL(HWT, a.work_type) || "—")}${a.hours_week ? ` · ${a.hours_week} ${L("ساعة في الأسبوع", "h / week")}` : ""}`],
+        [L("السعر المتوقع", "Expected rate"), a.expected_rate ? `<span dir="auto">${esc(a.expected_rate)}</span>` : "—"], [L("رقم الطلب", "Reference"), `<span class="mono">${esc(a.ref || "—")}</span>`]]))}
+      ${sec("reg", L("اتسجل إزاي ومتى", "How & when they registered"), L("كل المتقدمين بيقدّموا من فورم صفحة التوظيف بعد ما يسجلوا دخول بجوجل. مصدر الزيارة بيظهر لو المتقدم وافق على الإحصاءات.", "Everyone applies through the careers page form after signing in with Google. The visit source shows when the applicant allowed analytics."),
+        kv([[L("القناة", "Channel"), `${L("فورم صفحة التوظيف", "Careers page form")} · <a href="${careersUrl()}" target="_blank" rel="noopener" dir="ltr">hudera.ai/careers</a>`],
+          [L("طريقة الدخول", "Sign-in"), `${L("حساب جوجل", "Google account")}${a.email ? ` · <span dir="ltr">${esc(a.email)}</span>` : ""}`],
+          [L("قدّم في", "Applied on"), `${fdt(a.created_at)} <span class="faint">(${ago(a.created_at)})</span>`],
+          a.updated_at && a.updated_at !== a.created_at ? [L("آخر تحديث", "Last updated"), `${fdt(a.updated_at)}${a.updated_by_name ? ` · ${L("من", "by")} ${esc(a.updated_by_name)}` : ` <span class="faint small">(${L("لو قدّم تاني على نفس المجال الطلب بيتحدّث", "re-applying for the same field updates it")})</span>`}`] : null,
+          [L("لغة الفورم", "Form language"), a.lang ? (a.lang === "ar" ? "عربي" : "English") : "—"],
+          [L("الـ CV", "CV"), hCvKind(a)],
+          [L("جه منين للموقع", "Where they came from"), !evalOk ? `— <span class="faint small">(${L("محتاج الـ migration", "needs the migration")})</span>` : visit ? `${esc(FL(HSRC, visit.source) || visit.source || "—")}${visit.utm_source || visit.utm_campaign ? ` · <span dir="ltr">${esc([visit.utm_source, visit.utm_medium, visit.utm_campaign].filter(Boolean).join(" / "))}</span>` : ""}${visit.referrer ? ` · <span dir="ltr">${esc(visit.referrer)}</span>` : ""}<span class="s small muted">${visit.landing ? `${L("أول صفحة", "landing")}: <span dir="ltr">${esc(visit.landing)}</span> · ` : ""}${esc([visit.device, visit.browser, visit.os].filter(Boolean).join(" · "))} · ${fdt(visit.started_at)}</span>` : `<span class="faint">${L("مفيش بيانات زيارة (غالباً موافقش على الإحصاءات)", "No visit data (probably declined analytics)")}</span>`],
+          ft ? [L("أول زيارة للموقع", "First visit"), `${fdt(ft.first_seen_at, false)}${ft.utm_source || ft.referrer ? ` · <span dir="ltr">${esc(ft.utm_source || ft.referrer)}</span>` : ""}`] : null,
+          acct ? [L("حسابه على الموقع", "Site account"), `${L("اتعمل", "created")} ${fdt(acct.created_at, false)} · ${nf(acct.login_count)} ${L("مرة دخول", "sign-ins")} · ${L("آخر ظهور", "last seen")} ${ago(acct.last_seen_at)}`] : null,
+          others.length ? [L("قدّم كمان على", "Also applied for"), others.map(o => `<a href="#/hiring/${esc(o.id)}">${esc(hRole(c, o))}</a> ${chip2(HST, o.status)}`).join("<br>")] : null]))}
+    </div>
+
+    ${sec("form", L("كل اللي كتبه في الفورم", "Everything they filled in"), L("كل خانة في فورم التقديم بالترتيب، حتى اللي سابها فاضية، عشان مفيش حاجة تستخبى.", "Every field of the application form in order, including empty ones, so nothing is hidden."),
+      kv(formKeys.map(k => [flab(k), hFormValue(c, a, k)])))}
+
+    <div class="grid g2">
+      ${sec("skills", L("المهارات", "Skills"), skills.length ? L(`${skills.length} مهارة/أداة من اللي كتبها`, `${skills.length} skills/tools from what they wrote`) : "", `${hSkillChips(a.skills)}
+        <dl class="kv" style="margin-top:12px"><dt>${L("سنين الخبرة", "Experience")}</dt><dd>${esc(FL(HYRS, a.years) || "—")}</dd>${a.portfolio_url ? `<dt>${L("أعماله", "Portfolio")}</dt><dd><a href="${esc(a.portfolio_url)}" target="_blank" rel="noopener noreferrer" dir="ltr">${esc(a.portfolio_url)}</a></dd>` : ""}
+        ${ex ? `<dt>${L("الاختبار", "Test")}</dt><dd>${chip2(HEXAM_ST, ex.status)}${exPct != null ? ` <b>${exPct}/100</b>` : ""}</dd>` : ""}</dl>`)}
+      ${sec("cv", L("الـ CV", "CV"), "", a.cv_path ? `<p style="margin:0 0 10px">📄 <span dir="ltr">${esc(a.cv_name || L("ملف مرفوع", "Uploaded file"))}</span></p><button class="btn primary" type="button" data-cv>${L("افتح الـ CV", "Open CV")} ↗</button><p class="small faint" style="margin:8px 0 0">${L("الملف خاص. اللينك بيفتح لمدة 10 دقايق بس.", "The file is private; the link works for 10 minutes.")}</p>`
+        : a.cv_url ? `<p style="margin:0 0 10px">🔗 <a href="${esc(a.cv_url)}" target="_blank" rel="noopener noreferrer" dir="ltr" style="overflow-wrap:anywhere">${esc(a.cv_url)}</a></p><button class="btn primary" type="button" data-cv>${L("افتح لينك الـ CV", "Open CV link")} ↗</button><p class="small faint" style="margin:8px 0 0">${L("لو اللينك مش بيفتح، اطلب منه يخليه «أي حد معاه اللينك».", "If it doesn't open, ask them to set it to “anyone with the link”.")}</p>`
+        : `<p class="muted" style="margin:0">${L("مفيش CV في الطلب ده.", "No CV in this application.")}</p>`)}
+    </div>
+
+    ${sec("eval", L("التقييم", "Evaluation"), L("التقييم = الـ CV ‎20% + الاختبار 50% + المقابلة 30%. كل درجة من 100، والمجموع بيتحسب لوحده.", "Score = CV 20% + test 50% + interview 30%. Each out of 100; the total is calculated for you."),
+      `${!evalOk ? `<div class="warn">${c.xMissing ? L("خانات التقييم لسه مش موجودة في قاعدة البيانات. شغّل migration ‎20261113000100_hiring_eval.sql وبعدها هتقدر تحفظ الدرجات. لحد كده الدرجات «—».", "The score columns aren't in the database yet. Run migration 20261113000100_hiring_eval.sql to save scores; until then they show “—”.") : L("مقدرتش أجيب التقييم دلوقتي.", "Couldn't load the evaluation right now.")}</div>` : ""}
+      <form id="hz-ev-f">${evRow("cv")}${evRow("test")}
+        <div class="hz-exam small">${ex ? `<b>${L("الاختبار الأونلاين", "Online test")}:</b> ${chip2(HEXAM_ST, ex.status)} ${ex.mcq_max ? `· ${L("اختيار من متعدد", "multiple choice")} <b>${ex.mcq_score}/${ex.mcq_max}</b> ` : ""}· ${L("تقييم الفريق للإجابات", "team review")} <b>${ex.review_score ?? "—"}</b> · ${L("مخالفات", "violations")} <b class="${ex.violations >= 3 ? "late" : ""}">${ex.violations ?? 0}</b>
+            ${exPct != null && canEdit && evalOk ? ` <button class="btn sm" type="button" id="hz-use-exam">${L(`استخدم درجة الاختبار (${exPct})`, `Use the test score (${exPct})`)}</button>` : ""} <a href="${examReviewUrl()}" target="_blank" rel="noopener">${L("افتح الإجابات والتسجيل", "Open answers & recording")} ↗</a>
+            ${ev.testAuto ? `<span class="s muted">${L("المجموع بيستخدم درجة الاختبار دي لحد ما تكتب درجة بنفسك.", "The total uses this test score until you enter one yourself.")}</span>` : ""}`
+          : `<b>${L("الاختبار الأونلاين", "Online test")}:</b> ${L("لسه مدخلش الاختبار.", "Hasn't taken it yet.")} ${HEXAM_ROLES.includes(a.role) ? `<button class="btn sm" type="button" id="hz-exam-link">${L("انسخ لينك الاختبار", "Copy the test link")}</button>${wa ? ` <a class="btn sm" href="https://wa.me/${String(a.phone).replace(/\D/g, "")}?text=${encodeURIComponent(L(`أهلاً ${first}، الخطوة الجاية في طلبك (${a.ref}) اختبار أونلاين 40 دقيقة: ${examUrl(a.role)} . ادخل بنفس حساب جوجل اللي قدّمت بيه.`, `Hi ${first}, the next step for your application (${a.ref}) is a 40-minute online test: ${examUrl(a.role)} . Sign in with the same Google account you applied with.`))}" target="_blank" rel="noopener">${L("ابعته واتساب", "Send on WhatsApp")}</a>` : ""}` : `<span class="faint">${L("مفيش اختبار أونلاين للمجال ده؛ حط الدرجة يدوي.", "No online test for this field; enter the score manually.")}</span>`}`}</div>
+        ${evRow("interview")}
+        <div class="hz-total"><div><small class="muted">${L("المجموع", "Total")}</small><div><span class="big num" id="hz-tot">—</span><span class="faint"> /100</span></div><span class="small muted" id="hz-miss"></span></div>
+          <div style="flex:1;min-width:160px"><div class="meter" id="hz-meter"><i style="width:0"></i></div></div></div>
+        <div class="grid g2" style="margin-top:12px">
+          <label class="fld"><span>${L("التوصية", "Recommendation")}</span><select class="input" name="ev-rec" ${canEdit && evalOk ? "" : "disabled"}><option value="">${L("— لسه —", "— not yet —")}</option>${Object.keys(HREC).map(k => `<option value="${k}" ${ev.rec === k ? "selected" : ""}>${FL(HREC, k)}</option>`).join("")}</select><span class="small" id="hz-sug"></span></label>
+          <div class="fld"><span>${L("انطباع سريع (نجوم، اختياري)", "Quick impression (stars, optional)")}</span><div class="h-rate" role="radiogroup">${[1, 2, 3, 4, 5].map(n => `<label><input type="radio" name="rt" value="${n}" ${a.rating === n ? "checked" : ""} ${canEdit ? "" : "disabled"}><span>★</span></label>`).join("")}${canEdit ? `<button class="btn sm ghost" type="button" id="h-clr">${L("مسح", "Clear")}</button>` : ""}</div></div></div>
+        ${canEdit ? `<div class="filters" style="justify-content:space-between"><span class="small faint">${ev.at ? `${L("آخر تقييم", "Last scored")}: ${esc(ev.by || "")} · ${ago(ev.at)}` : ""}</span><button class="btn primary" type="submit">${L("حفظ التقييم", "Save evaluation")}</button></div>` : `<p class="small faint">${L("عندك صلاحية عرض بس.", "You have view-only access.")}</p>`}
+      </form>`)}
+
+    ${sec("notes", L("الملاحظات والسجل", "Notes & history"), "", `${a.note ? `<p class="small muted" style="margin:0 0 4px">💬 ${L("رسالته في الفورم", "Their message in the form")}</p><div class="msg" dir="auto">${esc(a.note)}</div>` : `<p class="small faint" style="margin:0">💬 ${L("مكتبش رسالة في الفورم.", "No message in the form.")}</p>`}
+      ${canEdit ? `<label class="fld" style="margin-top:12px"><span>🔒 ${L("ملاحظة الفريق (المتقدم مش بيشوفها)", "Team note (not shown to the applicant)")}</span><textarea class="input" id="hz-note" dir="auto" style="min-height:100px">${esc(a.staff_note || "")}</textarea></label>
+        <div class="filters" style="justify-content:flex-end"><button class="btn" type="button" id="hz-note-save">${L("حفظ الملاحظة", "Save note")}</button></div>` : a.staff_note ? `<div class="note" style="margin-top:12px">🔒 ${esc(a.staff_note)}</div>` : ""}
+      <h2 style="margin-top:14px">${L("السجل", "History")}</h2><ol class="tl">${tl.map(([when, icon, title, det]) => `<li><span class="dot">${ic(icon)}</span><div><b>${title}</b>${det ? `<span class="s">${det}</span>` : ""}</div><time>${fdt(when)}</time></li>`).join("")}</ol>`)}`;
+
+  /* behaviour */
+  $$("[data-cv]", v).forEach(b => b.addEventListener("click", () => openCv(a)));
+  $$("[data-go]", v).forEach(b => b.addEventListener("click", () => $(`#hz-${b.dataset.go}`)?.scrollIntoView({ behavior: "smooth", block: "start" })));
+  $$("[data-st]", v).forEach(b => b.addEventListener("click", async () => {
+    const st = b.dataset.st; if (st === "rejected" && !confirm(L("تنقله «مش مناسب»؟", "Mark as “Not a fit”?"))) return;
+    try { await hUpdate(a, { status: st }); toast(L(`اتنقل لـ «${FL(HST, st)}»`, `Moved to “${FL(HST, st)}”`)); viewApplicant(id); } catch (e) { toast(ferr(e)); } }));
+  $("#hz-note-save", v)?.addEventListener("click", async () => { try { await hUpdate(a, { note: $("#hz-note", v).value }); toast(L("اتحفظت الملاحظة", "Note saved")); viewApplicant(id); } catch (e) { toast(ferr(e)); } });
+  $("#hz-exam-link", v)?.addEventListener("click", async () => { const u = examUrl(a.role); try { await navigator.clipboard.writeText(u); toast(L("اتنسخ لينك الاختبار", "Test link copied")); } catch (e) { toast(u); } });
+  const f = $("#hz-ev-f", v), inp = k => $(`[name=ev-${k}]`, f);
+  const read = k => { const el = inp(k); if (el.value !== "") return Math.max(0, Math.min(100, +el.value)); return k === "test" && ev.testAuto ? ev.test : null; };
+  const recalc = () => {
+    const vals = { cv: read("cv"), test: read("test"), interview: read("interview") }, have = Object.keys(HW).filter(k => vals[k] != null);
+    const sum = Math.round(have.reduce((s, k) => s + (vals[k] * HW[k]) / 100, 0) * 10) / 10, tot = have.length === 3 ? sum : null;
+    Object.keys(HW).forEach(k => { $(`[data-contrib="${k}"]`, f).textContent = vals[k] != null ? L(`= ${Math.round(vals[k] * HW[k]) / 100} من ${HW[k]}`, `= ${Math.round(vals[k] * HW[k]) / 100} of ${HW[k]}`) : L(`من ${HW[k]}`, `of ${HW[k]}`); });
+    $("#hz-tot", f).textContent = !evalOk && !have.length ? "—" : tot ?? (have.length ? sum : "—");
+    $("#hz-miss", f).textContent = have.length === 3 ? "" : have.length ? `${L("جزئي · ناقص", "partial · missing")}: ${Object.keys(HW).filter(k => vals[k] == null).map(k => FL(HWL, k)).join("، ")}` : L("حط الدرجات عشان يتحسب المجموع", "Enter the scores to get the total");
+    const m = $("#hz-meter", f); m.className = `meter ${tot == null ? "" : tot >= 70 ? "" : tot >= 55 ? "amber" : "red"}`; $("i", m).style.width = `${tot ?? sum}%`;
+    const sg = hSuggest(tot); $("#hz-sug", f).innerHTML = sg ? `${L("اقتراح حسب المجموع", "Suggested from the total")}: ${chip2(HREC, sg)}${canEdit && evalOk && $("[name=ev-rec]", f).value !== sg ? ` <button class="btn sm ghost" type="button" id="hz-sug-use">${L("استخدمه", "Use it")}</button>` : ""}` : "";
+    $("#hz-sug-use", f)?.addEventListener("click", () => { $("[name=ev-rec]", f).value = sg; recalc(); });
+  };
+  f.addEventListener("input", recalc); f.addEventListener("change", recalc); recalc();
+  $("#hz-use-exam", v)?.addEventListener("click", () => { inp("test").value = exPct; recalc(); });
+  let clr = false; $("#h-clr", f)?.addEventListener("click", () => { $$("input[name=rt]", f).forEach(x => { x.checked = false; }); clr = true; });
+  $$("input[name=rt]", f).forEach(x => x.addEventListener("change", () => { clr = false; }));
+  f.addEventListener("submit", async e => {
+    e.preventDefault(); if (!canEdit) return;
+    const raw = k => (inp(k).value === "" ? null : +inp(k).value);
+    const vals = { cv: raw("cv"), test: raw("test"), interview: raw("interview") };
+    if (Object.values(vals).some(n => n != null && (!Number.isFinite(n) || n < 0 || n > 100))) { toast(L("كل درجة لازم تكون من 0 لـ 100", "Each score must be between 0 and 100")); return; }
+    Object.keys(vals).forEach(k => { if (vals[k] != null) vals[k] = Math.round(vals[k]); });
+    const rt = $("input[name=rt]:checked", f)?.value, starsChanged = rt ? +rt !== a.rating : clr && !!a.rating;
+    try {
+      if (evalOk) await api("admin_hiring_eval", { p_id: a.id, p_cv: vals.cv, p_test: vals.test, p_interview: vals.interview, p_recommendation: $("[name=ev-rec]", f).value || null });
+      if (starsChanged) await hUpdate(a, { rating: rt ? +rt : 0 });
+      hState.cache = null;
+      toast(evalOk ? L("اتحفظ التقييم ✓", "Evaluation saved ✓") : starsChanged ? L("اتحفظت النجوم. الدرجات محتاجة الـ migration.", "Stars saved. Scores need the migration.") : L("الدرجات محتاجة الـ migration الأول.", "Scores need the migration first."));
+      viewApplicant(id);
+    } catch (er) { toast(hMissing(er) ? L("الدرجات محتاجة الـ migration ‎20261113000100_hiring_eval.sql الأول.", "Scores need migration 20261113000100_hiring_eval.sql first.") : ferr(er)); }
   });
 }
 function hiringSettings(s) {
@@ -2587,7 +2879,7 @@ function route() {
   const [, sec, id] = location.hash.split("/");
   const first = NAV.find(n => can(n[3]))?.[0] || "overview";
   const go = { overview: viewOverview, users: id ? () => viewUser(id) : viewUsers, leads: id ? () => viewLead(id) : viewLeads, insights: id ? () => viewInsight(id) : viewInsights, pipeline: id ? () => viewDeal(id) : viewPipeline, chats: id ? () => viewChat(id) : viewChats, ai: viewAI, features: id ? () => viewFeature(decodeURIComponent(id)) : viewFeatures,
-    emails: viewEmails, settings: viewSettings, audit: viewAudit, finance: viewFinance, hiring: viewHiring, academy: viewAcademy }[sec];
+    emails: viewEmails, settings: viewSettings, audit: viewAudit, finance: viewFinance, hiring: id ? () => viewApplicant(id) : viewHiring, academy: viewAcademy }[sec];
   const need = NAV.find(n => n[0] === sec)?.[3];
   if (!go || (need && !can(need))) { location.hash = `#/${first}`; return; }
   go(); $("#view")?.focus({ preventScroll: true });
