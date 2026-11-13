@@ -829,6 +829,8 @@ body.chat-on .chat-fab{display:none}
 .cm.user{align-self:flex-end;background:var(--primary);color:#fff;border-start-end-radius:4px}
 .cm.sys{align-self:center;background:transparent;color:var(--mint,#16A34A);font-size:12.5px;font-weight:600;padding:2px 8px}
 .cm.err{border:1px solid color-mix(in srgb,var(--red,#dc2626) 35%,transparent)}
+.cm a{color:var(--primary);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}.cm.user a{color:inherit}
+a.chip-btn{text-decoration:none;display:inline-flex;align-items:center;gap:6px}a.chip-btn svg{width:14px;height:14px}
 .cm.typing{display:flex;gap:4px;align-items:center;padding:12px 14px}.cm.typing i{width:6px;height:6px;border-radius:50%;background:var(--faint);animation:chatdot 1s infinite}.cm.typing i:nth-child(2){animation-delay:.15s}.cm.typing i:nth-child(3){animation-delay:.3s}
 @keyframes chatdot{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
 .chat-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
@@ -5180,10 +5182,48 @@ const HP = (() => {
     if (!t || t.length < 30) { t = (uuid() + uuid()).replace(/-/g, ""); store.set(CHAT_KEY, t); }
     return t;
   };
-  const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
+  const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>")
+    .replace(/https?:\/\/[^\s<]+[^\s<.,،؛:!?)\]]/g, u => `<a href="${u}" target="_blank" rel="noopener" dir="ltr">${u.replace(/^https?:\/\//, "")}</a>`);
   const CHIPS = () => chatLang() === "ar"
     ? ["أريد مساعد واتساب لخدمة العملاء", "عندنا شغل يدوي كثير في الموارد البشرية", "كم تكلفة مشروع مثل هذا؟", "أريد أشوف ديمو"]
     : ["I want a WhatsApp assistant for customers", "Our HR work is very manual", "How much does a project like this cost?", "I'd like to see a demo"];
+
+  /* ---- question bank (بنك أسئلة المساعد): answers when the AI can't. Triggers: network error or timeout, server error,
+     no AI key, AI credit ended or the monthly AI budget paused (reply flagged paused/faq), or the AI switched off
+     (site_config.chat_ai = false, HUDERA_CONFIG.chatAI = false, or ?chat=bank). Data + matching: media/assistant/qbank.js */
+  const QB_SRC = "/media/assistant/qbank.js?v=1";
+  let qbP = null, chatDown = false, qbNoted = false;
+  const qbLoad = () => qbP || (qbP = window.HUDERA_QB ? Promise.resolve(window.HUDERA_QB) : new Promise(res => {
+    const s = document.createElement("script"); s.src = QB_SRC; s.async = true;
+    s.onload = () => res(window.HUDERA_QB || null); s.onerror = () => { qbP = null; res(null); };
+    document.head.appendChild(s);
+  }));
+  const aiOff = () => chatDown || !sb || site.chat_ai === false || cfg.chatAI === false || new URLSearchParams(location.search).get("chat") === "bank";
+  const waUrl = () => `https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(ct("Hello HUDERA AI, I have a question:", "مرحباً HUDERA AI، عندي سؤال:"))}`;
+  // chips row: tapping a chip sends its question; in bank mode it answers that exact entry
+  function chatChips(list, opts = {}) {
+    $("#chat-chips")?.remove();
+    const box = $("#chat-msgs"); if (!box) return;
+    box.insertAdjacentHTML("beforeend", `<div class="chat-chips" id="chat-chips">${list.map(c => `<button type="button" class="chip-btn" data-q="${esc(c.id || "")}">${esc(c.label)}</button>`).join("")}${
+      opts.wa ? `<a class="chip-btn bk" href="${waUrl()}" target="_blank" rel="noopener">${ic("chat")}${ct("WhatsApp our team", "كلّم فريقنا على واتساب")}</a>` : ""}${
+      opts.book && sb && !chatDown ? `<button type="button" class="chip-btn bk" id="chip-book">${SVG.cal}${ct("Book a call", "احجز مكالمة")}</button>` : ""}</div>`);
+    $$("#chat-chips button.chip-btn[data-q]").forEach(b => b.addEventListener("click", () => chatSend(b.textContent, b.dataset.q || null)));
+    $("#chip-book")?.addEventListener("click", () => { $("#chat-chips")?.remove(); chatBooking(); });
+    box.scrollTop = box.scrollHeight;
+  }
+  async function bankReply(text, qid) {
+    const QB = await qbLoad();
+    $("#chat-typing")?.remove();
+    if (!QB) {
+      chatBubble("assistant", ct(`Sorry, I can't answer right now. Our team will reply on WhatsApp: https://wa.me/${CONTACT.wa}`, `عذراً، لا أستطيع الرد الآن. فريقنا يرد عليك على واتساب: https://wa.me/${CONTACT.wa}`), "err");
+      return;
+    }
+    if (!qbNoted) { qbNoted = true; chatBubble("sys", ct("Quick answers mode: pick a suggested question or message our team on WhatsApp.", "وضع الإجابات السريعة: اختر سؤالاً من الاقتراحات أو كلّم فريقنا على واتساب.")); }
+    const r = QB.reply(text, chatLang(), qid);
+    chatBubble("assistant", r.text);
+    chatChips(r.chips, { wa: r.whatsapp, book: true });
+    speak(r.text);
+  }
   /* ---- voice: speak to the assistant (browser speech recognition) and let it read replies aloud ---- */
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   const SVG = {
@@ -5363,7 +5403,7 @@ const HP = (() => {
     $("#chat-lang").setAttribute("aria-label", ct("Chat language", "لغة المحادثة"));
     const sb_ = $("#chat-auth");
     if (sb_) {
-      sb_.hidden = !!session;
+      sb_.hidden = !!session || !sb;
       sb_.innerHTML = session ? "" : `<span>${ct("Sign in to save this chat and get a tailored follow-up.", "سجّل دخولك لنحفظ محادثتك ونتابع معك بعرض مناسب.")}</span>
         <button class="chat-gbtn" type="button" id="chat-gin2">${gIcon}<b>${ct("Sign in with Google", "سجّل بإيميلك")}</b></button>`;
       $("#chat-gin2")?.addEventListener("click", () => { store.set(CHAT_OPEN, "1", sessionStorage); signIn("chat"); });
@@ -5391,26 +5431,36 @@ const HP = (() => {
       "أهلاً بك! أنا مساعد HUDERA الذكي. أخبرني عن نشاط شركتك وما الذي يأخذ معظم وقت فريقك، وسأقترح عليك ما يناسبك."));
     (hist || []).forEach(m => chatBubble(m.role, m.content));
     if (!(hist || []).length) {
-      box.insertAdjacentHTML("beforeend", `<div class="chat-chips" id="chat-chips">${CHIPS().map(c => `<button type="button" class="chip-btn">${esc(c)}</button>`).join("")}</div>`);
-      $$("#chat-chips .chip-btn").forEach(b => b.addEventListener("click", () => chatSend(b.textContent)));
-      $("#chat-chips").insertAdjacentHTML("beforeend", `<button type="button" class="chip-btn bk" id="chip-book">${SVG.cal}${ct("Book a call", "احجز مكالمة")}</button>`);
-      $("#chip-book").addEventListener("click", () => { $("#chat-chips")?.remove(); chatBooking(); });
+      const QB = await qbLoad();                      // starter questions come from the question bank (old list if it can't load)
+      chatChips(QB ? QB.start(chatLang()) : CHIPS().map(c => ({ id: "", label: c })), { book: true, wa: aiOff() });
     } else if (session && store.get("hudera.just_signed_in_chat", sessionStorage)) {
       chatBubble("assistant", ct("Thanks for signing in! Your details are saved. Shall we continue?", "شكراً لتسجيلك! تم حفظ تفاصيلك. نكمل؟"));
     }
     store.del("hudera.just_signed_in_chat", sessionStorage);
   }
-  async function chatSend(text) {
+  async function chatSend(text, qid = null) {
     text = String(text || "").trim(); if (!text || chatBusy) return;
     chatBusy = true; $("#chat-chips")?.remove(); $("#chat-in").value = ""; chatGrow();
     chatBubble("user", text);
     $("#chat-msgs").insertAdjacentHTML("beforeend", `<div class="cm assistant typing" id="chat-typing"><i></i><i></i><i></i></div>`); $("#chat-msgs").scrollTop = 1e9;
     $("#chat-send").disabled = true;
+    qbLoad();                                          // load the bank in parallel so a fallback is instant
     try {
-      const r = await fetch(`${cfg.supabaseUrl}/functions/v1/chat`, { method: "POST",
-        headers: { apikey: cfg.supabaseAnonKey, "content-type": "application/json", ...(session?.access_token ? { authorization: `Bearer ${session.access_token}` } : {}) },
-        body: JSON.stringify({ token: chatToken(), message: text, lang: chatLang(), path: curPath() }) });
-      const j = await r.json().catch(() => ({}));
+      if (aiOff()) { await new Promise(r => setTimeout(r, 350)); await bankReply(text, qid); track("chat_message"); return; }
+      let r, j;
+      try {
+        const ac = new AbortController(), to = setTimeout(() => ac.abort(), 25000);
+        r = await fetch(`${cfg.supabaseUrl}/functions/v1/chat`, { method: "POST", signal: ac.signal,
+          headers: { apikey: cfg.supabaseAnonKey, "content-type": "application/json", ...(session?.access_token ? { authorization: `Bearer ${session.access_token}` } : {}) },
+          body: JSON.stringify({ token: chatToken(), message: text, lang: chatLang(), path: curPath() }) });
+        clearTimeout(to);
+        j = await r.json().catch(() => ({}));
+      } catch (e) { chatDown = true; await bankReply(text, qid); return; }      // offline, blocked or timed out: stay on the bank for this visit
+      // the AI could not answer (credit ended, error, budget paused, key missing): answer from the bank instead
+      if (j.paused || j.faq || r.status >= 500 || (r.ok && !j.reply) || ["failed", "not_configured", "ai_budget_reached"].includes(j.error)) {
+        if (j.error === "not_configured") chatDown = true;
+        await bankReply(text, qid); track("chat_message"); return;
+      }
       $("#chat-typing")?.remove();
       chatBubble("assistant", j.reply || ct("Sorry, something went wrong. Please try again or message us on WhatsApp.", "عذراً، حدث خطأ. حاول مرة أخرى أو راسلنا على واتساب."), r.ok ? "" : "err");
       if (j.handoff) chatBubble("sys", ct("✓ Sent to our team. We'll contact you soon.", "✓ وصل طلبك لفريقنا وسنتواصل معك قريباً."));
@@ -5421,7 +5471,7 @@ const HP = (() => {
     } catch (e) {
       $("#chat-typing")?.remove();
       chatBubble("assistant", ct("Connection problem. Please try again.", "مشكلة في الاتصال. حاول مرة أخرى."), "err");
-    } finally { chatBusy = false; $("#chat-send").disabled = false; $("#chat-in").focus(); }
+    } finally { $("#chat-typing")?.remove(); chatBusy = false; $("#chat-send").disabled = false; $("#chat-in").focus(); }
   }
   function chatGrow() { const i = $("#chat-in"); if (!i) return; i.style.height = "auto"; i.style.height = Math.min(120, i.scrollHeight) + "px"; }
   function chatOpen() {
@@ -5593,7 +5643,7 @@ const HP = (() => {
     if (!enabled) { const c = $("#consent-open"); if (c) c.hidden = true; return; }
     const lead = $("#contact-lead"); if (lead) lead.textContent = "Send us a request and follow its status from your account. We usually start with one process and a working demo built on it.";
     const host = $("#req-host"); if (host) { $("#brief-form").hidden = true; host.hidden = false; host.innerHTML = `<div class="req-signin"><p class="muted">Loading…</p></div>`; }
-    try { await loadSdk(); } catch (e) { $("#brief-form").hidden = false; if (host) host.hidden = true; return; }
+    try { await loadSdk(); } catch (e) { $("#brief-form").hidden = false; if (host) host.hidden = true; chatDown = true; chatInit(); return; }   // no SDK: the assistant still answers from the question bank
     sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { global: { fetch: (u, o = {}) => { const h = new Headers(o.headers || {}); const k = cfg.supabaseAnonKey; if (k && !k.includes('.') && h.get('Authorization') === 'Bearer ' + k) h.delete('Authorization'); return fetch(u, { ...o, headers: h }); } }, auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storageKey: "hudera-auth" } });
     const hadCode = new URLSearchParams(location.search).has("code");
     try { site = { ...site, ...(await rpc("site_config")) }; } catch (e) {}
