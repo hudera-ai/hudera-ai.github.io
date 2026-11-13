@@ -109,5 +109,81 @@
    ["AI Weekly", "https://aiweekly.co/alerts/deepminds-gemini-robotics-25-hits-96-on-mercedes-benz-line"],
    ["ShiftDelete", "https://shiftdelete.net/en/alphagenome-2"]
   ]
+ },
+ {
+  "date": "2026-11-10",
+  "slug": "openai-businesses-in-chatgpt",
+  "tag": {
+   "ar": "منتجات",
+   "en": "Products"
+  },
+  "ar": {
+   "title": "OpenAI تطلق «Businesses in ChatGPT»: ملف موثّق لشركتك ووكيل يرد على العملاء",
+   "desc": "نسخة تجريبية تتيح للشركات توثيق ملفها داخل ChatGPT ومتابعة ظهورها في الإجابات، مع وكلاء أعمال متاحين حالياً لشركات أمريكية فقط.",
+   "body": [
+    "أعلنت OpenAI يوم 10 نوفمبر 2026 نسخة تجريبية باسم Businesses in ChatGPT. الجزء الأول هو Business Hub: لوحة تتيح للشركة الموثّقة تحديث بياناتها ومعلومات منتجاتها مثل الأسعار والتوفر، ومعرفة عدد مرات ذكرها في إجابات ChatGPT وعدد النقرات إلى موقعها وأبرز المواضيع المرتبطة بذلك. الأرقام مجمّعة، وتقول OpenAI إنها لا تشارك محادثات المستخدمين مع الشركات.",
+    "الجزء الثاني هو Business Agents: وكيل يحمل اسم الشركة ويجيب عن أسئلة العملاء من معلوماتها، في محادثة معنونة بوضوح ومنفصلة عن إجابات ChatGPT نفسه. هذا الجزء متاح في البداية لشركات التجارة الإلكترونية والخدمات عبر الإنترنت المؤهلة في الولايات المتحدة فقط، ولم يُعلن موعد لدول أخرى. ويمكن للشركة أيضاً أن تموّل وكيلها كإعلان يظهر بوسم إعلاني. وتفيد التغطيات بأن التوثيق والدفع لا يضمنان ظهوراً أعلى في إجابات ChatGPT المستقلة."
+   ],
+   "biz": "عملاؤك يسألون ChatGPT عن المنتجات والخدمات قبل أن يزوروا موقعك، وهذه أول أداة رسمية ترى بها كيف تُذكر شركتك هناك. الوكلاء غير متاحين في منطقتنا بعد، لكن يمكنك من الآن التحقق من أهلية شركتك لتوثيق الملف، وترتيب بيانات منتجاتك وأسعارك على موقعك لتكون واضحة ودقيقة."
+  },
+  "en": {
+   "title": "OpenAI launches Businesses in ChatGPT: verified profiles and brand agents",
+   "desc": "A beta lets companies claim a verified ChatGPT profile and see how often they are mentioned. Business Agents start with eligible US firms only.",
+   "body": [
+    "On 10 November 2026 OpenAI announced a beta called Businesses in ChatGPT. The first part is Business Hub: a console where a verified company can update its details and product information such as prices and availability, and see how often ChatGPT mentions it, how many people click through to its website and which topics drive those mentions. The numbers are aggregated, and OpenAI says it does not share user conversations with businesses.",
+    "The second part is Business Agents: an agent under the company's name that answers customer questions from the company's own information, in a chat that is clearly labelled and kept apart from ChatGPT's own answers. This part starts only with eligible ecommerce and online service businesses in the United States, with no date given for other countries. A company can also sponsor its agent as a labelled ad. Coverage says neither verification nor paying guarantees a higher place in ChatGPT's independent answers."
+   ],
+   "biz": "Your customers ask ChatGPT about products and services before they reach your website, and this is the first official way to see how your company shows up there. Agents are not available in our region yet, but you can already check whether your company is eligible to claim a profile, and make sure the product and price information on your own site is clear and accurate."
+  },
+  "sources": [
+   [
+    "The Next Web",
+    "https://thenextweb.com/news/openai-businesses-in-chatgpt-business-agents"
+   ],
+   [
+    "Techgenyz",
+    "https://techgenyz.com/businesses-in-chatgpt-hub-agents-launch/"
+   ]
+  ]
+ },
+ {
+  "date": "2026-11-12",
+  "slug": "gemini-4-hydrogen-launch",
+  "tag": {
+   "ar": "نماذج",
+   "en": "Models"
+  },
+  "ar": {
+   "title": "Google تطلق Gemini 4 Hydrogen: نموذج أسرع وأرخص للمهام اليومية والوكلاء",
+   "desc": "Gemini 4 Hydrogen متاح عالمياً من 12 نوفمبر 2026 بسعر 1.50 دولار لكل مليون رمز إدخال و7.50 للإخراج، مع نافذة سياق بمليون رمز.",
+   "body": [
+    "أعلنت Google يوم 12 نوفمبر 2026 نموذج Gemini 4 Hydrogen، وهو في فئة أدنى من Gemini 4 Carbon و Gemini 4 Argon ومخصص للأعمال الكثيرة والمتكررة ولتشغيل الوكلاء. سعره عبر الواجهة البرمجية 1.50 دولار لكل مليون رمز إدخال و7.50 دولار لكل مليون رمز إخراج، بسعر ثابت على كامل نافذة السياق البالغة مليون رمز. وفيه أربعة مستويات للتفكير، منها مستوى جديد أعلى باسم xhigh.",
+    "تقول Google إن النموذج ينجز المهام أسرع بمرتين ونصف من Gemini 3.8 Flash، وإنه سجل 57% في اختبار Terminal-Bench 4.1 مقابل 18.2% للنموذج السابق. هذه أرقام الشركة نفسها ولم تؤكدها بعد جهات مستقلة. الإتاحة تبدأ عالمياً في Gemini API و Google AI Studio وتطبيق Gemini وبحث Google، وفي Google Sheets و Antigravity للمشتركين في الباقات المدفوعة."
+   ],
+   "biz": "إذا كانت شركتك تستخدم الذكاء الاصطناعي بكميات كبيرة، مثل الرد على العملاء أو تلخيص المستندات أو استخراج البيانات، فهذه فئة النماذج التي تحدد فاتورتك الشهرية. قبل أي انتقال، جرّب النموذج على عينة من عملك الفعلي، خصوصاً بالعربية، وقارن الجودة والتكلفة بما تستخدمه الآن. أرقام السرعة المعلنة هي مقارنة بنموذج Google السابق وليست بنماذج المنافسين."
+  },
+  "en": {
+   "title": "Google launches Gemini 4 Hydrogen, a faster and cheaper model for everyday work",
+   "desc": "Gemini 4 Hydrogen rolls out globally from 12 November 2026 at $1.50 per million input tokens and $7.50 output, with a 1M-token context window.",
+   "body": [
+    "On 12 November 2026 Google announced Gemini 4 Hydrogen, a model that sits below Gemini 4 Carbon and Gemini 4 Argon and is aimed at high-volume, repetitive work and at running agents. Through the API it costs $1.50 per million input tokens and $7.50 per million output tokens, a flat price across its full 1M-token context window. It has four thinking levels, including a new top level called xhigh.",
+    "Google says the model finishes tasks 2.5 times faster than Gemini 3.8 Flash and scores 57% on Terminal-Bench 4.1, against 18.2% for the older model. These are the company's own figures and have not yet been confirmed independently. The rollout is global: the Gemini API, Google AI Studio, the Gemini app and Google Search, plus Google Sheets and Antigravity for paid subscribers."
+   ],
+   "biz": "If your company uses AI in volume, for customer replies, document summaries or data extraction, this is the tier of model that decides your monthly bill. Before switching anything, test it on a sample of your real work, especially in Arabic, and compare quality and cost with what you use now. The speed claims compare it with Google's previous model, not with competitors."
+  },
+  "sources": [
+   [
+    "Google: Introducing Gemini 4 Hydrogen",
+    "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+   ],
+   [
+    "FoneArena",
+    "https://www.fonearena.com/blog/496944/google-gemini-4-hydrogen-features.html"
+   ],
+   [
+    "AI Understanding",
+    "https://aiunderstanding.org/news/google-unveils-gemini-4-hydrogen-with-new-pricing-and-multi-model-orchestrator"
+   ]
+  ]
  }
 ]
