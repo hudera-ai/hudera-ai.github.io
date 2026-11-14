@@ -185,5 +185,31 @@
     "https://aiunderstanding.org/news/google-unveils-gemini-4-hydrogen-with-new-pricing-and-multi-model-orchestrator"
    ]
   ]
+ },
+ {
+  "date": "2026-11-13",
+  "slug": "chatgpt-wallet-agent-purchases",
+  "tag": {
+   "ar": "منتجات",
+   "en": "Products"
+  },
+  "ar": {
+   "title": "OpenAI تطلق ChatGPT Wallet: وكلاء ChatGPT يشترون ويدفعون بعد موافقتك على كل عملية",
+   "desc": "ChatGPT Wallet يتيح للوكلاء إتمام الشراء ببطاقتك دون رؤية رقمها. الإتاحة الآن لمشتركي Pro في أمريكا فقط.",
+   "body": ["أطلقت OpenAI يوم 13 نوفمبر 2026 خدمة ChatGPT Wallet، وهي محفظة تسمح لوكلاء ChatGPT المسمّين dots باختيار المنتجات وإتمام الشراء نيابة عن المستخدم. يضيف المستخدم بطاقته مرة واحدة، ثم يراجع كل طلب (المنتجات والمبلغ والبطاقة) ويوافق عليه بالبصمة أو بالتعرف على الوجه. الوكيل لا يستطيع الشراء من تلقاء نفسه. المحفظة مبنية بالتعاون مع American Express و Mastercard و Visa، وتصدر شبكة البطاقة لكل عملية رمز دفع بديلاً، فلا يرى الوكيل رقم البطاقة الحقيقي.", "الإتاحة في البداية محدودة: مشتركو ChatGPT Pro في الولايات المتحدة ممن أعمارهم 18 سنة فأكثر وببطاقات صادرة هناك، ولم تعلن الشركة موعداً لدول أو باقات أخرى. وبحسب التقارير، لا تأخذ OpenAI عمولة على المشتريات في هذه المرحلة، وتخطط لاحقاً لإضافة حدود إنفاق وموافقات مسبقة. لم نتمكن من فتح صفحة الإعلان الأصلية، فهذا الملخص مبني على تغطيات صحفية متطابقة في النقاط المذكورة."],
+   "biz": "الخدمة غير متاحة في منطقتنا بعد، فلا شيء عاجل تفعله اليوم. لكن الاتجاه واضح: جزء من المشترين سيرسل وكيلاً آلياً ليشتري بدلاً منه. إذا كان عندك متجر إلكتروني، راقب أمرين: هل بيانات منتجاتك وأسعارك واضحة ومنظمة بحيث يقرؤها وكيل آلي، وهل أنظمة الحماية ومكافحة الاحتيال عندك ستحجب هذه الطلبات أم تميّزها عن الهجمات."
+  },
+  "en": {
+   "title": "OpenAI launches ChatGPT Wallet: ChatGPT agents can buy and pay after you approve each purchase",
+   "desc": "ChatGPT Wallet lets agents check out with your card without seeing its number. For now it is limited to Pro subscribers in the US.",
+   "body": ["On 13 November 2026 OpenAI launched ChatGPT Wallet, which lets ChatGPT's agents, called dots, choose products and complete a purchase on the user's behalf. The user adds a card once, then reviews each order (items, total and card) and approves it with a fingerprint or face scan. The agent cannot buy anything on its own. The wallet was built with American Express, Mastercard and Visa: the card network issues a substitute payment token for each transaction, so the agent never sees the real card number.", "The first rollout is narrow: ChatGPT Pro subscribers in the United States, aged 18 or older, with US-issued cards. OpenAI has given no date for other countries or plans. According to reports, OpenAI is not taking a commission on purchases at this stage and plans to add spending limits and pre-approved purchases later. We could not open the original announcement page, so this summary relies on press coverage that agrees on the points above."],
+   "biz": "This is not available in our region yet, so there is nothing urgent to do today. The direction is clear, though: some buyers will send a software agent to shop for them. If you run an online store, watch two things: whether your product data and prices are clear and structured enough for an agent to read, and whether your security and anti-fraud tools would block these orders or tell them apart from attacks."
+  },
+  "sources": [
+   ["Data Studios: ChatGPT Wallet", "https://www.datastudios.org/post/chatgpt-wallet-dots-agent-purchases-us-pro-users-visa-mastercard-amex"],
+   ["AI Weekly", "https://aiweekly.co/alerts/openais-chatgpt-wallet-lets-dots-agents-buy-for-us-pro-users"],
+   ["Tech Bytes", "https://techbytes.app/posts/chatgpt-wallet-lets-openais-dots-agents-make-purchases-for-you/"],
+   ["DigitalToday", "https://www.digitaltoday.co.kr/en/view/125663/openai-launches-chatgpt-wallet-dot-agent-to-handle-purchases-and-payments"]
+  ]
  }
 ]
