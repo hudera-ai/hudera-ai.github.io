@@ -211,5 +211,34 @@
    ["Tech Bytes", "https://techbytes.app/posts/chatgpt-wallet-lets-openais-dots-agents-make-purchases-for-you/"],
    ["DigitalToday", "https://www.digitaltoday.co.kr/en/view/125663/openai-launches-chatgpt-wallet-dot-agent-to-handle-purchases-and-payments"]
   ]
+ },
+ {
+  "date": "2026-11-11",
+  "slug": "elevenlabs-elevenai-meeting-notes-dictation",
+  "tag": {"ar": "منتجات", "en": "Products"},
+  "ar": {
+   "title": "ElevenLabs تفتح الوصول المبكر إلى ElevenAI: تطبيق لمحاضر الاجتماعات والإملاء الصوتي",
+   "desc": "ElevenAI تطبيق على Mac يكتب ملخص الاجتماع ومهامه ويحوّل الكلام إلى نص في أي برنامج. الوصول المبكر مجاني والسعر اللاحق غير معلن.",
+   "body": [
+    "كشفت ElevenLabs يوم 11 نوفمبر 2026 في مؤتمرها بنيويورك عن ElevenAI، وفتحت التسجيل في الوصول المبكر المجاني في اليوم نفسه. التطبيق يعمل حالياً على Mac ويجمع وظيفتين: تدوين الاجتماعات، سواء كانت حضورية أو عبر مكالمة، ثم إخراج ملخص وقائمة مهام مع تمييز المتحدثين، والإملاء الصوتي الذي يحوّل الكلام إلى نص منقّح داخل أي برنامج. تقول الشركة إن الوظيفتين تدعمان أكثر من 90 لغة وتعتمدان على نموذجها Scribe v3، وإن التطبيق يسجّل من الجهاز نفسه دون إدخال روبوت إلى المكالمة، ويعرض إشعاراً للمشاركين عند تدوين الملاحظات.",
+    "المنتج موجّه لفرق العمل أكثر من الأفراد: يمكن البحث في محتوى الاجتماعات السابقة، وربطه بمنصة ElevenAgents لتنفيذ خطوات لاحقة مثل صياغة بريد متابعة. وتذكر الشركة أنها لا تخزّن الصوت وأن سجل النصوص يبقى على جهاز المستخدم، وهذا تعهّد منها لم يتحقق منه طرف مستقل. التطبيق ما زال في مرحلة تجريبية، ولم يُعلن سعر ما بعد الوصول المبكر، ولا موعد نسخ لأنظمة أخرى غير Mac. وصفحة المنتج لا تسمّي اللغات المدعومة، فلا نستطيع تأكيد جودة العربية ولهجاتها قبل التجربة."
+   ],
+   "biz": "إذا كان فريقك يقضي وقتاً في كتابة محاضر الاجتماعات ورسائل المتابعة، فهذه الفئة من الأدوات تستحق تجربة صغيرة، لكن اختبرها أولاً على اجتماع حقيقي بالعربية وبلهجة فريقك قبل الاعتماد عليها. انتبه لأمرين: خذ موافقة الحاضرين قبل أي تسجيل، ولا تستخدمها في اجتماعات تتضمن بيانات حساسة مثل المعلومات المالية أو الصحية أو القانونية قبل مراجعة شروط الخدمة. ولا تبنِ إجراءات العمل على أداة تجريبية لم يُعلن سعرها بعد."
+  },
+  "en": {
+   "title": "ElevenLabs opens early access to ElevenAI, an app for meeting notes and voice dictation",
+   "desc": "ElevenAI is a Mac app that writes meeting summaries and action items and turns speech into text in any app. Early access is free; later pricing is unknown.",
+   "body": [
+    "On 11 November 2026, at its summit in New York, ElevenLabs unveiled ElevenAI and opened sign-ups for free early access the same day. The app currently runs on Mac and does two jobs: it takes notes in meetings, in person or on a call, then produces a summary and action items with speakers labeled, and it offers voice dictation that turns speech into cleaned-up text inside any app. The company says both features support more than 90 languages and run on its Scribe v3 model, that the app records from the device itself without adding a bot to the call, and that it shows participants a notice while notes are being taken.",
+    "The product is aimed at teams more than individuals: users can search across past meetings, and companies can connect it to the ElevenAgents platform for follow-up steps such as drafting a follow-up email. ElevenLabs states that it does not store audio and that transcript history stays on the user's Mac; that is the company's own claim and has not been independently verified. The app is still a preview, and there is no published price for what comes after early access and no date for platforms other than Mac. The product page does not name the supported languages, so we cannot confirm how well it handles Arabic and its dialects without testing."
+   ],
+   "biz": "If your team spends time writing meeting minutes and follow-up emails, this category of tool is worth a small trial, but test it first on a real meeting in Arabic, in your team's dialect, before relying on it. Mind two things: get the attendees' consent before any recording, and keep it out of meetings that involve sensitive data such as financial, health or legal information until you have read the terms. Do not build a work process on a preview tool whose price has not been announced."
+  },
+  "sources": [
+   ["ElevenLabs: Summit NYC announcements", "https://elevenlabs.io/blog/nyc-summit"],
+   ["ElevenLabs: ElevenAI product page", "https://elevenlabs.io/elevenai"],
+   ["TechCrunch", "https://techcrunch.com/2026/11/13/elevenlabs-new-app-combines-meeting-note-taking-and-dictation-for-teams/"],
+   ["tbreak", "https://tbreak.com/elevenai-meeting-notes-app-elevenlabs/"]
+  ]
  }
 ]
