@@ -240,5 +240,34 @@
    ["TechCrunch", "https://techcrunch.com/2026/11/13/elevenlabs-new-app-combines-meeting-note-taking-and-dictation-for-teams/"],
    ["tbreak", "https://tbreak.com/elevenai-meeting-notes-app-elevenlabs/"]
   ]
+ },
+ {
+  "date": "2026-11-13",
+  "slug": "fbi-artex-ai-agents-cyberattacks",
+  "tag": {"ar": "أمن", "en": "Security"},
+  "ar": {
+   "title": "تحذير من FBI: أداة ARTEX تجعل وكلاء الذكاء الاصطناعي ينفذون الاختراقات في ساعات",
+   "desc": "FBI يحذّر من إساءة استخدام ARTEX، إطار اختبار اختراق يعمل بوكلاء الذكاء الاصطناعي، و Amazon ترصد حملات تسرق مفاتيح خدمات AI.",
+   "body": [
+    "أصدر مكتب التحقيقات الفيدرالي الأمريكي FBI يوم الجمعة 13 نوفمبر 2026 تنبيهاً عاجلاً عن ARTEX، وهو إطار مفتوح المصدر لاختبار الاختراق يحوّل هدفاً مكتوباً بلغة عادية إلى خطوات ينفذها وكلاء ذكاء اصطناعي بالاعتماد على نماذج لغوية خارجية. بحسب ما نقلته المواقع المتخصصة عن التنبيه، يسيء المهاجمون استخدام الأداة منذ أغسطس 2026 على الأقل لأتمتة الاختراق على عدة مؤسسات في الوقت نفسه، وبعض الهجمات انتقل من تحديد الهدف إلى صلاحيات عالية في أقل من ثلاث ساعات. صاحب المشروع سحبه من GitHub يوم 8 أكتوبر بعد إقراره بإساءة استخدامه، لكن النسخ المتفرعة ونسخة تجارية ما زالت متداولة، ورُصد أكثر من 1600 لوحة تحكم ARTEX مكشوفة على الإنترنت.",
+    "في اليوم نفسه نشرت Amazon تقريراً عما سجلته خوادمها الوهمية بين 3 أكتوبر و5 نوفمبر: وكلاء يبحثون بلا توقف عن مفاتيح API لخدمات الذكاء الاصطناعي وبيانات الدخول السحابية، ثم يستخدمون المفاتيح المسروقة لتشغيل أنفسهم. نقاط الدخول لم تكن ثغرات نادرة، بل أخطاء أساسية: كلمات مرور افتراضية، لوحات إدارة بلا تسجيل دخول، برامج غير محدّثة، ومفاتيح متروكة داخل الكود. تنسب Amazon النشاط بدرجة ثقة متوسطة إلى مجموعات مرتبطة بالصين، وتقول إنها لم تستطع التحقق من النتائج التي ادّعاها الوكلاء. القطاعات المذكورة في التقارير تشمل المال والحكومة والتقنية والصحة، ولم نجد في المصادر التي راجعناها ذكراً لضحايا في الخليج أو الأردن أو مصر."
+   ],
+   "biz": "الخطر هنا ليس تقنية جديدة بقدر ما هو سرعة: الأخطاء البسيطة التي كانت تبقى أسابيع قبل أن يجدها أحد صارت تُكتشف وتُستغل في ساعات. الأنظمة الأكثر عرضة هي المنسية: بوابة الموردين، تطبيق داخلي قديم، أو ربط مع طرف ثالث. اطلب من مسؤول التقنية أو مزود الخدمة هذا الأسبوع أربعة أشياء: تغيير كل كلمات المرور الافتراضية، وضع لوحات الإدارة خلف VPN أو تسجيل دخول بخطوتين، تحديث كل ما هو مكشوف على الإنترنت، وتدوير مفاتيح API ومراقبة فاتورة خدمات الذكاء الاصطناعي والسحابة لأي استهلاك غير معتاد."
+  },
+  "en": {
+   "title": "FBI warns that ARTEX lets AI agents run network intrusions in hours",
+   "desc": "The FBI warns that attackers are abusing ARTEX, an AI-agent penetration testing framework, while Amazon documents campaigns stealing AI service keys.",
+   "body": [
+    "On Friday 13 November 2026 the US Federal Bureau of Investigation issued a flash alert about ARTEX, an open-source penetration testing framework that turns a goal written in plain language into steps carried out by AI agents running on external language models. According to specialist outlets reporting on the alert, attackers have been abusing the tool since at least August 2026 to automate intrusions against several organizations at once, and some attacks went from picking a target to privileged access in under three hours. The project's author pulled it from GitHub on 8 October after acknowledging the abuse, but forks and a commercial edition are still circulating, and more than 1,600 ARTEX control consoles were found exposed on the internet.",
+    "On the same day Amazon published what its decoy servers recorded between 3 October and 5 November: agents hunting nonstop for AI service API keys and cloud credentials, then using the stolen keys to pay for their own operation. The ways in were not rare flaws but basic mistakes: default passwords, admin panels with no login, unpatched software and keys left inside code. Amazon attributes the activity, with moderate confidence, to groups linked to China, and says it could not verify the results the agents claimed. Sectors named in the reports include finance, government, technology and healthcare; the sources we reviewed do not mention victims in the Gulf, Jordan or Egypt."
+   ],
+   "biz": "The risk here is less a new technique than speed: simple mistakes that used to sit unnoticed for weeks are now found and exploited within hours. The systems most exposed are the forgotten ones: a supplier portal, an old internal app, a third-party integration. This week, ask your IT lead or provider for four things: change every default password, put admin panels behind a VPN or two-step login, patch everything that faces the internet, and rotate API keys while watching your AI and cloud bills for unusual usage."
+  },
+  "sources": [
+   ["Amazon (AWS Security Blog): threat actors running campaigns with ARTEX AI agents", "https://aws.amazon.com/blogs/security/amazon-threat-intelligence-observes-threat-actors-running-cybercrime-campaigns-with-artex-ai-agents/"],
+   ["The Record", "https://therecord.media/artex-ai-tool-fbi-flash-alert"],
+   ["BleepingComputer", "https://www.bleepingcomputer.com/news/security/fbi-warns-artex-ai-hacking-tool-is-powering-global-cyberattacks/"],
+   ["SentinelOne: ARTEX Unmasked", "https://sentinelone.com/blog/artex-unmasked-the-rise-of-ai-powered-artex-in-cybercrime-espionage"]
+  ]
  }
 ]
