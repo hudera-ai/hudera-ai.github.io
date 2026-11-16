@@ -269,5 +269,36 @@
    ["BleepingComputer", "https://www.bleepingcomputer.com/news/security/fbi-warns-artex-ai-hacking-tool-is-powering-global-cyberattacks/"],
    ["SentinelOne: ARTEX Unmasked", "https://sentinelone.com/blog/artex-unmasked-the-rise-of-ai-powered-artex-in-cybercrime-espionage"]
   ]
+ },
+ {
+  "date": "2026-11-11",
+  "slug": "humain-3-trillion-model-saudi-ai-stack",
+  "tag": {
+   "ar": "السعودية",
+   "en": "Saudi Arabia"
+  },
+  "ar": {
+   "title": "HUMAIN تعلن نموذجاً مفتوح الأوزان بـ 3 تريليونات مُعامل ومنظومة ذكاء اصطناعي سعودية كاملة في 15 ديسمبر",
+   "desc": "HUMAIN السعودية تحدد 15 ديسمبر لإتاحة منظومتها الكاملة داخل المملكة: نموذج بـ 3 تريليونات مُعامل وسحابة وبنية تحتية، دون إعلان سعر بعد.",
+   "body": [
+    "قال Tareq Amin، الرئيس التنفيذي لشركة HUMAIN السعودية، في لقاء إعلامي مساء الأربعاء 11 نوفمبر 2026 بمقر الشركة في الرياض، إن الشركة ستتيح في ديسمبر نموذجاً لغوياً مفتوح الأوزان بحجم 3 تريليونات مُعامل، وإن المنظومة الكاملة ستكون متاحة داخل المملكة يوم الثلاثاء 15 ديسمبر. المنظومة بحسب التقارير تجمع النموذج والخدمة السحابية والبنية التحتية، وتقول الشركة إنها بُنيت وتُشغَّل في السعودية وموجهة للمطورين والشركات والجهات الحكومية، مع هدف معلن هو حوسبة بتكلفة معقولة لرواد الأعمال والشركات الناشئة والطلاب. وأعلنت الشركة في المناسبة نفسها HUMAIN+، وهو مركز تعليمي في الرياض بالشراكة مع VUZ يُنتظر أن يبدأ العمل في الربع الأول من 2027 بطاقة نحو 1500 متعلم سنوياً.",
+    "ما لم يُعلن أكثر مما أُعلن. لم تذكر الشركة اسم النموذج ولا رخصته ولا مكان تنزيل أوزانه، ولا مدى دعمه للغة العربية، ولا سعراً أو طريقة للاشتراك، ولا إن كان سيتاح خارج المملكة. وقالت HUMAIN إن النموذج يخفض التكلفة واستهلاك الرموز بنسبة 88% مقارنة بنماذج متاحة خارج السعودية، لكنها لم تسمِّ النماذج التي قارنت بها ولم يُنشر أي اختبار مستقل يؤكد الرقم. كل ما سبق منقول عن تغطيات صحفية للقاء، ولم نتمكن من فتح بيان رسمي من الشركة."
+   ],
+   "biz": "إذا كانت شركتك في السعودية وتتعامل مع بيانات يجب أن تبقى داخل المملكة، فقد يصبح أمامك خيار محلي للنماذج والسحابة خلال أسابيع، وهذا يستحق المتابعة. لكن لا تبنِ خطة أو ميزانية على رقم 88% قبل ظهور الأسعار واختبارات مستقلة. الخطوة العملية الآن: جهّز مهمة أو مهمتين حقيقيتين من عملك لتجربتهما عند الإتاحة، وقارن الجودة بالعربية والتكلفة الفعلية بما تستخدمه اليوم."
+  },
+  "en": {
+   "title": "HUMAIN says a 3-trillion-parameter open-weight model and a full Saudi AI stack arrive on 15 December",
+   "desc": "Saudi Arabia's HUMAIN sets 15 December for its full AI stack in the Kingdom: a 3-trillion-parameter model, cloud and infrastructure. No pricing yet.",
+   "body": [
+    "Tareq Amin, chief executive of Saudi company HUMAIN, told a media gathering at the company's Riyadh offices on the evening of Wednesday 11 November 2026 that it will make a 3-trillion-parameter open-weight language model available in December, and that its complete stack will be available in the Kingdom on Tuesday 15 December. According to the reports, the stack combines the model, a cloud service and the underlying infrastructure. The company says it was built and is operated in Saudi Arabia and is meant for developers, enterprises and government bodies, with a stated aim of affordable compute for entrepreneurs, startups and students. At the same event it announced HUMAIN+, a learning centre in Riyadh developed with VUZ, expected to start operating in the first quarter of 2027 with room for about 1,500 learners a year.",
+    "More is unknown than known. The company has not given the model's name, its licence, where the weights can be downloaded, how well it handles Arabic, any price or sign-up route, or whether it will be offered outside the Kingdom. HUMAIN said the model cuts cost and token use by 88% compared with models available outside Saudi Arabia, but it did not name the models it compared against, and no independent test supporting the figure has been published. All of this comes from press coverage of the event; we were not able to open an official company statement."
+   ],
+   "biz": "If your company is in Saudi Arabia and handles data that must stay in the Kingdom, a local option for models and cloud may be on the table within weeks, and that is worth watching. Do not build a plan or a budget on the 88% figure until prices and independent tests appear. The practical step now: prepare one or two real tasks from your own work to try when access opens, then compare Arabic quality and actual cost with what you use today."
+  },
+  "sources": [
+   ["Middle East AI News: HUMAIN to launch 3 trillion parameter model", "https://www.middleeastainews.com/p/humain-to-launch-3-trillion-parameter"],
+   ["tbreak: HUMAIN's AI stack arrives in December, HUMAIN+ in Q1 2027", "https://tbreak.com/humain-ai-stack-december-humain-plus-2027/"],
+   ["CASRAI: HUMAIN 3T open-weight model, what is known", "https://casrai.org/news/humain-3-trillion-parameter-model-plan-2026"]
+  ]
  }
 ]
