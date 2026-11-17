@@ -62,6 +62,14 @@ input,select{width:100%;font:inherit;padding:12px 14px;border:1px solid #C9C7E0;
 .adult{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:center}
 .adult .box{background:#1B1147;color:#FFFDF5;border-radius:22px;padding:26px}
 .adult .box p{color:#D9D4F5;margin:6px 0 18px}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:14px;counter-reset:s}
+.plan li{list-style:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.plan li::before{counter-increment:s;content:counter(s);width:44px;height:44px;border-radius:14px;background:var(--brand);color:#fff;font-weight:800;display:grid;place-items:center;font-size:19px}
+.plan b{display:block;font-size:17.5px}.plan span{color:var(--muted);font-size:15.5px}
+.each{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}.each li{background:#EEF1FF;border-radius:10px;padding:4px 12px;font-size:15px}
+.ok{background:#E7F8F3;border:1px solid #9FE3D2;border-radius:18px;padding:22px;max-width:720px}.ok b{font-size:20px}
+.ph{display:grid;grid-template-columns:120px 1fr;gap:8px}
+@media (max-width:760px){.plan{grid-template-columns:1fr}}
 footer{padding:26px 0 40px;color:var(--muted);font-size:14.5px}
 @media (max-width:760px){.three,.facts{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr}form{grid-template-columns:1fr}.adult{grid-template-columns:1fr}}
 </style>
@@ -78,7 +86,7 @@ footer{padding:26px 0 40px;color:var(--muted);font-size:14.5px}
   <span class="brandline"><bdi>HUDERA Kids Academy</bdi> <span>· «هوديرا كيدز أكاديمي»</span></span>
   <h1>طفلك يستخدم الذكاء الاصطناعي كل يوم. علّمه كيف يعمل.</h1>
   <p>كورس الذكاء الاصطناعي للأطفال من HUDERA Kids Academy، أونلاين من البيت. في كل جلسة يصنع الطفل شيئًا بيده ويريه لأهله، بدل أن يستخدم الأدوات دون أن يفهمها.</p>
-  <a class="btn" href="#book">احجز مكان طفلك قبل اكتمال العدد</a>
+  <a class="btn" href="#book">احجز مكان طفلك قبل اكتمال العدد</a> <a href="#plan" style="margin-inline-start:14px;font-weight:700;color:var(--brand)">اطّلع على المنهج</a>
 </div></div>
 
 <section><div class="wrap">
@@ -98,19 +106,38 @@ footer{padding:26px 0 40px;color:var(--muted);font-size:14.5px}
   <p class="note" style="margin-top:16px">مفيش لقاءات مباشرة ولا مواعيد لازم تحضروها: الطفل يتعلّم في الوقت اللي يناسبكم، والدعم والمتابعة من خلال المنصة والرسائل. أي سؤال أو مشكلة تبعتها لنا وبنرد عليك.</p>
 </div></section>
 
+<section id="plan"><div class="wrap">
+  <h2>ماذا سيتعلّم طفلك؟ المنهج في 8 جلسات</h2>
+  <p class="lead">جلسة كل أسبوع. كل جلسة فيها فيديو شرح بالرسوم المتحركة (حوالي 20 دقيقة) مع روبوت اسمه «روبي» يتعلّم مع طفلك خطوة بخطوة، ثم نشاط عملي من البيت.</p>
+  <ol class="plan">
+    <li><div><b>ما الذكاء الاصطناعي؟</b><span>يكتشف كيف يتعلّم الكمبيوتر من الأمثلة، ويلعب لعبة يخمّن فيها الكمبيوتر رسمته.</span></div></li>
+    <li><div><b>كيف يتعلّم الكمبيوتر؟</b><span>يدرّب الكمبيوتر بنفسه ليفرّق بين التفاحة والموزة باستخدام الكاميرا.</span></div></li>
+    <li><div><b>عندما يخطئ الكمبيوتر</b><span>يعرف لماذا يخطئ الذكاء الاصطناعي، وكيف نصحّحه بأمثلة أفضل.</span></div></li>
+    <li><div><b>نكلّم الذكاء الاصطناعي بطريقة صحيحة</b><span>يتعلّم كتابة طلب واضح، مع ولي أمره وعلى حسابه.</span></div></li>
+    <li><div><b>نؤلّف قصة مع الذكاء الاصطناعي</b><span>يخرج بقصة من أفكاره ورسوماته.</span></div></li>
+    <li><div><b>لعبتنا الأولى في Scratch</b><span>يبني لعبة صغيرة خطوة بخطوة.</span></div></li>
+    <li><div><b>لعبة نتحكم فيها بالذكاء الاصطناعي</b><span>يضيف إلى لعبته نموذجًا درّبه بنفسه.</span></div></li>
+    <li><div><b>الأمان والحقيقة وعرض المشروع</b><span>يتعلّم التحقق مما يراه على الإنترنت، ويعرض مشروعه على أهله.</span></div></li>
+  </ol>
+  <ul class="each"><li>🎬 فيديو شرح متحرك</li><li>✏️ نشاط عملي</li><li>🖼️ أسئلة بالصور</li><li>📸 مهمة يرفعها ولي الأمر</li><li>🗣️ مصري · خليجي · English</li></ul>
+</div></section>
 <section id="book"><div class="wrap">
   <h2>احجز مكان طفلك في HUDERA Kids Academy</h2>
-  <p class="lead">املأ البيانات واضغط الزر، فتُفتح محادثة واتساب مع فريق الأكاديمية ومعها بيانات الحجز. الأماكن محدودة، والأولوية بترتيب الحجز. نرسل لك موعد البداية والتفاصيل هناك.</p>
+  <p class="lead">سجّل بيانات طفلك الآن، ونحفظ مكانه في قائمة الحجز. وفور بدء الدفعة نتواصل معك على واتساب بموعد البداية وطريقة الاشتراك. التسجيل مجاني ولا يُلزمك بالدفع.</p>
   <form id="f" novalidate>
-    <div><label for="pn">اسم ولي الأمر</label><input id="pn" name="pn" autocomplete="name" required></div>
-    <div><label for="cn">اسم الطفل</label><input id="cn" name="cn" required></div>
+    <div><label for="pn">اسم ولي الأمر</label><input id="pn" autocomplete="name" required></div>
+    <div><label for="ph">رقم واتساب ولي الأمر</label><div class="ph"><select id="cc" aria-label="الدولة"></select><input id="ph" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="1012345678" required></div></div>
+    <div><label for="cn">اسم الطفل</label><input id="cn" required></div>
     <div><label for="age">عمر الطفل</label>
-      <select id="age" name="age" required><option value="">اختر العمر</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>أصغر من 8</option><option>أكبر من 12</option></select></div>
-    <div><label for="co">الدولة</label><input id="co" name="co" autocomplete="country-name" required></div>
+      <select id="age" required><option value="">اختر العمر</option><option value="7">7 سنوات</option><option value="8">8 سنوات</option><option value="9">9 سنوات</option><option value="10">10 سنوات</option><option value="11">11 سنة</option><option value="12">12 سنة</option></select></div>
+    <div><label for="city">المدينة (اختياري)</label><input id="city" autocomplete="address-level2"></div>
+    <div><label for="lang">لغة الشرح المفضّلة</label><select id="lang"><option value="egy">مصري</option><option value="gulf">خليجي</option><option value="en">English</option></select></div>
+    <label class="full" style="display:flex;gap:10px;align-items:flex-start;font-weight:400"><input id="ok" type="checkbox" style="width:auto;margin-top:7px"> أوافق على أن تتواصل معي HUDERA على واتساب بخصوص الكورس، وعلى <a href="/privacy.html">سياسة الخصوصية</a>.</label>
     <p class="err full" id="err" role="alert"></p>
-    <div class="full"><button class="btn" type="submit">أرسل الحجز على واتساب</button></div>
-    <p class="note full">لا نحفظ هذه البيانات على الموقع. تُرسل فقط في رسالة الواتساب التي ترسلها أنت.</p>
+    <div class="full"><button class="btn" id="go" type="submit">سجّل وأحجز مكان طفلي</button></div>
+    <p class="note full">بياناتك تُحفظ بأمان على نظام HUDERA ولا نشاركها مع أي جهة. الطفل لا ينشئ أي حساب.</p>
   </form>
+  <div class="ok" id="done" hidden><b>تم الحجز 🎉</b><p id="donep" style="margin:6px 0 0"></p></div>
 </div></section>
 
 <section><div class="wrap adult">
@@ -125,15 +152,35 @@ footer{padding:26px 0 40px;color:var(--muted);font-size:14.5px}
 <footer><div class="wrap">HUDERA Kids Academy «هوديرا كيدز أكاديمي» · جزء من <a href="/academy/">HUDERA Academy</a> · من <a href="/">HUDERA AI</a> · <a href="https://wa.me/201555159139" target="_blank" rel="noopener">واتساب</a> · <a href="mailto:info@hudera.ai">info@hudera.ai</a></div></footer>
 
 <script>
-document.getElementById('f').addEventListener('submit',function(e){
-  e.preventDefault();
-  var g=function(id){return document.getElementById(id).value.trim()};
-  var pn=g('pn'),cn=g('cn'),age=g('age'),co=g('co'),err=document.getElementById('err');
-  if(!pn||!cn||!age||!co){err.textContent='أكمل الخانات الأربع ثم اضغط الزر.';return;}
-  err.textContent='';
-  var msg='مرحبًا، أريد حجز مكان في HUDERA Kids Academy (كورس الذكاء الاصطناعي للأطفال).\nولي الأمر: '+pn+'\nالطفل: '+cn+'\nالعمر: '+age+'\nالدولة: '+co;
-  window.open('https://wa.me/201555159139?text='+encodeURIComponent(msg),'_blank','noopener');
-});
+(function(){
+  var URL_='https://aetdmyxpbxlkywkvltae.supabase.co', KEY='sb_publishable_5pt8cZlsoOgmX9QQoGWvvA_K8Ri4roW';
+  var C=[["EG","مصر","20"],["SA","السعودية","966"],["AE","الإمارات","971"],["KW","الكويت","965"],["QA","قطر","974"],["BH","البحرين","973"],["OM","عُمان","968"],["JO","الأردن","962"],["PS","فلسطين","970"],["LB","لبنان","961"],["IQ","العراق","964"],["LY","ليبيا","218"],["TN","تونس","216"],["DZ","الجزائر","213"],["MA","المغرب","212"],["SD","السودان","249"],["TR","تركيا","90"],["GB","المملكة المتحدة","44"],["DE","ألمانيا","49"],["US","الولايات المتحدة","1"],["CA","كندا","1"]];
+  var cc=document.getElementById('cc'); C.forEach(function(c){var o=document.createElement('option');o.value=c[0];o.textContent=c[1]+' +'+c[2];cc.appendChild(o);});
+  var $=function(id){return document.getElementById(id)}, err=$('err');
+  var tok=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2);
+  var phone=function(){var v=$('ph').value.replace(/[\s\-().]/g,'').replace(/[٠-٩]/g,function(c){return '٠١٢٣٤٥٦٧٨٩'.indexOf(c)});if(!v)return '';if(v.indexOf('00')===0)v='+'+v.slice(2);if(v[0]==='+')return v;var d=(C.find(function(c){return c[0]===cc.value})||[])[2];return '+'+d+v.replace(/^0+/,'');};
+  var E={invalid_age:'اختر عمر الطفل.',invalid_phone:'اكتب رقم واتساب صحيحًا.',guardian_phone:'اكتب رقم واتساب صحيحًا لولي الأمر.',guardian_required:'اكتب اسم ولي الأمر.',rate_limited:'محاولات كثيرة من نفس الشبكة. حاول بعد قليل.'};
+  $('f').addEventListener('submit',function(e){
+    e.preventDefault();
+    var pn=$('pn').value.trim(), cn=$('cn').value.trim(), age=$('age').value, p=phone();
+    if(pn.length<2){err.textContent='اكتب اسم ولي الأمر.';return;}
+    if(!/^\+[1-9]\d{7,14}$/.test(p)){err.textContent='اكتب رقم واتساب صحيحًا.';return;}
+    if(cn.length<2){err.textContent='اكتب اسم الطفل.';return;}
+    if(!age){err.textContent='اختر عمر الطفل.';return;}
+    if(!$('ok').checked){err.textContent='وافق على التواصل وسياسة الخصوصية لإكمال الحجز.';return;}
+    err.textContent='جارٍ الحجز…'; $('go').disabled=true;
+    var q=new URLSearchParams(location.search), utm={path:'/academy/kids/'}; ['utm_source','utm_medium','utm_campaign','ref'].forEach(function(k){if(q.get(k))utm[k]=q.get(k).slice(0,80);});
+    var body={p:{full_name:cn,age:age,country:cc.value,city:$('city').value.trim(),phone:p,email:'',occupation:'school',ai_use:'none',tools:[],goal:'basics',goal_note:'HUDERA Kids Academy · حجز من صفحة الأطفال',lang:$('lang').value,times:[],device:'',source:'kids-page',guardian_name:pn,guardian_phone:p,quiz:null,consent:true,client_token:tok,utm:utm}};
+    fetch(URL_+'/rest/v1/rpc/academy_register',{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})})
+      .then(function(x){
+        if(!x.ok){var k=String((x.j&&x.j.message)||'').split(/\s/)[0];err.textContent=E[k]||'حدثت مشكلة. حاول مرة أخرى، أو راسلنا على واتساب.';$('go').disabled=false;return;}
+        $('f').hidden=true; $('done').hidden=false;
+        $('donep').textContent='حجزنا مكان '+cn.split(/\s+/)[0]+' في قائمة الحجز'+(x.j&&x.j.ref?' (رقم الحجز: '+x.j.ref+')':'')+'. سنتواصل معك على واتساب فور بدء الدفعة.';
+      })
+      .catch(function(){err.textContent='تعذّر الاتصال. تأكد من الإنترنت وحاول مرة أخرى.';$('go').disabled=false;});
+  });
+})();
 </script>
 </body>
 </html>
