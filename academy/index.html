@@ -118,6 +118,8 @@ input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb,var(
 .consent{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;margin:4px 0 16px}.consent input{margin-top:5px;accent-color:var(--primary);width:18px;height:18px}
 .msg{padding:11px 14px;border-radius:12px;margin-top:12px;font-size:14.5px;background:var(--err-soft);color:var(--err)}.msg.ok{background:var(--ok-soft);color:var(--ok)}
 .note{padding:12px 14px;border-radius:12px;background:var(--warn-soft);color:var(--warn);font-size:15px}
+.was{color:var(--faint);text-decoration:line-through;text-decoration-thickness:2px;font-weight:600;font-size:.62em;margin-inline-end:8px}
+.sale{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 14px;border-radius:14px;background:var(--ok-soft);color:var(--ok);font-weight:700;margin-bottom:14px}.sale b{font:800 20px "Bricolage Grotesque";direction:ltr}.sale .off{background:var(--ok);color:#fff;border-radius:999px;padding:2px 10px;font-size:13px}
 .gbtn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px;border-radius:13px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
 .gbtn svg{width:20px;height:20px}
 .narrow{max-width:720px;margin:0 auto}
@@ -241,29 +243,39 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   const rpc = async (fn, args) => { const { data, error } = await sb.rpc(fn, args); if (error) throw error; return data; };
   const rnd = () => [...crypto.getRandomValues(new Uint8Array(8))].map(b => b.toString(16).padStart(2, "0")).join("");
 
+  /* one portal, two courses: /academy/?c=kids is the kids course (parents sign in and enroll their child) */
+  const KIDS = (() => { const q = new URLSearchParams(location.search); if (q.get("c") === "kids") return true;
+    if (q.has("code")) { try { return sessionStorage.getItem("academy-course") === "kids"; } catch (e) {} } return false; })();
+  const SLUG = KIDS ? "kids-ai" : "ai-foundations", QS = KIDS ? "?c=kids" : "";
+  if (KIDS) document.title = "HUDERA Kids Academy · حساب الطفل";
   let user = null, cat = null, course = null, enrId = null;
   const mineActive = () => (cat?.mine || []).find(m => ["active", "completed"].includes(m.status));
   const minePending = () => (cat?.mine || []).find(m => m.status === "pending");
 
-  async function loadCatalog() { cat = await rpc("academy_catalog", { p_slug: "ai-foundations" }); const a = mineActive(); enrId = a?.id || null; return cat; }
+  async function loadCatalog() { cat = await rpc("academy_catalog", { p_slug: SLUG }); const a = mineActive(); enrId = a?.id || null; return cat; }
   async function loadCourse() { course = enrId ? await rpc("academy_course", { p_enrollment: enrId }) : null; return course; }
 
   function nav() {
     const r = location.hash.split("/")[1] || "";
     const a = (h, t, k, cls = "") => `<a href="${h}" class="${cls}" ${r === k ? 'aria-current="page"' : ""}>${t}</a>`;
-    $("#nav").innerHTML = (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : a("#/register", "سجّل الآن", "register")) + a("#/course", "الدورة", "course", enrId ? "hm" : "") + `<a href="/academy/kids/" class="hm kd" title="HUDERA Kids Academy · هوديرا كيدز أكاديمي">Kids Academy</a><a href="../" class="hm">HUDERA AI</a>`
+    $("#nav").innerHTML = (KIDS
+        ? (enrId ? a("#/learn", "لوحة طفلك", "learn") + a("#/progress", "التقدّم", "progress", "hm") : a("#/enroll", "سجّل طفلك", "enroll")) + `<a href="/academy/kids/" class="hm">عن الكورس</a><a href="/academy/" class="hm">أكاديمية الكبار</a>`
+        : (enrId ? a("#/learn", "لوحتي", "learn") + a("#/progress", "تقدّمي", "progress", "hm") : a("#/register", "سجّل الآن", "register")) + a("#/course", "الدورة", "course", enrId ? "hm" : "") + `<a href="/academy/kids/" class="hm kd" title="HUDERA Kids Academy · هوديرا كيدز أكاديمي">Kids Academy</a><a href="../" class="hm">HUDERA AI</a>`)
       + (user ? `<span class="who">${user.user_metadata?.avatar_url ? `<img src="${esc(user.user_metadata.avatar_url)}" alt="" referrerpolicy="no-referrer">` : ""}<button class="btn sm ghost" id="out" type="button">خروج</button></span>`
               : `<button class="btn sm" id="in" type="button">${G_ICON} دخول</button>`);
     $("#out")?.addEventListener("click", async () => { await sb.auth.signOut(); location.hash = "#/course"; location.reload(); });
     $("#in")?.addEventListener("click", () => signIn());
   }
   function signIn(back = location.hash || "#/") {
-    try { sessionStorage.setItem("hudera-return", "/academy/"); sessionStorage.setItem("academy-back", back); } catch (e) {}
+    try { sessionStorage.setItem("hudera-return", "/academy/"); sessionStorage.setItem("academy-back", back); sessionStorage.setItem("academy-course", KIDS ? "kids" : ""); } catch (e) {}
     sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: "select_account" } } });
   }
 
   /* ---------------------------------------------------------------- landing */
   const pkgs = () => (cat?.packages || []);
+  const onSale = p => Number(p.list_usd) > Number(p.usd);
+  const priceHtml = p => onSale(p) ? `<s class="was">$${Number(p.list_usd)}</s>$${Number(p.usd)}` : `$${Number(p.usd)}`;
+  const saleBar = p => onSale(p) ? `<div class="sale"><span class="off">-${Math.round(100 - 100 * Number(p.usd) / Number(p.list_usd))}%</span><span>${esc(p.sale || "خصم لفترة محدودة")}: الكورس كامل</span><b>$${Number(p.usd)}</b><span>بدل <bdi dir="ltr"><s>$${Number(p.list_usd)}</s></bdi></span></div>` : "";
   const rate = () => Number(cat?.payment?.egp_rate) || 0;
   const egp = usd => rate() ? `≈ ${(Math.round(usd * rate() / 10) * 10).toLocaleString("en-US")} جنيه` : "";
   const nSess = () => (cat?.sessions || []).length || 8;
@@ -348,8 +360,8 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     const pend = minePending(), act = mineActive(), rej = (cat.mine || []).find(m => m.status === "rejected");
     if (act) { location.hash = "#/learn"; return; }
     if (!user) {
-      app.innerHTML = `<section><div class="wrap narrow"><div class="card state"><div class="ic">🔐</div><b>سجّل الدخول بحساب Google أولاً</b>
-        <p style="color:var(--muted)">حسابك في الأكاديمية مرتبط ببريدك في Google، ومنه تشاهد وتسلّم وتتابع درجاتك.</p><button class="gbtn" id="g" type="button">${G_ICON} الدخول بحساب Google</button></div></div></section>`;
+      app.innerHTML = `<section><div class="wrap narrow"><div class="card state"><div class="ic">🔐</div><b>${KIDS ? "ولي الأمر يسجّل الدخول بحساب Google" : "سجّل الدخول بحساب Google أولاً"}</b>
+        <p style="color:var(--muted)">${KIDS ? "حساب الطفل مرتبط ببريد ولي الأمر في Google، ومنه يشاهد طفلك الفيديوهات ويسلّم أنشطته وتتابع أنت تقدّمه." : "حسابك في الأكاديمية مرتبط ببريدك في Google، ومنه تشاهد وتسلّم وتتابع درجاتك."}</p><button class="gbtn" id="g" type="button">${G_ICON} الدخول بحساب Google</button></div></div></section>`;
       $("#g").addEventListener("click", () => signIn(location.hash)); return;
     }
     if (pend) {
@@ -365,29 +377,35 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     const book = !pay.instapay && !pay.vodafone_cash; /* no payment numbers yet: reserve now, pay after we message on WhatsApp */
     if (!C.length) { app.innerHTML = `<section><div class="wrap narrow"><div class="card state"><div class="ic">📅</div><b>لا توجد دفعة مفتوحة حالياً</b><p style="color:var(--muted)">سنعلن عن الدفعة القادمة قريباً على صفحاتنا.</p></div></div></section>`; return; }
     proof = null;
-    app.innerHTML = `<section><div class="wrap narrow"><h2 class="sec">احجز مقعدك</h2><p class="lead">${book ? "خطوة واحدة: بياناتك والدفعة والباقة، ثم نرسل لك بيانات الدفع عبر واتساب." : "خطوة واحدة: بياناتك، والدفعة، والباقة، وصورة التحويل."}</p>
+    app.innerHTML = `<section><div class="wrap narrow"><h2 class="sec">${KIDS ? "سجّل طفلك في كورس الذكاء الاصطناعي" : "احجز مقعدك"}</h2><p class="lead">${KIDS ? (book ? "خطوة واحدة: بيانات طفلك وبياناتك، ثم نرسل لك بيانات الدفع عبر واتساب." : "خطوة واحدة: بيانات طفلك وبياناتك وصورة التحويل.") : book ? "خطوة واحدة: بياناتك والدفعة والباقة، ثم نرسل لك بيانات الدفع عبر واتساب." : "خطوة واحدة: بياناتك، والدفعة، والباقة، وصورة التحويل."}</p>
+      ${saleBar(def)}
       ${prev?.reject_reason ? `<div class="note" style="margin-bottom:14px">رُفض طلبك السابق: ${esc(prev.reject_reason)}. صحّح المطلوب وأرسله مرة أخرى.</div>` : ""}
       <form class="card" id="ef" novalidate>
-        <div class="g2"><label class="f"><span>الاسم الكامل (يُكتب في الشهادة)</span><input type="text" id="nm" maxlength="120" value="${esc(me.name || user.user_metadata?.full_name || "")}"></label>
+        ${KIDS ? `<div class="g2"><label class="f"><span>اسم الطفل (يُكتب في الشهادة)</span><input type="text" id="nm" maxlength="120"></label>
+          <label class="f"><span>عمر الطفل</span><select id="ag"><option value="">اختر</option>${[7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n} سنين</option>`).join("")}</select></label></div>
+        <div class="g2"><label class="f"><span>اسم ولي الأمر</span><input type="text" id="pn" maxlength="120" value="${esc(me.name || user.user_metadata?.full_name || "")}"></label>
+          <label class="f"><span>واتساب ولي الأمر <small>(مع رمز الدولة)</small></span><input type="tel" id="ph" dir="ltr" maxlength="24" placeholder="+20 10 1234 5678" value="${esc(me.phone || "")}"></label></div>
+        <label class="f"><span>حاجة تحب نعرفها عن طفلك؟ <small>(اختياري)</small></span><textarea id="gl" maxlength="600" placeholder="مثلاً: بيحب الرسم، أو أول مرة يستخدم الكمبيوتر"></textarea></label>`
+        : `<div class="g2"><label class="f"><span>الاسم الكامل (يُكتب في الشهادة)</span><input type="text" id="nm" maxlength="120" value="${esc(me.name || user.user_metadata?.full_name || "")}"></label>
           <label class="f"><span>رقم الجوال / واتساب <small>(مع رمز الدولة)</small></span><input type="tel" id="ph" dir="ltr" maxlength="24" placeholder="+20 10 1234 5678" value="${esc(me.phone || "")}"></label></div>
         <label class="f"><span>ماذا تدرس أو تعمل؟</span><input type="text" id="st" maxlength="160" placeholder="مثلاً: هندسة مدنية، السنة الثالثة"></label>
-        <label class="f"><span>ماذا تريد أن تكتسب من الدورة؟ <small>(اختياري)</small></span><textarea id="gl" maxlength="600"></textarea></label>
+        <label class="f"><span>ماذا تريد أن تكتسب من الدورة؟ <small>(اختياري)</small></span><textarea id="gl" maxlength="600"></textarea></label>`}
         <div class="f"><span class="lg">الدفعة</span><div class="pick" id="coh">${C.map((c, i) => `<label><input type="radio" name="coh" value="${c.id}" ${i === 0 ? "checked" : ""}><span><b>${esc(c.name)}</b><small>تبدأ ${fmtD(c.starts_on)} · المقاعد المتبقية: ${Math.max(c.seats - c.taken, 0)}</small></span></label>`).join("")}</div></div>
-        <div class="f"><span class="lg">الباقة</span><div class="pick" id="pk">${P.map(p => `<label><input type="radio" name="pk" value="${esc(p.key)}" ${p.key === def.key ? "checked" : ""}><span><b>${esc(p.ar)}</b><small>${esc(noLive(p.features).slice(1, 3).join(" · "))}</small></span><span class="pr">$${Number(p.usd)}</span></label>`).join("")}</div></div>
+        <div class="f"><span class="lg">الباقة</span><div class="pick" id="pk">${P.map(p => `<label><input type="radio" name="pk" value="${esc(p.key)}" ${p.key === def.key ? "checked" : ""}><span><b>${esc(p.ar)}</b><small>${esc(noLive(p.features).slice(1, 3).join(" · "))}</small></span><span class="pr">${priceHtml(p)}</span></label>`).join("")}</div></div>
         <div class="paybox"><span style="color:var(--muted)">المبلغ المطلوب</span><br><span class="amt" id="amt"></span> <span id="amtE" style="color:var(--muted)"></span>
           ${pay.instapay ? `<div class="acct"><span>إنستاباي</span><b>${esc(pay.instapay)}</b></div>` : ""}${pay.vodafone_cash ? `<div class="acct"><span>فودافون كاش</span><b>${esc(pay.vodafone_cash)}</b></div>` : ""}
           ${!pay.instapay && !pay.vodafone_cash ? `<div class="acct"><span>بيانات التحويل</span><b>نرسلها لك عبر واتساب</b></div>` : ""}
-          <p style="margin:6px 0 0;font-size:14px;color:var(--muted)">${book ? "احجز مقعدك الآن، وسنتواصل معك عبر واتساب ببيانات الدفع. يُفعَّل حسابك بعد الدفع." : esc(pay.note || "")}</p></div>
+          <p style="margin:6px 0 0;font-size:14px;color:var(--muted)">${book ? (KIDS ? "احجز مكان طفلك الآن، وسنتواصل معك عبر واتساب ببيانات الدفع. يُفعَّل حساب طفلك بعد الدفع." : "احجز مقعدك الآن، وسنتواصل معك عبر واتساب ببيانات الدفع. يُفعَّل حسابك بعد الدفع.") : esc(pay.note || "")}</p></div>
         ${book ? "" : `
         <div class="f"><span class="lg">طريقة التحويل</span><div class="seg" id="pm"><label><input type="radio" name="pm" value="instapay" checked>إنستاباي</label><label><input type="radio" name="pm" value="vodafone_cash">فودافون كاش</label><label><input type="radio" name="pm" value="bank">تحويل بنكي</label><label><input type="radio" name="pm" value="other">طريقة أخرى</label></div></div>
         <label class="f"><span>رقم العملية / اسم المحوّل</span><input type="text" id="rf" maxlength="120" dir="auto"></label>
         <div class="f"><span class="lg">صورة التحويل</span><input type="file" id="pf" accept="image/*,.pdf" hidden>
           <div class="drop" id="dr" role="button" tabindex="0"><b>اضغط وارفع صورة إيصال التحويل</b><span>صورة أو PDF · حتى 5 ميجابايت</span></div>
           <div class="filepick" id="pk2" hidden><span>🧾</span><span class="nm" id="pn"></span><button class="btn sm ghost" type="button" id="un">إزالة</button></div></div>`}
-        <label class="consent"><input type="checkbox" id="cs"><span>أوافق على احتفاظ HUDERA Academy ببياناتي وأعمالي على المنصة لأغراض الدورة والشهادة، وأفهم شروط الاسترداد: كاملاً قبل الجلسة الأولى، أو بعد إتمام الدورة بشرط إتمام كل دروس الجلسات وتسليم كل المهام والاختبارات وطلبه خلال 14 يوماً من آخر جلسة. وأفهم أن الحساب شخصي: لا تجوز مشاركته أو مشاركة الفيديوهات أو تسجيلها، ويعمل على جهازين فقط، ويظهر اسمي على الفيديو أثناء المشاهدة، وتُوقف المشاركة الاشتراك دون استرداد. <a href="../privacy.html" target="_blank">الخصوصية</a></span></label>
-        <button class="btn primary big" style="width:100%" id="go" type="submit">${book ? "احجز مقعدي" : "أرسل طلب الاشتراك"}</button><div class="msg" id="er" role="alert" hidden></div>
+        <label class="consent"><input type="checkbox" id="cs"><span>${KIDS ? "أنا ولي أمر الطفل، وأوافق على تسجيله في الكورس وعلى" : "أوافق على"} احتفاظ HUDERA Academy ببياناتي وأعمالي على المنصة لأغراض الدورة والشهادة، وأفهم شروط الاسترداد: كاملاً قبل الجلسة الأولى، أو بعد إتمام الدورة بشرط إتمام كل دروس الجلسات وتسليم كل المهام والاختبارات وطلبه خلال 14 يوماً من آخر جلسة. وأفهم أن الحساب شخصي: لا تجوز مشاركته أو مشاركة الفيديوهات أو تسجيلها، ويعمل على جهازين فقط، ويظهر اسمي على الفيديو أثناء المشاهدة، وتُوقف المشاركة الاشتراك دون استرداد. <a href="../privacy.html" target="_blank">الخصوصية</a></span></label>
+        <button class="btn primary big" style="width:100%" id="go" type="submit">${book ? (KIDS ? "احجز مكان طفلك" : "احجز مقعدي") : "أرسل طلب الاشتراك"}</button><div class="msg" id="er" role="alert" hidden></div>
       </form></div></section>`;
-    const upd = () => { const p = P.find(x => x.key === $("input[name=pk]:checked")?.value) || def; $("#amt").textContent = `$${Number(p.usd)}`; $("#amtE").textContent = rate() ? `(${egp(p.usd)})` : ""; };
+    const upd = () => { const p = P.find(x => x.key === $("input[name=pk]:checked")?.value) || def; $("#amt").innerHTML = priceHtml(p); $("#amtE").textContent = rate() ? `(${egp(p.usd)})` : ""; };
     $("#pk").addEventListener("change", upd); upd();
     if (!book) {
     const pick = f => { if (!f) return; if (f.size > 5 * 1024 * 1024) return toast("حجم الملف أكبر من 5 ميجابايت"); if (!/^image\//.test(f.type) && f.type !== "application/pdf") return toast("ارفع صورة أو PDF"); proof = f; $("#pn").textContent = f.name; $("#pk2").hidden = false; $("#dr").hidden = true; };
@@ -400,7 +418,9 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     $("#ef").addEventListener("submit", async e => {
       e.preventDefault(); const er = $("#er"); er.hidden = true; const bad = (m, el) => { er.textContent = m; er.hidden = false; el?.classList.add("bad"); el?.focus(); };
       $$(".bad").forEach(x => x.classList.remove("bad"));
-      if ($("#nm").value.trim().length < 2) return bad(E.invalid_name, $("#nm"));
+      if ($("#nm").value.trim().length < 2) return bad(KIDS ? "اكتب اسم الطفل" : E.invalid_name, $("#nm"));
+      if (KIDS && !$("#ag").value) return bad("اختر عمر الطفل", $("#ag"));
+      if (KIDS && $("#pn").value.trim().length < 2) return bad("اكتب اسم ولي الأمر", $("#pn"));
       if ($("#ph").value.replace(/\D/g, "").length < 8) return bad(E.invalid_phone, $("#ph"));
       if (!book && !proof && $("#rf").value.trim().length < 3) return bad(E.proof_required, $("#rf"));
       if (!$("#cs").checked) return bad(E.consent_required, $("#cs"));
@@ -411,9 +431,9 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
           proof_path = `${user.id}/pay/receipt_${rnd()}.${ext}`; const { error } = await sb.storage.from("academy-files").upload(proof_path, proof, { contentType: proof.type, upsert: false }); if (error) throw new Error("file_missing"); }
         go.textContent = "جارٍ الإرسال…";
         await rpc("academy_enroll", { p: { cohort_id: $("input[name=coh]:checked").value, package: $("input[name=pk]:checked").value, full_name: $("#nm").value.trim(), phone: $("#ph").value.trim(),
-          study: $("#st").value.trim(), goal: $("#gl").value.trim(), pay_method: book ? "other" : $("input[name=pm]:checked").value, pay_ref: book ? "حجز: تُرسل بيانات الدفع عبر واتساب" : $("#rf").value.trim(), proof_path, consent: true } });
+          study: KIDS ? `طفل ${$("#ag").value} سنين · ولي الأمر: ${$("#pn").value.trim()}` : $("#st").value.trim(), goal: $("#gl").value.trim(), pay_method: book ? "other" : $("input[name=pm]:checked").value, pay_ref: book ? "حجز: تُرسل بيانات الدفع عبر واتساب" : $("#rf").value.trim(), proof_path, consent: true } });
         await loadCatalog(); nav(); viewEnroll(); window.scrollTo({ top: 0, behavior: "smooth" });
-      } catch (x) { bad(errMsg(x)); } finally { go.disabled = false; go.textContent = book ? "احجز مقعدي" : "أرسل طلب الاشتراك"; }
+      } catch (x) { bad(errMsg(x)); } finally { go.disabled = false; go.textContent = book ? (KIDS ? "احجز مكان طفلك" : "احجز مقعدي") : "أرسل طلب الاشتراك"; }
     });
   }
 
@@ -890,6 +910,7 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
     nav(); window.scrollTo(0, 0);
     try {
       if (r === "verify") return viewVerify(a ? decodeURIComponent(a) : "");
+      if (KIDS && (r === "register" || ((r === "" || r === "course") && !enrId))) { location.replace(r === "register" ? "/academy/kids/#book" : "/academy/kids/#price"); return; }
       if (r === "register") return viewRegister();
       if (r === "enroll") return viewEnroll(a);
       if ((r === "learn" || r === "s" || r === "progress") && !enrId) { location.hash = user ? "#/enroll" : "#/course"; return; }
@@ -904,8 +925,8 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
   (async () => {
     const qs = new URLSearchParams(location.search);
     const { data } = await sb.auth.getSession(); user = data.session?.user || null;
-    if (qs.has("code")) history.replaceState(null, "", location.pathname + location.hash);
-    let back = null; try { back = sessionStorage.getItem("academy-back"); sessionStorage.removeItem("academy-back"); sessionStorage.removeItem("hudera-return"); } catch (e) {}
+    if (qs.has("code")) history.replaceState(null, "", location.pathname + QS + location.hash);
+    let back = null; try { back = sessionStorage.getItem("academy-back"); sessionStorage.removeItem("academy-back"); sessionStorage.removeItem("hudera-return"); sessionStorage.removeItem("academy-course"); } catch (e) {}
     sb.auth.onAuthStateChange(async (ev, s) => { const was = user?.id; user = s?.user || null; if ((user?.id || null) !== (was || null)) { await loadCatalog().catch(() => {}); route(); } });
     try { await loadCatalog(); } catch (e) { if (location.hash.startsWith("#/register")) { route(); return; } app.innerHTML = `<section><div class="wrap narrow"><div class="msg">الأكاديمية غير متاحة حالياً. حاول بعد قليل.</div></div></section>`; return; }
     if (back && back !== location.hash) { location.hash = back; return; }

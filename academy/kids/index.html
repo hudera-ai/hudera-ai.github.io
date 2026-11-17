@@ -68,6 +68,17 @@ input,select{width:100%;font:inherit;padding:12px 14px;border:1px solid #C9C7E0;
 .plan b{display:block;font-size:17.5px}.plan span{color:var(--muted);font-size:15.5px}
 .each{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}.each li{background:#EEF1FF;border-radius:10px;padding:4px 12px;font-size:15px}
 .ok{background:#E7F8F3;border:1px solid #9FE3D2;border-radius:18px;padding:22px;max-width:720px}.ok b{font-size:20px}
+.price{background:#1B1147;color:#FFFDF5;border-radius:26px;padding:30px;display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:center}
+.price .tag{display:inline-block;background:var(--sun);color:#2A1B00;font-weight:800;border-radius:999px;padding:4px 14px;font-size:15px}
+.price .amt{display:flex;align-items:baseline;gap:14px;margin:14px 0 4px;direction:ltr;justify-content:flex-end}
+.price .amt b{font-size:clamp(56px,9vw,84px);line-height:1;font-weight:800;color:#fff}
+.price .amt s{font-size:30px;color:#A8A1D6;text-decoration-thickness:3px;text-decoration-color:#FF6B6B}
+.price .sub{color:#D9D4F5;margin:0 0 18px}
+.price ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.price li{display:flex;gap:10px;color:#F1EEFF}.price li::before{content:"✓";color:var(--sun);font-weight:800}
+.price .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:6px}
+.price .ghost{color:#FFFDF5;font-weight:700}
+@media (max-width:760px){.price{grid-template-columns:1fr;padding:24px}}
 .ph{display:grid;grid-template-columns:120px 1fr;gap:8px}
 @media (max-width:760px){.plan{grid-template-columns:1fr}}
 footer{padding:26px 0 40px;color:var(--muted);font-size:14.5px}
@@ -82,11 +93,11 @@ footer{padding:26px 0 40px;color:var(--muted);font-size:14.5px}
 
 <main>
 <div class="hero"><div class="wrap">
-  <span class="when">الحجز مفتوح · أونلاين من البيت · من 8 إلى 12 سنة · الأماكن محدودة</span>
+  <span class="when">خصم 50% لأولوية التسجيل · الكورس كامل <bdi dir="ltr">$100</bdi> بدل <bdi dir="ltr">$200</bdi> · الأماكن محدودة</span>
   <span class="brandline"><bdi>HUDERA Kids Academy</bdi> <span>· «هوديرا كيدز أكاديمي»</span></span>
   <h1>طفلك يستخدم الذكاء الاصطناعي كل يوم. علّمه كيف يعمل.</h1>
   <p>كورس الذكاء الاصطناعي للأطفال من HUDERA Kids Academy، أونلاين من البيت. في كل جلسة يصنع الطفل شيئًا بيده ويريه لأهله، بدل أن يستخدم الأدوات دون أن يفهمها.</p>
-  <a class="btn" href="#book">احجز مكان طفلك قبل اكتمال العدد</a> <a href="#plan" style="margin-inline-start:14px;font-weight:700;color:var(--brand)">اطّلع على المنهج</a>
+  <a class="btn" href="#price">احجز مكان طفلك بسعر أولوية التسجيل</a> <a href="#plan" style="margin-inline-start:14px;font-weight:700;color:var(--brand)">اطّلع على المنهج</a>
 </div></div>
 
 <section><div class="wrap">
@@ -121,9 +132,28 @@ footer{padding:26px 0 40px;color:var(--muted);font-size:14.5px}
   </ol>
   <ul class="each"><li>🎬 فيديو شرح متحرك</li><li>✏️ نشاط عملي</li><li>🖼️ أسئلة بالصور</li><li>📸 مهمة يرفعها ولي الأمر</li><li>🗣️ مصري · خليجي · English</li></ul>
 </div></section>
+<section id="price"><div class="wrap">
+  <div class="price">
+    <div>
+      <span class="tag">خصم 50% · أولوية التسجيل</span>
+      <div class="amt"><s>$200</s><b>$100</b></div>
+      <p class="sub">الكورس كامل: 8 جلسات. السعر بعد انتهاء أولوية التسجيل <bdi dir="ltr">$200</bdi>.</p>
+      <div class="acts"><a class="btn" href="/academy/?c=kids#/enroll">سجّل طفلك الآن بـ <bdi dir="ltr">$100</bdi></a><a class="ghost" href="#book">مش جاهز تدفع؟ احجز مكانه مجانًا</a></div>
+    </div>
+    <ul>
+      <li>8 جلسات فيديو متحركة مع «روبي»، بالمصري أو الخليجي أو الإنجليزي</li>
+      <li>نشاط عملي ومهمة بسيطة في كل جلسة</li>
+      <li>أسئلة بالصور بعد كل جلسة</li>
+      <li>ولي الأمر يتابع تقدّم طفله من حسابه</li>
+      <li>شهادة إتمام باسم الطفل</li>
+      <li>الدفعة الأولى تبدأ الجمعة 4 ديسمبر · جلسة جديدة كل جمعة</li>
+    </ul>
+  </div>
+</div></section>
+
 <section id="book"><div class="wrap">
   <h2>احجز مكان طفلك في HUDERA Kids Academy</h2>
-  <p class="lead">سجّل بيانات طفلك الآن، ونحفظ مكانه في قائمة الحجز. وفور بدء الدفعة نتواصل معك على واتساب بموعد البداية وطريقة الاشتراك. التسجيل مجاني ولا يُلزمك بالدفع.</p>
+  <p class="lead">سجّل بيانات طفلك الآن، ونحفظ مكانه في قائمة الحجز. ونتواصل معك على واتساب بموعد البداية وطريقة الاشتراك، ويثبت لك سعر أولوية التسجيل (<bdi dir="ltr">$100</bdi> بدل <bdi dir="ltr">$200</bdi>). الحجز مجاني ولا يُلزمك بالدفع.</p>
   <form id="f" novalidate>
     <div><label for="pn">اسم ولي الأمر</label><input id="pn" autocomplete="name" required></div>
     <div><label for="ph">رقم واتساب ولي الأمر</label><div class="ph"><select id="cc" aria-label="الدولة"></select><input id="ph" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="1012345678" required></div></div>
@@ -176,7 +206,7 @@ footer{padding:26px 0 40px;color:var(--muted);font-size:14.5px}
       .then(function(x){
         if(!x.ok){var k=String((x.j&&x.j.message)||'').split(/\s/)[0];err.textContent=E[k]||'حدثت مشكلة. حاول مرة أخرى، أو راسلنا على واتساب.';$('go').disabled=false;return;}
         $('f').hidden=true; $('done').hidden=false;
-        $('donep').textContent='حجزنا مكان '+cn.split(/\s+/)[0]+' في قائمة الحجز'+(x.j&&x.j.ref?' (رقم الحجز: '+x.j.ref+')':'')+'. سنتواصل معك على واتساب فور بدء الدفعة.';
+        $('donep').textContent='حجزنا مكان '+cn.split(/\s+/)[0]+' في قائمة الحجز'+(x.j&&x.j.ref?' (رقم الحجز: '+x.j.ref+')':'')+'، وثبّتنا لك سعر أولوية التسجيل \u2066$100\u2069 بدل \u2066$200\u2069. سنتواصل معك على واتساب. ';var ga=document.createElement('a');ga.href='/academy/?c=kids#/enroll';ga.textContent='أو أكمل الاشتراك الآن';ga.style.fontWeight='800';$('donep').appendChild(ga);
       })
       .catch(function(){err.textContent='تعذّر الاتصال. تأكد من الإنترنت وحاول مرة أخرى.';$('go').disabled=false;});
   });
