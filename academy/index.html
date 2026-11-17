@@ -340,7 +340,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     <section style="padding-top:0"><div class="wrap"><div class="card rgcta"><div><b style="color:var(--ink);font-size:19px">مش متأكد أي مسار يناسبك؟</b><p style="margin:4px 0 0;color:var(--muted)">سجّل بياناتك وحُلّ اختبار مستوى قصيراً (8 أسئلة)، ونقترح لك المسار المناسب ونتواصل معك على واتساب.</p></div><a class="btn primary big" href="#/register">سجّل الآن مجاناً</a></div></div></section>
     <section style="padding-top:0" id="kids"><div class="wrap"><div class="card kids">
       <div><span class="kt">🧒 جديد · للأطفال من 8 إلى 12 سنة</span><h2>HUDERA Kids Academy</h2><p class="ar">«هوديرا كيدز أكاديمي»</p>
-        <p>كورس ذكاء اصطناعي للأطفال من 8 لـ 12 سنة، أونلاين من البيت: طفلك يعلّم الكمبيوتر يميّز الصور، ويألّف قصة، ويصنع لعبته الأولى. الأماكن محدودة.</p>
+        <p>كورس الذكاء الاصطناعي الآمن للأطفال من 8 لـ 12 سنة، أونلاين من البيت: طفلك يعلّم الكمبيوتر يميّز الصور، ويألّف قصة، ويصنع لعبته الأولى. الأماكن محدودة.</p>
         <div class="kc"><span>💻 أونلاين من البيت</span><span>🎬 فيديو ونشاط في كل جلسة</span><span>👨‍👩‍👧 ولي الأمر يسجّل ويتابع</span><span>🎟️ الأماكن محدودة</span></div>
         <a class="btn big" href="/academy/kids/">اعرف أكتر واحجز مكان طفلك ←</a></div>
       <div class="art" aria-hidden="true"><i>🤖</i><i>🎨</i><i>📷</i><i>📖</i><i>🎮</i><i>✨</i></div>
@@ -377,7 +377,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     const book = !pay.instapay && !pay.vodafone_cash; /* no payment numbers yet: reserve now, pay after we message on WhatsApp */
     if (!C.length) { app.innerHTML = `<section><div class="wrap narrow"><div class="card state"><div class="ic">📅</div><b>لا توجد دفعة مفتوحة حالياً</b><p style="color:var(--muted)">سنعلن عن الدفعة القادمة قريباً على صفحاتنا.</p></div></div></section>`; return; }
     proof = null;
-    app.innerHTML = `<section><div class="wrap narrow"><h2 class="sec">${KIDS ? "سجّل طفلك في كورس الذكاء الاصطناعي" : "احجز مقعدك"}</h2><p class="lead">${KIDS ? (book ? "خطوة واحدة: بيانات طفلك وبياناتك، ثم نرسل لك بيانات الدفع عبر واتساب." : "خطوة واحدة: بيانات طفلك وبياناتك وصورة التحويل.") : book ? "خطوة واحدة: بياناتك والدفعة والباقة، ثم نرسل لك بيانات الدفع عبر واتساب." : "خطوة واحدة: بياناتك، والدفعة، والباقة، وصورة التحويل."}</p>
+    app.innerHTML = `<section><div class="wrap narrow"><h2 class="sec">${KIDS ? "سجّل طفلك في كورس الذكاء الاصطناعي الآمن" : "احجز مقعدك"}</h2><p class="lead">${KIDS ? (book ? "خطوة واحدة: بيانات طفلك وبياناتك. ما تدفعش دلوقتي: نأكّد معاك على واتساب قبل بدء الدفعة، والدفع بيكون بعد التأكيد بس." : "خطوة واحدة: بيانات طفلك وبياناتك وصورة التحويل.") : book ? "خطوة واحدة: بياناتك والدفعة والباقة، ثم نرسل لك بيانات الدفع عبر واتساب." : "خطوة واحدة: بياناتك، والدفعة، والباقة، وصورة التحويل."}</p>
       ${saleBar(def)}
       ${prev?.reject_reason ? `<div class="note" style="margin-bottom:14px">رُفض طلبك السابق: ${esc(prev.reject_reason)}. صحّح المطلوب وأرسله مرة أخرى.</div>` : ""}
       <form class="card" id="ef" novalidate>
@@ -395,7 +395,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         <div class="paybox"><span style="color:var(--muted)">المبلغ المطلوب</span><br><span class="amt" id="amt"></span> <span id="amtE" style="color:var(--muted)"></span>
           ${pay.instapay ? `<div class="acct"><span>إنستاباي</span><b>${esc(pay.instapay)}</b></div>` : ""}${pay.vodafone_cash ? `<div class="acct"><span>فودافون كاش</span><b>${esc(pay.vodafone_cash)}</b></div>` : ""}
           ${!pay.instapay && !pay.vodafone_cash ? `<div class="acct"><span>بيانات التحويل</span><b>نرسلها لك عبر واتساب</b></div>` : ""}
-          <p style="margin:6px 0 0;font-size:14px;color:var(--muted)">${book ? (KIDS ? "احجز مكان طفلك الآن، وسنتواصل معك عبر واتساب ببيانات الدفع. يُفعَّل حساب طفلك بعد الدفع." : "احجز مقعدك الآن، وسنتواصل معك عبر واتساب ببيانات الدفع. يُفعَّل حسابك بعد الدفع.") : esc(pay.note || "")}</p></div>
+          <p style="margin:6px 0 0;font-size:14px;color:var(--muted)">${book ? (KIDS ? "احجز مكان طفلك الآن من غير دفع. نأكّد معاك على واتساب قبل بدء الدفعة ونبعت بيانات الدفع، ويُفعَّل حساب طفلك بعد الدفع." : "احجز مقعدك الآن، وسنتواصل معك عبر واتساب ببيانات الدفع. يُفعَّل حسابك بعد الدفع.") : esc(pay.note || "")}</p></div>
         ${book ? "" : `
         <div class="f"><span class="lg">طريقة التحويل</span><div class="seg" id="pm"><label><input type="radio" name="pm" value="instapay" checked>إنستاباي</label><label><input type="radio" name="pm" value="vodafone_cash">فودافون كاش</label><label><input type="radio" name="pm" value="bank">تحويل بنكي</label><label><input type="radio" name="pm" value="other">طريقة أخرى</label></div></div>
         <label class="f"><span>رقم العملية / اسم المحوّل</span><input type="text" id="rf" maxlength="120" dir="auto"></label>
