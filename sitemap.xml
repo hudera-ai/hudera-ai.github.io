@@ -22,9 +22,9 @@
   <url><loc>https://hudera.ai/en/products/connect/</loc><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://hudera.ai/products/</loc><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://hudera.ai/en/products/</loc><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
-  <url><loc>https://hudera.ai/blog/ai-news/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://hudera.ai/blog/ai-news/</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
   <url><loc>https://hudera.ai/blog/ai-models/</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
-  <url><loc>https://hudera.ai/en/blog/ai-news/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://hudera.ai/en/blog/ai-news/</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
   <url><loc>https://hudera.ai/en/blog/ai-models/</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
   <url><loc>https://hudera.ai/blog/ai-news/chatgpt-images-2-6-gifs/</loc><lastmod>2026-11-04</lastmod><priority>0.5</priority></url>
   <url><loc>https://hudera.ai/blog/ai-news/claude-sheets-whiteboards-data/</loc><lastmod>2026-11-10</lastmod><priority>0.5</priority></url>
@@ -46,4 +46,8 @@
   <url><loc>https://hudera.ai/en/blog/ai-news/fbi-artex-ai-agents-cyberattacks/</loc><lastmod>2026-11-13</lastmod><priority>0.5</priority></url>
   <url><loc>https://hudera.ai/blog/ai-news/humain-3-trillion-model-saudi-ai-stack/</loc><lastmod>2026-11-11</lastmod><priority>0.5</priority></url>
   <url><loc>https://hudera.ai/en/blog/ai-news/humain-3-trillion-model-saudi-ai-stack/</loc><lastmod>2026-11-11</lastmod><priority>0.5</priority></url>
+  <url><loc>https://hudera.ai/blog/ai-news/sierra-poppy-1-0-shopify-personal-agents/</loc><lastmod>2026-11-13</lastmod><priority>0.5</priority></url>
+  <url><loc>https://hudera.ai/blog/ai-news/alibaba-qwen4-max-launch-pricing/</loc><lastmod>2026-11-16</lastmod><priority>0.5</priority></url>
+  <url><loc>https://hudera.ai/en/blog/ai-news/sierra-poppy-1-0-shopify-personal-agents/</loc><lastmod>2026-11-13</lastmod><priority>0.5</priority></url>
+  <url><loc>https://hudera.ai/en/blog/ai-news/alibaba-qwen4-max-launch-pricing/</loc><lastmod>2026-11-16</lastmod><priority>0.5</priority></url>
 </urlset>

@@ -300,5 +300,97 @@
    ["tbreak: HUMAIN's AI stack arrives in December, HUMAIN+ in Q1 2027", "https://tbreak.com/humain-ai-stack-december-humain-plus-2027/"],
    ["CASRAI: HUMAIN 3T open-weight model, what is known", "https://casrai.org/news/humain-3-trillion-parameter-model-plan-2026"]
   ]
+ },
+ {
+  "date": "2026-11-13",
+  "slug": "sierra-poppy-1-0-shopify-personal-agents",
+  "tag": {
+   "ar": "وكلاء الذكاء الاصطناعي",
+   "en": "AI agents"
+  },
+  "ar": {
+   "title": "Sierra تصدر Poppy 1.0 و Shopify تفعّله لكل متاجرها: بروتوكول ينظم تعامل الوكلاء الشخصيين مع الشركات",
+   "desc": "Sierra تصدر النسخة 1.0 من بروتوكول Poppy الذي يحدد ما يُسمح لوكيل العميل بفعله لدى الشركة، و Shopify تفعّله تلقائياً لكل المتاجر.",
+   "body": [
+    "أصدرت شركة Sierra يوم 13 نوفمبر 2026 النسخة 1.0 من Personal Agent Protocol، واسمه المختصر Poppy، وهو معيار كانت قد أعلنت عنه مع Meta وشركاء آخرين في 6 أكتوبر. الفكرة أن يصبح لدى كل شركة طريقة موحدة تخبر بها الوكيل الشخصي للعميل، أي المساعد الذي ينفذ المهام نيابة عنه، كيف يجدها وماذا يُسمح له أن يفعل: يستطيع الوكيل أن يبدأ كزائر للسؤال عن التوفر أو سياسة الإرجاع مثلاً، وللمهام المرتبطة بالحساب يسجّل العميل الدخول عبر OAuth ويحدد هو الصلاحيات التي يمنحها لوكيله. وبحسب Sierra فعّلت Shopify البروتوكول لكل التجار على منصتها، فكل متجر ينشر ملف Poppy تلقائياً دون أي عمل من التاجر، وأصبح Muse، وكيل Meta، يبحث عن Poppy أولاً في كل موقع يزوره. وتقول الشركة إن عدد شركاء التصميم تجاوز 100، منهم Delta Air Lines و Intuit و Salesforce و Zoom و Turkish Airlines و Wix، وإن Mercury و Turkish Airlines من أوائل من شغّلوه فعلياً.",
+    "هناك ما يستحق الحذر. تذكر التغطيات الصحفية أن المواصفة ما زالت تحمل وصف مسودة رغم رقم الإصدار 1.0، وأنها تسمح بتعديلات لاحقة قد لا تتوافق مع ما بُني عليها. ولم يذكر إعلان Sierra رخصة البروتوكول ولا الجهة التي ستحكم تطويره، ولم يوضح أي مصدر إن كان تاجر Shopify يستطيع إيقاف الخاصية، ولا الدول التي يعمل فيها Muse بهذه الطريقة. أما الشركات خارج Shopify فتقول Sierra إن أي شركة تستطيع تطبيق البروتوكول بنفسها، وإنها نشرت حزمة تطبيق تتضمن أداة للتحقق من صحة الإعداد."
+   ],
+   "biz": "إذا كان متجرك على Shopify فهو الآن يعرّف نفسه لوكلاء العملاء تلقائياً، ولا يُطلب منك شيء تقني. المطلوب عملياً أن تكون بيانات منتجاتك وأسعارك وسياسات الشحن والإرجاع دقيقة ومحدّثة، لأن وكيلاً آلياً سيقرؤها ويتصرف بناءً عليها. وإذا كان موقعك على منصة أخرى فلا داعي للاستعجال: المواصفة ما زالت مسودة، ولا نعرف بعد كم من عملاء منطقتنا يستخدمون وكلاء شخصيين، فتابع الموضوع قبل أن تستثمر فيه."
+  },
+  "en": {
+   "title": "Sierra releases Poppy 1.0 and Shopify turns it on for every store: a protocol for how personal AI agents deal with businesses",
+   "desc": "Sierra ships version 1.0 of Poppy, a protocol that tells a customer's AI agent what it may do with a business. Shopify enables it for every store.",
+   "body": [
+    "On 13 November 2026 Sierra released version 1.0 of the Personal Agent Protocol, known as Poppy, a standard it first announced with Meta and other partners on 6 October. The idea is to give every company one consistent way to tell a customer's personal agent, the assistant that carries out tasks on that person's behalf, how to find it and what it is allowed to do. An agent can start as a guest, for example to ask about availability or a returns policy. For account tasks the customer signs in through OAuth and decides which permissions the agent gets. According to Sierra, Shopify has enabled the protocol for every merchant on its platform, so each store publishes a Poppy file automatically with no work from the merchant, and Muse, Meta's agent, now looks for Poppy first on every site it visits. Sierra says more than 100 design partners have joined, including Delta Air Lines, Intuit, Salesforce, Zoom, Turkish Airlines and Wix, and that Mercury and Turkish Airlines are among the first running it live.",
+    "Some caution is in order. Press coverage notes that the specification is still labelled a draft despite the 1.0 number, and that it allows later changes that may break what has been built on it. Sierra's announcement does not state a licence for the protocol or who will govern it. No source we read says whether a Shopify merchant can switch the feature off, or in which countries Muse works this way. For companies outside Shopify, Sierra says anyone can implement the protocol on their own and that it has published an implementation kit with a validator to check the setup."
+   ],
+   "biz": "If your store runs on Shopify, it now introduces itself to customers' agents automatically and nothing technical is asked of you. What matters in practice is that your product data, prices, shipping and returns policies are accurate and current, because an automated agent will read them and act on them. If your site is on another platform there is no need to rush: the specification is still a draft and nobody yet knows how many customers in our region use personal agents, so watch it before you invest."
+  },
+  "sources": [
+   [
+    "Sierra: Releasing Personal Agent Protocol 1.0",
+    "https://sierra.ai/blog/releasing-poppy"
+   ],
+   [
+    "Sierra: Introducing Personal Agent Protocol",
+    "https://sierra.ai/blog/introducing-personal-agent-protocol"
+   ],
+   [
+    "The Next Web: Sierra releases Poppy 1.0 as Shopify and Meta's Muse sign on",
+    "https://thenextweb.com/news/sierra-poppy-1-0-shopify-meta-muse-personal-agents"
+   ],
+   [
+    "Unite.AI: Sierra Releases Poppy 1.0 With Shopify and Meta Muse Support",
+    "https://www.unite.ai/sierra-releases-poppy-1-0-with-shopify-and-meta-muse-support/"
+   ]
+  ]
+ },
+ {
+  "date": "2026-11-16",
+  "slug": "alibaba-qwen4-max-launch-pricing",
+  "tag": {
+   "ar": "نماذج",
+   "en": "Models"
+  },
+  "ar": {
+   "title": "Alibaba تطلق Qwen4-Max بسعر 1.50 دولار لمليون رمز إدخال و 4.50 دولار للإخراج",
+   "desc": "Alibaba تتيح نموذجها الرئيسي الجديد Qwen4-Max بسعر أقل من نماذج الصدارة، لكن القياسات المستقلة الأولى تضعه خلفها.",
+   "body": [
+    "أتاح فريق Qwen في Alibaba نموذجه الرئيسي الجديد Qwen4-Max للاستخدام العام يوم 16 نوفمبر 2026 بحسب معظم التقارير، وذكر تقرير واحد أنه بدأ العمل قبل ذلك بيوم. النموذج هو الأول على معمارية Qwen4: حجمه الكلي 2.4 تريليون مُعامل يعمل منها نحو 71 ملياراً مع كل رمز، ويقرأ الصور مباشرة، ونافذة سياقه مليون رمز. السعر المعلن عبر واجهة QwenCloud هو 1.50 دولار لكل مليون رمز إدخال و 4.50 دولار لكل مليون رمز إخراج، مقابل 4 و 20 دولاراً لـ Claude Opus 5.5 و 2 و 10 دولارات لـ GPT-6.1 Sol بحسب المقارنات المنشورة. أوزان النموذج مغلقة، وتقول التقارير إن نماذج Qwen4 أصغر ستُفتح لاحقاً دون موعد محدد.",
+    "السعر المنخفض لا يحسم المسألة. رقم خفض تكلفة المهمة بنحو 62% الذي تروّج له Alibaba مقيس على اختبارها الخاص Work360 ومقارنةً بنموذجها السابق لا بالمنافسين. أما القياس المستقل فيضع النموذج دون الصدارة: مؤشر Artificial Analysis يعطيه 43 نقطة، بينما يسجل المتصدر 65. ووصفته مراجعة DataCamp بأنه بطيء وكثير الإخراج، أي أنه يستهلك رموزاً أكثر في المهمة الواحدة فيتآكل جزء من فرق السعر. نقطة الوصول الافتراضية للواجهة في سنغافورة، ولم يذكر أي تقرير قرأناه منطقة تشغيل في الشرق الأوسط ولا شيئاً عن جودة اللغة العربية. ولم نتمكن من فتح صفحات Alibaba الرسمية، فكل ما سبق منقول عن تغطيات اطلعت عليها."
+   ],
+   "biz": "إذا كانت لديك مهام كثيرة ومتكررة مثل التصنيف والتلخيص وصياغة الردود، فالسعر يجعل النموذج جديراً بالتجربة، لكن احسب تكلفة المهمة كاملة لا سعر المليون رمز. قبل إرسال أي بيانات عملاء تأكد من مكان معالجتها ومن توافق ذلك مع التزاماتك، فالمزود صيني ونقطة الوصول الافتراضية في سنغافورة. واختبر العربية بنفسك على نصوص حقيقية من عملك، فلا يوجد قياس منشور نعتمد عليه."
+  },
+  "en": {
+   "title": "Alibaba launches Qwen4-Max at $1.50 per million input tokens and $4.50 per million output tokens",
+   "desc": "Alibaba opens its new flagship Qwen4-Max at a lower price than the leading models, but the first independent measurements place it behind them.",
+   "body": [
+    "Alibaba's Qwen team made its new flagship model, Qwen4-Max, generally available on 16 November 2026 according to most reports, while one report says it went live a day earlier. It is the first model on the Qwen4 architecture: 2.4 trillion parameters in total, of which about 71 billion are active for each token, with native image reading and a context window of one million tokens. The listed price through the QwenCloud API is $1.50 per million input tokens and $4.50 per million output tokens, against $4 and $20 for Claude Opus 5.5 and $2 and $10 for GPT-6.1 Sol in the published comparisons. The weights are closed, and reports say smaller Qwen4 models will be opened later, with no date given.",
+    "A low price does not settle the question. The roughly 62% cut in cost per task that Alibaba promotes was measured on its own Work360 test and against its previous model, not against rivals. Independent measurement puts the model below the leaders: the Artificial Analysis index gives it 43 points, while the leader scores 65. DataCamp's review calls it slow and verbose, meaning it uses more tokens per task, which eats into part of the price gap. The default API endpoint is in Singapore, and no report we read mentions a Middle East region or anything about Arabic quality. We were not able to open Alibaba's official pages, so all of this comes from coverage that read them."
+   ],
+   "biz": "If you have many repetitive tasks such as classification, summarising and drafting replies, the price makes this model worth a trial, but work out the cost of the whole task, not the price per million tokens. Before sending any customer data, confirm where it is processed and that this fits your obligations: the provider is Chinese and the default endpoint is in Singapore. Test Arabic yourself on real text from your work, because there is no published measurement to rely on."
+  },
+  "sources": [
+   [
+    "DataCamp: Qwen4-Max, features, benchmarks and pricing",
+    "https://www.datacamp.com/blog/qwen4-max"
+   ],
+   [
+    "Digital Trends: Qwen4-Max, Alibaba's latest flagship AI model",
+    "https://www.digitaltrends.com/computing/qwen-4-max-aliababas-latest-flagship-ai-model-announced/"
+   ],
+   [
+    "Developers Digest: Qwen4-Max, pricing, benchmarks and what to test",
+    "https://www.developersdigest.tech/blog/qwen4-max-alibaba-flagship-api-2026"
+   ],
+   [
+    "TheTechHacker: Qwen4-Max price vs GPT and Claude",
+    "https://thetechhacker.com/news/qwen4-max-price-vs-gpt-claude/"
+   ],
+   [
+    "Opper: AI model release tracker",
+    "https://opper.ai/model-releases"
+   ]
+  ]
  }
 ]
