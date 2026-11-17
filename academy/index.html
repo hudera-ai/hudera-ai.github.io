@@ -382,7 +382,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       ${prev?.reject_reason ? `<div class="note" style="margin-bottom:14px">رُفض طلبك السابق: ${esc(prev.reject_reason)}. صحّح المطلوب وأرسله مرة أخرى.</div>` : ""}
       <form class="card" id="ef" novalidate>
         ${KIDS ? `<div class="g2"><label class="f"><span>اسم الطفل (يُكتب في الشهادة)</span><input type="text" id="nm" maxlength="120"></label>
-          <label class="f"><span>عمر الطفل</span><select id="ag"><option value="">اختر</option>${[7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n} سنين</option>`).join("")}</select></label></div>
+          <label class="f"><span>عمر الطفل</span><select id="ag"><option value="">اختر</option>${[7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n} ${n > 10 ? "سنة" : "سنين"}</option>`).join("")}</select></label></div>
         <div class="g2"><label class="f"><span>اسم ولي الأمر</span><input type="text" id="pn" maxlength="120" value="${esc(me.name || user.user_metadata?.full_name || "")}"></label>
           <label class="f"><span>واتساب ولي الأمر <small>(مع رمز الدولة)</small></span><input type="tel" id="ph" dir="ltr" maxlength="24" placeholder="+20 10 1234 5678" value="${esc(me.phone || "")}"></label></div>
         <label class="f"><span>حاجة تحب نعرفها عن طفلك؟ <small>(اختياري)</small></span><textarea id="gl" maxlength="600" placeholder="مثلاً: بيحب الرسم، أو أول مرة يستخدم الكمبيوتر"></textarea></label>`
