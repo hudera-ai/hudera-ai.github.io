@@ -910,7 +910,7 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
     nav(); window.scrollTo(0, 0);
     try {
       if (r === "verify") return viewVerify(a ? decodeURIComponent(a) : "");
-      if (KIDS && (r === "register" || ((r === "" || r === "course") && !enrId))) { location.replace(r === "register" ? "/academy/kids/#book" : "/academy/kids/#price"); return; }
+      if (KIDS && (r === "register" || ((r === "" || r === "course") && !enrId))) { location.replace(r === "register" ? "/academy/kids/#book" : "/academy/kids/#book"); return; }
       if (r === "register") return viewRegister();
       if (r === "enroll") return viewEnroll(a);
       if ((r === "learn" || r === "s" || r === "progress") && !enrId) { location.hash = user ? "#/enroll" : "#/course"; return; }
