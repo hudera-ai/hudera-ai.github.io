@@ -392,5 +392,87 @@
     "https://opper.ai/model-releases"
    ]
   ]
+ },
+ {
+  "date": "2026-11-17",
+  "slug": "openai-gpt-6-2-astra-sol-launch",
+  "tag": {"ar": "نماذج", "en": "Models"},
+  "ar": {
+   "title": "OpenAI تطلق GPT-6.2 Astra و GPT-6.2 Sol وتخفض سعر Astra بنحو 20%",
+   "desc": "OpenAI أتاحت يوم 17 نوفمبر 2026 نموذجين جديدين في ChatGPT Work و Codex والواجهة البرمجية، والقياس المستقل يضع Astra في المركز الثاني.",
+   "body": [
+    "أعلنت OpenAI يوم 17 نوفمبر 2026 نموذجين جديدين: GPT-6.2 Astra للمهام المهنية الصعبة والطويلة، و GPT-6.2 Sol للعمل اليومي. النموذجان متاحان في ChatGPT Work و Codex لمشتركي Plus و Pro و Enterprise و Edu، وعبر الواجهة البرمجية. سعر Astra هو 8 دولارات لكل مليون رمز إدخال و 40 دولاراً لكل مليون رمز إخراج، وهو أقل بنحو 20% من سعر GPT-6 Astra بحسب التغطيات، أما Sol فبقي على سعر سابقه: دولاران للإدخال و 10 دولارات للإخراج. لم يرد ذكر للخطة المجانية، وحسابات المؤسسات تحتاج أن يفعّل مدير مساحة العمل النموذجين، وذكر بعض المستخدمين في منتدى OpenAI أنهم لم يروهما بعد لأن الإتاحة تدريجية.",
+    "تقول OpenAI إن Astra ينجز المهمة الواحدة بأقل من ثلث تكلفة سابقه في أحد اختباراتها، وهذا رقم من الشركة نفسها. القياس المستقل أكثر تحفظاً: مؤشر Artificial Analysis يعطي Astra 62 نقطة، في المركز الثاني خلف Claude Fable 5.2 بـ 65 نقطة وأمام Gemini 4 Carbon بـ 60، ويعطي Sol 57 نقطة. ونقل موقع The Decoder عن المؤشر نفسه أن التقدم في البرمجة شبه متوقف وأن Sol تراجع 3 نقاط عن سابقه في مؤشر وكلاء البرمجة، وأن معدل الهلوسة في اختبار AA-Omniscience بلغ 59% لـ Astra و 55% لـ Sol. كما شددت OpenAI قيود الأمن السيبراني في النموذجين، وهو ما قد يحد من بعض أعمال فحص الثغرات المشروعة. لم نتمكن من فتح صفحة الإعلان على موقع OpenAI نفسه، واعتمدنا على منشورها في منتدى المطورين وعلى تغطيتين."
+   ],
+   "biz": "إذا كانت شركتك تستخدم GPT-6 Astra عبر الواجهة البرمجية فالانتقال إلى GPT-6.2 Astra يخفض السعر المعلن ويستحق اختباراً على مهامك، مع حساب تكلفة المهمة كاملة لا سعر المليون رمز. إذا كنت تستخدم Sol فالسعر لم يتغير، فاختبر الجودة على مهامك قبل التحويل خصوصاً في البرمجة. ومعدلات الهلوسة المنشورة تذكير بأن أي إجابة تخص أرقاماً أو عقوداً أو عملاء تحتاج مراجعة بشرية."
+  },
+  "en": {
+   "title": "OpenAI launches GPT-6.2 Astra and GPT-6.2 Sol and cuts Astra's price by about 20%",
+   "desc": "On 17 November 2026 OpenAI released two new models in ChatGPT Work, Codex and the API. Independent testing ranks Astra second overall.",
+   "body": [
+    "OpenAI announced two new models on 17 November 2026: GPT-6.2 Astra for hard, long professional tasks, and GPT-6.2 Sol for everyday work. Both are available in ChatGPT Work and Codex for Plus, Pro, Enterprise and Edu subscribers, and through the API. Astra costs $8 per million input tokens and $40 per million output tokens, about 20% below GPT-6 Astra according to coverage, while Sol keeps its predecessor's price of $2 for input and $10 for output. The free plan is not mentioned, Enterprise and Edu accounts need a workspace admin to switch the models on, and some users on OpenAI's forum said they could not see them yet because the rollout is gradual.",
+    "OpenAI says Astra completes a task for less than a third of its predecessor's cost on one of its tests, and that figure comes from the company itself. Independent measurement is more cautious: the Artificial Analysis index gives Astra 62 points, second behind Claude Fable 5.2 at 65 and ahead of Gemini 4 Carbon at 60, and gives Sol 57. The Decoder reports from the same index that coding progress has nearly stalled, that Sol fell 3 points below its predecessor on the coding agent index, and that the hallucination rate on the AA-Omniscience test was 59% for Astra and 55% for Sol. OpenAI also tightened the cybersecurity safeguards in both models, which may limit some legitimate vulnerability research. We could not open the announcement page on OpenAI's own site, so this relies on its developer forum post and two pieces of coverage."
+   ],
+   "biz": "If your company uses GPT-6 Astra through the API, moving to GPT-6.2 Astra lowers the list price and is worth a test on your own tasks, counting the cost of the whole task and not the price per million tokens. If you use Sol, the price has not changed, so check quality on your tasks before switching, especially for coding. The published hallucination rates are a reminder that any answer about figures, contracts or customers still needs a human check."
+  },
+  "sources": [
+   [
+    "OpenAI Developer Community: GPT-6.2 Astra and Sol are now available",
+    "https://community.openai.com/t/gpt-6-2-astra-and-sol-are-now-available/1417531"
+   ],
+   [
+    "The Decoder: OpenAI launches GPT-6.2 Astra and Sol with lower API prices and some benchmark gains",
+    "https://the-decoder.com/openai-launches-gpt-6-2-astra-and-sol-with-lower-api-prices-and-some-benchmark-gains/"
+   ],
+   [
+    "DataCamp: GPT-6.2 Astra and Sol, features, benchmarks, tests and pricing",
+    "https://www.datacamp.com/blog/gpt-6-2-astra-and-sol"
+   ]
+  ]
+ },
+ {
+  "date": "2026-11-17",
+  "slug": "microsoft-ignite-office-in-copilot-autopilot",
+  "tag": {"ar": "أدوات العمل", "en": "Work tools"},
+  "ar": {
+   "title": "Microsoft تضع Word و Excel و PowerPoint داخل تطبيق Copilot وتكشف عن الوكيل Autopilot",
+   "desc": "في مؤتمر Ignite يوم 17 نوفمبر 2026 أتاحت Microsoft تحرير ملفات Office داخل Copilot ضمن الترخيص الحالي، وبدأت تجربة محدودة لوكيل دائم.",
+   "body": [
+    "أعلنت Microsoft في مؤتمر Ignite يوم 17 نوفمبر 2026 أن Word و Excel و PowerPoint أصبحت متاحة للجميع داخل تطبيق Copilot: تبدأ بمحادثة ثم تنشئ المستند أو الجدول أو العرض وتعدّله في المكان نفسه، ويمكن إكماله في تطبيقات Office المعتادة. تُحفظ الملفات في OneDrive وترث صلاحيات Microsoft 365 وتصنيفات الحساسية وضوابط الامتثال. وتقول الشركة إن هذه الميزة مشمولة في ترخيص Copilot الحالي، دون أن تحدد اسم الخطة. أما Copilot Code، الذي يبني لوحات متابعة وتطبيقات صغيرة من وصف بلغة عادية، فموعد إتاحته العامة ديسمبر بحسب كتاب أخبار المؤتمر، بينما اكتفت مدونة Copilot بعبارة «خلال الأسابيع المقبلة».",
+    "الإعلان الأبعد أثراً هو Autopilot: وكيل دائم يعمل داخل بيئة الشركة، له هوية خاصة في Microsoft Entra وذاكرة ومدير مسؤول عنه، ويمكن تكليفه بمتابعة البريد وقنوات Teams والأعمال المتكررة، ويستطيع قسم التقنية تقييده أو حظره. هو الآن محصور في برنامج Frontier للتجربة المبكرة ومعه مساحات العمل المشتركة Copilot Workspaces، ولم تُعلن أسعاره ولا موعد إتاحته العامة. كشفت Microsoft أيضاً عن نماذج من صنعها، منها MAI-Code-2 للبرمجة المتاح في GitHub Copilot، وتقول بحسب Reuters إنه يقارب أداء المنافسين بتكلفة أقل بكثير، دون نشر أسعار. ومقارنة التكلفة التي تعرضها الشركة مع ChatGPT و Claude أجرتها هي نفسها وتحققت GigaOm من منهجيتها، فلا تُعامل كقياس مستقل. ولم نجد في الصفحات التي قرأناها أي ذكر لدعم العربية أو لمناطق تشغيل في الشرق الأوسط."
+   ],
+   "biz": "إذا كانت شركتك تدفع ترخيص Microsoft 365 Copilot فتحرير ملفات Office داخل Copilot متاح الآن بحسب Microsoft دون رسوم إضافية، فجرّبه على تقرير أو عرض حقيقي واحكم على الجودة بالعربية بنفسك. أما Autopilot فليس متاحاً لمعظم الشركات بعد وسعره غير معلن، فلا تبنِ عليه خطة الآن. وقبل تشغيل أي وكيل يقرأ البريد والتقويم، راجع صلاحيات الملفات عندكم، لأن الوكيل يرى كل ما يراه الحساب."
+  },
+  "en": {
+   "title": "Microsoft puts Word, Excel and PowerPoint inside the Copilot app and unveils the Autopilot agent",
+   "desc": "At Ignite on 17 November 2026 Microsoft made Office editing inside Copilot available under the current licence and began a limited trial of a persistent agent.",
+   "body": [
+    "At its Ignite conference on 17 November 2026, Microsoft said Word, Excel and PowerPoint are now generally available inside the Copilot app: you start from a conversation, then create and edit the document, workbook or presentation in the same place, and can continue in the regular Office apps. Files are saved to OneDrive and inherit Microsoft 365 permissions, sensitivity labels and compliance controls. The company says this is included in the existing Copilot subscription licence, without naming the plan. Copilot Code, which builds dashboards and small apps from a plain-language description, reaches general availability in December according to the conference Book of News, while the Copilot blog only says in the coming weeks.",
+    "The announcement with the longest reach is Autopilot: a persistent agent that lives inside the company's tenant, with its own Microsoft Entra identity, memory and a named manager. It can be asked to follow up on email, watch Teams channels and run recurring work, and IT can scope or block it. For now it is limited to the Frontier early-access program, together with the shared Copilot Workspaces, and neither pricing nor a general release date has been announced. Microsoft also showed models of its own, including MAI-Code-2 for coding, available in GitHub Copilot, which it says, according to Reuters, nearly matches rivals at a much lower cost, with no prices published. The cost comparison Microsoft presents against ChatGPT and Claude was run by Microsoft itself with GigaOm validating the method, so do not treat it as an independent measurement. In the pages we read we found no mention of Arabic support or of Middle East regions."
+   ],
+   "biz": "If your company already pays for a Microsoft 365 Copilot licence, editing Office files inside Copilot is available now at no extra charge according to Microsoft, so try it on one real report or presentation and judge the Arabic quality yourself. Autopilot is not available to most companies yet and its price is unknown, so do not plan around it now. Before running any agent that reads email and calendars, review your file permissions, because the agent sees everything the account can see."
+  },
+  "sources": [
+   [
+    "Microsoft Copilot Blog: Copilot at Microsoft Ignite",
+    "https://www.microsoft.com/en-us/copilot/blog/2026/11/17/copilot-at-microsoft-ignite-expanding-whats-possible-with-intelligence-built-for-work/"
+   ],
+   [
+    "Microsoft: Ignite 2026 Book of News",
+    "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+   ],
+   [
+    "Reuters via The Star: Microsoft unveils AI models for coding, cybersecurity",
+    "https://www.thestar.com.my/tech/tech-news/2026/11/18/microsoft-unveils-ai-models-for-coding-cybersecurity-as-it-takes-on-anthropic-openai"
+   ],
+   [
+    "Data Studios: Microsoft Copilot at Ignite 2026",
+    "https://www.datastudios.org/post/microsoft-copilot-ignite-2026-office-in-copilot-copilot-code-december-autopilot"
+   ],
+   [
+    "Gethyn Ellis: Microsoft Ignite 2026 Day 1 announcements",
+    "https://www.gethynellis.com/2026/11/microsoft-ignite-2026-day-1-announcements/"
+   ]
+  ]
  }
 ]
