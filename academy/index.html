@@ -253,7 +253,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   const minePending = () => (cat?.mine || []).find(m => m.status === "pending");
 
   async function loadCatalog() { cat = await rpc("academy_catalog", { p_slug: SLUG }); const a = mineActive(); enrId = a?.id || null; return cat; }
-  async function loadCourse() { course = enrId ? await rpc("academy_course", { p_enrollment: enrId }) : null; return course; }
+  async function loadCourse() { course = enrId ? await rpc("academy_course", { p_enrollment: enrId }) : null; WATCH = null; return course; }
 
   function nav() {
     const r = location.hash.split("/")[1] || "";
@@ -284,7 +284,10 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   /* no live meetings: drop any catalog line (package features, tools, grading weights) that still mentions a live meeting or attendance */
   const LIVE_RX = /لقاء|لقاءات|لايف|\blive\b|zoom|زووم|\bmeet\b|حضور|attendance|جلسة مباشرة|جلسات مباشرة|بث مباشر/i;
   const noLive = a => (a || []).filter(x => !LIVE_RX.test(Array.isArray(x) ? x.join(" ") : String(x ?? "")));
-  const SUPPORT_TXT = "أي سؤال أو مشكلة تبعتها على المنصة وبنرد عليك";
+  const SUPPORT_TXT = "أرسل أي سؤال أو مشكلة على المنصة، وسنرد عليك";
+  /* real video lengths from the catalog: "نحو ساعتين ونصف" for the total, "من 9 إلى 27 دقيقة" per video */
+  const hoursTxt = m => { if (m < 90) return `نحو ${m} دقيقة`; const h = Math.round(m / 30) / 2, w = Math.floor(h), half = h % 1 ? " ونصف" : ""; return "نحو " + (w === 1 ? "ساعة" : w === 2 ? "ساعتين" : `${w} ساعات`) + half; };
+  const vidRange = () => { const ms = (cat?.sessions || []).flatMap(s => s.lessons.map(l => l.mins)).filter(Boolean); if (!ms.length) return ""; const a = Math.min(...ms), b = Math.max(...ms); return a === b ? `نحو ${a} دقيقة` : `من ${a} إلى ${b} دقيقة`; };
   function viewLanding() {
     const c = cat.course, m = c.meta || {}, coh = (cat.cohorts || []).find(c => new Date(c.starts_on) >= new Date(new Date().toDateString())) || (cat.cohorts || [])[0], pend = minePending();
     const totalMin = (cat.sessions || []).reduce((a, s) => a + s.lessons.reduce((x, l) => x + (l.mins || 0), 0), 0);
@@ -292,7 +295,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     <div class="hero"><div class="wrap">
       <span class="tag">🎓 ${esc(m.brand || "HUDERA Academy")} · دورة التأسيس</span>
       <h1>${esc(c.title)}</h1><p>${esc(c.tagline)}. ${esc(m.promise || "")}</p>
-      <div class="chips"><span>📚 ${nSess()} جلسات ${weeksTxt(coh)}</span><span>🎬 ${nSess()} فيديوهات شرح · نحو ${Math.round(totalMin / 60)} ساعات</span><span>💻 أونلاين 100٪ من أي مكان</span><span>💬 دعم ومتابعة من خلال المنصة</span><span>📝 مهام تُصحَّح بدرجة وتعليق</span><span>🏅 شهادة برقم تحقق</span><span>🛡️ ضمان استرداد المبلغ</span></div>
+      <div class="chips"><span>📚 ${nSess()} جلسات ${weeksTxt(coh)}</span><span>🎬 ${nSess()} فيديوهات شرح · ${hoursTxt(totalMin)}</span><span>💻 أونلاين 100٪ من أي مكان</span><span>💬 دعم ومتابعة من خلال المنصة</span><span>📝 مهام تُصحَّح بدرجة وتعليق</span><span>🏅 شهادة برقم تحقق</span><span>🛡️ ضمان استرداد المبلغ</span></div>
       <div class="row">${pend ? `<a class="btn primary big" href="#/enroll">طلبك قيد المراجعة ←</a>` : `<a class="btn primary big" href="#/register">سجّل الآن واعرف مسارك</a><a class="btn out big" href="#/enroll">احجز مقعدك في الدورة</a>`}<a class="btn out big" href="#curr">اطّلع على المنهج</a></div>
     </div></div>
     <section><div class="wrap">
@@ -302,7 +305,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     <section style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
       <h2 class="sec">كيف تسير كل جلسة؟</h2><p class="lead">الإيقاع نفسه في كل جلسة، لتتعلّم بالتطبيق لا بالاستماع فقط.</p>
       <div class="g4 how">
-        <div class="card"><div class="ic">🎬</div><b>شاهد فيديو الجلسة</b><p>فيديو نحو نصف ساعة، تختار لغة الشرح فيه: المصرية أو الخليجية أو الإنجليزية، ومقسّم إلى فصول تتنقّل بينها. يُتاح على المنصة في موعد الجلسة، وتشاهده في الوقت اللي يناسبك.</p></div>
+        <div class="card"><div class="ic">🎬</div><b>شاهد فيديو الجلسة</b><p>فيديو ${vidRange()}، تختار لغة الشرح فيه: المصرية أو الخليجية أو الإنجليزية، ومقسّم إلى فصول تتنقّل بينها. يُتاح على المنصة في موعد الجلسة، وتشاهده في الوقت الذي يناسبك.</p></div>
         <div class="card"><div class="ic">💬</div><b>اسأل على المنصة</b><p>دعم ومتابعة من خلال المنصة: ${SUPPORT_TXT}، ومن غير مواعيد لازم تلتزم بيها.</p></div>
         <div class="card"><div class="ic">📝</div><b>سلّم المهمة وحُلّ الاختبار</b><p>مهمة عملية تُصحَّح بدرجة وتعليق مكتوب، واختبار من 6 أسئلة يُصحَّح فوراً.</p></div>
         <div class="card"><div class="ic">🔓</div><b>تُفتح الجلسة التالية</b><p>بمجرد تسليم المهمة تُفتح الجلسة التالية في موعدها، وترتقي مستوى مع كل جلسة تجتازها.</p></div>
@@ -329,7 +332,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         <a class="btn ${p.default ? "primary" : ""}" href="#/enroll/${esc(p.key)}">اختر هذه الباقة</a></div>`).join("")}</div>
       <div class="card" style="margin-top:14px;border-color:var(--ok)"><b style="color:var(--ink)">🛡️ ضمان الاستفادة أو استرداد المبلغ</b><p style="margin:6px 0 0;font-size:15px">إذا أتممت الدورة ولم تستفد، نردّ لك المبلغ كاملاً، بشرط أن تكون أتممت كل دروس الجلسات (الفيديوهات)، وسلّمت كل المهام، وحللت كل الاختبارات، وطلبت الاسترداد خلال 14 يوماً من آخر جلسة. وإذا انسحبت قبل الجلسة الأولى يُردّ لك المبلغ كاملاً.</p></div>
     </div></section>
-    ${coh ? `<section style="padding-top:0"><div class="wrap"><div class="card cohort"><div><b style="color:var(--ink);font-size:18px">الدفعة القادمة: ${esc(coh.name)}</b><br><span style="color:var(--muted)">تبدأ ${fmtD(coh.starts_on)} · أونلاين بالكامل، وكل جلسة تُفتح على المنصة في موعدها</span></div>
+    ${coh ? `<section style="padding-top:0"><div class="wrap"><div class="card cohort"><div>${new Date(coh.starts_on) <= new Date() ? `<b style="color:var(--ink);font-size:18px">الدفعة الحالية: ${esc(coh.name)}</b><br><span style="color:var(--muted)">بدأت ${fmtD(coh.starts_on)} · يمكنك الانضمام الآن ومشاهدة الجلسات السابقة واللحاق بها</span>` : `<b style="color:var(--ink);font-size:18px">الدفعة القادمة: ${esc(coh.name)}</b><br><span style="color:var(--muted)">تبدأ ${fmtD(coh.starts_on)} · أونلاين بالكامل، وكل جلسة تُفتح على المنصة في موعدها</span>`}</div>
       <span class="seats ${coh.seats - coh.taken <= 3 ? "low" : ""}">المقاعد المتبقية: ${Math.max(coh.seats - coh.taken, 0)} من ${coh.seats}</span>
       <div class="dates">${(coh.schedule || []).map(s => `<span>ج${s.n} · ${(s.opens_at || s.live_at) ? new Date(s.opens_at || s.live_at).toLocaleDateString("ar-EG-u-nu-latn", { timeZone: "Africa/Cairo", weekday: "short", day: "numeric", month: "short" }) : "—"}</span>`).join("")}</div>
       <a class="btn primary" href="#/enroll" style="margin-inline-start:auto">احجز مقعدك</a></div></div></section>` : ""}
@@ -337,7 +340,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       <div class="card inst"><div class="av">م</div><div><b style="color:var(--ink);font-size:18px">${esc(m.instructor || "")}</b><br><span style="color:var(--muted)">${esc(m.instructor_title || "")}</span><p style="margin:6px 0 0;font-size:15px">يبني أنظمة ذكاء اصطناعي حقيقية للشركات في HUDERA AI، ويعلّم ما يستخدمه في العمل يومياً.</p></div></div>
       <div class="card"><b style="color:var(--ink)">ماذا ستحتاج؟</b>${noLive(m.tools).map(t => `<p style="margin:6px 0 0;font-size:15px"><b>${esc(t[0])}:</b> ${esc(t[1])}</p>`).join("")}</div>
     </div></section>
-    <section style="padding-top:0"><div class="wrap"><div class="card rgcta"><div><b style="color:var(--ink);font-size:19px">مش متأكد أي مسار يناسبك؟</b><p style="margin:4px 0 0;color:var(--muted)">سجّل بياناتك وحُلّ اختبار مستوى قصيراً (8 أسئلة)، ونقترح لك المسار المناسب ونتواصل معك على واتساب.</p></div><a class="btn primary big" href="#/register">سجّل الآن مجاناً</a></div></div></section>
+    <section style="padding-top:0"><div class="wrap"><div class="card rgcta"><div><b style="color:var(--ink);font-size:19px">لست متأكدًا أي مسار يناسبك؟</b><p style="margin:4px 0 0;color:var(--muted)">سجّل بياناتك وحُلّ اختبار مستوى قصيراً (8 أسئلة)، ونقترح لك المسار المناسب ونتواصل معك على واتساب.</p></div><a class="btn primary big" href="#/register">سجّل الآن مجاناً</a></div></div></section>
     <section style="padding-top:0" id="kids"><div class="wrap"><div class="card kids">
       <div><span class="kt">🧒 جديد · للأطفال من 8 إلى 12 سنة</span><h2>HUDERA Kids Academy</h2><p class="ar">«هوديرا كيدز أكاديمي»</p>
         <p>كورس الذكاء الاصطناعي الآمن للأطفال من 8 لـ 12 سنة، أونلاين من البيت: طفلك يعلّم الكمبيوتر يميّز الصور، ويألّف قصة، ويصنع لعبته الأولى. الأماكن محدودة.</p>
@@ -347,7 +350,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     </div></div></section>
     <section style="padding-top:0"><div class="wrap narrow faq"><h2 class="sec" style="margin-bottom:10px">أسئلة شائعة</h2>
       <details><summary>هل يجب أن أعرف البرمجة؟</summary><p>لا. أول 5 جلسات بلا برمجة إطلاقاً، وفي الجلسة 6 نكتب معاً كود Python بسيطاً خطوة بخطوة، ويساعدك الذكاء الاصطناعي في كتابته.</p></details>
-      <details><summary>هل فيه لقاءات مباشرة أو مواعيد لازم أحضرها؟</summary><p>لا. الدورة أونلاين 100٪ على المنصة: تشاهد فيديوهات الجلسات في الوقت اللي يناسبك، وتسلّم المهام وتحل الاختبارات قبل آخر موعد. والدعم والمتابعة من خلال المنصة: ${SUPPORT_TXT}.</p></details>
+      <details><summary>هل فيه لقاءات مباشرة أو مواعيد لازم أحضرها؟</summary><p>لا. الدورة أونلاين 100٪ على المنصة: تشاهد فيديوهات الجلسات في الوقت الذي يناسبك، وتسلّم المهام وتحل الاختبارات قبل آخر موعد. والدعم والمتابعة من خلال المنصة: ${SUPPORT_TXT}.</p></details>
       <details><summary>كيف أدفع؟</summary><p>من مصر: تحوّل المبلغ بالجنيه بسعر اليوم عبر إنستاباي أو فودافون كاش، وترفع صورة التحويل في نموذج التسجيل، ونفعّل حسابك خلال 24 ساعة. ومن الدول الأخرى نتواصل معك بوسيلة الدفع المناسبة.</p></details>
       <details><summary>هل الشهادة معتمدة؟</summary><p>شهادة من HUDERA Academy برقم تحقق، يمكن لأي شخص التأكد منها من صفحة «التحقق من شهادة». وقيمتها الحقيقية في المشروع الذي ستعرضه.</p></details>
       <details><summary>هل يمكنني استرداد المبلغ؟</summary><p>نعم، في حالتين: إذا انسحبت قبل الجلسة الأولى يُردّ لك المبلغ كاملاً. وإذا أتممت الدورة ولم تستفد يُردّ لك المبلغ كاملاً، بشرط إتمام كل دروس الجلسات (الفيديوهات)، وتسليم كل المهام، وحل كل الاختبارات، وطلب الاسترداد خلال 14 يوماً من آخر جلسة.</p></details>
@@ -377,7 +380,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     const book = !pay.instapay && !pay.vodafone_cash; /* no payment numbers yet: reserve now, pay after we message on WhatsApp */
     if (!C.length) { app.innerHTML = `<section><div class="wrap narrow"><div class="card state"><div class="ic">📅</div><b>لا توجد دفعة مفتوحة حالياً</b><p style="color:var(--muted)">سنعلن عن الدفعة القادمة قريباً على صفحاتنا.</p></div></div></section>`; return; }
     proof = null;
-    app.innerHTML = `<section><div class="wrap narrow"><h2 class="sec">${KIDS ? "سجّل طفلك في كورس الذكاء الاصطناعي الآمن" : "احجز مقعدك"}</h2><p class="lead">${KIDS ? (book ? "خطوة واحدة: بيانات طفلك وبياناتك. ما تدفعش دلوقتي: نأكّد معاك على واتساب قبل بدء الدفعة، والدفع بيكون بعد التأكيد بس." : "خطوة واحدة: بيانات طفلك وبياناتك وصورة التحويل.") : book ? "خطوة واحدة: بياناتك والدفعة والباقة، ثم نرسل لك بيانات الدفع عبر واتساب." : "خطوة واحدة: بياناتك، والدفعة، والباقة، وصورة التحويل."}</p>
+    app.innerHTML = `<section><div class="wrap narrow"><h2 class="sec">${KIDS ? "سجّل طفلك في كورس الذكاء الاصطناعي الآمن" : "احجز مقعدك"}</h2><p class="lead">${KIDS ? (book ? "خطوة واحدة: بيانات طفلك وبياناتك. لا تدفع الآن: نؤكّد معك على واتساب قبل بدء الدفعة، والدفع بعد التأكيد فقط." : "خطوة واحدة: بيانات طفلك وبياناتك وصورة التحويل.") : book ? "خطوة واحدة: بياناتك والدفعة والباقة، ثم نرسل لك بيانات الدفع عبر واتساب." : "خطوة واحدة: بياناتك، والدفعة، والباقة، وصورة التحويل."}</p>
       ${saleBar(def)}
       ${prev?.reject_reason ? `<div class="note" style="margin-bottom:14px">رُفض طلبك السابق: ${esc(prev.reject_reason)}. صحّح المطلوب وأرسله مرة أخرى.</div>` : ""}
       <form class="card" id="ef" novalidate>
@@ -467,7 +470,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       <div class="kpis" style="margin-bottom:18px"><div class="kpi"><small>فيديوهات شاهدتها</small><b>${done}/${lessonsAll.length}</b></div><div class="kpi"><small>متوسط المهام</small><b>${sm.task_sofar ?? "—"}</b></div>
         <div class="kpi"><small>متوسط الاختبارات</small><b>${sm.quiz_sofar != null ? sm.quiz_sofar + "٪" : "—"}</b></div><div class="kpi"><small>مهام سلّمتها</small><b>${course.sessions.filter(s => s.task && s.submission).length}/${course.sessions.filter(s => s.task).length}</b></div></div>
       <div class="card list">${course.sessions.map(s => { const st = sessState(s, sm), sub = s.submission;
-        const meta = st === "lock" ? gateText(s) : [sub ? (sub.status === "graded" ? `📝 اتصحح · ${sub.score ?? "—"}/100` : sub.status === "returned" ? "📝 رجع للتعديل" : "📥 تم الاستلام · في انتظار التصحيح") : (s.task ? "📝 لم تُسلَّم" : ""), s.quiz.best != null ? `✅ الاختبار ${s.quiz.best}٪` : ""].filter(Boolean).join(" · ");
+        const meta = st === "lock" ? gateText(s) : [sub ? (sub.status === "graded" ? `📝 صُحّحت · ${sub.score ?? "—"}/100` : sub.status === "returned" ? "📝 رجع للتعديل" : "📥 تم الاستلام · في انتظار التصحيح") : (s.task ? "📝 لم تُسلَّم" : ""), s.quiz.best != null ? `✅ الاختبار ${s.quiz.best}٪` : ""].filter(Boolean).join(" · ");
         return `<a class="sess ${st}" href="#/s/${s.n}"><span class="num">${st === "done" ? "✓" : st === "lock" ? "🔒" : s.n}</span><span><b>${esc(s.title)}</b><small>${meta}</small></span>
           <span class="st">${st === "done" ? '<span class="chip ok">اجتزتها</span>' : st === "lock" ? '<span class="chip">مغلقة</span>' : '<span class="chip blue">مفتوحة</span>'}</span></a>`; }).join("")}</div>
       ${supportCard()}
@@ -476,13 +479,29 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
   /* no live meetings: questions and problems go through the platform (the note with each task) and messages */
   function supportCard(n) {
     const txt = `سؤال في HUDERA Academy${n ? ` · الجلسة ${n}` : ""}${user?.email ? ` · ${user.email}` : ""}:\n`;
-    return `<div class="card" style="margin-top:14px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><b style="color:var(--ink)">💬 عندك سؤال أو مشكلة؟</b>
-      <p style="margin:4px 0 0;color:var(--muted);font-size:15px">الدعم والمتابعة من خلال المنصة: ${SUPPORT_TXT}. سؤال عن المهمة؟ اكتبه في «ملاحظة للمدرب» وانت بتسلّم. سؤال عن الشرح أو مشكلة تقنية؟ ابعتهولنا في رسالة.</p></div>
-      <a class="btn" href="${WA}?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">ابعت رسالة</a></div>`;
+    return `<div class="card" style="margin-top:14px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><b style="color:var(--ink)">💬 لديك سؤال أو مشكلة؟</b>
+      <p style="margin:4px 0 0;color:var(--muted);font-size:15px">الدعم والمتابعة من خلال المنصة: ${SUPPORT_TXT}. سؤال عن المهمة؟ اكتبه في «ملاحظة للمدرب» عند التسليم. سؤال عن الشرح أو مشكلة تقنية؟ أرسله إلينا في رسالة.</p></div>
+      <a class="btn" href="${WA}?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">أرسل رسالة</a></div>`;
   }
 
   /* ---------------------------------------------------------------- session */
   let curLesson = 0;
+  /* real watch tracking: only 5-second slices that actually played count (seeking earns nothing); the server caps credit by elapsed time
+     and marks the video watched at 90% */
+  let WATCH = null;
+  function trackWatch(vid, l, paint) {
+    const seen = new Set(); let last = null, busy = false, off = false;
+    vid.addEventListener("seeking", () => { last = null; });
+    vid.addEventListener("timeupdate", () => { if (vid.paused || vid.seeking) { last = null; return; } const t = vid.currentTime;
+      if (last != null && t > last && t - last < 2) for (let b = Math.floor(last / 5); b <= Math.floor(t / 5); b++) seen.add(b); last = t; });
+    const save = async () => { if (busy || off || !seen.size || !isFinite(vid.duration) || vid.duration < 10) return; busy = true;
+      try { const r = await rpc("academy_watch", { p_enrollment: enrId, p_lesson: l.id, p_buckets: [...seen], p_duration: Math.round(vid.duration) });
+        if (r) { (WATCH = WATCH || {})[l.id] = r.pct; if (r.done && !l.done) { l.done = true; toast("✓ اكتملت مشاهدة الفيديو"); } paint(); } }
+      catch (e) { if (/function|schema cache|not find/i.test(String(e?.message || ""))) off = true; } finally { busy = false; } };
+    const iv = setInterval(() => { if (!document.body.contains(vid)) { clearInterval(iv); save(); return; } if (!vid.paused) save(); }, 20000);
+    vid.addEventListener("pause", save); vid.addEventListener("ended", save);
+    document.addEventListener("visibilitychange", () => { if (document.hidden) save(); });
+  }
   async function videoSrc(l) {
     if (l.video_path?.startsWith("r2:")) { try { const r = await rpc("academy_video_ticket", { p_lesson: l.id, p_device: DEV, p_label: DEV_LABEL }); if (r && r.ok === false) return { type: r.reason || "limit" }; return { type: "file", url: r.url, tracks: r.tracks || [], ttl: +r.expires_in || 5400 }; } catch (e) { console.warn(e); } }
     else if (l.video_path) { const { data, error } = await sb.storage.from("academy-videos").createSignedUrl(l.video_path, 3 * 3600); if (!error) return { type: "file", url: data.signedUrl }; }
@@ -581,7 +600,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
         <div style="text-align:start;margin-top:16px"><b style="color:var(--ink)">ماذا تتضمّن؟</b><ul class="pts">${s.lessons.flatMap(l => (l.chapters || []).map(c => c.title || c)).map(t => `<li>${esc(t)}</li>`).join("")}</ul>${s.task ? `<p class="taskline">📝 ${esc(s.task.title)}</p>` : ""}</div></div></div></section>`; return;
     }
     if (tab === "live") tab = "help";   /* old links to the removed live tab */
-    const sub = s.submission, tlabel = !s.task ? "📝 المهمة" : !sub ? "📝 المهمة" : sub.status === "graded" ? "📝 المهمة ✓" : sub.status === "returned" ? "📝 المهمة · تعديل" : "📝 المهمة · اتسلّمت";
+    const sub = s.submission, tlabel = !s.task ? "📝 المهمة" : !sub ? "📝 المهمة" : sub.status === "graded" ? "📝 المهمة ✓" : sub.status === "returned" ? "📝 المهمة · تعديل" : "📝 المهمة · سُلّمت";
     const tabs = [["videos", "🎬 الفيديو"], ["task", tlabel], ["quiz", "✅ الاختبار"], ["more", "📚 مصادر"], ["help", "💬 أسئلة ودعم"]];
     app.innerHTML = `<section><div class="wrap"><a href="#/learn">→ لوحتي</a>
       <h2 style="font-size:clamp(22px,4vw,30px);margin-top:8px">الجلسة ${s.n}: ${esc(s.title)}</h2><p style="color:var(--muted);margin:4px 0 0">${esc(s.goal || "")}</p>
@@ -598,20 +617,22 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       tb.innerHTML = `<div class="vgrid"><div><div class="player" id="pl"><div class="soon">…</div></div><div class="card" style="margin-top:12px" id="lp"></div></div>
         <div><div class="card" style="padding:14px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px"><b style="color:var(--ink)">فصول الفيديو</b><small style="color:var(--faint)">نحو ${l.mins} دقيقة</small></div>
           <div class="lessons">${CH.map(c => `<div class="lesson ${c.i === curLesson ? "" : ""}" data-i="${c.i}" ${c.i === curLesson ? 'aria-current="true"' : ""} role="button" tabindex="0"><span class="ck">${c.i + 1}</span><b>${esc(c.title)}</b><small dir="ltr">${fmtT(c.t)}</small></div>`).join("")}</div>
-          <button class="btn ${l.done ? "" : "primary"}" id="dn" type="button" style="width:100%;margin-top:12px">${l.done ? "✓ شاهدت الفيديو" : "علِّم الفيديو كمكتمل"}</button></div>
+          <div id="wst" style="margin-top:12px"></div></div>
         <div class="card" style="margin-top:12px"><b style="color:var(--ink)">أهداف الجلسة</b><ul class="pts">${s.objectives.map(o => `<li>${esc(o)}</li>`).join("")}</ul></div></div></div>`;
       const showCh = i => { curLesson = i; const c = CH[i]; $$(".lesson", tb).forEach(x => x.setAttribute("aria-current", +x.dataset.i === i)); if (c) $("#lp").innerHTML = `<b style="color:var(--ink);font-size:17px">${i + 1}. ${esc(c.title)}</b><ul class="pts">${(c.points || []).map(p => `<li>${esc(p)}</li>`).join("")}</ul>`; };
       showCh(curLesson);
       let vid = null, yt = null;
       $$(".lesson", tb).forEach(x => { const go = () => { const i = +x.dataset.i, t = CH[i].t; showCh(i); if (vid && t != null) { vid.currentTime = t; vid.play().catch(() => {}); } else if (yt && t != null) yt.src = yt.dataset.base + `&start=${Math.floor(t)}&autoplay=1`; }; x.addEventListener("click", go); x.addEventListener("keydown", e => { if (e.key === "Enter") go(); }); });
-      $("#dn").addEventListener("click", async () => { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: !l.done }); l.done = !l.done; paintTab(s, "videos"); } catch (e) { toast(errMsg(e)); } });
+      const wst = () => { const el = $("#wst"); if (!el) return; const p = Math.round((WATCH || {})[l.id] || 0);
+        el.innerHTML = l.done ? `<b style="color:var(--ok)">✓ شاهدت الفيديو</b>` : `<div style="height:8px;border-radius:6px;background:var(--line);overflow:hidden"><i style="display:block;height:100%;width:${Math.min(p, 100)}%;background:var(--ok)"></i></div><small style="color:var(--muted)">شاهدت ${p}% · يكتمل تلقائيًا عند مشاهدة 90% من الفيديو</small>`; };
+      wst(); if (WATCH === null && enrId) rpc("academy_watch_status", { p_enrollment: enrId }).then(w => { WATCH = w || {}; wst(); }).catch(() => { WATCH = {}; });
       videoSrc(l).then(v => { const pl = $("#pl"); if (!pl) return;
         if (!v) pl.innerHTML = `<div class="soon"><b>🎬 الفيديو قيد التجهيز</b>سيُرفع هنا في موعد الجلسة، وحتى ذلك الحين اقرأ نقاط كل فصل.</div>`;
         else if (v.type === "device_limit") showLimit(pl);
         else if (v.type === "file") { pl.innerHTML = `<video controls controlsList="nodownload noremoteplayback nofullscreen" disablepictureinpicture disableremoteplayback preload="metadata" playsinline src="${esc(v.url)}"></video>`; vid = $("video", pl);
           const lp = v.tracks?.length ? langPlayer(vid, v.tracks, pl) : null; guardPlayer(vid, pl, l, v, lp);
           vid.addEventListener("timeupdate", () => { let k = 0; CH.forEach(c => { if (c.t != null && vid.currentTime >= c.t) k = c.i; }); if (k !== curLesson) showCh(k); });
-          vid.addEventListener("ended", async () => { if (!l.done) { try { await rpc("academy_lesson_done", { p_enrollment: enrId, p_lesson: l.id, p_done: true }); l.done = true; toast("✓ سُجِّل الفيديو كمكتمل"); paintTab(s, "videos"); } catch (e) {} } }); vid.addEventListener("contextmenu", e => e.preventDefault()); }
+          trackWatch(vid, l, wst); vid.addEventListener("contextmenu", e => e.preventDefault()); }
         else if (v.type === "yt") { pl.innerHTML = `<iframe src="${esc(v.url)}" data-base="${esc(v.url)}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(l.title)}"></iframe>`; yt = $("iframe", pl); }
         else pl.innerHTML = `<div class="soon"><a class="btn" href="${esc(v.url)}" target="_blank" rel="noopener">افتح الفيديو ↗</a></div>`; });
     }
@@ -621,19 +642,19 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     if (tab === "more") tb.innerHTML = `<div class="card">${(s.resources || []).length ? `<ul class="pts">${s.resources.map(r => `<li>${r[1] ? `<a href="${esc(r[1])}" target="_blank" rel="noopener">${esc(r[0])} ↗</a>` : esc(r[0])}</li>`).join("")}</ul>` : "<p>لا توجد مصادر إضافية لهذه الجلسة.</p>"}</div>`;
   }
   let taskFile = null, justSent = 0;
-  const RECEIVED_TXT = "✅ تم الاستلام — تاسكك وصلنا وهو في انتظار التصحيح. مش محتاج ترفعه تاني.";
+  const RECEIVED_TXT = "✅ تم الاستلام: وصلتنا مهمتك وهي في انتظار التصحيح، ولا تحتاج إلى رفعها مرة أخرى.";
   /* the submission's state, shown at the top of the task tab so it is seen first (on phones too): submitted → received, graded → score + feedback, returned → feedback + re-upload */
   function taskStatus(sub, fresh) {
     if (!sub) return "";
-    const meta = [sub.submitted_at ? `اتسلّم ${fmtDT(sub.submitted_at)}` : "", sub.version ? `نسخة ${sub.version}` : ""].filter(Boolean).join(" · ");
+    const meta = [sub.submitted_at ? `سُلّمت ${fmtDT(sub.submitted_at)}` : "", sub.version ? `نسخة ${sub.version}` : ""].filter(Boolean).join(" · ");
     const late = sub.late ? ` <span class="chip warn">متأخر</span>` : "";
     const what = [sub.file_name ? `📎 <span dir="ltr">${esc(sub.file_name)}</span>` : "", sub.link_url ? `🔗 <a href="${esc(sub.link_url)}" target="_blank" rel="noopener" dir="ltr">${esc(String(sub.link_url).slice(0, 60))}</a>` : ""].filter(Boolean).join(" · ");
     const fb = sub.feedback ? `<div class="fb"><b style="font-size:15px;color:var(--ink)">تعليق المدرب:</b>${esc(sub.feedback).replace(/\n/g, "<br>")}</div>` : "";
     const line = (meta || late) ? `<p style="color:var(--muted)">${meta}${late}</p>` : "";
-    if (sub.status === "graded") return `<div class="tstat done" role="status"><span class="i">🏁</span><div><b>اتصحح · الدرجة ${sub.score ?? "—"}/100</b>${line}${what ? `<p>${what}</p>` : ""}${fb}</div></div>`;
-    if (sub.status === "returned") return `<div class="tstat back" role="status"><span class="i">↩️</span><div><b>رجع للتعديل</b><p>المدرب رجّع التاسك عشان تعدّله: اقرا التعليق، عدّل المطلوب، وارفع النسخة المعدّلة من النموذج تحت.</p>${line}${fb}</div></div>`;
+    if (sub.status === "graded") return `<div class="tstat done" role="status"><span class="i">🏁</span><div><b>صُحّحت · الدرجة ${sub.score ?? "—"}/100</b>${line}${what ? `<p>${what}</p>` : ""}${fb}</div></div>`;
+    if (sub.status === "returned") return `<div class="tstat back" role="status"><span class="i">↩️</span><div><b>أُعيدت للتعديل</b><p>أعاد المدرب المهمة لتعديلها: اقرأ التعليق، وعدّل المطلوب، ثم ارفع النسخة المعدّلة من النموذج أدناه.</p>${line}${fb}</div></div>`;
     return `<div class="tstat ok ${fresh ? "big" : ""}" role="status">${fresh ? "" : `<span class="i">✅</span>`}<div><b>${fresh ? RECEIVED_TXT : "تم الاستلام · في انتظار التصحيح"}</b>${line}${what ? `<p>${what}</p>` : ""}
-      <p>${fresh ? "الدرجة وتعليق المدرب هيظهروا هنا أول ما يتصحح." : "مش محتاج ترفعه تاني. الدرجة وتعليق المدرب هيظهروا هنا أول ما يتصحح."}</p>${fb}</div></div>`;
+      <p>${fresh ? "ستظهر الدرجة وتعليق المدرب هنا فور التصحيح." : "لا تحتاج إلى رفعها مرة أخرى. ستظهر الدرجة وتعليق المدرب هنا فور التصحيح."}</p>${fb}</div></div>`;
   }
   function taskTab(s, tb) {
     const t = s.task, sub = s.submission; taskFile = null;
@@ -642,7 +663,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
     const fresh = waiting && justSent === s.n; justSent = 0;
     const can = !graded;
     const formHtml = `<form class="card" id="tf" style="margin-top:12px" novalidate><h3 style="font-size:18px">${returned ? "سلّم النسخة المعدّلة" : waiting ? "رفع نسخة معدّلة" : "سلّم المهمة"}</h3>
-        ${waiting ? `<p class="note" style="margin:6px 0 12px">تاسكك الحالي وصلنا بالفعل. ارفع نسخة جديدة بس لو عدّلت حاجة فيه، وهتتسجّل كنسخة جديدة.</p>` : ""}
+        ${waiting ? `<p class="note" style="margin:6px 0 12px">وصلتنا مهمتك الحالية بالفعل. ارفع نسخة جديدة فقط إذا عدّلت فيها شيئًا، وستُسجَّل كنسخة جديدة.</p>` : ""}
         <input type="file" id="tfl" hidden accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.png,.jpg,.jpeg,.webp,.txt,.csv">
         <div class="drop" id="tdr" role="button" tabindex="0"><b>ارفع ملفاً</b><span>PDF أو Word أو Excel أو صور أو ZIP · حتى 20 ميجابايت</span></div>
         <div class="filepick" id="tpk" hidden><span>📎</span><span class="nm" id="tpn"></span><button class="btn sm ghost" type="button" id="tun">إزالة</button></div>
@@ -670,7 +691,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       e.preventDefault(); const er = $("#ter"); er.hidden = true; const ln = $("#tln").value.trim(), note = $("#tnt").value.trim();
       if (!taskFile && !ln) { er.textContent = E.file_required; er.hidden = false; return; }
       if (ln && !/^https?:\/\/[^\s/]+\.[^\s]+$/i.test(ln)) { er.textContent = E.invalid_link; er.hidden = false; return; }
-      if (waiting && !confirm("تاسكك متسلّم بالفعل ووصلنا. متأكد إنك عايز ترفع نسخة معدّلة؟")) return;
+      if (waiting && !confirm("مهمتك مُسلّمة ووصلتنا بالفعل. هل تريد رفع نسخة معدّلة؟")) return;
       const go = $("#tgo"); go.disabled = true;
       let r;
       try {
@@ -829,7 +850,7 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
         <div class="f"><span class="lg">هدفك الأساسي من التعلّم</span><div class="pick">${RG_GOAL.map(([k, l]) => `<label><input type="radio" name="goal" value="${k}" ${d.goal === k ? "checked" : ""}><span><b>${l}</b></span></label>`).join("")}</div></div>
         <label class="f"><span>احكِ لنا باختصار ماذا تريد أن تحقق <small>(اختياري)</small></span><textarea name="goal_note" maxlength="600">${esc(d.goal_note || "")}</textarea></label>
         <div class="f"><span class="lg">لغة الشرح المفضّلة</span>${segs("lang", RG_LANG, d.lang)}</div>
-        <div class="f"><span class="lg">الأوقات اللي غالباً هتذاكر فيها <small>(بتوقيت بلدك · الدورة أونلاين وتذاكر في الوقت اللي يناسبك)</small></span>${segs("times", RG_TIMES, d.times, true)}</div>
+        <div class="f"><span class="lg">الأوقات التي ستذاكر فيها غالبًا <small>(بتوقيت بلدك · الدورة أونلاين وتذاكر في الوقت الذي يناسبك)</small></span>${segs("times", RG_TIMES, d.times, true)}</div>
         <div class="f"><span class="lg">الجهاز الذي ستتعلّم عليه</span>${segs("device", RG_DEV, d.device)}</div>
         <label class="f"><span>كيف عرفت HUDERA Academy؟</span><select name="source">${opts(RG_SRC, d.source, "اختر")}</select></label>`;
     } else {

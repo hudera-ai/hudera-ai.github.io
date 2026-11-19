@@ -2686,14 +2686,17 @@ async function acStudents() {
   if (!ac.cohort && ac.data.cohorts?.length) ac.cohort = ac.data.cohorts.find(c => c.active)?.id || ac.data.cohorts[0].id;
   const box = acPage("students", `<button class="btn sm" type="button" id="ac-xl">${ic("dl")} Excel</button>`);
   let list; try { list = (await api("admin_academy_enrollments", { p_cohort: ac.cohort || null, p_status: null })).filter(e => ["active", "completed"].includes(e.status)); } catch (e) { box.innerHTML = failBox(e); return; }
+  let W = {}; try { if (ac.cohort) W = (await api("admin_academy_watch", { p_cohort: ac.cohort })) || {}; } catch (e) { W = {}; }   /* watch % per student per session */
   const coh = (ac.data.cohorts || []).find(c => c.id === ac.cohort), N = coh?.sessions?.length || 8;
-  const cell = r => r ? `<td class="num" title="${L("تاسك", "Task")} ${r.task ?? "—"} · ${L("كويز", "Quiz")} ${r.quiz ?? "—"}${r.present != null ? ` · ${r.present ? L("حضر", "present") : L("غاب", "absent")}` : ""}">${r.passed ? "✅" : r.task_status === "returned" ? "↩️" : r.task != null ? `<b>${r.task}</b>` : r.quiz != null ? "·" : "—"}</td>` : "<td>—</td>";
-  box.innerHTML = `<div class="filters" style="margin-bottom:10px">${acCohortSel("ac-coh", false)}${coh && can("academy.grade") ? `<button class="btn sm" type="button" id="ac-att">✔ ${L("سجّل الحضور", "Attendance")}</button>` : ""}</div>
+  const wp = (e, n) => { const v = W[e.id]?.[String(n)]; return v == null ? null : Math.round(v); };
+  const wtag = p => p == null ? "" : `<span class="s" style="color:${p >= 90 ? "var(--ok, #0FA97A)" : "var(--muted, #888)"}">👁 ${p}%</span>`;
+  const cell = (r, p) => r ? `<td class="num" title="${L("تاسك", "Task")} ${r.task ?? "—"} · ${L("كويز", "Quiz")} ${r.quiz ?? "—"} · ${L("مشاهدة", "Watched")} ${p ?? 0}%">${r.passed ? "✅" : r.task_status === "returned" ? "↩️" : r.task != null ? `<b>${r.task}</b>` : r.quiz != null ? "·" : "—"}${wtag(p)}</td>` : `<td class="num">—${wtag(p)}</td>`;
+  box.innerHTML = `<div class="filters" style="margin-bottom:10px">${acCohortSel("ac-coh", false)}</div>
     ${list.length ? `<div class="tbl-wrap"><table><thead><tr><th>${L("الطالب", "Student")}</th><th>${L("المستوى", "Level")}</th>${Array.from({ length: N }, (_, i) => `<th class="num">${i + 1}</th>`).join("")}<th class="num">${L("النتيجة", "Score")}</th><th></th></tr></thead><tbody>
       ${list.map((e, i) => { const sm = e.summary || {}; return `<tr><td><span class="t" dir="auto">${esc(e.full_name)}</span><span class="s">${acPkg(e.package)}${e.user_id ? ` · <span class="mono" title="${L("الكود اللي بيظهر على الفيديو", "Code shown on the video")}">HX-${String(e.user_id).replace(/-/g, "").slice(0, 6).toUpperCase()}</span>` : ""}</span></td><td>${esc(sm.level?.[AR_() ? "ar" : "en"] || "")}</td>
-        ${Array.from({ length: N }, (_, k) => cell((sm.sessions || []).find(r => r.n === k + 1))).join("")}<td class="num"><b>${sm.final ?? 0}</b>${e.certificate_no ? `<span class="s mono">${esc(e.certificate_no)}</span>` : ""}</td>
+        ${Array.from({ length: N }, (_, k) => cell((sm.sessions || []).find(r => r.n === k + 1), wp(e, k + 1))).join("")}<td class="num"><b>${sm.final ?? 0}</b>${e.certificate_no ? `<span class="s mono">${esc(e.certificate_no)}</span>` : ""}</td>
         <td><div class="filters" style="flex-wrap:nowrap">${can("academy.manage") ? (e.certificate_no && e.status === "completed" ? `<span class="chip c-violet">🏅</span>` : sm.can_certify ? `<button class="btn sm primary" type="button" data-cert="${i}">🏅 ${L("الشهادة", "Certify")}</button>` : "") + `<button class="btn sm ghost" type="button" data-unl="${i}" title="${L("فتح سيشنز يدوي", "Manual unlock")}">🔓</button>` : ""}<button class="btn sm ghost" type="button" data-dev="${i}" title="${L("أجهزة الطالب", "Student devices")}">📱</button></div></td></tr>`; }).join("")}</tbody></table></div>
-      <p class="small muted">✅ ${L("عدّى السيشن (تاسك وكويز فوق النجاح)", "passed")} · ${L("رقم = درجة التاسك", "number = task score")} · ↩️ ${L("رجع للتعديل", "returned")} · ${L("الشهادة لما الطالب يكمّل كل التاسكات ويوصل لنسبة النجاح", "Certificate once all tasks are graded and the pass mark is reached")}</p>`
+      <p class="small muted">✅ ${L("عدّى السيشن (تاسك وكويز فوق النجاح)", "passed")} · 👁 ${L("نسبة مشاهدة الفيديو الحقيقية (السحب للآخر مش بيتحسب، والفيديو بيكمل عند 90%)", "real watch % (seeking doesn't count; complete at 90%)")} · ${L("رقم = درجة التاسك", "number = task score")} · ↩️ ${L("رجع للتعديل", "returned")} · ${L("الشهادة لما الطالب يكمّل كل التاسكات ويوصل لنسبة النجاح", "Certificate once all tasks are graded and the pass mark is reached")}</p>`
       : `<div class="card"><p class="empty">${L("مفيش طلاب مفعّلين في الدفعة دي.", "No active students in this cohort.")}</p></div>`}`;
   $("#ac-coh", box)?.addEventListener("change", e => { ac.cohort = e.target.value; acStudents(); });
   $$("[data-cert]", box).forEach(b => b.addEventListener("click", async () => { b.disabled = true; try { const r = await api("admin_academy_certificate", { p_id: list[+b.dataset.cert].id }); toast(`🏅 ${r.certificate_no}`); acStudents(); } catch (e) { toast(acErr(e)); b.disabled = false; } }));
@@ -2712,15 +2715,9 @@ async function acStudents() {
       <div class="filters" style="justify-content:flex-end;margin-top:6px"><button class="btn" value="cancel" type="submit" formnovalidate>${L("قفل", "Close")}</button>${d.length ? `<button class="btn danger" value="ok" type="submit">↺ ${L("إعادة تعيين الأجهزة", "Reset devices")}</button>` : ""}</div></form>`, false);
     dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { const r = await api("admin_academy_device_reset", { p_user: e.user_id }); toast(L(`اتمسح ${r.reset} جهاز، الطالب يقدر يسجّل أجهزته من جديد`, `Reset ${r.reset} devices`)); } catch (er) { toast(acErr(er)); } } dlg.remove(); });
   }));
-  $("#ac-att", box)?.addEventListener("click", () => {
-    const dlg = dlgOpen(`<form method="dialog"><h2>✔ ${L("حضور اللايف", "Live attendance")} · ${esc(coh.name)}</h2>
-      <label class="fld"><span>${L("السيشن", "Session")}</span><select class="input" name="s">${coh.sessions.map(s => `<option value="${s.n}" ${s.live_at && new Date(s.live_at) < new Date() ? "selected" : ""}>${s.n}. ${esc(s.title)}${s.live_at ? ` · ${acDT(s.live_at)}` : ""}</option>`).join("")}</select></label>
-      <div>${list.map(e => `<label class="of-share"><input type="checkbox" name="p" value="${e.id}" checked> <span dir="auto">${esc(e.full_name)}</span></label>`).join("")}</div>${dlgBtns(t("Save"))}</form>`, false);
-    dlg.addEventListener("close", async () => { if (dlg.returnValue === "ok") { try { await api("admin_academy_attendance", { p_cohort: coh.id, p_session_n: +$("[name=s]", dlg).value, p_present: $$("[name=p]:checked", dlg).map(x => x.value) }); toast(L("اتسجل الحضور ✓", "Attendance saved ✓")); acStudents(); } catch (er) { toast(acErr(er)); } } dlg.remove(); });
-  });
   $("#ac-xl").addEventListener("click", () => HX.xlsx([{ name: L("الطلاب", "Students"), head: [L("الاسم", "Name"), t("E-mail"), t("Phone"), L("الدفعة", "Cohort"), L("الباقة", "Package"), L("المستوى", "Level"), L("سيشنز عدّاها", "Passed"),
-      L("متوسط التاسكات", "Tasks"), L("متوسط الكويزات", "Quizzes"), L("المشروع", "Project"), L("الحضور", "Attendance"), L("النتيجة", "Final"), L("الشهادة", "Certificate")],
-    rows: list.map(e => { const sm = e.summary || {}; return [e.full_name, e.email || "", e.phone || "", e.cohort, e.package, sm.level?.ar || "", sm.passed, sm.task_sofar ?? "", sm.quiz_sofar ?? "", sm.project ?? "", sm.attendance_sofar ?? "", sm.final ?? 0, e.certificate_no || ""]; }) }],
+      L("متوسط التاسكات", "Tasks"), L("متوسط الكويزات", "Quizzes"), L("المشروع", "Project"), L("المشاهدة", "Watched"), L("النتيجة", "Final"), L("الشهادة", "Certificate")],
+    rows: list.map(e => { const sm = e.summary || {}; return [e.full_name, e.email || "", e.phone || "", e.cohort, e.package, sm.level?.ar || "", sm.passed, sm.task_sofar ?? "", sm.quiz_sofar ?? "", sm.project ?? "", (() => { const v = Object.values(W[e.id] || {}).map(Number); return v.length ? Math.round(v.reduce((x, y) => x + y, 0) / v.length) + "%" : ""; })(), sm.final ?? 0, e.certificate_no || ""]; }) }],
     `HUDERA-academy-${today()}.xlsx`, AR_()).catch(er => toast(er.message)));
 }
 
@@ -2732,10 +2729,10 @@ function acCohorts() {
   const C = ac.data.cohorts || [];
   box.innerHTML = C.length ? C.map((c, i) => `<section class="card" style="margin-bottom:14px"><div class="filters" style="justify-content:space-between;align-items:flex-start">
       <div><h2 style="margin:0">${esc(c.name)} <span class="chip ${c.status === "open" ? "c-mint" : c.status === "running" ? "c-sky" : ""}">${{ open: L("التسجيل مفتوح", "Open"), running: L("شغالة", "Running"), closed: L("مقفولة", "Closed") }[c.status]}</span></h2>
-        <p class="sub" style="margin:2px 0 0">${L("بتبدأ", "Starts")} ${fdt(c.starts_on, false)} · ${c.active}/${c.seats} ${L("طالب مفعّل", "active")}${c.pending ? ` · ${c.pending} ${L("مستني", "pending")}` : ""}${c.live_link ? ` · <a href="${esc(c.live_link)}" target="_blank" rel="noopener">${L("لينك اللايف", "Live link")}</a>` : ""}</p></div>
+        <p class="sub" style="margin:2px 0 0">${L("بتبدأ", "Starts")} ${fdt(c.starts_on, false)} · ${c.active}/${c.seats} ${L("طالب مفعّل", "active")}${c.pending ? ` · ${c.pending} ${L("مستني", "pending")}` : ""}</p></div>
       ${m ? `<button class="btn sm" type="button" data-ed="${i}">${L("تعديل المواعيد", "Edit schedule")}</button>` : ""}</div>
-    <div class="tbl-wrap" style="margin-top:10px"><table><thead><tr><th>#</th><th>${L("السيشن", "Session")}</th><th>${L("بتتفتح", "Opens")}</th><th>${L("اللايف (القاهرة)", "Live (Cairo)")}</th><th>${L("تسليم التاسك", "Task due")}</th><th>${L("التسجيل", "Recording")}</th></tr></thead><tbody>
-      ${c.sessions.map(s => `<tr><td>${s.n}</td><td>${esc(s.title)}</td><td>${acDT(s.opens_at)}</td><td><b>${acDT(s.live_at)}</b></td><td>${acDT(s.due_at)}</td><td>${s.recording_url ? `<a href="${esc(s.recording_url)}" target="_blank" rel="noopener">▶</a>` : "—"}</td></tr>`).join("")}</tbody></table></div></section>`).join("")
+    <div class="tbl-wrap" style="margin-top:10px"><table><thead><tr><th>#</th><th>${L("السيشن", "Session")}</th><th>${L("بتتفتح", "Opens")}</th><th>${L("تسليم التاسك", "Task due")}</th></tr></thead><tbody>
+      ${c.sessions.map(s => `<tr><td>${s.n}</td><td>${esc(s.title)}</td><td><b>${acDT(s.opens_at)}</b></td><td>${acDT(s.due_at)}</td></tr>`).join("")}</tbody></table></div></section>`).join("")
     : `<div class="card"><p class="empty">${L("لسه مفيش دفعات. اعمل أول دفعة.", "No cohorts yet.")}</p></div>`;
   $("#ac-new")?.addEventListener("click", () => acCohortForm());
   $$("[data-ed]", box).forEach(b => b.addEventListener("click", () => acCohortForm(C[+b.dataset.ed])));
@@ -2747,20 +2744,19 @@ function acCohortForm(c) {
       <label class="fld"><span>${L("أول يوم", "Start date")}</span><input class="input" name="sd" type="date" required value="${esc(c?.starts_on || "")}"></label>
       <label class="fld"><span>${L("عدد الأماكن", "Seats")}</span><input class="input" name="se" type="number" min="1" max="500" dir="ltr" value="${c?.seats || 15}"></label>
       <label class="fld"><span>${t("Status")}</span><select class="input" name="st">${["open", "running", "closed"].map(k => `<option value="${k}" ${(c?.status || "open") === k ? "selected" : ""}>${{ open: L("التسجيل مفتوح", "Open"), running: L("شغالة (التسجيل مقفول)", "Running"), closed: L("مقفولة", "Closed") }[k]}</option>`).join("")}</select></label></div>
-    <label class="fld"><span>${L("لينك اللايف الثابت (Meet / Zoom)", "Fixed live link (Meet / Zoom)")}</span><input class="input" name="ll" type="url" dir="ltr" value="${esc(c?.live_link || "")}" placeholder="https://meet.google.com/…"></label>
-    ${c ? `<div class="tbl-wrap"><table><thead><tr><th>#</th><th>${L("بتتفتح", "Opens")}</th><th>${L("اللايف", "Live")}</th><th>${L("التسليم", "Due")}</th><th>${L("تسجيل اللايف (لينك)", "Recording link")}</th></tr></thead><tbody>
-      ${c.sessions.map(s => `<tr data-sid="${s.session_id}"><td>${s.n}</td><td><input class="input" type="datetime-local" data-k="opens_at" value="${acLocal(s.opens_at)}"></td><td><input class="input" type="datetime-local" data-k="live_at" value="${acLocal(s.live_at)}"></td>
-        <td><input class="input" type="datetime-local" data-k="due_at" value="${acLocal(s.due_at)}"></td><td><input class="input" type="url" dir="ltr" data-k="recording_url" value="${esc(s.recording_url || "")}" placeholder="https://"></td></tr>`).join("")}</tbody></table></div>
+    ${c ? `<div class="tbl-wrap"><table><thead><tr><th>#</th><th>${L("بتتفتح", "Opens")}</th><th>${L("التسليم", "Due")}</th></tr></thead><tbody>
+      ${c.sessions.map(s => `<tr data-sid="${s.session_id}"><td>${s.n}</td><td><input class="input" type="datetime-local" data-k="opens_at" value="${acLocal(s.opens_at)}"></td>
+        <td><input class="input" type="datetime-local" data-k="due_at" value="${acLocal(s.due_at)}"></td></tr>`).join("")}</tbody></table></div>
       <p class="small muted">${L("المواعيد بتوقيت القاهرة.", "Times are Cairo time.")}</p>`
-    : `<div class="fld"><span>${L("أيام اللايف", "Live days")}</span><div class="filters">${days.map((d, i) => `<label class="of-share"><input type="checkbox" name="dy" value="${i}" ${[0, 3].includes(i) ? "checked" : ""}> ${d}</label>`).join("")}</div></div>
+    : `<div class="fld"><span>${L("أيام المواعيد الأسبوعية", "Weekly days")}</span><div class="filters">${days.map((d, i) => `<label class="of-share"><input type="checkbox" name="dy" value="${i}" ${[0, 3].includes(i) ? "checked" : ""}> ${d}</label>`).join("")}</div></div>
       <label class="fld" style="max-width:200px"><span>${L("الساعة (القاهرة)", "Time (Cairo)")}</span><input class="input" name="tm" type="time" value="19:00"></label>
-      <p class="small muted">${L("هيتعمل جدول الـ 8 سيشنز أوتوماتيك: الفيديوهات بتتفتح قبل كل لايف بيومين، والتاسك آخر ميعاده قبل اللايف اللي بعده بيوم. تقدر تعدّل أي ميعاد بعدين.", "The 8-session schedule is generated: videos open 2 days before each live, tasks are due a day before the next live. You can edit any date later.")}</p>`}
+      <p class="small muted">${L("هيتعمل جدول الـ 8 سيشنز أوتوماتيك: فيديو كل سيشن بيتفتح قبل الميعاد الأسبوعي بيومين، والتاسك آخر ميعاده قبل الميعاد اللي بعده بيوم. تقدر تعدّل أي ميعاد بعدين.", "The 8-session schedule is generated: each video opens 2 days before its weekly date, tasks are due a day before the next one. You can edit any date later.")}</p>`}
     ${dlgBtns(t("Save"))}</form>`);
   dlg.addEventListener("close", async () => {
     if (dlg.returnValue === "ok") { const g = n => $(`[name=${n}]`, dlg);
-      const p = { id: c?.id || null, course_id: c?.course_id || course?.id, name: g("nm").value.trim(), starts_on: g("sd").value, seats: g("se").value, status: g("st").value, live_link: g("ll").value.trim() };
+      const p = { id: c?.id || null, course_id: c?.course_id || course?.id, name: g("nm").value.trim(), starts_on: g("sd").value, seats: g("se").value, status: g("st").value, live_link: c?.live_link || "" };
       if (!c) { p.days = $$("[name=dy]:checked", dlg).map(x => +x.value); p.time = g("tm").value; }
-      else p.sessions = $$("tr[data-sid]", dlg).map(r => ({ session_id: r.dataset.sid, opens_at: acFromLocal($("[data-k=opens_at]", r).value), live_at: acFromLocal($("[data-k=live_at]", r).value), due_at: acFromLocal($("[data-k=due_at]", r).value), recording_url: $("[data-k=recording_url]", r).value.trim() }));
+      else p.sessions = $$("tr[data-sid]", dlg).map(r => ({ session_id: r.dataset.sid, opens_at: acFromLocal($("[data-k=opens_at]", r).value), live_at: acFromLocal($("[data-k=live_at]", r).value), due_at: acFromLocal($("[data-k=due_at]", r).value), live_at: (c.sessions.find(s => s.session_id === r.dataset.sid) || {}).live_at || null, recording_url: (c.sessions.find(s => s.session_id === r.dataset.sid) || {}).recording_url || "" }));
       if (!p.name || !p.starts_on) { toast(L("اكتب الاسم وأول يوم", "Name and start date are required")); }
       else { try { await api("admin_academy_cohort_save", { p }); toast(L("اتحفظت ✓", "Saved ✓")); ac.data = null; viewAcademy(); } catch (e) { toast(acErr(e)); } } }
     dlg.remove();
