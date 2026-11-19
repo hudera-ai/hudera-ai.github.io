@@ -474,5 +474,53 @@
     "https://www.gethynellis.com/2026/11/microsoft-ignite-2026-day-1-announcements/"
    ]
   ]
+ },
+ {
+  "date": "2026-11-18",
+  "slug": "gemini-4-neon-launch-pricing",
+  "tag": {
+   "ar": "نماذج",
+   "en": "Models"
+  },
+  "ar": {
+   "title": "Google تطلق Gemini 4 Neon: نموذج وسط بين Hydrogen و Carbon بسعر 3 دولارات للإدخال و15 للإخراج",
+   "desc": "أطلقت Google يوم 18 نوفمبر 2026 نموذج Gemini 4 Neon لمشتركي Pro و Ultra وللمطورين، بسعر 3 و15 دولاراً لكل مليون رمز.",
+   "body": [
+    "أعلنت Google يوم 18 نوفمبر 2026 نموذج Gemini 4 Neon، وهو الرابع في عائلة Gemini 4 خلال أسابيع قليلة. تضعه الشركة في الوسط: Carbon للمشاريع الأصعب والأطول، و Hydrogen للتنفيذ اليومي السريع، و Neon للتوازن بين العمق والكلفة. سعره عبر الواجهة البرمجية 3 دولارات لكل مليون رمز إدخال و15 دولاراً لكل مليون رمز إخراج، مع خصم 95% على الإدخال المخزّن مؤقتاً (0.15 دولار)، ونافذة سياق مليون رمز وأربعة مستويات تفكير. بدأ طرحه في تطبيق Gemini لمشتركي Google AI Pro و Ultra، وفي Google AI Studio على الفئة المدفوعة، وفي Antigravity، ولعملاء Gemini Enterprise. وهو يقرأ النصوص والصور والصوت والفيديو لكنه يكتب نصاً فقط.",
+    "تقول Google إن Neon عند مستوى التفكير الافتراضي يكلّف 32% أقل من Carbon في المهمة الواحدة. القياس المستقل من Artificial Analysis أكثر تحفظاً: أعطى Neon 61 نقطة في مؤشر الذكاء عند أعلى مستوى تفكير، بفارق نقطة واحدة عن Carbon، وفي المركز الثالث بحسب مقالها، وقدّر كلفة المهمة بنحو 6.44 دولار مقابل 7.76 دولار لـ Carbon بسعره العادي، أي أقل بنحو 17%، مع زمن أقصر بنحو 40%. وللمقارنة يجب الانتباه إلى أن سعر Carbon الحالي (2 و10 دولارات) سعر تمهيدي ينتهي في 30 نوفمبر ثم يصبح 4 و20 دولاراً بحسب التقارير، وأن Neon بضعف سعر Hydrogen (1.50 و7.50 دولار). أرقام السلامة والاختبارات الأخرى في الإعلان مصدرها Google نفسها. ولم نجد في الصفحات التي قرأناها أي ذكر لجودة العربية أو لتوفر خاص بدول المنطقة."
+   ],
+   "biz": "إذا كانت شركتك تستخدم Gemini عبر الواجهة البرمجية، فالسؤال العملي بعد 1 ديسمبر هو: هل يكفي Neon للمهام التي تشغّلونها اليوم على Carbon؟ جرّبوه على مهام حقيقية بالعربية وقارنوا كلفة المهمة كاملة، لا سعر المليون رمز، لأن مستويات التفكير الأعلى تستهلك رموزاً أكثر. وللأعمال اليومية البسيطة يبقى Hydrogen أرخص بالنصف."
+  },
+  "en": {
+   "title": "Google launches Gemini 4 Neon, a mid-tier model between Hydrogen and Carbon at $3 input and $15 output per million tokens",
+   "desc": "On 18 November 2026 Google released Gemini 4 Neon to Pro and Ultra subscribers and developers, priced at $3 and $15 per million tokens.",
+   "body": [
+    "On 18 November 2026 Google announced Gemini 4 Neon, the fourth model in the Gemini 4 family within a few weeks. The company places it in the middle: Carbon for the hardest, longest projects, Hydrogen for fast everyday execution, and Neon as the balance between depth and cost. API pricing is $3 per million input tokens and $15 per million output tokens, with a 95% discount on cached input ($0.15), a 1 million token context window and four thinking levels. It is rolling out in the Gemini app for Google AI Pro and Ultra subscribers, in Google AI Studio on the paid tier, in Antigravity, and to Gemini Enterprise customers. It reads text, images, audio and video but writes text only.",
+    "Google says that at its default thinking level Neon costs 32% less per task than Carbon. The independent measurement from Artificial Analysis is more cautious: it gave Neon 61 on its Intelligence Index at the highest thinking level, one point above Carbon and third overall according to its article, and put the cost per task at about $6.44 against $7.76 for Carbon at its standard price, roughly 17% lower, with about 40% less time per task. When comparing, note that Carbon's current price ($2 and $10) is an introductory rate that ends on 30 November and then becomes $4 and $20 according to reports, and that Neon costs twice as much as Hydrogen ($1.50 and $7.50). The safety figures and other benchmark results in the announcement come from Google itself. In the pages we read we found no mention of Arabic quality or of specific availability in the region's countries."
+   ],
+   "biz": "If your company uses Gemini through the API, the practical question after 1 December is whether Neon is good enough for the work you run on Carbon today. Test it on real tasks in Arabic and compare the cost of the whole task, not the price per million tokens, because higher thinking levels use more tokens. For simple daily work Hydrogen remains half the price."
+  },
+  "sources": [
+   [
+    "Google: Introducing Gemini 4 Neon",
+    "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+   ],
+   [
+    "Artificial Analysis: Google continues to accelerate its release cadence with Gemini 4 Neon",
+    "https://artificialanalysis.ai/articles/gemini-4-neon-intelligence-gain"
+   ],
+   [
+    "Artificial Analysis: Gemini 4 Neon model page",
+    "https://artificialanalysis.ai/models/gemini-4-neon"
+   ],
+   [
+    "Android Headlines: Google launches Gemini 4 Neon",
+    "https://www.androidheadlines.com/2026/11/google-gemini-4-neon-release-pricing-features.html"
+   ],
+   [
+    "Fello AI: Gemini 4 Neon price, benchmarks and who gets it",
+    "https://felloai.com/gemini-4-neon/"
+   ]
+  ]
  }
 ]
