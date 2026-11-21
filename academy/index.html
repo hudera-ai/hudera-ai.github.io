@@ -340,7 +340,7 @@ const HUDERA_CONFIG = {"supabaseUrl": "https://aetdmyxpbxlkywkvltae.supabase.co"
       <div class="card inst"><div class="av">م</div><div><b style="color:var(--ink);font-size:18px">${esc(m.instructor || "")}</b><br><span style="color:var(--muted)">${esc(m.instructor_title || "")}</span><p style="margin:6px 0 0;font-size:15px">يبني أنظمة ذكاء اصطناعي حقيقية للشركات في HUDERA AI، ويعلّم ما يستخدمه في العمل يومياً.</p></div></div>
       <div class="card"><b style="color:var(--ink)">ماذا ستحتاج؟</b>${noLive(m.tools).map(t => `<p style="margin:6px 0 0;font-size:15px"><b>${esc(t[0])}:</b> ${esc(t[1])}</p>`).join("")}</div>
     </div></section>
-    <section style="padding-top:0"><div class="wrap"><div class="card rgcta"><div><b style="color:var(--ink);font-size:19px">لست متأكدًا أي مسار يناسبك؟</b><p style="margin:4px 0 0;color:var(--muted)">سجّل بياناتك وحُلّ اختبار مستوى قصيراً (8 أسئلة)، ونقترح لك المسار المناسب ونتواصل معك على واتساب.</p></div><a class="btn primary big" href="#/register">سجّل الآن مجاناً</a></div></div></section>
+    <section style="padding-top:0"><div class="wrap"><div class="card rgcta"><div><b style="color:var(--ink);font-size:19px">لست متأكدًا أي مسار يناسبك؟</b><p style="margin:4px 0 0;color:var(--muted)">سجّل بياناتك وحُلّ اختبار مستوى قصيراً (8 أسئلة)، ونقترح لك المسار المناسب ونتواصل معك على واتساب.</p></div><a class="btn primary big" href="#/register">سجّل الآن</a></div></div></section>
     <section style="padding-top:0" id="kids"><div class="wrap"><div class="card kids">
       <div><span class="kt">🧒 جديد · للأطفال من 8 إلى 12 سنة</span><h2>HUDERA Kids Academy</h2><p class="ar">«هوديرا كيدز أكاديمي»</p>
         <p>كورس الذكاء الاصطناعي الآمن للأطفال من 8 لـ 12 سنة، أونلاين من البيت: طفلك يعلّم الكمبيوتر يميّز الصور، ويألّف قصة، ويصنع لعبته الأولى. الأماكن محدودة.</p>
@@ -861,7 +861,7 @@ h1{font:800 44px "Bricolage Grotesque";margin:14px 0 0;color:#1B2E86;letter-spac
     }
     app.innerHTML = `<section class="rg"><div class="wrap narrow">
       <h1 style="font-size:clamp(26px,5vw,36px)">سجّل في HUDERA Academy</h1>
-      <p class="lead" style="margin-top:6px">بياناتك تساعدنا نختار لك المسار المناسب ونتواصل معك على واتساب لتأكيده. التسجيل مجاني ولا يحتاج حساباً.</p>
+      <p class="lead" style="margin-top:6px">بياناتك تساعدنا نختار لك المسار المناسب ونتواصل معك على واتساب لتأكيده. التسجيل لا يحتاج حساباً.</p>
       ${head}<form class="card" id="rgf" novalidate><input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">${body}
         <div id="rgm"></div>
         <div class="row rg-nav">${rg.step > 1 ? `<button class="btn" type="button" id="rgb">→ السابق</button>` : `<span></span>`}
