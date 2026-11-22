@@ -522,5 +522,45 @@
     "https://felloai.com/gemini-4-neon/"
    ]
   ]
+ },
+ {
+  "date": "2026-11-20",
+  "slug": "thinking-machines-inkling-2-mini-open-weights-laptop",
+  "tag": {
+   "ar": "نماذج",
+   "en": "Models"
+  },
+  "ar": {
+   "title": "Thinking Machines تطلق Inkling 2 Mini: نموذج بأوزان مفتوحة يعمل على حاسوب محمول دون إنترنت",
+   "desc": "أطلقت Thinking Machines Lab يوم 20 نوفمبر 2026 نموذج Inkling 2 Mini بأوزان مفتوحة، بحجم نحو 20 غيغابايت ويعمل محلياً على حاسوب محمول.",
+   "body": [
+    "أعلنت Thinking Machines Lab يوم 20 نوفمبر 2026 نموذج Inkling 2 Mini بأوزان مفتوحة قابلة للتنزيل من Hugging Face. يضم النموذج 26.4 مليار معامل، لكنه يشغّل 3.4 مليار منها فقط لكل رمز، وحجمه في الذاكرة نحو 20 غيغابايت. تقول الشركة إنه مصمم للحواسيب المحمولة والمكتبية، وعرضته يعمل على MacBook Pro في وضع الطيران، أي دون أي اتصال. ويمكن تشغيله عبر Ollama على أجهزة Mac بذاكرة 32 غيغابايت على الأقل، كما يتوفر مستضافاً على منصة Tinker التابعة للشركة للاستخدام والتخصيص. الفكرة التقنية الجديدة أن الطبقات الوسطى تُعاد ثلاث مرات لكل رمز، فيحصل النموذج على عمق حسابي أكبر من عدد طبقاته المخزّنة.",
+    "في أرقام الشركة نفسها يتقدم Inkling 2 Mini على Qwen3.8-27B في اختبارات البرمجة عبر الوكلاء: 48.2% مقابل 42.2% في DeepSWE، و77.9% مقابل 73.8% في SWE-bench Pro Hard، مع تنبيه في الجدول إلى أن إعدادات التقييم تختلف من نموذج لآخر. وفي مؤشر الذكاء من Artificial Analysis سجّل نحو 20 نقطة، مساوياً لـ Qwen3.8-27B، وهو مستوى بعيد عن النماذج الكبرى التي تتجاوز 60 نقطة. وتعترف الشركة بحدوده: ليس الأقوى بين النماذج الصغيرة في المحادثة متعددة الأدوار ولا في التعليمات كثيرة القيود، والتكرار الداخلي لا يضيف معرفة بالحقائق. ذكر موقع The Next Web أن الرخصة Apache 2.0، لكننا لم نجد اسم الرخصة في صفحة الإعلان التي قرأناها، ولم نجد في أي مصدر ذكراً للغة العربية أو للغات المدعومة."
+   ],
+   "biz": "النماذج المحلية تهم الشركة التي لا تريد أن تخرج بياناتها من أجهزتها: عقود، ملفات عملاء، شيفرة داخلية. Inkling 2 Mini يجعل هذا ممكناً على حاسوب محمول قوي بدل خادم، لكنه نموذج للبرمجة والمهام الآلية أكثر منه للمحادثة، ومستواه العام أقل بوضوح من النماذج السحابية الكبرى. قبل الاعتماد عليه اختبروه على نصوص عربية من عملكم، وتأكدوا من شروط الرخصة في صفحة النموذج على Hugging Face."
+  },
+  "en": {
+   "title": "Thinking Machines releases Inkling 2 Mini, an open-weights model that runs offline on a laptop",
+   "desc": "On 20 November 2026 Thinking Machines Lab released Inkling 2 Mini with open weights: about 20GB in memory and able to run locally on a laptop.",
+   "body": [
+    "On 20 November 2026 Thinking Machines Lab announced Inkling 2 Mini with open weights that can be downloaded from Hugging Face. The model has 26.4 billion parameters but activates only 3.4 billion of them per token, and its memory footprint is about 20GB. The company says it is built for laptops and desktop machines, and demonstrated it on a MacBook Pro in airplane mode, with no connection at all. It runs through Ollama on Macs with at least 32GB of memory, and is also hosted on the company's Tinker platform for inference and customization. The new technical idea is that the middle layers run three times per token, so the model gets more computational depth than its stored layer count suggests.",
+    "In the company's own figures Inkling 2 Mini beats Qwen3.8-27B on agentic coding tests: 48.2% against 42.2% on DeepSWE, and 77.9% against 73.8% on SWE-bench Pro Hard, with a note in the table that evaluation setups vary by model. On the Artificial Analysis Intelligence Index it scores about 20, level with Qwen3.8-27B, which is far from the largest models that score above 60. The company admits its limits: it is not the strongest small model for multi-turn chat or for instructions with many constraints, and the internal looping does not add factual knowledge. The Next Web reports the license as Apache 2.0, but we did not find the license named on the announcement page we read, and no source we read mentions Arabic or lists supported languages."
+   ],
+   "biz": "Local models matter to a company that does not want its data to leave its own machines: contracts, customer files, internal code. Inkling 2 Mini makes that possible on a powerful laptop instead of a server, but it is a model for coding and automated tasks more than for conversation, and its overall level is clearly below the large cloud models. Before relying on it, test it on Arabic text from your own work and confirm the license terms on the model's Hugging Face page."
+  },
+  "sources": [
+   [
+    "Thinking Machines Lab: Introducing Inkling 2 Mini",
+    "https://thinkingmachines.ai/news/inkling-2-mini/"
+   ],
+   [
+    "The Next Web: Thinking Machines releases Inkling 2 Mini, a looped AI model for laptops",
+    "https://thenextweb.com/news/inkling-2-mini-thinking-machines-looped-open-weights-laptop"
+   ],
+   [
+    "Unite.AI: Thinking Machines Lab releases Inkling 2 Mini for local devices",
+    "https://www.unite.ai/thinking-machines-lab-releases-inkling-2-mini-for-local-devices/"
+   ]
+  ]
  }
 ]
