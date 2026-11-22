@@ -1039,7 +1039,7 @@ a.chip-btn{text-decoration:none;display:inline-flex;align-items:center;gap:6px}a
   <section class="container sec" id="process">
     <div class="sec-head"><div><span class="eyebrow">How we work</span><h2>From your process to a running system</h2><p>You see a working demo of your own workflow before committing to the full build.</p></div></div>
     <div class="steps">
-      <div class="step"><span class="k">01</span><h3>Discovery call</h3><p>We map one process that costs your team the most time and look at real examples of your messages, sheets and reports.</p><span class="tag chip c-blue">Free · 30 min</span></div>
+      <div class="step"><span class="k">01</span><h3>Discovery call</h3><p>We map one process that costs your team the most time and look at real examples of your messages, sheets and reports.</p><span class="tag chip c-blue">30 min</span></div>
       <div class="step"><span class="k">02</span><h3>Clickable prototype</h3><p>We build a demo on your workflow, like the ones on this page, so your team can try it and correct it.</p><span class="tag chip c-violet">1–2 weeks</span></div>
       <div class="step"><span class="k">03</span><h3>Pilot &amp; launch</h3><p>We connect it to your WhatsApp, files and systems for one team, with a success measure agreed at the start.</p><span class="tag chip c-amber">2–6 weeks</span></div>
       <div class="step"><span class="k">04</span><h3>Run &amp; improve</h3><p>We monitor, maintain and extend the system every month, with clear limits on usage and support.</p><span class="tag chip c-mint">Monthly plan</span></div>
@@ -2334,7 +2334,7 @@ const AR_DICT = {
 "You see a working demo of your own workflow before committing to the full build.": "ترى نموذجاً يعمل على مسار عملك قبل الالتزام بالتنفيذ الكامل.",
 "Discovery call": "مكالمة تعريفية",
 "We map one process that costs your team the most time and look at real examples of your messages, sheets and reports.": "نحدد العملية التي تستهلك أكثر وقت فريقك، ونراجع أمثلة حقيقية من رسائلك وجداولك وتقاريرك.",
-"Free · # min": "مجانية · # دقيقة",
+"# min": "# دقيقة",
 "Clickable prototype": "نموذج تفاعلي",
 "We build a demo on your workflow, like the ones on this page, so your team can try it and correct it.": "نبني نموذجاً على مسار عملك، مثل النماذج في هذه الصفحة، ليجرّبه فريقك ويصحّحه.",
 "#–# weeks": "#–# أسابيع",
@@ -2370,7 +2370,7 @@ const AR_DICT = {
 "Add your name and a short description": "أضف اسمك ووصفاً قصيراً",
 "Copied to clipboard": "تم النسخ",
 "Select the text and copy it": "حدد النص وانسخه",
-"Free #-minute discovery call": "مكالمة تعريفية مجانية # دقيقة",
+"#-minute discovery call": "مكالمة تعريفية # دقيقة",
 "Arabic or English": "بالعربي أو الإنجليزي",
 "Remote across Saudi Arabia and the Gulf": "عن بُعد في السعودية والخليج",
 "WhatsApp:": "واتساب:",
@@ -3318,15 +3318,15 @@ const CONNECT_TXT = {
     biz: { name: "لومن للتصميم الداخلي", sub: "حساب تجاري", day: "اليوم", placeholder: "مراسلة", note: "يرد المساعد الآلي فوراً، ويمكنك طلب موظف في أي وقت" },
     auto: "رد آلي", agentLbl: "نورة · فريق المبيعات",
     q1: "السلام عليكم، أبغى أعرف عن خدمة تصميم وتنفيذ المطابخ",
-    welcome: "وعليكم السلام، أهلاً بك في لومن للتصميم الداخلي 👋\nأنا المساعد الآلي، أقدر أعطيك سعر مبدئي أو أحجز لك زيارة قياس مجانية. وش تحتاج؟",
+    welcome: "وعليكم السلام، أهلاً بك في لومن للتصميم الداخلي 👋\nأنا المساعد الآلي، أقدر أعطيك سعر مبدئي أو أحجز لك زيارة قياس. وش تحتاج؟",
     bQuote: "سعر مبدئي", bVisit: "حجز زيارة قياس", bHuman: "التحدث مع موظف",
     area: "ممتاز. كم مساحة المطبخ تقريباً؟", a1: "أقل من 10 م²", a2: "10 – 20 م²", a3: "أكثر من 20 م²",
     city: "وفي أي مدينة المشروع؟", c1: "الرياض", c2: "جدة", c3: "مدينة أخرى",
     photo: "هذي صورة المطبخ الحالي", photoCap: "IMG_2041.jpg",
-    estimate: "شكراً فيصل، وصلت الصورة ✅\nحسب المساحة، يبدأ سعر التصميم والتنفيذ من *18,000 ريال*، والسعر النهائي يتحدد بعد زيارة القياس.\nتبغى أحجز لك زيارة مجانية؟",
+    estimate: "شكراً فيصل، وصلت الصورة ✅\nحسب المساحة، يبدأ سعر التصميم والتنفيذ من *18,000 ريال*، والسعر النهائي يتحدد بعد زيارة القياس.\nتبغى أحجز لك زيارة؟",
     bYes: "نعم، احجز زيارة", bCat: "أرسل الكتالوج",
     slots: "المواعيد المتاحة هذا الأسبوع:", s1: "الأحد 10:00 ص", s2: "الاثنين 4:30 م", s3: "الثلاثاء 11:00 ص",
-    booked: s => `تم الحجز ✅\n*${s}* — زيارة قياس مجانية\nالمهندسة: سارة القحطاني\nرقم الطلب: LM-2417\nبنرسل لك تذكير قبل الموعد بيوم.`,
+    booked: s => `تم الحجز ✅\n*${s}* — زيارة قياس\nالمهندسة: سارة القحطاني\nرقم الطلب: LM-2417\nبنرسل لك تذكير قبل الموعد بيوم.`,
     cat: "تفضل كتالوج المطابخ 2026، وإذا حبيت تحجز زيارة اكتب «زيارة» في أي وقت.", catDoc: "Lumen-Kitchens-2026.pdf",
     handoff: "أكيد. حولت المحادثة لنورة من فريق المبيعات، وبترد عليك خلال دقائق في أوقات العمل.",
     paused: "شكراً لتواصلك مع لومن. أحد أعضاء الفريق بيرد عليك قريباً.",
@@ -3337,15 +3337,15 @@ const CONNECT_TXT = {
     biz: { name: "Lumen Interiors", sub: "Business account", day: "Today", placeholder: "Message", note: "The automated assistant replies instantly. You can ask for a person at any time." },
     auto: "Automated reply", agentLbl: "Nora · Sales team",
     q1: "Hi, I'd like to know about your kitchen design and fit-out service",
-    welcome: "Hi, welcome to Lumen Interiors 👋\nI'm the automated assistant. I can give you an initial price or book a free measurement visit. What do you need?",
+    welcome: "Hi, welcome to Lumen Interiors 👋\nI'm the automated assistant. I can give you an initial price or book a measurement visit. What do you need?",
     bQuote: "Initial price", bVisit: "Book a measurement visit", bHuman: "Talk to a team member",
     area: "Great. Roughly how big is the kitchen?", a1: "Under 10 m²", a2: "10 – 20 m²", a3: "Over 20 m²",
     city: "Which city is the project in?", c1: "Riyadh", c2: "Jeddah", c3: "Another city",
     photo: "Here's a photo of the current kitchen", photoCap: "IMG_2041.jpg",
-    estimate: "Thanks Faisal, photo received ✅\nFor this size, design and fit-out starts from *SAR 18,000*. The final price is set after the measurement visit.\nShall I book a free visit?",
+    estimate: "Thanks Faisal, photo received ✅\nFor this size, design and fit-out starts from *SAR 18,000*. The final price is set after the measurement visit.\nShall I book a visit?",
     bYes: "Yes, book a visit", bCat: "Send the catalogue",
     slots: "Available slots this week:", s1: "Sun 10:00 AM", s2: "Mon 4:30 PM", s3: "Tue 11:00 AM",
-    booked: s => `Booked ✅\n*${s}* — free measurement visit\nEngineer: Sara Al-Qahtani\nRequest no.: LM-2417\nWe'll send a reminder the day before.`,
+    booked: s => `Booked ✅\n*${s}* — measurement visit\nEngineer: Sara Al-Qahtani\nRequest no.: LM-2417\nWe'll send a reminder the day before.`,
     cat: "Here's our 2026 kitchen catalogue. Type “visit” any time to book a measurement visit.", catDoc: "Lumen-Kitchens-2026.pdf",
     handoff: "Of course. I've passed this chat to Nora from our sales team. She'll reply within minutes during working hours.",
     paused: "Thanks for contacting Lumen. A team member will reply shortly.",
@@ -4371,7 +4371,7 @@ function renderHome() {
   fitPreviews();
   $("#interest").innerHTML = `<option value="">Choose a product or service</option>${PRODUCTS.map(p => `<option value="${p.id}">${p.name} · ${p.kind}</option>`).join("")}<option value="other">Something else</option>`;
   const cl = $("#contact-lines");
-  cl.innerHTML = [["calendar", "Free 30-minute discovery call"], ["chat", "Arabic or English"], ["globe", "Remote across Saudi Arabia and the Gulf"], ...(CONTACT.email ? [["send", CONTACT.email]] : []), ...(CONTACT.whatsapp ? [["phone", "WhatsApp: ", null, CONTACT.whatsapp]] : []), ...(CONTACT.linkedin ? [["link", "LinkedIn: hudera", CONTACT.linkedin]] : []), ...(CONTACT.facebook ? [["users", "Facebook: huderaai", CONTACT.facebook]] : []), ...(CONTACT.github ? [["grid", "GitHub: hudera-ai", CONTACT.github]] : [])].map(([i, t, h, n]) => h ? `<a href="${h}" target="_blank" rel="noopener" style="color:inherit">${ic(i)}${esc(t)}</a>` : `<span>${ic(i)}<span>${esc(t)}${n ? `<span dir="ltr">${esc(n)}</span>` : ""}</span></span>`).join("");
+  cl.innerHTML = [["calendar", "30-minute discovery call"], ["chat", "Arabic or English"], ["globe", "Remote across Saudi Arabia and the Gulf"], ...(CONTACT.email ? [["send", CONTACT.email]] : []), ...(CONTACT.whatsapp ? [["phone", "WhatsApp: ", null, CONTACT.whatsapp]] : []), ...(CONTACT.linkedin ? [["link", "LinkedIn: hudera", CONTACT.linkedin]] : []), ...(CONTACT.facebook ? [["users", "Facebook: huderaai", CONTACT.facebook]] : []), ...(CONTACT.github ? [["grid", "GitHub: hudera-ai", CONTACT.github]] : [])].map(([i, t, h, n]) => h ? `<a href="${h}" target="_blank" rel="noopener" style="color:inherit">${ic(i)}${esc(t)}</a>` : `<span>${ic(i)}<span>${esc(t)}${n ? `<span dir="ltr">${esc(n)}</span>` : ""}</span></span>`).join("");
   if (CONTACT.wa) cl.insertAdjacentHTML("beforeend", `<a class="btn primary" style="align-self:flex-start;margin-top:8px" ${waAttr("Hi HUDERA AI, I'd like to book a discovery call.", "مرحباً HUDERA AI، أرغب في حجز مكالمة تعريفية.")}>${ic("chat")}Chat with us on WhatsApp</a>`);
 }
 
@@ -5006,7 +5006,7 @@ const HP = (() => {
   async function chatBooking() {
     if (!sb) return; $("#chat-book")?.remove();
     const box = $("#chat-msgs");
-    box.insertAdjacentHTML("beforeend", `<div class="chat-card chat-book" id="chat-book"><b>${ct("Book a free call", "احجز مكالمة مجانية")}</b><small>${ct("Saudi time · about 30 minutes", "بتوقيت السعودية · حوالي 30 دقيقة")}</small><div class="bk-body"><div class="cm assistant typing"><i></i><i></i><i></i></div></div></div>`);
+    box.insertAdjacentHTML("beforeend", `<div class="chat-card chat-book" id="chat-book"><b>${ct("Book a call", "احجز مكالمة")}</b><small>${ct("Saudi time · about 30 minutes", "بتوقيت السعودية · حوالي 30 دقيقة")}</small><div class="bk-body"><div class="cm assistant typing"><i></i><i></i><i></i></div></div></div>`);
     box.scrollTop = 1e9;
     let data; try { data = await rpc("booking_slots", { p_days: 7 }); } catch (e) { data = null; }
     const body = $("#chat-book .bk-body"); if (!body) return;
