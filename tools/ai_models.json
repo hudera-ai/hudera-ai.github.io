@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-19",
+ "updated": "2026-11-23",
  "tables": [
-  {"id": "text", "ar": "المحادثة والكتابة العامة (Arena Text)", "en": "General chat and writing (Arena Text)", "asof": "2026-11-11", "unit": "Elo",
-   "rows": [["Gemini 4 Carbon", "Google", 1526], ["Gemini 4 Argon", "Google", 1522], ["Muse Wonder", "Meta", 1511], ["Claude Opus 5.5", "Anthropic", 1506], ["Claude Fable 5", "Anthropic", 1504]]},
+  {"id": "text", "ar": "المحادثة والكتابة العامة (Arena Text)", "en": "General chat and writing (Arena Text)", "asof": "2026-11-19", "unit": "Elo",
+   "rows": [["Gemini 4 Carbon", "Google", 1527], ["Gemini 4 Argon", "Google", 1520], ["Gemini 4 Neon", "Google", 1513], ["Muse Wonder", "Meta", 1511], ["Claude Opus 5.5", "Anthropic", 1506], ["Claude Fable 5", "Anthropic", 1504]]},
   {"id": "webdev", "ar": "بناء المواقع والتطبيقات (Arena WebDev)", "en": "Building websites and apps (Arena WebDev)", "asof": "2026-11-12", "unit": "Elo",
    "rows": [["Claude Fable 5.2", "Anthropic", 1836], ["Claude Opus 5.5", "Anthropic", 1814], ["Claude Sonnet 5.5", "Anthropic", 1773], ["Gemini 4 Carbon", "Google", 1768], ["GPT-6 Astra", "OpenAI", 1764], ["GPT-6.1 Sol", "OpenAI", 1743]]},
   {"id": "search", "ar": "البحث على الإنترنت (Arena Search)", "en": "Web search (Arena Search)", "asof": "2026-11-09", "unit": "Elo",
@@ -16,6 +16,7 @@
   ["Arena (LMArena): Text leaderboard", "https://arena.ai/leaderboard/chat/text"],
   ["BenchLeader: LMArena Text", "https://www.benchleader.com/benchmarks/lmarena_text"],
   ["Artificial Analysis: model leaderboard (Intelligence Index)", "https://artificialanalysis.ai/leaderboards/models"],
+  ["BenchLeader: Artificial Analysis Intelligence Index", "https://www.benchleader.com/benchmarks/aa_intelligence_index_v5"],
   ["tbreak: Artificial Analysis Intelligence Index v5", "https://tbreak.com/gemini-4-carbon-artificial-analysis-claude-opus-5-5/"],
   ["The Decoder: GPT-6.2 Astra and Sol on the Artificial Analysis index", "https://the-decoder.com/openai-launches-gpt-6-2-astra-and-sol-with-lower-api-prices-and-some-benchmark-gains/"],
   ["Artificial Analysis: Gemini 4 Neon on the Intelligence Index", "https://artificialanalysis.ai/articles/gemini-4-neon-intelligence-gain"],

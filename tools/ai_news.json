@@ -562,5 +562,49 @@
     "https://www.unite.ai/thinking-machines-lab-releases-inkling-2-mini-for-local-devices/"
    ]
   ]
+ },
+ {
+  "date": "2026-11-22",
+  "slug": "openrouter-offboards-providers-dragos-prompt-theft",
+  "tag": {
+   "ar": "أمن",
+   "en": "Security"
+  },
+  "ar": {
+   "title": "OpenRouter تستبعد ثلاثة مزوّدين بعد بحث من Dragos كشف سرقة طلبات المستخدمين لدى شركات استضافة النماذج",
+   "desc": "في 22 نوفمبر 2026 استبعدت OpenRouter ثلاثة مزوّدين وسحبت صفة عدم الاحتفاظ بالبيانات من 125 نقطة وصول بعد بحث أمني من Dragos.",
+   "body": [
+    "أعلنت OpenRouter يوم 22 نوفمبر 2026، وهي منصة توجّه طلبات العملاء إلى عشرات الشركات التي تشغّل نماذج الذكاء الاصطناعي، أنها أوقفت التعامل مع ثلاثة مزوّدين وسحبت صفة «عدم الاحتفاظ بالبيانات» (Zero Data Retention) من 125 نقطة وصول، بعضها احتياطاً. لم تذكر المنصة أسماء المزوّدين الثلاثة، وقالت إنها أبلغت العملاء المحتمل تأثرهم وإن التحقيق لم يُظهر أي اختراق لأنظمتها هي. جاء القرار بعد بحث نشره HD Moore من شركة Dragos يوم 19 نوفمبر: أرسل فريقه نحو مليوني طلب بين يوليو ونوفمبر 2026 إلى خدمات ذكاء اصطناعي واسعة الاستخدام، وفي كل طلب مفاتيح وروابط وهمية تعمل كفخ، ثم راقب من يستخدمها.",
+    "النتيجة بحسب Dragos أن مهاجمين سرقوا بيانات من داخل ثلاثة مزوّدين على الأقل، وأن نحو مئتي مفتاح AWS وهمي سُرقت ثم جُرّبت، وأن بعض الطلبات المسروقة كانت موسومة بعدم الاحتفاظ بالبيانات. ووجد البحث أيضاً سوقاً لإعادة بيع النماذج بأسعار منخفضة يستطيع البائعون فيها قراءة طلبات العملاء وحفظها دون أي اختراق. لم تسمِّ Dragos أي شركة، لكن مزوّدين نشروا إشعارات خاصة بهم: Phala قالت إن مهاجماً سيطر على خادم لتشغيل النماذج وإنها احتوت الحادثة يوم 8 نوفمبر، و Together AI قالت إن وكيل برمجة آلياً نشر مفتاح دخول في مستودع عام على GitHub فنزّل طرف غير مصرّح له عينات محفوظة من طلبات العملاء، و Novita تحدثت عن خطأ في إعدادات التوجيه أرسل بعض الطلبات إلى واجهة MiniMax الرسمية. ولم يؤكد أي مصدر قرأناه أن هذه الشركات هي نفسها الثلاث المستبعدة."
+   ],
+   "biz": "إذا كانت شركتك تستخدم نماذج الذكاء الاصطناعي عبر منصة وسيطة أو مزوّد رخيص، فالنص الذي ترسله يمر بأطراف قد لا تعرفها، وعبارة «لا نحتفظ بالبيانات» وعد تعاقدي لا ضمانة تقنية. عملياً: لا تضعوا كلمات مرور أو مفاتيح API أو بيانات عملاء حساسة داخل الطلبات، وحدّدوا بأنفسكم المزوّد الذي تُرسل إليه البيانات بدل ترك الاختيار للأرخص، وغيّروا أي مفتاح سبق أن مرّ في طلب. الأعمال الحساسة تستحق مزوّداً من الصف الأول أو تشغيلاً محلياً."
+  },
+  "en": {
+   "title": "OpenRouter drops three providers after Dragos research catches prompt theft at AI hosting firms",
+   "desc": "On 22 November 2026 OpenRouter off-boarded three providers and removed 125 endpoints from Zero Data Retention eligibility after Dragos research.",
+   "body": [
+    "On 22 November 2026 OpenRouter, a platform that routes customer requests to dozens of companies running AI models, said it had off-boarded three providers and removed 125 endpoints from Zero Data Retention eligibility, some of them as a precaution. It did not name the three providers. It said it had notified customers who may be affected and that the investigation showed no breach of its own systems. The decision followed research published on 19 November by HD Moore of Dragos: his team sent about two million prompts between July and November 2026 to widely used AI services, each carrying decoy keys and links that act as tripwires, then watched who used them.",
+    "According to Dragos, attackers stole data from inside at least three providers, about two hundred decoy AWS keys were taken and then tested, and some of the stolen requests had been flagged for zero data retention. The research also found a marketplace reselling models at low prices where sellers could read and keep customer prompts with no hacking involved. Dragos named no company, but providers have published their own notices: Phala said an attacker took control of an inference server and that it contained the incident on 8 November, Together AI said an automated coding agent published a credential in a public GitHub repository and an unauthorized party then downloaded stored samples of customer prompts, and Novita described a routing configuration error that sent some requests to MiniMax's official API. No source we read confirms that these companies are the three that were off-boarded."
+   ],
+   "biz": "If your company uses AI models through a routing platform or a cheap provider, the text you send passes through parties you may not know, and \"we do not retain data\" is a contractual promise, not a technical guarantee. In practice: keep passwords, API keys and sensitive customer data out of prompts, choose the provider your data goes to yourself instead of leaving it to whichever is cheapest, and rotate any key that has ever travelled inside a prompt. Sensitive work deserves a first-tier provider or a locally run model."
+  },
+  "sources": [
+   [
+    "OpenRouter: Data Processing Incidents on Inference Providers",
+    "https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/"
+   ],
+   [
+    "Dragos: Three breaches, endless leaks: Your AI supply chain needs canaries",
+    "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens"
+   ],
+   [
+    "The Hacker News: OpenRouter Drops 3 Providers After Researchers Catch Months of Prompt Theft at AI Hosting Firms",
+    "https://thehackernews.com/2026/11/openrouter-drops-3-providers-after.html"
+   ],
+   [
+    "Unite.AI: OpenRouter Cuts Three Providers After AI Prompt Exposure Findings",
+    "https://www.unite.ai/openrouter-cuts-three-providers-after-ai-prompt-exposure-findings/"
+   ]
+  ]
  }
 ]
