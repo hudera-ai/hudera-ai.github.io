@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAMASCO | نجوم المنارة لتجارة وتأجير السقالات – الشارقة، الإمارات</title>
+<link rel="canonical" href="https://hudera.ai/namasco/">
+<meta property="og:url" content="https://hudera.ai/namasco/">
+<meta name="description" content="نجوم المنارة لتجارة وتأجير السقالات (NAMASCO)، الشارقة: تأجير وبيع السقالات، التركيب والفك، فحص المواقع ودعم المشاريع في جميع أنحاء الإمارات. Scaffolding rental, trading and installation across the UAE.">
+<meta name="theme-color" content="#14213d">
+<meta property="og:type" content="website"><meta property="og:site_name" content="NAMASCO">
+<meta property="og:title" content="NAMASCO | نجوم المنارة لتجارة وتأجير السقالات">
+<meta property="og:description" content="Building Safer. Reaching Higher. Delivering Trust. حلول سقالات موثوقة في أنحاء الإمارات.">
+<meta property="og:image" content="https://hudera.ai/namasco/img/og.jpg"><meta property="og:locale" content="ar_AE"><meta property="og:locale:alternate" content="en_AE">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="img/favicon.png"><link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "NAMASCO – Nejoum Al Manarah Scaffolding Trading & Rental L.L.C.", "alternateName": ["NAMASCO", "نجوم المنارة لتجارة وتأجير السقالات ذ.م.م"], "description": "Scaffolding rental, trading, installation & dismantling, site inspection and project support across the UAE.", "foundingDate": "2023", "telephone": "+971 6 574 4314", "email": "info@nejoumalmanarah.com", "address": {"@type": "PostalAddress", "streetAddress": "Sajah Industrial Area", "addressLocality": "Sharjah", "addressCountry": "AE"}, "hasMap": "https://maps.app.goo.gl/TT6SrM75kqH7bA2r9", "areaServed": "AE", "contactPoint": [{"@type": "ContactPoint", "telephone": "+971 50 665 0393", "contactType": "sales", "availableLanguage": ["Arabic", "English"]}], "logo": "https://hudera.ai/namasco/img/logo.png", "image": "https://hudera.ai/namasco/img/og.jpg", "url": "https://hudera.ai/namasco/"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="importmap">{"imports":{"three":"./lib/three.module.min.js","three/addons/":"./lib/jsm/"}}</script>
+<style>
+:root{
+  /* direction B: daylight, concrete, brand navy and maroon */
+  --navy:#14213d; --mar:#8e1b2e; --paper:#f4f1ec; --card:#fbfaf7; --mute:#4b5567; --line:rgba(20,33,61,.16);
+  --ar:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif; --en:"Inter","Segoe UI",Arial,sans-serif;
+  --pad:clamp(16px,6vw,96px);
+}
+*{box-sizing:border-box}
+html.lock{overflow:hidden}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--navy);font-family:var(--ar);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+html[lang=en] body{font-family:var(--en);line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--mar);outline-offset:2px}
+.btn{display:inline-block;font:600 15px/1 inherit;font-family:inherit;padding:15px 22px;border:0;cursor:pointer;text-decoration:none;background:var(--navy);color:#fff}
+.btn.mar{background:var(--mar)}
+.btn.ghost{background:none;color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.btn{border-radius:3px;transition:background .2s,color .2s,box-shadow .2s,transform .2s}
+.btn:hover{background:#0b1530}
+.btn.mar:hover{background:#6e1222}
+.btn.ghost:hover{background:var(--navy);color:#fff}
+.btn:active{transform:translateY(1px)}
+.pill{border-radius:3px;transition:background .2s,color .2s}
+.pill{font:500 13.5px/1 inherit;font-family:inherit;padding:11px 14px;border:1px solid var(--navy);background:rgba(251,250,247,.92);color:var(--navy);cursor:pointer}
+.pill[aria-pressed=true]{background:var(--navy);color:#fff}
+
+/* ---------- intro ---------- */
+#intro{position:fixed;inset:0;z-index:100;background:var(--paper);display:grid;place-items:center;transition:opacity .6s}
+#intro.out{opacity:0;pointer-events:none}
+#icv{position:absolute;inset:0;width:100%;height:100%;transition:opacity .7s}
+#intro.logo #icv{opacity:0}
+.ilogo{position:relative;width:min(320px,62vw);opacity:0;transform:scale(.96);transition:opacity .7s,transform 1.2s;overflow:hidden}
+.ilogo img{display:block;width:100%}
+#intro.logo .ilogo{opacity:1;transform:none}
+.ilogo::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;background:linear-gradient(100deg,rgba(244,241,236,0),rgba(255,255,255,.85),rgba(244,241,236,0))}
+#intro.logo .ilogo::after{animation:sweep 1.1s .55s ease-in-out forwards}
+@keyframes sweep{to{left:120%}}
+.iline{position:absolute;left:50%;bottom:16%;width:160px;height:2px;margin-left:-80px;background:var(--line)}
+.iline i{display:block;height:100%;width:0;background:var(--mar)}
+#intro.logo .iline{opacity:0}
+#iskip{position:absolute;bottom:22px;inset-inline-end:22px}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;height:68px;display:flex;align-items:center;gap:22px;padding:0 clamp(16px,4vw,56px);transition:background .3s,box-shadow .3s;background:rgba(244,241,236,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.nav.solid{background:var(--paper);box-shadow:0 1px 0 var(--line)}
+.nav img{height:42px;display:block}
+.nav .links{display:flex;gap:22px;font-size:15px;margin-inline-start:16px}
+.nav .links a{text-decoration:none}
+.nav .links a:hover{color:var(--mar)}
+.nav .sp{flex:1}
+.lang{font:500 14px/1 var(--en);background:none;border:0;color:inherit;cursor:pointer;padding:10px 6px}
+.nav .btn{padding:12px 18px;font-size:14px}
+.menu{display:none;width:44px;height:44px;border:1px solid var(--line);background:var(--card);cursor:pointer;padding:12px 11px;flex-direction:column;justify-content:space-between}
+.menu span{display:block;height:2px;background:var(--navy)}
+.mnav{position:fixed;top:58px;left:0;right:0;z-index:45;background:var(--paper);box-shadow:0 10px 30px rgba(13,20,38,.18);display:grid;padding:8px var(--pad) 16px}
+.mnav[hidden]{display:none}
+.mnav a{padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:17px;color:var(--navy)}
+@media (max-width:900px){.menu{display:flex}.nav .links{display:none}.nav{height:58px;gap:10px}.nav img{height:34px}}
+
+/* ---------- hero: one screen, the scaffold builds itself ---------- */
+#track{position:relative}
+#stage{position:relative;height:100vh;height:100svh;min-height:580px;max-height:1100px;overflow:hidden;background:linear-gradient(#cdd8e2,#e6e9e8 58%,#ddd6c9)}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.veil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to left,rgba(244,241,236,.96) 0,rgba(244,241,236,.88) 32%,rgba(244,241,236,0) 58%)}
+html[lang=en] .veil{background:linear-gradient(to right,rgba(244,241,236,.96) 0,rgba(244,241,236,.88) 32%,rgba(244,241,236,0) 58%)}
+.hl{position:absolute;inset-inline-start:var(--pad);top:50%;transform:translateY(-54%);width:min(560px,44vw)}
+.eyebrow,.kick{font:600 12.5px/1.5 var(--en);letter-spacing:.26em;text-transform:uppercase;color:var(--mar);margin:0 0 18px}
+html[lang=ar] .kick,html[lang=ar] .eyebrow.t{font-family:var(--ar);letter-spacing:0;font-size:15px}
+.hl h1{font:300 clamp(44px,5.8vw,88px)/1.02 var(--en);letter-spacing:-.025em;margin:0}
+.hl h1 b{font-weight:600;color:var(--navy)}
+html[lang=ar] .hl h1{font-family:var(--ar);font-weight:300;line-height:1.28;letter-spacing:0}
+.hl p{font-size:clamp(17px,1.4vw,20px);color:var(--mute);margin:16px 0 26px}
+.hl .row{display:flex;gap:12px;flex-wrap:wrap}
+.hstats{display:flex;gap:0;margin:34px 0 0;padding:0;border-top:1px solid var(--line);max-width:520px}
+.hstats div{flex:1;padding:14px 0 0;padding-inline-end:14px}
+.hstats div+div{border-inline-start:1px solid var(--line);padding-inline-start:16px}
+.hstats dt{font:300 clamp(28px,2.6vw,38px)/1 var(--en);color:var(--mar)}
+.hstats dd{margin:6px 0 0;font-size:13.5px;color:var(--mute);line-height:1.4}
+.cap{position:absolute;inset-inline-end:clamp(16px,4vw,56px);bottom:clamp(18px,3.2vh,36px);width:min(390px,34vw);background:rgba(251,250,247,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(20,33,61,.1);box-shadow:0 12px 32px rgba(13,20,38,.12);padding:14px 16px 12px;border-radius:4px}
+.seg{display:flex;gap:4px;direction:ltr;margin-bottom:12px}
+html[lang=ar] .seg{direction:rtl}
+.seg i{flex:1;height:3px;background:rgba(20,33,61,.12);position:relative;overflow:hidden;border-radius:2px}
+.seg i::after{content:"";position:absolute;inset:0;background:var(--mar);transform:scaleX(var(--f,0));transform-origin:left}
+html[lang=ar] .seg i::after{transform-origin:right}
+.cap-row{display:flex;gap:14px;align-items:flex-start}
+.cap .n{font:300 30px/1 var(--en);color:var(--mar);direction:ltr;display:inline-block;flex:none}
+.cap .n small{font-size:12px;color:var(--mute);margin-left:4px}
+.cap b{display:block;font-size:17px;font-weight:600;line-height:1.35}
+.cap span.d{color:var(--mute);font-size:14.5px;display:block;line-height:1.55;margin-top:2px}
+.cap-foot{display:flex;gap:8px;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.cap-foot .sp{flex:1}
+.cap .cnt{font:500 12px/1 var(--en);letter-spacing:.06em;color:var(--mute);unicode-bidi:isolate}
+html[lang=ar] .cap .cnt{font-family:var(--ar);letter-spacing:0}
+.cap .pill{padding:9px 12px;font-size:13px;border-radius:3px}
+.pill.dark{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pill.dark:hover{background:var(--mar);border-color:var(--mar)}
+.scue{position:absolute;left:50%;bottom:clamp(16px,3vh,30px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:var(--mute);text-decoration:none}
+.scue i{width:22px;height:34px;border:1.5px solid var(--navy);border-radius:12px;position:relative;opacity:.7}
+.scue i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--mar);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:translateY(0);opacity:1}70%{transform:translateY(11px);opacity:0}100%{opacity:0}}
+.scue:hover{color:var(--mar)}
+#msg{position:absolute;left:0;right:0;top:50%;text-align:center;color:var(--mute);font-size:15px;pointer-events:none}
+#msg[hidden]{display:none}
+#track.still #stage{background:#e9e4da url(img/hero-still.jpg) center/cover}
+#track.still #cv,#track.still .cap{display:none}
+.xtop,.xtools,.xpanel{display:none}
+#stage.ex .hl,#stage.ex .cap,#stage.ex .veil,#stage.ex .scue{display:none}
+#stage.ex{position:fixed;inset:0;height:auto;max-height:none;z-index:30}
+#stage.ex #cv{touch-action:none;cursor:grab}
+#stage.ex .xtop,#stage.ex .xtools{display:flex}
+#stage.ex .xpanel{display:block}
+.xtop{position:absolute;top:80px;left:0;right:0;gap:8px;overflow-x:auto;padding:0 clamp(16px,4vw,56px) 4px;scrollbar-width:none}
+.chip{flex:none;font:500 14px/1 inherit;font-family:inherit;padding:11px 14px;border:1px solid var(--line);background:rgba(251,250,247,.96);color:var(--navy);cursor:pointer}
+.chip.on{background:var(--mar);border-color:var(--mar);color:#fff}
+.xtools{position:absolute;left:clamp(16px,4vw,56px);right:clamp(16px,4vw,56px);bottom:20px;gap:8px;flex-wrap:wrap}
+.xpanel{position:absolute;right:clamp(16px,4vw,56px);top:138px;width:min(400px,38vw);background:rgba(251,250,247,.97);border-top:2px solid var(--mar);padding:20px 22px;max-height:calc(100% - 226px);overflow:auto}
+.xpanel .e{font:600 12px/1.4 var(--en);letter-spacing:.2em;text-transform:uppercase;color:var(--mar);display:block;unicode-bidi:isolate}
+.xpanel h3{font-size:24px;font-weight:600;margin:4px 0 8px;line-height:1.35}
+.xpanel p{margin:0 0 10px;color:#2a3550;font-size:16px}
+.xpanel .fit{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;font-size:15px}
+.xpanel .fit b{font-weight:600}
+.xpanel .nt{font-size:13.5px;color:var(--mute);background:#ebe6dd;padding:9px 12px;margin:12px 0}
+.xpanel .hint{color:var(--mute)}
+@media (max-width:1100px) and (min-width:761px){.hstats{display:none}}
+@media (max-height:700px) and (min-width:761px){.hstats{display:none}.hl p{margin:10px 0 18px}}
+@media (max-width:760px){
+  #stage{min-height:620px}
+  .veil,html[lang=en] .veil{background:linear-gradient(to bottom,rgba(244,241,236,.97) 0,rgba(244,241,236,.92) 40%,rgba(244,241,236,0) 60%)}
+  .hl{inset-inline:16px;top:78px;transform:none;width:auto}
+  .hl h1{font-size:40px}
+  .hl p{margin:8px 0 16px;font-size:16px}
+  .hl .btn{padding:13px 16px;font-size:14px}
+  .hstats{margin-top:18px}
+  .hstats div{padding-top:10px}
+  .hstats dt{font-size:24px}
+  .hstats dd{font-size:12px}
+  .cap{inset-inline:12px;width:auto;bottom:12px;padding:10px 12px}
+  .cap .n{font-size:24px}
+  .cap b{font-size:15.5px}
+  .cap span.d{display:none}
+  .cap-foot{margin-top:8px;padding-top:8px}
+  .scue{display:none}
+  .xpanel{left:12px;right:12px;top:auto;bottom:76px;width:auto;max-height:44%;padding:14px 16px}
+  .xpanel p{font-size:15px;margin-bottom:6px}
+  .xpanel .nt{margin:8px 0}
+  .xpanel h3{font-size:20px}
+  .xtop{top:66px}
+}
+
+/* ---------- sections ---------- */
+main section{padding:clamp(52px,7vw,100px) var(--pad);border-top:1px solid var(--line)}
+#services,#clients,#license{background:#fbfaf7}
+.kick{display:flex;align-items:center;gap:12px}
+.kick::before{content:"";width:30px;height:2px;background:var(--mar);flex:none}
+.nav .links a{position:relative;padding:6px 0}
+.nav .links a.on{color:var(--mar)}
+.nav .links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--mar)}
+h2{font-weight:300;font-size:clamp(30px,4.4vw,56px);line-height:1.15;letter-spacing:-.02em;margin:0 0 14px;max-width:20ch}
+html[lang=ar] h2{font-weight:400;letter-spacing:0;line-height:1.4;max-width:24ch}
+.lead{color:var(--mute);max-width:62ch;margin:0 0 34px;font-size:18px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+.idx{border-top:1px solid var(--navy);margin:0;padding:0}
+.idx li{border-bottom:1px solid var(--line);list-style:none}
+.idx a{display:grid;grid-template-columns:64px 1fr 150px;gap:20px;align-items:center;padding:18px 0;text-decoration:none}
+.idx a:hover b,.idx a:focus-visible b{color:var(--mar)}
+.idx .go{display:inline-block;margin-top:6px;font-size:13.5px;font-weight:600;color:var(--mar);border-bottom:1px solid currentColor}
+.idx .no{font:300 30px/1 var(--en);color:var(--mar)}
+.idx .e{font:500 12px/1.3 var(--en);letter-spacing:.14em;color:var(--mute);text-transform:uppercase;display:block;margin-bottom:2px;unicode-bidi:isolate}
+.idx b{display:block;font-size:20px;font-weight:600}
+.idx .d{display:block;color:var(--mute);font-size:16px}
+.idx img{width:150px;height:110px;object-fit:contain;background:#f2f3f5;display:block}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;counter-reset:s}
+.steps div{border-top:1px solid var(--navy);padding-top:14px}
+.steps .no{font:300 30px/1 var(--en);color:var(--mar);display:block;margin-bottom:10px}
+.steps b{display:block;font-size:18px;font-weight:600;margin-bottom:4px}
+.steps span.d{color:var(--mute);font-size:15.5px}
+.gal{columns:3 260px;column-gap:14px}
+.gal figure{margin:0 0 14px;break-inside:avoid}
+.gal img{width:100%;display:block;background:#ddd}
+.gal figcaption{font:500 12.5px/1.4 var(--en);color:var(--mute);padding-top:6px;unicode-bidi:isolate}
+.pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(24px,5vw,72px);align-items:start}
+.big{font:300 clamp(64px,9vw,120px)/1 var(--en);color:var(--mar);direction:ltr;display:block;text-align:start}
+.bars{margin:22px 0 0;padding:0;list-style:none}
+.bars li{display:grid;grid-template-columns:120px 1fr 44px;gap:10px;align-items:center;padding:6px 0;font-size:15px}
+.bars i{display:block;height:8px;background:var(--navy)}
+.bars em{font:500 14px/1 var(--en);font-style:normal;color:var(--mute);direction:ltr}
+.plist{margin:0;padding:0;border-top:1px solid var(--navy)}
+.plist li{list-style:none;display:grid;grid-template-columns:48px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.plist .no{font:300 24px/1.2 var(--en);color:var(--mar)}
+.plist b{display:block;font-weight:600;font-size:17.5px}
+.plist span{color:var(--mute);font-size:15px}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px}
+.strip img{width:100%;height:220px;object-fit:cover;display:block;background:#ddd}
+.mq{overflow:hidden;direction:ltr;margin:0 calc(var(--pad)*-1)}
+.tr{display:flex;gap:14px;width:max-content;padding:0 14px;animation:mq 46s linear infinite}
+.mq:hover .tr,.mq:focus-within .tr{animation-play-state:paused}
+.tr button{flex:none;width:200px;height:158px;background:#fff;border:1px solid var(--line);padding:6px;cursor:pointer}
+.tr button.on{border-color:var(--mar);box-shadow:inset 0 -3px 0 var(--mar)}
+.tr img{width:100%;height:100%;object-fit:contain;display:block}
+@keyframes mq{to{transform:translateX(-50%)}}
+.cinfo{margin:22px 0 0;min-height:56px;border-inline-start:2px solid var(--mar);padding-inline-start:14px}
+.cinfo b{display:block;font-size:18px}
+.cinfo span{color:var(--mute);font-size:15.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,56px)}
+.two h3{font-size:18px;font-weight:600;margin:0 0 8px;border-top:1px solid var(--navy);padding-top:12px}
+.two ul{margin:0;padding-inline-start:20px}
+.two li{margin-bottom:5px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
+.tags span{border:1px solid var(--line);padding:6px 12px;font-size:14px;background:var(--card)}
+.small{font-size:13.5px;color:var(--mute);margin-top:14px;max-width:70ch}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:34px}
+.cgrid div{border-top:1px solid var(--navy);padding-top:10px}
+.cgrid b{display:block;color:var(--mute);font-weight:500;font-size:13.5px}
+.cgrid bdi{direction:ltr;unicode-bidi:isolate;font-size:17px}
+form.q{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;max-width:980px}
+form.q label{display:grid;gap:4px;font-size:14px;color:var(--mute)}
+form.q input,form.q select{font:inherit;color:var(--navy);padding:11px 12px;border:1px solid var(--line);background:var(--card);min-width:0;border-radius:0}
+form.q .btn{grid-column:1/-1;justify-self:start}
+.qout{margin-top:16px;max-width:980px;border:1px solid var(--line);background:var(--card);padding:14px 16px}
+.qout[hidden]{display:none}
+.qout pre{margin:0 0 12px;white-space:pre-wrap;font:inherit;font-size:15.5px}
+.qout .acts{display:flex;gap:10px;flex-wrap:wrap}
+/* ---------- products: store grid ---------- */
+.shop-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:8px 0 18px}
+.cats{display:flex;gap:8px;flex-wrap:wrap}
+.cats button{font:inherit;font-size:14.5px;padding:9px 16px;border:1px solid var(--line);background:var(--card);color:var(--navy);cursor:pointer;border-radius:999px;transition:background .2s,color .2s,border-color .2s}
+.cats button:hover{border-color:var(--navy)}
+.cats button[aria-selected=true]{background:var(--navy);border-color:var(--navy);color:#fff}
+.shop-n{font-size:14px;color:var(--mute)}
+.shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:18px}
+.pc{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(20,33,61,.1);border-radius:6px;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;position:relative}
+.pc:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(13,20,38,.13)}
+.pc[hidden]{display:none}
+.pc.wide{grid-column:1/-1;flex-direction:row}
+.pc.wide .pc-media{flex:0 0 46%;aspect-ratio:auto;min-height:250px}
+.pc.wide .pc-body{justify-content:center;padding:28px 32px}
+.pc.wide .pc-body h3{font-size:24px}
+.pc.wide .pc-act{margin-top:14px;max-width:380px}
+.pc-media{position:relative;display:block;aspect-ratio:4/3.1;background:radial-gradient(60% 18% at 50% 88%,rgba(20,33,61,.16),rgba(20,33,61,0) 70%),linear-gradient(180deg,#f3f4f5,#e4e7ea);overflow:hidden}
+.pc-media img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;transition:opacity .5s}
+.pc-media img.cover{inset:0;width:100%;height:100%;object-fit:cover}
+.pc-media canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .6s}
+.pc.live .pc-media canvas{opacity:1}
+.pc.live .pc-media img{opacity:0}
+.badge{position:absolute;top:12px;inset-inline-start:12px;font:600 11.5px/1 var(--en);letter-spacing:.08em;padding:6px 9px;border-radius:3px;background:rgba(20,33,61,.9);color:#fff}
+.badge.soft{background:rgba(251,250,247,.95);color:var(--navy);border:1px solid var(--line)}
+.pc-no{position:absolute;top:10px;inset-inline-end:14px;font:300 24px/1 var(--en);color:rgba(20,33,61,.35)}
+.pc-body{display:flex;flex-direction:column;gap:6px;padding:16px 18px 18px;flex:1}
+.pc-body .e{font:600 11.5px/1.3 var(--en);letter-spacing:.14em;text-transform:uppercase;color:var(--mar);unicode-bidi:isolate}
+.pc-body h3{margin:0;font-size:20px;font-weight:600;line-height:1.35}
+.pc-body h3 a{text-decoration:none}
+.pc-body h3 a::after{content:"";position:absolute;inset:0;z-index:1}
+.pc-body p{margin:0;color:var(--mute);font-size:15px;line-height:1.6}
+.pc-spec{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0;padding:0;list-style:none}
+.pc-spec li{font-size:12.5px;padding:4px 9px;background:#f1efea;border-radius:3px;color:#2a3550}
+.pc-act{display:flex;gap:8px;margin-top:auto;padding-top:12px;position:relative;z-index:2}
+.pc-act .btn{flex:1;text-align:center;padding:12px 10px;font-size:14px}
+@media (max-width:640px){.pc.wide{flex-direction:column}.pc.wide .pc-media{min-height:170px}.pc.wide .pc-body{padding:14px}.pc.wide .pc-body p{display:block}.shop{grid-template-columns:1fr 1fr;gap:10px}.pc-body{padding:12px}.pc-body h3{font-size:16px}.pc-body p,.pc-spec{display:none}.pc-act{flex-direction:column;gap:6px}.pc-act .btn{padding:10px 6px;font-size:13px}.badge{top:8px;inset-inline-start:8px}.pc-no{font-size:18px}.cats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--pad)*-1);padding-inline:var(--pad)}.cats button{flex:none}}
+
+/* ---------- profile content ---------- */
+h2.long{max-width:30ch;font-size:clamp(24px,3.1vw,40px);line-height:1.3}
+html[lang=ar] h2.long{max-width:34ch;line-height:1.55}
+h3.sub{font:600 13px/1.5 var(--en);letter-spacing:.2em;text-transform:uppercase;color:var(--mar);margin:clamp(32px,4.5vw,56px) 0 16px}
+html[lang=ar] h3.sub{font-family:var(--ar);letter-spacing:0;font-size:17px}
+.tag-en{font:500 13px/1.5 var(--en);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:-4px 0 26px;unicode-bidi:isolate}
+.tag-en[hidden]{display:none}
+.agrid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,72px);align-items:end;margin-top:20px}
+.atext p{margin:0 0 14px;max-width:70ch;font-size:18px;color:#2a3550}
+.est{border-top:1px solid var(--navy);padding-top:10px;min-width:150px}
+.est span{font:300 clamp(56px,8vw,96px)/1 var(--en);color:var(--mar);display:block;direction:ltr}
+.est b{font-weight:500;color:var(--mute);font-size:15px}
+.pts{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.pts.mini{display:flex;flex-wrap:wrap;gap:10px}
+.pts.mini>div{border:1px solid var(--line);background:var(--card);padding:10px 16px}
+.pts.mini b{margin:0;font-size:15.5px}
+.pts>div{border-top:1px solid var(--navy);padding-top:12px}
+.pts .no{font:300 24px/1 var(--en);color:var(--mar);display:block;margin-bottom:8px}
+.pts b{display:block;font-size:17px;font-weight:600;margin-bottom:3px}
+.pts span.d{color:var(--mute);font-size:15px}
+.nums{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(36px,5vw,64px)}
+.nums div{background:var(--paper);padding:22px 12px;text-align:center}
+.nums b{display:block;font:300 clamp(26px,3.2vw,42px)/1.25 var(--en);color:var(--mar)}
+html[lang=ar] .nums b{font-family:var(--ar)}
+.nums span{font-size:14px;color:var(--mute)}
+.band{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);min-height:300px;background:#101b33;color:#fff;margin-top:clamp(32px,5vw,64px);overflow:hidden;border-radius:6px}
+.band::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 64px),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 64px),
+  radial-gradient(120% 140% at 0% 0%,#1d2d52 0,#101b33 60%)}
+.band .bt{display:flex;flex-direction:column;justify-content:center;gap:14px;padding:clamp(28px,4.5vw,64px)}
+.band .bt>b{font:600 clamp(24px,2.7vw,38px)/1.3 var(--en);letter-spacing:-.01em;max-width:22ch}
+html[lang=ar] .band .bt>b{font-family:var(--ar);letter-spacing:0;line-height:1.45}
+.band strong{display:flex;align-items:center;gap:12px;font:600 12.5px/1.4 var(--en);letter-spacing:.2em;text-transform:uppercase;color:#f0c3cb}
+html[lang=ar] .band strong{font-family:var(--ar);letter-spacing:0;font-size:15px}
+.band strong::before{content:"";width:36px;height:2px;background:var(--mar);flex:none}
+.band .bt>span{color:#cfd6e2;font-size:16.5px;line-height:1.75;max-width:56ch}
+.band .bimg{position:relative;margin:0;min-height:240px;overflow:hidden}
+.band .bimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 9s cubic-bezier(.2,.6,.2,1)}
+.band.in .bimg img{transform:scale(1.02)}
+.band .bimg::after{content:"";position:absolute;inset:0;background:linear-gradient(to left,rgba(16,27,51,0) 40%,rgba(16,27,51,.92));}
+html[lang=ar] .band .bimg::after{background:linear-gradient(to right,rgba(16,27,51,0) 40%,rgba(16,27,51,.92))}
+.band .bimg::before{content:"";position:absolute;inset-inline-end:0;top:0;bottom:0;width:4px;background:var(--mar);z-index:1}
+.band.quote .bt>b{font-size:clamp(26px,3vw,42px);font-weight:300}
+.band.quote .bt>b::before{content:"\201C";display:block;font:600 72px/0.6 Georgia,serif;color:var(--mar);margin-bottom:10px}
+html[lang=ar] .band.quote .bt>b::before{content:"\201D"}
+@media (max-width:760px){.band{grid-template-columns:1fr}.band .bimg{order:-1;min-height:180px}.band .bimg::after{background:linear-gradient(to top,rgba(16,27,51,.95),rgba(16,27,51,0) 60%)!important}}
+/* yard: living mosaic */
+.mosaic{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;grid-template-rows:repeat(2,clamp(170px,17vw,250px));gap:10px}
+.tile{position:relative;overflow:hidden;border:0;padding:0;margin:0;background:#cfc9be;cursor:zoom-in;border-radius:4px}
+.tile:first-child{grid-row:span 2}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity 1.3s ease}
+.tile img.on{opacity:1}
+.tile img.on,.tile img.off{animation:kb 12s linear forwards}
+@keyframes kb{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.16) translate(var(--kx,1.5%),var(--ky,-1.5%))}}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,20,38,.55),rgba(13,20,38,0) 45%);opacity:0;transition:opacity .3s}
+.tile:hover::after,.tile:focus-visible::after{opacity:1}
+.tile .tn{position:absolute;bottom:10px;inset-inline-start:12px;z-index:1;color:#fff;font:500 12.5px/1 var(--en);opacity:0;transition:opacity .3s}
+.tile:hover .tn,.tile:focus-visible .tn{opacity:1}
+.tile .tz{position:absolute;top:10px;inset-inline-end:10px;z-index:1;width:30px;height:30px;border-radius:50%;background:rgba(251,250,247,.92);display:grid;place-items:center;opacity:0;transform:scale(.8);transition:.3s}
+.tile:hover .tz{opacity:1;transform:none}
+.tile .tz svg{width:14px;height:14px}
+.mos-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap}
+.mos-n{font-size:14px;color:var(--mute);display:flex;align-items:center;gap:10px}
+.mos-n i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#1f8f4e;box-shadow:0 0 0 0 rgba(31,143,78,.5);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(31,143,78,0)}100%{box-shadow:0 0 0 0 rgba(31,143,78,0)}}
+@media (max-width:760px){.mosaic{grid-template-columns:1fr 1fr;grid-template-rows:200px 130px 130px}.tile:first-child{grid-row:auto;grid-column:span 2}.tile:nth-child(n+6){display:none}}
+/* client logos: moving banner */
+.lmq{position:relative;overflow:hidden;direction:ltr;margin:0 calc(var(--pad)*-1);padding:6px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.lmq .lt{display:flex;gap:18px;width:max-content;animation:lmq 50s linear infinite}
+.lmq .lt.rev{animation-direction:reverse;margin-top:18px;animation-duration:58s}
+.lmq:hover .lt{animation-play-state:paused}
+.lmq figure{flex:none;margin:0;width:230px;height:150px;background:#fff;border:1px solid rgba(20,33,61,.1);border-radius:6px;display:grid;place-items:center;padding:10px;transition:transform .3s,box-shadow .3s}
+.lmq figure:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(13,20,38,.12)}
+.lmq img{max-width:100%;max-height:100%;object-fit:contain;display:block;mix-blend-mode:multiply}
+@keyframes lmq{to{transform:translateX(-50%)}}
+@media (max-width:640px){.lmq figure{width:160px;height:110px}}
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{border:1px solid var(--line);background:var(--card);padding:18px}
+.pcard .no{font:300 28px/1 var(--en);color:var(--mar)}
+.pcard h4{font-size:17px;font-weight:600;margin:8px 0 12px;line-height:1.45}
+.pcard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:14.5px}
+.pcard dt{color:var(--mute)}
+.pcard dd{margin:0}
+.gal.short button:nth-child(n+9){display:none}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;columns:auto}
+.gal button,.phg button{padding:0;border:0;background:#d9d5cc;cursor:zoom-in;aspect-ratio:4/3;overflow:hidden;display:block;width:100%}
+.gal img,.phg button img{width:100%;height:100%;object-fit:cover;display:block}
+.regbox{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:clamp(18px,4vw,56px);align-items:center;border-top:1px solid var(--navy);margin-top:clamp(36px,5vw,64px);padding-top:24px}
+.regbox .bars{margin:0}
+.partners{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px}
+.partners figure{margin:0;border:1px solid var(--line);background:#fff;padding:16px}
+.partners img{max-width:100%;height:70px;object-fit:contain;display:block;margin:0 auto 10px}
+.partners figcaption{text-align:center;font-size:14px;color:var(--mute)}
+.partners b{display:block;color:var(--navy);font-weight:600}
+.otop{display:grid;justify-items:center}
+.obox{border:1px solid var(--navy);padding:11px 14px;background:var(--card);font-weight:600;text-align:center;font-size:15px;line-height:1.4}
+.otop .obox{min-width:200px}
+.obox.ceo{background:var(--navy);color:#fff}
+.obox.bm{background:var(--mar);border-color:var(--mar);color:#fff}
+.oline{width:1px;height:22px;background:var(--navy);display:block}
+.ocols{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;border-top:1px solid var(--navy);padding-top:22px}
+.ocol{position:relative}
+.ocol::before{content:"";position:absolute;top:-22px;left:50%;width:1px;height:22px;background:var(--navy)}
+.ocol ul{list-style:none;margin:10px 0 0;padding:0;padding-inline-start:12px;border-inline-start:1px solid var(--line)}
+.ocol li{font-size:14px;padding:6px 0;padding-inline-start:10px;position:relative}
+.ocol li::before{content:"";position:absolute;inset-inline-start:-12px;top:17px;width:14px;height:1px;background:var(--line)}
+.ocol li span{display:block}
+.ocol li ul{margin-top:6px}
+.lic{display:grid;grid-template-columns:minmax(150px,auto) 1fr;border-top:1px solid var(--navy);margin:0;max-width:860px}
+.lic dt,.lic dd{padding:12px 0;border-bottom:1px solid var(--line);margin:0}
+.lic dt{color:var(--mute);padding-inline-end:26px}
+.leader{display:grid;grid-template-columns:minmax(220px,320px) minmax(0,1fr);gap:clamp(24px,4.5vw,64px);align-items:center;margin-top:clamp(40px,6vw,80px);background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 0 var(--line),0 22px 50px rgba(13,20,38,.1)}
+.leader figure{position:relative;margin:0;height:100%;min-height:380px;background:#1b2c4b}
+.leader figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.leader figure::after{content:"";position:absolute;inset-inline-end:0;top:0;bottom:0;width:4px;background:var(--mar)}
+.leader figcaption{position:absolute;bottom:14px;inset-inline-start:14px;background:var(--mar);color:#fff;font-size:13px;font-weight:600;padding:7px 12px;border-radius:3px}
+.ld-body{padding:clamp(24px,3.5vw,48px);padding-inline-start:0}
+.ld-body .e{display:flex;align-items:center;gap:12px;font:600 12.5px/1.4 var(--en);letter-spacing:.2em;text-transform:uppercase;color:var(--mar)}
+html[lang=ar] .ld-body .e{font-family:var(--ar);letter-spacing:0;font-size:15px}
+.ld-body .e::before{content:"";width:30px;height:2px;background:var(--mar)}
+.ld-body blockquote{margin:18px 0 22px;font-size:clamp(19px,1.7vw,24px);line-height:1.75;font-weight:300;color:var(--navy);position:relative}
+.ld-body blockquote::before{content:"\201D";display:block;font:600 64px/0.5 Georgia,serif;color:var(--mar);margin:12px 0 14px}
+html[lang=en] .ld-body blockquote::before{content:"\201C"}
+.ld-sign{border-top:1px solid var(--line);padding-top:14px}
+.ld-sign b{display:block;font-size:20px;font-weight:600}
+.ld-sign span{color:var(--mar);font-size:15px}
+.ld-act{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.ld-act bdi{direction:ltr;unicode-bidi:isolate;font-family:var(--en)}
+@media (max-width:760px){.leader{grid-template-columns:1fr}.leader figure{min-height:0;aspect-ratio:4/4.6}.ld-body{padding:0 20px 24px!important}}
+.team li.lead{background:#fff;border:1px solid rgba(20,33,61,.12);border-inline-start:3px solid var(--mar);padding:14px 16px;margin:10px 0;border-radius:4px}
+.team .tm{display:flex;align-items:center;gap:14px}
+.team .tm img{width:68px;height:68px;border-radius:50%;object-fit:cover;flex:none;background:#1b2c4b;box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(142,27,46,.6),0 8px 18px rgba(13,20,38,.18)}
+.team li.lead{padding:18px 20px;box-shadow:0 10px 28px rgba(13,20,38,.07)}
+.team .gm{font-style:normal;font-size:12px;font-weight:600;background:var(--navy);color:#fff;padding:5px 10px;border-radius:3px;margin-inline-start:6px;align-self:center;white-space:nowrap}
+.team li.lead a{font-size:18px;color:var(--navy)}
+@media (max-width:640px){.team .gm{display:none}.team .tm img{width:56px;height:56px}.team li.lead{flex-wrap:wrap;gap:10px}.team li.lead .tm{flex:1 1 100%}.team li.lead>a{padding-inline-start:70px}.hud{flex-wrap:wrap}}
+.team li.lead b{font-size:18px;color:var(--navy);font-weight:700}
+.team{list-style:none;margin:0 0 34px;padding:0;border-top:1px solid var(--navy);max-width:860px}
+.team li{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.team b{display:block;font-weight:600}
+.team span{color:var(--mar);font-size:14.5px}
+.team a{font:500 17px/1 var(--en);direction:ltr;text-decoration:none;white-space:nowrap}
+.qr{display:flex;gap:18px;align-items:center}
+.qr img{width:120px;height:auto;border:1px solid var(--line);background:#fff;padding:4px}
+.qr b{display:block;font-weight:500;color:var(--mute);font-size:14px;margin-bottom:10px}
+#lb{position:fixed;inset:0;z-index:120;background:rgba(13,20,38,.95);display:grid;place-items:center}
+#lb[hidden]{display:none}
+#lbImg{max-width:94vw;max-height:82vh;display:block}
+#lb button{position:absolute;width:48px;height:48px;border:0;background:rgba(251,250,247,.14);color:#fff;font:300 30px/1 var(--en);cursor:pointer}
+#lbX{top:14px;right:14px}
+#lbP{left:10px;top:50%;margin-top:-24px}
+#lbNx{right:10px;top:50%;margin-top:-24px}
+#lbN{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#dfe3ea;font:500 14px/1 var(--en);direction:ltr}
+#rview{padding:calc(68px + clamp(24px,4vw,52px)) var(--pad) 64px;min-height:100vh}
+#rview[hidden]{display:none}
+#rview h1{font-weight:300;font-size:clamp(32px,4.6vw,58px);line-height:1.2;margin:0 0 12px}
+html[lang=ar] #rview h1{font-weight:400}
+#rview .bars{max-width:640px;margin:0 0 30px}
+.rg-tools{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;margin:0 0 12px}
+.rg-tools input,.rg-tools select{font:inherit;font-size:15.5px;color:var(--navy);padding:11px 12px;border:1px solid var(--line);background:var(--card);min-width:0;border-radius:0}
+.rg-count{font-size:14px;color:var(--mute);margin:0 0 6px}
+.rr{display:grid;grid-template-columns:minmax(0,2.3fr) 112px minmax(0,1.1fr) minmax(0,1fr);gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;align-items:baseline}
+.rr.h{font-size:13px;font-weight:600;color:var(--mute);border-bottom:1px solid var(--navy)}
+.rr .c{font-weight:500;unicode-bidi:plaintext}
+.rr .dt{font-family:var(--en);direction:ltr;text-align:start}
+#rgMore{margin-top:18px}
+@media (max-width:900px){
+  .nums{grid-template-columns:1fr 1fr}.nums div:last-child{grid-column:1/-1}
+  .agrid,.band,.regbox{grid-template-columns:1fr}
+  .pcards{grid-template-columns:1fr 1fr}
+  .logos{grid-template-columns:repeat(3,1fr)}
+  .ocols{grid-template-columns:1fr 1fr;border-top:0;padding-top:16px;gap:18px 12px}
+  .ocol::before{display:none}
+  #rview{padding-top:calc(58px + 22px)}
+}
+@media (max-width:640px){
+  .pcards,.partners{grid-template-columns:1fr}
+  .logos{grid-template-columns:1fr 1fr}
+  .gal{grid-template-columns:repeat(3,1fr);gap:6px}
+  .lic{grid-template-columns:1fr}.lic dt{border-bottom:0;padding-bottom:0}.lic dd{padding-top:2px}
+  .rg-tools{grid-template-columns:1fr 1fr}.rg-tools input{grid-column:1/-1}
+  .rr{grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;font-size:14.5px}
+  .rr.h{display:none}
+  .rr .ty,.rr .st{font-size:13.5px;color:var(--mute)}
+  .rr .st{text-align:end}
+}
+.pcard img{width:calc(100% + 36px);margin:-18px -18px 12px;aspect-ratio:2.15/1;object-fit:cover;display:block;background:#ddd}
+.pcard .go{display:inline-block;margin-top:12px;font-size:14px;font-weight:600;color:var(--mar);border-bottom:1px solid currentColor;text-decoration:none}
+.cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ccard{border:1px solid var(--line);background:var(--card);padding:18px 18px 6px}
+.ccard>a{display:block;text-decoration:none;border-bottom:1px solid var(--navy);padding-bottom:10px;margin-bottom:4px}
+.ccard>a .e{display:block;font:500 12px/1.4 var(--en);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);unicode-bidi:isolate}
+.ccard>a b{font-size:19px;font-weight:600}
+.ccard>a:hover b{color:var(--mar)}
+.ccard dl{margin:0}
+.ccard dt{font-size:13px;color:var(--mute);margin-top:12px}
+.ccard dd{margin:2px 0 10px;font-size:15.5px}
+.ccard dd a{color:var(--mar)}
+.mapwrap{position:relative;max-width:1120px;margin:0 auto}
+.uae svg{direction:ltr}
+.uae{margin:0;border-radius:6px;overflow:hidden;box-shadow:0 1px 0 var(--line),0 20px 50px rgba(13,20,38,.12);background:#6faec6}
+.uae svg{display:block;width:100%;height:auto}
+.uae text{font-family:var(--ar);pointer-events:none}
+html[lang=en] .uae text{font-family:var(--en)}
+.uae .sea{fill:#1f5f7d;font-size:22px;font-style:italic;letter-spacing:.3em;opacity:.75;text-anchor:middle}
+html[lang=ar] .uae .sea{letter-spacing:.05em;font-style:normal}
+.uae .sea.s2{font-size:13px}
+.uae .cty{fill:#6b5a43;font-size:14px;letter-spacing:.25em;text-anchor:middle;opacity:.8;font-weight:500}
+html[lang=ar] .uae .cty{letter-spacing:0}
+.uae .cty.big{fill:#4a3a26;font-size:19px;font-weight:600;opacity:.65;letter-spacing:.35em}
+html[lang=ar] .uae .cty.big{letter-spacing:.02em}
+.uae .town{fill:#4a3a26;stroke:#fff;stroke-width:1}
+.uae .tw{fill:#4a3a26;font-size:11.5px;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:3px}
+.uae .halo{fill:rgba(142,27,46,.22);stroke:rgba(142,27,46,.75);stroke-width:1.2}
+.uae .dot{fill:#8e1b2e;stroke:#fff;stroke-width:1.6}
+.uae .ld{stroke:#14213d;stroke-width:1;opacity:.55}
+.uae .card rect{fill:rgba(251,250,247,.96);stroke:rgba(20,33,61,.18);filter:drop-shadow(0 3px 6px rgba(13,20,38,.22));transition:fill .2s}
+.uae .cn{fill:#14213d;font-size:calc(13px * var(--k,1));font-weight:600}
+.uae .cc{fill:#8e1b2e;font:700 calc(14px * var(--k,1)) var(--en)}
+.uae a{cursor:pointer}
+.uae a:hover rect,.uae a:focus rect{fill:#14213d}
+.uae a:hover .cn,.uae a:focus .cn,.uae a:hover .cc,.uae a:focus .cc{fill:#fff}
+.mapcard{position:absolute;top:clamp(14px,3%,32px);inset-inline-start:clamp(14px,3%,32px);width:min(310px,30%);background:rgba(251,250,247,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:20px 22px;border-radius:6px;box-shadow:0 14px 36px rgba(13,20,38,.18)}
+html[lang=ar] .mapcard{inset-inline-start:auto;left:clamp(14px,3%,32px)}
+.mapcard .e{font:600 12px/1 var(--en);letter-spacing:.2em;text-transform:uppercase;color:var(--mar)}
+html[lang=ar] .mapcard .e{font-family:var(--ar);letter-spacing:0;font-size:14px}
+.mapcard .big{font-size:clamp(52px,5vw,76px);margin:8px 0 6px}
+.mapcard p{margin:0 0 14px;font-size:15px;color:#2a3550;line-height:1.6}
+.mapcard .small{margin:12px 0 0;font-size:12.5px}
+@media (max-width:900px){.mapcard{position:static;width:auto;margin-top:12px;box-shadow:none;border:1px solid var(--line)}}
+.estbox{grid-column:1/-1;background:var(--navy);color:#fff;padding:16px 18px}
+.estbox .et{display:block;font-weight:600;color:#e9c8ce;margin-bottom:8px}
+.enums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.enums span{display:block;font:300 clamp(28px,4vw,44px)/1.1 var(--en)}
+.enums small{font-size:13.5px;color:#cfd5df}
+.estbox .small{color:#cfd5df}
+.pdl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:15px}
+.pdl dt{color:var(--mute)}.pdl dd{margin:0}
+.fab{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:10px;direction:ltr}
+.fab-menu{display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none}
+.fab-menu a{opacity:0;transform:translateY(14px) scale(.9);transition:opacity .25s,transform .3s cubic-bezier(.2,.8,.2,1)}
+.fab-menu a:nth-child(1){transition-delay:.05s}
+.fab.open .fab-menu{pointer-events:auto}
+.fab.open .fab-menu a{opacity:1;transform:none}
+.fab.open .fab-menu a:nth-child(2){transition-delay:0s}
+.fab-btn{position:relative;display:flex;align-items:center;gap:10px;height:56px;min-width:56px;padding:0 20px 0 18px;border:0;border-radius:28px;background:var(--mar);color:#fff;font:600 15px/1 var(--ar);cursor:pointer;box-shadow:0 10px 24px rgba(142,27,46,.35);transition:background .2s,transform .2s}
+html[lang=en] .fab-btn{font-family:var(--en)}
+.fab-btn:hover{background:#6e1222}
+.fab-btn svg{width:24px;height:24px;flex:none}
+.fab-btn .i-x{display:none}
+.fab.open .fab-btn{background:var(--navy);box-shadow:0 10px 24px rgba(13,20,38,.3)}
+.fab.open .fab-btn .i-x{display:block}.fab.open .fab-btn .i-o{display:none}
+.fab-btn::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(142,27,46,.45);animation:fabp 2.6s infinite}
+.fab.open .fab-btn::after{animation:none}
+@keyframes fabp{0%{box-shadow:0 0 0 0 rgba(142,27,46,.45)}70%{box-shadow:0 0 0 14px rgba(142,27,46,0)}100%{box-shadow:0 0 0 0 rgba(142,27,46,0)}}
+.fab a{display:flex;align-items:center;gap:8px;height:52px;min-width:52px;padding:0 16px;border-radius:26px;color:#fff;text-decoration:none;font:600 15px/1 var(--ar);box-shadow:0 6px 18px rgba(13,20,38,.28)}
+.fab .wa{background:#1f8f4e}.fab .call{background:var(--navy)}
+.fab svg{width:24px;height:24px;flex:none}
+html.lock .fab,body.pv .fab.hide{display:none}
+.fab{transition:opacity .3s,transform .3s}
+body.athero:not(.pv) .fab{opacity:0;transform:translateY(12px);pointer-events:none}
+@media (max-width:900px){.cmp,.mapbox{grid-template-columns:1fr}}
+@media (max-width:640px){.fab-btn{padding:0;justify-content:center;width:56px}.fab-btn span{display:none}.enums span{font-size:26px}}
+/* ---------- product page ---------- */
+body.pv #track,body.pv main{display:none}
+#pview{padding-top:68px;min-height:100vh;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(360px,1fr);direction:ltr}
+#pview[hidden]{display:none}
+.pv-stage{position:sticky;top:68px;height:calc(100vh - 68px);background:linear-gradient(165deg,#dedad1,#c5c0b5);overflow:hidden}
+#pcv{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
+.pv-hint{position:absolute;left:24px;top:20px;margin:0;font:500 12px/1 var(--en);letter-spacing:.22em;color:var(--mute);text-transform:uppercase;pointer-events:none}
+html[lang=ar] .pv-hint{font-family:var(--ar);letter-spacing:0;font-size:14px}
+.pv-modes{position:absolute;left:24px;bottom:24px;display:flex;gap:8px}
+.pv-modes button{font:500 13px/1 var(--en);letter-spacing:.1em;padding:13px 16px;border:1px solid var(--line);background:rgba(251,250,247,.94);color:var(--navy);cursor:pointer}
+html[lang=ar] .pv-modes button{font-family:var(--ar);letter-spacing:0;font-size:14.5px}
+.pv-modes button[aria-pressed=true]{background:var(--navy);border-color:var(--navy);color:#fff}
+#pmsg{position:absolute;left:0;right:0;top:48%;text-align:center;color:var(--mute);font-size:15px;pointer-events:none}
+#pins{position:absolute;inset:0;pointer-events:none;overflow:hidden;transition:opacity .25s}
+.pin{position:absolute;left:0;top:0;width:0;height:0}
+.pin button{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;border:2px solid #fbfaf7;background:var(--mar);color:#fff;font:600 13px/1 var(--en);cursor:pointer;pointer-events:auto;padding:0}
+.pin.on button{background:var(--navy)}
+.pin i{position:absolute;left:14px;top:0;width:58px;height:1px;background:var(--mar)}
+.pin .lbl{position:absolute;left:72px;top:-15px;height:30px;line-height:28px;padding:0 10px;background:#fbfaf7;border:1px solid var(--line);font-size:14px;white-space:nowrap;color:var(--navy)}
+.pin.flip i{left:auto;right:14px}
+.pin.flip .lbl{left:auto;right:72px}
+.pin.nolbl i,.pin.nolbl .lbl,.pv-stage.sm .pin i,.pv-stage.sm .pin .lbl{display:none}
+.pincap{position:absolute;left:12px;right:12px;bottom:66px;background:rgba(251,250,247,.96);border-top:2px solid var(--mar);padding:9px 12px;font-size:14.5px;line-height:1.55}
+.pincap[hidden]{display:none}
+.pincap b{font-weight:600}
+.pv-gal{position:absolute;inset:0;display:flex;flex-direction:column;background:#14213d}
+.pv-gal[hidden]{display:none}
+.pv-gal>img{flex:1;min-height:0;width:100%;object-fit:cover;display:block}
+.pv-gal .th{display:flex;gap:6px;padding:6px;background:#14213d}
+.pv-gal .th button{flex:1;height:64px;padding:0;border:2px solid transparent;background:none;cursor:pointer}
+.pv-gal .th button.on{border-color:#fbfaf7}
+.pv-gal .th img{width:100%;height:100%;object-fit:cover;display:block}
+.pv-panel{padding:clamp(22px,3.4vw,52px);background:var(--paper)}
+html[lang=ar] .pv-panel{direction:rtl}
+.crumb{font-size:14px;color:var(--mute);margin-bottom:26px}
+.crumb a{color:var(--navy)}
+.pv-panel h1{font-weight:600;font-size:clamp(30px,3.4vw,46px);line-height:1.25;margin:0 0 4px;letter-spacing:-.01em}
+.pv-en{font:500 13px/1.4 var(--en);letter-spacing:.14em;color:var(--mute);text-transform:uppercase;margin:0 0 16px;unicode-bidi:isolate}
+.pv-desc{font-size:18px;color:#2a3550;margin:0 0 14px}
+.pv-fact{border-inline-start:2px solid var(--mar);padding:2px 0;padding-inline-start:12px;margin:0 0 18px;font-size:15px}
+.pv-fact[hidden]{display:none}
+.pv-fact b{display:block;font-size:13px;font-weight:500;color:var(--mute)}
+.pv-fact bdi{direction:ltr;unicode-bidi:isolate}
+.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:22px 0 4px}
+.tabs button{font:inherit;font-size:15.5px;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:10px 0;color:var(--mute);cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--navy);font-weight:600;border-color:var(--mar)}
+.plst{list-style:none;margin:0;padding:0}
+.plst button{display:grid;grid-template-columns:30px 1fr;gap:12px;width:100%;text-align:start;font:inherit;color:inherit;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 0;cursor:pointer}
+.plst .n{width:26px;height:26px;border-radius:50%;background:var(--mar);color:#fff;font:600 12.5px/26px var(--en);text-align:center}
+.plst li.on .n{background:var(--navy)}
+.plst b{display:block;font-weight:600;font-size:16.5px}
+.plst .d{color:var(--mute);font-size:15px}
+.fitl a{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.fitl a b{font:500 16px/1.4 var(--en)}
+.fitl a span{color:var(--mute);font-size:15px;text-align:end}
+.fitl a:hover b{color:var(--mar)}
+.phg{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:14px}
+.phg figure{margin:0}
+.phg img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#ddd}
+.phg figcaption{font:500 12.5px/1.4 var(--en);color:var(--mute);padding-top:5px;unicode-bidi:isolate}
+.pv-note{font-size:13.5px;color:var(--mute);background:#ebe6dd;padding:11px 14px;margin:20px 0}
+.pv-cta{display:flex;gap:10px;flex-wrap:wrap}
+.pv-cta .btn{flex:1 1 auto;text-align:center}
+.pv-nav{display:flex;justify-content:space-between;gap:12px;margin-top:30px;border-top:1px solid var(--navy);padding-top:14px;font-size:15px}
+.pv-nav a{text-decoration:none}
+.pv-nav a:hover{color:var(--mar)}
+.pv-nav small{display:block;color:var(--mute);font-size:12.5px}
+@media (max-width:900px){
+  #pview{display:block;padding-top:58px}
+  .pv-stage{position:relative;top:0;height:60vh;height:60svh;min-height:360px}
+  .pv-hint{left:12px;top:12px}
+  .pv-modes{left:12px;right:12px;bottom:12px;gap:6px}
+  .pv-modes button{flex:1;padding:13px 4px}
+  .pin button{left:-16px;top:-16px;width:32px;height:32px}
+}
+.fgrid{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(16px,4vw,56px);align-items:start;padding-bottom:18px;margin-bottom:14px;border-bottom:1px solid var(--line)}
+.flinks{display:flex;flex-wrap:wrap;gap:10px 22px}.flinks a{color:var(--navy);text-decoration:none;font-size:15px}.flinks a:hover{color:var(--mar)}
+.fcon{display:grid;gap:4px;font-size:14.5px;color:var(--navy)}
+footer p{margin:0}
+@media (max-width:760px){.fgrid{grid-template-columns:1fr}}
+footer{padding:clamp(36px,5vw,56px) var(--pad) 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--mute);background:#fbfaf7}
+.fgrid img{display:block}
+.fbar{display:flex;align-items:center;justify-content:space-between;gap:16px 28px;flex-wrap:wrap;margin:22px calc(var(--pad)*-1) 0;padding:18px var(--pad) 22px;background:#0f1a30;color:#c4ccd9}
+@media (min-width:761px){.fbar{padding-right:max(var(--pad),190px)}}
+.fbar .copy{margin:0;font-size:14px}
+.fbar .copy #yr{font-family:var(--en)}
+.hud{display:flex;align-items:center;gap:12px;text-decoration:none;color:#c4ccd9;font-size:13.5px;padding:6px 10px;margin:-6px -10px;border-radius:4px;transition:background .2s}
+.hud:hover{background:rgba(255,255,255,.06);color:#fff}
+.hud img{height:30px;width:auto;display:block}
+@media (max-width:760px){.fbar{flex-direction:column;align-items:flex-start;padding-bottom:96px}}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}.pgrid,.two{grid-template-columns:1fr}.strip{grid-template-columns:1fr 1fr}.strip img{height:150px}}
+@media (max-width:640px){.gal{columns:2;column-gap:10px}.gal figure{margin-bottom:10px}.idx a{grid-template-columns:36px 1fr 84px;gap:12px}.idx img{width:84px;height:64px}.idx .no{font-size:22px}.idx b{font-size:17.5px}.bars li{grid-template-columns:96px 1fr 40px}.tr button{width:160px;height:128px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.lmq{-webkit-mask-image:none;mask-image:none}.lmq .lt{animation:none;flex-wrap:wrap;width:auto;justify-content:center;padding:0 var(--pad)}.lmq .lt.rev,.lmq [aria-hidden=true]{display:none}.tile img.on,.tile img.off{animation:none}.scue i::after{animation:none}.tr{animation:none;flex-wrap:wrap;width:auto}.tr .dup{display:none}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="intro">
+  <canvas id="icv" aria-hidden="true"></canvas>
+  <div class="ilogo"><img src="img/logo-q.png" alt="NAMASCO"></div>
+  <div class="iline"><i id="ibar"></i></div>
+  <button type="button" class="pill" id="iskip">تخطي</button>
+</div>
+
+<header class="nav" id="nav">
+  <a href="#" data-go="track" aria-label="NAMASCO"><img src="img/logo-q.png" alt="NAMASCO"></a>
+  <nav class="links" aria-label="القائمة">
+    <a href="#" data-go="about" data-i="n0"></a><a href="#" data-go="systems" data-i="n1"></a><a href="#" data-go="services" data-i="n2"></a><a href="#" data-go="projects" data-i="n3"></a>
+    <a href="#" data-go="clients" data-i="n4"></a><a href="#" data-go="safety" data-i="n5"></a>
+  </nav>
+  <span class="sp"></span>
+  <button type="button" class="lang" id="lang" aria-label="Switch language">EN</button>
+  <button type="button" class="menu" id="menuBtn" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+  <a class="btn" href="#" data-go="contact" data-i="quote"></a>
+</header>
+
+<nav class="mnav" id="mnav" hidden><a href="#" data-go="about" data-i="n0"></a><a href="#" data-go="systems" data-i="n1"></a><a href="#" data-go="services" data-i="n2"></a><a href="#" data-go="projects" data-i="n3"></a><a href="#project-register" data-i="p_regbtn"></a><a href="#" data-go="clients" data-i="n4"></a><a href="#" data-go="safety" data-i="n5"></a><a href="#" data-go="contact" data-i="quote"></a></nav>
+<section id="track" aria-label="NAMASCO">
+  <div id="stage">
+    <canvas id="cv"></canvas>
+    <div class="veil" id="veil"></div>
+    <div class="hl" id="hl">
+      <p class="eyebrow" id="hEy"></p>
+      <h1 id="hH">Engineering<br><b>in motion</b></h1>
+      <p dir="auto" id="hSub"></p>
+      <div class="row"><a class="btn mar" href="#" data-go="contact" data-i="quote"></a><a class="btn ghost" href="#" data-go="systems" id="hShop"></a></div>
+      <dl class="hstats" id="hStats"></dl>
+    </div>
+    <div class="cap" id="cap">
+      <div class="seg" id="seg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="cap-row"><span class="n"><span id="capN">01</span><small>/ 06</small></span><div><b id="capT"></b><span class="d" id="capD"></span></div></div>
+      <div class="cap-foot"><span class="cnt" id="count"></span><span class="sp"></span><button type="button" class="pill" id="play" aria-pressed="false"></button><button type="button" class="pill dark" id="capX"></button></div>
+    </div>
+    <a class="scue" href="#" data-go="about" id="skip"><span id="skipT"></span><i aria-hidden="true"></i></a>
+    <div class="xtop" id="xtop"></div>
+    <div class="xpanel" id="xpanel"></div>
+    <div class="xtools">
+      <button type="button" class="pill" id="xExplode" aria-pressed="false"></button>
+      <button type="button" class="pill" id="xReset"></button>
+      <button type="button" class="pill" id="xExit"></button>
+    </div>
+    <div id="msg"></div>
+  </div>
+</section>
+
+<section id="pview" hidden>
+  <div class="pv-stage" id="pvStage">
+    <canvas id="pcv"></canvas>
+    <div class="pv-gal" id="pvGal" hidden><img id="pvPhoto" alt=""><div class="th" id="pvThumbs"></div></div>
+    <div id="pins"></div>
+    <p class="pv-hint" id="pvHint"></p>
+    <div class="pincap" id="pinCap" hidden></div>
+    <div class="pv-modes" id="pvModes"></div>
+    <div id="pmsg" hidden></div>
+  </div>
+  <div class="pv-panel">
+    <nav class="crumb"><a href="#" data-go="systems" id="pvUp"></a> <span aria-hidden="true">›</span> <span id="pvCrumb"></span></nav>
+    <p class="eyebrow" id="pvEy"></p>
+    <h1 id="pvName"></h1>
+    <p class="pv-en" id="pvEn"></p>
+    <p class="pv-desc" id="pvDesc"></p>
+    <div class="pv-fact" id="pvFact" hidden></div>
+    <div class="tabs" id="pvTabs" role="tablist"></div>
+    <div id="pvBody"></div>
+    <p class="pv-note" id="pvNote"></p>
+    <div class="pv-cta"><button type="button" class="btn mar" id="pvQuote"></button><a class="btn ghost" href="#" data-go="systems" id="pvAll"></a></div>
+    <div class="pv-nav"><a id="pvPrev"></a><a id="pvNext" style="text-align:end"></a></div>
+  </div>
+</section>
+
+<section id="rview" hidden>
+  <nav class="crumb"><a href="#" data-go="projects" id="rgUp"></a> <span aria-hidden="true">›</span> <span id="rgCrumb"></span></nav>
+  <p class="eyebrow t" id="rgEy"></p>
+  <h1 id="rgTitle"></h1>
+  <p class="lead" id="rgLead"></p>
+  <ul class="bars" id="rgBars"></ul>
+  <div class="rg-tools"><input id="rgQ" type="search"><select id="rgS"></select><select id="rgY"></select><select id="rgT"></select></div>
+  <p class="rg-count" id="rgCount" aria-live="polite"></p>
+  <div class="rg-table" id="rgTable"></div>
+  <button type="button" class="btn ghost" id="rgMore" hidden></button>
+  <p class="small" id="rgNote"></p>
+</section>
+
+<main>
+  <section id="about">
+    <p class="kick" data-i="a_k"></p>
+    <h2 class="rv" id="aTag"></h2>
+    <p class="tag-en" id="aTagEn"></p>
+    <div class="agrid rv"><div class="atext" id="aText"></div><div class="est"><span>2023</span><b data-i="a_est"></b></div></div>
+    <p class="rv" style="margin:18px 0 0"><a class="btn ghost pdfbtn" href="files/NAMASCO-Company-Profile.pdf" target="_blank" rel="noopener" hidden data-i="pdf"></a></p>
+    <div class="leader rv"><figure><img src="img/ceo.jpg" alt="" id="ldImg" loading="lazy" width="560" height="700"><figcaption data-i="ld_badge"></figcaption></figure><div class="ld-body"><span class="e" data-i="ld_e"></span><blockquote data-i="ld_msg"></blockquote><div class="ld-sign"><b data-i="ld_name"></b><span data-i="ld_role"></span></div><div class="ld-act"><a class="btn" href="tel:+971506650393"><bdi>050 665 0393</bdi></a><a class="btn ghost" href="https://wa.me/971506650393" target="_blank" rel="noopener" data-i="fab_wa"></a></div></div></div>
+    <h3 class="sub rv" data-i="a_v"></h3>
+    <div class="pts rv" id="vals"></div>
+    <div class="nums rv" id="nums"></div>
+  </section>
+  <section id="systems">
+    <p class="kick" data-i="s_k"></p><h2 class="rv long" data-i="s_t"></h2>
+    <div class="shop-bar rv"><div class="cats" id="cats" role="tablist"></div><span class="shop-n" id="shopN"></span></div>
+    <div class="shop" id="sysList"></div>
+    <h3 class="sub rv" data-i="cmp_t"></h3>
+    <div class="cmp rv" id="cmp"></div>
+    <p class="small" data-i="cmp_n"></p>
+    <div class="band rv"><div class="bt"><strong data-i="s_b2"></strong><b data-i="s_b1"></b><span data-i="s_b3"></span></div><figure class="bimg"><img src="img/yard/03.jpg" alt="" loading="lazy"></figure></div>
+  </section>
+  <section id="services">
+    <p class="kick" data-i="v_k"></p><h2 class="rv long" data-i="v_t"></h2>
+    <div class="steps rv" id="svcList"></div>
+    <div class="band rv"><div class="bt"><strong data-i="v_b2"></strong><b data-i="v_b1"></b><span data-i="v_b3"></span></div><figure class="bimg"><img src="img/sites/04.jpg" alt="" loading="lazy"></figure></div>
+  </section>
+  <section id="yard">
+    <p class="kick" data-i="y_k"></p><h2 class="rv" data-i="y_t"></h2><p class="lead rv" data-i="y_l"></p>
+    <div class="mosaic rv" id="yardGal"></div>
+    <div class="mos-bar"><span class="mos-n" id="yardN"></span><button type="button" class="btn ghost" id="yardMore"></button></div>
+  </section>
+  <section id="projects">
+    <p class="kick" data-i="p_k"></p><h2 class="rv long" data-i="p_t"></h2>
+    <div class="pcards rv" id="projList"></div>
+    <p class="small" data-i="p_note"></p>
+    <h3 class="sub rv" data-i="p_why"></h3>
+    <div class="pts rv" id="whyChoose"></div>
+    <h3 class="sub rv" data-i="p_sites"></h3>
+    <div class="gal rv" id="siteGal"></div>
+    <h3 class="sub rv" data-i="map_t"></h3>
+    <div class="mapwrap rv"><figure class="uae" id="uaeMap"></figure><div class="mapcard"><span class="e" data-i="map_e"></span><span class="big">781</span><p data-i="p_reg"></p><a class="btn" href="#project-register" data-i="p_regbtn"></a><p class="small" data-i="map_n"></p></div></div>
+    <p class="small" data-i="map_src"></p>
+  </section>
+  <section id="clients">
+    <p class="kick" data-i="c_k"></p><h2 class="rv long" data-i="c_t"></h2>
+    <div class="lmq rv" id="logos"></div>
+    <h3 class="sub rv" data-i="c_why"></h3>
+    <div class="pts rv" id="whyTrust"></div>
+    <h3 class="sub rv" data-i="c_str"></h3>
+    <div class="pts rv" id="strengths"></div>
+    <h3 class="sub rv" data-i="c_tp"></h3>
+    <div class="partners rv" id="partners"></div>
+  </section>
+  <section id="safety">
+    <p class="kick" data-i="q_k"></p><h2 class="rv" data-i="q_t"></h2><p class="lead rv" data-i="q_l"></p>
+    <div class="two rv"><div><h3 data-i="q_s"></h3><ul id="safeList"></ul></div><div><h3 data-i="q_q"></h3><ul id="qualList"></ul></div></div>
+    <div class="band rv"><div class="bt"><strong data-i="q_b2"></strong><b data-i="q_b1"></b><span data-i="q_b3"></span></div><figure class="bimg"><img src="img/sites/05.jpg" alt="" loading="lazy"></figure></div>
+    <div class="pts mini rv" id="commit3" style="margin-top:26px"></div>
+    <h3 class="sub rv" data-i="q_c"></h3>
+    <p class="lead rv" data-i="q_cl" style="margin-bottom:0"></p>
+    <div class="tags rv" id="tags"></div>
+    <div class="band rv quote"><div class="bt"><b data-i="q_h1"></b><span data-i="q_h2"></span></div><figure class="bimg"><img src="img/projects/02.jpg" alt="" loading="lazy"></figure></div>
+  </section>
+  <section id="org">
+    <p class="kick" data-i="o_k"></p><h2 class="rv" data-i="o_t"></h2><p class="lead rv" data-i="o_l"></p>
+    <div class="orgc rv" id="orgc"></div>
+    <div class="pts mini rv" id="orgPts" style="margin-top:clamp(30px,5vw,56px)"></div>
+  </section>
+  <section id="license">
+    <p class="kick" data-i="l_k"></p><h2 class="rv" data-i="l_t"></h2><p class="lead rv" data-i="l_l"></p>
+    <dl class="lic rv" id="lic"></dl>
+  </section>
+  <section id="contact">
+    <p class="kick" data-i="f_k"></p><h2 class="rv" data-i="f_t"></h2><p class="lead rv" data-i="f_th"></p>
+    <div class="pts mini rv" id="build4"></div>
+    <h3 class="sub rv" data-i="f_q"></h3>
+    <p class="lead rv" data-i="f_l"></p>
+    <form class="q rv" id="qform">
+      <label><span data-i="f0"></span><select id="q_p"></select></label>
+      <label><span data-i="f1"></span><select id="q_type"></select></label>
+      <label><span data-i="f2"></span><select id="q_srv"></select></label>
+      <label><span data-i="f3"></span><input id="q_h" type="number" min="1" max="200" step="0.5" inputmode="decimal" placeholder="12"></label>
+      <label><span data-i="f4"></span><input id="q_l" type="number" min="1" max="2000" step="0.5" inputmode="decimal" placeholder="40"></label>
+      <label><span data-i="f5"></span><select id="q_e"></select></label>
+      <label><span data-i="f6"></span><input id="q_n" type="text" autocomplete="organization"></label>
+      <div class="estbox" aria-live="polite"><b class="et" data-i="est_t"></b><div class="enums"><div><span id="eA">–</span><small data-i="est_a"></small></div><div><span id="eL">–</span><small data-i="est_l"></small></div><div><span id="eB">–</span><small data-i="est_b"></small></div></div><p class="small" data-i="est_n" style="margin:8px 0 0"></p></div>
+      <button type="submit" class="btn mar" data-i="f_go"></button>
+    </form>
+    <div class="qout" id="qout" hidden><pre id="qtext"></pre><div class="acts"><a class="btn" id="qwa" href="#" target="_blank" rel="noopener" data-i="f_wa"></a><button type="button" class="btn ghost" id="qcopy" data-i="f_cp"></button></div></div>
+    <h3 class="sub rv" data-i="f_team"></h3>
+    <ul class="team rv" id="team"></ul>
+    <div class="cgrid rv">
+      <div><b data-i="k1"></b><bdi>+971 6 574 4314</bdi></div><div><b data-i="k2"></b><bdi>+971 50 665 0393</bdi></div>
+      <div><b data-i="k3"></b><bdi>info@nejoumalmanarah.com</bdi></div><div><b data-i="k4"></b><span data-i="k4v"></span></div>
+    </div>
+    <p class="rv"><a class="btn ghost pdfbtn" href="files/NAMASCO-Company-Profile.pdf" target="_blank" rel="noopener" hidden data-i="pdf"></a></p>
+    <div class="qr rv"><img src="img/qr-location.png" alt="QR" loading="lazy" width="120" height="116"><div><b data-i="f_loc"></b><a class="btn ghost" href="https://maps.app.goo.gl/TT6SrM75kqH7bA2r9" target="_blank" rel="noopener" data-i="f_map"></a></div></div>
+  </section>
+</main>
+<div class="fab" id="fab"><div class="fab-menu" id="fabMenu"><a class="wa" href="https://wa.me/971506650393" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.6 8.4c.3-.6.7-.6 1-.6h.5c.2 0 .4 0 .6.5l.7 1.6c.1.3 0 .5-.1.7l-.5.6c-.1.2-.2.3 0 .6.6 1 1.4 1.8 2.5 2.4.3.2.5.1.6 0l.7-.8c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.4.5 0 .5-.2 1.2-.8 1.6-.6.4-1.6.6-3.4-.2a10 10 0 0 1-4.3-4.2c-.8-1.5-.5-2.7 0-3.3z" fill="currentColor"/></svg><span data-i="fab_wa"></span></a><a class="call" href="tel:+97165744314"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h2.6l1.4 4-1.9 1.3a11 11 0 0 0 5.5 5.5l1.3-1.9 4 1.4v2.6c0 1-.8 1.8-1.8 1.8A15.2 15.2 0 0 1 4.8 5.3c0-1 .8-1.8 1.8-1.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span data-i="fab_call"></span></a></div><button type="button" class="fab-btn" id="fabBtn" aria-expanded="false" aria-controls="fabMenu"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.5" cy="9.5" r="1.1" fill="currentColor"/><circle cx="12" cy="9.5" r="1.1" fill="currentColor"/><circle cx="15.5" cy="9.5" r="1.1" fill="currentColor"/></svg><svg class="i-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i="fab_t"></span></button></div>
+<div id="lb" hidden role="dialog" aria-modal="true"><img id="lbImg" alt=""><button type="button" id="lbX">×</button><button type="button" id="lbP">‹</button><button type="button" id="lbNx">›</button><span id="lbN"></span></div>
+<footer><div class="fgrid"><img src="img/logo-q.png" alt="NAMASCO" width="110"><nav class="flinks"><a href="#" data-go="about" data-i="n0"></a><a href="#" data-go="systems" data-i="n1"></a><a href="#" data-go="projects" data-i="n3"></a><a href="#project-register" data-i="p_regbtn"></a><a href="#" data-go="contact" data-i="quote"></a></nav><div class="fcon"><bdi>+971 6 574 4314</bdi><bdi>+971 50 665 0393</bdi><bdi>info@nejoumalmanarah.com</bdi><span data-i="k4v"></span></div></div><div class="fbar"><p class="copy">© <span id="yr">2026</span> <span data-i="copy"></span></p><a class="hud" href="https://hudera.ai" target="_blank" rel="noopener"><span data-i="by"></span><img src="img/hudera-logo.png" alt="HUDERA AI" width="122" height="36" loading="lazy"></a></div></footer>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+
+const SITE_TITLE = document.title;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v)), smooth = t => t * t * (3 - 2 * t);
+const B = a => new THREE.Vector3(a[0], a[2], -a[1]);
+const UP = new THREE.Vector3(0, 1, 0), ZA = new THREE.Vector3(0, 0, 1);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let LANG = 'ar';
+const L = (a, e) => (LANG === 'en' ? e : a);
+
+/* ================= content (English text is copied from the NAMASCO company profile; Arabic is a translation) ================= */
+const T = {
+  n0: ['عن الشركة', 'About'], n1: ['المنتجات', 'Products'], n2: ['الخدمات', 'Services'], n3: ['المشاريع', 'Projects'], n4: ['العملاء', 'Clients'], n5: ['السلامة والجودة', 'Safety & Quality'], quote: ['اطلب عرض سعر', 'Request a quote'],
+  a_k: ['عن NAMASCO', 'About NAMASCO'], a_est: ['سنة التأسيس', 'Established'], a_v: ['قيمنا الأساسية', 'Our core values'],
+  s_k: ['منتجاتنا', 'Our products'], s_t: ['نوفّر مجموعة شاملة من مواد وملحقات السقالات عالية الجودة لتلبية متطلبات المشاريع المختلفة.', 'We supply a comprehensive range of high-quality scaffolding materials and accessories to meet diverse project requirements.'],
+  s_b1: ['منتجات عالية الجودة. حلول آمنة. منشآت أقوى.', 'Quality products. Safe solutions. Stronger builds.'], s_b2: ['جودة ممتازة، مصنوعة للسلامة', 'Premium quality, built for safety'], s_b3: ['جميع منتجاتنا تُصنَّع وتُورَّد وفق المعايير الدولية، بما يضمن المتانة والسلامة والكفاءة في كل موقع.', 'All our products are manufactured and supplied to meet international standards, ensuring durability, safety and efficiency on every site.'],
+  v_k: ['خدماتنا', 'Our services'], v_t: ['حلول سقالات متكاملة مصممة لدعم كل مرحلة من مشروعك الإنشائي.', 'End-to-end scaffolding solutions designed to support every stage of your construction project.'],
+  v_b1: ['آمنة. موثوقة. مصممة للدعم.', 'Safe. Reliable. Built to support.'], v_b2: ['التزامنا', 'Our commitment'], v_b3: ['نلتزم بتقديم حلول سقالات آمنة وعالية الجودة واقتصادية، مع التركيز على السلامة والموثوقية ورضا العملاء. هدفنا بناء شراكات طويلة الأمد والمساهمة في نجاح كل مشروع نشارك فيه.', 'We are committed to providing safe, high-quality and cost-effective scaffolding solutions with a focus on safety, reliability and customer satisfaction. Our goal is to build long-term partnerships and contribute to the success of every project we are part of.'],
+  y_k: ['صور حقيقية', 'Real photos'], y_t: ['من مخزننا', 'From our yard'], y_l: ['تعرض الصور التالية لقطات حقيقية لأنظمة السقالات والمنتجات ومواقع مشاريع مختارة ورّدت لها NAMASCO ودعمت أعمال الإنشاء فيها بنجاح في أنحاء الإمارات.', 'The following pages showcase real photos of our scaffolding systems, products, and selected project sites where NAMASCO successfully supplied and supported construction activities across the UAE.'],
+  p_k: ['مشاريع رئيسية', 'Major projects'], p_t: ['نفخر بدعم مجموعة واسعة من مشاريع الإنشاء في أنحاء الإمارات بحلول سقالات موثوقة وخدمات احترافية.', 'We take pride in supporting a wide range of construction projects across the UAE with our reliable scaffolding solutions and professional services.'],
+  p_note: ['* بعض تفاصيل المشاريع محجوبة حفاظًا على سرية العملاء.', '* Some project details are withheld due to client confidentiality.'], p_why: ['لماذا يختار العملاء NAMASCO\u200F؟', 'Why clients choose NAMASCO?'], p_sites: ['من مواقع المشاريع', 'From the project sites'],
+  ld_e: ['كلمة المدير العام', 'A word from the General Manager'], ld_badge: ['المدير العام', 'General Manager'],
+  ld_msg: ['منذ تأسيس NAMASCO عام 2023 التزمنا بتقديم حلول سقالات آمنة وعالية الجودة واقتصادية، مع التركيز على السلامة والموثوقية ورضا العملاء. هدفنا بناء شراكات طويلة الأمد والمساهمة في نجاح كل مشروع نشارك فيه.', 'Since NAMASCO was founded in 2023, we have been committed to delivering safe, high-quality and cost-effective scaffolding solutions, with a focus on safety, reliability and customer satisfaction. Our goal is to build long-term partnerships and contribute to the success of every project we are part of.'],
+  ld_name: ['محمد حامد', 'Mohamed Hamed'], ld_role: ['الرئيس التنفيذي والمدير العام، NAMASCO', 'CEO & General Manager, NAMASCO'],
+  p_reg: ['سجلًّا في جدول المشاريع بملف الشركة، موزّعة على الإمارات السبع.', 'records in the profile\'s project table, across all seven emirates.'], p_regbtn: ['افتح سجل المشاريع', 'Open the project register'],
+  c_k: ['عملاؤنا وشركاؤنا', 'Our clients & partners'], c_t: ['نفخر بالعمل مع مقاولين وجهات رائدة في أنحاء الإمارات.', 'We are proud to work with leading contractors and organizations across the UAE.'],
+  c_why: ['لماذا يثق بنا العملاء', 'Why clients trust us'], c_str: ['نقاط قوتنا', 'Our strengths'], c_tp: ['معتمدون من عملائنا – شركاء الطرف الثالث', 'Approved by our clients – third party partners'],
+  q_k: ['السلامة والجودة', 'Safety & quality'], q_t: ['أولويتنا، في كل مرة', 'Our priority, every time'], q_l: ['في NAMASCO، السلامة والجودة أساس كل ما نقوم به. نتّبع إجراءات سلامة صارمة وتدابير ضبط جودة لضمان أعلى المعايير في كل مشروع.', 'At NAMASCO, safety and quality are at the core of everything we do. We follow strict safety procedures and quality control measures to ensure the highest standards on every project.'],
+  q_s: ['ممارسات السلامة لدينا', 'Our safety practices'], q_q: ['ضبط الجودة لدينا', 'Our quality control'],
+  q_b1: ['أفراد آمنون. عمل متقن. مشاريع ناجحة.', 'Safe people. Quality work. Successful projects.'], q_b2: ['التزامنا', 'Our commitment'], q_b3: ['نلتزم بتوفير بيئة عمل آمنة وتقديم حلول سقالات بأعلى جودة تتجاوز توقعات العملاء.', 'We are committed to providing a safe working environment and delivering top-quality scaffolding solutions that exceed client expectations.'],
+  q_c: ['الشهادات والامتثال', 'Certifications & compliance'], q_cl: ['نلتزم بأنظمة الجهات المحلية ونتّبع أفضل ممارسات القطاع.', 'We comply with local authority regulations and follow industry best practices.'],
+  q_h1: ['الجودة ليست فعلًا عابرًا، بل عادة.', 'Quality is not an act, it\'s a habit.'], q_h2: ['من اختيار المواد الخام إلى الفحص النهائي، نحافظ على أعلى مستوى من الجودة لضمان حلول سقالات آمنة وقوية وموثوقة.', 'From the selection of raw materials to final inspection, we maintain the highest level of quality to ensure safe, strong and reliable scaffolding solutions.'],
+  o_k: ['الهيكل التنظيمي', 'Organization chart'], o_t: ['مبنية على التنظيم. يقودها الأفراد.', 'Built on structure. Driven by people.'], o_l: ['الهيكل الإداري – NAMASCO لتجارة وتأجير السقالات ذ.م.م', 'Management Structure – NAMASCO Scaffolding Trading & Rental L.L.C.'],
+  l_k: ['الرخصة التجارية', 'Trade license'], l_t: ['رخصة تجارية', 'Trading License'], l_l: ['نحن شركة مسجّلة في دولة الإمارات العربية المتحدة، مرخّصة بالكامل لمزاولة أنشطة تجارة وتأجير السقالات وفق قوانين وأنظمة الدولة.', 'We are a registered company in the United Arab Emirates, fully licensed to carry out scaffolding trading and rental activities in accordance with UAE laws and regulations.'],
+  f_k: ['شكرًا لكم!', 'Thank you!'], f_t: ['لنبنِ معًا', 'Let\'s build together'], f_th: ['نقدّر بصدق وقتكم واهتمامكم، ونتطلع إلى بناء شراكة ناجحة وطويلة الأمد معكم.', 'We sincerely appreciate your time and consideration. We look forward to building a long-term and successful partnership with you.'],
+  f_team: ['فريقنا – جهات الاتصال', 'Our team – contact persons'], f_loc: ['الموقع: امسح الرمز للعرض', 'Location: scan to view'], f_map: ['افتح في خرائط Google', 'Open in Google Maps'], f_q: ['اطلب عرض سعر', 'Request a quote'],
+  f_l: ['أدخل بيانات مشروعك لتُجهَّز رسالة ترسلها إلى واتساب الشركة.', 'Enter your project details and the page prepares a message to send to the company on WhatsApp.'],
+  k1: ['هاتف', 'Landline'], k2: ['واتساب (محمد حامد)', 'WhatsApp (Mohamed Hamed)'], k3: ['البريد الإلكتروني', 'Email'], k4: ['العنوان', 'Address'], k4v: ['المنطقة الصناعية بالصجعة، الشارقة، الإمارات العربية المتحدة', 'Sajah Industrial Area, Sharjah, United Arab Emirates'],
+  f0: ['المنتج', 'Product'], f1: ['نوع المشروع', 'Project type'], f2: ['الخدمة', 'Service'], f3: ['ارتفاع المبنى (م)', 'Building height (m)'], f4: ['طول الواجهات (م)', 'Facade length (m)'], f5: ['الإمارة', 'Emirate'], f6: ['الاسم أو الشركة', 'Name or company'],
+  f_go: ['جهّز الرسالة', 'Prepare the message'], f_wa: ['افتح واتساب', 'Open WhatsApp'], f_cp: ['انسخ الرسالة', 'Copy the message'],
+  fab_t: ['تواصل معنا', 'Contact us'], by: ['صُمّم وطُوّر بالتعاون مع', 'Designed & developed in partnership with'],
+  copy: ['نجوم المنارة لتجارة وتأجير السقالات ذ.م.م (NAMASCO). جميع الحقوق محفوظة.', 'Nejoum Al Manarah Scaffolding Trading & Rental L.L.C. (NAMASCO). All rights reserved.'],
+  pdf: ['حمّل ملف الشركة (PDF)', 'Download the company profile (PDF)'], fab_wa: ['واتساب', 'WhatsApp'], fab_call: ['اتصل', 'Call'],
+  cmp_t: ['أي نظام يناسب مشروعك؟', 'Which system suits your project?'], cmp_n: ['مقارنة عامة للاسترشاد. يحدد فريق NAMASCO النظام المناسب لكل مشروع.', 'A general guide. The NAMASCO team recommends the right system for each project.'],
+  map_t: ['المشاريع على خريطة الإمارات', 'Projects across the UAE map'], map_n: ['اضغط على أي إمارة لعرض سجلاتها. حجم الدائرة يمثّل عدد السجلات.', 'Tap an emirate to see its records. Circle size shows the number of records.'], map_e: ['التغطية', 'Coverage'], map_src: ['الخريطة مبنية من بيانات Natural Earth الجغرافية العامة. الأرقام من جدول المشاريع في ملف الشركة.', 'Map built from public Natural Earth geographic data. Figures come from the project table in the company profile.'],
+  est_t: ['تقدير مبدئي', 'Preliminary estimate'], est_a: ['م² من السقالة تقريبًا', 'm² of scaffold, approx.'], est_l: ['عدد الأدوار', 'Lifts'], est_b: ['عدد الباكيات', 'Bays'],
+  est_n: ['للاسترشاد فقط: يفترض الحساب ارتفاع دور 2.0 م وطول باكية 2.5 م. يحدد فريق NAMASCO الكميات والسعر بعد دراسة المشروع.', 'For guidance only: assumes a 2.0 m lift and a 2.5 m bay. The NAMASCO team sets quantities and price after reviewing the project.'],
+  foot: ['© 2026 نجوم المنارة لتجارة وتأجير السقالات ذ.م.م (NAMASCO) · الشارقة، الإمارات العربية المتحدة', '© 2026 Nejoum Al Manarah Scaffolding Trading & Rental L.L.C. (NAMASCO) · Sharjah, United Arab Emirates'],
+};
+const ABOUT = {
+  tag: ['نبني بأمان أكثر. نصل إلى أعلى. ونسلّم الثقة.', 'Building Safer. Reaching Higher. Delivering Trust.'],
+  p: [['نجوم المنارة لتجارة وتأجير السقالات ذ.م.م (NAMASCO) شركة مقرها الشارقة بدولة الإمارات، متخصصة في حلول السقالات لقطاع الإنشاءات. تأسست عام 2023، واكتسبت سريعًا سمعة في الموثوقية والسلامة والتميّز في الخدمة.', 'NEJOUM AL MANARAH SCAFFOLDING TRADING & RENTAL L.L.C. (NAMASCO) is a Sharjah, UAE based company specializing in scaffolding solutions for the construction industry. Established in 2023, we have quickly built a reputation for reliability, safety, and excellence in service.'],
+    ['نوفّر مواد سقالات عالية الجودة بنظامَي التأجير والبيع، مع خدمات احترافية للتركيب والفك وفحص المواقع، مصممة لتلبية أعلى معايير القطاع. التزامنا بالسلامة والجودة ورضا العملاء يدفعنا لنكون الشريك الموثوق المفضّل للمقاولين والمطوّرين في أنحاء الإمارات.', 'We provide high-quality scaffolding materials on rental and sales basis along with professional installation, dismantling, and site inspection services tailored to meet the highest industry standards. Our commitment to safety, quality and customer satisfaction drives us to be the trusted partner of choice for contractors and developers across the UAE.'],
+    ['بفريق ماهر ومخزون مُصان جيدًا ونهج يضع العميل أولًا، تواصل NAMASCO دعم نمو المنطقة بالمساهمة في بناء منشآت قوية وأكثر أمانًا وذكاءً.', 'With a skilled team, a well-maintained inventory, and a customer-first approach, NAMASCO continues to support the region\'s growth by helping build strong, safer and smarter structures.']],
+};
+/* point lists: [Arabic title, English title, Arabic line, English line] */
+const VALUES = [['السلامة أولًا', 'Safety first', 'نضع سلامة موظفينا وعملائنا ومجتمعاتنا في المقدمة.', 'We prioritize the safety of our people, clients and communities.'],
+  ['الجودة المضمونة', 'Quality assured', 'نقدّم منتجات وخدمات متميزة تطابق المعايير الدولية.', 'We deliver premium products and services that meet international standards.'],
+  ['التركيز على العميل', 'Customer focused', 'نجاح عملائنا نجاحنا. نستمع ونفهم وننفّذ.', 'Our clients\' success is our success. We listen, understand and deliver.'],
+  ['النزاهة', 'Integrity', 'ندير أعمالنا بأمانة وشفافية ومسؤولية.', 'We conduct our business with honesty, transparency and accountability.'],
+  ['التحسين المستمر', 'Continuous improvement', 'نتبنّى الابتكار ونسعى إلى النمو والتميّز المستمرَّين.', 'We embrace innovation and strive for continuous growth and excellence.']];
+const NUMS = [['2023', 'Established', '2023', 'سنة التأسيس'], ['Skilled', 'Workforce', 'ماهر', 'فريق عمل'], ['100+', 'Projects supported', '+100', 'مشروع تم دعمه'], ['100%', 'Safety commitment', '100%', 'التزام بالسلامة'], ['Trusted', 'By leading contractors', 'موثوقون', 'لدى كبار المقاولين']];
+const SYS = [
+  ['Cuplock System', 'نظام Cuplock', 'نظام متعدد الاستخدامات، قوي وسهل التركيب، مثالي لجميع أنواع المنشآت.', 'Versatile, strong and easy-to-assemble system ideal for all types of structures.', 'p-cuplock-node'],
+  ['Frame Scaffolding', 'سقالات الإطارات', 'نظام اقتصادي واسع الاستخدام لأعمال الإنشاء والصيانة.', 'Cost-effective and widely used system for construction and maintenance works.', 'p-frame-scaffold'],
+  ['Props (Steel Shoring)', 'الدعامات الحديدية', 'دعامات حديدية قابلة للضبط لدعم الأسقف وأعمال الشدّات.', 'Adjustable steel props for slab support and formwork applications.', 'p-adjustable-prop'],
+  ['Base Jack', 'القاعدة القلاووظ', 'توفّر دعمًا ثابتًا وضبطًا للمنسوب على الأسطح غير المستوية.', 'Provides stable support and leveling on uneven surfaces.', 'p-base-jack'],
+  ['U Head Jack', 'الرأس القلاووظ', 'مصممة لحمل الكمرات وعناصر الشدّة الرئيسية بأمان.', 'Designed to support beams and primary formwork elements securely.', 'p-u-head-jack'],
+  ['Steel Planks', 'ألواح المشي الحديدية', 'ألواح متينة ومقاومة للانزلاق تضمن منصات عمل آمنة.', 'Durable and slip-resistant planks ensuring safe working platforms.', 'p-steel-plank'],
+  ['Ladders', 'السلالم', 'سلالم وصول قوية وآمنة للحركة الرأسية في الموقع.', 'Strong and safe access ladders for vertical movement on site.', 'p-ladder'],
+  ['Accessories', 'الملحقات', 'مجموعة واسعة من المشابك والعوارض والتدعيمات والملحقات لاستكمال احتياجات سقالاتك.', 'Wide range of clamps, ledgers, braces and accessories to complete your scaffolding needs.', 'p-double-coupler'],
+  ['Custom Solutions', 'حلول مخصصة', 'نقدّم حلول سقالات مخصصة وفق مواصفات مشروعك.', 'We provide customized scaffolding solutions tailored to your project specifications.', 'sites/t/04'],
+];
+const SVC = [
+  ['Scaffolding Rental', 'تأجير السقالات', 'مجموعة واسعة من أنظمة السقالات للتأجير قصير وطويل الأجل بأسعار تنافسية.', 'Wide range of scaffolding systems available for short-term and long-term rental at competitive rates.'],
+  ['Scaffolding Trading', 'تجارة السقالات', 'توريد مواد وملحقات سقالات عالية الجودة من مصنّعين موثوقين.', 'Supply of high-quality scaffolding materials and accessories from trusted manufacturers.'],
+  ['Installation & Dismantling', 'التركيب والفك', 'فريق خبير يضمن تركيبًا وفكًّا آمنًا وسريعًا وفعّالًا وفق معايير السلامة.', 'Experienced team ensuring safe, fast and efficient erection and dismantling in compliance with safety standards.'],
+  ['Site Inspection', 'فحص المواقع', 'فحص دوري واعتماد للسقالات لضمان سلامة المنشأ والعاملين.', 'Regular inspection and certification of scaffolding to ensure structural integrity and worker safety.'],
+  ['Project Support', 'دعم المشاريع', 'دعم فني وحلول ميدانية مصممة حسب متطلبات المشروع وجدوله الزمني.', 'Technical support and on-site solutions tailored to meet project requirements and timelines.'],
+];
+const SCOPE = ['توريد وتركيب وفك السقالات', 'Supply, Installation & Dismantling of Scaffolding'], CONF = ['سرّي', 'Confidential'];
+/* major projects, as printed on page 6: title, location, client, main contractor */
+const PROJ = [
+  { t: ['مبنى G+4 مقترح', 'Proposed G+4 Building'], loc: ['Tilal / Suburb Al Suyoh – Plot No. 8111', 'Tilal / Suburb Al Suyoh – Plot No. 8111'], cl: ['Yazan Yousef Farid Qaryouti', 'Yazan Yousef Farid Qaryouti'], mc: ['NASHAMA Building Contracting LLC', 'NASHAMA Building Contracting LLC'] },
+  { t: ['مسجد دور أرضي + سكن الإمام ومبنى المجلس G+1', 'Ground Floor Masjid + Imam House & Majlis Block G+1'], loc: ['Plot No. 3502 – Bahya', 'Plot No. 3502 – Bahya'], cl: ['الهيئة العامة للشؤون الإسلامية والأوقاف', 'General Authority for Islamic Affairs and Endowments'], mc: ['NEW GULF ASIA Building Contracting LLC', 'NEW GULF ASIA Building Contracting LLC'] },
+  { t: ['مبنى مقترح G+ميزانين+4 طوابق+بنتهاوس', 'Proposed G+Mezz+4FL+ Penthouse Building'], loc: ['مواقع متعددة – الإمارات', 'Various Locations – UAE'], cl: CONF, mc: CONF },
+  { t: ['مبنى تجاري (G+3 طوابق)', 'Commercial Building (G+3 Floors)'], loc: ['الشارقة، الإمارات', 'Sharjah, UAE'], cl: CONF, mc: CONF },
+  { t: ['مبنى سكني (G+5 طوابق)', 'Residential Building (G+5 Floors)'], loc: ['دبي، الإمارات', 'Dubai, UAE'], cl: CONF, mc: CONF },
+  { t: ['مشروع مستودع صناعي', 'Industrial Warehouse Project'], loc: ['المنطقة الصناعية بالشارقة، الإمارات', 'Sharjah Industrial Area, UAE'], cl: CONF, mc: CONF },
+];
+const WHY_CHOOSE = [['موثوقون', 'Reliable & trusted', 'ننفّذ ما نعد به، في الوقت المحدد، كل مرة.', 'We deliver what we promise, on time, every time.'],
+  ['فريق خبير', 'Experienced team', 'محترفون مهرة بسنوات من الخبرة في القطاع.', 'Skilled professionals with years of industry experience.'],
+  ['مواد عالية الجودة', 'Quality materials', 'نستخدم مواد عالية الجودة تضمن السلامة والمتانة.', 'We use high-quality materials that ensure safety and durability.'],
+  ['التسليم في الوقت', 'On-time delivery', 'نقدّر وقتك ونضمن إنجاز المشروع في موعده.', 'We value your time and ensure timely project completion.'],
+  ['التركيز على العميل', 'Customer focus', 'رضا عملائنا أولويتنا القصوى في كل مشروع.', 'Our clients\' satisfaction is our top priority in every project.'],
+  ['حلول اقتصادية', 'Cost effective solutions', 'أسعار تنافسية دون المساس بالجودة.', 'Competitive pricing without compromising on quality.']];
+const CLIENTS = [['gulf-asia', 'Gulf Asia Building Contracting Company (L.L.C)'], ['nashama', 'NASHAMA Building Contracting LLC'], ['mimar', 'MIMAR Building Contracting L.L.C'], ['islamic-affairs', 'General Authority of Islamic Affairs & Endowments'], ['moon-link', 'Moon Link Building Contracting'],
+  ['qbuild', 'QBUILD Building Contracting'], ['damas-land', 'Damas Land Building Contracting'], ['bertawi', 'Bertawi General Contracting'], ['fast', 'Fast Building Contracting (L.L.C)'], ['al-rehab', 'Al Rehab Al Arabi Building Contracting']];
+const WHY_TRUST = [['السلامة أولًا', 'Safety first', 'التزام بمعايير HSE في كل موقع.', 'Commitment to HSE standards on every site.'],
+  ['الجودة المضمونة', 'Quality assured', 'مواد عالية الجودة وفحوصات صارمة.', 'High quality materials and strict inspections.'],
+  ['فريق خبير', 'Experienced team', 'محترفون مهرة بخبرة واسعة في القطاع.', 'Skilled professionals with vast industry experience.'],
+  ['التسليم في الوقت', 'On-time delivery', 'خدمات لوجستية موثوقة ودعم للمشاريع في موعده.', 'Reliable logistics and timely project support.'],
+  ['شراكة طويلة الأمد', 'Long term partnership', 'نبني علاقات دائمة قائمة على الثقة.', 'Building lasting relationships based on trust.'],
+  ['ميزة تنافسية', 'Competitive advantage', 'حلول اقتصادية دون المساس بالجودة.', 'Cost effective solutions without compromising on quality.']];
+const STRENGTHS = [['مخزون كبير', 'Large inventory', 'مجموعة واسعة من مواد السقالات تلبي جميع احتياجات المشاريع.', 'Wide range of scaffolding materials to meet all project needs.'],
+  ['قوى عاملة ماهرة', 'Skilled workforce', 'فريق مدرَّب وخبير يضمن تنفيذًا آمنًا وفعّالًا.', 'Trained and experienced team ensuring safe and efficient execution.'],
+  ['معدات حديثة', 'Modern equipment', 'معدات مُصانة جيدًا لعمليات سلسة.', 'Well maintained equipment for smooth operations.'],
+  ['حلول مخصصة', 'Customized solutions', 'حلول سقالات مصممة لكل متطلبات المشروع.', 'Tailored scaffolding solutions for every project requirement.'],
+  ['تغطية لكل الإمارات', 'Pan UAE coverage', 'نخدم المشاريع في أنحاء الإمارات بخدمة سريعة.', 'Serving projects across the UAE with prompt service.'],
+  ['دعم متفرّغ', 'Dedicated support', 'خدمة عملاء سريعة الاستجابة من الاستفسار حتى إنجاز المشروع.', 'Responsive customer service from inquiry to project completion.']];
+const PARTNERS = [['akid', 'AKID Occupational Safety Consultancy L.L.C', ['استشارات الصحة والسلامة المهنية', 'Occupational health & safety consultancy']], ['bsafe', 'B SAFE Safety & Security Consultancy', ['استشارات السلامة والأمن', 'Safety & security consultancy']]];
+const SAFE = [['نلتزم بجميع الأنظمة المحلية ومعايير الصحة والسلامة والبيئة (HSE) الدولية.', 'We follow all local regulations and international HSE standards.'], ['تدريب دوري على السلامة ولقاءات توعية (Toolbox Talks) لجميع الموظفين.', 'Regular safety training and toolbox talks for all employees.'], ['فحص دوري للمعدات ومواد السقالات.', 'Routine inspection of equipment and scaffolding materials.'], ['استخدام معدات الوقاية الشخصية المناسبة وأنظمة الحماية من السقوط.', 'Use of proper PPE and fall protection systems.'], ['الجاهزية للطوارئ وتوفّر الإسعافات الأولية في الموقع.', 'Emergency preparedness and first aid facilities on site.']];
+const QUAL = [['مواد عالية الجودة من مصنّعين موثوقين.', 'High-quality materials sourced from trusted manufacturers.'], ['فحص دقيق لجميع المواد قبل التسليم وبعد الاستخدام.', 'Strict inspection of all materials before delivery and after use.'], ['مخزون مُصان جيدًا يضمن المتانة والاعتمادية.', 'Well-maintained inventory ensuring durability and reliability.'], ['فريق ماهر وخبير يضمن جودة التنفيذ.', 'Skilled and experienced team ensuring quality workmanship.'], ['تحسين مستمر في الإجراءات والأداء.', 'Continuous improvement in processes and performance.']];
+const COMMIT3 = [['لا تهاون في السلامة', 'Zero compromise on safety'], ['جودة تثق بها', 'Quality you can trust'], ['إتقان في كل تفصيل', 'Excellence in every detail']];
+const TAGS = [['متوافقون مع قانون العمل الإماراتي', 'UAE Labour Law Compliant'], ['متوافقون مع بلدية دبي', 'Dubai Municipality Compliant'], ['معتمدون من الدفاع المدني بدبي', 'Dubai Civil Defence Approved'], ['معايير الجودة ISO', 'ISO Quality Standards'], ['إرشادات السلامة OSHA', 'OSHA Safety Guidelines']];
+/* organization chart, as printed on page 7: [title, children] */
+const ORG = [
+  [['المدير المالي', 'Financial Manager'], [[['محاسب أول', 'Senior Accountant']], [['محاسب العملاء', 'Customers Accountant']]]],
+  [['مدير التصميم والفحص', 'Design & Inspection Manager'], [[['مهندس تصميم وفني', 'Design & Tech. Eng.']], [['مهندس تصميم وفحص', 'Design & Inspection Eng.']]]],
+  [['مدير الشؤون الإدارية والموارد البشرية', 'Admin & HR Manager'], []],
+  [['مدير اللوجستيات', 'Logistic Manager'], [[['تريلا (1)', 'Trella (1)']], [['بيك أب (3)', 'Pickup (3)']]]],
+  [['مدير المستودع', 'Warehouse Manager'], [[['أمناء مستودع (2)', 'Storekeepers (2)'], [[['سائقو رافعات شوكية (2)', 'Forklift drivers (2)']], [['عمال (16)', 'Labours (16)']]]]]],
+  [['مدير التسويق والتحصيل', 'Marketing and Collecting Manager'], [[['تنفيذي مبيعات وتسويق (5)', 'Sales & Marketing Executive (5)']], [['تنفيذي تحصيل (3)', 'Collecting Executive (3)']]]],
+];
+const ORG_PTS = [['قيادة قوية', 'Strong leadership'], ['مسؤوليات واضحة', 'Clear responsibilities'], ['عمليات فعّالة', 'Efficient operations'], ['عمل جماعي ومساءلة', 'Teamwork & accountability'], ['نمو مستدام', 'Sustainable growth']];
+/* trade licence, page 10: company details only. The partners table is not published. */
+const LIC = [[['رقم الرخصة', 'License No.'], '807854'], [['رقم السجل', 'Registration No.'], '210050'], [['تاريخ الإصدار', 'Issue Date'], '30-01-2023'], [['تاريخ الانتهاء', 'Expiry Date'], '30-01-2027'],
+  [['الاسم التجاري', 'Trade Name'], ['نجوم المنارة لتجارة و تأجير السقالات ذ.م.م', 'NEJOUM AL MANARAH SCAFFOLDING TR & RENTAL L.L.C']], [['الشكل القانوني', 'Legal Status'], ['شركة ذات مسؤولية محدودة', 'Limited Liability Company']],
+  [['أنشطة الرخصة', 'License activities'], ['بيع السقالات بالتجزئة، تأجير السقالات', 'Scaffolding retail sale, scaffolding rental']], [['جهة الإصدار', 'Issued by'], ['حكومة الشارقة، دائرة التنمية الاقتصادية', 'Government of Sharjah, Economic Development Department']]];
+const BUILD4 = [['جودة تثق بها', 'Quality you can trust'], ['سلامة نضعها أولًا', 'Safety we prioritize'], ['خدمة نلتزم بها', 'Service we deliver'], ['شراكة نعتزّ بها', 'Partnership we value']];
+const TEAM = [['محمد حامد', 'Mohamed Hamed', 'الرئيس التنفيذي والمدير العام', 'CEO & General Manager', '050 665 0393', '+971506650393'], ['أحمد إبراهيم', 'Ahmed Ibrahim', 'المدير المالي', 'Financial Manager', '050 245 5081', '+971502455081'],
+  ['محمد بديع قيمه', 'Mohamed Badee Qema', 'مدير التصميم والفحص', 'Design & Inspection Manager', '050 245 5303', '+971502455303'], ['حامد عادل', 'Hamed Adel', 'مدير الفرع', 'Branch Manager', '050 245 5382', '+971502455382']];
+/* project table, pages 27 to 49: state names and row counts as printed */
+const RST = [['دبي', 'Dubai', 351], ['عجمان', 'Ajman Emirate', 150], ['الشارقة', 'Sharjah', 147], ['رأس الخيمة', 'Ras al-Khaimah', 74], ['أم القيوين', 'Umm al-Quwain', 28], ['الفجيرة', 'Fujairah', 27], ['أبوظبي', 'Abu Dhabi', 4]];
+const RTY_EN = ['Villa / residential', 'Building', 'Warehouse / industrial', 'Masjid', 'Commercial', 'School', 'Healthcare', 'Not specified'];
+const RTY = ['فيلا / سكني', 'مبنى', 'مستودع / صناعي', 'مسجد', 'تجاري', 'مدرسة', 'صحي', 'غير محدد'];
+const QTYPE = [['فيلا', 'Villa'], ['مبنى سكني', 'Residential building'], ['مبنى تجاري', 'Commercial building'], ['مسجد', 'Mosque'], ['مستودع', 'Warehouse'], ['أخرى', 'Other']];
+const QSRV = [['تأجير مع تركيب وفك', 'Rental with installation and dismantling'], ['تأجير فقط', 'Rental only'], ['شراء', 'Purchase']];
+const CAPS = [
+  [['كل قطعة في مكانها', 'القوائم والعوارض والألواح مرصوصة بجوار خطوط التخطيط.'], ['Every part in its place', 'Standards, ledgers and planks are laid out beside the setting-out lines.']],
+  [['القواعد أولًا', 'توضع القواعد القلاووظ على تقاطعات خطوط التخطيط.'], ['Base jacks first', 'Base jacks are set on the crossings of the setting-out lines.']],
+  [['يقف الدور الأول', 'تُركَّب القوائم على القواعد، وتُقفَل العوارض في وصلات Cuplock.'], ['The first lift stands', 'Standards go onto the jacks and ledgers lock into the Cuplock nodes.']],
+  [['السقالة ترتفع', 'دورًا بعد دور، مع التدعيم المائل.'], ['The scaffold rises', 'Lift after lift, with its diagonal bracing.']],
+  [['منصات عمل آمنة', 'ألواح المشي والدرابزين في كل دور.'], ['Safe working platforms', 'Planks and guardrails on every lift.']],
+  [['اكتملت السقالة', 'دوّرها وقرّبها واختر أي قطعة لمعرفة وظيفتها.'], ['The scaffold is complete', 'Rotate it, zoom in and select any part to see what it does.']],
+];
+const PARTS = {
+  Standard: { e: 'Cuplock Standard', n: ['القائم الرأسي', 'Vertical standard'], d: ['العمود الذي يحمل وزن السقالة وينقله إلى القاعدة، وعليه وصلات Cuplock التي تُقفَل فيها العوارض.', 'The post that carries the scaffold load down to the base. It carries the Cuplock nodes that the ledgers lock into.'], f: ['القاعدة القلاووظ أسفله، والعوارض في وصلاته.', 'Base jack underneath, ledgers in its nodes.'] },
+  Ledger: { e: 'Cuplock Ledger', n: ['العارضة الأفقية', 'Horizontal ledger'], d: ['تربط القوائم ببعضها بطول الواجهة وتحدد طول الباكية. القطعة نفسها تعمل درابزينًا فوق منصة العمل.', 'Ties the standards together along the facade and sets the bay length. The same part works as a guardrail above the working platform.'], f: ['تُقفَل في وصلات القوائم من الطرفين.', 'Locks into the standard nodes at both ends.'] },
+  Transom: { e: 'Transom', n: ['العارضة العرضية', 'Transom'], d: ['تربط الصف الخارجي بالصف الداخلي، وتوضع عليها ألواح المشي.', 'Ties the outer row to the inner row, and the planks rest on it.'], f: ['القوائم من الطرفين، والألواح فوقها.', 'Standards at both ends, planks on top.'] },
+  Jack: { e: 'Base Jack', n: ['القاعدة القلاووظ', 'Base jack'], d: ['توفّر دعمًا ثابتًا وضبطًا للمنسوب على الأسطح غير المستوية. أول قطعة على الأرض تحت كل قائم.', 'Provides stable support and leveling on uneven surfaces. The first part on the ground under every standard.'], f: ['يُركَّب القائم فوقها.', 'The standard sits on top of it.'] },
+  Plank: { e: 'Steel Plank', n: ['لوح المشي الحديدي', 'Steel plank'], d: ['ألواح متينة ومقاومة للانزلاق تضمن منصات عمل آمنة.', 'Durable and slip-resistant planks ensuring safe working platforms.'], f: ['توضع على العوارض العرضية.', 'Rests on the transoms.'] },
+  Brace: { e: 'Brace', n: ['التدعيم المائل', 'Diagonal brace'], d: ['ماسورة مائلة تثبّت السقالة وتمنع ميلها في أي اتجاه.', 'A diagonal tube that stiffens the scaffold and stops it swaying in either direction.'], f: ['تُثبَّت في القوائم عند الوصلات.', 'Fixed to the standards at the nodes.'] },
+};
+const ORDER = ['Standard', 'Ledger', 'Transom', 'Jack', 'Plank', 'Brace'];
+/* product pages. Names and one-line descriptions come from SYS (company profile). Part names and "fits with" are general scaffolding knowledge. */
+const PROD = [
+  { slug: 'cuplock-system', file: 'cuplock_node', view: [1, 0.42, 1.5], zoom: 0.62, center: [0, 0, 0.355], exz: 1.5,
+    ex: [['Ledger_E', [0.26, 0, 0.03]], ['Ledger_N', [0, 0.26, 0.03]], ['Ledger_W', [-0.26, 0, 0.03]], ['Ledger_S', [0, -0.26, 0.03]], ['TopCup', [0, 0, 0.13], 1.0]],
+    mn: ['المجسم: وصلة واحدة من النظام. النظام كاملًا يُجمَّع في أعلى الصفحة الرئيسية.', 'Model: a single node of the system. The whole system assembles at the top of the home page.'],
+    hs: [{ p: [0.031, -0.031, 0.386], t: ['الكوب العلوي', 'Top cup'], d: ['كوب متحرك ينزل على أطراف العوارض ويدور فيقفلها جميعًا مرة واحدة.', 'A loose cup that drops over the ledger ends and rotates to lock them all at once.'] },
+      { p: [0.029, -0.029, 0.303], t: ['الكوب السفلي', 'Bottom cup'], d: ['ثابت في القائم، ويستقبل طرف كل عارضة.', 'Fixed to the standard; it receives the end of each ledger.'] },
+      { p: [0.031, 0.010, 0.346], t: ['لسان العارضة', 'Ledger blade'], d: ['طرف العارضة الذي يُمسَك بين الكوبين.', 'The ledger end that is held between the two cups.'] },
+      { p: [0.26, 0, 0.37], t: ['العارضة', 'Ledger'], d: ['حتى أربع عوارض في الوصلة الواحدة.', 'Up to four ledgers meet at one node.'] },
+      { p: [0, -0.0242, 0.62], t: ['القائم', 'Standard'], d: ['العمود الرأسي الذي يحمل الوصلات.', 'The vertical post that carries the nodes.'] }],
+    fits: [[3, ['تحت كل قائم', 'Under every standard']], [5, ['على العوارض العرضية', 'On the transoms']], [4, ['فوق القائم في أعمال الشدّات', 'On top of the standard in formwork support']], [7, ['للتدعيم والربط', 'For bracing and ties']]] },
+  { slug: 'frame-scaffolding', file: 'frame_scaffold', view: [1, 0.42, 1.15],
+    ex: [['Frame_A', [0, -0.4, 0]], ['Frame_B', [0, 0.4, 0]], ['CrossBraces', [0, 0, 0.38]], ['Pins_A', [0, -0.4, 0.26]], ['Pins_B', [0, 0.4, 0.26]]],
+    mn: ['المجسم أزرق كما في صورة المنتج بملف الشركة.', 'The model is blue, like the product photo in the profile.'],
+    hs: [{ p: [0.6095, 0, 1.0], t: ['الإطار', 'Frame'], d: ['قطعة ملحومة جاهزة: رِجلان وعوارض.', 'A ready-welded unit: two legs and cross members.'] },
+      { p: [0, 0, 1.62], t: ['العارضة العلوية', 'Top member'], d: ['توضع عليها ألواح المشي.', 'The planks rest on it.'] },
+      { p: [0.575, 0.9145, 0.925], t: ['التقاطع', 'Cross brace'], d: ['ماسورتان على شكل X تربطان الإطارين.', 'Two tubes in an X that tie the two frames together.'] },
+      { p: [-0.6095, 0, 1.78], t: ['بنز الوصل', 'Coupling pin'], d: ['يدخل في رِجل الإطار الذي فوقه لترتفع السقالة.', 'Slots into the leg of the frame above so the scaffold can rise.'] },
+      { p: [0.565, 0, 0.35], t: ['مسمار التقاطع', 'Brace stud'], d: ['يُركَّب عليه طرف التقاطع ويُقفَل.', 'The end of the cross brace slips over it and locks.'] }],
+    fits: [[3, ['تحت كل رِجل', 'Under each leg']], [5, ['فوق العارضة العلوية', 'Over the top member']]] },
+  { slug: 'props', file: 'adjustable_prop', view: [1, 0.22, 1.2], zoom: 0.5, center: [0, 0, 1.82], full: true, exz: 1.3, hide: ['Welds'],
+    ex: [['CollarNut', [0, 0, 0.2]], ['InnerTube', [0, 0, 0.5]], ['TopPlate', [0, 0, 0.5]], ['GPin', [0, 0.3, 0]]],
+    mn: ['المجسم مدهون بالأزرق كرصّات الدعامات في صور المخزن.', 'The model is painted blue, like the prop stacks in the yard photos.'],
+    fact: [['المقاسات المكتوبة في ملف الشركة', 'Sizes stated in the profile'], 'Prop jack (3.5, 4, 5.5) M New'],
+    photos: ['yard/04', 'yard/01', 'yard/02', 'yard/16'],
+    hs: [{ p: [0.06, 0, 2.997], t: ['اللوح العلوي', 'Top plate'], d: ['يسند الكمرة أو الشدّة.', 'Bears against the beam or formwork.'] },
+      { p: [0, -0.0242, 2.296], t: ['فتحات الضبط', 'Adjustment holes'], d: ['على الماسورة الداخلية، لاختيار الارتفاع.', 'Along the inner tube, for choosing the height.'] },
+      { p: [0, 0.072, 1.87], t: ['البنز', 'Pin'], d: ['يمرّ في فتحة الماسورة الداخلية ويثبّت الارتفاع.', 'Passes through a hole in the inner tube and fixes the height.'] },
+      { p: [0.150, 0, 1.86], t: ['صامولة الضبط', 'Adjusting nut'], d: ['للضبط الدقيق بعد تثبيت البنز.', 'For fine adjustment once the pin is in.'] },
+      { p: [0.0338, 0, 1.76], t: ['القلاووظ', 'Thread'], d: ['جزء مقلوظ في أعلى الماسورة الخارجية.', 'A threaded section at the top of the outer tube.'] },
+      { p: [0.0302, 0, 0.9], t: ['الماسورة الخارجية', 'Outer tube'], d: ['تتحرك الماسورة الداخلية بداخلها.', 'The inner tube slides inside it.'] },
+      { p: [0.06, 0, 0.006], t: ['لوح القاعدة', 'Base plate'], d: ['يوزّع الحمل على الأرض.', 'Spreads the load on the ground.'] }] },
+  { slug: 'base-jack', file: 'base_jack', view: [1, 0.4, 1.3],
+    ex: [['Stem', [0, 0, 0.12]], ['Weld', [0, 0, 0.12]], ['WingNut', [0, 0, 0.34]]],
+    hs: [{ p: [0.019, 0, 0.47], t: ['الساق المقلوظ', 'Threaded stem'], d: ['يدخل في ماسورة القائم.', 'Slides inside the standard tube.'] },
+      { p: [0.090, 0, 0.276], t: ['صامولة الضبط', 'Adjusting nut'], d: ['يستقر عليها القائم، وتدويرها يرفعه أو ينزله.', 'The standard sits on it; turning it raises or lowers the standard.'] },
+      { p: [0.06, -0.06, 0.006], t: ['لوح القاعدة', 'Base plate'], d: ['يوزّع حمل القائم على الأرض.', 'Spreads the standard load on the ground.'] }],
+    fits: [[0, ['يُركَّب القائم فوقها', 'The standard sits on top of it']], [1, ['تحت كل رِجل', 'Under each leg']]] },
+  { slug: 'u-head-jack', file: 'u_head_jack', view: [1, 0.3, 1.3],
+    ex: [['WingNut', [0, 0, 0.26]], ['UHead', [0, 0, 0.3]], ['Weld', [0, 0, 0.3]]],
+    fact: [['كمرات في صور المخزن بملف الشركة', 'Beams in the profile\'s yard photos'], 'Aluminum beam 4mm (Used) · H20 Timber beams · LVL Osha Brand'],
+    photos: ['yard/05', 'yard/06', 'yard/08'],
+    hs: [{ p: [0.066, 0, 0.64], t: ['الرأس U', 'U-head'], d: ['تستقبل كمرات الشدّة.', 'Receives the formwork beams.'] },
+      { p: [0.066, -0.045, 0.636], t: ['فتحات التثبيت', 'Fixing holes'], d: ['لتثبيت الكمرة في مكانها.', 'For fixing the beam in place.'] },
+      { p: [0.090, 0, 0.316], t: ['صامولة الضبط', 'Adjusting nut'], d: ['تدويرها يضبط منسوب الشدّة.', 'Turning it sets the formwork level.'] },
+      { p: [0.019, 0, 0.1], t: ['الساق المقلوظ', 'Threaded stem'], d: ['يدخل في القائم من الأعلى.', 'Slides into the standard from the top.'] }],
+    fits: [[0, ['تدخل في القائم من الأعلى', 'Slides into the standard from the top']]] },
+  { slug: 'steel-planks', file: 'steel_plank', view: [0.8, 0.7, 1.2],
+    ex: [['Deck', [0, 0, 0.11]]],
+    photos: ['yard/07'],
+    hs: [{ p: [0.28, -0.02, 0.003], t: ['سطح مخرّم', 'Perforated surface'], d: ['مقاوم للانزلاق، ويصرّف الماء والرمل.', 'Gives grip and drains water and sand.'] },
+      { p: [-0.3, -0.1125, -0.02], t: ['الجانب', 'Side'], d: ['حافة مثنية تمنح اللوح صلابته.', 'A folded edge that gives the plank its stiffness.'] },
+      { p: [1.0, 0, -0.019], t: ['غطاء الطرف', 'End cap'], d: ['يغلق نهاية اللوح.', 'Closes the end of the plank.'] }],
+    fits: [[0, ['على العوارض العرضية', 'On the transoms']], [1, ['فوق العارضة العلوية', 'Over the top member']]] },
+  { slug: 'ladders', file: 'aframe_ladder', view: [1, 0.3, 1.25], tint: { NM_steel: ['#d6dadd', 0.9, true] },
+    ex: [['Side_A', [0, -0.24, 0]], ['Side_B', [0, 0.24, 0]], ['Spreaders', [0, 0, 0.3]], ['Hinge', [0, 0, 0.22]]],
+    mn: ['المجسم مبني على شكل السلالم في صورة ملف الشركة.', 'The model follows the ladders shown in the profile photo.'],
+    hs: [{ p: [0.19, 0, 2.27], t: ['المفصلة', 'Hinge'], d: ['تربط الجانبين من الأعلى وتسمح بفتح السلم وطيّه.', 'Joins the two sides at the top and lets the ladder open and fold.'] },
+      { p: [0, -0.482, 0.895], t: ['الدرجات', 'Steps'], d: ['درجات مسطّحة على الجانبين.', 'Flat steps on both sides.'] },
+      { p: [0.214, -0.321, 1.392], t: ['القائم الجانبي', 'Side rail'], d: ['يحمل الدرجات، ويتّسع باتجاه الأرض.', 'Carries the steps and widens toward the ground.'] },
+      { p: [0.2475, 0, 1.0515], t: ['شدّاد الفتح', 'Spreader bar'], d: ['يثبّت فتحة السلم وهو مفتوح.', 'Holds the ladder open at a fixed spread.'] },
+      { p: [0.28, -0.75, 0.02], t: ['القدم', 'Foot'], d: ['تثبّت السلم على الأرض.', 'Steadies the ladder on the ground.'] }] },
+  { slug: 'accessories', file: 'double_coupler', view: [1, 0.6, 1.1],
+    ex: [['Tube_A', [0.4, 0, 0]], ['Bridge', [0, 0, 0.035]], ['Clamp_B', [0, 0, 0.075]], ['Tube_B', [0, 0.4, 0.075]], ['Bolt_B', [0, 0, 0.14]]],
+    mn: ['المجسم: مشبك ثابت (Double Coupler)، مثال واحد من الملحقات.', 'Model: a double coupler, one example of the accessories.'],
+    fact: [['في صور المخزن بملف الشركة', 'In the profile\'s yard photos'], 'GI Scaffolding Tube (4, 3.2) mm _ 6 meter'],
+    photos: ['yard/20', 'yard/21', 'yard/23', 'yard/10', 'yard/03', 'yard/22'],
+    hs: [{ p: [0, 0.012, 0.0325], t: ['السرج', 'Saddle'], d: ['جسم المشبك الذي يحتضن الماسورة.', 'The coupler body that cradles the tube.'] },
+      { p: [0, 0.02, -0.028], t: ['البوابة', 'Gate'], d: ['تُفتَح وتُغلَق حول الماسورة.', 'Opens and closes around the tube.'] },
+      { p: [0, -0.0377, -0.02], t: ['المسمار والصامولة', 'Bolt and nut'], d: ['شدّ الصامولة يقفل المشبك على الماسورة.', 'Tightening the nut clamps the coupler onto the tube.'] },
+      { p: [0.16, 0, 0], t: ['الماسورة', 'Tube'], d: ['يربط المشبك ماسورتين متعامدتين.', 'The coupler joins two tubes at a right angle.'] }],
+    fits: [[0, ['للتدعيم والربط', 'For bracing and ties']]] },
+  { slug: 'custom-solutions', gallery: ['sites/01', 'sites/04', 'sites/03', 'sites/06', 'sites/05', 'sites/02', 'sites/07', 'sites/08'],
+    mn: ['الصور من مواقع مشاريع ورّدت لها NAMASCO السقالات ودعمتها، من ملف الشركة.', 'Photos are from project sites that NAMASCO supplied and supported, from the company profile.'] },
+  {"slug": "project-01", "kind": "project", "pj": 0, "file": "project_g4", "view": [1, 0.5, 1.35], "zoom": 0.56, "center": [10, 7, 8.5], "focus": 10, "photos": ["projects/01"], "hs": [{"p": [10, -1.45, 9], "t": ["سقالة الواجهة", "Facade scaffold"], "d": ["سقالة Cuplock حول المبنى بالكامل في المجسم: باكية 2.5 م، وعرض 1.2 م، ودور كل 2.0 م.", "Cuplock scaffold around the whole building: 2.5 m bays, 1.2 m wide, a lift every 2.0 m."]}, {"p": [16, -0.85, 12.25], "t": ["منصات العمل", "Working platforms"], "d": ["ألواح تغطي عرض السقالة في كل دور.", "Planks closed across the scaffold width at every lift."]}, {"p": [4, -1.45, 13.2], "t": ["الدرابزين", "Guardrails"], "d": ["ماسورتان على الصف الخارجي عند كل منصة.", "Two rails on the outer row at each platform."]}, {"p": [6.18, -0.25, 6.95], "t": ["الربط بالمبنى", "Ties to the building"], "d": ["مواسير ربط عند منسوب كل سقف تثبّت السقالة في الهيكل.", "Tie tubes at each slab level fix the scaffold to the structure."]}, {"p": [13.82, -1.45, 0.05], "t": ["القواعد", "Bases"], "d": ["يرتكز كل قائم على قاعدة قلاووظ ولوح قاعدة.", "Every standard stands on a base jack and sole plate."]}, {"p": [20, 7, 16.4], "t": ["الهيكل الخرساني", "Concrete frame"], "d": ["دور أرضي وأربعة أدوار وسطح. الشكل تمثيلي.", "Ground floor, four floors and a roof. The form is representative."]}]},
+  {"slug": "project-02", "kind": "project", "pj": 1, "file": "project_masjid", "view": [-0.75, 0.45, 1.4], "zoom": 0.706, "center": [13.35, 9, 12.65], "focus": 14.7, "photos": ["projects/02"], "hs": [{"p": [9, -1.45, 5.2], "t": ["سقالة قاعة الصلاة", "Prayer hall scaffold"], "d": ["حول القاعة بالكامل لأعمال الواجهات.", "Around the whole hall for facade work."]}, {"p": [-5, 0.25, 16], "t": ["سقالة المئذنة", "Minaret scaffold"], "d": ["برج سقالة مربع حول المئذنة، مربوط بها على عدة ارتفاعات.", "A square scaffold tower around the minaret, tied to it at intervals up its height."]}, {"p": [9, 2.95, 11.2], "t": ["سقالة القبة", "Dome scaffold"], "d": ["هيكل سقالة قائم على السطح حول القبة.", "A scaffold cage standing on the roof around the dome."]}, {"p": [28, 0.55, 5], "t": ["سكن الإمام والمجلس", "Imam house and majlis"], "d": ["مبنى G+1 مع سقالته.", "A G+1 building with its scaffold."]}, {"p": [6.387, -1.45, 0.05], "t": ["القواعد", "Bases"], "d": ["يرتكز كل قائم على قاعدة قلاووظ ولوح قاعدة.", "Every standard stands on a base jack and sole plate."]}, {"p": [-5, 3, 23.2], "t": ["رأس المئذنة", "Minaret top"], "d": ["أعلى نقطة في المشروع، نحو 25 م في المجسم.", "The highest point of the project, about 25 m in the model."]}]},
+  {"slug": "project-03", "kind": "project", "pj": 2, "file": "project_gmezz", "view": [1, 0.5, 1.35], "zoom": 0.613, "center": [9, 8, 11.2], "focus": 9.9, "photos": ["projects/03"], "hs": [{"p": [9, -1.45, 11.2], "t": ["سقالة الواجهة", "Facade scaffold"], "d": ["سقالة Cuplock حول المبنى، ارتفاعها في المجسم نحو 21.3 م.", "Cuplock scaffold around the building, about 21.3 m high in the model."]}, {"p": [14.4, -0.85, 12.26], "t": ["منصات العمل", "Working platforms"], "d": ["ألواح تغطي عرض السقالة في كل دور.", "Planks closed across the scaffold width at every lift."]}, {"p": [3.6, -1.45, 13.2], "t": ["الدرابزين", "Guardrails"], "d": ["ماسورتان على الصف الخارجي عند كل منصة.", "Two rails on the outer row at each platform."]}, {"p": [1.162, -0.25, 3.15], "t": ["الربط بالمبنى", "Ties to the building"], "d": ["مواسير ربط عند منسوب كل سقف.", "Tie tubes at each slab level."]}, {"p": [9, -1.45, 0.05], "t": ["القواعد", "Bases"], "d": ["يرتكز كل قائم على قاعدة قلاووظ ولوح قاعدة.", "Every standard stands on a base jack and sole plate."]}, {"p": [18, 8, 18.6], "t": ["الهيكل الخرساني", "Concrete frame"], "d": ["دور أرضي وميزانين وأربعة أدوار. الشكل تمثيلي.", "Ground floor, mezzanine and four floors. The form is representative."]}, {"p": [14, 7, 21.8], "t": ["البنتهاوس", "Penthouse"], "d": ["دور مرتدّ فوق السطح.", "A set-back floor above the roof."]}]},
+  {"slug": "project-04", "kind": "project", "pj": 3, "file": "project_commercial", "view": [1, 0.5, 1.35], "zoom": 0.636, "center": [15, 8, 8.8], "focus": 11.6, "photos": ["projects/04"], "hs": [{"p": [15, -1.45, 9.2], "t": ["سقالة الواجهة", "Facade scaffold"], "d": ["سقالة Cuplock حول المبنى، ارتفاعها في المجسم نحو 17.3 م.", "Cuplock scaffold around the building, about 17.3 m high in the model."]}, {"p": [24, -0.85, 10.26], "t": ["منصات العمل", "Working platforms"], "d": ["ألواح تغطي عرض السقالة في كل دور.", "Planks closed across the scaffold width at every lift."]}, {"p": [6, -1.45, 11.2], "t": ["الدرابزين", "Guardrails"], "d": ["ماسورتان على الصف الخارجي عند كل منصة.", "Two rails on the outer row at each platform."]}, {"p": [1.081, -0.25, 4.65], "t": ["الربط بالمبنى", "Ties to the building"], "d": ["مواسير ربط عند منسوب كل سقف.", "Tie tubes at each slab level."]}, {"p": [16.265, -1.45, 0.05], "t": ["القواعد", "Bases"], "d": ["يرتكز كل قائم على قاعدة قلاووظ ولوح قاعدة.", "Every standard stands on a base jack and sole plate."]}, {"p": [30, 8, 15], "t": ["الهيكل الخرساني", "Concrete frame"], "d": ["دور أرضي مرتفع للمحلات وثلاثة أدوار. الشكل تمثيلي.", "A tall ground floor for shops and three floors. The form is representative."]}]},
+  {"slug": "project-05", "kind": "project", "pj": 4, "file": "project_residential", "view": [1, 0.5, 1.35], "zoom": 0.637, "center": [11, 9, 11.65], "focus": 11, "photos": ["projects/05"], "hs": [{"p": [11, -1.45, 13.2], "t": ["سقالة الواجهة", "Facade scaffold"], "d": ["سقالة Cuplock حول المبنى، ارتفاعها في المجسم نحو 23.3 م.", "Cuplock scaffold around the building, about 23.3 m high in the model."]}, {"p": [17.6, -0.85, 14.26], "t": ["منصات العمل", "Working platforms"], "d": ["ألواح تغطي عرض السقالة في كل دور.", "Planks closed across the scaffold width at every lift."]}, {"p": [4.4, -1.45, 15.2], "t": ["الدرابزين", "Guardrails"], "d": ["ماسورتان على الصف الخارجي عند كل منصة.", "Two rails on the outer row at each platform."]}, {"p": [1.04, -0.25, 3.75], "t": ["الربط بالمبنى", "Ties to the building"], "d": ["مواسير ربط عند منسوب كل سقف.", "Tie tubes at each slab level."]}, {"p": [11, -1.45, 0.05], "t": ["القواعد", "Bases"], "d": ["يرتكز كل قائم على قاعدة قلاووظ ولوح قاعدة.", "Every standard stands on a base jack and sole plate."]}, {"p": [22, 9, 19.6], "t": ["الهيكل الخرساني", "Concrete frame"], "d": ["دور أرضي وخمسة أدوار وسطح. الشكل تمثيلي.", "Ground floor, five floors and a roof. The form is representative."]}]},
+  {"slug": "project-06", "kind": "project", "pj": 5, "file": "project_warehouse", "view": [1, 0.5, 1.35], "zoom": 0.654, "center": [18, 10, 5.65], "focus": 12.9, "photos": ["projects/06"], "hs": [{"p": [21.6, -1.45, 5.2], "t": ["سقالة الواجهة", "Facade scaffold"], "d": ["سقالة Cuplock حول المبنى، ارتفاعها في المجسم نحو 11.3 م.", "Cuplock scaffold around the building, about 11.3 m high in the model."]}, {"p": [-1.45, 10, 5.2], "t": ["سقالة الواجهة الجانبية", "Side elevation scaffold"], "d": ["على الواجهة القصيرة للمستودع.", "On the short elevation of the warehouse."]}, {"p": [35.7, 10, 10.6], "t": ["الهيكل المعدني", "Steel structure"], "d": ["إطارات حديدية كل 6 م تحمل السقف.", "Steel portal frames every 6 m carrying the roof."]}, {"p": [10.8, 5, 9.8], "t": ["تغطية السقف", "Roof cladding"], "d": ["ألواح صاج مركّبة على جزء من السقف.", "Roof sheeting fitted over part of the roof."]}, {"p": [28, 0, 4], "t": ["حوائط البلوك", "Blockwork walls"], "d": ["حوائط خارجية بارتفاع 4 م.", "External walls 4 m high."]}, {"p": [8.275, -1.45, 0.05], "t": ["القواعد", "Bases"], "d": ["يرتكز كل قائم على قاعدة قلاووظ ولوح قاعدة.", "Every standard stands on a base jack and sole plate."]}]}
+];
+const COMPARE = {
+  sys: [0, 1, 2],
+  rows: [
+    [['الوصف في ملف الشركة', 'In the company profile'], null],
+    [['الاستخدام الأنسب', 'Best suited to'], [['سقالات الواجهات وأبراج التحميل والمنشآت ذات الأشكال المختلفة.', 'Facade scaffolds, shoring towers and structures of varied shapes.'], ['أعمال الصيانة والتشطيبات على الواجهات المستوية.', 'Maintenance and finishing works on regular facades.'], ['سند الأسقف والكمرات أثناء الصب وبعده.', 'Supporting slabs and beams during and after the pour.']]],
+    [['طريقة التركيب', 'How it goes together'], [['قوائم وعوارض تُقفَل في وصلات بكوب دوّار، دون مسامير سائبة.', 'Standards and ledgers locked into cup nodes, with no loose bolts.'], ['إطارات ملحومة جاهزة تُربط بتقاطعات.', 'Ready-welded frames joined by cross braces.'], ['دعامة مفردة يُضبط طولها بالبنز والصامولة.', 'A single prop set to length with a pin and a nut.']]],
+    [['المرونة مع شكل المبنى', 'Fit to building shape'], [['عالية: أطوال عوارض متعددة وحتى أربع عوارض في الوصلة.', 'High: several ledger lengths and up to four ledgers per node.'], ['محدودة: أبعاد الإطار ثابتة.', 'Limited: frame sizes are fixed.'], ['لا تنطبق: تُستخدم تحت السقف أو الكمرة.', 'Not applicable: used under the slab or beam.']]],
+    [['قطع مكمّلة من منتجاتنا', 'Goes with our'], [[3, 5, 4], [3, 5, 6], [4]]],
+  ],
+};
+const pv = { el: $('#pview'), stage: $('#pvStage'), cv: $('#pcv'), pinsBox: $('#pins'), msg: $('#pmsg'), cur: -1, open: false, homeY: 0, go: null, r: null, model: null, parts: [], hidden: [], pins: [], active: -1, token: 0, mode: 'rotate', t0: 0, last: 0, home: null, fly: null, dirty: 3, moved: false, tab: 'parts', photo: 0 };
+const rg = { el: $('#rview'), open: false, data: null, shown: 80, fail: false, loading: false, preset: null };
+const MAPP = {"W":1000,"H":787,"city":{"Dubai":[728.6,253.8],"Ajman":[760.6,213.2],"Sharjah":[750.6,225.1],"Ras Al Khaimah":[852.0,135.0],"Umm Al Quwain":[780.8,180.7],"Fujairah":[922.3,269.2],"Abu Dhabi":[564.6,405.7],"Al Ain":[815.5,455.3],"Khor Fakkan":[926.2,226.6],"Ruwais":[262.4,474.9],"Liwa":[449.5,671.1],"Hatta":[884.4,335.8]},"lbl":{"gulf":[348.6,143.0],"oman_gulf":[976.1,315.6],"saudi":[82.6,647.2],"oman":[899.1,657.2],"qatar":[9.2,244.7],"uae":[495.4,607.2]}};
+
+const pts = (id, arr, numbered) => $(id).replaceChildren(...arr.map((p, i) => { const d = el('div'); if (numbered) d.append(el('span', 'no', String(i + 1).padStart(2, '0'))); d.append(el('b', '', L(p[0], p[1]))); if (p[2]) d.append(el('span', 'd', L(p[2], p[3]))); return d; }));
+function gallery(id, dir, n, label) {
+  $(id).replaceChildren(...Array.from({ length: n }, (_, i) => { const k = String(i + 1).padStart(2, '0'), b = el('button'), im = el('img'); b.type = 'button'; b.dataset.full = 'img/' + dir + '/' + k + '.jpg'; im.src = 'img/' + dir + '/t/' + k + '.jpg'; im.alt = label + ' ' + (i + 1); im.loading = 'lazy'; b.append(im); return b; }));
+}
+function bars(id) { $(id).replaceChildren(...RST.map(e => { const li = el('li'), i = el('i'), w = el('div'); i.style.width = (e[2] / 351 * 100).toFixed(1) + '%'; w.append(i); li.append(el('span', '', L(e[0], e[1])), w, el('em', '', String(e[2]))); return li; })); }
+function orgChart() {
+  const box = (t, c) => { const d = el('div', 'obox' + (c ? ' ' + c : ''), L(t[0], t[1])); d.dir = 'auto'; return d; };
+  const list = arr => { const ul = el('ul'); for (const c of arr) { const li = el('li'), s = el('span', '', L(c[0][0], c[0][1])); s.dir = 'auto'; li.append(s); if (c[1]) li.append(list(c[1])); ul.append(li); } return ul; };
+  const top = el('div', 'otop'), cols = el('div', 'ocols');
+  top.append(box(['الرئيس التنفيذي والمدير العام', 'CEO & General Manager'], 'ceo'), el('i', 'oline'), box(['مدير الفرع', 'Branch Manager'], 'bm'), el('i', 'oline'));
+  for (const [t, ch] of ORG) { const c = el('div', 'ocol'); c.append(box(t)); if (ch.length) c.append(list(ch)); cols.append(c); }
+  $('#orgc').replaceChildren(top, cols);
+}
+function compare() {
+  const box = $('#cmp'); box.replaceChildren();
+  for (const [k, si] of COMPARE.sys.entries()) {
+    const c = el('article', 'ccard'), h = el('a'), dl = el('dl'); h.href = '#' + PROD[si].slug; h.append(el('span', 'e', SYS[si][0]), el('b', '', L(SYS[si][1], SYS[si][0])));
+    for (const [lab, vals] of COMPARE.rows) {
+      const dd = el('dd');
+      if (!vals) dd.textContent = L(SYS[si][2], SYS[si][3]);
+      else if (typeof vals[k][0] === 'number') vals[k].forEach((j, n) => { const a = el('a', '', L(SYS[j][1], SYS[j][0])); a.href = '#' + PROD[j].slug; if (n) dd.append(document.createTextNode(L('، ', ', '))); dd.append(a); });
+      else dd.textContent = L(vals[k][0], vals[k][1]);
+      dl.append(el('dt', '', L(lab[0], lab[1])), dd);
+    }
+    c.append(h, dl); box.append(c);
+  }
+}
+/* ================= products: store grid with live 3D cards ================= */
+const CATS = [['all', 'الكل', 'All', null], ['sys', 'أنظمة السقالات', 'Scaffold systems', [0, 1]], ['sup', 'الدعامات والقواعد', 'Props & jacks', [2, 3, 4]], ['acc', 'المنصّات والوصول', 'Platforms & access', [5, 6]], ['more', 'ملحقات وحلول', 'Accessories & custom', [7, 8]]];
+const shop = { r: null, ok: true, scene: null, cam: null, items: [], queue: [], loading: false, vis: new Set(), raf: 0, last: 0, prev: 0, cat: 'all' };
+const shopIO = new IntersectionObserver(es => { for (const e of es) { const it = shop.items[+e.target.dataset.k]; if (!it) continue; if (e.isIntersecting) { shop.vis.add(it); if (!it.model && !it.queued && PROD[it.i].file) { it.queued = true; shop.queue.push(it); shopPump(); } } else shop.vis.delete(it); } shopKick(); }, { rootMargin: '250px 0px' });
+const shopRO = new ResizeObserver(es => { const d = Math.min(devicePixelRatio || 1, 2); for (const e of es) { const cv = e.target.querySelector('canvas'); if (!cv) continue; cv.width = Math.round(e.contentRect.width * d); cv.height = Math.round(e.contentRect.height * d); const it = shop.items[+e.target.closest('.pc').dataset.k]; if (it) it.drawn = false; } shopKick(); });
+function shopFilter() {
+  const c = CATS.find(x => x[0] === shop.cat), ids = c[3]; let n = 0;
+  for (const it of shop.items) { const on = !ids || ids.includes(it.i); it.card.hidden = !on; if (on) n++; }
+  $$('#cats button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.c === shop.cat)));
+  $('#shopN').textContent = L(n + ' منتجات', n + ' products');
+}
+function shopBuild() {
+  $('#cats').replaceChildren(...CATS.map(c => { const b = el('button', '', L(c[1], c[2])); b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.c = c[0]; b.addEventListener('click', () => { shop.cat = c[0]; shopFilter(); }); return b; }));
+  const cards = SYS.map((sy, i) => {
+    const p = PROD[i], it = shop.items[i] || (shop.items[i] = { i, model: null, ang: i * 0.7, hover: false });
+    const card = el('article', 'pc' + (it.model ? ' live' : '') + (p.file ? '' : ' wide')), media = el('a', 'pc-media'), im = el('img'), body = el('div', 'pc-body'), h = el('h3'), ha = el('a', '', L(sy[1], sy[0])), spec = el('ul', 'pc-spec'), act = el('div', 'pc-act');
+    card.dataset.k = i; media.href = ha.href = '#' + p.slug; media.tabIndex = -1; media.setAttribute('aria-hidden', 'true');
+    im.src = 'img/' + sy[4] + '.jpg'; im.alt = ''; im.loading = 'lazy'; if (!p.file) im.className = 'cover';
+    media.append(im);
+    if (p.file) { const cv = el('canvas'); media.append(cv, el('span', 'badge', '3D')); it.cv = cv; it.ctx = cv.getContext('2d'); it.drawn = false; }
+    else media.append(el('span', 'badge soft', L('حسب الطلب', 'Made to order')));
+    media.append(el('span', 'pc-no', String(i + 1).padStart(2, '0')));
+    h.append(ha);
+    if (p.file) spec.append(el('li', '', L('مجسم تفاعلي', 'Interactive model')));
+    if (p.hs && p.hs.length) spec.append(el('li', '', L(p.hs.length + ' أجزاء موضّحة', p.hs.length + ' labelled parts')));
+    if (p.fits && p.fits[0]) spec.append(el('li', '', L('يُركَّب مع ' + SYS[p.fits[0][0]][1], 'Fits ' + SYS[p.fits[0][0]][0])));
+    const more = el('a', 'btn', L('التفاصيل', 'Details')), qb = el('button', 'btn ghost', L('اطلب سعر', 'Get a quote'));
+    more.href = '#' + p.slug; qb.type = 'button';
+    qb.addEventListener('click', () => { $('#q_p').selectedIndex = i + 1; $('#contact').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+    act.append(more, qb);
+    body.append(el('span', 'e', sy[0]), h, el('p', '', L(sy[2], sy[3])), spec, act);
+    card.append(media, body);
+    card.addEventListener('pointerenter', () => { it.hover = true; shopKick(); }); card.addEventListener('pointerleave', () => { it.hover = false; });
+    it.card = card; shopIO.observe(card); if (p.file) shopRO.observe(media);
+    return card;
+  });
+  $('#sysList').replaceChildren(...cards); shopFilter();
+}
+function shopGL() {
+  if (shop.r) return true; if (!shop.ok) return false;
+  try { shop.r = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { shop.ok = false; return false; }
+  shop.r.setPixelRatio(1); shop.r.toneMapping = THREE.ACESFilmicToneMapping; shop.r.toneMappingExposure = 1.0; shop.r.setClearColor(0, 0);
+  shop.scene = new THREE.Scene();
+  shop.scene.environment = new THREE.PMREMGenerator(shop.r).fromScene(new RoomEnvironment(), 0.03).texture; shop.scene.environmentIntensity = 0.95;
+  const sun = new THREE.DirectionalLight('#fff4e4', 1.8); sun.position.set(-2, 4, 3); shop.scene.add(sun, new THREE.HemisphereLight('#ffffff', '#c9c2b4', 0.5));
+  shop.cam = new THREE.PerspectiveCamera(28, 1, 0.01, 200);
+  return true;
+}
+async function shopLoad(it) {
+  if (!shopGL()) return;
+  const p = PROD[it.i], g = await loadGLTF(p.file + '.gltf.json'), m = g.scene;
+  m.traverse(n => { if (!n.isMesh) return; for (const mt of [].concat(n.material)) { const tt = p.tint && p.tint[mt.name]; if (tt) { mt.color.set(tt[0]); mt.roughness = tt[1]; if (tt[2]) mt.map = null; } else if (mt.name === 'NM_blue') mt.color.setScalar(8); mt.envMap = shop.scene.environment; mt.envMapIntensity = 1.2; } });
+  const box = new THREE.Box3().setFromObject(m), c = box.getCenter(new THREE.Vector3()), piv = new THREE.Group();
+  m.position.sub(c); piv.add(m);
+  it.R = box.getBoundingSphere(new THREE.Sphere()).radius; it.model = piv; it.drawn = false;
+}
+async function shopPump() {
+  if (shop.loading || !shop.queue.length) return;
+  shop.loading = true; const it = shop.queue.shift();
+  try { await shopLoad(it); } catch (e) { it.fail = true; }
+  shop.loading = false; shopKick(); shopPump();
+}
+function shopKick() { if (!shop.raf && shop.r) shop.raf = requestAnimationFrame(shopTick); }
+const shopDir = new THREE.Vector3(1, 0.5, 1.35).normalize();
+function shopTick(now) {
+  shop.raf = 0;
+  if (pv.open || rg.open || document.hidden) return;
+  const live = shop.items.filter(it => it.model && it.cv && shop.vis.has(it) && !it.card.hidden && it.cv.width);
+  if (!live.length) return;
+  shop.raf = requestAnimationFrame(shopTick);
+  if (now - shop.last < 30) return;
+  const dt = Math.min(0.1, (now - (shop.prev || now)) / 1000); shop.prev = shop.last = now;
+  for (const it of live) {
+    const spin = reduce ? (it.hover ? 0.8 : 0) : it.hover ? 1.5 : 0.5;
+    if (it.drawn && !spin) continue;
+    it.ang += dt * spin; it.model.rotation.y = it.ang;
+    const w = it.cv.width, h = it.cv.height, cam = shop.cam;
+    if (shop.r.domElement.width !== w || shop.r.domElement.height !== h) shop.r.setSize(w, h, false);
+    cam.aspect = w / h; const v = cam.fov * Math.PI / 360, hf = Math.atan(Math.tan(v) * cam.aspect), d = it.R / Math.sin(Math.min(v, hf)) * 1.02;
+    cam.near = d / 50; cam.far = d * 4; cam.position.copy(shopDir).multiplyScalar(d); cam.lookAt(0, 0, 0); cam.updateProjectionMatrix();
+    shop.scene.add(it.model); shop.r.render(shop.scene, cam); shop.scene.remove(it.model);
+    it.ctx.clearRect(0, 0, w, h); it.ctx.drawImage(shop.r.domElement, 0, 0);
+    if (!it.drawn) { it.drawn = true; it.card.classList.add('live'); }
+  }
+}
+document.addEventListener('visibilitychange', shopKick);
+function mapDraw() {
+  const C = MAPP.city, sm = matchMedia('(max-width:640px)').matches, k = sm ? 1.45 : 1, o = [];
+  const tx = (x, y, t, c, ex) => o.push('<text class="' + c + '" x="' + x + '" y="' + y + '"' + (ex || '') + '>' + t + '</text>');
+  o.push('<image href="img/uae-map.jpg" x="0" y="0" width="1000" height="787" preserveAspectRatio="none"/>');
+  tx(300, 132, L('الخليج العربي', 'Arabian Gulf'), 'sea');
+  tx(962, 470, L('خليج عُمان', 'Gulf of Oman'), 'sea s2', ' transform="rotate(-64 962 470)"');
+  tx(150, 700, L('المملكة العربية السعودية', 'Saudi Arabia'), 'cty'); tx(900, 650, L('سلطنة عُمان', 'Oman'), 'cty'); tx(52, 200, L('قطر', 'Qatar'), 'cty');
+  tx(430, 560, L('الإمارات العربية المتحدة', 'United Arab Emirates'), 'cty big');
+  for (const [n, ar] of [['Al Ain', 'العين'], ['Ruwais', 'الرويس'], ['Liwa', 'ليوا'], ['Hatta', 'حتا']]) { const p = C[n]; o.push('<circle class="town" cx="' + p[0] + '" cy="' + p[1] + '" r="2.6"/>'); tx(p[0], p[1] + 15, L(ar, n), 'tw'); }
+  const KEY = ['Dubai', 'Ajman', 'Sharjah', 'Ras Al Khaimah', 'Umm Al Quwain', 'Fujairah', 'Abu Dhabi'];
+  const M = KEY.map((key, i) => ({ i, key, n: RST[i][2], p: C[key] }));
+  const u = [0.72, -0.694], nv = [-0.694, -0.72], north = ['Dubai', 'Sharjah', 'Ajman', 'Umm Al Quwain', 'Ras Al Khaimah'];
+  const mean = north.reduce((a, q) => [a[0] + C[q][0] / 5, a[1] + C[q][1] / 5], [0, 0]), gap = sm ? 66 : 60, off = sm ? 96 : 100;
+  for (const m of M) {
+    const j = north.indexOf(m.key);
+    if (j >= 0) { const t = (j - 2) * gap; m.c = [mean[0] + nv[0] * off + u[0] * t, mean[1] + nv[1] * off + u[1] * t]; }
+    else m.c = m.key === 'Fujairah' ? [sm ? 940 : 948, 322] : [m.p[0] - 4, m.p[1] - 62];
+  }
+  for (const m of [...M].sort((a, b) => b.n - a.n)) o.push('<circle class="halo" cx="' + m.p[0] + '" cy="' + m.p[1] + '" r="' + (5 + Math.sqrt(m.n) * 1.3).toFixed(1) + '"/>');
+  for (const m of M) o.push('<line class="ld" x1="' + m.p[0] + '" y1="' + m.p[1] + '" x2="' + m.c[0].toFixed(1) + '" y2="' + m.c[1].toFixed(1) + '"/><circle class="dot" cx="' + m.p[0] + '" cy="' + m.p[1] + '" r="4"/>');
+  const h = 30 * k, en = LANG === 'en';
+  for (const m of M) {
+    const e = RST[m.i], nm = L(e[0], e[1].replace(' Emirate', '')), w = (56 + nm.length * (en ? 7.6 : 8.4)) * k, x = Math.min(1000 - w / 2 - 2, m.c[0]) - w / 2, y = m.c[1] - h / 2;
+    o.push('<a href="#project-register" data-st="' + m.i + '" aria-label="' + nm + ': ' + e[2] + '"><g class="card"><rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + w + '" height="' + h + '" rx="4"/>' +
+      '<text class="cn" x="' + (en ? x + 10 * k : x + w - 10 * k).toFixed(1) + '" y="' + (y + h / 2 + 5 * k).toFixed(1) + '" text-anchor="' + (en ? 'start' : 'end') + '">' + nm + '</text>' +
+      '<text class="cc" x="' + (en ? x + w - 10 * k : x + 10 * k).toFixed(1) + '" y="' + (y + h / 2 + 5.5 * k).toFixed(1) + '" text-anchor="' + (en ? 'end' : 'start') + '">' + e[2] + '</text></g></a>');
+  }
+  const vb = sm ? '480 0 520 520' : '0 0 1000 787';
+  $('#uaeMap').innerHTML = '<svg dir="ltr" viewBox="' + vb + '" role="img" aria-label="' + L('خريطة سجلات المشاريع على الإمارات', 'Project records by emirate') + '" style="--k:' + k + '">' + o.join('') + '</svg>';
+  $('#uaeMap').dataset.sm = sm ? '1' : '';
+}
+matchMedia('(max-width:640px)').addEventListener('change', () => mapDraw());
+document.addEventListener('click', e => { const a = e.target.closest('[data-st]'); if (a) rg.preset = +a.dataset.st; });
+function estVals() { const h = parseFloat($('#q_h').value), l = parseFloat($('#q_l').value); if (!(h > 0 && l > 0)) return null; return { area: Math.round(h * l), lifts: Math.ceil(h / 2), bays: Math.ceil(l / 2.5) }; }
+function est() {
+  const v = estVals(), f = n => n == null ? '–' : n.toLocaleString('en-US');
+  $('#eA').textContent = f(v && v.area); $('#eL').textContent = f(v && v.lifts); $('#eB').textContent = f(v && v.bays);
+}
+function fillStatic() {
+  for (const e of $$('[data-i]')) { const t = T[e.dataset.i]; if (t) e.textContent = L(t[0], t[1]); }
+  $('#aTag').textContent = L(ABOUT.tag[0], ABOUT.tag[1]); $('#aTagEn').textContent = ABOUT.tag[1]; $('#aTagEn').hidden = LANG === 'en';
+  $('#aText').replaceChildren(...ABOUT.p.map(p => el('p', '', L(p[0], p[1]))));
+  pts('#vals', VALUES, true);
+  $('#nums').replaceChildren(...NUMS.map(n => { const d = el('div'); d.append(el('b', '', L(n[2], n[0])), el('span', '', L(n[3], n[1]))); return d; }));
+  shopBuild();
+  $('#svcList').replaceChildren(...SVC.map((s, i) => { const d = el('div'); d.append(el('span', 'no', String(i + 1).padStart(2, '0')), el('b', '', L(s[1], s[0])), el('span', 'd', L(s[2], s[3]))); return d; }));
+  yardBuild(); gallery('#siteGal', 'sites', 8, L('صورة من موقع مشروع', 'Project site photo'));
+  $('#projList').replaceChildren(...PROJ.map((p, i) => { const c = el('article', 'pcard'), dl = el('dl'), im = el('img'), go = el('a', 'go', L('افتح المجسم ثلاثي الأبعاد', 'Open in 3D')); im.src = 'img/projects/' + String(i + 1).padStart(2, '0') + '.jpg'; im.alt = L(p.t[0], p.t[1]); im.loading = 'lazy'; go.href = '#project-' + String(i + 1).padStart(2, '0'); for (const [k, v] of [[L('الموقع', 'Location'), p.loc], [L('العميل', 'Client'), p.cl], [L('المقاول الرئيسي', 'Main Contractor'), p.mc], [L('نطاق العمل', 'Scope'), SCOPE]]) { const dd = el('dd', '', L(v[0], v[1])); dd.dir = 'auto'; dl.append(el('dt', '', k), dd); } c.append(im, el('span', 'no', String(i + 1).padStart(2, '0')), el('h4', '', L(p.t[0], p.t[1])), dl, go); return c; }));
+  compare(); mapDraw(); est();
+  pts('#whyChoose', WHY_CHOOSE);
+  { const fig = (c, dup) => { const f = el('figure'), im = el('img'); im.src = 'img/clients/' + c[0] + '.jpg'; im.alt = dup ? '' : c[1]; im.decoding = 'async'; f.title = c[1]; if (dup) f.setAttribute('aria-hidden', 'true'); f.append(im); return f; };
+    const row = (arr, rev) => { const t = el('div', 'lt' + (rev ? ' rev' : '')); t.append(...arr.map(c => fig(c)), ...arr.map(c => fig(c, 1))); return t; };
+    $('#logos').replaceChildren(row(CLIENTS), row([...CLIENTS].reverse(), 1)); }
+  pts('#whyTrust', WHY_TRUST); pts('#strengths', STRENGTHS);
+  $('#partners').replaceChildren(...PARTNERS.map(p => { const f = el('figure'), im = el('img'), c = el('figcaption'); im.src = 'img/partners/' + p[0] + '.jpg'; im.alt = p[1]; im.loading = 'lazy'; c.append(el('b', '', p[1]), document.createTextNode(L(p[2][0], p[2][1]))); f.append(im, c); return f; }));
+  $('#safeList').replaceChildren(...SAFE.map(s => el('li', '', L(s[0], s[1]))));
+  $('#qualList').replaceChildren(...QUAL.map(s => el('li', '', L(s[0], s[1]))));
+  pts('#commit3', COMMIT3);
+  $('#tags').replaceChildren(...TAGS.map(t => el('span', '', L(t[0], t[1]))));
+  orgChart(); pts('#orgPts', ORG_PTS);
+  $('#lic').replaceChildren(...LIC.flatMap(r => { const dd = el('dd', '', typeof r[1] === 'string' ? r[1] : L(r[1][0], r[1][1])); dd.dir = 'auto'; return [el('dt', '', L(r[0][0], r[0][1])), dd]; }));
+  pts('#build4', BUILD4);
+  $('#team').replaceChildren(...TEAM.map((m, i) => { const li = el('li', i ? '' : 'lead'), d = el('div', 'tm'), t = el('div'), a = el('a', '', m[4]); if (!i) { const im = el('img'); im.src = 'img/ceo-face.jpg'; im.alt = L(m[0], m[1]); im.loading = 'lazy'; d.append(im); } t.append(el('b', '', L(m[0], m[1])), el('span', '', L(m[2], m[3]))); if (!i) d.append(el('em', 'gm', L('المدير العام', 'General Manager'))); d.append(t); a.href = 'tel:' + m[5]; li.append(d, a); return li; }));
+  { const k = $('#q_p').selectedIndex; $('#q_p').replaceChildren(el('option', '', L('غير محدد', 'Not specified')), ...SYS.map(s => el('option', '', L(s[1], s[0])))); $('#q_p').selectedIndex = Math.max(0, k); }
+  $('#q_type').replaceChildren(...QTYPE.map(o => el('option', '', L(o[0], o[1]))));
+  $('#q_srv').replaceChildren(...QSRV.map(o => el('option', '', L(o[0], o[1]))));
+  $('#q_e').replaceChildren(...[2, 0, 1, 6, 3, 4, 5].map(i => el('option', '', L(RST[i][0], i === 1 ? 'Ajman' : RST[i][1]))));
+  $('#hEy').textContent = L('حلول سقالات موثوقة في أنحاء الإمارات', 'Trusted Scaffolding Solutions Across the UAE'); $('#hEy').classList.toggle('t', true);
+  $('#hH').innerHTML = LANG === 'en' ? 'Engineering<br><b>in motion</b>' : 'هندسة<br><b>تتحرّك</b>';
+  $('#hSub').textContent = L('مصمّمة لتترابط، ومبنيّة لتؤدّي.', 'Built to connect. Designed to perform.');
+  $('#hShop').textContent = L('تصفّح المنتجات', 'Browse products');
+  $('#hStats').replaceChildren(...[['2023', 'سنة التأسيس', 'Established'], ['781', 'سجل مشروع في ملف الشركة', 'project records in the profile'], ['7', 'إمارات نعمل فيها', 'emirates served']].map(r => { const d = el('div'); d.append(el('dt', '', r[0]), el('dd', '', L(r[1], r[2]))); return d; }));
+  $('#capX').textContent = L('استكشف ثلاثي الأبعاد', 'Explore in 3D'); $('#skipT').textContent = L('تصفّح الموقع', 'Scroll');
+  $('#xReset').textContent = L('إعادة المنظر', 'Reset view'); $('#xExit').textContent = L('خروج', 'Exit'); $('#xExplode').textContent = L('تفكيك القطع', 'Exploded view');
+  $('#yr').textContent = new Date().getFullYear(); $('#iskip') && ($('#iskip').textContent = L('تخطي', 'Skip intro'));
+  $('#lbX').setAttribute('aria-label', L('إغلاق', 'Close')); $('#lbP').setAttribute('aria-label', L('السابق', 'Previous')); $('#lbNx').setAttribute('aria-label', L('التالي', 'Next'));
+}
+function setLang(l) {
+  LANG = l; document.documentElement.lang = l; document.documentElement.dir = l === 'en' ? 'ltr' : 'rtl';
+  $('#lang').textContent = l === 'en' ? 'ع' : 'EN';
+  try { localStorage.setItem('nm-lang', l); } catch (e) {}
+  fillStatic(); stageShown = -1; play.textContent = playLabel(); buildChips(); renderPanel(); if (pv.open) pvFill(); if (rg.open) rgFill();
+}
+$('#lang').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+$('#menuBtn').addEventListener('click', () => { const m = $('#mnav'), o = m.hidden; m.hidden = !o; $('#menuBtn').setAttribute('aria-expanded', String(o)); });
+document.addEventListener('click', e => { if (!e.target.closest('#mnav, #menuBtn')) { $('#mnav').hidden = true; $('#menuBtn').setAttribute('aria-expanded', 'false'); } else if (e.target.closest('#mnav a')) { $('#mnav').hidden = true; $('#menuBtn').setAttribute('aria-expanded', 'false'); } });
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-go]'); if (!a) return; e.preventDefault(); if (explore) exitExplore();
+  if (pv.open || rg.open) { pv.go = a.dataset.go; location.hash = '#home'; return; }
+  const t = document.getElementById(a.dataset.go); if (t) t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+});
+const io = new IntersectionObserver(es => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { rootMargin: '0px 0px -8% 0px' });
+$$('.rv').forEach(e => io.observe(e));
+const secIO = new IntersectionObserver(es => { for (const e of es) if (e.isIntersecting) $$('.nav .links a').forEach(a => a.classList.toggle('on', a.dataset.go === e.target.id)); }, { rootMargin: '-45% 0px -50% 0px' });
+$$('main section[id]').forEach(x => secIO.observe(x));
+{ const fab = $('#fab'), fb = $('#fabBtn'), set = o => { fab.classList.toggle('open', o); fb.setAttribute('aria-expanded', String(o)); fb.setAttribute('aria-label', o ? L('إغلاق', 'Close') : L('تواصل معنا', 'Contact us')); };
+  fb.addEventListener('click', e => { e.stopPropagation(); set(!fab.classList.contains('open')); });
+  document.addEventListener('click', e => { if (!e.target.closest('#fab')) set(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') set(false); }); }
+const navState = () => $('#nav').classList.toggle('solid', pv.open || rg.open || scrollY > track.offsetTop + track.offsetHeight - 70);
+addEventListener('scroll', navState, { passive: true });
+$('#qform').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = id => $('#' + id).value, sel = id => $('#' + id).selectedOptions[0].textContent, h = parseFloat(v('q_h')) || null, l = parseFloat(v('q_l')) || null;
+  const lines = L(['طلب عرض سعر - NAMASCO', 'المنتج: ' + sel('q_p'), 'نوع المشروع: ' + sel('q_type'), 'الخدمة: ' + sel('q_srv'), 'الإمارة: ' + sel('q_e')],
+    ['Quote request - NAMASCO', 'Product: ' + sel('q_p'), 'Project type: ' + sel('q_type'), 'Service: ' + sel('q_srv'), 'Emirate: ' + sel('q_e')]);
+  if (h) lines.splice(4, 0, L('ارتفاع المبنى: ' + h + ' م', 'Building height: ' + h + ' m')); if (l) lines.splice(h ? 5 : 4, 0, L('طول الواجهات: ' + l + ' م', 'Facade length: ' + l + ' m'));
+  const ev = estVals(); if (ev) lines.push(L('التقدير المبدئي: نحو ' + ev.area + ' م² من السقالة، ' + ev.lifts + ' دور، ' + ev.bays + ' باكية', 'Preliminary estimate: about ' + ev.area + ' m² of scaffold, ' + ev.lifts + ' lifts, ' + ev.bays + ' bays'));
+  if (v('q_n').trim()) lines.push(L('من: ', 'From: ') + v('q_n').trim());
+  const m = lines.join('\n'); $('#qtext').textContent = m; $('#qwa').href = 'https://wa.me/971506650393?text=' + encodeURIComponent(m); $('#qout').hidden = false;
+});
+for (const id of ['#q_h', '#q_l']) $(id).addEventListener('input', est);
+$('#yardMore').addEventListener('click', () => yardOpen(0));
+$('#qcopy').addEventListener('click', async e => { const b = e.currentTarget; try { await navigator.clipboard.writeText($('#qtext').textContent); b.textContent = L('تم النسخ', 'Copied'); } catch (err) { b.textContent = L('حدّد النص وانسخه', 'Select the text and copy it'); } });
+
+/* ================= yard: living mosaic ================= */
+const yard = { tiles: [], pool: [], on: false, hover: false, last: -1 };
+const ypad = k => String(k + 1).padStart(2, '0');
+function yardOpen(k) {
+  lb.list = Array.from({ length: 23 }, (_, i) => ({ full: 'img/yard/' + ypad(i) + '.jpg', alt: L('صورة من المخزن ', 'Yard photo ') + (i + 1) }));
+  lb.el.hidden = false; document.documentElement.classList.add('lock'); lbShow(k);
+}
+function yardText() {
+  for (const b of yard.tiles) { const k = +b.dataset.k; b.querySelector('.tn').textContent = ypad(k) + ' / 23'; b.setAttribute('aria-label', L('افتح صورة المخزن ', 'Open yard photo ') + (k + 1)); }
+  $('#yardN').textContent = L('23 صورة حقيقية من مخزن الشركة، تتبدّل تلقائيًا. اضغط على أي صورة لتكبيرها.', '23 real photos from the company yard, changing on their own. Tap any photo to enlarge it.');
+  $('#yardMore').textContent = L('عرض كل الصور (23)', 'View all 23 photos');
+}
+function yardBuild() {
+  const box = $('#yardGal');
+  if (!yard.tiles.length) {
+    const first = [10, 0, 14, 12, 6, 17, 2];
+    yard.pool = Array.from({ length: 23 }, (_, i) => i).filter(k => !first.includes(k));
+    first.forEach(k => {
+      const b = el('button', 'tile'), a = el('img'), c = el('img'), tz = el('span', 'tz');
+      b.type = 'button'; b.dataset.k = k; a.alt = c.alt = ''; a.decoding = c.decoding = 'async'; a.className = 'on'; a.src = 'img/yard/m/' + ypad(k) + '.jpg'; a.loading = 'lazy';
+      tz.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="#14213d" stroke-width="1.6"/><path d="M10.4 10.4 14 14M7 5v4M5 7h4" stroke="#14213d" stroke-width="1.6" stroke-linecap="round"/></svg>';
+      b.append(a, c, el('span', 'tn'), tz); b.addEventListener('click', () => yardOpen(+b.dataset.k));
+      yard.tiles.push(b); box.append(b);
+    });
+    new IntersectionObserver(es => { yard.on = es[0].isIntersecting; }, { threshold: 0.15 }).observe(box);
+    box.addEventListener('pointerenter', () => { yard.hover = true; }); box.addEventListener('pointerleave', () => { yard.hover = false; });
+    box.addEventListener('focusin', () => { yard.hover = true; }); box.addEventListener('focusout', () => { yard.hover = false; });
+    if (!reduce) setInterval(yardStep, 2600);
+  }
+  yardText();
+}
+function yardStep() {
+  if (!yard.on || yard.hover || document.hidden || !lb.el.hidden) return;
+  const vis = yard.tiles.filter(b => b.offsetParent); let t;
+  do { t = Math.floor(Math.random() * vis.length); } while (vis.length > 1 && t === yard.last);
+  yard.last = t; const b = vis[t], k = yard.pool.shift(), [x, y] = b.querySelectorAll('img'), cur = x.classList.contains('on') ? x : y, nxt = cur === x ? y : x;
+  yard.pool.push(+b.dataset.k); b.dataset.k = k;
+  const src = 'img/yard/m/' + ypad(k) + '.jpg', pre = new Image(); pre.src = src;
+  (pre.decode ? pre.decode() : Promise.resolve()).catch(() => {}).then(() => {
+    nxt.src = src; nxt.style.setProperty('--kx', (Math.random() * 4 - 2).toFixed(2) + '%'); nxt.style.setProperty('--ky', (Math.random() * 4 - 2).toFixed(2) + '%');
+    nxt.classList.remove('off'); void nxt.offsetWidth; nxt.classList.add('on'); cur.classList.replace('on', 'off'); setTimeout(() => cur.classList.remove('off'), 1500);
+    yardText();
+  });
+}
+
+/* photo lightbox */
+const lb = { el: $('#lb'), list: [], i: 0 };
+function lbShow(i) { const n = lb.list.length; lb.i = (i + n) % n; $('#lbImg').src = lb.list[lb.i].full; $('#lbImg').alt = lb.list[lb.i].alt; $('#lbN').textContent = (lb.i + 1) + ' / ' + n; }
+function lbClose() { lb.el.hidden = true; $('#lbImg').removeAttribute('src'); if (!explore) document.documentElement.classList.remove('lock'); }
+document.addEventListener('click', e => {
+  const b = e.target.closest('.gal button, .phg button'); if (!b) return;
+  const all = [...b.parentElement.querySelectorAll('button')]; lb.list = all.map(x => ({ full: x.dataset.full, alt: x.firstChild.alt }));
+  lb.el.hidden = false; document.documentElement.classList.add('lock'); lbShow(all.indexOf(b));
+});
+$('#lbX').addEventListener('click', lbClose); $('#lbP').addEventListener('click', () => lbShow(lb.i - 1)); $('#lbNx').addEventListener('click', () => lbShow(lb.i + 1));
+lb.el.addEventListener('click', e => { if (e.target === lb.el) lbClose(); });
+addEventListener('keydown', e => { if (lb.el.hidden) return; if (e.key === 'Escape') lbClose(); else if (e.key === 'ArrowRight') lbShow(lb.i + 1); else if (e.key === 'ArrowLeft') lbShow(lb.i - 1); });
+
+/* project register: the profile's table, without owners' names and plot numbers */
+function rgList() {
+  const box = $('#rgTable'), more = $('#rgMore');
+  if (!rg.data) { box.replaceChildren(el('p', 'small', rg.fail ? L('تعذّر تحميل السجل. حدّث الصفحة وحاول مرة أخرى.', 'The register did not load. Refresh the page and try again.') : L('جارٍ تحميل السجل…', 'Loading the register…'))); more.hidden = true; $('#rgCount').textContent = ''; return; }
+  const D = rg.data, q = $('#rgQ').value.trim().toLowerCase(), s = $('#rgS').value, y = $('#rgY').value, t = $('#rgT').value;
+  const rows = D.r.filter(r => (!q || D.c[r[0]].toLowerCase().includes(q)) && (s === '' || r[2] === +s) && (y === '' || r[1].startsWith(y)) && (t === '' || r[3] === +t));
+  $('#rgCount').textContent = L(rows.length + ' سجل من ' + D.r.length, rows.length + ' of ' + D.r.length + ' records');
+  const head = el('div', 'rr h'); head.append(el('span', '', L('اسم العميل', 'Customer Name')), el('span', '', L('تاريخ البدء', 'Start Date')), el('span', '', L('نوع المشروع', 'Project type')), el('span', '', L('الإمارة', 'State')));
+  const out = [head];
+  for (const r of rows.slice(0, rg.shown)) {
+    const d = el('div', 'rr'), c = el('span', 'c', D.c[r[0]] === 'Private client' ? L('عميل خاص', 'Private client') : D.c[r[0]]); c.dir = 'auto';
+    d.append(c, el('span', 'dt', r[1].slice(6) + '-' + r[1].slice(4, 6) + '-' + r[1].slice(0, 4)), el('span', 'ty', L(RTY[r[3]], RTY_EN[r[3]])), el('span', 'st', L(RST[r[2]][0], RST[r[2]][1]))); out.push(d);
+  }
+  box.replaceChildren(...out); more.hidden = rows.length <= rg.shown; more.textContent = L('عرض المزيد', 'Show more');
+}
+function rgFill() {
+  $('#rgUp').textContent = L('المشاريع', 'Projects'); $('#rgCrumb').textContent = L('سجل المشاريع', 'Project register');
+  $('#rgEy').textContent = L('من ملف الشركة، الصفحات 27 إلى 49', 'From the company profile, pages 27 to 49'); $('#rgTitle').textContent = L('سجل المشاريع', 'Project register');
+  $('#rgLead').textContent = L('781 سجلًّا من جدول المشاريع: اسم العميل، تاريخ البدء، نوع المشروع، والإمارة.', '781 records from the project table: customer name, start date, project type and state.');
+  $('#rgNote').textContent = L('نوع المشروع مستخلص من وصف المشروع في الجدول. أسماء ملّاك المشاريع وأرقام القطع لا تُنشر.', 'Project type is derived from the project description in the table. Project owners\' names and plot numbers are not published.');
+  bars('#rgBars'); $('#rgQ').placeholder = L('ابحث باسم العميل', 'Search by customer name'); $('#rgQ').setAttribute('aria-label', $('#rgQ').placeholder);
+  const fill = (id, all, opts) => { const s = $(id), v = s.value; s.replaceChildren(el('option', '', all), ...opts.map(o => { const e = el('option', '', o[1]); e.value = o[0]; return e; })); s.firstChild.value = ''; s.value = v; s.setAttribute('aria-label', all); };
+  fill('#rgS', L('كل الإمارات', 'All states'), RST.map((e, i) => [String(i), L(e[0], e[1])]));
+  fill('#rgY', L('كل السنوات', 'All years'), ['2026', '2025', '2024', '2023', '2022'].map(y => [y, y]));
+  fill('#rgT', L('كل الأنواع', 'All types'), RTY.map((t, i) => [String(i), L(t, RTY_EN[i])]));
+  if (rg.preset != null) { $('#rgS').value = String(rg.preset); $('#rgQ').value = ''; $('#rgY').value = ''; $('#rgT').value = ''; rg.preset = null; rg.shown = 80; }
+  rgList();
+}
+async function rgLoad() { try { const r = await fetch('data/register.json'); if (!r.ok) throw 0; rg.data = await r.json(); } catch (e) { rg.fail = true; } if (rg.open) rgFill(); }
+$('#rgQ').addEventListener('input', () => { rg.shown = 80; rgList(); });
+for (const id of ['#rgS', '#rgY', '#rgT']) $(id).addEventListener('change', () => { rg.shown = 80; rgList(); });
+$('#rgMore').addEventListener('click', () => { rg.shown += 80; rgList(); });
+
+/* ================= model loader: embedded glTF JSON -> GLB in memory ================= */
+async function loadGLTF(name) {
+  try { return await parseGLTF('models/opt/' + name); } catch (e) { return parseGLTF('models/' + name); }
+}
+async function parseGLTF(url) {
+  const res = await fetch(url); if (!res.ok) throw new Error('HTTP ' + res.status);
+  const g = await res.json(), uri = g.buffers[0].uri, raw = atob(uri.slice(uri.indexOf(',') + 1));
+  const bin = new Uint8Array(raw.length); for (let i = 0; i < raw.length; i++) bin[i] = raw.charCodeAt(i);
+  delete g.buffers[0].uri;
+  const json = new TextEncoder().encode(JSON.stringify(g)), jp = (4 - json.length % 4) % 4, bp = (4 - bin.length % 4) % 4;
+  const total = 28 + json.length + jp + bin.length + bp, out = new ArrayBuffer(total), dv = new DataView(out), u8 = new Uint8Array(out);
+  dv.setUint32(0, 0x46546C67, true); dv.setUint32(4, 2, true); dv.setUint32(8, total, true);
+  dv.setUint32(12, json.length + jp, true); dv.setUint32(16, 0x4E4F534A, true); u8.set(json, 20); u8.fill(0x20, 20 + json.length, 20 + json.length + jp);
+  const o = 20 + json.length + jp; dv.setUint32(o, bin.length + bp, true); dv.setUint32(o + 4, 0x004E4942, true); u8.set(bin, o + 8);
+  return new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(out, '');
+}
+
+/* ================= intro: one Cuplock node locks, then the logo ================= */
+const intro = $('#intro');
+let introDone = false, iR = null;
+function endIntro(fast) {
+  if (introDone) return; introDone = true;
+  try { sessionStorage.setItem('nm-intro', '1'); } catch (e) {}
+  intro.classList.add('out'); document.documentElement.classList.remove('lock');
+  setTimeout(() => { if (iR) { iR.setAnimationLoop(null); iR.dispose(); } intro.remove(); }, fast ? 300 : 750);
+}
+async function runIntro() {
+  let seen = false; try { seen = sessionStorage.getItem('nm-intro') === '1'; } catch (e) {}
+  if (seen) { introDone = true; intro.remove(); return; }
+  document.documentElement.classList.add('lock');
+  $('#iskip').addEventListener('click', () => endIntro(true));
+  let logoShown = false;
+  const logoStep = () => { if (logoShown) return; logoShown = true; intro.classList.add('logo'); setTimeout(() => endIntro(false), reduce ? 1000 : 2100); };
+  if (reduce) { logoStep(); return; }
+  try {
+    const cv = $('#icv'); iR = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+    iR.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); iR.toneMapping = THREE.ACESFilmicToneMapping;
+    const sc = new THREE.Scene(); sc.environment = new THREE.PMREMGenerator(iR).fromScene(new RoomEnvironment(), 0.03).texture;
+    const key = new THREE.DirectionalLight(0xfff1dd, 2.2); key.position.set(-2, 4, 3); sc.add(key);
+    const cam = new THREE.PerspectiveCamera(30, 1, 0.01, 50), tgt = new THREE.Vector3(0, 0.36, 0), dir = new THREE.Vector3(0.98, 0.30, 1.16).normalize();
+    const fitI = () => { const w = intro.clientWidth, h = intro.clientHeight; iR.setSize(w, h, false); cam.aspect = w / h; cam.fov = w < h ? 50 : 30; cam.updateProjectionMatrix(); };
+    fitI(); addEventListener('resize', () => { if (!introDone) fitI(); });
+    const gltf = await loadGLTF('cuplock_node.gltf.json'); if (introDone) return;
+    sc.add(gltf.scene);
+    const D = { Ledger_E: [1, 0], Ledger_N: [0, -1], Ledger_W: [-1, 0], Ledger_S: [0, 1] }, parts = [];
+    let cup = null;
+    gltf.scene.traverse(n => { if (D[n.name]) parts.push({ n, b: n.position.clone(), d: D[n.name] }); if (n.name === 'TopCup') cup = { n, b: n.position.clone(), r: n.rotation.y }; });
+    const t0 = performance.now();
+    iR.setAnimationLoop(now => {
+      const t = (now - t0) / 1000;
+      parts.forEach((p, i) => { const s = clamp((t - 0.25 - i * 0.3) / 1.35, 0, 1), e = 1 - Math.pow(1 - s, 3), off = (1 - e) * 0.9, lift = s < 0.82 ? 0.04 : 0.04 * (1 - (s - 0.82) / 0.18); p.n.position.set(p.b.x + p.d[0] * off, p.b.y + lift, p.b.z + p.d[1] * off); });
+      if (cup) { const c = smooth(clamp((t - 2.45) / 0.9, 0, 1)); cup.n.position.y = cup.b.y + 0.17 * (1 - c); cup.n.rotation.y = cup.r - 1.15 * (1 - c); }
+      const dist = 2.25 - 0.4 * smooth(clamp(t / 3.6, 0, 1));
+      cam.position.copy(tgt).addScaledVector(dir, dist); cam.lookAt(tgt);
+      $('#ibar').style.width = (clamp(t / 3.7, 0, 1) * 100).toFixed(1) + '%';
+      iR.render(sc, cam);
+      if (t > 3.85) logoStep();
+    });
+  } catch (e) { console.error('intro', e && e.message); logoStep(); }
+}
+
+/* ================= hero: scaffold layout (Blender-style coords: x along facade, y depth, z up) ================= */
+const NX = 4, BAY = 2.5, W = 1.2, LIFT = 2.0, NL = 5, RO = 0.02415, Z0 = 0.30;
+const ZL = m => 0.38 + 0.046 + LIFT * m;
+const items = [], counts = {};
+function add(type, pos, yaw, pitch, stage, key, app, ex) {
+  const q1 = new THREE.Quaternion().setFromAxisAngle(UP, yaw).multiply(new THREE.Quaternion().setFromAxisAngle(ZA, pitch));
+  counts[type] = counts[type] || 0;
+  items.push({ type, p1: B(pos), q1, stage, key, pre: B(pos).add(B(app)), idx: counts[type]++, ex: B(ex) });
+}
+const H = Math.PI / 2;
+for (let i = 0; i <= NX; i++) for (let r = 0; r < 2; r++) {
+  add('Jack', [i * BAY, r * W, 0], 0, 0, 1, i * 2 + r, [0, 0, 0.9], [0, 0, 0]);
+  for (let t = 0; t < 4; t++) add('Standard', [i * BAY, r * W, Z0 + 3 * t], 0, 0, t === 0 ? 2 : 3, t * 100 + i * 2 + r, [0, 0, 0.8], [0, 0, 0.35 + 0.5 * t]);
+}
+for (let m = 0; m <= NL; m++) {
+  const st = m <= 1 ? 2 : 3, k = (m <= 1 ? 20 + m * 30 : (m * 3 - 2) * 34);
+  for (let r = 0; r < 2; r++) for (let i = 0; i < NX; i++) add('Ledger', [i * BAY, r * W, ZL(m)], 0, 0, st, k + i * 2 + r, r ? [0, 0, 0.5] : [0, -0.55, 0.08], [0, r ? 1.0 : -1.0, 0.2 * m]);
+  for (let i = 0; i <= NX; i++) add('Transom', [i * BAY, 0, ZL(m)], H, 0, st, k + 10 + i, [0, 0, 0.45], [(i - NX / 2) * 0.35, 0, 0.2 * m + 0.3]);
+}
+const aF = Math.atan2(LIFT, BAY), aE = Math.atan2(LIFT, W);
+for (let m = 0; m < NL; m++) {
+  const k = ((m + 1) * 3 - 2) * 34 + 20, up = m % 2 === 0;
+  for (const i of [0, NX - 1]) add('BraceF', [(up ? i : i + 1) * BAY, -0.06, ZL(m)], 0, up ? aF : Math.PI - aF, 3, k + i, [0, -0.6, 0], [0, -1.9, 0.2 * m]);
+  for (const x of [0, NX * BAY]) add('BraceE', [x + (x ? 0.06 : -0.06), up ? 0 : W, ZL(m)], up ? H : -H, aE, 3, k + 6, [x ? 0.6 : -0.6, 0, 0], [x ? 1.7 : -1.7, 0, 0.2 * m]);
+}
+for (let m = 1; m <= NL; m++) {
+  for (let i = 0; i < NX; i++) for (let p = 0; p < 4; p++) add('Plank', [i * BAY, 0.15 + 0.3 * p, ZL(m) + RO + 0.04], 0, 0, 4, m * 100 + i * 4 + p, [0, 0, 0.5], [0, -0.4 - 0.25 * p, 0.2 * m + 0.75]);
+  for (const dz of [0.5, 1.0]) {
+    for (let i = 0; i < NX; i++) add('Ledger', [i * BAY, 0, ZL(m) + dz], 0, 0, 4, m * 100 + 40 + i, [0, -0.55, 0.08], [0, -1.0 - dz * 0.5, 0.2 * m]);
+    for (const x of [0, NX * BAY]) add('Transom', [x, 0, ZL(m) + dz], H, 0, 4, m * 100 + 50, [x ? 0.5 : -0.5, 0, 0.08], [x ? 1.0 : -1.0, 0, 0.2 * m]);
+  }
+}
+/* start state: the kit stacked on the ground in front of the setting-out lines */
+const qLay = new THREE.Quaternion().setFromAxisAngle(ZA, -H), qFlat = new THREE.Quaternion();
+const CL = {
+  Standard: { c: [0.3, -3.9, 0.06], n: [1, 10], sp: [0, 0.12, 0.11], q: qLay },
+  Ledger: { c: [4.2, -3.9, 0.045], n: [2, 11], sp: [2.75, 0.1, 0.09], q: qFlat },
+  Plank: { c: [0.3, -6.6, 0.045], n: [2, 4], sp: [2.8, 0.31, 0.046], q: qFlat },
+  Transom: { c: [6.3, -6.5, 0.045], n: [2, 9], sp: [1.45, 0.1, 0.09], q: qFlat },
+  Jack: { c: [9.7, -6.5, 0.0], n: [2, 5], sp: [0.42, 0.42, 0], q: qFlat },
+  BraceF: { c: [0.3, -8.6, 0.04], n: [1, 10], sp: [0, 0.1, 0.07], q: qFlat },
+  BraceE: { c: [4.2, -8.6, 0.04], n: [1, 10], sp: [0, 0.1, 0.07], q: qFlat },
+};
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647 - 0.5;
+for (const it of items) {
+  const c = CL[it.type], ix = it.idx % c.n[0], iy = Math.floor(it.idx / c.n[0]) % c.n[1], iz = Math.floor(it.idx / (c.n[0] * c.n[1]));
+  it.p0 = B([c.c[0] + ix * c.sp[0] + rnd() * 0.02, c.c[1] + iy * c.sp[1], c.c[2] + iz * c.sp[2]]);
+  it.q0 = new THREE.Quaternion().setFromAxisAngle(UP, rnd() * 0.012).multiply(c.q);
+}
+const ST = { 1: [0.07, 0.17], 2: [0.17, 0.35], 3: [0.35, 0.61], 4: [0.61, 0.82] }, D = 0.055;
+for (const s of [1, 2, 3, 4]) {
+  const list = items.filter(i => i.stage === s).sort((a, b) => a.key - b.key), [a, b] = ST[s];
+  list.forEach((it, k) => { it.s = a + (b - a - D) * (list.length > 1 ? k / (list.length - 1) : 0); });
+}
+const CAM = [
+  [0.00, [-8.6, -15.2, 2.2], [4.2, -0.5, 4.2]], [0.07, [-3, -15, 5.2], [5, -2.6, 1.2]], [0.15, [7.6, -5.4, 1.5], [4.6, 0.6, 0.4]],
+  [0.27, [-2.5, -7.5, 2.6], [3.0, 0.6, 1.6]], [0.35, [-4.5, -11, 4.0], [4.5, 0.6, 3.2]], [0.50, [14, -14, 8.5], [5, 0.6, 5.5]],
+  [0.61, [13, -12, 11], [5, 0.6, 7.5]], [0.73, [-3.5, -9.5, 10.5], [5, 0.6, 8.0]], [0.87, [-5.5, -17, 7.2], [5, 1.2, 5.6]], [1.00, [-7, -19, 7.8], [5, 1.2, 5.6]],
+].map(k => [k[0], B(k[1]), B(k[2])]);
+const CENTER = B([5, 0.6, 5.6]);
+
+/* ================= hero: scene ================= */
+const stage = $('#stage'), canvas = $('#cv'), track = $('#track'), msg = $('#msg'), play = $('#play');
+let renderer, scene, camera, controls, sun, lines, inst = {}, ready = false, P = 0, playing = false, last = performance.now(), stageShown = -1;
+let explore = false, ex = 0, exTarget = 0, sel = null, fly = null, dirty = 3, lastP = -1, placed = 0;
+const playLabel = () => (playing ? L('إيقاف', 'Pause') : P > 0.985 ? L('إعادة التجميع', 'Replay') : L('تشغيل', 'Play'));
+
+function init() {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.92;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  scene = new THREE.Scene();
+  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.03).texture; scene.environmentIntensity = 0.55;
+  scene.fog = new THREE.Fog('#dfe2df', 70, 260);
+  camera = new THREE.PerspectiveCamera(36, 1, 0.1, 600);
+  scene.add(new THREE.HemisphereLight('#dbe6f2', '#a89c86', 0.62));
+  sun = new THREE.DirectionalLight('#fff0d8', 2.9); sun.position.set(-16, 24, 20); sun.target.position.set(5, 4, -1);
+  sun.castShadow = true; const sz = innerWidth < 700 ? 1024 : 2048; sun.shadow.mapSize.set(sz, sz);
+  Object.assign(sun.shadow.camera, { left: -20, right: 20, top: 20, bottom: -20, near: 1, far: 95 }); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02; sun.shadow.camera.updateProjectionMatrix();
+  scene.add(sun, sun.target);
+  const gc = document.createElement('canvas'); gc.width = gc.height = 512; const g2 = gc.getContext('2d');
+  g2.fillStyle = '#bdb5a6'; g2.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 2400; i++) { g2.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,.04)' : 'rgba(60,50,35,.04)'; g2.beginPath(); g2.arc(Math.random() * 512, Math.random() * 512, 1 + Math.random() * 11, 0, 7); g2.fill(); }
+  g2.strokeStyle = 'rgba(70,60,45,.25)'; g2.lineWidth = 2; g2.strokeRect(0, 0, 512, 512);
+  const gt = new THREE.CanvasTexture(gc); gt.wrapS = gt.wrapT = THREE.RepeatWrapping; gt.repeat.set(96, 96); gt.colorSpace = THREE.SRGBColorSpace; gt.anisotropy = 8;
+  const ground = new THREE.Mesh(new THREE.CircleGeometry(240, 48), new THREE.MeshStandardMaterial({ map: gt, roughness: 1, metalness: 0 }));
+  ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+  /* the building the scaffold serves: concrete frame, block infill on two storeys, parapet */
+  const boxes = [], FZ = [0.15, 3.4, 6.65, 9.9], CX = [-0.6, 2.2, 5, 7.8, 10.6], CY = [1.75, 6, 10.25];
+  for (const z of FZ) boxes.push([[-0.8, 1.5, z - 0.25], [10.8, 10.5, z], 0]);
+  for (let st = 0; st < 3; st++) for (const x of CX) for (const y of CY) boxes.push([[x - 0.18, y - 0.25, FZ[st]], [x + 0.18, y + 0.25, FZ[st + 1] - 0.25], 0]);
+  for (let st = 0; st < 2; st++) {
+    const z0 = FZ[st], z1 = FZ[st + 1] - 0.25;
+    for (let b = 0; b < 4; b++) {
+      const x0 = CX[b] + 0.18, x1 = CX[b + 1] - 0.18, xc = (x0 + x1) / 2;
+      boxes.push([[x0, 1.56, z0], [x1, 1.76, z0 + 1.0], 1], [[x0, 1.56, z0 + 2.4], [x1, 1.76, z1], 1], [[x0, 1.56, z0 + 1.0], [xc - 0.7, 1.76, z0 + 2.4], 1], [[xc + 0.7, 1.56, z0 + 1.0], [x1, 1.76, z0 + 2.4], 1]);
+    }
+    for (const x of [-0.74, 10.54]) for (let b = 0; b < 2; b++) boxes.push([[x, CY[b] + 0.25, z0], [x + 0.2, CY[b + 1] - 0.25, z1], 1]);
+  }
+  boxes.push([[-0.8, 1.5, 9.9], [10.8, 1.7, 10.8], 1], [[-0.8, 10.3, 9.9], [10.8, 10.5, 10.8], 1], [[-0.8, 1.7, 9.9], [-0.6, 10.3, 10.8], 1], [[10.6, 1.7, 9.9], [10.8, 10.3, 10.8], 1]);
+  const shell = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 0.95, metalness: 0 }), boxes.length);
+  const m4 = new THREE.Matrix4(), cc = [new THREE.Color('#aaa192'), new THREE.Color('#c9c3b7')];
+  boxes.forEach(([lo, hi, ci], i) => { const a = B(lo), b = B(hi); m4.makeScale(Math.abs(b.x - a.x), Math.abs(b.y - a.y), Math.abs(b.z - a.z)); m4.setPosition((a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2); shell.setMatrixAt(i, m4); shell.setColorAt(i, cc[ci]); });
+  shell.castShadow = shell.receiveShadow = true; scene.add(shell);
+  /* setting-out lines in the brand maroon */
+  const pts = [];
+  for (const y of [0, W]) pts.push(B([-1, y, 0.02]), B([NX * BAY + 1, y, 0.02]));
+  for (let i = 0; i <= NX; i++) pts.push(B([i * BAY, -0.7, 0.02]), B([i * BAY, W + 0.7, 0.02]));
+  lines = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: '#8e1b2e', transparent: true, opacity: 0.9 }));
+  scene.add(lines);
+  controls = new OrbitControls(camera, canvas); controls.enabled = false; controls.enableDamping = true; controls.dampingFactor = 0.08;
+  controls.minDistance = 2.5; controls.maxDistance = 46; controls.maxPolarAngle = Math.PI / 2 - 0.03; controls.target.copy(CENTER);
+  controls.addEventListener('start', () => { fly = null; });
+  new ResizeObserver(resize).observe(stage); resize();
+  new IntersectionObserver(es => renderer.setAnimationLoop(es[0].isIntersecting ? tick : null)).observe(stage);
+}
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) return;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w < h ? 52 : 36;
+  camera.updateProjectionMatrix(); vo[0] = 9; dirty = 3;
+}
+const vo = [9, 9];
+function offset() {
+  const w = stage.clientWidth, h = stage.clientHeight, wide = w > 760;
+  const ox = !wide ? 0 : (explore ? 0.13 : 0.15) * (LANG === 'en' ? -1 : 1), oy = wide ? 0 : explore ? 0.14 : -0.2;
+  if (Math.abs(ox - vo[0]) < 0.001 && Math.abs(oy - vo[1]) < 0.001) return;
+  vo[0] = ox; vo[1] = oy; camera.setViewOffset(w, h, Math.round(ox * w), Math.round(oy * h), w, h);
+}
+async function loadKit() {
+  const gltf = await loadGLTF('hero_kit.gltf.json');
+  const src = []; gltf.scene.traverse(n => { if (n.isMesh) src.push(n); });
+  const white = new THREE.Color(1, 1, 1);
+  for (const type of Object.keys(counts)) {
+    inst[type] = src.filter(m => m.name.startsWith('H_' + type)).map(m => {
+      const mat = m.material.clone();
+      if (/galv/i.test(mat.name)) { mat.color.set('#d3d7db'); mat.metalness = 0.88; mat.roughness = 0.36; }
+      mat.envMap = scene.environment; mat.envMapIntensity = 1.7;
+      const g = new THREE.BufferGeometry(); m.updateWorldMatrix(true, false);
+      for (const k of ['position', 'normal', 'uv']) { const a = m.geometry.getAttribute(k); if (!a) continue; const f = new Float32Array(a.count * a.itemSize); for (let i = 0; i < a.count; i++) for (let j = 0; j < a.itemSize; j++) f[i * a.itemSize + j] = a.getComponent(i, j); g.setAttribute(k, new THREE.BufferAttribute(f, a.itemSize)); }
+      if (m.geometry.index) g.setIndex(m.geometry.index.clone()); g.applyMatrix4(m.matrixWorld);
+      const im = new THREE.InstancedMesh(g, mat, counts[type]);
+      for (let i = 0; i < counts[type]; i++) im.setColorAt(i, white);
+      im.userData.type = type; im.castShadow = im.receiveShadow = true; im.frustumCulled = false; scene.add(im); return im;
+    });
+  }
+  ready = true; msg.hidden = true; dirty = 3;
+  if (reduce) { P = 1; play.textContent = playLabel(); } else setTimeout(() => togglePlay(true), 350);
+}
+const v = new THREE.Vector3(), q = new THREE.Quaternion(), one = new THREE.Vector3(1, 1, 1), M = new THREE.Matrix4(), ca = new THREE.Vector3(), cb = new THREE.Vector3();
+function apply(p) {
+  let placed = 0;
+  for (const it of items) {
+    const t = (p - it.s) / D;
+    if (t <= 0) { v.copy(it.p0); q.copy(it.q0); }
+    else if (t >= 1) { v.copy(it.p1); if (ex > 0.001) v.addScaledVector(it.ex, ex); q.copy(it.q1); placed++; }
+    else {
+      const a = Math.min(1, t / 0.72), e = smooth(a), b = Math.max(0, (t - 0.72) / 0.28);
+      if (b > 0) v.lerpVectors(it.pre, it.p1, 1 - Math.pow(1 - b, 3)); else { v.lerpVectors(it.p0, it.pre, e); v.y += Math.sin(Math.PI * a) * 1.1; }
+      q.slerpQuaternions(it.q0, it.q1, e);
+    }
+    M.compose(v, q, one);
+    for (const im of inst[it.type]) im.setMatrixAt(it.idx, M);
+  }
+  for (const k in inst) for (const im of inst[k]) im.instanceMatrix.needsUpdate = true;
+  return placed;
+}
+function camAt(p, pos, tgt) {
+  let i = 0; while (i < CAM.length - 2 && p > CAM[i + 1][0]) i++;
+  const k0 = CAM[i], k1 = CAM[i + 1], t = smooth(clamp((p - k0[0]) / (k1[0] - k0[0]), 0, 1));
+  pos.lerpVectors(k0[1], k1[1], t); tgt.lerpVectors(k0[2], k1[2], t);
+  if (camera.aspect < 1) pos.sub(tgt).multiplyScalar(1.3).add(tgt);
+}
+const maxScroll = () => track.offsetHeight - innerHeight;
+function setP(p, toScroll) { P = clamp(p, 0, 1); if (toScroll && maxScroll() > 10) scrollTo(0, track.offsetTop + P * maxScroll()); }
+addEventListener('scroll', () => { const m = maxScroll(); if (m > 10) P = clamp(-track.getBoundingClientRect().top / m, 0, 1); }, { passive: true });
+function togglePlay(on) { playing = on == null ? !playing : on; if (playing && P > 0.985) setP(0, true); play.textContent = playLabel(); play.setAttribute('aria-pressed', String(playing)); }
+play.addEventListener('click', () => togglePlay());
+let heroIn = true;
+new IntersectionObserver(es => { heroIn = es[0].isIntersecting; document.body.classList.toggle('athero', heroIn); if (heroIn) dirty = 3; }, { threshold: 0.35 }).observe(track);
+
+/* ---------- explore mode ---------- */
+const typeOf = t => (t === 'BraceF' || t === 'BraceE' ? 'Brace' : t);
+const count = k => items.filter(i => typeOf(i.type) === k).length;
+function buildChips() { $('#xtop').replaceChildren(...ORDER.map(k => { const b = el('button', 'chip' + (sel === k ? ' on' : ''), L(PARTS[k].n[0], PARTS[k].n[1])); b.type = 'button'; b.addEventListener('click', () => select(sel === k ? null : k)); return b; })); }
+function renderPanel() {
+  const box = $('#xpanel'); box.replaceChildren();
+  if (!sel) { box.append(el('p', 'hint', L('اسحب للتدوير، وقرّب بإصبعين أو بعجلة الفأرة. اضغط على أي قطعة في السقالة أو اخترها من الأعلى.', 'Drag to rotate, pinch or scroll to zoom. Tap any part of the scaffold or pick one above.'))); return; }
+  const p = PARTS[sel], fit = el('p', 'fit'), b = el('a', 'btn mar', L('اطلب عرض سعر', 'Request a quote')), more = el('a', 'btn ghost', L('صفحة المنتج', 'Product page')); b.href = '#'; b.dataset.go = 'contact';
+  more.href = '#' + PROD[sel === 'Jack' ? 3 : sel === 'Plank' ? 5 : 0].slug; more.style.marginInlineStart = '8px';
+  fit.append(el('b', '', L('تُركَّب مع: ', 'Fits with: ')), document.createTextNode(L(p.f[0], p.f[1])));
+  box.append(el('span', 'e', p.e), el('h3', '', L(p.n[0], p.n[1])), el('p', '', L(p.d[0], p.d[1])), fit,
+    el('p', 'fit', L('في هذه السقالة: ' + count(sel) + ' قطعة.', 'In this scaffold: ' + count(sel) + ' pieces.')),
+    el('p', 'nt', L('وصف عام للقطعة. تُؤكَّد المقاسات والحمولات مع عرض السعر.', 'General description. Dimensions and load ratings are confirmed with the quotation.')), b, more);
+}
+const cSel = new THREE.Color(1.0, 0.36, 0.38), cDim = new THREE.Color(0.60, 0.62, 0.66), cOn = new THREE.Color(1, 1, 1);
+function paint() {
+  dirty = 3;
+  for (const k in inst) for (const im of inst[k]) { const c = !sel ? cOn : typeOf(k) === sel ? cSel : cDim; for (let i = 0; i < im.count; i++) im.setColorAt(i, c); im.instanceColor.needsUpdate = true; }
+}
+function select(k, hit) {
+  sel = k; buildChips(); renderPanel(); if (ready) paint();
+  if (!k || !explore) return;
+  const it = hit || items.filter(i => typeOf(i.type) === k).sort((a, b) => a.p1.distanceTo(camera.position) - b.p1.distanceTo(camera.position))[0];
+  const tgt = it.p1.clone().addScaledVector(it.ex, ex); if (it.type !== 'Jack') tgt.y += it.type === 'Standard' ? 1.2 : 0;
+  const dir = camera.position.clone().sub(controls.target).normalize(), dist = clamp(camera.position.distanceTo(controls.target) * 0.6, 6, 16);
+  fly = { t0: performance.now(), p0: camera.position.clone(), g0: controls.target.clone(), p1: tgt.clone().addScaledVector(dir, dist), g1: tgt };
+}
+function enterExplore() {
+  if (explore || !ready) return; togglePlay(false); setP(1, true); explore = true;
+  document.documentElement.classList.add('lock'); stage.classList.add('ex'); $('#nav').classList.remove('solid');
+  camAt(1, ca, cb); camera.position.copy(ca); controls.target.copy(CENTER); controls.enabled = true; controls.update();
+  buildChips(); renderPanel();
+}
+function exitExplore() {
+  if (!explore) return; explore = false; dirty = 3; exTarget = 0; fly = null; controls.enabled = false; sel = null; paint();
+  $('#xExplode').setAttribute('aria-pressed', 'false'); stage.classList.remove('ex'); document.documentElement.classList.remove('lock');
+}
+$('#capX').addEventListener('click', enterExplore); $('#xExit').addEventListener('click', exitExplore);
+$('#xExplode').addEventListener('click', e => { exTarget = exTarget ? 0 : 1; e.currentTarget.setAttribute('aria-pressed', String(!!exTarget)); });
+$('#xReset').addEventListener('click', () => { select(null); camAt(1, ca, cb); fly = { t0: performance.now(), p0: camera.position.clone(), g0: controls.target.clone(), p1: ca.clone(), g1: CENTER.clone() }; });
+let down = null; const ray = new THREE.Raycaster();
+canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+canvas.addEventListener('pointerup', e => {
+  if (!explore || !down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 7) return;
+  const r = canvas.getBoundingClientRect(), all = [];
+  ray.setFromCamera(new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), camera);
+  for (const k in inst) for (const im of inst[k]) { im.boundingSphere = null; all.push(im); }
+  const h = ray.intersectObjects(all, false)[0]; if (!h) return;
+  const type = h.object.userData.type, it = items.find(i => i.type === type && i.idx === h.instanceId);
+  select(typeOf(type), it);
+});
+addEventListener('keydown', e => { if (e.key === 'Escape' && explore) exitExplore(); });
+
+const E = { hl: $('#hl'), veil: $('#veil'), cap: $('#cap'), seg: [...$$('#seg i')], count: $('#count'), n: $('#capN'), t: $('#capT'), d: $('#capD'), x: $('#capX') };
+function tick(now) {
+  const dt = Math.min(0.1, (now - last) / 1000); last = now;
+  if (!heroIn && !explore) return;
+  if (playing) { setP(P + dt / 15, true); if (P >= 1) { P = 1; togglePlay(false); } }
+  const exMove = Math.abs(exTarget - ex) > 0.0005;
+  if (exMove) ex += (exTarget - ex) * Math.min(1, dt * 5); else ex = exTarget;
+  if (stageShown < 0) dirty = Math.max(dirty, 1);
+  if (!(explore || exMove || P !== lastP || dirty > 0)) return;
+  if (dirty > 0) dirty--;
+  lines.material.opacity = 0.9 * (1 - clamp((P - 0.30) / 0.10, 0, 1));
+  if (explore) {
+    if (fly) { const k = Math.min(1, (now - fly.t0) / 700), e = smooth(k); camera.position.lerpVectors(fly.p0, fly.p1, e); controls.target.lerpVectors(fly.g0, fly.g1, e); if (k >= 1) fly = null; }
+    controls.update();
+  } else { camAt(P, ca, cb); camera.position.copy(ca); camera.lookAt(cb); }
+  offset();
+  if (ready) placed = apply(P);
+  lastP = P;
+  E.count.textContent = L(placed + ' من ' + items.length + ' قطعة', placed + ' / ' + items.length + ' parts');
+  const s = P < 0.07 ? 0 : P < 0.17 ? 1 : P < 0.35 ? 2 : P < 0.61 ? 3 : P < 0.86 ? 4 : 5;
+  if (s !== stageShown) { stageShown = s; const c = CAPS[s][LANG === 'en' ? 1 : 0]; E.n.textContent = '0' + (s + 1); E.t.textContent = c[0]; E.d.textContent = c[1]; }
+  { const B6 = [0, 0.07, 0.17, 0.35, 0.61, 0.86, 1]; E.seg.forEach((g, i) => g.style.setProperty('--f', clamp((P - B6[i]) / (B6[i + 1] - B6[i]), 0, 1).toFixed(3))); }
+  renderer.render(scene, camera);
+}
+
+/* ================= product viewer ================= */
+function pvInit() {
+  if (pv.r) return true;
+  try { pv.r = new THREE.WebGLRenderer({ canvas: pv.cv, antialias: true, alpha: true }); } catch (e) { return false; }
+  pv.r.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); pv.r.toneMapping = THREE.ACESFilmicToneMapping; pv.r.toneMappingExposure = 1.0;
+  pv.r.shadowMap.enabled = true; pv.r.shadowMap.type = THREE.PCFSoftShadowMap;
+  pv.scene = new THREE.Scene(); pv.scene.environment = new THREE.PMREMGenerator(pv.r).fromScene(new RoomEnvironment(), 0.03).texture; pv.scene.environmentIntensity = 0.9;
+  pv.sun = new THREE.DirectionalLight('#fff4e4', 2.3); pv.sun.castShadow = true; pv.sun.shadow.mapSize.set(1024, 1024); pv.scene.add(pv.sun, pv.sun.target);
+  pv.floor = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.ShadowMaterial({ opacity: 0.24 })); pv.floor.rotation.x = -Math.PI / 2; pv.floor.receiveShadow = true; pv.scene.add(pv.floor);
+  pv.cam = new THREE.PerspectiveCamera(32, 1, 0.01, 100);
+  pv.ctl = new OrbitControls(pv.cam, pv.cv); pv.ctl.enableDamping = true; pv.ctl.dampingFactor = 0.08; pv.ctl.autoRotateSpeed = 1.0; pv.ctl.enablePan = false;
+  pv.ctl.addEventListener('start', () => { pv.fly = null; pv.moved = true; pv.ctl.autoRotate = false; });
+  pv.cv.style.touchAction = matchMedia('(pointer: coarse)').matches ? 'pan-y' : 'none';
+  new ResizeObserver(pvResize).observe(pv.stage); pvResize();
+  return true;
+}
+function pvResize() {
+  const w = pv.stage.clientWidth, h = pv.stage.clientHeight; if (!w || !h) return;
+  pv.stage.classList.toggle('sm', w < 620);
+  if (!pv.r) return;
+  pv.r.setSize(w, h, false); pv.cam.aspect = w / h; pv.cam.updateProjectionMatrix(); pv.dirty = 3;
+}
+function disposeTree(o) {
+  o.traverse(n => { if (!n.isMesh) return; n.geometry.dispose(); for (const m of [].concat(n.material)) { for (const k of ['map', 'roughnessMap', 'metalnessMap', 'normalMap']) if (m[k]) m[k].dispose(); m.dispose(); } });
+}
+function pvFit(p) {
+  const box = new THREE.Box3().setFromObject(pv.model), s = box.getBoundingSphere(new THREE.Sphere()), R = s.radius, c = s.center.clone();
+  const tgt = p.center ? B(p.center) : c.clone(), v = pv.cam.fov * Math.PI / 360, hf = Math.atan(Math.tan(v) * pv.cam.aspect);
+  const fd = R / Math.sin(Math.min(v, hf)) * 1.12, d = p.zoom ? fd / 1.12 * p.zoom * (pv.stage.classList.contains('sm') ? 1.06 : 1) : fd, dir = new THREE.Vector3(...p.view).normalize();
+  pv.cam.near = Math.max(d / 400, 0.002); pv.cam.far = d * 40; pv.cam.updateProjectionMatrix();
+  pv.ctl.minDistance = Math.min(0.12, R * 0.5); pv.ctl.maxDistance = Math.max(d * 2.6, fd * 1.5);
+  pv.home = { dir, target: tgt, d, r: R, fullPos: c.clone().addScaledVector(dir, fd), fullTarget: c };
+  pv.cam.position.copy(tgt).addScaledVector(dir, d); pv.ctl.target.copy(tgt); pv.ctl.update();
+  pv.sun.position.copy(c).add(new THREE.Vector3(-0.9, 1.9, 1.25).multiplyScalar(R * 2.2)); pv.sun.target.position.copy(c);
+  const sc = pv.sun.shadow.camera; sc.left = sc.bottom = -R * 2.3; sc.right = sc.top = R * 2.3; sc.near = R * 0.2; sc.far = R * 11; sc.updateProjectionMatrix();
+  pv.sun.shadow.bias = -0.0004; pv.sun.shadow.normalBias = R * 0.006;
+  pv.floor.position.set(c.x, box.min.y - R * 0.002, c.z); pv.floor.scale.setScalar(R * 16);
+}
+function pvFly(scale, home, sphere) {
+  const h = pv.home; if (!h) return;
+  const dir = home ? h.dir.clone() : pv.cam.position.clone().sub(pv.ctl.target).normalize();
+  let g1 = h.target.clone(), d = h.d * scale;
+  if (sphere) { const v = pv.cam.fov * Math.PI / 360, hf = Math.atan(Math.tan(v) * pv.cam.aspect); g1 = sphere.center.clone(); d = sphere.radius / Math.sin(Math.min(v, hf)) * 1.1; pv.ctl.maxDistance = Math.max(pv.ctl.maxDistance, d * 1.4); }
+  const p1 = g1.clone().addScaledVector(dir, d);
+  if (reduce) { pv.cam.position.copy(p1); pv.ctl.target.copy(g1); pv.dirty = 3; return; }
+  pv.fly = { t0: performance.now(), p0: pv.cam.position.clone(), g0: pv.ctl.target.clone(), p1, g1 };
+}
+function pvMode(m) {
+  if (!pv.model) return;
+  const p = PROD[pv.cur];
+  if (m === 'reset') { m = 'rotate'; pv.moved = false; pvActive(-1); pvFly(1, true); }
+  else if (m === 'rotate') { if (pv.mode !== 'rotate') pvFly(1, false); }
+  else { pvActive(-1); pvFly(p.exz || 1.3, false, p.exz ? null : pv.exS); }
+  pv.mode = m; pv.t0 = performance.now(); pv.dirty = 3;
+  pv.parts.forEach((x, k) => {
+    if (m === 'explode') { x.target = 1; x.delay = k * 0.06; }
+    else if (m === 'assembly') { x.a = reduce ? 0 : 1; x.target = 0; x.delay = 0.7 + k * 0.55; }
+    else { x.target = 0; x.delay = 0; }
+  });
+  pv.ctl.autoRotate = m === 'rotate' && !pv.moved && !reduce;
+  [...$('#pvModes').children].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === m)));
+}
+function pvActive(i, fly) {
+  pv.active = i;
+  pv.pins.forEach((q, k) => q.node.classList.toggle('on', k === i));
+  $$('#pvBody .plst li').forEach((li, k) => li.classList.toggle('on', k === i));
+  const cap = $('#pinCap'), p = PROD[pv.cur];
+  if (i < 0 || !p.hs) { cap.hidden = true; pv.dirty = 3; return; }
+  const h = p.hs[i]; cap.replaceChildren(el('b', '', (i + 1) + ' · ' + L(h.t[0], h.t[1]) + ': '), document.createTextNode(L(h.d[0], h.d[1])));
+  cap.hidden = !pv.stage.classList.contains('sm'); cap.dir = LANG === 'en' ? 'ltr' : 'rtl';
+  if (fly && pv.home && pv.mode === 'rotate') {
+    pv.ctl.autoRotate = false; pv.moved = true;
+    const t = pv.pins[i].pos.clone(), dir = pv.cam.position.clone().sub(pv.ctl.target).normalize(), d = p.focus ? p.focus * 2.2 : Math.max(0.3, Math.min(pv.home.d * 0.62, pv.home.r * 2.4));
+    if (reduce) { pv.cam.position.copy(t).addScaledVector(dir, d); pv.ctl.target.copy(t); }
+    else pv.fly = { t0: performance.now(), p0: pv.cam.position.clone(), g0: pv.ctl.target.clone(), p1: t.clone().addScaledVector(dir, d), g1: t };
+  }
+  pv.dirty = 3;
+}
+const pvV = new THREE.Vector3();
+function pvTick(now) {
+  const dt = Math.min(0.1, (now - pv.last) / 1000); pv.last = now;
+  let moving = false, maxA = 0; const t = (now - pv.t0) / 1000;
+  for (const x of pv.parts) {
+    if (t >= x.delay) { if (Math.abs(x.target - x.a) > 0.0006) { x.a += (x.target - x.a) * Math.min(1, dt * 5.5); moving = true; } else x.a = x.target; }
+    else if (x.a !== x.target) moving = true;
+    const e = smooth(x.a); x.n.position.copy(x.base).addScaledVector(x.off, e); if (x.spin) x.n.rotation.y = x.rot + x.spin * e;
+    if (x.a > maxA) maxA = x.a;
+  }
+  for (const h of pv.hidden) h.visible = maxA < 0.03;
+  if (pv.fly) { const k = clamp((now - pv.fly.t0) / (pv.fly.dur || 700), 0, 1), e = smooth(k); pv.cam.position.lerpVectors(pv.fly.p0, pv.fly.p1, e); pv.ctl.target.lerpVectors(pv.fly.g0, pv.fly.g1, e); if (k >= 1) pv.fly = null; moving = true; }
+  const changed = pv.ctl.update();
+  if (!(changed || moving || pv.dirty > 0)) return;
+  if (pv.dirty > 0) pv.dirty--;
+  const w = pv.stage.clientWidth, h = pv.stage.clientHeight, sm = pv.stage.classList.contains('sm'), placed = [];
+  pv.pinsBox.style.opacity = maxA > 0.03 ? '0' : '1'; pv.pinsBox.style.pointerEvents = 'none';
+  const order = pv.pins.map((_, i) => i).sort((a, b) => (a === pv.active ? -1 : b === pv.active ? 1 : a - b));
+  for (const i of order) {
+    const q = pv.pins[i]; pvV.copy(q.pos).project(pv.cam);
+    const x = (pvV.x * 0.5 + 0.5) * w, y = (-pvV.y * 0.5 + 0.5) * h, ok = pvV.z < 1 && x > 8 && x < w - 8 && y > 8 && y < h - (sm ? 66 : 8) && maxA < 0.5;
+    q.node.style.display = ok ? '' : 'none'; if (!ok) continue;
+    q.node.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+    if (sm) continue;
+    let f = x > w * 0.58; if (!f && x + 80 + q.lw > w) f = true; else if (f && x - 80 - q.lw < 0) f = false;
+    const x0 = f ? x - 74 - q.lw : x + 14, x1 = f ? x - 14 : x + 74 + q.lw;
+    const clash = placed.some(o => Math.abs(o.y - y) < 32 && o.x0 < x1 + 6 && x0 < o.x1 + 6) || pv.pins.some(o => o !== q && o.sx != null && Math.abs(o.sy - y) < 22 && o.sx > x0 - 16 && o.sx < x1 + 16 && Math.abs(o.sx - x) > 1);
+    q.node.classList.toggle('flip', f); q.node.classList.toggle('nolbl', clash && i !== pv.active); q.sx = x; q.sy = y;
+    if (!clash || i === pv.active) placed.push({ y, x0, x1 });
+  }
+  pv.r.render(pv.scene, pv.cam);
+}
+async function pvLoad() {
+  const p = PROD[pv.cur], my = ++pv.token;
+  pv.parts = []; pv.hidden = []; pv.fly = null; pv.mode = 'rotate'; pv.moved = false;
+  if (pv.model) { pv.scene.remove(pv.model); disposeTree(pv.model); pv.model = null; }
+  pv.pinsBox.style.visibility = 'hidden'; pv.dirty = 3;
+  if (!p.file) return;
+  pv.msg.hidden = false; pv.msg.textContent = L('جارٍ تحميل المجسم…', 'Loading the model…');
+  try {
+    const gltf = await loadGLTF(p.file + '.gltf.json');
+    if (my !== pv.token) { disposeTree(gltf.scene); return; }
+    pv.model = gltf.scene;
+    const aniso = pv.r.capabilities.getMaxAnisotropy();
+    pv.model.traverse(n => {
+      if (!n.isMesh) return; n.castShadow = n.receiveShadow = true;
+      for (const m of [].concat(n.material)) { for (const k of ['map', 'roughnessMap', 'normalMap']) if (m[k]) m[k].anisotropy = aniso; const tt = p.tint && p.tint[m.name]; if (tt) { m.color.set(tt[0]); m.roughness = tt[1]; if (tt[2]) m.map = null; } else if (m.name === 'NM_blue') m.color.setScalar(8); m.envMap = pv.scene.environment; m.envMapIntensity = 1.2; }
+    });
+    pv.scene.add(pv.model);
+    for (const [name, off, spin] of p.ex || []) { const n = pv.model.getObjectByName(name); if (n) pv.parts.push({ n, base: n.position.clone(), off: B(off), rot: n.rotation.y, spin: spin || 0, a: 0, target: 0, delay: 0 }); }
+    for (const name of p.hide || []) { const n = pv.model.getObjectByName(name); if (n) pv.hidden.push(n); }
+    pvFit(p); pv.ctl.maxPolarAngle = p.kind ? Math.PI / 2 - 0.04 : Math.PI;
+    for (const x of pv.parts) x.n.position.copy(x.base).add(x.off);
+    pv.exS = new THREE.Box3().setFromObject(pv.model).getBoundingSphere(new THREE.Sphere());
+    for (const x of pv.parts) x.n.position.copy(x.base);
+    pv.msg.hidden = true; pv.pinsBox.style.visibility = ''; pvMode('rotate');
+    if (p.full && !reduce) { const h = pv.home; pv.cam.position.copy(h.fullPos); pv.ctl.target.copy(h.fullTarget); pv.ctl.update(); pv.fly = { t0: performance.now() + 700, dur: 1500, p0: h.fullPos.clone(), g0: h.fullTarget.clone(), p1: h.target.clone().addScaledVector(h.dir, h.d), g1: h.target.clone() }; }
+    pv.pins.forEach(q => { q.lw = q.node.lastChild.offsetWidth || 110; });
+  } catch (e) {
+    if (my === pv.token) { pv.msg.hidden = false; pv.msg.textContent = L('تعذّر تحميل المجسم. حدّث الصفحة وحاول مرة أخرى.', 'The model did not load. Refresh the page and try again.'); }
+  }
+}
+function pvTab(k) {
+  pv.tab = k; const p = PROD[pv.cur], body = $('#pvBody'); body.replaceChildren();
+  [...$('#pvTabs').children].forEach(b => b.setAttribute('aria-selected', String(b.dataset.k === k)));
+  if (k === 'parts') {
+    const ul = el('ul', 'plst');
+    p.hs.forEach((h, i) => { const li = el('li', i === pv.active ? 'on' : ''), b = el('button'), tx = el('span'); b.type = 'button'; tx.append(el('b', '', L(h.t[0], h.t[1])), el('span', 'd', L(h.d[0], h.d[1]))); b.append(el('span', 'n', String(i + 1)), tx); li.append(b); ul.append(li);
+      b.addEventListener('click', () => { pvActive(i, true); if (pv.stage.classList.contains('sm')) pv.stage.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' }); }); });
+    body.append(ul);
+  } else if (k === 'fits') {
+    const d = el('div', 'fitl'); for (const [j, how] of p.fits) { const a = el('a'); a.href = '#' + PROD[j].slug; a.append(el('b', '', SYS[j][0]), el('span', '', L(how[0], how[1]))); d.append(a); } body.append(d);
+  } else if (k === 'photos') {
+    const g = el('div', 'phg'); p.photos.forEach((f, k) => { const b = el('button'), im = el('img'); b.type = 'button'; b.dataset.full = 'img/' + f + '.jpg'; im.src = 'img/' + f.replace('/', '/t/') + '.jpg'; im.alt = L('صورة من مخزن الشركة ', 'Photo from the company yard ') + (k + 1); im.loading = 'lazy'; b.append(im); g.append(b); }); body.append(g);
+  }
+}
+function pvPhoto(k) {
+  const p = PROD[pv.cur]; pv.photo = k; $('#pvPhoto').src = 'img/' + p.gallery[k] + '.jpg';
+  [...$('#pvThumbs').children].forEach((b, i) => b.classList.toggle('on', i === k));
+}
+const nameOf = j => PROD[j].kind ? PROJ[PROD[j].pj].t : [SYS[j][1], SYS[j][0]];
+function pvFill() {
+  const i = pv.cur, p = PROD[i], pj = !!p.kind, s = pj ? null : SYS[i], nm = nameOf(i), sib = PROD.map((q, j) => j).filter(j => !!PROD[j].kind === pj), n = sib.length, at = sib.indexOf(i);
+  document.title = 'NAMASCO · ' + nm[1];
+  $('#pvUp').textContent = pj ? L('المشاريع', 'Projects') : L('المنتجات', 'Products'); $('#pvUp').dataset.go = pj ? 'projects' : 'systems'; $('#pvCrumb').textContent = L(nm[0], nm[1]);
+  $('#pvEy').textContent = (pj ? 'Project ' : 'Product ') + String(at + 1).padStart(2, '0') + ' · ' + (pj ? 'Major projects' : s[0]); $('#pvEy').classList.remove('t');
+  $('#pvName').textContent = L(nm[0], nm[1]); $('#pvEn').textContent = LANG === 'en' ? '' : nm[1]; $('#pvEn').hidden = LANG === 'en';
+  $('#pvDesc').textContent = pj ? L('من المشاريع الرئيسية في ملف الشركة. نطاق العمل: توريد وتركيب وفك السقالات.', 'One of the major projects in the company profile. Scope: supply, installation and dismantling of scaffolding.') : L(s[2], s[3]);
+  const fact = $('#pvFact');
+  if (pj) { const q = PROJ[p.pj], dl = el('dl', 'pdl'); for (const [k, v] of [[L('الموقع', 'Location'), q.loc], [L('العميل', 'Client'), q.cl], [L('المقاول الرئيسي', 'Main Contractor'), q.mc]]) { const dd = el('dd', '', L(v[0], v[1])); dd.dir = 'auto'; dl.append(el('dt', '', k), dd); } fact.replaceChildren(dl); fact.hidden = false; }
+  else { fact.hidden = !p.fact; if (p.fact) { const v = el('bdi', '', p.fact[1]); fact.replaceChildren(el('b', '', L(p.fact[0][0], p.fact[0][1])), v); } }
+  const tabs = [['parts', p.hs, pj ? L('على المبنى', 'On the building') : L('الأجزاء', 'Parts')], ['fits', p.fits, L('تُركَّب مع', 'Fits with')], ['photos', p.photos, pj ? L('الصورة في ملف الشركة', 'Photo in the profile') : L('صور من المخزن', 'Yard photos')]].filter(t => t[1]);
+  $('#pvTabs').hidden = !tabs.length;
+  $('#pvTabs').replaceChildren(...tabs.map(t => { const b = el('button', '', t[2]); b.type = 'button'; b.dataset.k = t[0]; b.setAttribute('role', 'tab'); b.addEventListener('click', () => pvTab(t[0])); return b; }));
+  if (tabs.length) pvTab(tabs.some(t => t[0] === pv.tab) ? pv.tab : tabs[0][0]); else $('#pvBody').replaceChildren();
+  $('#pvNote').textContent = pj ? L('المبنى والسقالة في المجسم تمثيليان وليسا مطابقين لمخططات المشروع. بيانات المشروع من ملف الشركة.', 'The building and scaffold in the model are representative, not taken from the project drawings. The project data comes from the company profile.') : (p.mn ? L(p.mn[0], p.mn[1]) + ' ' : '') + (p.file ? L('المجسم مبدئي. المقاسات والحمولات غير المذكورة في ملف الشركة لا تُعرض هنا، ويؤكدها فريق NAMASCO مع عرض السعر.', 'This is a draft model. Sizes and load ratings that are not stated in the company profile are not shown here; the NAMASCO team confirms them with the quotation.') : '');
+  $('#pvQuote').textContent = pj ? L('اطلب عرض سعر لمشروع مشابه', 'Request a quote for a similar project') : L('اطلب عرض سعر لهذا المنتج', 'Request a quote for this product');
+  $('#pvAll').textContent = pj ? L('كل المشاريع', 'All projects') : L('كل المنتجات', 'All products'); $('#pvAll').dataset.go = pj ? 'projects' : 'systems';
+  const a = sib[(at + n - 1) % n], b = sib[(at + 1) % n], pr = $('#pvPrev'), nx = $('#pvNext'), na = nameOf(a), nb = nameOf(b);
+  pr.href = '#' + PROD[a].slug; pr.replaceChildren(el('small', '', L('السابق', 'Previous')), document.createTextNode(L(na[0], na[1])));
+  nx.href = '#' + PROD[b].slug; nx.replaceChildren(el('small', '', L('التالي', 'Next')), document.createTextNode(L(nb[0], nb[1])));
+  $('#pvHint').textContent = L('360° · اسحب للتدوير', '360° · drag to rotate');
+  const M = [['rotate', L('تدوير', 'Rotate')], ['explode', L('تفكيك', 'Explode')], ['assembly', L('تركيب', 'Assembly')], ['reset', L('إعادة', 'Reset')]];
+  $('#pvModes').replaceChildren(...M.filter(m => p.ex || m[0] === 'rotate' || m[0] === 'reset').map(m => { const b = el('button', '', m[1]); b.type = 'button'; b.dataset.m = m[0]; b.setAttribute('aria-pressed', String(m[0] === pv.mode)); b.addEventListener('click', () => pvMode(m[0])); return b; }));
+  const gal = !!p.gallery, noGL = !gal && !pv.r;
+  $('#pvGal').hidden = !(gal || noGL); pv.cv.hidden = gal || noGL; $('#pvHint').hidden = $('#pvModes').hidden = gal || noGL;
+  if (gal) { $('#pvThumbs').hidden = false; $('#pvThumbs').replaceChildren(...p.gallery.map((f, k) => { const b = el('button'), im = el('img'); b.type = 'button'; im.src = 'img/' + f.replace('/', '/t/') + '.jpg'; im.alt = L('صورة موقع ', 'Site photo ') + (k + 1); b.append(im); b.addEventListener('click', () => pvPhoto(k)); return b; })); $('#pvPhoto').style.objectFit = 'cover'; pvPhoto(Math.min(pv.photo, p.gallery.length - 1)); }
+  else if (noGL) { $('#pvThumbs').hidden = true; $('#pvPhoto').src = 'img/' + (pj ? p.photos[0] : s[4]) + '.jpg'; $('#pvPhoto').style.objectFit = 'contain'; }
+  pv.pinsBox.replaceChildren(); pv.pins = [];
+  if (!gal && !noGL) (p.hs || []).forEach((h, k) => {
+    const node = el('div', 'pin' + (k === pv.active ? ' on' : '')), b = el('button', '', String(k + 1)), lbl = el('span', 'lbl', L(h.t[0], h.t[1])); b.type = 'button'; b.setAttribute('aria-label', L(h.t[0], h.t[1])); lbl.dir = 'auto';
+    node.append(b, el('i'), lbl); pv.pinsBox.append(node); b.addEventListener('click', () => pvActive(k, true));
+    pv.pins.push({ pos: B(h.p), node, lw: lbl.offsetWidth || 110 });
+  });
+  if (pv.active >= 0) pvActive(pv.active, false); else $('#pinCap').hidden = true;
+  pv.dirty = 3;
+}
+function pvOpen(i) {
+  if (explore) exitExplore();
+  if (!pv.open) { if (!rg.open) pv.homeY = scrollY; rg.open = false; rg.el.hidden = true; pv.open = true; document.body.classList.add('pv'); pv.el.hidden = false; }
+  const same = pv.cur === i; pv.cur = i; pv.active = -1; pv.tab = 'parts'; pv.photo = 0;
+  const gl = PROD[i].file ? pvInit() : false;
+  pvFill(); navState(); scrollTo(0, 0);
+  if (pv.r) { pv.last = performance.now(); pv.r.setAnimationLoop(gl ? pvTick : null); }
+  if (gl && !(same && pv.model)) pvLoad(); else if (!gl && pv.model) { pv.scene.remove(pv.model); disposeTree(pv.model); pv.model = null; pv.token++; }
+  if (gl && same && pv.model) pvMode('reset');
+}
+fetch('files/NAMASCO-Company-Profile.pdf', { method: 'HEAD' }).then(r => { if (r.ok && (r.headers.get('content-type') || '').includes('pdf')) $$('.pdfbtn').forEach(b => { b.hidden = false; }); }).catch(() => {});
+function rgOpen() {
+  if (explore) exitExplore();
+  if (!(pv.open || rg.open)) pv.homeY = scrollY;
+  if (pv.open) { pv.open = false; pv.el.hidden = true; if (pv.r) pv.r.setAnimationLoop(null); }
+  rg.open = true; document.body.classList.add('pv'); rg.el.hidden = false; document.title = 'NAMASCO · Project register';
+  rgFill(); navState(); scrollTo(0, 0);
+  if (!rg.data && !rg.loading) { rg.loading = true; rgLoad(); }
+}
+function goHome() {
+  if (!(pv.open || rg.open)) return;
+  pv.open = false; pv.el.hidden = true; rg.open = false; rg.el.hidden = true; document.body.classList.remove('pv'); if (pv.r) pv.r.setAnimationLoop(null);
+  document.title = SITE_TITLE;
+  const go = pv.go; pv.go = null;
+  requestAnimationFrame(() => { const t = go && document.getElementById(go); if (t) t.scrollIntoView({ behavior: 'auto', block: 'start' }); else scrollTo(0, pv.homeY); dirty = 3; navState(); shopKick(); });
+}
+function route() { const h = location.hash.slice(1), i = PROD.findIndex(p => p.slug === h); if (i >= 0) pvOpen(i); else if (h === 'project-register') rgOpen(); else goHome(); }
+addEventListener('hashchange', route);
+$('#pvQuote').addEventListener('click', () => { $('#q_p').selectedIndex = PROD[pv.cur].kind ? 0 : pv.cur + 1; pv.go = 'contact'; location.hash = '#home'; });
+
+/* ================= start ================= */
+let saved = 'ar'; try { saved = localStorage.getItem('nm-lang') || 'ar'; } catch (e) {}
+setLang(saved === 'en' ? 'en' : 'ar');
+msg.textContent = L('جارٍ تحميل القطع…', 'Loading parts…');
+introDone = true; intro.remove();
+try { init(); loadKit().catch(() => { msg.hidden = false; msg.textContent = L('تعذّر تحميل القطع. حدّث الصفحة وحاول مرة أخرى.', 'The parts did not load. Refresh the page and try again.'); }); }
+catch (e) { track.classList.add('still'); msg.hidden = true; }
+route();
+</script>
+</body>
+</html>
