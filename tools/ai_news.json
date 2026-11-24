@@ -606,5 +606,34 @@
     "https://www.unite.ai/openrouter-cuts-three-providers-after-ai-prompt-exposure-findings/"
    ]
   ]
+ },
+ {
+  "date": "2026-11-23",
+  "slug": "uae-mira-government-ai-assistant",
+  "tag": {"ar": "حكومات", "en": "Government"},
+  "ar": {
+   "title": "الإمارات تكشف عن Mira: مساعد ذكاء اصطناعي ينجز المعاملات الحكومية ويبدأ العمل في مارس 2027",
+   "desc": "في 23 نوفمبر 2026 أعلنت حكومة الإمارات عن Mira، مساعد شخصي بالذكاء الاصطناعي ينجز المعاملات الحكومية، على أن يتاح للجمهور في مارس 2027.",
+   "body": [
+    "أعلنت حكومة الإمارات يوم الاثنين 23 نوفمبر 2026 في دبي عن Mira، مساعد شخصي يعمل بالذكاء الاصطناعي وينفّذ المعاملات الحكومية نيابة عن المستخدم بدل أن يكتفي بالإجابة عن الأسئلة. كشف عنه الشيخ محمد بن راشد آل مكتوم بحضور نحو ألف من كبار المسؤولين الاتحاديين، وعرض تفاصيله وزير شؤون مجلس الوزراء محمد القرقاوي. الفكرة واجهة واحدة على الهاتف لكل الخدمات الحكومية: يطلب المستخدم ما يريده بلغته اليومية، والمساعد يستخدم بياناته ووثائقه المحفوظة لدى الجهات الحكومية لتعبئة الطلب وإتمامه. وقال مسؤولون إن المساعد يتعامل مع المستخدم بلغته، وهو موجّه للمواطنين والمقيمين والزوار.",
+    "بحسب التقارير، يتاح Mira للجمهور في مارس 2027 ويبدأ بالخدمات ذات الأولوية: تجديد جواز السفر وبطاقة الهوية والإقامة، والخدمات الصحية والتعليمية، ثم يشمل كل الخدمات الحكومية قبل نهاية 2027. وهو جزء من خطة أعلنتها الإمارات في أبريل 2026 لتشغيل نصف الخدمات الحكومية عبر وكلاء الذكاء الاصطناعي خلال سنتين. ذكر وزراء أيضاً أن المساعد سيخدم الشركات، مثل متابعة تصاريح العمل وإجراءات الموظفين والوصول إلى الخدمات المناسبة لكل قطاع. لم تذكر المصادر التي قرأناها الشركة أو النموذج الذي بُني عليه Mira، ولا تفاصيل عن حماية البيانات."
+   ],
+   "biz": "إذا كانت شركتك تعمل في الإمارات أو توظف فيها، فالمتوقع خلال 2027 أن تنتقل معاملات مثل تصاريح العمل وتجديد الإقامات إلى محادثة مع مساعد واحد بدل التنقل بين عدة منصات، لكن لا شيء يتغير قبل مارس 2027 والتفاصيل الخاصة بالشركات ما زالت قليلة. الأهم لأصحاب الأعمال في المنطقة كلها أن العملاء سيعتادون إنجاز معاملة كاملة بمحادثة، وسيتوقعون المستوى نفسه من الشركات الخاصة. ابدأ بترتيب بياناتك وإجراءاتك، فهذا ما يعتمد عليه أي مساعد من هذا النوع."
+  },
+  "en": {
+   "title": "UAE unveils Mira, an AI assistant that completes government transactions, due in March 2027",
+   "desc": "On 23 November 2026 the UAE government unveiled Mira, a personal AI assistant that carries out government transactions, due to open in March 2027.",
+   "body": [
+    "On Monday 23 November 2026 in Dubai, the UAE government unveiled Mira, a personal AI assistant that carries out government transactions on the user's behalf instead of only answering questions. Sheikh Mohammed bin Rashid Al Maktoum revealed it in front of about 1,000 senior federal officials, and Minister of Cabinet Affairs Mohammad Al Gergawi presented the details. The idea is a single interface on the phone for all government services: the user asks in everyday language, and the assistant uses the personal data and documents that government entities already hold to fill in and complete the request. Officials said it works in the user's own language and is meant for citizens, residents and visitors.",
+    "According to reports, Mira becomes available to the public in March 2027, starting with priority services: passport, Emirates ID and residency renewals, plus healthcare and education, and it is due to cover all government services by the end of 2027. It is part of a plan the UAE announced in April 2026 to run half of government services through AI agents within two years. Ministers also said the assistant will serve companies, for example tracking work permits and employee procedures and finding the services relevant to each industry. The sources we read do not name the company or model behind Mira, and give no detail on data protection."
+   ],
+   "biz": "If your company operates or employs people in the UAE, expect tasks such as work permits and residency renewals to move during 2027 into a conversation with one assistant instead of several portals, but nothing changes before March 2027 and details for companies are still thin. The wider point for business owners across the region: customers will get used to finishing a whole transaction in a chat and will expect the same from private companies. Start by putting your data and procedures in order, because that is what any assistant of this kind depends on."
+  },
+  "sources": [
+   ["The National: UAE unveils government AI assistant called Mira to boost public services", "https://thenationalnews.com/news/uae/2026/11/23/uae-unveils-government-ai-assistant-called-mira-to-boost-public-services"],
+   ["Arab News: UAE unveils Mira AI assistant to handle government services", "https://arabnews.com/middle-east/uae-unveils-mira-ai-assistant-to-handle-government-services-3013726"],
+   ["Gulf News: Sheikh Mohammed says Mira will eliminate the need to navigate multiple platforms", "https://gulfnews.com/uae/sheikh-mohammed-says-uae-governments-new-ai-assistant-mira-will-eliminate-need-for-multiple-platforms-1.500758155"],
+   ["Gulf News: UAE launches Mira, AI assistant for government services", "https://gulfnews.com/uae/dubai/uae-launches-mira-ai-assistant-for-government-services-1.500757702"]
+  ]
  }
 ]
