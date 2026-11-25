@@ -635,5 +635,33 @@
    ["Gulf News: Sheikh Mohammed says Mira will eliminate the need to navigate multiple platforms", "https://gulfnews.com/uae/sheikh-mohammed-says-uae-governments-new-ai-assistant-mira-will-eliminate-need-for-multiple-platforms-1.500758155"],
    ["Gulf News: UAE launches Mira, AI assistant for government services", "https://gulfnews.com/uae/dubai/uae-launches-mira-ai-assistant-for-government-services-1.500757702"]
   ]
+ },
+ {
+  "date": "2026-11-24",
+  "slug": "google-workspace-mcp-ga-agents-rest-deadline",
+  "tag": {"ar": "أدوات الأعمال", "en": "Business tools"},
+  "ar": {
+   "title": "Google تتيح خوادم MCP لـ Workspace للجميع وتُلزم وكلاء الذكاء الاصطناعي باستخدامها من 1 فبراير 2027",
+   "desc": "أتاحت Google خوادم MCP وأداة سطر الأوامر لـ Workspace للجميع، وألزمت وكلاء الذكاء الاصطناعي بالوصول إلى Gmail و Drive عبرها من 1 فبراير 2027.",
+   "body": [
+    "أعلنت Google يوم الثلاثاء 24 نوفمبر 2026 أن خوادم MCP الخاصة بـ Google Workspace وأداة سطر الأوامر الرسمية Workspace CLI صارت متاحة بشكل عام لكل عملاء Workspace والمطورين. الخوادم تستضيفها Google نفسها وتعمل بمعيار MCP المفتوح، وتمنح أدوات الذكاء الاصطناعي طريقاً رسمياً للقراءة والعمل في Gmail و Drive و Docs و Sheets و Slides و Calendar و Chat و Tasks، وقالت الشركة إن Keep سيضاف قريباً. ومع الإعلان جاءت قاعدة جديدة: وكلاء الذكاء الاصطناعي والأدوات المشابهة يجب أن تصل إلى بيانات Workspace عبر MCP بدل استدعاء واجهات REST مباشرة، ويبدأ التطبيق التقني لهذه القاعدة في 1 فبراير 2027. التطبيقات العادية غير المعتمدة على وكلاء تواصل العمل بالواجهات الحالية بحسب التغطيات الصحفية، وGoogle تطلب فصلها في عميل OAuth مستقل عن عميل الوكيل.",
+    "أضافت Google أيضاً مستويين للاستخدام يبدآن بـ Gmail و Drive و Calendar: مستوى Standard مجاني ضمن حصص منشورة، وتقول الشركة إن أكثر من 99% من المطورين النشطين يقعون فيه، ومستوى Scaled للمشاريع التي تحتاج حصصاً أعلى، ويبدأ احتساب رسوم ما يتجاوز الحصة اليومية المجانية في 1 أبريل 2027. لم تنشر Google أسعاراً في الإعلان. المشاريع المستخدمة داخل المؤسسة فقط يستطيع المسؤول تعليمها كمشاريع داخلية لتبقى حدودها الأعلى ضمن اشتراك Workspace. وفي لوحة الإدارة، تحت Security ثم API Controls، يتحكم المسؤول في الأدوات والوكلاء المسموح لهم بالوصول، ويضع قواعد تطلب تأكيد المستخدم قبل الإجراءات الحساسة مثل مشاركة البيانات، ويراجع سجلاً لما فعله كل وكيل. تصل هذه الضوابط إلى النطاقات خلال نحو أسبوعين. تختلف التقارير في نقطة واحدة: بعضها يذكر أن موافقة الإنسان إلزامية قبل إرسال البريد أو تغيير المشاركة، بينما إعلان Google يتركها قواعد يضبطها المسؤول."
+   ],
+   "biz": "إذا كانت شركتك تعمل على Google Workspace وتستخدم أداة ذكاء اصطناعي أو أتمتة تقرأ البريد أو الملفات أو التقويم، اسأل مزوّدها الآن: هل سينتقل إلى MCP قبل 1 فبراير 2027؟ الأدوات التي لا تنتقل قد تتوقف عن الوصول إلى بياناتك. الجانب الإيجابي أن المسؤول صار يملك مكاناً واحداً يرى منه أي وكيل يصل إلى ماذا، ويستطيع فرض تأكيد بشري قبل الإرسال أو المشاركة. وغالباً لن تدفع الشركات الصغيرة شيئاً إضافياً، لكن راجع لوحة الاستخدام قبل أبريل 2027 إن كان لديك استخدام كثيف."
+  },
+  "en": {
+   "title": "Google makes Workspace MCP servers generally available and requires AI agents to use them from 1 February 2027",
+   "desc": "Google made its Workspace MCP servers and CLI generally available and will require AI agents to reach Gmail and Drive through them from 1 February 2027.",
+   "body": [
+    "On Tuesday 24 November 2026 Google announced that its Google Workspace MCP servers and the official Workspace CLI are generally available to all Workspace customers and developers. The servers are hosted by Google and built on the open MCP standard, giving AI tools an official route to read and act in Gmail, Drive, Docs, Sheets, Slides, Calendar, Chat and Tasks, with Keep listed as coming soon. The launch comes with a new rule: AI agents and similar tools must reach Workspace data through MCP instead of calling the REST APIs directly, and technical enforcement starts on 1 February 2027. Ordinary, non-agent apps keep working on the existing APIs according to press coverage, and Google asks developers to keep them on a separate OAuth client from the agent.",
+    "Google also introduced two usage tiers, starting with Gmail, Drive and Calendar. Standard is free within published quotas, and Google says more than 99% of active developers fall into it. Scaled is for projects that need higher quotas, with charges for usage above the daily free allowance starting on 1 April 2027. The announcement gives no prices. Projects used only inside one organization can be marked internal by an admin so their higher limits stay included in the Workspace subscription. In the Admin console, under Security then API Controls, admins decide which tools and agents get access, set rules that ask the user to confirm sensitive actions such as sharing data, and review a log of what each agent did. These controls reach domains over about two weeks. Reports differ on one point: some say human approval is mandatory before sending email or changing sharing, while Google's announcement describes it as rules the admin configures."
+   ],
+   "biz": "If your company runs on Google Workspace and uses an AI tool or automation that reads mail, files or calendars, ask the vendor now whether it will move to MCP before 1 February 2027. Tools that do not move may lose access to your data. The upside is that your admin now has one place to see which agent reaches what, and can require a human confirmation before sending or sharing. Most small companies will probably pay nothing extra, but check the usage dashboard before April 2027 if your usage is heavy."
+  },
+  "sources": [
+   ["Google Workspace Updates: MCP servers, CLI, standardized usage tiers, and admin policies", "https://workspaceupdates.googleblog.com/2026/11/mcp-servers-cli-standardized-usage-tiers-now-available.html"],
+   ["The Next Web: Google will make AI agents use new gateways to reach Gmail and Drive", "https://thenextweb.com/news/google-workspace-ai-agents-mcp-servers-rules"],
+   ["DEV Community: Google Workspace MCP Servers Are Generally Available, and REST API Access for AI Agents Ends Feb 1, 2027", "https://dev.to/paullovelace/google-workspace-mcp-servers-are-generally-available-and-rest-api-access-for-ai-agents-ends-feb-1-1n43"]
+  ]
  }
 ]
