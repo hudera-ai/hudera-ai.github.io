@@ -22,9 +22,9 @@
   <url><loc>https://hudera.ai/en/products/connect/</loc><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://hudera.ai/products/</loc><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://hudera.ai/en/products/</loc><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
-  <url><loc>https://hudera.ai/blog/ai-news/</loc><lastmod>2026-11-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://hudera.ai/blog/ai-news/</loc><lastmod>2026-11-25</lastmod><priority>0.7</priority></url>
   <url><loc>https://hudera.ai/blog/ai-models/</loc><lastmod>2026-11-23</lastmod><priority>0.7</priority></url>
-  <url><loc>https://hudera.ai/en/blog/ai-news/</loc><lastmod>2026-11-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://hudera.ai/en/blog/ai-news/</loc><lastmod>2026-11-25</lastmod><priority>0.7</priority></url>
   <url><loc>https://hudera.ai/en/blog/ai-models/</loc><lastmod>2026-11-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://hudera.ai/blog/ai-news/chatgpt-images-2-6-gifs/</loc><lastmod>2026-11-04</lastmod><priority>0.5</priority></url>
   <url><loc>https://hudera.ai/blog/ai-news/claude-sheets-whiteboards-data/</loc><lastmod>2026-11-10</lastmod><priority>0.5</priority></url>
@@ -64,4 +64,6 @@
   <url><loc>https://hudera.ai/en/blog/ai-news/uae-mira-government-ai-assistant/</loc><lastmod>2026-11-23</lastmod><priority>0.5</priority></url>
   <url><loc>https://hudera.ai/blog/ai-news/google-workspace-mcp-ga-agents-rest-deadline/</loc><lastmod>2026-11-24</lastmod><priority>0.5</priority></url>
   <url><loc>https://hudera.ai/en/blog/ai-news/google-workspace-mcp-ga-agents-rest-deadline/</loc><lastmod>2026-11-24</lastmod><priority>0.5</priority></url>
+  <url><loc>https://hudera.ai/blog/ai-news/cloudflare-search-for-agents-website-search/</loc><lastmod>2026-11-25</lastmod><priority>0.5</priority></url>
+  <url><loc>https://hudera.ai/en/blog/ai-news/cloudflare-search-for-agents-website-search/</loc><lastmod>2026-11-25</lastmod><priority>0.5</priority></url>
 </urlset>

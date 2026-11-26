@@ -663,5 +663,33 @@
    ["The Next Web: Google will make AI agents use new gateways to reach Gmail and Drive", "https://thenextweb.com/news/google-workspace-ai-agents-mcp-servers-rules"],
    ["DEV Community: Google Workspace MCP Servers Are Generally Available, and REST API Access for AI Agents Ends Feb 1, 2027", "https://dev.to/paullovelace/google-workspace-mcp-servers-are-generally-available-and-rest-api-access-for-ai-agents-ends-feb-1-1n43"]
   ]
+ },
+ {
+  "date": "2026-11-25",
+  "slug": "cloudflare-search-for-agents-website-search",
+  "tag": {"ar": "أدوات الأعمال", "en": "Business tools"},
+  "ar": {
+   "title": "Cloudflare تطلق Search for Agents: زر واحد يجعل موقعك قابلاً للبحث من وكلاء الذكاء الاصطناعي، على كل الخطط ومنها المجانية",
+   "desc": "أطلقت Cloudflare ميزة Search for Agents التي تفهرس موقعك وتفتح لوكلاء الذكاء الاصطناعي عنوان بحث مباشراً فيه، على كل الخطط ومنها المجانية.",
+   "body": [
+    "أعلنت Cloudflare يوم الأربعاء 25 نوفمبر 2026 عن ميزة Search for Agents. بتفعيل خيار واحد من لوحة التحكم أو عبر الـ API، تنشئ Cloudflare فهرساً لمحتوى موقعك باستخدام خدمتها AI Search، وتفتح على نطاقك عنوان بحث ثابتاً هو /.well-known/search. يرسل وكيل الذكاء الاصطناعي سؤاله إلى هذا العنوان فيستلم مقاطع من صفحاتك بصيغة Markdown مع مصادرها، لا إجابة مولّدة جاهزة، ثم يصوغ نموذجه الإجابة للمستخدم. الفكرة أن يجد الوكيل المعلومة الصحيحة في موقعك مباشرة بدل أن يتصفح الصفحات واحدة واحدة أو يخمّن. وتقول الشركة إن الوصول يبقى خاضعاً لإعدادات نطاقك، أي أن قواعد حظر الروبوتات و AI Crawl Control وجدار الحماية تظل سارية.",
+    "تقول Cloudflare إن الميزة متاحة من اليوم لكل العملاء، ومنهم أصحاب الخطة المجانية، ضمن حدود. وتصفها تغطيات صحفية بأنها ما زالت نسخة تجريبية (beta). وبحسب تغطيتين اطلعنا عليهما تنقلان عن وثائق الشركة، يشمل الاستخدام المجاني شهرياً 1,000 استعلام دلالي و1,000 استعلام نصي و5 ملايين رمز للفهرسة و10 غيغابايت من التخزين، وما يزيد على ذلك يُحتسب بنحو 0.75 دولار لكل 1,000 استعلام دلالي، ويبدأ احتساب الرسوم في 1 ديسمبر 2026. الفهرسة الافتراضية تتابع الروابط وخريطة الموقع وتعيد المزامنة كل 24 ساعة، وعلى الحسابات المجانية سقف يومي بنحو 500 صفحة. لم نتمكن من فتح صفحة الوثائق الرسمية نفسها اليوم، فراجع الأرقام هناك قبل الاعتماد عليها. وتبقى الفائدة العملية مرهونة بأن تبدأ أدوات الذكاء الاصطناعي فعلاً باستخدام هذا العنوان."
+   ],
+   "biz": "إذا كان موقع شركتك يمر عبر Cloudflare، فهذه طريقة قليلة التكلفة ليصل مساعدو الذكاء الاصطناعي إلى أسعارك وخدماتك وساعات عملك من موقعك نفسه بدل مصادر قديمة. قبل التفعيل تأكد أن الموقع لا يعرض صفحات لا تريد فهرستها، وراقب عدد الاستعلامات لأن ما يتجاوز الحصة المجانية يُحتسب عليك من 1 ديسمبر. ولا تتوقع أثراً فورياً على الزيارات أو المبيعات: المعيار جديد ولا يُعرف بعد كم وكيلاً سيستخدمه."
+  },
+  "en": {
+   "title": "Cloudflare launches Search for Agents: one switch makes your website searchable by AI agents, on every plan including Free",
+   "desc": "Cloudflare launched Search for Agents, which indexes your site and gives AI agents a direct search address on it, on every plan including Free.",
+   "body": [
+    "On Wednesday 25 November 2026 Cloudflare announced Search for Agents. Turning on one option in the dashboard, or through the API, makes Cloudflare build an index of your site's content with its AI Search service and open a fixed search address on your domain at /.well-known/search. An AI agent sends its question to that address and gets back passages from your pages in Markdown with their sources, not a ready-made generated answer, and the agent's own model then writes the reply for the user. The aim is for an agent to find the right information on your site directly instead of browsing page by page or guessing. Cloudflare says access stays subject to your domain settings, so bot blocking rules, AI Crawl Control and the firewall still apply.",
+    "Cloudflare says the feature is available from today to all customers, including those on the Free plan, with limits. Press coverage describes it as still in beta. According to two reports we read that cite the company's documentation, the free monthly allowance covers 1,000 semantic queries, 1,000 full-text queries, 5 million indexing tokens and 10 GB of storage, usage above that costs about $0.75 per 1,000 semantic queries, and billing starts on 1 December 2026. The default crawl follows links and the sitemap and re-syncs every 24 hours, with a daily ceiling of about 500 pages on free accounts. We could not open the official documentation page itself today, so check the numbers there before relying on them. The practical value also depends on AI tools actually starting to use this address."
+   ],
+   "biz": "If your company's website runs through Cloudflare, this is a low-cost way for AI assistants to reach your prices, services and opening hours from your own site instead of stale third-party sources. Before switching it on, make sure the site does not expose pages you would not want indexed, and watch the query count, because usage above the free allowance is billed from 1 December. Do not expect an immediate effect on traffic or sales: the convention is new and nobody knows yet how many agents will use it."
+  },
+  "sources": [
+   ["Cloudflare Blog: Introducing Search for Agents", "https://blog.cloudflare.com/search-for-agents/"],
+   ["Unite.AI: Cloudflare Launches Automatic Website Search for AI Agents", "https://www.unite.ai/cloudflare-launches-automatic-website-search-for-ai-agents/"],
+   ["i10x: Cloudflare Search for Agents: What a Site Search Endpoint for AI Costs You", "https://i10x.ai/news/cloudflare-search-for-agents-well-known-search-endpoint-cost"]
+  ]
  }
 ]
