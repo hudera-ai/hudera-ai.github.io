@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس هوديرا</title>
+<meta name="description" content="مقياس هوديرا: اختبار للشخصية والتوجهات يجمع أفضل المقاييس العالمية، مع تقرير PDF مفصل ونسخة للصغار بعمر 12 سنة.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="مقياس هوديرا للشخصية والتوجهات">
+<meta property="og:description" content="اعرف شخصيتك وتوجهك المهني في دقائق، واحصل على تقرير PDF مفصل. نسخة للبالغين ونسخة للصغار.">
+<meta property="og:url" content="https://hudera.ai/scale/">
+<meta property="og:image" content="https://hudera.ai/og.png">
+<link rel="canonical" href="https://hudera.ai/scale/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233D5AFE'/%3E%3Cpath d='M10.2 6.2V25.4M10.2 17.6C10.2 14 12.6 12.6 15.3 12.6c3.4 0 5.9 1.8 5.9 5.4v4.4' fill='none' stroke='%23fff' stroke-width='3.3' stroke-linecap='round'/%3E%3Ccircle cx='20.6' cy='24.7' r='2.7' fill='%2316C79A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Readex+Pro:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one narrow column. Home picks a version; quiz is one question per screen; result is a stack of cards that are the same sections the A4 PDF report is built from. */
+:root{
+  /* ألوان الشعار: أزرق #3D5AFE، نقطة تركواز #16C79A، حبر #0B1220 */
+  --bg:#f5f7fc; --surface:#ffffff; --ink:#0B1220; --muted:#5d687e;
+  --primary:#3D5AFE; --on-primary:#ffffff; --accent:#16C79A; --warn:#d99a00;
+  --line:#e6e9f2; --soft:#eef1fb; --ai:#9ba3b3;
+  --font-display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans Arabic","Readex Pro",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1220; --surface:#121c30; --ink:#e9eff8; --muted:#8fa0ba;
+    --primary:#7189ff; --on-primary:#08101f; --accent:#2fdcb0; --warn:#f0b83a;
+    --line:#243350; --soft:#182640; --ai:#8fa0ba;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1220; --surface:#121c30; --ink:#e9eff8; --muted:#8fa0ba;
+  --primary:#7189ff; --on-primary:#08101f; --accent:#2fdcb0; --warn:#f0b83a;
+  --line:#243350; --soft:#182640; --ai:#8fa0ba;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.7;min-height:100%}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 48px}
+.brand{display:flex;align-items:center;justify-content:space-between;padding:6px 0 18px}
+.brand>span:last-child{color:var(--muted);font-size:13px}
+.logo{display:inline-flex;align-items:center;gap:10px;direction:ltr;unicode-bidi:isolate;font-family:Inter,system-ui,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1;color:var(--ink)}
+.logo .mk{width:32px;height:32px;flex:none}
+.logo em{font-style:normal;color:var(--ai);font-weight:700}
+.logo.sm{font-size:15px;gap:7px}.logo.sm .mk{width:22px;height:22px}
+h1,h2,h3{font-family:var(--font-display);margin:0;text-wrap:balance;line-height:1.35}
+h1{font-size:30px;font-weight:700}
+h2{font-size:22px;font-weight:600}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+.muted{color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.stack{display:flex;flex-direction:column;gap:14px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{background:var(--primary);color:var(--on-primary);border:0;border-radius:12px;padding:14px 20px;font-weight:600;font-size:17px;width:100%}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.6;cursor:default}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+input[type=text]{font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.hero{padding:8px 0 4px}
+.hero h1{margin-bottom:10px}
+.axes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0;padding:0;list-style:none}
+.axes li{background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.5}
+.axes li b{display:block;font-family:var(--font-display);font-weight:600;font-size:14px}
+.axes li.wide{grid-column:1/-1}
+.modes{display:grid;gap:12px}
+.mode{text-align:start;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:2px}
+.mode:hover{border-color:var(--primary)}
+.mode b{font-family:var(--font-display);font-size:18px;font-weight:600}
+.mode span{color:var(--muted);font-size:14px}
+.mode em{font-style:normal;color:var(--primary);font-weight:600;margin-top:6px}
+.bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--primary);border-radius:6px;transition:width .25s}
+.qmeta{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin:10px 0 18px;font-variant-numeric:tabular-nums}
+.q{font-size:23px;min-height:5.4em;margin-bottom:18px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;text-align:start;font-size:16px;display:flex;align-items:center;gap:12px}
+.opt .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.opt[aria-checked="true"]{border-color:var(--primary);background:var(--soft)}
+.opt[aria-checked="true"] .n{background:var(--primary);color:var(--on-primary)}
+.nav{display:flex;margin-top:16px}
+.nav button{background:none;border:0;color:var(--muted);padding:8px 4px;font-size:15px}
+/* sections shared by screen and report */
+.top{display:flex;flex-direction:column;gap:6px}
+.kicker{color:var(--muted);font-size:14px}
+.title{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--primary);line-height:1.3}
+.cmp{position:relative;width:100%;aspect-ratio:340/300;margin:4px auto}
+.cmp svg{width:100%;height:100%;display:block}
+.cl{position:absolute;white-space:nowrap;text-align:center;line-height:1.3;font-weight:600;font-size:14px}
+.cl i{display:block;font-style:normal;font-weight:400;font-size:12px;color:var(--muted)}
+.list{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.list li{position:relative;padding-inline-start:18px}
+.list li::before{content:"";position:absolute;inset-inline-start:0;top:.7em;width:8px;height:8px;border-radius:50%;background:var(--primary)}
+.list.warn li::before{background:var(--warn)}
+.row{display:flex;flex-direction:column;gap:4px;padding:10px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.row .h{display:flex;justify-content:space-between;gap:8px;font-weight:500}
+.row .h span:last-child{font-variant-numeric:tabular-nums;color:var(--muted)}
+.track{height:10px;background:var(--soft);border-radius:8px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--primary);border-radius:8px}
+.row.top1 .track i{background:var(--accent)}
+.row small{color:var(--muted);font-size:14px;line-height:1.55}
+.row small b,.blk b.g{color:var(--primary)}
+.code{font-family:var(--font-display);font-size:30px;font-weight:700;letter-spacing:.14em;direction:ltr;text-align:right;color:var(--primary)}
+.blk{background:var(--soft);border-radius:10px;padding:10px 12px;margin-top:10px;line-height:1.6}
+.blk .h{display:flex;justify-content:space-between;gap:8px}
+.blk .h span{color:var(--muted);font-variant-numeric:tabular-nums}
+.plan{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.plan .blk{margin-top:0;font-size:14px}
+.hl{background:var(--soft)}
+.note{font-size:13px;color:var(--muted);line-height:1.6}
+.sec p+p{margin-top:6px}
+textarea{width:100%;min-height:150px;font:inherit;font-size:14px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px}
+.foot{text-align:center;margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:6px}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+
+/* ---------- التقرير (A4) ---------- */
+#reportRoot{position:absolute;left:-12000px;top:0;width:794px;direction:rtl}
+#rep{width:794px;direction:rtl}
+.rpage{--bg:#fff;--surface:#fff;--ink:#0B1220;--muted:#5d687e;--primary:#3D5AFE;--accent:#16C79A;--warn:#d99a00;--line:#e3e7f1;--soft:#eef1fb;
+  width:794px;height:1120px;position:relative;overflow:hidden;background:#fff;color:#0B1220;font-family:var(--font-body);font-size:16px;line-height:1.65;direction:rtl}
+.rhead{position:absolute;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 44px;border-bottom:3px solid #3D5AFE;font-family:var(--font-display);font-weight:600;font-size:15px}
+.rband{position:absolute;top:0;left:0;right:0;height:200px;background:#0B1220;color:#fff;padding:32px 44px;border-bottom:6px solid #3D5AFE;display:flex;flex-direction:column;gap:16px}
+.rband .rt{font-family:var(--font-display);font-size:30px;font-weight:700;line-height:1.35}
+.rband .rm{color:#b9c3d8;font-size:15px;display:flex;gap:14px}
+.rband .rm b{color:#fff;font-weight:600}
+.rbody{position:absolute;top:84px;bottom:54px;left:44px;right:44px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.cover .rbody{top:226px}
+.rfoot{position:absolute;bottom:0;left:0;right:0;height:40px;display:flex;justify-content:space-between;align-items:center;padding:0 44px;font-size:12px;color:#5d687e;border-top:1px solid #e3e7f1}
+.rsec{border:1px solid #e3e7f1;border-radius:14px;padding:16px 22px;background:#fff}
+.rsec.hl{background:#eef1fb;border-color:#dbe1f7}
+.rsec h3{color:#3D5AFE;font-size:20px;margin-bottom:6px}
+.rbody>.rsec.fill{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+.rpage .title{font-size:34px}
+.rpage .row{padding:8px 0;gap:6px}
+.rpage .track{height:12px}
+.rpage .row small{font-size:14px;line-height:1.6}
+.rpage .cmp{max-width:470px}
+.rpage .plan{grid-template-columns:repeat(4,1fr)}
+.rpage .plan .blk{font-size:13.5px}
+.rpage .blk{margin-top:10px;font-size:14.5px;line-height:1.6;padding:10px 14px}
+.rpage .list{gap:6px;margin-top:8px}
+.rpage .note{font-size:12.5px}
+.rpage .code{font-size:32px;text-align:right}
+@media print{
+  @page{size:A4;margin:0}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff}
+  .wrap{display:none}
+  #reportRoot{position:static;left:auto}
+  .rpage{break-after:page}
+  .rpage:last-child{break-after:auto}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="hmark" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#3D5AFE"/><path d="M10.2 6.2V25.4M10.2 17.6C10.2 14 12.6 12.6 15.3 12.6c3.4 0 5.9 1.8 5.9 5.4v4.4" fill="none" stroke="#fff" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20.6" cy="24.7" r="2.7" fill="#16C79A"/></symbol></svg>
+<div class="wrap">
+  <div class="brand"><span class="logo" role="img" aria-label="HUDERA AI"><svg class="mk" aria-hidden="true"><use href="#hmark"/></svg><span>hudera <em>AI</em></span></span><span>مقياس هوديرا للشخصية والتوجهات</span></div>
+  <main id="app"></main>
+  <p class="note foot"><span class="logo sm" role="img" aria-label="HUDERA AI"><svg class="mk" aria-hidden="true"><use href="#hmark"/></svg><span>hudera <em>AI</em></span></span><br>hudera.ai</p>
+</div>
+<div id="reportRoot" aria-hidden="true"></div>
+
+<script id="core">
+/* ================= بنك أسئلة البالغين (51) =================
+   s = المقياس الفرعي، r = 1 للعبارة المعكوسة
+   F: الخمس الكبرى | B: السلوك DISC | T: نمط التفكير | R: الميول المهنية | Q: الذكاء العاطفي */
+const ITEMS=[
+{s:"F.O",t:"أستمتع بتجربة أفكار وطرق جديدة حتى لو لم تُجرَّب من قبل."},
+{s:"F.O",t:"أفضّل الروتين المعروف على التغيير.",r:1},
+{s:"F.O",t:"كثيرًا ما أتخيل حلولًا غير تقليدية للمشكلات."},
+{s:"F.C",t:"أنجز مهامي في موعدها دون أن يذكّرني أحد."},
+{s:"F.C",t:"أراجع عملي وأهتم بالتفاصيل الصغيرة قبل تسليمه."},
+{s:"F.C",t:"أؤجل المهام المهمة إلى اللحظة الأخيرة.",r:1},
+{s:"F.E",t:"أشعر بالنشاط عندما أكون وسط مجموعة من الناس."},
+{s:"F.E",t:"أبادر بالتعرف على أشخاص جدد."},
+{s:"F.E",t:"أفضّل العمل بصمت بعيدًا عن الاجتماعات والنقاشات الكثيرة.",r:1},
+{s:"F.A",t:"أضع نفسي مكان الآخرين قبل أن أحكم عليهم."},
+{s:"F.A",t:"أميل إلى الجدال حتى أثبت أن رأيي هو الصحيح.",r:1},
+{s:"F.A",t:"أتنازل أحيانًا عن رأيي للحفاظ على جو الفريق."},
+{s:"F.N",t:"أقلق بسرعة عندما تتغير الظروف أو تتراكم المهام."},
+{s:"F.N",t:"أحافظ على هدوئي في المواقف الصعبة.",r:1},
+{s:"F.N",t:"تتأثر حالتي المزاجية بسهولة بالانتقاد أو الأخطاء."},
+{s:"B.D",t:"أحب أن أقود وأتخذ القرار بدل انتظار الآخرين."},
+{s:"B.D",t:"أتحمل المخاطرة من أجل نتيجة كبيرة وسريعة."},
+{s:"B.D",t:"أواجه المشكلات مباشرة حتى لو أزعج ذلك بعض الناس."},
+{s:"B.I",t:"أنجح في إقناع الناس وإثارة حماسهم لفكرة ما."},
+{s:"B.I",t:"أتحدث بسهولة أمام الآخرين وأحب أن أكون في قلب الحوار."},
+{s:"B.I",t:"أشرح أفكاري بالقصص والأمثلة وبحماس."},
+{s:"B.S",t:"أفضّل بيئة عمل هادئة ومستقرة يمكن توقع ما سيحدث فيها."},
+{s:"B.S",t:"أنصت جيدًا وأدعم زملائي بصبر."},
+{s:"B.S",t:"أحتاج وقتًا للتأقلم قبل قبول تغيير كبير في طريقة العمل."},
+{s:"B.C",t:"أتأكد من صحة المعلومات والأرقام قبل اتخاذ أي قرار."},
+{s:"B.C",t:"أفضّل العمل وفق قواعد وإجراءات ومعايير جودة واضحة."},
+{s:"B.C",t:"أقارن الخيارات بدقة قبل أن ألتزم بأحدها."},
+{s:"T.A",t:"أعتمد على الأرقام والحقائق والمنطق أكثر من الإحساس عند اتخاذ القرار."},
+{s:"T.A",t:"أحب تفكيك المشكلة إلى أجزاء وفحص كل جزء على حدة."},
+{s:"T.B",t:"أضع خطة بخطوات وجدول زمني قبل أن أبدأ أي عمل."},
+{s:"T.B",t:"أرتاح عندما تسير الأمور وفق نظام متفق عليه."},
+{s:"T.C",t:"أنتبه لمشاعر الناس وأراعيها عند اتخاذ القرار."},
+{s:"T.C",t:"أتعلم أفضل بالنقاش وتبادل الخبرات مع الآخرين."},
+{s:"T.D",t:"أرى الصورة الكبرى وأربط بين أفكار تبدو متباعدة."},
+{s:"T.D",t:"أفضّل تجربة فكرة جديدة على اتباع خطوات مرسومة مسبقًا."},
+{s:"R.R",t:"أستمتع بإصلاح الأجهزة أو بناء شيء بيدي."},
+{s:"R.R",t:"أفضّل العمل بالأدوات والمعدات أو في الميدان على العمل المكتبي."},
+{s:"R.I",t:"أستمتع بالبحث وتحليل البيانات لفهم سبب حدوث شيء ما."},
+{s:"R.I",t:"أحب حل المسائل المعقدة التي تحتاج تفكيرًا عميقًا."},
+{s:"R.A",t:"أستمتع بالتصميم أو الكتابة أو صناعة المحتوى والفيديو."},
+{s:"R.A",t:"أحب التعبير عن أفكاري بطرق أصيلة وغير مألوفة."},
+{s:"R.S",t:"أستمتع بتعليم الآخرين أو تدريبهم ومساعدتهم على النمو."},
+{s:"R.S",t:"أرتاح لمساعدة الناس في حل مشكلاتهم الدراسية أو الشخصية."},
+{s:"R.E",t:"أستمتع بالإقناع والتفاوض وبيع الأفكار أو المنتجات."},
+{s:"R.E",t:"أحب إطلاق مشروع أو قيادة فريق لتحقيق هدف تجاري."},
+{s:"R.C",t:"أستمتع بتنظيم الملفات والجداول والبيانات وضبط تفاصيلها."},
+{s:"R.C",t:"أرتاح لاتباع نظام عمل واضح وإنجاز مهام محددة بدقة."},
+{s:"Q",t:"أنتبه لمشاعري وأعرف أسباب غضبي أو توتري."},
+{s:"Q",t:"أستطيع تهدئة نفسي قبل الرد في المواقف المشحونة."},
+{s:"Q",t:"ألاحظ تغيّر مزاج من حولي حتى لو لم يتحدثوا."},
+{s:"Q",t:"أجد صعوبة في فهم سبب انزعاج الآخرين مني.",r:1}
+];
+
+/* ================= بنك أسئلة الصغار (36) =================
+   I: الميول (R,I,A,S,E,C) | L: المهارات الحياتية | S: السلوك الاجتماعي (D,I,S,C) */
+const KITEMS=[
+{s:"I.R",t:"أحب أن أفك الأشياء وأركّبها لأعرف كيف تعمل."},
+{s:"I.R",t:"أحب الأنشطة التي أستخدم فيها يدي مثل البناء والتجارب والأعمال اليدوية."},
+{s:"I.I",t:"أحب أن أسأل «لماذا؟» و«كيف؟» وأبحث عن الإجابة بنفسي."},
+{s:"I.I",t:"أستمتع بحل الألغاز والمسائل الصعبة."},
+{s:"I.A",t:"أحب الرسم أو التصميم أو الكتابة أو تأليف القصص."},
+{s:"I.A",t:"أحب أن أصنع شيئًا جديدًا من خيالي."},
+{s:"I.S",t:"أحب مساعدة أصدقائي وشرح الدروس لهم."},
+{s:"I.S",t:"أشعر بالسعادة عندما أفيد شخصًا أو أهتم به."},
+{s:"I.E",t:"أحب أن أقود مجموعة وأنظّم فكرة أو نشاطًا."},
+{s:"I.E",t:"أحب إقناع الآخرين بفكرتي أو بيع شيء بسيط في مشروع صغير."},
+{s:"I.C",t:"أحب ترتيب أغراضي وجدول مذاكرتي."},
+{s:"I.C",t:"أرتاح عندما أتبع خطوات وقواعد واضحة."},
+{s:"L.com",t:"أستطيع شرح فكرتي للآخرين بوضوح."},
+{s:"L.com",t:"أتحدث أمام زملائي دون خوف كبير."},
+{s:"L.coop",t:"أستمتع بالعمل مع مجموعة لإنجاز مهمة."},
+{s:"L.coop",t:"أستمع لرأي أصدقائي حتى لو كان مختلفًا عن رأيي."},
+{s:"L.prob",t:"عندما تواجهني مشكلة أفكر في أكثر من حل."},
+{s:"L.prob",t:"لا أستسلم بسرعة عندما تكون المسألة صعبة."},
+{s:"L.crea",t:"تأتيني أفكار جديدة ومختلفة كثيرًا."},
+{s:"L.crea",t:"أحب تجربة طريقة جديدة بدل تكرار الطريقة نفسها."},
+{s:"L.time",t:"أبدأ واجباتي في وقتها دون أن يذكّرني أحد."},
+{s:"L.time",t:"أحافظ على ترتيب كتبي وأدواتي."},
+{s:"L.resp",t:"أنفذ ما أعد به حتى لو كان صعبًا."},
+{s:"L.resp",t:"أعترف بخطئي وأحاول إصلاحه."},
+{s:"L.init",t:"أبدأ بنفسي دون انتظار من يطلب مني."},
+{s:"L.init",t:"أحاول تعلّم أشياء جديدة بنفسي من الكتب أو الإنترنت."},
+{s:"L.calm",t:"أهدأ بسرعة عندما أغضب."},
+{s:"L.calm",t:"أستطيع الصبر والانتظار لأحصل على شيء أريده."},
+{s:"S.D",t:"أحب أن أكون قائد الفريق في الألعاب والأنشطة."},
+{s:"S.D",t:"أقول رأيي بصراحة حتى لو خالفني الآخرون."},
+{s:"S.I",t:"أتعرف على أصدقاء جدد بسهولة."},
+{s:"S.I",t:"أحب أن أحكي القصص وأُضحك من حولي."},
+{s:"S.S",t:"أنتبه عندما يكون صديقي حزينًا وأحاول مساعدته."},
+{s:"S.S",t:"أفضّل الهدوء وحل الخلافات بدل الشجار."},
+{s:"S.C",t:"أراجع واجبي حتى أتأكد أنه صحيح."},
+{s:"S.C",t:"أحب أن تكون الأمور واضحة ومرتبة قبل أن أبدأ."}
+];
+
+/* ================= ترتيب العرض (ثابت) ================= */
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function makeOrder(items,seed){
+  const rnd=mulberry(seed), a=items.map((_,i)=>i), k=i=>items[i].s;
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  for(let i=1;i<a.length;i++){
+    if(k(a[i])===k(a[i-1])){
+      for(let j=i+1;j<a.length;j++){
+        if(k(a[j])!==k(a[i-1]) && (i+1>=a.length || k(a[j])!==k(a[i+1]) || j===i+1)){[a[i],a[j]]=[a[j],a[i]];break}
+      }
+    }
+  }
+  return a;
+}
+const ORDER={adult:makeOrder(ITEMS,2026),kid:makeOrder(KITEMS,12)};
+
+/* ================= التصحيح ================= */
+function pcts(items,ans){
+  const sums={},cnt={};
+  items.forEach((it,i)=>{const v=it.r?6-ans[i]:ans[i];sums[it.s]=(sums[it.s]||0)+v;cnt[it.s]=(cnt[it.s]||0)+1});
+  const p={};for(const k in sums)p[k]=Math.round(((sums[k]/cnt[k])-1)/4*100);
+  return p;
+}
+const avg=(...k)=>Math.round(k.reduce((a,x)=>a+x,0)/k.length);
+
+function score(ans){ /* البالغين */
+  const p=pcts(ITEMS,ans);
+  const domains={
+    exec:avg(p["F.C"],p["B.C"],p["T.B"]),
+    infl:avg(p["F.E"],p["B.D"],p["B.I"]),
+    rel:avg(p["F.A"],p["B.S"],p["T.C"],p["Q"]),
+    strat:avg(p["F.O"],p["T.A"],p["T.D"],p["R.I"])
+  };
+  const tie={"R.R":p["T.B"],"R.I":p["T.A"],"R.A":p["T.D"],"R.S":p["T.C"],"R.E":avg(p["F.E"],p["B.D"]),"R.C":p["B.C"]};
+  const holland=["R.R","R.I","R.A","R.S","R.E","R.C"].sort((a,b)=>p[b]-p[a]||tie[b]-tie[a]).map(x=>x.slice(2));
+  const rank=(pre,l)=>l.slice().sort((a,b)=>p[pre+b]-p[pre+a]);
+  return {p,domains,domainRank:Object.keys(domains).sort((a,b)=>domains[b]-domains[a]),
+    disc:rank("B.",["D","I","S","C"]),think:rank("T.",["A","B","C","D"]),holland,calm:avg(100-p["F.N"],p["Q"])};
+}
+
+function scoreKid(ans){ /* الصغار */
+  const p=pcts(KITEMS,ans);
+  const domains={
+    strat:avg(p["L.prob"],p["L.crea"],p["I.I"]),
+    exec:avg(p["L.time"],p["L.resp"],p["I.C"]),
+    infl:avg(p["L.com"],p["L.init"],p["S.D"],p["S.I"]),
+    rel:avg(p["L.coop"],p["L.calm"],p["S.S"],p["I.S"])
+  };
+  const tie={R:domains.exec,I:domains.strat,A:domains.strat,S:domains.rel,E:domains.infl,C:domains.exec};
+  const fields=["R","I","A","S","E","C"].sort((a,b)=>p["I."+b]-p["I."+a]||tie[b]-tie[a]);
+  const skills=["com","coop","prob","crea","time","resp","init","calm"].map(k=>({k,v:p["L."+k]}));
+  return {p,domains,domainRank:Object.keys(domains).sort((a,b)=>domains[b]-domains[a]),fields,skills,
+    skillsDesc:skills.slice().sort((a,b)=>b.v-a.v),skillsAsc:skills.slice().sort((a,b)=>a.v-b.v),
+    social:["D","I","S","C"].sort((a,b)=>p["S."+b]-p["S."+a])};
+}
+</script>
+
+<script id="ui">
+/* ================= محتوى البالغين ================= */
+const BIG5={
+ O:{n:"الانفتاح على التجربة",
+  hi:{t:"عقلك فضولي ومبتكر؛ تلتقط الفرص قبل غيرك وتحب تحويل الأفكار الجديدة إلى شيء ملموس.",g:"حوّل أفكارك إلى خطوات صغيرة، واختر فكرة واحدة تكملها قبل الانتقال لغيرها."},
+  mid:{t:"توازن بين الجديد والمجرَّب؛ تتبنى التغيير حين تقتنع به وتحمي ما ينجح.",g:"خصّص وقتًا أسبوعيًا لتجربة أداة أو طريقة جديدة في مجالك."},
+  lo:{t:"عملي وواقعي؛ تعتمد على ما ثبتت فعاليته، ويثق الناس في ثباتك وبعدك عن المجازفات غير المحسوبة.",g:"جرّب كل شهر تجربة صغيرة جديدة (دورة، أداة، طريقة عمل) لتوسّع خياراتك دون مخاطرة."}},
+ C:{n:"الانضباط والإتقان",
+  hi:{t:"منظم وموثوق؛ تُنجز في الموعد وتهتم بالجودة، وهذه من أكثر السمات ارتباطًا بالنجاح المهني.",g:"حدّد «مستوى كافيًا» لكل مهمة حتى لا يتحول الإتقان إلى بطء."},
+  mid:{t:"تنضبط عندما تتطلب المهمة ذلك وتحتفظ بمرونتك.",g:"اعتمد قائمة من ثلاث أولويات يوميًا لتحوّل مرونتك إلى إنجاز ثابت."},
+  lo:{t:"مرن وعفوي وتتكيف بسرعة مع المتغيرات، وتجيد العمل حين تتبدل الأولويات.",g:"استخدم تقويمًا وتنبيهات للمواعيد، وقسّم المهام الكبيرة إلى مهام صغيرة بمواعيد قصيرة."}},
+ E:{n:"الانبساطية",
+  hi:{t:"طاقتك تجذب الناس؛ تبادر وتبني العلاقات بسرعة وتجيد التأثير في الاجتماعات والتفاوض.",g:"امنح الآخرين مساحة للحديث قبل الحسم، وخصّص وقتًا للتركيز العميق."},
+  mid:{t:"ترتاح مع الناس وفي العمل الفردي على حد سواء، وهذه مرونة تناسب أدوارًا متنوعة.",g:"اختر لقاءً واحدًا أسبوعيًا تبادر فيه بالحديث لتقوّي حضورك."},
+  lo:{t:"هادئ وعميق؛ تركّز طويلًا وتختار كلماتك بعناية، ويثق الناس في رأيك حين تتحدث.",g:"تدرّب على مشاركة رأيك مبكرًا في الاجتماعات بجملة واحدة على الأقل."}},
+ A:{n:"التوافق والتعاون",
+  hi:{t:"متعاون ومتفهّم؛ تبني الثقة وتجمع الفريق وتخفف الخلافات، وهذه صفة قيادية مهمة.",g:"تدرّب على قول «لا» والاعتراض بلطف عند الحاجة حتى لا تتحمل فوق طاقتك."},
+  mid:{t:"تجمع بين التعاون والدفاع عن رأيك، وهذا توازن ممتاز في العمل الجماعي.",g:"قبل أي نقاش حاد، لخّص وجهة نظر الطرف الآخر ثم اعرض رأيك."},
+  lo:{t:"صريح وتنافسي؛ لا تتردد في الاعتراض وتدفع الجودة إلى الأعلى وتجيد التفاوض.",g:"اسأل سؤالًا يوضح وجهة نظر الآخر قبل الاعتراض، فهذا يزيد تأثيرك ويحفظ العلاقة."}},
+ N:{n:"الحساسية للضغوط",
+  hi:{t:"حسّاس لما حولك وتلتقط المخاطر مبكرًا، وهذا يجعلك دقيقًا ومتحسبًا للمشكلات.",g:"ابنِ روتينًا للتهدئة (تنفس، مشي قصير، كتابة ما يقلقك) وقسّم الضغط إلى مهام صغيرة."},
+  mid:{t:"تتعامل مع أغلب الضغوط بتماسك، وتحتاج دعمًا حين تتراكم.",g:"راقب علامات الإجهاد المبكرة وخذ فواصل قصيرة قبل أن تتراكم المهام."},
+  lo:{t:"هادئ ومتزن تحت الضغط، ومن حولك يستمدون منك الطمأنينة.",g:"أنصت لقلق الآخرين بجدية حتى لا يبدو هدوؤك لا مبالاة."}}
+};
+const DISC={
+ D:{n:"القيادي الحاسم",d:"تتحرك نحو النتيجة بسرعة، وتتحمل المسؤولية وتحسم القرارات الصعبة.",w:"تعمل أفضل مع أهداف واضحة وصلاحيات كافية وتحديات.",g:"أصغِ أكثر قبل الحسم، وشارك الفريق في التفاصيل."},
+ I:{n:"المؤثر المعبّر",d:"تلهم وتقنع وتبني الحماس حول الأفكار، وتجيد العروض والتواصل.",w:"تعمل أفضل مع جمهور وتفاعل وحرية في التعبير.",g:"ثبّت وعودك بخطوات ومواعيد مكتوبة وتابع التفاصيل."},
+ S:{n:"المستقر الداعم",d:"ثابت وصبور، تدعم الفريق وتحافظ على استقرار العمل والعلاقات.",w:"تعمل أفضل في بيئة مستقرة وواضحة مع تقدير لجهدك.",g:"تدرّب على طرح رأيك وطلب التغيير بوضوح قبل أن يتراكم الضيق."},
+ C:{n:"الملتزم التحليلي",d:"تهتم بالدقة والجودة وتبني قراراتك على البيانات والمعايير.",w:"تعمل أفضل مع وقت كافٍ للتحليل ومعايير واضحة.",g:"حدّد وقتًا للقرار حتى لا يتحول التحليل إلى تأخير، وتقبّل «جيد بما يكفي» أحيانًا."}
+};
+const THINK={
+ A:{n:"التحليلي المنطقي",d:"تفكر بالأرقام والحقائق وتفكّك المشكلات بدقة.",w:"تتعلم أفضل بالأدلة والأمثلة والبيانات.",g:"اربط تحليلك بقصة بسيطة حتى يتبناه الآخرون."},
+ B:{n:"التنظيمي التنفيذي",d:"تفكر بالخطوات والجداول وتحب الأنظمة الواضحة.",w:"تتعلم أفضل بالتسلسل والتدريب العملي المنظّم.",g:"اترك مساحة للتجريب خارج الخطة لاكتشاف حلول جديدة."},
+ C:{n:"العاطفي الاجتماعي",d:"تفكر بالناس وتفهم أثر القرار على من حولك.",w:"تتعلم أفضل بالنقاش وتبادل الخبرات.",g:"أضف معيارًا رقميًا لقراراتك لتوازن بين الإحساس والحقائق."},
+ D:{n:"الإبداعي الاستراتيجي",d:"تفكر بالصورة الكبرى وتربط الأفكار وتحب التجريب.",w:"تتعلم أفضل بالاستكشاف والمشاريع المفتوحة.",g:"حوّل رؤيتك إلى خطة بمراحل ومؤشرات قياس."}
+};
+const RIASEC={
+ R:{n:"العملي الواقعي",c:"الهندسة والتشغيل والأنظمة التقنية",m:"الهندسة، التقنيات التطبيقية، الميكاترونكس، الحاسبات"},
+ I:{n:"الاستقصائي التحليلي",c:"تحليل البيانات والبحث وهندسة الذكاء الاصطناعي",m:"علوم الحاسب، الذكاء الاصطناعي، الإحصاء، العلوم، الطب والبحث"},
+ A:{n:"الفني الإبداعي",c:"التصميم وصناعة المحتوى والفيديو وتجربة المستخدم",m:"التصميم، الإعلام، الفنون، العمارة، اللغات"},
+ S:{n:"الاجتماعي",c:"التدريب والتعليم ودعم العملاء والموارد البشرية",m:"التربية، علم النفس، الخدمة الاجتماعية، التمريض والطب، الموارد البشرية"},
+ E:{n:"المبادر القيادي",c:"المبيعات وتطوير الأعمال وريادة الأعمال والإدارة",m:"إدارة الأعمال، التسويق، التجارة، الاقتصاد، القانون"},
+ C:{n:"التقليدي التنظيمي",c:"إدارة المشاريع والعمليات والحسابات وضبط الجودة",m:"المحاسبة، نظم المعلومات، الإدارة، الخدمات اللوجستية"}
+};
+const DOMAIN={
+ exec:{n:"التنفيذ",title:"المُنفِّذ المُتقن",
+  pos:"أنت من النوع الذي يحوّل الخطط إلى نتائج دقيقة في موعدها، وهذا ما يجعل الفرق والمؤسسات تعتمد عليك وتنجح بك.",
+  dir:"في هذا الاتجاه ستكون الشخص الذي يُنجز بإتقان ويُعتمد عليه، ومؤشراتك تقول إنك تملك مقومات التميّز والإنتاجية والنجاح فيه.",
+  env:"مشاريع بأهداف ومعايير واضحة وجداول محددة، وفرق تقدّر الجودة والالتزام.",
+  s:["التزام بالمواعيد والمعايير","دقة في التفاصيل","ثبات في التنفيذ تحت الجداول الضيقة"],
+  w:["قد تتمسك بالإجراءات حيث تلزم المرونة.","اطلب أولويات واضحة كي لا يستنزفك السعي للكمال."]},
+ infl:{n:"التأثير",title:"القائد المُلهِم",
+  pos:"أنت من النوع الذي يحرّك الناس نحو الهدف؛ إقناعك ومبادرتك يفتحان لك أبواب القيادة والنمو السريع.",
+  dir:"في هذا الاتجاه ستكون صاحب أثر وحضور، ومؤشراتك تقول إنك تملك مقومات التميّز والإنتاجية والنجاح فيه.",
+  env:"أدوار فيها قيادة وتفاوض ومبادرة وعمل مع جمهور، وبيئات تكافئ الجرأة وسرعة القرار.",
+  s:["إقناع وتحفيز","مبادرة وسرعة في القرار","حضور قوي في الاجتماعات والتفاوض"],
+  w:["قد تتجاوز التفاصيل في طريقك للنتيجة.","أصغِ أكثر قبل الحسم، ووزّع المتابعة على من يتقنها."]},
+ rel:{n:"بناء العلاقات",title:"بنّاء الفرق",
+  pos:"أنت من النوع الذي يبني الثقة والفرق؛ الفرق القوية تقوم حول أشخاص مثلك، وهذا أساس النجاح المستدام.",
+  dir:"في هذا الاتجاه ستكون الشخص الذي يجمع الناس ويرفع أداء من حوله، ومؤشراتك تقول إنك تملك مقومات التميّز والإنتاجية والنجاح فيه.",
+  env:"فرق متعاونة وأدوار تدريب ودعم وبناء علاقات طويلة مع العملاء والزملاء.",
+  s:["فهم الآخرين والإنصات","بناء الثقة والتعاون","احتواء الخلافات"],
+  w:["قد تتجنب مواجهة لازمة لحماية العلاقة.","تدرّب على قول «لا» بوضوح ولطف."]},
+ strat:{n:"التفكير الاستراتيجي",title:"المُفكِّر المبتكر",
+  pos:"أنت من النوع الذي يرى ما لا يراه غيره؛ تفكيرك المبتكر والاستراتيجي يضعك في مقدمة من يصنعون الجديد.",
+  dir:"في هذا الاتجاه ستكون صاحب رؤية تسبق الفريق بخطوة، ومؤشراتك تقول إنك تملك مقومات التميّز والإنتاجية والنجاح فيه.",
+  env:"تحديات مفتوحة وابتكار وتخطيط طويل المدى، وبيئات تحترم الأفكار الجديدة.",
+  s:["رؤية شاملة وربط الأفكار","توليد حلول مبتكرة","تحليل عميق للمشكلات"],
+  w:["قد تملّ من التنفيذ المتكرر.","اشترك مع من يتقن المتابعة والتفاصيل."]}
+};
+const GROW={
+ O:{n:"الانفتاح والتجديد",a:["اقرأ أو شاهد شيئًا خارج تخصصك مرة كل أسبوع.","جرّب أداة أو طريقة جديدة في عملك كل شهر."]},
+ C:{n:"الانضباط وإدارة الوقت",a:["اكتب أهم ثلاث مهام كل صباح وأنهِها قبل أي شيء آخر.","ضع لكل مهمة موعد تسليم واضحًا في تقويمك."]},
+ E:{n:"الحضور والمبادرة الاجتماعية",a:["ابدأ حديثًا قصيرًا مع شخص جديد كل أسبوع.","شارك برأيك مرة واحدة على الأقل في كل اجتماع."]},
+ A:{n:"التعاون وإدارة الخلاف",a:["قبل الرد في أي خلاف، أعد صياغة كلام الطرف الآخر بجملتك.","امدح جهد زميلك علنًا مرة كل أسبوع."]},
+ calm:{n:"الاتزان تحت الضغط",a:["خصّص خمس دقائق يوميًا للتنفس أو المشي لتهدئة التوتر.","قسّم أي ضغط كبير إلى خطوات صغيرة واكتبها."]},
+ Q:{n:"الذكاء العاطفي",a:["اكتب كل مساء شعورًا شعرت به وسببه.","اسأل من حولك «كيف تشعر؟» وانتبه لإجابتهم."]}
+};
+/* ================= محتوى الصغار ================= */
+const KFIELD={
+ R:{n:"العملي اليدوي",f:"الهندسة والتقنيات التطبيقية",s:"الرياضيات والعلوم والروبوتات والأعمال اليدوية",j:"مهندس، فني تقني، مصمم أنظمة، مخترع",t:"اصنع روبوتًا بسيطًا أو نموذجًا من الكرتون والدوائر الكهربائية."},
+ I:{n:"الباحث المستكشف",f:"العلوم والرياضيات والبرمجة",s:"الرياضيات والعلوم والحاسب",j:"عالم، مبرمج، طبيب، باحث",t:"جرّب البرمجة بلغة سكراتش أو حل لغز رياضي كل أسبوع."},
+ A:{n:"الفنان المبدع",f:"الفنون والتصميم واللغات والإعلام",s:"اللغة العربية واللغات والرسم والتربية الفنية",j:"مصمم، كاتب، صانع محتوى، مخرج",t:"ابدأ دفتر أفكار للرسم أو القصص وشارك عملًا جديدًا كل أسبوع."},
+ S:{n:"المساعد الاجتماعي",f:"الطب والتربية والعلوم الإنسانية",s:"العلوم والدراسات الاجتماعية واللغة والتربية الدينية",j:"طبيب، معلم، أخصائي اجتماعي، ممرض",t:"ساعد زميلًا في مادة تتقنها أو شارك في نشاط تطوعي بالمدرسة."},
+ E:{n:"القائد المبادر",f:"ريادة الأعمال والإدارة والإعلام",s:"الرياضيات والاجتماعيات واللغات والإلقاء",j:"رائد أعمال، مدير، محامٍ، مقدم برامج",t:"ابدأ مشروعًا صغيرًا أو نظّم فعالية في الفصل مع زملائك."},
+ C:{n:"المنظِّم الدقيق",f:"المحاسبة والإدارة وتنظيم المعلومات",s:"الرياضيات والحاسب واللغات",j:"محاسب، محلل بيانات، مدير مشاريع، مدقق",t:"نظّم جدول مذاكرتك وأعدّ قائمة بالتزاماتك الأسبوعية."}
+};
+const KSKILL={
+ com:{n:"التواصل",hi:"تعبّر عن أفكارك بوضوح، وهذه مهارة ستخدمك في كل مجال.",tip:"لخّص لأسرتك ما تعلمته اليوم في دقيقة واحدة."},
+ coop:{n:"التعاون",hi:"تعمل جيدًا مع فريقك وتحترم الآراء المختلفة.",tip:"في كل نشاط جماعي اسأل زميلًا عن رأيه قبل أن تقترح."},
+ prob:{n:"حل المشكلات",hi:"تفكر في حلول متعددة ولا تستسلم بسرعة.",tip:"عند أي مشكلة اكتب ثلاثة حلول ثم اختر أفضلها."},
+ crea:{n:"الإبداع",hi:"أفكارك جديدة ومختلفة، وهذا أساس الابتكار.",tip:"خصّص عشر دقائق أسبوعيًا لتصنع شيئًا من أدوات بسيطة حولك."},
+ time:{n:"التنظيم وإدارة الوقت",hi:"تنظّم وقتك وأدواتك، وهذا يصنع التفوق.",tip:"اكتب مهام يومك في ورقة صغيرة وضع علامة عند كل إنجاز."},
+ resp:{n:"المسؤولية",hi:"تفي بوعودك وتتحمل مسؤولية أفعالك.",tip:"اختر مهمة منزلية ثابتة تتولاها بنفسك."},
+ init:{n:"المبادرة والتعلم الذاتي",hi:"تبدأ بنفسك وتتعلم ذاتيًا، وهذا يميّز الناجحين.",tip:"اختر شيئًا تريد تعلمه وتعلّمه خطوة خطوة لمدة أسبوعين."},
+ calm:{n:"ضبط النفس والصبر",hi:"تهدأ بسرعة وتصبر، وهذا يمنحك قوة في المواقف الصعبة.",tip:"خذ نفسًا عميقًا ثلاث مرات عندما تغضب قبل أن ترد."}
+};
+const KSOCIAL={
+ D:{n:"القائد",d:"تحب القيادة وتتحدث بثقة وتتحمل المسؤولية في الفريق.",tip:"تذكّر أن تستمع لآراء الجميع قبل أن تقرر."},
+ I:{n:"المتحمّس",d:"تتعرف على الناس بسهولة وتنشر المرح والحماس.",tip:"اكتب مهامك حتى لا تنسى وعودك وسط الحماس."},
+ S:{n:"الصديق الداعم",d:"تهتم بمن حولك وتحب الهدوء والتعاون.",tip:"لا تتردد في قول رأيك حين لا يعجبك أمر."},
+ C:{n:"المنظّم الدقيق",d:"تحب الدقة والوضوح وترتيب الأمور.",tip:"اسمح لنفسك أحيانًا بالتجربة حتى لو لم تكن النتيجة مثالية."}
+};
+const KDOMAIN={
+ exec:{n:"الإنجاز والتنظيم",d:"التنظيم والالتزام وإنهاء المهام",title:"المنجِز المنظّم",pos:"أنت تحوّل الأفكار إلى عمل منظّم، وهذه صفة ستجعلك متفوقًا في دراستك ومشاريعك."},
+ infl:{n:"القيادة والتعبير",d:"القيادة والتعبير والمبادرة",title:"القائد المتحمّس",pos:"أنت تلهم من حولك وتبادر، وهذه صفة تصنع القادة المميزين."},
+ rel:{n:"التعاون والتعاطف",d:"التعاون وفهم الآخرين والصبر",title:"الصديق المتعاون",pos:"أنت تجمع الناس وتفهمهم، والفرق الناجحة تحتاج أشخاصًا مثلك."},
+ strat:{n:"التفكير والابتكار",d:"التفكير وحل المشكلات والإبداع",title:"المفكّر المبتكر",pos:"عقلك يسأل ويبتكر، وهذه بداية طريق المخترعين والعلماء والمبدعين."}
+};
+
+/* ================= أدوات مساعدة ================= */
+const QUIZ_LABELS=["لا تنطبق عليّ إطلاقًا","تنطبق نادرًا","تنطبق أحيانًا","تنطبق غالبًا","تنطبق عليّ تمامًا"];
+const SHORT_A={strat:"التفكير الاستراتيجي",infl:"التأثير",exec:"التنفيذ",rel:"العلاقات"};
+const SHORT_K={strat:"التفكير",infl:"القيادة",exec:"الإنجاز",rel:"التعاون"};
+const band=v=>v>=62?"hi":v<=38?"lo":"mid";
+const fa=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function el(html){const t=document.createElement("template");t.innerHTML=html.trim();return t.content.firstChild}
+const cfg=m=>m==="kid"?{items:KITEMS,order:ORDER.kid}:{items:ITEMS,order:ORDER.adult};
+
+function bar(n,v,note,top){
+  return `<div class="row${top?" top1":""}"><div class="h"><span>${n}</span><span>${fa(v)}٪</span></div><div class="track"><i style="width:${v}%"></i></div>${note?`<small>${note}</small>`:""}</div>`;
+}
+function cmp(d,L,lit){
+  const C=lit?{line:"#e3e7f1",primary:"#3D5AFE",accent:"#16C79A"}:{line:"var(--line)",primary:"var(--primary)",accent:"var(--accent)"};
+  const cx=170,cy=150,R=96,vals=[d.strat,d.infl,d.exec,d.rel];
+  const pt=(a,v)=>{const r=R*v/100;return [[cx,cy-r],[cx+r,cy],[cx,cy+r],[cx-r,cy]][a]};
+  const poly=v=>[0,1,2,3].map(a=>pt(a,v).join(",")).join(" ");
+  const shape=[0,1,2,3].map(a=>pt(a,vals[a]).join(",")).join(" ");
+  const rings=[25,50,75,100].map(v=>`<polygon points="${poly(v)}" fill="none" stroke="${C.line}" stroke-width="1"/>`).join("");
+  const dots=[0,1,2,3].map(a=>{const q=pt(a,vals[a]);return `<circle cx="${q[0]}" cy="${q[1]}" r="5" fill="${C.accent}"/>`}).join("");
+  return `<div class="cmp"><svg viewBox="0 0 340 300" role="img" aria-label="بوصلة هوديرا">${rings}
+    <line x1="${cx}" y1="${cy-R}" x2="${cx}" y2="${cy+R}" stroke="${C.line}"/><line x1="${cx-R}" y1="${cy}" x2="${cx+R}" y2="${cy}" stroke="${C.line}"/>
+    <polygon points="${shape}" fill="${C.primary}" fill-opacity=".2" stroke="${C.primary}" stroke-width="2.5" stroke-linejoin="round"/>${dots}</svg>
+    <span class="cl" style="left:50%;top:0;transform:translateX(-50%)">${L.strat}<i>${fa(d.strat)}٪</i></span>
+    <span class="cl" style="left:81%;top:50%;transform:translateY(-50%)">${L.infl}<i>${fa(d.infl)}٪</i></span>
+    <span class="cl" style="left:50%;top:87%;transform:translateX(-50%)">${L.exec}<i>${fa(d.exec)}٪</i></span>
+    <span class="cl" style="left:19%;top:50%;transform:translate(-100%,-50%)">${L.rel}<i>${fa(d.rel)}٪</i></span></div>`;
+}
+const calmText=v=>v>=65?"تحافظ على اتزانك وقت الضغط وتساعد من حولك على الهدوء."
+  :v>=40?"اتزانك جيد في الأغلب، ويتأثر عندما تجتمع الضغوط. وضوح الأولويات يساعدك."
+  :"الضغط يؤثر عليك بوضوح. جرّب فواصل قصيرة وتقسيم المهام ووضوح التوقعات مع فريقك.";
+const DISCLAIMER="هذا التقرير أداة استرشادية للتطوير والتوجيه وليس تشخيصًا نفسيًا، ولا يُستخدم وحده في قرارات التوظيف أو القبول.";
+
+/* ================= أقسام نتيجة البالغين ================= */
+function adultSections(r,name,lit){
+  const p=r.p,D=DOMAIN[r.domainRank[0]],D2=DOMAIN[r.domainRank[1]];
+  const code=r.holland.slice(0,3),H=RIASEC[code[0]],who=name?esc(name):"";
+  const S={};
+  S.hero=`<div class="top"><span class="kicker">${who?"نتيجة "+who:"نتيجتك"}</span><div class="title">${D.title}</div><p>${D.pos}</p><p class="muted">ميلك الثانوي: ${D2.n}.</p>${cmp(r.domains,SHORT_A,lit)}<p class="note">بوصلة هوديرا تجمع أسئلة المقاييس كلها في أربعة اتجاهات.</p></div>`;
+  S.strengths=`<h3>نقاط قوتك</h3><ul class="list">${D.s.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+  S.dir=`<h3>اتجاهك الأقرب</h3><p>المجال الأقرب لشخصيتك هو <b>${H.c}</b>. ${D.dir}</p>`;
+  S.careers=`<h3>ميولك المهنية والدراسية</h3><div class="code" aria-label="شفرة هولاند">${code.join("")}</div><ul class="list">${code.map(k=>`<li><b>${RIASEC[k].n}:</b> ${RIASEC[k].c}<br><span class="muted">تخصصات دراسية قريبة: ${RIASEC[k].m}</span></li>`).join("")}</ul>`
+    +`<div style="margin-top:8px">${r.holland.map((k,i)=>bar(`${RIASEC[k].n} (${k})`,p["R."+k],"",i<3)).join("")}</div>`;
+  S.env=`<h3>بيئة العمل الأنسب لك</h3><p>${D.env}</p>`;
+  S.big5=`<h3>سماتك الأساسية</h3>`+["O","C","E","A","N"].map(k=>{const v=p["F."+k],B=BIG5[k][band(v)];return bar(BIG5[k].n,v,`${B.t}<br><b>للتطوير:</b> ${B.g}`)}).join("");
+  const [d1,d2]=r.disc;
+  S.disc=`<h3>أسلوبك السلوكي</h3>`+r.disc.map((k,i)=>bar(DISC[k].n,p["B."+k],"",i<2)).join("")
+    +`<div class="blk"><b>الأبرز: ${DISC[d1].n}</b><br>${DISC[d1].d}<br><b class="g">أفضل بيئة لك:</b> ${DISC[d1].w}<br><b class="g">للتطوير:</b> ${DISC[d1].g}</div>`
+    +`<div class="blk"><b>ثم: ${DISC[d2].n}</b><br>${DISC[d2].d}</div>`;
+  const t1=r.think[0];
+  S.think=`<h3>نمط تفكيرك</h3>`+r.think.map((k,i)=>bar(THINK[k].n,p["T."+k],"",i<1)).join("")
+    +`<div class="blk"><b>الأقوى: ${THINK[t1].n}</b><br>${THINK[t1].d}<br><b class="g">كيف تتعلم أفضل:</b> ${THINK[t1].w}<br><b class="g">للتطوير:</b> ${THINK[t1].g}</div>`;
+  S.calm=`<h3>الاتزان تحت الضغط</h3>`+bar("الذكاء العاطفي مع الثبات الانفعالي",r.calm,calmText(r.calm));
+  const cand=[["O",p["F.O"]],["C",p["F.C"]],["E",p["F.E"]],["A",p["F.A"]],["calm",r.calm],["Q",p.Q]].sort((a,b)=>a[1]-b[1]).slice(0,3);
+  S.grow=`<h3>نقاط يمكنك العمل عليها</h3><p class="muted">ليست عيوبًا، بل أسرع الطرق لرفع أثرك ونجاحك:</p>`
+    +cand.map(([k,v])=>`<div class="blk"><div class="h"><b>${GROW[k].n}</b><span>${fa(v)}٪</span></div><ul class="list">${GROW[k].a.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+  const wk=[["الأسبوع ١","ابدأ بـ«"+GROW[cand[0][0]].n+"»: "+GROW[cand[0][0]].a[0]],["الأسبوع ٢","أضف «"+GROW[cand[1][0]].n+"»: "+GROW[cand[1][0]].a[0]],["الأسبوع ٣","أضف «"+GROW[cand[2][0]].n+"»: "+GROW[cand[2][0]].a[0]],["الأسبوع ٤","راجع تقدمك مع شخص تثق به، واحتفل بما أنجزته، ثم اختر هدفًا جديدًا."]];
+  S.plan=`<h3>خطة الثلاثين يومًا</h3><div class="plan" style="margin-top:8px">${wk.map(([a,b])=>`<div class="blk"><b>${a}</b><br>${b}</div>`).join("")}</div>`;
+  S.closing=`<p><b>${who?who+"، ":""}رسالة أخيرة:</b> نتائجك تُظهر أساسًا قويًا للتميّز في اتجاهك. الاتجاه الذي تختاره، مع اجتهادك وتطوير النقاط أعلاه، هو ما يصنع الفارق. نتمنى لك رحلة ممتازة ومنتجة وناجحة.</p><p class="note" style="margin-top:8px">${DISCLAIMER}</p>`;
+  return S;
+}
+
+/* ================= أقسام نتيجة الصغار ================= */
+function kidSections(r,name,lit){
+  const p=r.p,K=KDOMAIN[r.domainRank[0]],K2=KDOMAIN[r.domainRank[1]],who=name?esc(name):"";
+  const S={};
+  S.hero=`<div class="top"><span class="kicker">${who?"نتيجة "+who:"نتيجتك"}</span><div class="title">${K.title}</div><p>${K.pos}</p><p class="muted">ميلك الثاني: ${K2.n}.</p>${cmp(r.domains,SHORT_K,lit)}</div>`;
+  S.strong=`<h3>مهاراتك الأقوى</h3><ul class="list">${r.skillsDesc.slice(0,3).map(s=>`<li><b>${KSKILL[s.k].n}:</b> ${KSKILL[s.k].hi}</li>`).join("")}</ul>`;
+  const top=r.fields.slice(0,3);
+  S.study=`<h3>التخصصات الدراسية الأقرب لك</h3><p class="muted">هذه مؤشرات مبكرة تساعدك على الاستكشاف، وتتغير مع التجربة والنمو.</p>`
+    +top.map(k=>{const F=KFIELD[k];return `<div class="blk"><div class="h"><b>${F.f}</b><span>${fa(p["I."+k])}٪</span></div>المواد المرتبطة: ${F.s}<br>مهن المستقبل: ${F.j}<br><b class="g">جرّب:</b> ${F.t}</div>`}).join("");
+  S.interests=`<h3>ميولك</h3>`+r.fields.map((k,i)=>bar(KFIELD[k].n,p["I."+k],"",i<3)).join("");
+  S.skills=`<h3>مهاراتك الحياتية</h3>`+r.skills.map(s=>{const K=KSKILL[s.k],b=band(s.v);
+    const note=b==="hi"?K.hi:(b==="mid"?"مهارة جيدة وتزداد قوة بالتدريب.":"مساحة رائعة للنمو، ومع التدريب ستصبح من نقاط قوتك.")+(b==="hi"?"":` <b>جرّب:</b> ${K.tip}`);
+    return bar(K.n,s.v,note,b==="hi")}).join("");
+  const [a,b]=r.social;
+  S.social=`<h3>سلوكك الاجتماعي</h3>`+r.social.map((k,i)=>bar(KSOCIAL[k].n,p["S."+k],"",i<2)).join("")
+    +`<div class="blk"><b>الأبرز: ${KSOCIAL[a].n}</b><br>${KSOCIAL[a].d}<br><b class="g">نصيحة:</b> ${KSOCIAL[a].tip}</div><div class="blk"><b>ثم: ${KSOCIAL[b].n}</b><br>${KSOCIAL[b].d}</div>`;
+  S.comp=`<h3>جداراتك الأربع</h3>`+r.domainRank.map((k,i)=>bar(KDOMAIN[k].n,r.domains[k],KDOMAIN[k].d,i<1)).join("");
+  S.challenge=`<h3>تحديات الشهر القادم</h3><p class="muted">اختر تحديًا واحدًا كل أسبوع، وستلاحظ الفرق:</p>`
+    +r.skillsAsc.slice(0,3).map(s=>`<div class="blk"><b>${KSKILL[s.k].n}</b><br>${KSKILL[s.k].tip}</div>`).join("");
+  S.parent=`<h3>رسالة للأهل والمعلم</h3><ul class="list"><li>اسألوه عن الأنشطة التي يفعلها بشغف ولا يشعر بالوقت معها.</li><li>شجّعوه على تجربة النشاط المقترح أسبوعين قبل الحكم عليه.</li><li>تعاملوا مع النتيجة كبداية للحوار لا كحكم نهائي؛ فالميول تتطور بالخبرة.</li></ul>`;
+  S.closing=`<p><b>${who?who+"، ":""}رسالة لك:</b> أنت تملك نقاط قوة جميلة وطريقًا مفتوحًا للتميّز. استمر في التجربة والتعلم، وكل خطوة صغيرة تقرّبك من النجاح. نحن فخورون بك!</p><p class="note" style="margin-top:8px">${DISCLAIMER}</p>`;
+  return S;
+}
+
+/* ================= التقرير A4 ================= */
+function logoSvg(sz){return `<svg width="${sz}" height="${sz}" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#3D5AFE"/><path d="M10.2 6.2V25.4M10.2 17.6C10.2 14 12.6 12.6 15.3 12.6c3.4 0 5.9 1.8 5.9 5.4v4.4" fill="none" stroke="#fff" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20.6" cy="24.7" r="2.7" fill="#16C79A"/></svg>`}
+function lockup(sz,dark){return `<span class="logo" style="font-size:${Math.round(sz*.66)}px;color:${dark?"#fff":"#0B1220"};gap:8px">${logoSvg(sz)}<span>hudera <em style="color:#9ba3b3">AI</em></span></span>`}
+function reportHTML(mode,r,name){
+  const kid=mode==="kid",S=kid?kidSections(r,name,true):adultSections(r,name,true);
+  const date=new Date().toLocaleDateString("ar-EG",{year:"numeric",month:"long",day:"numeric"});
+  const sec=(h,c)=>`<div class="rsec ${c||""}">${h}</div>`;
+  const pages=kid
+    ?[[sec(S.hero,"fill"),sec(S.strong)],[sec(S.study),sec(S.interests,"fill")],[sec(S.skills,"fill")],[sec(S.social),sec(S.comp,"fill")],[sec(S.challenge,"fill"),sec(S.parent),sec(S.closing,"hl")]]
+    :[[sec(S.hero,"fill"),sec(S.strengths)],[sec(S.dir,"hl"),sec(S.careers,"fill"),sec(S.env)],[sec(S.big5,"fill"),sec(S.calm)],[sec(S.disc),sec(S.think)],[sec(S.grow,"fill"),sec(S.plan),sec(S.closing,"hl")]];
+  const title=kid?"تقرير مقياس هوديرا للصغار":"تقرير مقياس هوديرا للشخصية والتوجهات";
+  const N=pages.length;
+  return pages.map((inner,i)=>{
+    const first=i===0;
+    const head=first
+      ?`<div class="rband">${lockup(40,true)}<div class="rt">${title}</div><div class="rm">${name?`<span><b>${esc(name)}</b></span>`:""}<span>${date}</span></div></div>`
+      :`<div class="rhead"><span>${title}</span>${lockup(28,false)}</div>`;
+    return `<section class="rpage ${first?"cover":""} ${first?"":"pb"}">${head}<div class="rbody">${inner.join("")}</div><div class="rfoot"><span>hudera.ai</span><span>${fa(i+1)} / ${fa(N)}</span></div></section>`;
+  }).join("");
+}
+
+/* ================= الحالة والشاشات ================= */
+const state={mode:null,screen:"home",i:0,ans:[],name:""};
+const $app=document.getElementById("app");
+
+function home(){
+  $app.innerHTML=`
+  <section class="stack">
+    <div class="hero">
+      <h1>اعرف شخصيتك وتوجهك في دقائق</h1>
+      <p class="muted">اختبار يجمع أفضل ما في المقاييس العالمية، ويعطيك تقريرًا مفصلًا بصيغة PDF يوضح نقاط قوتك والمجالات التي تستطيع تطويرها.</p>
+    </div>
+    <div class="card stack">
+      <label class="f" for="nm">الاسم (اختياري)<input id="nm" type="text" autocomplete="off" value=""></label>
+      <p class="note">لا توجد إجابة صحيحة أو خاطئة. أجب بما يصفك فعلًا لا بما تتمنى أن تكون عليه.</p>
+    </div>
+    <div class="modes">
+      <button class="mode" id="m-adult"><b>للبالغين والشباب</b><span>٥١ سؤالًا، حوالي ٨ دقائق<br>الشخصية، السلوك، نمط التفكير، الميول المهنية، الاتزان تحت الضغط</span><em>ابدأ ←</em></button>
+      <button class="mode" id="m-kid"><b>للصغار (١٢ سنة)</b><span>٣٦ سؤالًا، حوالي ٦ دقائق<br>التخصصات الدراسية الأقرب، المهارات الحياتية، الميول، السلوك الاجتماعي</span><em>ابدأ ←</em></button>
+    </div>
+  </section>`;
+  const nm=document.getElementById("nm"); nm.value=state.name;
+  const go=m=>()=>{state.name=nm.value.trim().slice(0,40);state.mode=m;state.ans=new Array(cfg(m).items.length).fill(0);state.i=0;state.screen="quiz";render()};
+  document.getElementById("m-adult").onclick=go("adult");
+  document.getElementById("m-kid").onclick=go("kid");
+}
+
+function quiz(){
+  const C=cfg(state.mode),idx=C.order[state.i],it=C.items[idx],cur=state.ans[idx],n=C.items.length;
+  $app.innerHTML=`
+  <section>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${state.i}"><i style="width:${state.i/n*100}%"></i></div>
+    <div class="qmeta"><span>سؤال ${fa(state.i+1)} من ${fa(n)}</span><span>${state.mode==="kid"?"هل تشبهك هذه الجملة؟":"إلى أي مدى تنطبق عليك العبارة؟"}</span></div>
+    <h2 class="q" id="qt"></h2>
+    <div class="opts" role="radiogroup" aria-labelledby="qt" id="opts"></div>
+    <div class="nav"><button id="back" ${state.i===0?"disabled":""}>← السؤال السابق</button></div>
+  </section>`;
+  document.getElementById("qt").textContent=it.t;
+  const box=document.getElementById("opts");
+  QUIZ_LABELS.forEach((lab,k)=>{
+    const b=el(`<button class="opt" role="radio" aria-checked="${cur===k+1}" type="button"><span class="n">${fa(k+1)}</span><span></span></button>`);
+    b.lastChild.textContent=lab;
+    b.onclick=()=>{
+      state.ans[idx]=k+1;
+      box.querySelectorAll(".opt").forEach((o,j)=>o.setAttribute("aria-checked",String(j===k)));
+      setTimeout(()=>{ if(state.i<n-1){state.i++;render()} else {state.screen="result";render();window.scrollTo(0,0)} },170);
+    };
+    box.appendChild(b);
+  });
+  document.getElementById("back").onclick=()=>{if(state.i>0){state.i--;render()}};
+}
+
+function summaryText(r){
+  const lines=[`مقياس هوديرا | HUDERA AI${state.name?" - "+state.name:""}`];
+  if(state.mode==="kid"){
+    lines.push(`بصمتك: ${KDOMAIN[r.domainRank[0]].title}`,
+      `التخصصات الأقرب: ${r.fields.slice(0,3).map(k=>KFIELD[k].f).join(" / ")}`,
+      `أقوى المهارات: ${r.skillsDesc.slice(0,3).map(s=>KSKILL[s.k].n).join("، ")}`,
+      `السلوك الاجتماعي: ${KSOCIAL[r.social[0]].n}`);
+  } else {
+    lines.push(`بصمتك: ${DOMAIN[r.domainRank[0]].title} (ميل ثانوي: ${DOMAIN[r.domainRank[1]].n})`,
+      `الأسلوب السلوكي: ${DISC[r.disc[0]].n} + ${DISC[r.disc[1]].n}`,
+      `نمط التفكير: ${THINK[r.think[0]].n}`,
+      `شفرة الميول المهنية: ${r.holland.slice(0,3).join("")}`,
+      `الاتزان تحت الضغط: ${r.calm}٪`);
+  }
+  lines.push(`بوصلة هوديرا: التنفيذ ${r.domains.exec}٪، التأثير ${r.domains.infl}٪، العلاقات ${r.domains.rel}٪، التفكير ${r.domains.strat}٪`);
+  return lines.join("\n");
+}
+
+async function savePDF(r){
+  /* الطباعة من المتصفح تعطي PDF متجهيًا بخط عربي سليم (أدق من تحويل الصفحة إلى صورة) */
+  const root=document.getElementById("reportRoot");
+  root.innerHTML=`<div id="rep">${reportHTML(state.mode,r,state.name)}</div>`;
+  try{await document.fonts.ready}catch(e){}
+  const old=document.title;
+  document.title=state.mode==="kid"?"hudera-kids-report":"hudera-report";
+  try{window.print()}catch(e){}
+  setTimeout(()=>{document.title=old},1500);
+}
+
+function result(){
+  const kid=state.mode==="kid";
+  const r=kid?scoreKid(state.ans):score(state.ans);
+  const S=kid?kidSections(r,state.name):adultSections(r,state.name);
+  const order=kid?["hero","strong","study","interests","skills","social","comp","challenge","parent"]:["hero","strengths","dir","careers","env","big5","disc","think","calm","grow","plan"];
+  const freq=[1,2,3,4,5].map(v=>state.ans.filter(a=>a===v).length);
+  const flat=Math.max(...freq)/state.ans.length>=0.8;
+  $app.innerHTML=`<section class="stack">
+    ${flat?'<div class="card"><p><b>تنبيه:</b> أغلب إجاباتك متطابقة، فقد تكون النتيجة أقل دقة. أعد الاختبار وركّز في الفروق بين العبارات.</p></div>':""}
+    ${order.map(k=>`<div class="card sec ${k==="dir"?"hl":""}">${S[k]}</div>`).join("")}
+    <div class="card sec hl">${S.closing}</div>
+    <div class="card stack">
+      <button class="btn" id="pdf">حفظ التقرير كـ PDF</button>
+      <p class="note">التقرير ${fa(5)} صفحات بهوية هوديرا. من نافذة الطباعة اختر «حفظ كملف PDF». يعمل عند فتح الصفحة في المتصفح مباشرة.</p>
+      <button class="btn ghost" id="copy">نسخ ملخص النتيجة</button>
+      <div id="cp"></div>
+      <button class="btn ghost" id="again">إعادة الاختبار</button>
+    </div></section>`;
+  document.getElementById("pdf").onclick=()=>savePDF(r);
+  document.getElementById("copy").onclick=async()=>{
+    const txt=summaryText(r),box=document.getElementById("cp");
+    try{await navigator.clipboard.writeText(txt);box.innerHTML='<p class="note">تم النسخ.</p>'}
+    catch(e){box.innerHTML='<textarea id="ta" readonly></textarea>';const ta=document.getElementById("ta");ta.value=txt;ta.focus();ta.select()}
+  };
+  document.getElementById("again").onclick=()=>{state.mode=null;state.ans=[];state.i=0;state.screen="home";render();window.scrollTo(0,0)};
+}
+
+function render(){ state.screen==="home"?home():state.screen==="quiz"?quiz():result() }
+
+window.claude?.hot?.snapshot?.(()=>({mode:state.mode,screen:state.screen,i:state.i,ans:state.ans,name:state.name}));
+const boot=d=>{ if(d&&d.mode&&Array.isArray(d.ans)&&d.ans.length===cfg(d.mode).items.length){Object.assign(state,d)} render() };
+window.claude?.hot?.ready ? window.claude.hot.ready(boot) : boot(window.claude?.hot?.data ?? {});
+</script>
+</body>
+</html>
