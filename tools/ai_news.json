@@ -691,5 +691,33 @@
    ["Unite.AI: Cloudflare Launches Automatic Website Search for AI Agents", "https://www.unite.ai/cloudflare-launches-automatic-website-search-for-ai-agents/"],
    ["i10x: Cloudflare Search for Agents: What a Site Search Endpoint for AI Costs You", "https://i10x.ai/news/cloudflare-search-for-agents-well-known-search-endpoint-cost"]
   ]
+ },
+ {
+  "date": "2026-11-24",
+  "slug": "chatgpt-chat-work-single-usage-meter",
+  "tag": {"ar": "أدوات الأعمال", "en": "Business tools"},
+  "ar": {
+   "title": "OpenAI تبدأ دمج Chat و Work في ChatGPT بعدّاد استخدام واحد، والمستخدمون الأكثر استهلاكاً قد يبلغون الحد أسرع",
+   "desc": "بدأت OpenAI دمج تجربتي Chat و Work في ChatGPT بحصة استخدام مشتركة، وتقول إن قلة من أكثر المشتركين استهلاكاً قد تبلغ الحد أسرع.",
+   "body": [
+    "بدأت OpenAI يوم الثلاثاء 24 نوفمبر 2026 طرح تجربة موحدة تجمع Chat و Work داخل ChatGPT، بحسب منشور لمسؤول المنتج Thibault Sottiaux على منصة X نقلته TechCrunch. Chat هو المحادثة المعتادة، أما Work فهو الوضع الذي تسلّم فيه ChatGPT مهمة متعددة الخطوات، مثل إعداد عرض تقديمي أو موقع أو بحث، مع ملفاتك وإضافاتك، ثم تراجع النتيجة وتوجّهها. الطرح الحالي يشمل مجموعة صغيرة من مشتركي Pro لجمع الملاحظات. والتغيير الأهم أن Chat و Work سيسحبان من عدّاد استخدام واحد بدل حصتين منفصلتين، وكانت OpenAI قد أبلغت المستخدمين مطلع نوفمبر أن ChatGPT و Codex سيتشاركان الحصة نفسها.",
+    "قال متحدث باسم OpenAI لموقع TechCrunch إن أغلب المستخدمين لن يلاحظوا بلوغ الحد بوتيرة أعلى، لكن نسبة صغيرة من أكثر المشتركين استخداماً قد تصل إلى حدها أسرع. المحادثات على نموذج Instant تبقى غير محدودة ولا تُحتسب من الحصة المشتركة، ويمكن متابعة العمل بها بعد نفاد الحصة. وتخطط الشركة لتوسيع الحدود المشتركة في ديسمبر بحسب صفحة الدعم لديها كما نقلت TechCrunch، ويذكر تقرير آخر أن التوسيع يشمل خطط Plus و Pro و Business. لم تعلن OpenAI بعد حجم الحصة الجديدة، ولا هل تساوي مجموع الحصتين الحاليتين. وعبّر مشتركون عن قلقهم من أن يحصلوا على وصول أقل إلى النماذج المتقدمة بالسعر نفسه. لم نتمكن من فتح منشور X ولا صفحة الدعم مباشرة اليوم، فاعتمدنا على ما نقلته التغطيات."
+   ],
+   "biz": "إذا كان فريقك يستخدم ChatGPT للمحادثة اليومية وللمهام الطويلة في Work أو Codex معاً، فقد تنفد الحصة أسرع بعد الدمج، لأن الاستخدامين سيُحسبان من رصيد واحد. راقب استهلاك حساباتك في ديسمبر قبل أي قرار بترقية الخطة أو تغييرها، واجعل الأسئلة البسيطة على Instant واترك النماذج الأقوى للمهام التي تستحقها. لا حاجة إلى إجراء عاجل: الأرقام النهائية لم تُعلن، والشركة تقول إن أغلب المستخدمين لن يتأثروا."
+  },
+  "en": {
+   "title": "OpenAI starts merging Chat and Work in ChatGPT under one usage meter, and the heaviest users may hit limits sooner",
+   "desc": "OpenAI began merging ChatGPT's Chat and Work experiences under one shared usage allowance and says a few of its heaviest subscribers may hit limits sooner.",
+   "body": [
+    "On Tuesday 24 November 2026 OpenAI began rolling out a unified experience that combines Chat and Work inside ChatGPT, according to a post on X by product lead Thibault Sottiaux reported by TechCrunch. Chat is the familiar conversation. Work is the mode where you hand ChatGPT a multi-step job, such as a presentation, a website or a research task, along with your files and plugins, then review and steer the result. The current rollout covers a small group of Pro subscribers, for feedback. The change that matters most is that Chat and Work will draw from a single usage meter instead of two separate allowances. OpenAI had already told users in early November that ChatGPT and Codex would share the same allowance.",
+    "An OpenAI spokesperson told TechCrunch that most users should not see more frequent limit resets, but a small share of the heaviest subscribers may reach their limits sooner. Conversations on the Instant model stay unlimited, do not count toward the shared allowance, and remain usable after the allowance runs out. The company plans to extend shared limits more widely in December, according to its support page as cited by TechCrunch, and another report says that covers the Plus, Pro and Business plans. OpenAI has not yet said how large the new allowance is, or whether it equals the two current ones added together. Some subscribers have voiced concern that they will get less access to the advanced models for the same price. We could not open the X post or the support page directly today, so this summary relies on the coverage."
+   ],
+   "biz": "If your team uses ChatGPT both for everyday chat and for long jobs in Work or Codex, the allowance may run out sooner after the merge, because both kinds of use will come out of one balance. Watch how your accounts consume it in December before deciding to upgrade or change plans, and keep simple questions on Instant so the stronger models are saved for tasks that need them. Nothing needs doing urgently: the final numbers are not public, and the company says most users will not be affected."
+  },
+  "sources": [
+   ["TechCrunch: OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work", "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/"],
+   ["TechCrunch: OpenAI is finally merging ChatGPT's Chat and Work tabs", "https://techcrunch.com/2026/11/02/openai-is-finally-merging-chatgpts-chat-and-work-tabs/"],
+   ["Silicon Report: OpenAI starts ChatGPT Chat and Work merger that could curb usage", "https://www.siliconreport.com/openai-starts-chatgpt-chat-and-work-merger-that-could-curb-usage"]
+  ]
  }
 ]
