@@ -1593,7 +1593,7 @@ function sbBoot(){
     if (r && r.data && r.data.data && r.data.data.profile) {
       var d = r.data.data, icons = ICONS, logos = LOGOS, imgs = IMG;
       if (d.profile && d.profile.cutout === undefined) d.profile.cutout = STATE.profile.cutout;
-      migrate(d); STATE = d; STATE.__icons = icons; STATE.__logos = logos;
+      migrate(d); try { d = JSON.parse(JSON.stringify(d).split("https://mahmoud-shahab.vercel.app/assets/").join("/media/team/assets/")); } catch (e) {} STATE = d; STATE.__icons = icons; STATE.__logos = logos;
       IMG = Object.assign({}, imgs, d.images || {}); Object.keys(imgs).forEach(function(k){ if (/^assets\//.test(String(IMG[k]))) IMG[k] = imgs[k]; }); STATE.images = IMG;
       render();
     }
