@@ -719,5 +719,36 @@
    ["TechCrunch: OpenAI is finally merging ChatGPT's Chat and Work tabs", "https://techcrunch.com/2026/11/02/openai-is-finally-merging-chatgpts-chat-and-work-tabs/"],
    ["Silicon Report: OpenAI starts ChatGPT Chat and Work merger that could curb usage", "https://www.siliconreport.com/openai-starts-chatgpt-chat-and-work-merger-that-could-curb-usage"]
   ]
+ },
+ {
+  "date": "2026-11-26",
+  "slug": "openai-gpt-6-2-billing-fix-limits-faster",
+  "tag": {
+   "ar": "أسعار وحدود الاستخدام",
+   "en": "Pricing and limits"
+  },
+  "ar": {
+   "title": "OpenAI تصحح خطأ في احتساب GPT-6.2: حدود الاستخدام تُبلغ أسرع بنحو 40% على Astra و 25% على Sol",
+   "desc": "صححت OpenAI خطأ منح خصماً غير مقصود على GPT-6.2، فصار المشتركون يبلغون حدودهم أسرع بنحو 40% على Astra و 25% على Sol.",
+   "body": [
+    "أعلن Thibault Sottiaux من OpenAI في منشور على منصة X يوم الخميس 26 نوفمبر 2026 أن الشركة أخطأت في الاحتساب عند إطلاق GPT-6.2 يوم 17 نوفمبر، فحُسب استخدام نموذجي GPT-6.2 Astra و GPT-6.2 Sol لأغلب المستخدمين بخصم لم يكن مقصوداً. النتيجة أن المشتركين حصلوا خلال الأسبوع الماضي على استخدام أكثر مما تتيحه خططهم فعلاً. بعد التصحيح سيبلغ المستخدمون حدودهم أسرع بنحو 40% على Astra وبنحو 25% على Sol مقارنة بالأسبوع الماضي، بحسب ما نقلته The Decoder و BetaNews و Decrypt عن المنشور. وتحسب BetaNews أن الحصة نفسها تغطي الآن نحو 71% من حجم العمل السابق على Astra ونحو 80% على Sol، وتذكر أن الأثر يظهر في الاستخدام داخل Work و Codex. النماذج الأخرى لم تتأثر.",
+    "لن تطالب OpenAI أحداً بفرق الاستخدام السابق. وتعويضاً عن التغيير يحصل مشتركو Go و Plus و Pro و Business على إعادة تعبئة إضافية واحدة للحصة، تُفعَّل من إعدادات الاستخدام في تطبيق سطح المكتب أو الموقع، وتقول BetaNews إنها غير متاحة من تطبيق الجوال وإن لها تاريخ انتهاء. الحسابات المجانية لا تتأثر لأنها لا تستخدم هذين النموذجين. ويقول Sottiaux إن النموذجين سيبقيان أوفر في الحصة من GPT-6 Astra و GPT-6.1 Sol، لكن الشركة لم تنشر أرقاماً تفصيلية تسمح بالتحقق من ذلك. وذكرت Decrypt أن OpenAI لم ترد على سؤالها عن حجم الحصة الموحدة المنتظرة في ديسمبر. لم نتمكن من فتح منشور X مباشرة اليوم، فاعتمدنا على التغطيات الثلاث."
+   ],
+   "biz": "إذا بنى فريقك عادات عمله على ما لاحظه من سخاء الحصة في الأسبوع الأول بعد إطلاق GPT-6.2، فتلك الأرقام كانت نتيجة خطأ وليست المعيار. توقّع أن تنفد الحصة أبكر في المهام الطويلة على Astra، واحتفظ بإعادة التعبئة الإضافية ليوم ضغط حقيقي وانتبه لتاريخ انتهائها. لا تقرر ترقية الخطة الآن: قِس استهلاكك الفعلي أسبوعاً أو أسبوعين بعد التصحيح، خصوصاً أن دمج الحصص المنتظر في ديسمبر قد يغيّر الصورة مرة أخرى."
+  },
+  "en": {
+   "title": "OpenAI fixes a GPT-6.2 billing error: usage limits now arrive about 40% sooner on Astra and 25% sooner on Sol",
+   "desc": "OpenAI corrected a launch error that had discounted GPT-6.2 usage, so subscribers now reach limits about 40% sooner on Astra and 25% sooner on Sol.",
+   "body": [
+    "On Thursday 26 November 2026, OpenAI's Thibault Sottiaux said in a post on X that the company made a billing mistake when it launched GPT-6.2 on 17 November: usage of GPT-6.2 Astra and GPT-6.2 Sol was metered at an unintended discount for most users. In practice, subscribers got more out of their plans last week than the plans are meant to include. With the error corrected, users will reach their limits about 40% sooner on Astra and about 25% sooner on Sol compared with last week, according to The Decoder, BetaNews and Decrypt, which all report the post. BetaNews works out that the same allowance now covers roughly 71% of last week's workload on Astra and about 80% on Sol, and says the effect shows up in usage inside Work and Codex. Other models are not affected.",
+    "OpenAI will not bill anyone for the difference on past usage. As compensation, subscribers on Go, Plus, Pro and Business get one extra banked reset of their allowance, claimed from the usage settings in the desktop app or on the website. BetaNews adds that it cannot be claimed from the mobile app and that it carries an expiry date. Free accounts see no change because they cannot use these two models. Sottiaux says both models should still stretch further per plan than GPT-6 Astra and GPT-6.1 Sol, but the company has not published detailed figures that would let anyone check this. Decrypt says OpenAI did not answer its question about how large the merged allowance planned for December will be. We could not open the X post directly today, so this summary relies on the three reports."
+   ],
+   "biz": "If your team shaped its working habits around how generous the allowance felt in the first week of GPT-6.2, those numbers came from an error and are not the baseline. Expect the allowance to run out earlier on long Astra jobs, keep the extra reset for a day of real pressure, and note its expiry date. Do not upgrade plans yet: measure your actual consumption for a week or two after the fix, especially since the allowance merge expected in December may change the picture again."
+  },
+  "sources": [
+   ["The Decoder: GPT-6.2 Astra users now hit limits 40% faster after OpenAI patched a pricing error", "https://the-decoder.com/gpt-6-2-astra-users-now-hit-limits-40-faster-after-openai-patched-a-pricing-error/"],
+   ["BetaNews: OpenAI fixes GPT-6.2 billing error, so Astra and Sol users hit caps sooner", "https://betanews.com/article/gpt-6-2-billing-fix-astra-sol/"],
+   ["Decrypt: OpenAI Fixes ChatGPT Billing Error, Promises to Make it 40% Worse", "https://decrypt.co/384053/openai-fixes-chatgpt-billing-error-promises-to-make-it-40-worse"]
+  ]
  }
 ]
